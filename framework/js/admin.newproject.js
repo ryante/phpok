@@ -1,0 +1,348 @@
+/**
+ * 項目管理相關JS
+ * @作者 qinggan <admin@phpok.com>
+ * @版權 深圳市錕铻科技有限公司
+ * @網站 http://www.phpok.com
+ * @版本 4.x
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @日期 2017年10月07日
+ **/
+;(function($){
+    $.admin_project = {
+
+        /**
+         * 項目編輯保存
+         **/
+        save:function(id)
+        {
+            if(typeof(CKEDITOR) != "undefined"){
+                for(var i in CKEDITOR.instances){
+                    CKEDITOR.instances[i].updateElement();
+                }
+            }
+            $("#"+id).ajaxSubmit({
+                'url':get_url('newproject','save'),
+                'type':'post',
+                'dataType':'json',
+                'success':function(rs){
+                    if(rs.status){
+                        var tip = $("#id").val() ? p_lang('文庫信息編輯成功') : p_lang('文庫信息創建成功');
+                        $.dialog.tips(tip,function(){
+                            $.admin.reload(get_url('newproject'));
+                            $.admin.close();
+                        }).lock();
+                        return false;
+                    }
+                    $.dialog.alert(rs.info);
+                    return false;
+                }
+            });
+            return false;
+        },
+
+        /**
+         * 模塊選擇時執行觸發
+         **/
+        module_change:function(obj)
+        {
+            $("#module_set,#module_set2").hide();
+            var val = $(obj).val();
+            var mtype = $(obj).find('option:selected').attr('data-mtype');
+            if(!val || val == '0'){
+                return true;
+            }
+            $("#tmp_orderby_btn,#tmp_orderby_btn2").html('');
+            //清除字段
+            //$("#tmp_fields_btn").html('');
+            var c = '';
+            var f = '';
+            if(mtype == 1){
+                c += '<input type="button" value="ID" onclick="phpok_admin_orderby(\'orderby2\',\'id\')" class="layui-btn layui-btn-sm" />';
+            }
+            $.phpok.json(get_url('newproject','mfields','id='+val),function(rs){
+                if(!rs.status){
+                    $.dialog.alert(rs.info);
+                    return false;
+                }
+                if(rs.info){
+                    var list = rs.info;
+                    for(var i in list){
+                        if(list[i].type == 'varchar'){
+                            if(mtype == 1){
+                                c += '<input type="button" value="'+list[i].title+'" onclick="phpok_admin_orderby(\'orderby2\',\''+list[i].identifier+'\')" class="layui-btn layui-btn-sm"/>';
+                            }else{
+                                c += '<input type="button" value="'+list[i].title+'" onclick="phpok_admin_orderby(\'orderby\',\'ext.'+list[i].identifier+'\')" class="layui-btn layui-btn-sm"/>';
+                            }
+                        }
+                        f += '<input type="button" value="'+list[i].title+'" onclick="$.admin_project.fields_add(\''+list[i].identifier+'\')" class="layui-btn layui-btn-sm"/>';
+                    }
+                }
+                if(f && f != ''){
+                    f += '<input type="button" value="'+p_lang('全部')+'" class="layui-btn layui-btn-sm layui-btn-normal" onclick="$.admin_project.fields_add(\'*\')" />';
+                    f += '<input type="button" value="'+p_lang('不讀擴展')+'" class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.admin_project.fields_add(\'id\')" />';
+                    $("#tmp_fields_btn").html(f).show();
+                }
+                if(mtype == 1){
+                    $("#tmp_orderby_btn2").html(c);
+                    $("#module_set2").show();
+                }else{
+                    $("#tmp_orderby_btn").html(c);
+                    $("#module_set").show();
+                }
+                return true;
+            });
+        },
+        fields_add:function(val)
+        {
+            if(val == '*' || val == 'id'){
+                $("#list_fields").val(val);
+                return true;
+            }
+            var tmp = $("#list_fields").val();
+            if(tmp == '*' || tmp == 'id'){
+                $("#list_fields").val(val);
+                return true;
+            }
+            var n = tmp;
+            if(tmp){
+                n += ',';
+            }
+            n += val;
+            $("#list_fields").val(n);
+            return true;
+        },
+        del:function(id)
+        {
+            var tip = p_lang('確定要刪除此項目嗎？刪除會將相關內容壹起刪除 #{id}','<span class="red">'+id);
+            $.dialog.confirm(tip,function(){
+                var url = get_url('newproject','delete','id='+id);
+                var tips = $.dialog.tips(p_lang('正在執行刪除請求…'));
+                $.phpok.json(url,function(data){
+                    tips.close();
+                    if(data.status){
+                        $("#project_"+id).remove();
+                        $.dialog.tips(p_lang('模塊刪除成功'));
+                        return true;
+                    }
+                    $.dialog.alert(data.info);
+                    return false;
+                })
+            });
+        },
+        copy:function()
+        {
+            var id = $.checkbox.join();
+            if(!id){
+                $.dialog.alert(p_lang('未選擇要復制的項目'));
+                return false;
+            }
+            var list = id.split(',');
+            if(list.length > 1 ){
+                $.dialog.alert(p_lang('復制操作只能選擇壹個'));
+                return false;
+            }
+            $.dialog.confirm(p_lang('確定要復制此項目 #{id}','<span class="red">'+id+'</id>'),function(){
+                var url = get_url('newproject','copy','id='+id);
+                $.phpok.json(url,function(data){
+                    if(data.status){
+                        $.dialog.tips(p_lang('項目復制成功'),function(){
+                            $.phpok.reload();
+                        })
+                        return true;
+                    }
+                    $.dialog.alert(data.info);
+                    return false;
+                });
+            });
+        },
+        extinfo:function()
+        {
+            var id = $.checkbox.join();
+            if(!id){
+                $.dialog.alert(p_lang('未選擇要自定義擴展字段的項目'));
+                return false;
+            }
+            var list = id.split(',');
+            if(list.length > 1 ){
+                $.dialog.alert(p_lang('自定義擴展字段操作只能選擇壹個'));
+                return false;
+            }
+            $.win(p_lang('擴展字段')+"_"+$("#id_"+id).attr("data-title"),get_url('newproject','content','id='+id));
+            return true;
+        },
+        extinfo_save:function(id)
+        {
+            if(typeof(CKEDITOR) != "undefined"){
+                for(var i in CKEDITOR.instances){
+                    CKEDITOR.instances[i].updateElement();
+                }
+            }
+            $("#"+id).ajaxSubmit({
+                'url':get_url('newproject','content_save'),
+                'type':'post',
+                'dataType':'json',
+                'success':function(rs){
+                    if(rs.status){
+                        $.dialog.tips(p_lang('數據保存成功'),function(){
+                            $.admin.reload(get_url('newproject'));
+                            $.admin.close();
+                        }).lock();
+                        return false;
+                    }
+                    $.dialog.alert(rs.info);
+                    return false;
+                }
+            });
+            return false;
+        },
+        export:function()
+        {
+            var id = $.checkbox.join();
+            if(!id){
+                $.dialog.alert(p_lang('未選擇要自定義擴展字段的項目'));
+                return false;
+            }
+            var list = id.split(',');
+            if(list.length > 1 ){
+                $.dialog.alert(p_lang('自定義擴展字段操作只能選擇壹個'));
+                return false;
+            }
+            $.phpok.go(get_url('newproject','export','id='+id));
+            return true;
+        },
+        import_xml:function()
+        {
+            var url = get_url('newproject','import');
+            $.dialog.open(url,{
+                'title':p_lang('項目導入'),
+                'lock':true,
+                'width':'500px',
+                'height':'150px',
+                'ok':function(){
+                    var iframe = this.iframe.contentWindow;
+                    if (!iframe.document.body) {
+                        alert(p_lang('iframe還沒加載完畢呢'));
+                        return false;
+                    };
+                    iframe.save();
+                    return false;
+                },
+                'okVal':p_lang('導入項目'),
+                'cancelVal':p_lang('取消'),
+                'cancel':true
+            });
+        },
+        set_hidden:function(hidden)
+        {
+            var id = $.checkbox.join();
+            if(!id){
+                var tip = hidden == 1 ? p_lang('未選擇要隱藏的項目') : p_lang('未選擇要顯示的項目');
+                $.dialog.alert(tip);
+                return false;
+            }
+            var tip = hidden == 1 ? p_lang('指定項目已經設為隱藏') : p_lang('指定項目已經設為顯示');
+            var url = get_url('newproject','hidden','id='+$.str.encode(id)+"&hidden="+hidden);
+            $.phpok.json(url,function(data){
+                if(data.status){
+                    $.dialog.tips(tip,function(){
+                        $.phpok.reload();
+                    });
+                    return true;
+                }
+                $.dialog.alert(data.info);
+                return false;
+            })
+        },
+        set_lock:function(status)
+        {
+            var id = $.checkbox.join();
+            if(!id){
+                var tip = status == 1 ? p_lang('未選擇要啟用的項目') : p_lang('未選擇要禁用的項目');
+                $.dialog.alert(tip);
+                return false;
+            }
+            var tip = status == 1 ? p_lang('指定項目已經設為啟用') : p_lang('指定項目已經設為禁用');
+            var url = get_url('newproject','status','id='+$.str.encode(id)+"&status="+status);
+            $.phpok.json(url,function(data){
+                if(data.status){
+                    $.dialog.tips(tip,function(){
+                        $.phpok.reload();
+                    });
+                    return true;
+                }
+                $.dialog.alert(data.info);
+                return false;
+            })
+        },
+        set_status:function(id)
+        {
+            var url = get_url('newproject','status','id='+id);
+            var old_value = $("#status_"+id).attr("value");
+            var new_value = old_value == "1" ? "0" : "1";
+            url += "&status="+new_value;
+            $.phpok.json(url,function(rs){
+                if(rs.status){
+                    $("#status_"+id).removeClass("status"+old_value).addClass("status"+new_value).attr("value",new_value);
+                    return true;
+                }
+                $.dialog.alert(rs.info);
+            });
+        },
+        sort:function(val,id)
+        {
+            var url = get_url('newproject','sort','sort['+id+']='+val);
+            $.phpok.json(url,function(data){
+                if(data.status){
+                    $("div[name=taxis][data="+id+"]").text(val);
+                    $.dialog.tips(p_lang('排序編輯成功，您可以手動刷新看新的排序效果'));
+                    return true;
+                }
+                $.dialog.alert(data.info);
+                return false;
+            })
+        },
+        ext_help:function()
+        {
+            top.$.dialog({
+                'title':p_lang('擴展項幫助說明'),
+                'content':document.getElementById('ext_help'),
+                'lock':true,
+                'width':'700px',
+                'height':'500px',
+                'padding':'0 10px'
+            })
+        },
+        icolist:function()
+        {
+            $.dialog.open(get_url('newproject','icolist'),{
+                'title':p_lang('選擇圖標'),
+                'lock':true,
+                'width':'700px',
+                'height':'60%',
+                'ok':function(){
+                    var iframe = this.iframe.contentWindow;
+                    if (!iframe.document.body) {
+                        alert('iframe還沒加載完畢呢');
+                        return false;
+                    };
+                    iframe.save();
+                    return false;
+                },
+                'okVal':'提交',
+                'cancel':true
+            })
+        }
+    };
+
+    $(document).ready(function(){
+        if($("#_quick_insert").length>0){
+            var module = $("#_quick_insert").attr("data-module");
+            var url = get_url('ext','select','type=project&module='+$.str.encode(module));
+            $.phpok.ajax(url,function(rs){
+                $("#_quick_insert").html(rs);
+                layui.form.render();
+            });
+        }
+    });
+})(jQuery);
+

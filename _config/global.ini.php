@@ -154,3 +154,7 @@ time = 3600
 
 ;连接失败，指向目录地址
 folder = "static/cdn"
+
+[my_config]
+;自建的moduleid
+my_module_id = 2,3,5,6

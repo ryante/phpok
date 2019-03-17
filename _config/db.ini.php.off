@@ -7,7 +7,7 @@ file = "mysqli"
 
 ; 数据库服务器，本地请填写localhost或127.0.0.1
 ; 当使用 http 时，这里填写服务器的 IP，可用于解决无法认别域名问题
-host = "127.0.0.1"
+host = "192.168.2.205"
 ;host = "localhost"
 
 ; 数据库服务器的端口号，默认是3306
@@ -16,12 +16,12 @@ port = "3306"
 
 ; 连接数据库的账号
 ; 使用 http 模式时，这里是认证账号，不需要请留空
-user = "root"
+user = "ryante"
 ;user = "root"
 
 ; 连接数据库的密码
 ; 使用 http 模式时的基本验证，不需要请留空
-pass = "abc1234!?"
+pass = "abc123"
 ;pass = "root"
 
 ; 数据库名称

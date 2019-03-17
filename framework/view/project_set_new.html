@@ -1,0 +1,323 @@
+<!-- include tpl=head_lay -->
+<form method="post" id="{$ext_module}" class="layui-form" onsubmit="return $.admin_project.save('{$ext_module}')">
+	<!-- if $id --><input type="hidden" id="id" name="id" value="{$id}" /><!-- /if -->
+	<div class="layui-card">
+		<div class="layui-card-header">{lang基本信息}</div>
+		<div class="layui-card-body">
+			<div class="layui-form-item">
+				<label class="layui-form-label">{lang文庫名稱}</label>
+				<div class="layui-input-inline default-auto">
+					<input type="text" id="title" name="title" class="layui-input" value="{$rs.title}" />
+				</div>
+				<div class="layui-input-inline auto gray">{lang設置名稱，該名稱將在網站前臺導航中使用}</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">{lang排序}</label>
+				<div class="layui-input-inline">
+					<input type="text" id="taxis" name="taxis" class="layui-input" value="{$rs.taxis ? $rs.taxis : '255'}" />
+				</div>
+				<div class="layui-input-inline auto gray">{lang自定義排序，值越小越往前靠}</div>
+			</div>
+
+			<div class="layui-form-item">
+				<label class="layui-form-label">{lang父級欄目}</label>
+				<div class="layui-input-inline default-auto">
+					<select id="parent_id" name="parent_id">
+						<option value="0">{lang設為父欄目}</option>
+						<!-- loop from=$parent_list key=$key value=$value -->
+						<!-- if $rs.id != $value.id -->
+						<option value="{$value.id}"{if $rs.parent_id == $value.id} selected{/if}>{$value.title}</option>
+						<!-- /if -->
+						<!-- /loop -->
+					</select>
+				</div>
+				<div class="layui-input-inline auto gray">{lang實現父子欄目可以實現數據交叉使用}</div>
+			</div>
+			<div class="layui-form-item">
+				<div class="layui-input-inline default-auto">
+					<input type="hidden" id="identifier" name="identifier" class="layui-input" value="{$rs.identifier}" />
+					{if !$rs.identifier}
+					<script>
+                        $(function () {
+                            $.admin.rand('identifier')
+                        })
+                        {/if}
+					</script>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label title">{lang綁定模塊}</label>
+				<div class="layui-input-inline auto">
+					<select id="module" name="module" onchange="$.admin_project.module_change(this)"lay-ignore>
+						<option value="0">{lang不關聯模塊}</option>
+						<!-- loop from=$module_list key=$key value=$value id=module_list_id -->
+						<option value="{$value.id}"{if $value.id == $rs.module} selected{/if} data-mtype="{$value.mtype}">{$value.title}</option>
+						<!-- /loop -->
+					</select>
+				</div>
+				<div class="layui-input-inline auto gray">{lang實現類似新聞，產品等多條項目信息，綁定成功後建議不要修改，以防止數據混亂！}</div>
+			</div>
+			<div id="module_set2" class="hidden">
+				<div class="layui-form-item">
+					<label class="layui-form-label">{lang默認主題數}</label>
+					<div class="layui-input-inline default-auto">
+						<input type="text" id="psize2" name="psize2" value="{$rs.psize ? $rs.psize : 30}" class="layui-input" />
+					</div>
+					<div class="layui-input-inline auto gray">{lang設置每頁默認的主題數量}</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">
+						{lang數據排序}
+					</label>
+					<div class="layui-input-block">
+						<ul class="layout">
+							<li class="long"><input type="text" id="orderby2" name="orderby2" class="layui-input" value="{$rs.orderby ? $rs.orderby : 'id DESC'}" /></li>
+							<li><input type="button" value="{lang清空}" class="layui-btn layui-btn-danger" onclick="$('input[name=orderby2]').val('')" /></li>
+						</ul>
+					</div>
+					<div class="layui-input-block mtop">
+						<div class="layui-btn-group" id="tmp_orderby_btn2">
+							<input type="button" value="ID" onclick="phpok_admin_orderby('orderby2','id')" class="layui-btn layui-btn-sm" />
+						</div>
+					</div>
+					<div class="layui-input-block">{lang設置好默認排序，有利於網站的管理（前後臺壹致）}</div>
+				</div>
+			</div>
+
+			<div id="module_set" class="hidden">
+				<div class="layui-form-item">
+					<label class="layui-form-label">{lang主題別名}</label>
+					<div class="layui-input-inline default-auto">
+						<input type="text" id="alias_title" name="alias_title" class="layui-input" value="{$rs.alias_title}" />
+					</div>
+					<div class="layui-input-inline auto gray">{lang在使用模塊時，會有壹個必填選項，即主題，您可在這裏設置別名}</div>
+				</div>
+				<div class="layui-form-item" style="display: none">
+					<label class="layui-form-label">{lang主題備註}</label>
+					<div class="layui-input-inline long">
+						<input type="text" id="alias_note" name="alias_note" class="layui-input" value="{$rs.alias_note}" />
+					</div>
+					<div class="layui-input-inline auto gray">{lang針對主題的別名設置相應的備註信息}</div>
+				</div>
+				<div class="layui-form-item" style="display: none">
+					<div id="ext_help" class="hide">
+						<table class="layui-table">
+							<thead>
+							<tr>
+								<th>擴展項</th>
+								<th>備註</th>
+							</tr>
+							</thead>
+							<tr>
+								<td>{lang主題屬性}</td>
+								<td>{lang相當於給主題增加標簽，如精華，推薦，熱薦等}</td>
+							</tr>
+							<tr>
+								<td>{lang搜索}</td>
+								<td>{lang勾選此項後，該項目在前臺將支持搜索}</td>
+							</tr>
+							<tr>
+								<td>{lang下級主題}</td>
+								<td>{lang啟用此項，主題將支持二級，多用於二級導航}</td>
+							</tr>
+							<tr>
+								<td>{lang發布}</td>
+								<td>{lang勾選此項，被授權的用戶可以在前臺有發布權限}</td>
+							</tr>
+							<tr>
+								<td>{lang評論}</td>
+								<td>{lang即回復功能，勾選後被授權的用戶將支持回復，靜態頁無效}</td>
+							</tr>
+							<!-- if $config.biz_status -->
+							<tr>
+								<td>{lang電子商務}</td>
+								<td>{lang啟用此項，該主題將支持交易功能}</td>
+							</tr>
+							<!-- /if -->
+						</table>
+
+					</div>
+					<label class="layui-form-label"><i class="layui-icon hand" onclick="$.admin_project.ext_help()">&#xe702;</i> {lang擴展項}</label>
+					<div class="layui-input-inline" style="width:80%;">
+						<ul>
+							<li class="layui-col-md3"><input type="checkbox" name="is_attr" title="{lang主題屬性}" class="layui-tips" id="is_attr"{if $rs.is_attr} checked{/if} /></li>
+							<li class="layui-col-md3"><input type="checkbox" name="is_search" title="{lang搜索}" id="is_search"{if $rs.is_search} checked{/if} /></li>
+							<li class="layui-col-md3"><input type="checkbox" name="subtopics" title="{lang下級主題}" id="subtopics"{if $rs.subtopics} checked{/if} /></li>
+							<li class="layui-col-md3"><input type="checkbox" name="post_status" title="{lang發布}" id="post_status"{if $rs.post_status} checked{/if} /></li>
+							<li class="layui-col-md3"><input type="checkbox" name="comment_status" title="{lang評論}" id="comment_status"{if $rs.comment_status} checked{/if} /></li>
+							<!-- if $config.biz_status -->
+							<li class="layui-col-md3"><input type="checkbox" name="is_biz" title="{lang電子商務}" id="is_biz"{if $rs.is_biz} checked{/if} /></li>
+							<!-- /if -->
+						</ul>
+					</div>
+				</div>
+
+				<div id="use_biz_setting"{if !$rs.is_biz || !$config.biz_status} style="display:none"{/if}>
+				<div class="layui-form-item">
+					<label class="layui-form-label">{lang貨幣默認類型}</label>
+					<div class="layui-input-inline default-auto">
+						<select name="currency_id" id="currency_id">
+							<option value="">{lang請選擇……}</option>
+							<!-- loop from=$currency_list key=$key value=$value -->
+							<option value="{$value.id}"{if $rs.currency_id == $value.id} selected{/if}>{$value.title}/{lang標識：}{$value.code}/{lang匯率：}{$value.val}</option>
+							<!-- /loop -->
+						</select>
+					</div>
+					<div class="layui-input-inline auto gray">{lang此項主要是方便後臺管理員添加產品時，默認使用的貨幣}</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">{lang運費模板}</label>
+					<div class="layui-input-inline default-auto">
+						<select name="freight" id="freight">
+							<option value="">{lang請選擇運費計算方式……}</option>
+							<!-- loop from=$freight key=$key value=$value -->
+							<option value="{$value.id}"{if $rs.freight == $value.id} selected{/if}>{$value.title}</option>
+							<!-- /loop -->
+						</select>
+					</div>
+					<div class="layui-input-inline auto gray">{lang請選擇這個項目的運費計算方式}</div>
+				</div>
+				<div class="layui-form-item">
+					<label class="layui-form-label">{lang電商屬性}</label>
+					<div class="layui-input-inline default-auto">
+						<input type="radio" name="biz_attr" value="0"{if !$rs.biz_attr} checked{/if} title="{lang不使用}" />
+						<input type="radio" name="biz_attr" value="1"{if $rs.biz_attr} checked{/if} title="{lang使用}" />
+					</div>
+					<div class="layui-input-inline auto gray">{lang啟用此項後，將允許設定可選產品的壹些屬性，如顏色，款式，支持價格浮動}</div>
+				</div>
+			</div>
+
+			<div id="email_set_post_status"{if !$rs.post_status} style="display:none"{/if}>
+			<div class="layui-form-item">
+				<label class="layui-form-label"><i class="layui-icon layui-tips" lay-tips="{lang發布通知管理員及會員的郵件模板}">&#xe702;</i> {lang發布模板}</label>
+				<div class="layui-input-block">
+					<select id="etpl_admin" name="etpl_admin">
+						<option value="">{lang發布信息_管理員不通知}</option>
+						<!-- loop from=$emailtpl key=$key value=$value id=$tmpid -->
+						<option value="{$value.identifier}"{if $rs.etpl_admin == $value.identifier} selected{/if}>{lang發布信息_管理員模板}_{$value.title}_{$value.identifier}<!-- if $value.note -->_{$value.note}<!-- /if --></option>
+						<!-- /loop -->
+					</select>
+				</div>
+				<div class="layui-input-block" style="margin-top:10px;">
+					<select id="etpl_user" name="etpl_user">
+						<option value="">{lang發布信息_會員不通知}</option>
+						<!-- loop from=$emailtpl key=$key value=$value id=$tmpid -->
+						<option value="{$value.identifier}"{if $rs.etpl_user == $value.identifier} selected{/if}>{lang發布信息_會員模板}_{$value.title}_{$value.identifier}<!-- if $value.note -->_{$value.note}<!-- /if --></option>
+						<!-- /loop -->
+					</select>
+				</div>
+				<div class="layui-input-block gray">{lang通知管理員僅限啟用【前臺發布】後有效，通知會員僅限啟用【前臺發布】且已登錄會員後有效}</div>
+			</div>
+		</div>
+
+		<div id="email_set_comment_status"{if !$rs.comment_status} style="display:none"{/if}>
+		<div class="layui-form-item">
+			<label class="layui-form-label"><i class="layui-icon layui-tips" lay-tips="{lang評論通知管理員及會員的郵件模板}">&#xe702;</i> {lang評論模板}</label>
+			<div class="layui-input-block">
+				<select id="etpl_comment_admin" name="etpl_comment_admin">
+					<option value="">{lang回復信息_管理員不通知}</option>
+					<!-- loop from=$emailtpl key=$key value=$value id=$tmpid -->
+					<option value="{$value.identifier}"{if $rs.etpl_comment_admin == $value.identifier} selected{/if}>{lang回復信息_管理員模板}_{$value.title}_{$value.identifier}<!-- if $value.note -->_{$value.note}<!-- /if --></option>
+					<!-- /loop -->
+				</select>
+			</div>
+			<div class="layui-input-block" style="margin-top:10px;">
+				<select id="etpl_comment_user" name="etpl_comment_user">
+					<option value="">{lang回復信息_會員不通知}</option>
+					<!-- loop from=$emailtpl key=$key value=$value id=$tmpid -->
+					<option value="{$value.identifier}"{if $rs.etpl_comment_user == $value.identifier} selected{/if}>{lang回復信息_會員模板}_{$value.title}_{$value.identifier}<!-- if $value.note -->_{$value.note}<!-- /if --></option>
+					<!-- /loop -->
+				</select>
+			</div>
+			<div class="layui-input-block gray">{lang通知管理員僅限啟用【評論】後有效，通知會員僅限啟用【評論】且已登錄會員後有效}</div>
+		</div>
+	</div>
+	<div class="layui-form-item" style="display: none">
+		<label class="layui-form-label">{lang默認主題數}</label>
+		<div class="layui-input-inline">
+			<input type="text" id="psize" name="psize" value="{$rs.psize ? $rs.psize : 30}" class="layui-input" />
+		</div>
+		<div class="layui-input-inline auto gray">{lang設置每頁默認的主題數量}</div>
+	</div>
+	<div class="layui-form-item" style="display: none">
+		<label class="layui-form-label">{lang數據排序}</label>
+		<div class="layui-input-block">
+			<input type="text" id="orderby" name="orderby" class="layui-input" value="{$rs.orderby ? $rs.orderby : 'l.sort ASC,l.dateline DESC,l.id DESC'}" />
+		</div>
+		<div class="layui-input-block" style="margin-top:10px;">
+			<div class="button-group">
+				<input type="button" value="{lang清空}" class="phpok-btn" onclick="$('#orderby').val('')" />
+				<input type="button" value="{lang點擊}" onclick="phpok_admin_orderby('orderby','l.hits')" class="phpok-btn" />
+				<input type="button" value="{lang時間}" onclick="phpok_admin_orderby('orderby','l.dateline')" class="phpok-btn" />
+				<input type="button" value="{lang回復時間}" onclick="phpok_admin_orderby('orderby','l.replydate')" class="phpok-btn" />
+				<input type="button" value="ID" onclick="phpok_admin_orderby('orderby','l.id')" class="phpok-btn" />
+				<input type="button" value="{lang人工}" onclick="phpok_admin_orderby('orderby','l.sort')" class="phpok-btn" />
+			</div>
+			<div id="tmp_orderby_btn" class="button-group" style="margin-left:10px;"></div>
+		</div>
+		<div class="layui-input-block auto">{lang設置好默認排序，有利於網站的管理/前後臺壹致}</div>
+	</div>
+	<div class="layui-form-item" style="display: none">
+		<label class="layui-form-label">{lang列表讀取}</label>
+		<div class="layui-input-block">
+			<input type="text" id="list_fields" name="list_fields" class="layui-input" value="{$rs.list_fields}" />
+		</div>
+		<div class="layui-input-block" style="margin-top:10px;">
+			<div class="layui-btn-group" id="tmp_fields_btn">
+				<input type="button" value="{lang清空}" class="layui-btn layui-btn-sm layui-btn-normal" onclick="$('#list_fields').val('')" />
+			</div>
+		</div>
+		<div class="layui-input-block auto">{lang當綁定了模塊後，讀取列表的數據默認為全部，請根據實際情況來設置，最多不能超過200字符}</div>
+	</div>
+	<div class="layui-form-item" style="display: none">
+		<label class="layui-form-label">{lang關聯根分類}</label>
+		<div class="layui-input-inline auto">
+			<select id="cate" name="cate" onchange="update_show_select(this.value)" lay-ignore>
+				<option value="0">{lang不關聯分類}</option>
+				<!-- loop from=$catelist key=$key value=$value id=catelist_id -->
+				<option value="{$value.id}"{if $value.id == $rs.cate} selected{/if}>{$value.title}</option>
+				<!-- /loop -->
+			</select>
+			<input type="button" value="{lang添加根分類}" onclick="cate_add(this.value)" class="phpok-btn" />
+		</div>
+		<div class="layui-input-inline auto gray">{lang啟用此項後，添加內容時，需要選對相對應的分類，且不能為空}</div>
+	</div>
+
+	<div id="cate_multiple_set"{if !$rs.cate} class="hide"{/if}>
+	<div class="layui-form-item">
+		<label class="layui-form-label"><i class="layui-icon layui-tips" lay-tips="{lang設置分類是單選模式還是多選模式}">&#xe702;</i> {lang分類選項}</label>
+		<div class="layui-input-inline auto">
+			<input type="radio" name="cate_multiple" value="0"{if !$rs.cate_multiple} checked{/if} title="{lang單選}" />
+			<input type="radio" name="cate_multiple" value="1"{if $rs.cate_multiple} checked{/if} title="{lang多選}" />
+		</div>
+		<div class="layui-input-inline auto gray"></div>
+	</div>
+	</div>
+	</div>
+
+
+	<div class="layui-form-item">
+		<label class="layui-form-label">{lang標簽}</label>
+		<div class="layui-input-block">
+			<input type="text" id="tag" name="tag" class="layui-input" value="{$rs.tag}" />
+		</div>
+		<div class="layui-input-block mtop">
+			{lang多個標簽用 [title] 分開，最多不能超過10個|title:$tag_config.separator}
+		</div>
+	</div>
+	</div>
+
+	</div>
+
+	<div class="submit-info">
+		<div class="layui-container center">
+			<input type="submit" value="{lang提交保存}" class="layui-btn layui-btn-lg layui-btn-danger" />
+			<input type="button" value="{lang取消關閉}" class="layui-btn layui-btn-lg layui-btn-primary" onclick="$.admin.close()" />
+		</div>
+	</div>
+	<div class="submit-info-clear"></div>
+</form>
+
+
+<!-- include tpl=foot_lay -->

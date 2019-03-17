@@ -237,10 +237,10 @@ li { list-style: none; }
 #c-content .c-wrap .c-form .c-title {
     padding-bottom: 40px;
     font-weight:bold;
-    font-size: 30px;
+    font-size: 24px;
     line-height: 30px;
     text-align: center;
-    color: #383838;
+    color: #46b9b1;
 }
 #c-content .c-wrap .c-form .c-user,#c-content .c-wrap .c-form .c-password {
     position: relative;
