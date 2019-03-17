@@ -532,6 +532,7 @@ class index_control extends phpok_control
 
 	public function info_f()
 	{
+	    exit("<h1>Denny</h1>");
 		$showphp = $this->get('php','int');
 		$this->assign('showphp',$showphp);
 		if(function_exists('phpinfo')){

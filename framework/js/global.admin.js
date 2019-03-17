@@ -512,7 +512,8 @@ $(document).ready(function(){
 			}
 			
 		}
-	}],[{
+	}],
+		[{
 		'text':p_lang('网页属性'),
 		'func':function(){
 			var url = window.location.href;
@@ -540,12 +541,18 @@ $(document).ready(function(){
 			}
 			window.open(url);
 		}    
-	}],[{
-		'text': p_lang('帮助说明'),
-		'func': function() {
-			top.$("a[layadmin-event=about]").click();
-		}
-	}]];
+	}],
+
+        /*
+        [{
+        'text': p_lang('帮助说明'),
+        'func': function() {
+            top.$("a[layadmin-event=about]").click();
+        }
+    }]
+    */
+
+	];
 	$(window).smartMenu(r_menu,{
 		'name':'smart',
 		'textLimit':8,

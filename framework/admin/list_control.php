@@ -137,25 +137,30 @@ class list_control extends phpok_control
             $this->assign("show_parent_catelist",$show_parent_catelist);
         }
 
+        $m_rs = $this->model('module')->get_one($rs['module']);
+        $contentTpl = "list_content";
+        $setTpl = "list_set2";
+
+        // new add start
+        $myModuleId = empty($this->config['my_config']['my_module_id']) ? '' : $this->config['my_config']['my_module_id'];
+        if (!empty($myModuleId)) {
+            $myModuleArr = explode(",", $myModuleId);
+            if (in_array($m_rs['id'], $myModuleArr)) {
+                $contentTpl = "list_content_new";
+            }
+        }
+        if ($rs['id'] == 4){
+            $setTpl = "list_set2_new";
+        }
+        // new add end
+
         //設置內容列表
         if($rs["module"]){
-            $m_rs = $this->model('module')->get_one($rs['module']);
             if($m_rs['mtype']){
                 $this->standalone_app($rs,$m_rs);
             }
             $this->content_list($rs);
-
-            // new add start
-            $myModuleId = empty($this->config['my_config']['my_module_id']) ? '' : $this->config['my_config']['my_module_id'];
-            if (!empty($myModuleId)) {
-                $myModuleArr = explode(",", $myModuleId);
-                if (in_array($m_rs['id'], $myModuleArr)) {
-                    $this->view("list_content_new");
-                }
-            }
-            // new add end
-
-            $this->view("list_content");
+            $this->view($contentTpl);
         }
         $show_edit = true;
         $extlist = $this->model('ext')->ext_all('project-'.$id);
@@ -173,7 +178,7 @@ class list_control extends phpok_control
             }
             $this->assign('extlist',$tmp);
         }
-        $this->view("list_set2");
+        $this->view($setTpl);
     }
 
     public function set_f()
@@ -362,11 +367,16 @@ class list_control extends phpok_control
         $layout = $m_list = array();
         $m_rs = $this->model('module')->get_one($mid);
         $m_list = $this->model('module')->fields_all($mid,"identifier");
+
         if($m_rs["layout"]) $layout = explode(",",$m_rs["layout"]);
+
         $this->assign("m_rs",$m_rs);
         //布局
         $layout_list = array();
         foreach($layout as $key=>$value){
+            if (empty($value)) {
+                continue;
+            }
             if($value == "hits"){
                 $layout_list[$value] = P_Lang('查看次數');
             }elseif($value == "dateline"){

@@ -61,7 +61,7 @@ function save()
 	return false;
 }
 </script>
-<form method="post" class="layui-form" id="post_save" onsubmit="return save()">
+<form method="post" class="layui-form" id="post_save" onsubmit="return save()" style="display: none">
 <input type="hidden" id="id" name="id" value="{$id}" />
 <div class="layui-card">
 	<div class="layui-card-body">
@@ -89,7 +89,7 @@ function save()
 		
 	</div>
 </div>
-<div class="layui-card" >
+<div class="layui-card" style="display: none;">
 	<div class="layui-card-header hand" onclick="$.admin.card(this)">
 		{langSEO优化}
 		<i class="layui-icon layui-icon-right"></i>

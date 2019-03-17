@@ -459,7 +459,7 @@ class newmodule_control extends phpok_control
 			$this->json(P_Lang('未指定ID'));
 		}
 		$rs = $this->model('module')->field_one($id);
-		$module_id = $rs['module_id'];
+		$module_id = $rs['ftype'];
 		$title = $this->get("title");
 		if(!$title){
 			$this->json(P_Lang('字段名称不能为空'));
@@ -479,6 +479,7 @@ class newmodule_control extends phpok_control
 				}
 			}
 		}
+
 		$array = array();
 		$array["title"] = $title;
 		$array["note"] = $this->get("note");
@@ -494,6 +495,22 @@ class newmodule_control extends phpok_control
 		$array['search_separator'] = $this->get('search_separator');
 		$this->model('module')->fields_save($array,$id);
 		$this->model('module')->update_fields($id);
+
+
+		// new add start 更新后台列表显示的字段
+        $layout = '';
+        $m_list = $this->model('module')->fields_all($module_id,"identifier");
+        if (!empty($m_list)) {
+            foreach ($m_list as $key => $val) {
+                if (!empty($val['is_back'])) {
+                   $layout .= $key . ',';
+                }
+            }
+        }
+        $layout .= 'dateline,sort';
+        $this->model('module')->save(['layout' => $layout], $module_id);
+        // new add end
+
 		$this->json(true);
 	}
 

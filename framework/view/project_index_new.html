@@ -21,10 +21,9 @@
 				<th width="70px" class="center">ID</th>
 				<th width="30px">&nbsp;</th>
 				<th>{lang文庫名稱}</th>
-				<th>{lang模塊}</th>
 				<th width="65" class="center">{lang排序}</th>
 				<!-- if $popedom.set -->
-				<th width="220px">&nbsp;</th>
+				<th width="260px">&nbsp;</th>
 				<!-- /if -->
 			</tr>
 			</thead>
@@ -37,7 +36,6 @@
 				<td class="center gray" height="24px">{$value.id}</td>
 				<td class="center"><span class="status{$value.status}" id="status_{$value.id}" {if $popedom.set}onclick="$.admin_project.set_status({$value.id})"{else} style="cursor:default"{/if} value="{$value.status}"></span></td>
 				<td><label for="id_{$value.id}">{$value.space}{$value.title}<!-- if $value.nick_title --><span class="gray i"> ({$value.nick_title})</span><!-- /if --><!-- if $value.hidden --><span class="red i">{lang（隱藏）}</span><!-- /if --></label></td>
-				<td>{$value.project_module_title ? $value.project_module_title : '-'}</td>
 				<td><div class="gray i hand center" title="{lang點擊調整排序}" name="taxis" data="{$value.id}">{$value.taxis}</div></td>
 				<!-- if $popedom.set -->
 				<td>
@@ -47,6 +45,10 @@
 						<!-- if !$value.parent_id -->
 						<input type="button" value="{lang添加子項}" class="layui-btn layui-btn-sm" onclick="$.win('{lang添加子項}_#{$value.id}','{url ctrl=newproject func=set pid=$value.id/}')" />
 						<!-- /if -->
+						<!-- if $value.module -->
+						<input type="button" value="{lang字段管理}" onclick="$.win('{lang字段管理}_{$value.title}_#{$value.module}','{url ctrl=newmodule func=fields id=$value.module/}');" class="layui-btn layui-btn-sm"/>
+						<!-- /if -->
+
 					</div>
 				</td>
 				<!-- /if -->
