@@ -21,6 +21,7 @@
 				<th width="70px" class="center">ID</th>
 				<th width="30px">&nbsp;</th>
 				<th>{lang文庫名稱}</th>
+				<th>图片</th>
 				<th width="65" class="center">{lang排序}</th>
 				<!-- if $popedom.set -->
 				<th width="260px">&nbsp;</th>
@@ -35,7 +36,11 @@
 				<!-- /if -->
 				<td class="center gray" height="24px">{$value.id}</td>
 				<td class="center"><span class="status{$value.status}" id="status_{$value.id}" {if $popedom.set}onclick="$.admin_project.set_status({$value.id})"{else} style="cursor:default"{/if} value="{$value.status}"></span></td>
+
 				<td><label for="id_{$value.id}">{$value.space}{$value.title}<!-- if $value.nick_title --><span class="gray i"> ({$value.nick_title})</span><!-- /if --><!-- if $value.hidden --><span class="red i">{lang（隱藏）}</span><!-- /if --></label></td>
+
+				<td>{if $value.pic}<a href="{$value.pic}" target="_blank"><img src="{$value.pic}" width="28px" height="28px" border="0" class="hand" style="border:1px solid #dedede;padding:1px;" /></a>{/if}</td>
+
 				<td><div class="gray i hand center" title="{lang點擊調整排序}" name="taxis" data="{$value.id}">{$value.taxis}</div></td>
 				<!-- if $popedom.set -->
 				<td>
