@@ -11,7 +11,7 @@
  **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
-class list_control extends phpok_control
+class book_control extends phpok_control
 {
     public $popedom;
     public function __construct()
@@ -71,8 +71,12 @@ class list_control extends phpok_control
     public function action_f()
     {
         $id = $this->get("id");
+        $lid = $this->get("lid");
         if(!$id){
             $this->error(P_Lang('未指定ID'),$this->url("list"));
+        }
+        if(!$lid){
+            $this->error(P_Lang('未指定lid'),$this->url("list"));
         }
         $this->popedom_auto($id);
         if(!$this->popedom["list"]){
@@ -82,6 +86,12 @@ class list_control extends phpok_control
         if(!$rs){
             $this->error(P_Lang('項目信息不存在'),$this->url("list"));
         }
+        $bookInfo = $this->model('list')->get_one($lid);
+        if(!$bookInfo){
+            $this->error(P_Lang('文献信息不存在'),$this->url("list"));
+        }
+        $this->assign("book_info", $bookInfo);
+
         $son_list = $this->model('project')->get_all($rs["site_id"],$id,"p.status=1 AND p.hidden=0");
         if($son_list){
             foreach($son_list as $key=>$value){
@@ -138,22 +148,8 @@ class list_control extends phpok_control
         }
 
         $m_rs = $this->model('module')->get_one($rs['module']);
-        $contentTpl = "list_content";
+        $contentTpl = "book_list_content";
         $setTpl = "list_set2";
-
-        // new add start
-        $myModuleId = empty($this->config['my_config']['my_module_id']) ? '' : $this->config['my_config']['my_module_id'];
-        if (!empty($myModuleId)) {
-            $myModuleArr = explode(",", $myModuleId);
-            if (in_array($m_rs['id'], $myModuleArr)) {
-                $this->assign('my_module', true);
-                $contentTpl = "list_content_new";
-            }
-        }
-        if ($rs['id'] == 4){
-            $setTpl = "list_set2_new";
-        }
-        // new add end
 
         //設置內容列表
         if($rs["module"]){
@@ -401,9 +397,11 @@ class list_control extends phpok_control
             $pageid = 1;
         }
         $offset = ($pageid-1) * $psize;
+        $lid = $this->get('lid');
         $condition = "l.site_id='".$site_id."' AND l.project_id='".$pid."' AND l.parent_id='0' ";
         $pageurl = $this->url("list","action","id=".$pid);
         $keywords = $this->get('keywords');
+        $keywords['lid'] = $lid;
         if($keywords){
             $this->assign('keywords',$keywords);
         }
@@ -462,6 +460,9 @@ class list_control extends phpok_control
             $pageurl .= "&keywords[user]=".rawurlencode($keywords['user']);
         }
         if($keywords && $m_list){
+            if (isset($m_list['lid']['search'])) {
+                $m_list['lid']['search'] = 1;
+            }
             foreach($m_list as $key=>$value){
                 $_condition = $this->model('form')->search($value,$keywords[$value['identifier']]);
                 if($_condition){
@@ -470,6 +471,7 @@ class list_control extends phpok_control
                 }
             }
         }
+        echo $condition;
         if($keywords && $keywords['attr']){
             $condition .= " AND FIND_IN_SET('".$keywords['attr']."',l.attr) ";
             $pageurl .= "&keywords[attr]=".rawurlencode($keywords['attr']);
@@ -840,7 +842,7 @@ class list_control extends phpok_control
         }
         // new add end
 
-        $this->view("list_edit");
+        $this->view("book_list_edit");
     }
 
     public function ok_f()
