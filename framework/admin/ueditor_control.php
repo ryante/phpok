@@ -346,7 +346,10 @@ class ueditor_control extends phpok_control
 		if($gd_rs)
 		{
 			$ext_rs = $this->model('res')->get_gd_pic($rs['id']);
-			$filename = ($ext_rs && $ext_rs[$gd_rs['identifier']]) ? $ext_rs[$gd_rs['identifier']]['filename'] : $rs['filename'];
+
+            // new edit
+            //$filename = ($ext_rs && $ext_rs[$gd_rs['identifier']]) ? $ext_rs[$gd_rs['identifier']]['filename'] : $rs['filename'];
+            $filename = ($ext_rs && $ext_rs[$gd_rs['identifier']]) ? $ext_rs[$gd_rs['identifier']] : $rs['filename'];
 		}
 		else
 		{

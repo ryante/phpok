@@ -336,6 +336,8 @@
 							<!-- if $comments[$vv.id][uncheck] --><span class="layui-badge layui-bg-orange">{$comments[$vv.id][uncheck]}</span><!-- /if -->
 						</button>
 						<!-- /if -->
+
+						<!-- if $my_module --><input type="button" value="書籍管理" onclick="$.win('{$rs.title}_{$vv.title}','{url ctrl=book func=action id=8 lid=$vv.id /}')" class="layui-btn layui-btn-sm" /><!-- /if -->
 					</div>
 				</td>
 			</tr>

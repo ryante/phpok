@@ -91,7 +91,6 @@ class book_control extends phpok_control
             $this->error(P_Lang('文献信息不存在'),$this->url("list"));
         }
         $this->assign("book_info", $bookInfo);
-
         $son_list = $this->model('project')->get_all($rs["site_id"],$id,"p.status=1 AND p.hidden=0");
         if($son_list){
             foreach($son_list as $key=>$value){
@@ -398,10 +397,9 @@ class book_control extends phpok_control
         }
         $offset = ($pageid-1) * $psize;
         $lid = $this->get('lid');
-        $condition = "l.site_id='".$site_id."' AND l.project_id='".$pid."' AND l.parent_id='0' ";
+        $condition = "l.site_id='".$site_id."' AND l.project_id='".$pid."' AND l.parent_id='0' AND ext.lid={$lid} ";
         $pageurl = $this->url("list","action","id=".$pid);
         $keywords = $this->get('keywords');
-        $keywords['lid'] = $lid;
         if($keywords){
             $this->assign('keywords',$keywords);
         }
@@ -460,9 +458,6 @@ class book_control extends phpok_control
             $pageurl .= "&keywords[user]=".rawurlencode($keywords['user']);
         }
         if($keywords && $m_list){
-            if (isset($m_list['lid']['search'])) {
-                $m_list['lid']['search'] = 1;
-            }
             foreach($m_list as $key=>$value){
                 $_condition = $this->model('form')->search($value,$keywords[$value['identifier']]);
                 if($_condition){
@@ -471,7 +466,6 @@ class book_control extends phpok_control
                 }
             }
         }
-        echo $condition;
         if($keywords && $keywords['attr']){
             $condition .= " AND FIND_IN_SET('".$keywords['attr']."',l.attr) ";
             $pageurl .= "&keywords[attr]=".rawurlencode($keywords['attr']);
@@ -639,9 +633,15 @@ class book_control extends phpok_control
     {
         $id = $this->get("id","int");
         $pid = $this->get("pid","int");
+        $lid = $this->get("lid","int");
         if(!$id && !$pid){
             $this->error(P_Lang('操作異常'),$this->url("list"));
         }
+        $bookInfo = $this->model('list')->get_one($lid);
+        if(!$bookInfo){
+            $this->error(P_Lang('文献信息不存在'),$this->url("list"));
+        }
+        $this->assign("book_info", $bookInfo);
         if($id){
             $rs = $this->model('list')->get_one($id,false);
             $pid = $rs["project_id"];
@@ -831,17 +831,6 @@ class book_control extends phpok_control
                 $this->assign('taglist',$taglist);
             }
         }
-
-        // new add start
-        $myModuleId = empty($this->config['my_config']['my_module_id']) ? '' : $this->config['my_config']['my_module_id'];
-        if (!empty($myModuleId)) {
-            $myModuleArr = explode(",", $myModuleId);
-            if (in_array($m_rs['id'], $myModuleArr)) {
-                $this->view("list_edit_new");
-            }
-        }
-        // new add end
-
         $this->view("book_list_edit");
     }
 
@@ -1070,6 +1059,7 @@ class book_control extends phpok_control
                 }
                 $tmplist[$value["identifier"]] = $this->lib('form')->get($value);
             }
+            $tmplist['lid'] = $this->get('lid');
             $this->model('list')->save_ext($tmplist,$p_rs["module"]);
         }
         //保存內容擴展字段

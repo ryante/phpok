@@ -6,7 +6,7 @@
 	<div class="layui-card-body">
 		<ul class="project" id="project">
 			<!-- loop from=$project_list key=$key value=$value -->
-			<li id="project_{$value.id}" title="{$value.title}" status="{$value.status}" href="{url ctrl=list func=action id=$value.id/}">
+			<li id="project_{$value.id}" title="{$value.title}" status="{$value.status}" href="{url ctrl=book func=action id=$value.id/}">
 				<div class="img"><img src="{$value.ico ? $value.ico : 'images/ico/default.png'}" /></div>
 				<div class="txt" id="txt_{$value.id}">{$value.nick_title ? $value.nick_title : $value.title}</div>
 			</li>
@@ -110,7 +110,7 @@
 				<label class="layui-form-label">&nbsp;</label>
 				<div class="layui-input-block">
 					<input type="submit" value="{lang提交搜索}" class="layui-btn layui-btn-normal" />
-					<input type="button" value="{lang取消搜索}" onclick="$.phpok.go('{url ctrl=list func=action id=$rs.id/}')" class="layui-btn layui-btn-primary" />
+					<input type="button" value="{lang取消搜索}" onclick="$.phpok.go('{url ctrl=book func=action id=$rs.id/}')" class="layui-btn layui-btn-primary" />
 				</div>
 			</div>
 		</div>
@@ -129,11 +129,11 @@
 
 <div class="layui-card">
 	<div class="layui-card-header">
-        {$book_info.title}书籍内容
+        书籍内容
 		<span id="AP_ACTION_HTML"></span>
 		<div class="layui-btn-group fr">
 			<!-- if $popedom.add -->
-			<button class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.win('{$rs.title}_{lang添加内容}','{url ctrl=list func=edit pid=$pid/}')"><span class="layui-icon">&#xe654;</span>{lang添加内容}</button>
+			<button class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.win('{$book_info.title}_{lang添加书籍}','{url ctrl=book func=edit pid=$pid lid=$book_info.id/}')"><span class="layui-icon">&#xe654;</span>{lang添加书籍}</button>
 			<!-- /if -->
 			<button class="layui-btn layui-btn-sm" onclick="$.admin.hide_show('search_html')"><span class="layui-icon">&#xe615;</span>{lang搜索}</button>
 		</div>
@@ -156,7 +156,7 @@
 				<!-- elseif $key == "hits" -->
 				<th style="width:50px" class="center">{lang点击}</th>
 				<!-- elseif $key == "sort" -->
-				<th style="width:80px" class="center">{lang排序}</th>
+				<th style="width:80px" class="center">{lang页码}</th>
 				<!-- else -->
 				<th class="lft">{$value}</th>
 				<!-- /if -->
@@ -193,7 +193,7 @@
 				<div class="extcate">
 					分类：
 					<!-- loop from=$clist[$value.id] key=$ck value=$cv -->
-					<a href="{url ctrl=list func=action id=$pid cateid=$cv/}" class="i">{$cateall[$cv]}</a>
+					<a href="{url ctrl=book func=action id=$pid cateid=$cv/}" class="i">{$cateall[$cv]}</a>
 					<!-- /loop -->
 				</div>
 				<!-- /if -->
@@ -239,7 +239,7 @@
 			<td>
 				<div class="layui-btn-group">
 					<!-- if $popedom.modify -->
-					<input type="button" value="{lang编辑}" onclick="top.$.win('{$rs.title}_{lang编辑}_#{$value.id}','{url ctrl=list func=edit id=$value.id/}')" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang编辑}" onclick="top.$.win('{$rs.title}_{lang编辑}_#{$value.id}','{url ctrl=book func=edit id=$value.id lid=$book_info.id/}')" class="layui-btn layui-btn-sm" />
 					<!-- /if -->
 					<!-- if $popedom.delete -->
 					<input type="button" value="{lang删除}" onclick="content_del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
@@ -250,7 +250,7 @@
 						<!-- if $comments[$value.id][uncheck] --><span class="layui-badge layui-bg-orange">{$comments[$value.id][uncheck]}</span><!-- /if -->
 					</button>
 					<!-- /if -->
-					<!-- if $rs.subtopics && !$value.parent_id && $popedom.add --><input type="button" value="{lang加子主题}" onclick="$.win('{lang加子主题}_{$rs.title}','{url ctrl=list func=edit parent_id=$value.id pid=$value.project_id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
+					<!-- if $rs.subtopics && !$value.parent_id && $popedom.add --><input type="button" value="{lang加子主题}" onclick="$.win('{lang加子主题}_{$rs.title}','{url ctrl=book func=edit parent_id=$value.id pid=$value.project_id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
 				</div>
 			</td>
 		</tr>
@@ -281,7 +281,7 @@
 					<div class="extcate">
 						分类：
 						<!-- loop from=$clist[$vv.id] key=$ck value=$cv -->
-						<a href="{url ctrl=list func=action id=$pid cateid=$cv/}" class="i">{$cateall[$cv]}</a>
+						<a href="{url ctrl=book func=action id=$pid cateid=$cv/}" class="i">{$cateall[$cv]}</a>
 						<!-- /loop -->
 					</div>
 					<!-- /if -->
@@ -323,7 +323,7 @@
 				<!-- /loop -->
 				<td>
 					<div class="layui-btn-group">
-						<!-- if $popedom.modify --><input type="button" value="{lang编辑}" onclick="top.$.win('{$rs.title}_{lang编辑}_#{$vv.id}','{url ctrl=list func=edit id=$vv.id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
+						<!-- if $popedom.modify --><input type="button" value="{lang编辑}" onclick="top.$.win('{$rs.title}_{lang编辑}_#{$vv.id}','{url ctrl=book func=edit id=$vv.id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
 						<!-- if $popedom.delete --><input type="button" value="{lang删除}" onclick="content_del('{$vv.id}')" class="layui-btn layui-btn-sm layui-btn-danger" /><!-- /if -->
 						<!-- if $popedom.comment && ($rs.comment_status || $comments[$vv.id]) -->
 						<button type="button"class="layui-btn layui-btn-sm" onclick="$.admin_list.reply_it('{$vv.id}')">
