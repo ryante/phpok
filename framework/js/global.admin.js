@@ -392,7 +392,7 @@ function ext_edit(id,module)
 		/**
 		 * 关闭当前窗口
 		**/
-		close(url)
+		close:function(url)
 		{
 			var self = this;
 			window.setTimeout(function(){
