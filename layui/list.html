@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <title>
+            layout 后台大布局 - Layui
+        </title>
+        <link rel="stylesheet" href="css/layui.css" />
+        <script src="layui.js">
+        </script>
+        <style type="text/css">
+            .layui-nav{padding: 0px 0px !important} .head-img{height: 52px;} .layui-header{
+            background-color: #fff !important; box-shadow: 0 2px 2px rgba(0, 0, 0,
+            0.05), 0 1px 0 rgba(0, 0, 0, 0.05); } .layui-nav .layui-nav-item1 { position:
+            relative; display: inline-block; *display: inline; *zoom: 1; vertical-align:
+            middle; line-height: 60px; } .layui-tab-content{background-color: #fff;}
+            .layui-card-header {background-color: #fff;} .img-href{border: 1px solid
+            #ddd;padding: 4px; display: block;border-radius:3px;} .img-href:hover{border-color:
+            #2c3e50} .img-href img{width: 100%} .layui-badge{margin-top: 4px} #lib-list
+            .layui-col-md3{ overflow: hidden; text-align: center; } #lib-list .layui-col-md3
+            img{ width: 150px; } #lib-list table tr td:first-child{ background-color:
+            #f2f2f2; font-weight: 700 } #lib-list .layui-table{margin: 0px}
+        </style>
+    </head>
+    
+    <body class="layui-layout-body" style="background-color: #f2f2f2">
+        <div class="layui-layout layui-layout-admin">
+            <div class="layui-header">
+                <div class="layui-logo">
+                    <a href="/">
+                        <img class="head-img" src="images/logo1.png" />
+                    </a>
+                </div>
+                <!-- 头部区域（可配合layui已有的水平导航） -->
+                <ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item1" style="margin-right: 10px">
+                        <img class="head-img" src="images/logo2.png" />
+                    </li>
+                    <li class="layui-nav-item1">
+                        <img class="head-img" src="images/logo3.png" />
+                    </li>
+                </ul>
+                <ul class="layui-nav layui-layout-right">
+                    <img src="images/bg-top-right.png" style="height: 60px" alt="placeholder+image"
+                    />
+                </ul>
+            </div>
+            <div class="layui-side layui-bg-black">
+                <div class="layui-side-scroll">
+                    <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                    <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                        <li class="layui-nav-item layui-nav-itemed">
+                            <a class="" href="javascript:;">
+                                所有商品
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd>
+                                    <a href="javascript:;">
+                                        列表一
+                                    </a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">
+                                        列表二
+                                    </a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">
+                                        列表三
+                                    </a>
+                                </dd>
+                                <dd>
+                                    <a href="">
+                                        超链接
+                                    </a>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">
+                                解决方案
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd>
+                                    <a href="javascript:;">
+                                        列表一
+                                    </a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">
+                                        列表二
+                                    </a>
+                                </dd>
+                                <dd>
+                                    <a href="">
+                                        超链接
+                                    </a>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="">
+                                云市场
+                            </a>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="">
+                                发布商品
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-body">
+                <!-- 内容主体区域 -->
+                <div style="padding: 15px;">
+                    <div class="layui-container">
+                        <!-- search form start -->
+                        <form class="layui-form" action="">
+                            <div class="layui-row layui-col-space10">
+                              <div class="layui-col-md3">
+                                <select name="modules" lay-verify="required" lay-search="">
+                                  <option value="">直接选择或搜索选择</option>
+                                  <option value="1">layer</option>
+                                  <option value="2">form</option>
+                                  <option value="3">layim</option>
+                                  <option value="4">element</option>
+                                </select>
+                              </div>
+
+                                <div class="layui-col-md6">
+                                    <input type="text" name="title" lay-verify="title" autocomplete="off"
+                                    placeholder="请输入标题" class="layui-input" />
+                                </div>
+                                <div class="layui-col-md3">
+                                    <button class="layui-btn">
+                                        默认按钮
+                                    </button>
+                                    <button class="layui-btn" style="float: right;">
+                                        进阶搜索
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
+                                <div class="layui-card-header">
+                                    卡片面板
+                                </div>
+                                <div class="layui-tab-content">
+                                    <div class="layui-form-item">
+                                        <div class="layui-block">
+                                            <input type="checkbox" name="like[write]" title="写作" />
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-block">
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-block">
+                                            <input type="checkbox" name="like[write]" title="写作" />
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-block">
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
+                                            checked="" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <!-- search form end -->
+                        <!-- search list start -->
+                            <div class="layui-row layui-col-space20">
+                                <div class="layui-col-md3">
+                                    <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
+                                        <div class="layui-card-header">
+                                            标签云
+                                        </div>
+                                        <div class="layui-tab-content">
+                                            <fieldset class="layui-elem-field" style="border-color: #01AAED">
+                                                <legend style="color: #01AAED">
+                                                    爱好
+                                                </legend>
+                                                <div class="layui-field-box">
+                                                    <a href="">
+                                                        <span class="layui-badge layui-bg-blue">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge layui-bg-blue">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge layui-bg-blue">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge layui-bg-blue">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge layui-bg-blue">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="layui-elem-field" style="border-color: #FF5722">
+                                                <legend style="color: #FF5722">
+                                                    爱好
+                                                </legend>
+                                                <div class="layui-field-box">
+                                                    <a href="">
+                                                        <span class="layui-badge">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            </fieldset>
+                                            <fieldset class="layui-elem-field" style="border-color: #FFB800">
+                                                <legend style="color: #FFB800">
+                                                    爱好
+                                                </legend>
+                                                <div class="layui-field-box">
+                                                    <a href="">
+                                                        <span class="layui-badge layui-bg-orange">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge layui-bg-orange">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge layui-bg-orange">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge layui-bg-orange">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge layui-bg-orange">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge layui-bg-orange">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                    <a href="">
+                                                        <span class="layui-badge layui-bg-orange">
+                                                            橙橙橙橙
+                                                        </span>
+                                                    </a>
+                                                </div>
+                                            </fieldset>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="layui-col-md9">
+                                    <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
+                                        <div class="layui-card-header">
+                                            检索结果
+                                            <div style="float: right;">
+                                                <a href="" title="图表显示">
+                                                    <i class="layui-icon layui-icon-table" style="font-size: 26px; color: #009688">
+                                                    </i>
+                                                </a>
+                                                <a href="" title="列表显示">
+                                                    <i class="layui-icon layui-icon-list" style="font-size: 26px;color: #009688">
+                                                    </i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="layui-tab-content" id="lib-list">
+
+                                            <div class="layui-row">
+                                                <a href="">
+                                                    <div class="layui-col-md3">
+                                                        <img src="http://daodm2.crs.cuhk.edu.hk/uploads/20171106/6a1c642868b3762bdae22ccefe5e35c0.png">
+                                                        <p>asdfsdfds</p>
+                                                    </div>
+                                                </a>
+                                                <a href="">
+                                                    <div class="layui-col-md3">
+                                                        <img src="http://daodm2.crs.cuhk.edu.hk/uploads/20171106/6a1c642868b3762bdae22ccefe5e35c0.png">
+                                                        <p>asdfsdfds</p>
+                                                    </div>
+                                                </a>
+                                                <a href="">
+                                                    <div class="layui-col-md3">
+                                                        <img src="http://daodm2.crs.cuhk.edu.hk/uploads/20171106/6a1c642868b3762bdae22ccefe5e35c0.png">
+                                                        <p>asdfsdfds</p>
+                                                    </div>
+                                                </a>
+                                                <a href="">
+                                                    <div class="layui-col-md3">
+                                                    aaaaaaa         
+                                                    </div>
+                                                </a>
+                                            </div>
+
+                                            <div class="layui-row" style="text-align: center;">
+                                                <div class="layui-box layui-laypage layui-laypage-default" style="margin: 20px" id="layui-laypage-10">
+                                                    <span class="layui-laypage-count">
+                                                        共 100 条
+                                                    </span>
+                                                    <a href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="0">
+                                                        上一页
+                                                    </a>
+                                                    <span class="layui-laypage-curr">
+                                                        <em class="layui-laypage-em">
+                                                        </em>
+                                                        <em>
+                                                            1
+                                                        </em>
+                                                    </span>
+                                                    <a href="javascript:;" data-page="2">
+                                                        2
+                                                    </a>
+                                                    <a href="javascript:;" data-page="3">
+                                                        3
+                                                    </a>
+                                                    <a href="javascript:;" data-page="4">
+                                                        4
+                                                    </a>
+                                                    <a href="javascript:;" data-page="5">
+                                                        5
+                                                    </a>
+                                                    <span class="layui-laypage-spr">
+                                                        …
+                                                    </span>
+                                                    <a href="javascript:;" class="layui-laypage-last" title="尾页" data-page="10">
+                                                        10
+                                                    </a>
+                                                    <a href="javascript:;" class="layui-laypage-next" data-page="2">
+                                                        下一页
+                                                    </a>
+                                                  </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <!-- search list end -->
+                    </div>
+                </div>
+                <!-- 内容主体区域 -->
+
+            </div>
+        </div>
+        <script>
+            //JavaScript代码区域
+            layui.use(['element', 'form'],function() {
+                var element = layui.element;
+                var form = layui.form;
+            });
+        </script>
+    </body>
+
+</html>
