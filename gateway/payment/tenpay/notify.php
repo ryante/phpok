@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： payment/tenpay/notify.php
-	备注： 异步通知
+	檔案： payment/tenpay/notify.php
+	備註： 非同步通知
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年5月3日
+	時間： 2014年5月3日
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class tenpay_notify
@@ -55,7 +55,7 @@ class tenpay_notify
 		$tenpay->param_clear();
 		$tenpay->set_key($this->payment['param']['key']);
 		$tenpay->set_xml_content();
-		//取得订单通知
+		//取得訂單通知
 		if(!$tenpay->check_sign($array)){
 			exit('fail');
 		}
@@ -80,7 +80,7 @@ class tenpay_notify
 				$app->model('order')->update_order_status($order['id'],'paid');
 				$param = 'id='.$order['id']."&status=paid";
 				$app->model('task')->add_once('order',$param);
-				$note = P_Lang('订单支付完成，编号：{sn}',array('sn'=>$order['sn']));
+				$note = P_Lang('訂單支付完成，編號：{sn}',array('sn'=>$order['sn']));
 				$log = array('order_id'=>$order['id'],'addtime'=>$app->time,'who'=>$app->user['user'],'note'=>$note);
 				$app->model('order')->log_save($log);
 				//增加order_payment

@@ -1,13 +1,13 @@
 <?php
 /**
- * 日志管理
+ * 日誌管理
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @许可 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年05月07日
+ * @許可 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年05月07日
 **/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class log_control extends phpok_control
@@ -76,8 +76,8 @@ class log_control extends phpok_control
 			$this->assign('pageid',$pageid);
 			$this->assign('offset',$offset);
 			$this->assign('psize',$psize);
-			$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=5';
-			$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+			$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=5';
+			$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 			$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 			$this->assign('pagelist',$pagelist);
 		}
@@ -88,17 +88,17 @@ class log_control extends phpok_control
 	public function delete_f()
 	{
 		if(!$this->session->val('admin_rs.if_system')){
-			$this->error(P_Lang('只有系统管理员才有此权限'));
+			$this->error(P_Lang('只有系統管理員才有此許可權'));
 		}
 		$id = $this->get('id','int');
 		$ids = $this->get('ids');
 		$date = $this->get('date','int');
 		if(!$id && !$ids && !$date){
-			$this->error(P_Lang('参数不完整！'));
+			$this->error(P_Lang('引數不完整！'));
 		}
 		if($id){
 			$condition = "id='".$id."'";
-			$tip = P_Lang('删除日志#{id}',array('id'=>$id));
+			$tip = P_Lang('刪除日誌#{id}',array('id'=>$id));
 		}
 		if($ids){
 			$lst = explode(",",$ids);
@@ -111,15 +111,15 @@ class log_control extends phpok_control
 			}
 			$ids = implode(",",$lst);
 			if(!$ids){
-				$this->error(P_Lang('未指定要删除的日志'));
+				$this->error(P_Lang('未指定要刪除的日誌'));
 			}
 			$condition = "id IN(".$ids.")";
-			$tip = P_Lang('删除日志#{id}',array('id'=>$ids));
+			$tip = P_Lang('刪除日誌#{id}',array('id'=>$ids));
 		}
 		if($date){
 			$time = strtotime(date("Y-m-d",$this->time)) - $date*24*60*60;
 			$condition = "dateline<".$time;
-			$tip = P_Lang('删除{date}天前的日志',array('date'=>$date));
+			$tip = P_Lang('刪除{date}天前的日誌',array('date'=>$date));
 		}
 		$this->model('log')->delete($condition);
 		$this->model('log')->save($tip);

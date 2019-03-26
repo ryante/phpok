@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/libs/xml.php
-	备注： PHP操作XML类，读取方法：SimpleXML>正则解析
+	檔案： {phpok}/libs/xml.php
+	備註： PHP操作XML類，讀取方法：SimpleXML>正則解析
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年01月05日 14时23分
+	時間： 2015年01月05日 14時23分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class xml_lib
@@ -37,9 +37,9 @@ class xml_lib
 	}
 
 	/**
-	 * 读取XML操作
-	 * @参数 $info XML文件或要解析的XML内容
-	 * @参数 $isfile，是否是文件，默认为是，如果要解析XML内容，请改为false
+	 * 讀取XML操作
+	 * @引數 $info XML檔案或要解析的XML內容
+	 * @引數 $isfile，是否是檔案，預設為是，如果要解析XML內容，請改為false
 	**/
 	public function read($info,$isfile=true)
 	{
@@ -110,7 +110,7 @@ class xml_lib
 		}
 	}
 
-	//通过SimpleXML读取XML信息
+	//通過SimpleXML讀取XML資訊
 	private function read_simplexml($info,$isfile=true)
 	{
 		if($isfile){
@@ -142,7 +142,7 @@ class xml_lib
 					$attr[$k] = (string) $v;
 				}
 			}
-			//检测子节点
+			//檢測子節點
 			$val = (string) $value;
 			if($value->children()){
 				$tmp = $this->simplexml_obj_to_array($value->children());
@@ -164,7 +164,7 @@ class xml_lib
 		return $list;
 	}
 
-	//通过人工编写自己读取XML，效率较慢
+	//通過人工編寫自己讀取XML，效率較慢
 	private function read_phpok($info,$isfile=true)
 	{
 		if($isfile){
@@ -228,7 +228,7 @@ class xml_lib
 			$val = $this->xml_to_array($matches[3][$i]);
 			if(is_string($val)){
 				$val = preg_replace('/<\!\[CDATA\[([^\]\]>]+)\]\]>/isU','\\1',$val);
-				//将值中的HTML标记更换
+				//將值中的HTML標記更換
 				$val = preg_replace('/\[html:([^\]]+)\]/isU','<\\1>',$val);
 				$val = preg_replace('/\[\/([a-zA-Z0-9\_\-]+):html\]/isU','</\\1>',$val);
 			}

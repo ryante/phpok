@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： gateway/payment/wxpay/submit.php
-	备注： 微信支付
+	檔案： gateway/payment/wxpay/submit.php
+	備註： 微信支付
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年11月04日 11时46分
+	時間： 2015年11月04日 11時46分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class wxpay_submit
@@ -13,8 +13,8 @@ class wxpay_submit
 	private $order;
 	private $param;
 	private $obj;
-	//order，订单信息
-	//param，微信支付配置信息
+	//order，訂單資訊
+	//param，微信支付配置資訊
 	public function __construct($order,$param)
 	{
 		$this->param = $param;
@@ -33,7 +33,7 @@ class wxpay_submit
 		if($wxpay->trade_type() == 'jsapi'){
 			$openid = $wxpay->get_openid();
 			if(!$openid){
-				exit('获取OpenId失败，请检查 '.$wxpay->errmsg());
+				exit('獲取OpenId失敗，請檢查 '.$wxpay->errmsg());
 			}
 			$data['openid'] = $openid;
 		}else{
@@ -44,13 +44,13 @@ class wxpay_submit
 			$data['attach'] = $order['passwd'];
 		}
 		$price = price_format_val($this->order['price'],$this->order['currency_id'],$this->param['currency']['id']);
-		$data['body'] = '订单：'.$this->order['sn'].'-'.$this->order['id'];
+		$data['body'] = '訂單：'.$this->order['sn'].'-'.$this->order['id'];
 		$data['out_trade_no'] = $this->order['sn'].'-'.$this->order['id'];
 		$data['total_fee'] = intval($price*100);
 		$data['notify_url'] = $this->baseurl."gateway/payment/wxpay/notify_url.php";
 		$info = $wxpay->create($data);
 		if(!$info){
-			$app->error('支付出错，请联系管理员');
+			$app->error('支付出錯，請聯絡管理員');
 		}
 		if(strtolower($info['result_code']) == 'fail'){
 			$app->error($info['err_code'].'：'.$info['err_code_des']);

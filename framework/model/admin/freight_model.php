@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/freight_model.php
-	备注： 运费管理
+	檔案： {phpok}/model/admin/freight_model.php
+	備註： 運費管理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年08月08日 07时13分
+	時間： 2015年08月08日 07時13分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class freight_model extends freight_model_base
@@ -32,7 +32,7 @@ class freight_model extends freight_model_base
 
 	public function delete($id)
 	{
-		//删除主表
+		//刪除主表
 		$sql = "DELETE FROM ".$this->db->prefix."freight WHERE id='".$id."'";
 		$this->db->query($sql);
 		$sql = "SELECT id FROM ".$this->db->prefix."freight_zone WHERE fid='".$id."'";

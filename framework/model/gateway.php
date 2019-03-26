@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/gateway.php
-	备注： 第三方网关接入管理工具
+	檔案： {phpok}/model/gateway.php
+	備註： 第三方閘道器接入管理工具
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年09月29日 23时58分
+	時間： 2015年09月29日 23時58分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class gateway_model_base extends phpok_model
@@ -16,10 +16,10 @@ class gateway_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取网关信息
-	 * @参数 $id 网关ID
-	 * @参数 $type 网关类型，当为 true 或 false 时，表示 chkstatus
-	 * @参数 $chkstatus 是否验证必填信息项目
+	 * 獲取閘道器資訊
+	 * @引數 $id 閘道器ID
+	 * @引數 $type 閘道器型別，當為 true 或 false 時，表示 chkstatus
+	 * @引數 $chkstatus 是否驗證必填資訊專案
 	**/
 	public function get_one($id,$type='',$chkstatus=false)
 	{
@@ -132,14 +132,14 @@ class gateway_model_base extends phpok_model
 		return include $file;
 	}
 
-	//保存临时数据
+	//儲存臨時資料
 	public function save_temp($info,$gid,$uid=0)
 	{
 		$file = 'gateway_'.$gid.'_'.$uid.'_'.$this->site_id.'.php';
 		return $this->lib('file')->vi($info,$this->dir_cache.$file);
 	}
 
-	//读取临时数据
+	//讀取臨時資料
 	public function read_temp($gid,$uid=0)
 	{
 		$file = 'gateway_'.$gid.'_'.$uid.'_'.$this->site_id.'.php';

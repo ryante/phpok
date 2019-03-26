@@ -1,13 +1,13 @@
 <?php
 /**
- * 远程访问类，适用于生成静态页及远程获取数据，系统生成静态页类也是基于此项生成
+ * 遠端訪問類，適用於生成靜態頁及遠端獲取資料，系統生成靜態頁類也是基於此項生成
  * @package phpok\libs
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年11月18日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年11月18日
 **/
 class html_lib
 {
@@ -40,9 +40,9 @@ class html_lib
 	}
 
 	/**
-	 * 设置私有参数
-	 * @参数 $var 变量名
-	 * @参数 $val 变量值
+	 * 設定私有引數
+	 * @引數 $var 變數名
+	 * @引數 $val 變數值
 	**/
 	public function setting($var,$val="")
 	{
@@ -50,9 +50,9 @@ class html_lib
 	}
 
 	/**
-	 * 设置HTTP响应头部参数
-	 * @参数 $key 变量名
-	 * @参数 $value 变量值
+	 * 設定HTTP響應頭部引數
+	 * @引數 $key 變數名
+	 * @引數 $value 變數值
 	**/
 	public function set_header($key,$value)
 	{
@@ -60,8 +60,8 @@ class html_lib
 	}
 
 	/**
-	 * 设置是否使用post，为false时使用GET模式
-	 * @参数 $post 布尔值 true/false
+	 * 設定是否使用post，為false時使用GET模式
+	 * @引數 $post 布林值 true/false
 	**/
 	public function set_post($post=true)
 	{
@@ -69,9 +69,9 @@ class html_lib
 	}
 
 	/**
-	 * 设置要POST提交的数据
-	 * @参数 $key 字段名
-	 * @参数 $value 字段值，如果值为空，则表示注销要提交的这个字段，0不是空值
+	 * 設定要POST提交的資料
+	 * @引數 $key 欄位名
+	 * @引數 $value 欄位值，如果值為空，則表示登出要提交的這個欄位，0不是空值
 	**/
 	public function set_postdata($key,$value='')
 	{
@@ -88,8 +88,8 @@ class html_lib
 	}
 
 	/**
-	 * 注销要提交的POST字段内容
-	 * @参数 $key 字段名称
+	 * 登出要提交的POST欄位內容
+	 * @引數 $key 欄位名稱
 	 * @返回 true
 	**/
 	public function unset_postdata($key)
@@ -101,8 +101,8 @@ class html_lib
 	}
 
 	/**
-	 * 内部处理POST数据
-	 * @参数 $data 要处理的post数据
+	 * 內部處理POST資料
+	 * @引數 $data 要處理的post資料
 	**/
 	private function _set_postdata($data)
 	{
@@ -120,9 +120,9 @@ class html_lib
 	}
 
 	/**
-	 * 设置IP，当主机无法获取gethostbyname
-	 * @参数 $ip IP地址
-	 * @返回 当前的IP或是您指定的IP
+	 * 設定IP，當主機無法獲取gethostbyname
+	 * @引數 $ip IP地址
+	 * @返回 當前的IP或是您指定的IP
 	**/
 	public function ip($ip='')
 	{
@@ -133,8 +133,8 @@ class html_lib
 	}
 
 	/**
-	 * 返回的结果集中是否包含Header信息
-	 * @参数 $type 布尔值true/false
+	 * 返回的結果集中是否包含Header資訊
+	 * @引數 $type 布林值true/false
 	**/
 	public function include_header($type=false)
 	{
@@ -143,8 +143,8 @@ class html_lib
 	}
 
 	/**
-	 * 设置超时时间，单位是秒，建议设置为5秒或是10秒
-	 * @参数 $time 时间，单位是秒
+	 * 設定超時時間，單位是秒，建議設定為5秒或是10秒
+	 * @引數 $time 時間，單位是秒
 	**/
 	public function timeout($time=5)
 	{
@@ -155,10 +155,10 @@ class html_lib
 	}
 
 	/**
-	 * 取得远程数据
-	 * @参数 $url 远程地址
-	 * @参数 $post 要发送的POST数据
-	 * @返回  远程字符串数据
+	 * 取得遠端資料
+	 * @引數 $url 遠端地址
+	 * @引數 $post 要傳送的POST資料
+	 * @返回  遠端字串資料
 	**/
 	public function get_content($url,$post="")
 	{
@@ -190,9 +190,9 @@ class html_lib
 		}else{
 			curl_setopt($curl, CURLOPT_HTTPGET,true);
 		}
-		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT,$this->timeout);//等待时间，超时退出
+		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT,$this->timeout);//等待時間，超時退出
 		if($this->is_gzip){
-			curl_setopt($curl,CURLOPT_ENCODING ,'gzip');//GZIP压缩
+			curl_setopt($curl,CURLOPT_ENCODING ,'gzip');//GZIP壓縮
 		}
 		if($this->is_proxy && $this->proxy_service){
 			curl_setopt($curl,CURLOPT_PROXY,$this->proxy_service);
@@ -284,7 +284,7 @@ class html_lib
 			return false;
 		}
 		set_time_limit($this->timeout);
-		//取得内容信息
+		//取得內容資訊
 		$urlext = $this->purl["path"];
 		if($urlext != "/" && $this->purl["query"]){
 			$urlext .= "?";

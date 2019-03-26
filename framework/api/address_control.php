@@ -1,12 +1,12 @@
 <?php
 /**
- * 地址库相关操作
+ * 地址庫相關操作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @许可 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年06月04日
+ * @許可 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年06月04日
 **/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class address_control extends phpok_control
@@ -19,7 +19,7 @@ class address_control extends phpok_control
 	public function index_f()
 	{
 		if(!$this->session->val('user_id')){
-			$this->error(P_Lang('您还未登录，请先登录'));
+			$this->error(P_Lang('您還未登入，請先登入'));
 		}
 		$rslist = $this->model('user')->address_all($this->session->val('user_id'));
 		if(!$rslist){
@@ -49,11 +49,11 @@ class address_control extends phpok_control
 	public function all_f()
 	{
 		if(!$this->session->val('user_id')){
-			$this->error(P_Lang('您还未登录，请先登录'));
+			$this->error(P_Lang('您還未登入，請先登入'));
 		}
 		$rslist = $this->model('user')->address_all($this->session->val('user_id'));
 		if(!$rslist){
-			$this->error(P_Lang('会员暂无收货地址信息'));
+			$this->error(P_Lang('會員暫無收貨地址資訊'));
 		}
 		$total = count($rslist);
 		$default = $first = array();
@@ -73,7 +73,7 @@ class address_control extends phpok_control
 	}
 
 	/**
-	 * 获取会员地址列表别名
+	 * 獲取會員地址列表別名
 	**/
 	public function list_f()
 	{
@@ -81,28 +81,28 @@ class address_control extends phpok_control
 	}
 
 	/**
-	 * 保存地址信息
+	 * 儲存地址資訊
 	**/
 	public function save_f()
 	{
 		if(!$this->session->val('user_id')){
-			$this->error(P_Lang('您没有权限执行此操作，请先登录'));
+			$this->error(P_Lang('您沒有許可權執行此操作，請先登入'));
 		}
 		$id = $this->get('id','int');
 		if($id){
 			$rs = $this->model('user')->address_one($id);
 			if($rs['user_id'] != $this->session->val('user_id')){
-				$this->error(P_Lang('您没有权限修改其他人联系信息'));
+				$this->error(P_Lang('您沒有許可權修改其他人聯絡資訊'));
 			}
 		}
 		$data = array();
 		$data['fullname'] = $this->get('fullname');
 		if(!$data['fullname']){
-			$this->error(P_Lang('姓名不能为空'));
+			$this->error(P_Lang('姓名不能為空'));
 		}
 		$data['country'] = $this->get('country');
 		if(!$data['country']){
-			$data['country'] = P_Lang('中国');
+			$data['country'] = P_Lang('中國');
 		}
 		$pca = $this->get('pca');
 		if(!$pca){
@@ -116,30 +116,30 @@ class address_control extends phpok_control
 			$county = $tmp[2];
 		}
 		if(!$province){
-			$this->error(P_Lang('省份信息不能为空'));
+			$this->error(P_Lang('省份資訊不能為空'));
 		}
 		$data['province'] = $province;
 		$data['city'] = $city;
 		$data['county'] = $county;
 		$data['address'] = $this->get('address');
 		if(!$data['address']){
-			$this->error(P_Lang('地址信息不能为空'));
+			$this->error(P_Lang('地址資訊不能為空'));
 		}
 		$data['mobile'] = $this->get('mobile');
 		$data['tel'] = $this->get('tel');
 		if(!$data['mobile'] && !$data['tel']){
-			$this->error(P_Lang('手机号或固定电话至少要填写一项'));
+			$this->error(P_Lang('手機號或固定電話至少要填寫一項'));
 		}
 		if($data['mobile']){
 			$chk = $this->lib('common')->tel_check($data['mobile']);
 			if(!$chk){
-				$this->error(P_Lang('手机号不符合要求'));
+				$this->error(P_Lang('手機號不符合要求'));
 			}
 		}
 		if($data['tel']){
 			$chk = $this->lib('common')->tel_check($data['tel']);
 			if(!$chk){
-				$this->error(P_Lang('固定电话号码不符合要求'));
+				$this->error(P_Lang('固定電話號碼不符合要求'));
 			}
 		}
 		$data['email'] = $this->get('email');
@@ -152,32 +152,32 @@ class address_control extends phpok_control
 	}
 
 	/**
-	 * 删除一条地址记录
+	 * 刪除一條地址記錄
 	**/
 	public function delete_f()
 	{
 		if(!$this->session->val('user_id')){
-			$this->error(P_Lang('您没有权限执行此操作，请先登录'));
+			$this->error(P_Lang('您沒有許可權執行此操作，請先登入'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指要删除的地址ID'));
+			$this->error(P_Lang('未指要刪除的地址ID'));
 		}
 		$rs = $this->model('user')->address_one($id);
 		if($rs['user_id'] != $this->session->val('user_id')){
-			$this->error(P_Lang('您没有权限执行当前操作'));
+			$this->error(P_Lang('您沒有許可權執行當前操作'));
 		}
 		$this->model('user')->address_delete($id);
 		$this->success();
 	}
 
 	/**
-	 * 设置默认地址记录
+	 * 設定預設地址記錄
 	**/
 	public function default_f()
 	{
 		if(!$this->session->val('user_id')){
-			$this->error(P_Lang('您没有权限执行此操作，请先登录'));
+			$this->error(P_Lang('您沒有許可權執行此操作，請先登入'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
@@ -185,7 +185,7 @@ class address_control extends phpok_control
 		}
 		$rs = $this->model('user')->address_one($id);
 		if($rs['user_id'] != $this->session->val('user_id')){
-			$this->error(P_Lang('您没有权限执行当前操作'));
+			$this->error(P_Lang('您沒有許可權執行當前操作'));
 		}
 		$this->model('user')->address_default($id);
 		$this->success();

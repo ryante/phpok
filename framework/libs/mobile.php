@@ -1,13 +1,13 @@
 <?php
 /**
- * 第三方控件，检测是否手机浏览器
+ * 第三方控制元件，檢測是否手機瀏覽器
  * @package phpok\libs
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年06月20日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年06月20日
 **/
 
 if(!defined("PHPOK_SET")){

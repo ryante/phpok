@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： payment/unionpay/notify_url.php
-	备注： 订单异步通知处理
+	檔案： payment/unionpay/notify_url.php
+	備註： 訂單非同步通知處理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年03月24日 21时11分
+	時間： 2015年03月24日 21時11分
 *****************************************************************************************/
 error_reporting(E_ALL ^ E_NOTICE);
 define('PHPOK_SET',true);
@@ -41,7 +41,7 @@ function root_url()
 }
 $info = file_get_contents("php://input");
 if(!$info){
-	exit('<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[获取数据失败]]></return_msg></xml>');
+	exit('<xml><return_code><![CDATA[FAIL]]></return_code><return_msg><![CDATA[獲取資料失敗]]></return_msg></xml>');
 }
 include_once($root_dir.'framework/libs/xml.php');
 $xml = new xml_lib();

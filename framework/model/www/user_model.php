@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {$phpok}/model/user.php
-	Note	: 会员模块
+	Note	: 會員模組
 	Version : 3.0
 	Author  : qinggan
 	Update  : 2013年5月4日
@@ -14,7 +14,7 @@ class user_model extends user_model_base
 		parent::__construct();
 	}
 
-	//取得全部会员ID
+	//取得全部會員ID
 	function get_all_from_uid($uid,$pri="")
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."user WHERE id IN(".$uid.")";
@@ -26,7 +26,7 @@ class user_model extends user_model_base
 		return $this->db->list_fields($this->db->prefix."user");
 	}
 
-	//更新会员头像
+	//更新會員頭像
 	function update_avatar($file,$uid)
 	{
 		$sql = "UPDATE ".$this->db->prefix."user SET avatar='".$file."' WHERE id='".$uid."'";

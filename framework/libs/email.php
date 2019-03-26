@@ -1,12 +1,12 @@
 <?php
 /***********************************************************
 	Filename: libs/system/email.php
-	Note	: 发送邮件类
+	Note	: 傳送郵件類
 	Version : 3.0
 	Author  : qinggan
 	Update  : 2010-05-10
 ***********************************************************/
-//引入phpmail控件发送邮件
+//引入phpmail控制元件傳送郵件
 class email_lib
 {
 	private $app;
@@ -26,7 +26,7 @@ class email_lib
 	public $is_debug = false;
 	public $obj;
 
-	//读取邮件信息
+	//讀取郵件資訊
 	public function __construct()
 	{
 		global $app;
@@ -41,7 +41,7 @@ class email_lib
 		if(!$info){
 			return false;
 		}
-		//初始化邮件服务器参数
+		//初始化郵件伺服器引數
 		$this->smtp_charset = $info['charset'] ? str_replace('-','',$info['charset']) : 'utf8';
 		$this->smtp_server = $info["server"];
 		$this->smtp_port = $info["port"] ? $info["port"] : 25;
@@ -87,7 +87,7 @@ class email_lib
 		$this->obj->Subject = $title;
 		$this->obj->MsgHTML(stripslashes($content));
 		foreach($account as $key=>$value){
-			//如果管理员邮箱和要发送的邮箱是一样的
+			//如果管理員郵箱和要傳送的郵箱是一樣的
 			if($this->smtp_admin == $value['email']){
 				continue;
 			}
@@ -110,7 +110,7 @@ class email_lib
 		$this->obj->CharSet = $this->smtp_charset;
 		$this->obj->IsSMTP();
 		$this->obj->SMTPAuth = true;
-		$this->obj->SMTPDebug = $this->is_debug;//是否启用调试
+		$this->obj->SMTPDebug = $this->is_debug;//是否啟用除錯
 		$this->obj->IsHTML(true);
 		$this->obj->Username = trim($this->smtp_user);
 		$this->obj->Password = trim($this->smtp_pass);
@@ -121,12 +121,12 @@ class email_lib
 		}
 		$this->obj->LE = "\r\n";
 		$this->obj->Timeout = 15;
-		//发件人
+		//發件人
 		$this->obj->From = $this->smtp_admin;
 		$this->obj->FromName = $this->smtp_fromname;
 	}
 
-	//连接到email环境中
+	//連線到email環境中
 	public function send_mail($sendto,$subject,$content,$user_name="")
 	{
 		if(!$subject || !$content || !$sendto){

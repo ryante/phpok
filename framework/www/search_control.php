@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/www/search_control.php
-	Note	: 搜索
+	Note	: 搜尋
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -17,7 +17,7 @@ class search_control extends phpok_control
 
 	public function index_f()
 	{
-		//查询
+		//查詢
 		$keywords = $this->get('keywords');
 		if($keywords){
 			$keywords = str_replace(array("　","，",",","｜","|","、","/","\\","／","＼","+","＋")," ",$keywords);
@@ -36,11 +36,11 @@ class search_control extends phpok_control
 	private function load_search($keywords)
 	{
 		if(!$keywords) return false;
-		//取得符合搜索的项目
+		//取得符合搜尋的專案
 		$condition = "status=1 AND hidden=0 AND is_search !=0 AND module>0";
 		$list = $this->model('project')->project_all($this->site['id'],'id',$condition);
 		if(!$list){
-			$this->error(P_Lang('您的网站没有允许可以搜索的信息'),$this->url,10);
+			$this->error(P_Lang('您的網站沒有允許可以搜尋的資訊'),$this->url,10);
 		}
 		$pids = $mids = $projects = array();
 		foreach($list AS $key=>$value){

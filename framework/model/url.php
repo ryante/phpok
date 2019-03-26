@@ -1,13 +1,13 @@
 <?php
 /**
- * URL网址生成
+ * URL網址生成
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年10月01日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年10月01日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -86,7 +86,7 @@ class url_model_base extends phpok_model
 		$this->urltype = $type;
 	}
 
-	//保护字段
+	//保護欄位
 	public function protected_ctrl($info='')
 	{
 		if(!$info){
@@ -402,9 +402,9 @@ class url_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得标识
-	 * @参数 $id 主键ID
-	 * @参数 $type 类型，仅支持：list，cate，project
+	 * 取得標識
+	 * @引數 $id 主鍵ID
+	 * @引數 $type 型別，僅支援：list，cate，project
 	**/
 	public function get_from_id($id,$type='list')
 	{
@@ -413,8 +413,8 @@ class url_model_base extends phpok_model
 
 	/**
 	 * 取得ID
-	 * @参数 $identifier 标识
-	 * @参数 $type 类型，仅支持：list，cate，project
+	 * @引數 $identifier 標識
+	 * @引數 $type 型別，僅支援：list，cate，project
 	**/
 	public function get_from_identifier($identifier,$type='list')
 	{
@@ -466,7 +466,7 @@ class url_model_base extends phpok_model
 			return $url;
 		}
 		$url .= $this->phpfile;
-		//判断ctrl在
+		//判斷ctrl在
 		if(in_array($ctrl,$this->protected_id)){
 			$url .= "?".$this->ctrl_id."=".$ctrl;
 			if($func) $url .= "&".$this->func_id."=".$func;

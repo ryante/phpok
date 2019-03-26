@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/libs/vcode.php
-	Note	: 图形验证码类，使用PNG透明图片
+	Note	: 圖形驗證碼類，使用PNG透明圖片
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -71,7 +71,7 @@ class vcode_lib
 		return $thetxt;
 	}
 	
-	//这里仅限数字
+	//這裡僅限數字
 	public function create()
 	{
 		ob_end_clean();

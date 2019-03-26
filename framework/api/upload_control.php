@@ -1,18 +1,18 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/api/upload_control.php
-	备注： 前端附件上传接口
+	檔案： {phpok}/api/upload_control.php
+	備註： 前端附件上傳介面
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年7月10日
+	時間： 2014年7月10日
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class upload_control extends phpok_control
 {
-	private $u_id = 0; //会员ID
-	private $u_name = 'guest'; //会员名字，游客使用guest
-	private $is_client = false;//判断是否客户端
+	private $u_id = 0; //會員ID
+	private $u_name = 'guest'; //會員名字，遊客使用guest
+	private $is_client = false;//判斷是否客戶端
 	function __construct()
 	{
 		parent::control();
@@ -21,7 +21,7 @@ class upload_control extends phpok_control
 			$this->lib('token')->keyid($this->site['api_code']);
 			$info = $this->lib('token')->decode($token);
 			if(!$info || !$info['user_id'] || !$info['user_name']){
-				$this->json(P_Lang('您还没有登录，请先登录或注册'));
+				$this->json(P_Lang('您還沒有登入，請先登入或註冊'));
 			}
 			$this->u_id = $info['user_id'];
 			$this->u_name = $info['user_name'];
@@ -34,17 +34,17 @@ class upload_control extends phpok_control
 		}
 	}
 
-	//存储上传的数据，游客仅能上传jpg,png,gif,jpeg附件
-	//普通会员能上传的附件有：jpg,png,gif,jpeg,zip,rar,doc,xls,docx,xlsx,txt,ppt,pptx
+	//儲存上傳的資料，遊客僅能上傳jpg,png,gif,jpeg附件
+	//普通會員能上傳的附件有：jpg,png,gif,jpeg,zip,rar,doc,xls,docx,xlsx,txt,ppt,pptx
 	public function save_f()
 	{
 		if($this->u_id){
 			if(!$this->site['upload_user']){
-				$this->json(P_Lang('你没有上传权限'));
+				$this->json(P_Lang('你沒有上傳許可權'));
 			}
 		}else{
 			if(!$this->site['upload_guest']){
-				$this->json(P_Lang('游客没有上传权限'));
+				$this->json(P_Lang('遊客沒有上傳許可權'));
 			}
 		}
 		$cateid = $this->get('cateid','int');
@@ -54,7 +54,7 @@ class upload_control extends phpok_control
 		if(!$cate_rs){
 			$cate_rs = $this->model('rescate')->get_default();
 			if(!$cate_rs){
-				$this->json(P_Lang('未配置附件存储方式'));
+				$this->json(P_Lang('未配置附件儲存方式'));
 			}
 		}
 		$filetypes = $this->u_id ? $cate_rs['filetypes'] : 'jpg,png,gif,rar,zip';
@@ -62,7 +62,7 @@ class upload_control extends phpok_control
 		$this->lib('upload')->set_cate($cate_rs);
 		$upload = $this->lib('upload')->upload('upfile');
 		if(!$upload || !$upload['status']){
-			$this->json(P_Lang('附件上传失败'));
+			$this->json(P_Lang('附件上傳失敗'));
 		}
 		if($upload['status'] != 'ok'){
 			$this->json($upload['content']);
@@ -88,7 +88,7 @@ class upload_control extends phpok_control
 		$id = $this->model('res')->save($array);
 		if(!$id){
 			$this->lib('file')->rm($this->dir_root.$upload['filename']);
-			$this->json(P_Lang('图片存储失败'));
+			$this->json(P_Lang('圖片儲存失敗'));
 		}
 		$this->model('res')->gd_update($id);
 		$rs = $this->model('res')->get_one($id);

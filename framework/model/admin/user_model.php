@@ -1,16 +1,16 @@
 <?php
 /**
- * 会员增删改查
+ * 會員增刪改查
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年01月20日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年01月20日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -24,8 +24,8 @@ class user_model extends user_model_base
 	}
 
 	/**
-	 * 删除会员操作
-	 * @参数 $id 会员ID
+	 * 刪除會員操作
+	 * @引數 $id 會員ID
 	**/
 	public function del($id)
 	{
@@ -33,10 +33,10 @@ class user_model extends user_model_base
 		$this->db->query($sql);
 		$sql = "DELETE FROM ".$this->db->prefix."user_ext WHERE id='".$id."'";
 		$this->db->query($sql);
-		//删除相应的积分
+		//刪除相應的積分
 		$sql = "DELETE FROM ".$this->db->prefix."wealth_info WHERE uid='".$id."'";
 		$this->db->query($sql);
-		//删除积分日志
+		//刪除積分日誌
 		$sql = "DELETE FROM ".$this->db->prefix."wealth_log WHERE goal_id='".$id."'";
 		$this->db->query($sql);
 		return true;
@@ -65,7 +65,7 @@ class user_model extends user_model_base
 	}
 
 	/**
-	 * 创建会员字段
+	 * 建立會員欄位
 	**/
 	public function create_fields($rs)
 	{
@@ -118,7 +118,7 @@ class user_model extends user_model_base
 		return $this->db->query($sql);
 	}
 
-	//后台显示
+	//後臺顯示
 	public function get_one($id,$field='id',$ext=true,$wealth=true)
 	{
 		if(!$id){
@@ -135,7 +135,7 @@ class user_model extends user_model_base
 	}
 
 	/**
-	 * 会员自定义字段排序
+	 * 會員自定義欄位排序
 	**/
 	public function user_next_taxis()
 	{
@@ -145,9 +145,9 @@ class user_model extends user_model_base
 	}
 
 	/**
-	 * 保存扩展字段数据
-	 * @参数 $data 一维数组
-	 * @参数 $id 主键ID，留空或为0表示写入新的
+	 * 儲存擴充套件欄位資料
+	 * @引數 $data 一維陣列
+	 * @引數 $id 主鍵ID，留空或為0表示寫入新的
 	**/
 	public function fields_save($data,$id=0)
 	{
@@ -167,9 +167,9 @@ class user_model extends user_model_base
 	}
 
 	/**
-	 * 简单通过会员ID获取会员的ID及账号
-	 * @参数 $ids 会员ID，支持数据及字串
-	 * @参数 $field 字段，要查询的字段
+	 * 簡單通過會員ID獲取會員的ID及賬號
+	 * @引數 $ids 會員ID，支援資料及字串
+	 * @引數 $field 欄位，要查詢的欄位
 	**/
 	public function simple_user_list($ids,$field='user')
 	{

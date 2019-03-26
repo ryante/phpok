@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: libs/autoload/trans.php
-	Note	: 数据安全传输
+	Note	: 資料安全傳輸
 	Version : 3.0
 	Author  : qinggan
 	Update  : 2009-10-20
@@ -17,21 +17,21 @@ class trans_lib
 		$this->script = false;
 		$this->iframe = false;
 		$this->style = false;
-		//字符串过滤
+		//字串過濾
 		$this->html_string = array("&amp;","&nbsp;","'",'"',"<",">","\t","\r");
 		$this->html_clear = array("&"," ","&#39;","&quot;","&lt;","&gt;","&nbsp; &nbsp; ","");
-		//JS过滤
+		//JS過濾
 		$this->js_string = array("/<script(.*)<\/script>/isU");
 		$this->js_clear = array("");
-		//iframe框过滤
+		//iframe框過濾
 		$this->frame_string = array("/<frame(.*)>/isU","/<\/fram(.*)>/isU","/<iframe(.*)>/isU","/<\/ifram(.*)>/isU",);
 		$this->frame_clear = array("","","","");
-		//style样式过滤
+		//style樣式過濾
 		$this->style_string = array("/<style(.*)<\/style>/isU","/<link(.*)>/isU","/<\/link>/isU");
 		$this->style_clear = array("","","");
 	}
 
-	//设置全局状态
+	//設定全域性狀態
 	function setting($script=false,$iframe=false,$style=false)
 	{
 		$this->script = $script;
@@ -66,7 +66,7 @@ class trans_lib
 		return $this->_safe($msg);
 	}
 
-	//实体化HTML
+	//實體化HTML
 	function st_safe($msg)
 	{
 		$msg = $this->_safe($msg);
@@ -91,7 +91,7 @@ class trans_lib
 			$msg = trim($msg);
 			$msg = str_replace($this->html_string,$this->html_clear,$msg);
 			$msg = str_replace("   ","&nbsp; &nbsp;",$msg);
-			//过滤JS
+			//過濾JS
 			$msg = preg_replace($this->js_string,$this->js_clear,$msg);
 			$msg = preg_replace($this->frame_string,$this->frame_clear,$msg);
 			$msg = preg_replace($this->style_string,$this->style_clear,$msg);
@@ -99,7 +99,7 @@ class trans_lib
 		return $msg;
 	}
 
-	#[用户加载文件的数据传输]
+	#[使用者載入檔案的資料傳輸]
 	function safeinc($msg)
 	{
 		$msg = $this->safe($msg);
@@ -115,7 +115,7 @@ class trans_lib
 		return $msg;
 	}
 
-	//格式化为时间模式
+	//格式化為時間模式
 	function time($msg)
 	{
 		$msg = $this->safe($msg);
@@ -189,11 +189,11 @@ class trans_lib
 		return isset($_POST[$id]) ? 1 : 0;
 	}
 
-	#[截取字符长度，仅支持UTF-8]
+	#[擷取字元長度，僅支援UTF-8]
 	function cut($string,$sublen,$dot="…")
 	{
 		if(!$string) return false;
-		//过滤iframe
+		//過濾iframe
 		$string = preg_replace($this->frame_string,$this->frame_clear,$string);
 		//清空HTML,CSS
 		$string = $this->Html2Text($string);
@@ -229,7 +229,7 @@ class trans_lib
 	}
 	
 
-	#[编码转换，使用PHP里的iconv功能]
+	#[編碼轉換，使用PHP裡的iconv功能]
 	function charset($msg, $s_code="UTF-8", $e_code="GBK")
 	{
 		if(!$msg)

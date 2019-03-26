@@ -1,12 +1,12 @@
 <?php
 /**
- * 圆支付
+ * 圓支付
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年10月13日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年10月13日
 **/
 use Yuansfer\Yuansfer;
 use Yuansfer\Exception\YuansferException;
@@ -14,7 +14,7 @@ use Yuansfer\Exception\YuansferException;
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class yuansfer_submit
 {
-	//支付接口初始化
+	//支付介面初始化
 	public $param;
 	public $order;
 	public $paydir;
@@ -39,7 +39,7 @@ class yuansfer_submit
 		$this->order = $order;
 	}
 
-	//创建订单
+	//建立訂單
 	public function submit()
 	{
 		global $app;

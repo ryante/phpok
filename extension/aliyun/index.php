@@ -1,17 +1,17 @@
 <?php
 /**
- * 阿里云SDK信息，请配合插件或是网关路由使用
+ * 阿里雲SDK資訊，請配合外掛或是閘道器路由使用
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2017年12月23日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2017年12月23日
 **/
 
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -20,66 +20,66 @@ if(!defined("PHPOK_SET")){
 include_once dirname(__FILE__).'/aliyun-php-sdk-core/Config.php';
 
 /**
- * 邮件推送
+ * 郵件推送
 **/
 use Dm\Request\V20151123 as Dm;
 
 /**
- * 视频上传
+ * 視訊上傳
 **/
 use vod\Request\V20170321 as vod;
 
 /**
- * 短消息服务
+ * 短訊息服務
 **/
 use Aliyun\DySDKLite as sms;
 
 class aliyun_lib
 {
 	/**
-	 * Access Key ID 密钥ID
+	 * Access Key ID 金鑰ID
 	**/
 	private $access_key = '';
 
 	/**
-	 * Access Key Secret 密钥加密参数
+	 * Access Key Secret 金鑰加密引數
 	**/
 	private $access_secret = '';
 
 	/**
-	 * 服务器节点ID，默认使用 cn-hangzhou
+	 * 伺服器節點ID，預設使用 cn-hangzhou
 	**/
 	private $regoin_id = 'cn-hangzhou';
 
 	/**
-	 * 签名
+	 * 簽名
 	**/
-	private $signature = '锟铻科技';
+	private $signature = '錕鋙科技';
 
 	/**
-	 * 模板ID，一般适用于短信发送使用
+	 * 模板ID，一般適用於簡訊傳送使用
 	**/
 	private $template_id = 0;
 
 	/**
-	 * 服务器节点地址
+	 * 伺服器節點地址
 	**/
-	private $end_point = ''; //节点
+	private $end_point = ''; //節點
 
 	/**
-	 * 邮件发送账号
+	 * 郵件傳送賬號
 	**/
 	private $dm_account = '';
 
 	/**
-	 * 发件人昵称
+	 * 發件人暱稱
 	**/
-	private $dm_name = '锟铻科技';
+	private $dm_name = '錕鋙科技';
 
 	private $client;
 
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -87,8 +87,8 @@ class aliyun_lib
 	}
 
 	/**
-	 * Access Key ID 密钥ID
-	 * @参数 $val 要设定的值
+	 * Access Key ID 金鑰ID
+	 * @引數 $val 要設定的值
 	**/
 	public function access_key($val='')
 	{
@@ -99,8 +99,8 @@ class aliyun_lib
 	}
 
 	/**
-	 * Access Key Secret 密钥加密参数
-	 * @参数 $val 要设定的值
+	 * Access Key Secret 金鑰加密引數
+	 * @引數 $val 要設定的值
 	**/
 	public function access_secret($val='')
 	{
@@ -111,8 +111,8 @@ class aliyun_lib
 	}
 
 	/**
-	 * 服务器节点ID，默认使用 cn-hangzhou
-	 * @参数 $val 要设定的值
+	 * 伺服器節點ID，預設使用 cn-hangzhou
+	 * @引數 $val 要設定的值
 	**/
 	public function regoin_id($val='')
 	{
@@ -123,8 +123,8 @@ class aliyun_lib
 	}
 
 	/**
-	 * 签名
-	 * @参数 $val 要设定的值
+	 * 簽名
+	 * @引數 $val 要設定的值
 	**/
 	public function signature($val='')
 	{
@@ -136,7 +136,7 @@ class aliyun_lib
 
 	/**
 	 * 模板ID
-	 * @参数 $val 要设定的值
+	 * @引數 $val 要設定的值
 	**/
 	public function template_id($val='')
 	{
@@ -147,8 +147,8 @@ class aliyun_lib
 	}
 
 	/**
-	 * 服务器节点地址
-	 * @参数 $val 要设定的值
+	 * 伺服器節點地址
+	 * @引數 $val 要設定的值
 	**/
 	public function end_point($val='')
 	{
@@ -159,8 +159,8 @@ class aliyun_lib
 	}
 
 	/**
-	 * 邮件账号
-	 * @参数 $val 要设定的值
+	 * 郵件賬號
+	 * @引數 $val 要設定的值
 	**/
 	public function dm_account($val='')
 	{
@@ -171,8 +171,8 @@ class aliyun_lib
 	}
 
 	/**
-	 * 发件人称呼
-	 * @参数 $val 要设定的值
+	 * 發件人稱呼
+	 * @引數 $val 要設定的值
 	**/
 	public function dm_name($val='')
 	{
@@ -183,15 +183,15 @@ class aliyun_lib
 	}
 
 	/**
-	 * 邮件发送
-	 * @参数 $title 邮件主题
-	 * @参数 $content 邮件内容
-	 * @参数 $mailto 目标邮箱
+	 * 郵件傳送
+	 * @引數 $title 郵件主題
+	 * @引數 $content 郵件內容
+	 * @引數 $mailto 目標郵箱
 	**/
 	public function email($title='',$content='',$mailto='')
 	{
 		if(!$title || !$content || !$mailto){
-			return $this->error(P_Lang('参数传递不完整'));
+			return $this->error(P_Lang('引數傳遞不完整'));
 		}
 		if(!$this->access_key){
 			return $this->error(P_Lang('未指定Access Key'));
@@ -200,13 +200,13 @@ class aliyun_lib
 			return $this->error(P_Lang('未指定Access Secret'));
 		}
 		if(!$this->signature){
-			return $this->error(P_Lang('未配置标签'));
+			return $this->error(P_Lang('未配置標籤'));
 		}
 		if(!$this->dm_account){
-			return $this->error(P_Lang('未配置发信地址'));
+			return $this->error(P_Lang('未配置發信地址'));
 		}
 		if(!$this->dm_name){
-			return $this->error(P_Lang('未配置发信人昵称'));
+			return $this->error(P_Lang('未配置發信人暱稱'));
 		}
 		$iClientProfile = DefaultProfile::getProfile($this->regoin_id, $this->access_key,$this->access_secret);
 		if($this->end_point && $this->regoin_id != 'cn-hangzhou'){
@@ -238,14 +238,14 @@ class aliyun_lib
 	}
 
 	/**
-	 * 短信发送
-	 * @参数 $mobile 目标手机号
-	 * @参数 $data 变量参数，仅限数组
+	 * 簡訊傳送
+	 * @引數 $mobile 目標手機號
+	 * @引數 $data 變數引數，僅限陣列
 	**/
 	public function sms($mobile,$data='')
 	{
 		if(!$mobile){
-			return $this->error(P_Lang('未指定手机号'));
+			return $this->error(P_Lang('未指定手機號'));
 		}
 		if(!$this->template_id){
 			return $this->error(P_Lang('未指定模板ID'));
@@ -257,7 +257,7 @@ class aliyun_lib
 			return $this->error(P_Lang('未指定Access Secret'));
 		}
 		if(!$this->signature){
-			return $this->error(P_Lang('未配置签名'));
+			return $this->error(P_Lang('未配置簽名'));
 		}
 
 		if(!$this->end_point){
@@ -275,7 +275,7 @@ class aliyun_lib
 		$helper = new sms\SignatureHelper();
 		$content = $helper->request($this->access_key,$this->access_secret,$this->end_point,$params);
 		if(!$content){
-			return $this->error('短信发送失败');
+			return $this->error('簡訊傳送失敗');
 		}
 		$content = (array) $content;
 		if($content['Code'] == 'OK'){
@@ -287,7 +287,7 @@ class aliyun_lib
 	public function client()
 	{
 		if(!$this->regoin_id){
-			return $this->error(P_Lang('未设置 Regoin ID'));
+			return $this->error(P_Lang('未設定 Regoin ID'));
 		}
 		if(!$this->access_key){
 			return $this->error(P_Lang('未指定Access Key ID'));
@@ -296,7 +296,7 @@ class aliyun_lib
 			return $this->error(P_Lang('未指定Access Key Secret'));
 		}
 		if(!$this->signature){
-			return $this->error(P_Lang('未配置标签'));
+			return $this->error(P_Lang('未配置標籤'));
 		}
 		$iClientProfile = DefaultProfile::getProfile($this->regoin_id, $this->access_key,$this->access_secret);
 		$this->client = new DefaultAcsClient($iClientProfile);
@@ -304,12 +304,12 @@ class aliyun_lib
 	}
 
 	/**
-	 * 上传视频文件
-	 * @参数 $filename 文件名
-	 * @参数 $title 标题
-	 * @参数 $thumb 缩略图
-	 * @参数 $note 摘要
-	 * @参数 $tag 标签
+	 * 上傳視訊檔案
+	 * @引數 $filename 檔名
+	 * @引數 $title 標題
+	 * @引數 $thumb 縮圖
+	 * @引數 $note 摘要
+	 * @引數 $tag 標籤
 	**/
 	public function create_upload_video($filename,$title='',$thumb='',$note='',$tag='')
 	{
@@ -327,9 +327,9 @@ class aliyun_lib
 		$request->setAcceptFormat('JSON');
 		$request->setRegionId($this->regoin_id);
 		$request->setTitle($title);
-		//视频源文件名称(必须包含扩展名)
+		//視訊原始檔名稱(必須包含副檔名)
 		$request->setFileName($filename);
-		//视频源文件字节数
+		//視訊原始檔位元組數
 		$request->setFileSize(0);
 		if($note){
 			$request->setDescription($note);
@@ -355,8 +355,8 @@ class aliyun_lib
 	}
 
 	/**
-	 * 视频刷新
-	 * @参数 $videoid 视频ID
+	 * 視訊重新整理
+	 * @引數 $videoid 視訊ID
 	**/
 	public function refresh_upload_video($videoid)
 	{
@@ -380,8 +380,8 @@ class aliyun_lib
 	}
 
 	/**
-	 * 取得视频信息
-	 * @参数 $videoid 视频ID
+	 * 取得視訊資訊
+	 * @引數 $videoid 視訊ID
 	**/
 	public function video_info($videoid)
 	{
@@ -405,11 +405,11 @@ class aliyun_lib
 	}
 
 	/**
-	 * 视频列表
-	 * @参数 $pageid 页码
-	 * @参数 $psize 每次查询数量
-	 * @参数 $starttime 开始时间
-	 * @参数 $endtime 结束时间
+	 * 視訊列表
+	 * @引數 $pageid 頁碼
+	 * @引數 $psize 每次查詢數量
+	 * @引數 $starttime 開始時間
+	 * @引數 $endtime 結束時間
 	**/
 	public function video_list($pageid=1,$psize=30,$starttime='',$endtime='')
 	{
@@ -462,15 +462,15 @@ class aliyun_lib
 	}
 
 	/**
-	 * 错误返回
-	 * @参数 $error 错误内容
-	 * @参数 $errid 错误ID
-	 * @返回 数组
+	 * 錯誤返回
+	 * @引數 $error 錯誤內容
+	 * @引數 $errid 錯誤ID
+	 * @返回 陣列
 	**/
 	private function error($error='',$errid=0)
 	{
 		if(!$error){
-			$error = '异常';
+			$error = '異常';
 		}
 		$array = array('status'=>false,'error'=>$error);
 		if($errid){
@@ -480,8 +480,8 @@ class aliyun_lib
 	}
 
 	/**
-	 * 成功时返回的结果
-	 * @参数 $info 返回的内容，支持字串，数组，及空
+	 * 成功時返回的結果
+	 * @引數 $info 返回的內容，支援字串，陣列，及空
 	**/
 	private function success($info='')
 	{

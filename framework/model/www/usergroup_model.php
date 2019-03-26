@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/www/usergroup_model.php
-	备注： 用户组前端相应操作
+	檔案： {phpok}/model/www/usergroup_model.php
+	備註： 使用者組前端相應操作
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年10月6日
+	時間： 2014年10月6日
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class usergroup_model extends usergroup_model_base
@@ -28,7 +28,7 @@ class usergroup_model extends usergroup_model_base
 		return $rs;
 	}
 
-	//取得开放的会员组列表
+	//取得開放的會員組列表
 	public function opened_grouplist($pri='')
 	{
 		$sql = "SELECT id,title,register_status,tbl_id,fields FROM ".$this->db->prefix."user_group ";

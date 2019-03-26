@@ -2,11 +2,11 @@
 /**
  * APP管理工具
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年06月05日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年06月05日
 **/
 
 class appsys_model_base extends phpok_model
@@ -19,8 +19,8 @@ class appsys_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取或保存远程配置信息
-	 * @参数 $data 数组，要保存的信息，如果为空表示读远程配置信息
+	 * 獲取或儲存遠端配置資訊
+	 * @引數 $data 陣列，要儲存的資訊，如果為空表示讀遠端配置資訊
 	**/
 	public function server($data='')
 	{
@@ -35,7 +35,7 @@ class appsys_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取系统全部未安装的模型
+	 * 讀取系統全部未安裝的模型
 	**/
 	public function get_all()
 	{
@@ -92,7 +92,7 @@ class appsys_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取已安装的应用
+	 * 獲取已安裝的應用
 	**/
 	public function installed()
 	{
@@ -141,7 +141,7 @@ class appsys_model_base extends phpok_model
 		if(!$all){
 			return false;
 		}
-		//变成未安装模式
+		//變成未安裝模式
 		if(is_file($this->dir_app.$id.'/config.xml')){
 			$info = $this->lib('xml')->read($this->dir_app.$id.'/config.xml',true);
 			if(isset($info['installed'])){
@@ -154,7 +154,7 @@ class appsys_model_base extends phpok_model
 
 	public function install($id)
 	{
-		//检查Config文件
+		//檢查Config檔案
 		$info = array();
 		if(is_file($this->dir_app.$id.'/config.xml')){
 			$info = $this->lib('xml')->read($this->dir_app.$id.'/config.xml',true);

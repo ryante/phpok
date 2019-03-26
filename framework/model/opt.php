@@ -1,13 +1,13 @@
 <?php
 /**
- * 选项组信息
+ * 選項組資訊
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年08月03日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年08月03日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -20,7 +20,7 @@ class opt_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得全部的选项组
+	 * 取得全部的選項組
 	**/
 	function group_all()
 	{
@@ -29,8 +29,8 @@ class opt_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得某个组信息
-	 * @参数 $id 组ID
+	 * 取得某個組資訊
+	 * @引數 $id 組ID
 	**/
 	public function group_one($id)
 	{
@@ -49,9 +49,9 @@ class opt_model_base extends phpok_model
 
 	/**
 	 * 取得值列表
-	 * @参数 $condition 查询条件
-	 * @参数 $offset 开始位置
-	 * @参数 $psize 内容数
+	 * @引數 $condition 查詢條件
+	 * @引數 $offset 開始位置
+	 * @引數 $psize 內容數
 	**/
 	public function opt_list($condition="",$offset=0,$psize=20)
 	{
@@ -65,8 +65,8 @@ class opt_model_base extends phpok_model
 	}
 
 	/**
-	 * 选项列表
-	 * @参数 $condition 查询条件
+	 * 選項列表
+	 * @引數 $condition 查詢條件
 	**/
 	public function opt_all($condition="")
 	{
@@ -79,9 +79,9 @@ class opt_model_base extends phpok_model
 	}
 
 	/**
-	 * 格式化多维数组
-	 * @参数 $groupid 组ID
-	 * @参数 $pid 父级ID
+	 * 格式化多維陣列
+	 * @引數 $groupid 組ID
+	 * @引數 $pid 父級ID
 	**/
 	public function opt_format($groupid=0,$pid=0)
 	{
@@ -111,8 +111,8 @@ class opt_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得数量总数
-	 * @参数 $condition 查询条件
+	 * 取得數量總數
+	 * @引數 $condition 查詢條件
 	**/
 	public function opt_count($condition="")
 	{
@@ -124,8 +124,8 @@ class opt_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得选项内容
-	 * @参数 $id 选项ID
+	 * 取得選項內容
+	 * @引數 $id 選項ID
 	**/
 	public function opt_one($id)
 	{
@@ -134,8 +134,8 @@ class opt_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得单条选项内容
-	 * @参数 $condition 查询条件
+	 * 取得單條選項內容
+	 * @引數 $condition 查詢條件
 	**/
 	public function opt_one_condition($condition)
 	{
@@ -147,9 +147,9 @@ class opt_model_base extends phpok_model
 	}
 
 	/**
-	 * 选项内容
-	 * @参数 $gid 组ID
-	 * @参数 $val 值
+	 * 選項內容
+	 * @引數 $gid 組ID
+	 * @引數 $val 值
 	**/
 	public function opt_val($gid,$val)
 	{
@@ -163,11 +163,11 @@ class opt_model_base extends phpok_model
 	}
 
 	/**
-	 * 检测值是否重复
-	 * @参数 $gid 组ID
-	 * @参数 $val 值
-	 * @参数 $pid 当前父级ID
-	 * @参数 $id 当前ID
+	 * 檢測值是否重複
+	 * @引數 $gid 組ID
+	 * @引數 $val 值
+	 * @引數 $pid 當前父級ID
+	 * @引數 $id 當前ID
 	**/
 	public function chk_val($gid,$val,$pid=0,$id=0)
 	{
@@ -189,9 +189,9 @@ class opt_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得父子关系的数组
-	 * @参数 $list 引用组
-	 * @参数 $pid 父级ID
+	 * 取得父子關係的陣列
+	 * @引數 $list 引用組
+	 * @引數 $pid 父級ID
 	**/
 	public function opt_parent(&$list,$pid=0)
 	{
@@ -205,9 +205,9 @@ class opt_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得子项列表
-	 * @参数 $list 引用组
-	 * @参数 $id 父级ID
+	 * 取得子項列表
+	 * @引數 $list 引用組
+	 * @引數 $id 父級ID
 	**/
 	public function opt_son(&$list,$id=0)
 	{

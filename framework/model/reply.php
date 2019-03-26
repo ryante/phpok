@@ -1,13 +1,13 @@
 <?php
 /**
- * 评论信息维护
+ * 評論資訊維護
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年04月28日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年04月28日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -19,10 +19,10 @@ class reply_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得全部回复
-	 * @参数 $condition 查询条件
-	 * @参数 $offset 起始值
-	 * @参数 $psize 每页查询数
+	 * 取得全部回覆
+	 * @引數 $condition 查詢條件
+	 * @引數 $offset 起始值
+	 * @引數 $psize 每頁查詢數
 	**/
 	public function get_all($condition="",$offset=0,$psize=30)
 	{
@@ -39,8 +39,8 @@ class reply_model_base extends phpok_model
 	}
 
 	/**
-	 * 统计回复中的已审核主题信息，未审核信息
-	 * @参数 $id 主题ID，多个ID用英文逗号隔开
+	 * 統計回覆中的已稽核主題資訊，未稽核資訊
+	 * @引數 $id 主題ID，多個ID用英文逗號隔開
 	**/
 	public function total_status($id)
 	{
@@ -67,12 +67,12 @@ class reply_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取回复列表
-	 * @参数 $condition 查询条件
-	 * @参数 $offset 开始位置
-	 * @参数 $psize 每页查询数
-	 * @参数 $pri 主键
-	 * @参数 $orderby 排序
+	 * 獲取回覆列表
+	 * @引數 $condition 查詢條件
+	 * @引數 $offset 開始位置
+	 * @引數 $psize 每頁查詢數
+	 * @引數 $pri 主鍵
+	 * @引數 $orderby 排序
 	**/
 	public function get_list($condition="",$offset=0,$psize=30,$pri="",$orderby="")
 	{
@@ -112,8 +112,8 @@ class reply_model_base extends phpok_model
 	}
 
 	/**
-	 * 评论中的附件
-	 * @参数 $rslist 回复数据，数组格式
+	 * 評論中的附件
+	 * @引數 $rslist 回覆資料，陣列格式
 	**/
 	protected function _res($rslist,$ext=false)
 	{
@@ -152,8 +152,8 @@ class reply_model_base extends phpok_model
 	}
 
 	/**
-	 * 查询数量
-	 * @参数 $condition 条件
+	 * 查詢數量
+	 * @引數 $condition 條件
 	**/
 	public function get_total($condition="")
 	{
@@ -165,9 +165,9 @@ class reply_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存回复数据
-	 * @参数 $data 数组，要保存的数据
-	 * @参数 $id 回复ID，不为空时表示更新
+	 * 儲存回覆資料
+	 * @引數 $data 陣列，要儲存的資料
+	 * @引數 $id 回覆ID，不為空時表示更新
 	**/
 	public function save($data,$id=0)
 	{
@@ -182,8 +182,8 @@ class reply_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除回复
-	 * @参数 $id 回复ID
+	 * 刪除回覆
+	 * @引數 $id 回覆ID
 	**/
 	public function delete($id)
 	{
@@ -206,8 +206,8 @@ class reply_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得一条回复信息
-	 * @参数 $id 回复ID
+	 * 取得一條回覆資訊
+	 * @引數 $id 回覆ID
 	**/
 	public function get_one($id)
 	{
@@ -216,8 +216,8 @@ class reply_model_base extends phpok_model
 	}
 
 	/**
-	 * 回复统计
-	 * @参数 $ids 主题ID，多个主题用英文逗号隔开，也支持多个主题的数组
+	 * 回覆統計
+	 * @引數 $ids 主題ID，多個主題用英文逗號隔開，也支援多個主題的陣列
 	**/
 	public function comment_stat($ids)
 	{
@@ -240,8 +240,8 @@ class reply_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得主题属性信息，如绑定的项目ID，如分页页码等
-	 * @参数 int $id 主题ID或主题标识
+	 * 取得主題屬性資訊，如繫結的專案ID，如分頁頁碼等
+	 * @引數 int $id 主題ID或主題標識
 	 */
 	public function get_title_info($id)
 	{

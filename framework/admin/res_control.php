@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/admin/res_control.php
-	Note	: 资源管理器
+	Note	: 資源管理器
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -55,8 +55,8 @@ class res_control extends phpok_control
 		$this->assign("rslist",$rslist);
 		$total = $this->model('res')->get_count($condition);
 		$this->assign("total",$total);
-		$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=5';
-		$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+		$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=5';
+		$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 		$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 		$this->assign("pagelist",$pagelist);
 		$myurl = $pageurl ."&".$this->config["pageid"]."=".$pageid;
@@ -115,7 +115,7 @@ class res_control extends phpok_control
 	}
 
 	/**
-	 * 修改附件信息
+	 * 修改附件資訊
 	**/
 	public function setok_f()
 	{
@@ -125,7 +125,7 @@ class res_control extends phpok_control
 		}
 		$title = $this->get('title');
 		if(!$title){
-			$this->error(P_Lang('附件标题不能为空'));
+			$this->error(P_Lang('附件標題不能為空'));
 		}
 		$note = $this->get('note','html');
 		$this->model('res')->save(array('title'=>$title,'note'=>$note),$id);
@@ -140,13 +140,13 @@ class res_control extends phpok_control
 		}
 		$rs = $this->model('res')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('附件信息不存在'));
+			$this->error(P_Lang('附件資訊不存在'));
 		}
 		if(!is_file($this->dir_root.$rs['filename'])){
 			$this->error(P_Lang('附件不存在'));
 		}
 		if(!$rs['ext'] || ($rs['ext'] && !in_array(strtolower($rs['ext']),array('jpg','gif','png','jpeg')))){
-			$this->error(P_Lang('要压缩的图片仅支持JPG，GIF，PNG，JPEG'));
+			$this->error(P_Lang('要壓縮的圖片僅支援JPG，GIF，PNG，JPEG'));
 		}
 		$ext = strtolower($rs['ext']);
 		$imginfo = getimagesize($this->dir_root.$rs['filename']);
@@ -179,8 +179,8 @@ class res_control extends phpok_control
 	}
 
 	/**
-	 * 下载附件
-	 * @参数 id 附件ID
+	 * 下載附件
+	 * @引數 id 附件ID
 	**/
 	public function download_f()
 	{
@@ -191,7 +191,7 @@ class res_control extends phpok_control
 		}
 		$rs = $this->model('res')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('附件信息不存在'));
+			$this->error(P_Lang('附件資訊不存在'));
 		}
 		$my = strtolower(substr($rs["filename"],0,7));
 		if($my == "https:/" || $my == "http://"){
@@ -204,12 +204,12 @@ class res_control extends phpok_control
 	}
 
 	/**
-	 * 附件批量处理
+	 * 附件批量處理
 	**/
 	public function pl_f()
 	{
 		if(!$this->popedom["pl"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$pageid = $this->get($this->config["pageid"],"int");
 		if(!$pageid){
@@ -218,7 +218,7 @@ class res_control extends phpok_control
 		$psize = 240;
 		$pageurl = $this->url("res","pl");
 		$offset = ($pageid - 1) * $psize;
-		# 附件分类
+		# 附件分類
 		$catelist = $this->model('res')->cate_all();
 		$this->assign("catelist",$catelist);
 		$condition = "1=1";
@@ -229,11 +229,11 @@ class res_control extends phpok_control
 		$this->assign("rslist",$rslist);
 		$total = $this->model('res')->get_count($condition);
 		$this->assign("total",$total);
-		$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=5';
-		$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+		$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=5';
+		$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 		$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 		$this->assign("pagelist",$pagelist);
-		# 存储当前的URL信息
+		# 儲存當前的URL資訊
 		$myurl = $pageurl ."&".$this->config["pageid"]."=".$pageid;
 		$_SESSION["admin_return_url"] = $myurl;
 		$this->view("res_list");
@@ -300,12 +300,12 @@ class res_control extends phpok_control
 	}
 
 	/**
-	 * 批量更新图片
+	 * 批量更新圖片
 	**/
 	public function update_pl_f()
 	{
 		if(!$this->popedom["pl"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id");
 		if(!$id){
@@ -325,7 +325,7 @@ class res_control extends phpok_control
 			}
 			$reslist = $this->model('res')->get_list("filename NOT LIKE 'http%//%'",$pageid,8);
 			if(!$reslist){
-				$this->success(P_Lang('附件信息更新完毕，共更新数量：{pageid}，点击右上角关闭窗口^_^',array('pageid'=>"<span class='red'>".$pageid."</span>")));
+				$this->success(P_Lang('附件資訊更新完畢，共更新數量：{pageid}，點選右上角關閉視窗^_^',array('pageid'=>"<span class='red'>".$pageid."</span>")));
 			}
 			$tmplist = array();
 			$filesize = 0;
@@ -339,7 +339,7 @@ class res_control extends phpok_control
 				}
 			}
 			if(!$tmplist || count($tmplist)<1){
-				$this->success(P_Lang('附件信息更新完毕，共更新数量：{pageid}，点击右上角关闭窗口^_^',array('pageid'=>"<span class='red'>".$pageid."</span>")));
+				$this->success(P_Lang('附件資訊更新完畢，共更新數量：{pageid}，點選右上角關閉視窗^_^',array('pageid'=>"<span class='red'>".$pageid."</span>")));
 			}
 			foreach($tmplist as $key=>$value){
 				$this->model('res')->gd_update($value['id']);
@@ -350,24 +350,24 @@ class res_control extends phpok_control
 			$myurl = $this->url("res","update_pl") ."&id=".rawurlencode($id)."&pageid=".($pageid+1);
 			$list = explode(",",$id);
 			if(!$list[$pageid]){
-				$this->success(P_Lang('附件信息更新完毕，共更新数量：{pageid}，点击右上角关闭窗口^_^',array('pageid'=>"<span class='red'>".count($list)."</span>")));
+				$this->success(P_Lang('附件資訊更新完畢，共更新數量：{pageid}，點選右上角關閉視窗^_^',array('pageid'=>"<span class='red'>".count($list)."</span>")));
 			}
 			$rs = $this->model('res')->get_one($list[$pageid]);
 			if(!$rs){
-				$this->error(P_Lang("附件更新中，当前ID：{pageid} 不存在附件",array('pageid'=>$list[$pageid])),$myurl);
+				$this->error(P_Lang("附件更新中，當前ID：{pageid} 不存在附件",array('pageid'=>$list[$pageid])),$myurl);
 			}
 			$this->model('res')->gd_update($rs['id']);
 		}
 		
 		$total = $pageid+1;
-		$this->tip(P_Lang('附件更新中，当前已更新数量：{total}',array('total'=>"<span class='red'><strong>".$total."</strong></span>")),$myurl,0.3);
+		$this->tip(P_Lang('附件更新中，當前已更新數量：{total}',array('total'=>"<span class='red'><strong>".$total."</strong></span>")),$myurl,0.3);
 	}
 
 
 	function delete_pl_f()
 	{
 		if(!$this->popedom['pl']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id');
 		if(!$id){
@@ -392,7 +392,7 @@ class res_control extends phpok_control
 			$this->json(P_Lang('未指定ID'));
 		}
 		if(!$newcate){
-			$this->json(P_Lang('未指定新的附件分类'));
+			$this->json(P_Lang('未指定新的附件分類'));
 		}
 		$list = explode(',',$id);
 		foreach($list as $key=>$value){
@@ -407,7 +407,7 @@ class res_control extends phpok_control
 	}
 
 	/**
-	 * 编辑器远程附件本地化设置
+	 * 編輯器遠端附件本地化設定
 	**/
 	public function setting_remote_to_local_f()
 	{
@@ -420,7 +420,7 @@ class res_control extends phpok_control
 	}
 
 	/**
-	 * 保存附件本地化配置信息
+	 * 儲存附件本地化配置資訊
 	**/
 	public function setting_remote_to_local_save_f()
 	{

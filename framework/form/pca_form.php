@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/form/pca_form.php
-	备注： 省市县联动
+	檔案： {phpok}/form/pca_form.php
+	備註： 省市縣聯動
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年08月02日 14时48分
+	時間： 2015年08月02日 14時48分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class pca_form extends _init_auto
@@ -20,7 +20,7 @@ class pca_form extends _init_auto
 		$this->view($this->dir_phpok.'form/html/pca_admin.html','abs-file');
 	}
 
-	//格式化内容
+	//格式化內容
 	public function phpok_format($rs,$appid='admin')
 	{
 		if($appid == 'admin'){

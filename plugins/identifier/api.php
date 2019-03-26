@@ -1,12 +1,12 @@
 <?php
 /**
- * 标识串自动生成API接口
+ * 標識串自動生成API介面
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年09月18日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年09月18日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -59,7 +59,7 @@ class api_identifier extends phpok_plugin
 		$rs = $this->plugin_info();
 		$q = $this->get("q");
 		if(!$q){
-			$this->error("没有指定翻译内容");
+			$this->error("沒有指定翻譯內容");
 		}
 		$post = array('q'=>$q,'from'=>'auto','to'=>'EN','appKey'=>$this->youdao_appid);
 		$post['salt'] = $this->lib('common')->str_rand(3,'number');
@@ -72,7 +72,7 @@ class api_identifier extends phpok_plugin
 		if($data['errorCode']){
 			$tip = $this->err_code($data['errorCode']);
 			if(!$tip){
-				$tip = '异常错误，请检查';
+				$tip = '異常錯誤，請檢查';
 			}
 			$this->error($tip);
 		}
@@ -95,7 +95,7 @@ class api_identifier extends phpok_plugin
 				$string .= "-";
 			}
 		}
-		//如果首字母为0-9的数字或非字母
+		//如果首字母為0-9的數字或非字母
 		$array = array('0','1','2','3','4','5','6','7','8','9','-','_');
 		$t1 = substr($string,0,1);
 		if(in_array($t1,$array)){
@@ -106,24 +106,24 @@ class api_identifier extends phpok_plugin
 
 	public function pingyin()
 	{
-		//取得关键字
+		//取得關鍵字
 		$title = $this->get('title');
 		if(!$title){
-			$this->error('没有指定要翻译的内容');
+			$this->error('沒有指定要翻譯的內容');
 		}
-		//取得拼音库
+		//取得拼音庫
 		$content = $this->py_share($title,false);
 		$this->success($content);
 	}
 
 	public function py()
 	{
-		//取得关键字
+		//取得關鍵字
 		$title = $this->get('title');
 		if(!$title){
-			$this->error('没有指定要翻译的内容');
+			$this->error('沒有指定要翻譯的內容');
 		}
-		//取得拼音库
+		//取得拼音庫
 		$content = $this->py_share($title,true);
 		$this->success($content);
 	}
@@ -131,7 +131,7 @@ class api_identifier extends phpok_plugin
 	private function py_share($title,$is_first=false)
 	{
 		if(!$title){
-			$this->error('未指定要翻译的信息');
+			$this->error('未指定要翻譯的資訊');
 		}
 		$url = $this->kunwu_url.'?_appid='.$this->kunwu_appid;
 		$data = array("keywords"=>$title);
@@ -141,7 +141,7 @@ class api_identifier extends phpok_plugin
 		$url .= "&params[keywords]=".rawurlencode($title)."&params[first]=".$data['first'];
 		$info = $this->lib('curl')->get_json($url);
 		if(!$info){
-			$this->error('获取内容失败');
+			$this->error('獲取內容失敗');
 		}
 		if(!$info['status']){
 			$this->error($info['info']);

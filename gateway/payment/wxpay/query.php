@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： gateway/payment/wxpay/query.php
-	备注： 微信订单接口查询
+	檔案： gateway/payment/wxpay/query.php
+	備註： 微信訂單介面查詢
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年11月09日 04时28分
+	時間： 2015年11月09日 04時28分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class wxpay_query
@@ -29,7 +29,7 @@ class wxpay_query
 		global $app;
 		$data = $this->obj->query($this->order['sn'].'-'.$this->order['id']);
 		if(!$data){
-			$this->json('查询失败');
+			$this->json('查詢失敗');
 		}
 		if($data['trade_state'] == 'SUCCESS'){
 			$ext = $this->order['ext'] ? unserialize($this->order['ext']) : array();
@@ -71,9 +71,9 @@ class wxpay_query
 					if($payinfo){
 						$payment_data = array('dateline'=>$mytime,'ext'=>serialize($ext));
 						$app->model('order')->save_payment($payment_data,$payinfo['id']);
-						//更新订单日志
+						//更新訂單日誌
 						$app->model('order')->update_order_status($order['id'],'paid');
-						$note = P_Lang('订单支付完成，编号：{sn}',array('sn'=>$order['sn']));
+						$note = P_Lang('訂單支付完成，編號：{sn}',array('sn'=>$order['sn']));
 						$log = array('order_id'=>$order['id'],'addtime'=>$app->time,'who'=>$app->user['user'],'note'=>$note);
 						$app->model('order')->log_save($log);
 					}

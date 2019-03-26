@@ -1,17 +1,17 @@
 <?php
 /**
- * 多语言操作文件
+ * 多語言操作檔案
  * @package phpok\framework
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2017年11月27日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2017年11月27日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -49,10 +49,10 @@ class phpok_language
 	}
 
 	/**
-	 * 定义绑定的ID/域名
-	 * @参数 $id 为空使用 www
-	 * @参数 
-	 * @参数 
+	 * 定義繫結的ID/域名
+	 * @引數 $id 為空使用 www
+	 * @引數 
+	 * @引數 
 	**/
 	public function id($id='')
 	{
@@ -63,7 +63,7 @@ class phpok_language
 	}
 
 	/**
-	 * 开启语言包
+	 * 開啟語言包
 	**/
 	public function open()
 	{
@@ -71,7 +71,7 @@ class phpok_language
 	}
 
 	/**
-	 * 关闭语言包
+	 * 關閉語言包
 	**/
 	public function close()
 	{
@@ -79,7 +79,7 @@ class phpok_language
 	}
 
 	/**
-	 * 关闭语言包
+	 * 關閉語言包
 	**/
 	public function stop()
 	{
@@ -87,7 +87,7 @@ class phpok_language
 	}
 
 	/**
-	 * 获取是否使用语言包
+	 * 獲取是否使用語言包
 	**/
 	public function status()
 	{
@@ -95,8 +95,8 @@ class phpok_language
 	}
 
 	/**
-	 * 语言包目录
-	 * @参数 $folder 目录地址，必须存在才有效
+	 * 語言包目錄
+	 * @引數 $folder 目錄地址，必須存在才有效
 	**/
 	public function folder($folder='')
 	{
@@ -107,8 +107,8 @@ class phpok_language
 	}
 
 	/**
-	 * 设置语言ID
-	 * @参数 $langid 默认是 default，支持其他语言
+	 * 設定語言ID
+	 * @引數 $langid 預設是 default，支援其他語言
 	**/
 	public function lang_id($langid='default')
 	{
@@ -200,7 +200,7 @@ class phpok_language
 			$this->_status = false;
 			return false;
 		}
-		//pomo文件读取
+		//pomo檔案讀取
 		$lang = new \NOOP_Translations;
 		$mo = new \MO();
 		if (!$mo->import_from_file($mofile)){

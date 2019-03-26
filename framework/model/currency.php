@@ -1,13 +1,13 @@
 <?php
 /**
- * 货币管理器
+ * 貨幣管理器
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年10月10日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年10月10日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -15,7 +15,7 @@ class currency_model_base extends phpok_model
 {
 	private $_cache;
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -23,9 +23,9 @@ class currency_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得国际货币列表
-	 * @参数 $pri 多维数组中的key定位，留空使用数字，从0起
-	 * @返回 多维数组或false
+	 * 取得國際貨幣列表
+	 * @引數 $pri 多維陣列中的key定位，留空使用數字，從0起
+	 * @返回 多維陣列或false
 	**/
 	public function get_list($pri='')
 	{
@@ -34,10 +34,10 @@ class currency_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得指定货币的基本信息
-	 * @参数 $id 主键ID
-	 * @参数 $field_id 表字段名，在货币里常指id、code、title等
-	 * @返回 数组或false
+	 * 取得指定貨幣的基本資訊
+	 * @引數 $id 主鍵ID
+	 * @引數 $field_id 表字段名，在貨幣裡常指id、code、title等
+	 * @返回 陣列或false
 	**/
 	public function get_one($id,$field_id='id')
 	{
@@ -55,9 +55,9 @@ class currency_model_base extends phpok_model
 	}
 
 	/**
-	 * 存储信息，添加或更新
-	 * @参数 $data 数组
-	 * @参数 $id 主键ID
+	 * 儲存資訊，新增或更新
+	 * @引數 $data 陣列
+	 * @引數 $id 主鍵ID
 	 * @返回 true/false/或自增ID
 	**/
 	public function save($data,$id="")
@@ -73,9 +73,9 @@ class currency_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新货币状态
-	 * @参数 $id 货币ID
-	 * @参数 $status 为0表示禁用，1表示启用
+	 * 更新貨幣狀態
+	 * @引數 $id 貨幣ID
+	 * @引數 $status 為0表示禁用，1表示啟用
 	 * @返回 true/false
 	**/
 	public function update_status($id,$status=0)
@@ -86,8 +86,8 @@ class currency_model_base extends phpok_model
 	
 	/**
 	 * 更新排序
-	 * @参数 $id 货币ID
-	 * @参数 $taxis 排序值，最大255，最小0
+	 * @引數 $id 貨幣ID
+	 * @引數 $taxis 排序值，最大255，最小0
 	 * @返回 true/false
 	**/
 	public function update_sort($id,$taxis=255)
@@ -97,8 +97,8 @@ class currency_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除货币操作，请慎用，执行此删除后，货币订单等计算会有问题
-	 * @参数 $id 货币ID
+	 * 刪除貨幣操作，請慎用，執行此刪除後，貨幣訂單等計算會有問題
+	 * @引數 $id 貨幣ID
 	 * @返回 true/false
 	**/
 	public function del($id)
@@ -108,10 +108,10 @@ class currency_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得货币汇率
-	 * @参数 $id 货币ID
-	 * @参数 $field_id 表字段名，在货币里常指id、code、title等
-	 * @返回 汇率信息或空
+	 * 取得貨幣匯率
+	 * @引數 $id 貨幣ID
+	 * @引數 $field_id 表字段名，在貨幣裡常指id、code、title等
+	 * @返回 匯率資訊或空
 	**/
 	public function rate($id,$field_id='id')
 	{

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/form/url_form.php
-	备注： 网址
+	檔案： {phpok}/form/url_form.php
+	備註： 網址
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年03月06日 14时05分
+	時間： 2015年03月06日 14時05分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class url_form extends _init_auto

@@ -2,7 +2,7 @@
 namespace Qiniu\Http;
 
 /**
- * 七牛业务请求逻辑错误封装类，主要用来解析API请求返回如下的内容：
+ * 七牛業務請求邏輯錯誤封裝類，主要用來解析API請求返回如下的內容：
  * <pre>
  *     {"error" : "detailed error message"}
  * </pre>

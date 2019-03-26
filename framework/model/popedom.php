@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/popedom.php
-	备注： 后台管理员权限类
+	檔案： {phpok}/model/popedom.php
+	備註： 後臺管理員許可權類
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年02月03日 11时25分
+	時間： 2015年02月03日 11時25分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class popedom_model_base extends phpok_model
@@ -37,9 +37,9 @@ class popedom_model_base extends phpok_model
 		return $rs;
 	}
 
-	//判断是否有阅读权限
-	//pid，为项目ID
-	//groupid，为会员组ID
+	//判斷是否有閱讀許可權
+	//pid，為專案ID
+	//groupid，為會員組ID
 	public function check($pid,$groupid=0,$type='read')
 	{
 		$popedom = $this->_popedom_list($groupid);

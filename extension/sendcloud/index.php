@@ -1,13 +1,13 @@
 <?php
 /**
- * SendCloud提供的云服务
+ * SendCloud提供的雲服務
  * @package phpok\extension\sendcloud
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年02月27日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年02月27日
 **/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 
@@ -73,11 +73,11 @@ class sendcloud_lib
 	}
 
 	/**
-	 * 发送邮件
-	 * @参数 $title 标题
-	 * @参数 $content 内容
-	 * @参数 $emailto 目标邮箱
-	 * @返回 false 或 数组
+	 * 傳送郵件
+	 * @引數 $title 標題
+	 * @引數 $content 內容
+	 * @引數 $emailto 目標郵箱
+	 * @返回 false 或 陣列
 	**/
 	public function email($title='',$content='',$emailto='')
 	{
@@ -112,10 +112,10 @@ class sendcloud_lib
 
 	
 	/**
-	 * 发送短信
-	 * @参数 $mobile 目标手机号
-	 * @参数 $data 数组，要传递的参数
-	 * @返回 数组
+	 * 傳送簡訊
+	 * @引數 $mobile 目標手機號
+	 * @引數 $data 陣列，要傳遞的引數
+	 * @返回 陣列
 	**/
 	public function sms($mobile='',$data='')
 	{

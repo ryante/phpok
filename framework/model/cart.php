@@ -1,25 +1,25 @@
 <?php
 /**
- * 购物车相关全局操作
+ * 購物車相關全域性操作
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年08月17日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年08月17日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class cart_model_base extends phpok_model
 {
 	/**
-	 * 购物车ID，仅限内部使用
+	 * 購物車ID，僅限內部使用
 	**/
 	private $_id;
 
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -27,10 +27,10 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取购物车ID，如果不存在，系统会尝试创建
-	 * @参数 $sessid 用户Session ID
-	 * @参数 $uid 会员ID，为0表示游客下单
-	 * @返回 数字ID
+	 * 獲取購物車ID，如果不存在，系統會嘗試建立
+	 * @引數 $sessid 使用者Session ID
+	 * @引數 $uid 會員ID，為0表示遊客下單
+	 * @返回 數字ID
 	**/
 	public function cart_id($sessid='',$uid=0)
 	{
@@ -57,7 +57,7 @@ class cart_model_base extends phpok_model
 			$this->_id = $rs['id'];
 			return $this->_id;
 		}
-		//合并购物车
+		//合併購物車
 		$array = array('session_id'=>$sessid,'user_id'=>$uid,'addtime'=>$this->time);
 		$this->_id = $this->db->insert_array($array,'cart');
 		$idlist = array();
@@ -72,11 +72,11 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得购物车信息
-	 * @参数 $cart_id 购物车ID，留空使用系统的$this->_id
-	 * @参数 $condition fixed 条件查询，当为数组时表示多个ID，当为数字时表示单个ID
-	 * @返回 false 或购物车里的产品信息
-	 * @更新时间 2016年08月19日
+	 * 取得購物車資訊
+	 * @引數 $cart_id 購物車ID，留空使用系統的$this->_id
+	 * @引數 $condition fixed 條件查詢，當為陣列時表示多個ID，當為數字時表示單個ID
+	 * @返回 false 或購物車裡的產品資訊
+	 * @更新時間 2016年08月19日
 	**/
 	public function get_all($cart_id='',$condition='')
 	{
@@ -112,10 +112,10 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得购物车里的产品详细信息
-	 * @参数 $id 购物车产品（表cart_product）里的id
-	 * @返回 数组
-	 * @更新时间 2016年09月01日
+	 * 取得購物車裡的產品詳細資訊
+	 * @引數 $id 購物車產品（表cart_product）裡的id
+	 * @返回 陣列
+	 * @更新時間 2016年09月01日
 	**/
 	public function get_one($id)
 	{
@@ -124,9 +124,9 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新购物车里的产品数量
-	 * @参数 $id 购物车产品（表cart_product）里的id
-	 * @参数 $qty 数量，不能小于1
+	 * 更新購物車裡的產品數量
+	 * @引數 $id 購物車產品（表cart_product）裡的id
+	 * @引數 $qty 數量，不能小於1
 	 * @返回 true 或 false
 	**/
 	public function update($id,$qty=1)
@@ -149,8 +149,8 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 添加产品数据
-	 * @参数 $data 数组
+	 * 新增產品資料
+	 * @引數 $data 陣列
 	 * @返回 false 或插入的id
 	**/
 	public function add($data)
@@ -164,8 +164,8 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新购物车操作时间
-	 * @参数 $cart_id 购物车ID
+	 * 更新購物車操作時間
+	 * @引數 $cart_id 購物車ID
 	**/
 	public function update_cart_time($cart_id)
 	{
@@ -174,8 +174,8 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得购物车下的产品数量
-	 * @参数 $cart_id 购物车ID
+	 * 取得購物車下的產品數量
+	 * @引數 $cart_id 購物車ID
 	**/
 	public function total($cart_id)
 	{
@@ -184,9 +184,9 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除购物车信息
-	 * @参数 $cart_id 购物车ID
-	 * @参数 $ids 要删除的产品ID，数组
+	 * 刪除購物車資訊
+	 * @引數 $cart_id 購物車ID
+	 * @引數 $ids 要刪除的產品ID，陣列
 	**/
 	public function delete($cart_id,$ids='')
 	{
@@ -210,8 +210,8 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除产品
-	 * @参数 $id 主键ID，这里说明下，不是产品ID
+	 * 刪除產品
+	 * @引數 $id 主鍵ID，這裡說明下，不是產品ID
 	**/
 	public function delete_product($id)
 	{
@@ -220,8 +220,8 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 清空购物车下的产品数据
-	 * @参数 $cart_id 购物车ID
+	 * 清空購物車下的產品資料
+	 * @引數 $cart_id 購物車ID
 	**/
 	public function clear_cart($cart_id='')
 	{
@@ -234,7 +234,7 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 清空超过24小时的购物车
+	 * 清空超過24小時的購物車
 	**/
 	public function clear_expire_cart()
 	{
@@ -254,12 +254,12 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 计算运费
-	 * @参数 $data 数组，里面包含：number数量，weight重量，volume体积
-	 * @参数 $province 省份
-	 * @参数 $city 城市
-	 * @返回 false 或 实际运费
-	 * @更新时间 2016年09月11日
+	 * 計算運費
+	 * @引數 $data 陣列，裡面包含：number數量，weight重量，volume體積
+	 * @引數 $province 省份
+	 * @引數 $city 城市
+	 * @返回 false 或 實際運費
+	 * @更新時間 2016年09月11日
 	**/
 	public function freight_price($data,$province='',$city='')
 	{
@@ -297,8 +297,8 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 购物车产品属性扩展数组数据格式化为字串，如果值都是数字，则用英文逗号隔开，非数字则用serialize序列化
-	 * @参数 $data 要格式化的内容，必须是数组
+	 * 購物車產品屬性擴充套件陣列資料格式化為字串，如果值都是數字，則用英文逗號隔開，非數字則用serialize序列化
+	 * @引數 $data 要格式化的內容，必須是陣列
 	**/
 	public function product_ext_to_string($data='')
 	{
@@ -319,9 +319,9 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 购物车产品中的扩展属性数据转化为数组，多数字组合则读取产品属性表，反之则用unserialize反序列化
-	 * @参数 $data 要格式化的数据，字串
-	 * @参数 $tid 产品ID（仅限数据为数字及英文逗号组成）
+	 * 購物車產品中的擴充套件屬性資料轉化為陣列，多數字組合則讀取產品屬性表，反之則用unserialize反序列化
+	 * @引數 $data 要格式化的資料，字串
+	 * @引數 $tid 產品ID（僅限資料為數字及英文逗號組成）
 	**/
 	public function product_ext_to_array($data='',$tid=0)
 	{
@@ -351,9 +351,9 @@ class cart_model_base extends phpok_model
 	}
 
 	/**
-	 * 产品属性参数比较，如果相同返回 true，不同返回 false
-	 * @参数 $data 属性1
-	 * @参数 $check 属性2
+	 * 產品屬性引數比較，如果相同返回 true，不同返回 false
+	 * @引數 $data 屬性1
+	 * @引數 $check 屬性2
 	**/
 	public function product_ext_compare($data,$check)
 	{

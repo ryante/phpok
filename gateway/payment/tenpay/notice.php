@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： payment/tenpay/notice.php
-	备注： 支付通知页
+	檔案： payment/tenpay/notice.php
+	備註： 支付通知頁
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年5月3日
+	時間： 2014年5月3日
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class tenpay_notice
@@ -21,7 +21,7 @@ class tenpay_notice
 		include_once($this->paydir."tenpay.php");
 	}
 
-	//获取订单信息
+	//獲取訂單資訊
 	function submit()
 	{
 		if($this->order['status']){
@@ -33,24 +33,24 @@ class tenpay_notice
 		$array = array($app->config['ctrl_id'],$app->config['func_id'],'sign','id');
 		$trade_mode = $app->get('trade_mode','int');
 		$trade_status = $app->get('trade_state','int');
-		//检测为fail的几种情况
+		//檢測為fail的幾種情況
 		if($trade_mode != '1' && $trade_mode != '2'){
-			$app->error('订单错误：参数传递错误！');
+			$app->error('訂單錯誤：引數傳遞錯誤！');
 		}
 		if($trade_mode == '1'){
 			if($trade_status != '0'){
-				$app->error('订单错误：付款失败！');
+				$app->error('訂單錯誤：付款失敗！');
 			}
 		}
 		$attach = $app->get('attach');
 		if(!$attach){
-			$app->error('您没有权限查看此订单信息');
+			$app->error('您沒有許可權檢視此訂單資訊');
 		}
 		if(!$tenpay->check_sign($array)){
-			$app->error('验证不通过，请检查');
+			$app->error('驗證不通過，請檢查');
 		}
 		if($app->get('retcode','int') != '0'){
-			$app->error('付款失败，请检查');
+			$app->error('付款失敗，請檢查');
 		}
 
 		$pay_date = $tenpay->get_date();
@@ -70,7 +70,7 @@ class tenpay_notice
 				$app->model('order')->update_order_status($order['id'],'paid');
 				$param = 'id='.$order['id']."&status=paid";
 				$app->model('task')->add_once('order',$param);
-				$note = P_Lang('订单支付完成，编号：{sn}',array('sn'=>$order['sn']));
+				$note = P_Lang('訂單支付完成，編號：{sn}',array('sn'=>$order['sn']));
 				$log = array('order_id'=>$order['id'],'addtime'=>$app->time,'who'=>$app->user['user'],'note'=>$note);
 				$app->model('order')->log_save($log);
 				//增加order_payment

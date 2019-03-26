@@ -1,13 +1,13 @@
 <?php
 /**
- * 常用函数
+ * 常用函式
  * @package phpok\framework
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年06月21日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年06月21日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -22,17 +22,17 @@ function G($id,$type='safe')
 	return $GLOBALS['app']->get($id,$type);
 }
 
-function str_rand($length=10)//随机字符，参数是长度
+function str_rand($length=10)//隨機字元，引數是長度
 {
 	if(!$length) return false;
 	return $GLOBALS['app']->lib('common')->str_rand($length);
 }
 
 /**
- * 执行SQL操作
- * @参数 $db DB引挈，这里直接从外部引入
- * @参数 $sql SQL文件或是SQL代码
- * @参数 $isfile 为true时表示这是$sql是一个文件，为false表示是一个字串
+ * 執行SQL操作
+ * @引數 $db DB引挈，這裡直接從外部引入
+ * @引數 $sql SQL檔案或是SQL程式碼
+ * @引數 $isfile 為true時表示這是$sql是一個檔案，為false表示是一個字串
 **/
 function phpok_loadsql($db,$sql='',$isfile=false)
 {
@@ -67,11 +67,11 @@ function phpok_loadsql($db,$sql='',$isfile=false)
 	return true;
 }
 
-//创建API_url
-//ctrl，控制器名称
-//func，应用方法名称
-//ext，是否有扩展参数
-//root，是否包含网站域名
+//建立API_url
+//ctrl，控制器名稱
+//func，應用方法名稱
+//ext，是否有擴充套件引數
+//root，是否包含網站域名
 function api_url($ctrl,$func="",$ext="",$root=false)
 {
 	$url = $root ? $GLOBALS['app']->url : '';
@@ -92,7 +92,7 @@ function api_url($ctrl,$func="",$ext="",$root=false)
 	return $url;
 }
 
-# Ajax提示信息封装
+# Ajax提示資訊封裝
 function json_exit($content,$status=false)
 {
 	$GLOBALS['app']->json($content,$status);
@@ -103,7 +103,7 @@ function json_ok($content,$format=true)
 	$GLOBALS['app']->json($content,true,true,$format);
 }
 
-# Ajax 返回提示封装
+# Ajax 返回提示封裝
 function array_return($content,$status=false)
 {
 	$rs = array();
@@ -112,13 +112,13 @@ function array_return($content,$status=false)
 	return $rs;
 }
 
-//自定义跳转
-//tips，提示信息
-//url，网址
-//type，类型，支持
-//	notice：通知类文件
-//	ok：状态为对
-//	error：状态为错误
+//自定義跳轉
+//tips，提示資訊
+//url，網址
+//type，型別，支援
+//	notice：通知類檔案
+//	ok：狀態為對
+//	error：狀態為錯誤
 function error($tips="",$url="",$type="notice",$time=2)
 {
 	if(!$tips && !ob_get_contents()){
@@ -126,7 +126,7 @@ function error($tips="",$url="",$type="notice",$time=2)
 		exit;
 	}
 	if(!$url && !$tips){
-		$GLOBALS['app']->error("操作异常，没有传递任何有效参数！");
+		$GLOBALS['app']->error("操作異常，沒有傳遞任何有效引數！");
 	}
 	if($type == 'error'){
 		$GLOBALS['app']->error($tips,$url,$time);
@@ -141,8 +141,8 @@ function error($tips="",$url="",$type="notice",$time=2)
 }
 
 /**
- * 字串不可逆加密（加盐模式）
- * @参数 $pass 要加密的字串
+ * 字串不可逆加密（加鹽模式）
+ * @引數 $pass 要加密的字串
 **/
 function password_create($pass)
 {
@@ -153,10 +153,10 @@ function password_create($pass)
 }
 
 /**
- * 密码验证，基于MD5实现，支持三种加密：32位长度，16位长度，32位加盐模式
- * @参数 $pass 原文，即明文密码
- * @参数 $password 要比较的字串，即加密后的密码
- * @参数 
+ * 密碼驗證，基於MD5實現，支援三種加密：32位長度，16位長度，32位加鹽模式
+ * @引數 $pass 原文，即明文密碼
+ * @引數 $password 要比較的字串，即加密後的密碼
+ * @引數 
 **/
 function password_check($pass,$password)
 {
@@ -183,7 +183,7 @@ function password_check($pass,$password)
 	return $chkpass == $password ? true : false;
 }
 
-//格式化获取扩展数据的内容
+//格式化獲取擴充套件資料的內容
 function ext_value($rs)
 {
 	global $app;
@@ -207,7 +207,7 @@ function ext_value($rs)
 }
 
 /**
- * 内容图片本地化操作
+ * 內容圖片本地化操作
 **/
 function phpok_img_local($content)
 {
@@ -293,11 +293,11 @@ function phpok_img_local($content)
 			if(!$content_img){
 				continue;
 			}
-			//文件名
+			//檔名
 			$filename = $app->time."_".$key.".".$ext;
 			$app->lib("file")->save_pic($content_img,$save_folder.$filename);
 			unset($content_img);
-			//生成记录
+			//生成記錄
 			$array = array();
 			$array["cate_id"] = $cate_rs["id"];
 			$array["folder"] = $folder;
@@ -332,7 +332,7 @@ function phpok_img_local($content)
 	return $content;
 }
 
-//Post 密码属性的设置
+//Post 密碼屬性的設定
 function ext_password_format($val,$content,$type)
 {
 	if(!$val || !$type || $type == "default") return $val;
@@ -351,7 +351,7 @@ function ext_password_format($val,$content,$type)
 	return $val == $content ? $val : md5($val);
 }
 
-# 存储扩展字段
+# 儲存擴充套件欄位
 function ext_save($myid,$is_add=false,$save_id="")
 {
 	if($is_add){
@@ -406,19 +406,19 @@ function ext_save($myid,$is_add=false,$save_id="")
 	return true;	
 }
 
-# 删除扩展字段
+# 刪除擴充套件欄位
 function ext_delete($myid)
 {
 	return $GLOBALS['app']->model("ext")->del($myid);
 }
 
 /**
- * 价格格式化
- * @参数 $val 要格式化的价格
- * @参数 $currency_id 当前货币ID，如果为浮点值，表示当前汇率，支持数组
- * @参数 $show_id 输出货币ID，支持数组
- * @参数 $show_rate 输出货币对应的汇率
- * @参数 $currency_rate 当前货币的汇率
+ * 價格格式化
+ * @引數 $val 要格式化的價格
+ * @引數 $currency_id 當前貨幣ID，如果為浮點值，表示當前匯率，支援陣列
+ * @引數 $show_id 輸出貨幣ID，支援陣列
+ * @引數 $show_rate 輸出貨幣對應的匯率
+ * @引數 $currency_rate 當前貨幣的匯率
 **/
 function price_format($val='',$currency_id='',$show_id=0,$show_rate=0,$currency_rate=0)
 {
@@ -497,12 +497,12 @@ function price_format($val='',$currency_id='',$show_id=0,$show_rate=0,$currency_
 }
 
 /**
- * 价格格式化，仅显示值
- * @参数 $val 要格式化的价格
- * @参数 $currency_id 当前货币ID，如果为浮点值，表示当前汇率，支持数组
- * @参数 $show_id 输出货币ID，支持数组
- * @参数 $show_rate 输出货币对应的汇率
- * @参数 $currency_rate 当前货币的汇率
+ * 價格格式化，僅顯示值
+ * @引數 $val 要格式化的價格
+ * @引數 $currency_id 當前貨幣ID，如果為浮點值，表示當前匯率，支援陣列
+ * @引數 $show_id 輸出貨幣ID，支援陣列
+ * @引數 $show_rate 輸出貨幣對應的匯率
+ * @引數 $currency_rate 當前貨幣的匯率
 **/
 function price_format_val($val='',$currency_id='',$show_id=0,$show_rate=0,$currency_rate=0)
 {
@@ -621,20 +621,20 @@ function phpok_filesize($size,$is_file=true)
 function phpok_user_login($id,$pass="",$field='id')
 {
 	if(!$id){
-		return P_Lang('未指定会员账号或Email或手机号或ID号');
+		return P_Lang('未指定會員賬號或Email或手機號或ID號');
 	}
 	$rs = $GLOBALS['app']->model('user')->get_one($id,$field);
 	if(!$rs){
-		return P_Lang('会员信息不存在');
+		return P_Lang('會員資訊不存在');
 	}
 	if(!$rs["status"]){
-		return P_Lang('会员账号未审核');
+		return P_Lang('會員賬號未稽核');
 	}
 	if($rs['status'] == '2'){
-		return P_Lang('会员账号被锁定，请联系管理员');
+		return P_Lang('會員賬號被鎖定，請聯絡管理員');
 	}
 	if($pass && !password_check($pass,$rs["pass"])){
-		return P_Lang('会员账号验证不通过，密码不正确');
+		return P_Lang('會員賬號驗證不通過，密碼不正確');
 	}
 	$_SESSION["user_id"] = $id;
 	$_SESSION["user_gid"] = $rs['group_id'];
@@ -642,7 +642,7 @@ function phpok_user_login($id,$pass="",$field='id')
 	return 'ok';
 }
 
-//取得扩展表里的信息
+//取得擴充套件表裡的資訊
 function phpok_ext_info($module,$extc=true)
 {
 	$rslist = $GLOBALS['app']->model('ext')->ext_all($module,true);
@@ -655,7 +655,7 @@ function phpok_ext_info($module,$extc=true)
 	return $rs;
 }
 
-//取得主题扩展内容信息
+//取得主題擴充套件內容資訊
 function phpok_ext_list($mid,$tid=0)
 {
 	if(!$mid || !$tid) return false;
@@ -684,7 +684,7 @@ function phpok_ext_list($mid,$tid=0)
 }
 
 
-//取得表单选项信息
+//取得表單選項資訊
 function phpok_opt($id,$ext="")
 {
 	$group_rs = $GLOBALS['app']->model("opt")->group_one($id);
@@ -728,7 +728,7 @@ function phpok_decode($string,$id="")
 	return $t[$id];
 }
 
-//WEB前台通用模板，如果您的程序比较复杂，请自己写Head
+//WEB前臺通用模板，如果您的程式比較複雜，請自己寫Head
 function tpl_head($array=array())
 {
 	$app = $GLOBALS['app'];
@@ -880,7 +880,7 @@ function tpl_head($array=array())
 	return $html;	
 }
 
-//表单生成器
+//表單生成器
 function form_edit($id,$content="",$type="text",$attr="",$return='echo')
 {
 	if(!$id){
@@ -896,7 +896,7 @@ function form_edit($id,$content="",$type="text",$attr="",$return='echo')
 	return $rs['html'];
 }
 
-//基于字段管理生成表单项
+//基於欄位管理生成表單項
 //
 function form_fields($identifer='',$id='',$content='',$return='')
 {
@@ -918,12 +918,12 @@ function form_fields($identifer='',$id='',$content='',$return='')
 	return $rs['html'];
 }
 
-//生成HTML表单控制
-//此项机制与form_edit类似
-//type，HTML表单类型，具体支持请查看form里的配置
-//id，表单名称
-//attr，各种属性，多种属性连接模式为：type=1&ok=2&upload=1
-//content，表单默认值内容
+//生成HTML表單控制
+//此項機制與form_edit類似
+//type，HTML表單型別，具體支援請檢視form裡的配置
+//id，表單名稱
+//attr，各種屬性，多種屬性連線模式為：type=1&ok=2&upload=1
+//content，表單預設值內容
 function form_html($type='text',$id='phpok',$attr='',$content='')
 {
 	$array = array("identifier"=>$id,"form_type"=>$type,"content"=>$content);
@@ -936,7 +936,7 @@ function form_html($type='text',$id='phpok',$attr='',$content='')
 	return $GLOBALS['app']->lib('form')->format($array);
 }
 
-//取得授权时间
+//取得授權時間
 function license_date()
 {
 	if($GLOBALS['app']->license_site == '.phpok.com') return '2005-'.date("Y",$GLOBALS['app']->time);
@@ -947,12 +947,12 @@ function license_date()
 }
 
 
-//PHPOK日志存储，可用于调试
+//PHPOK日誌儲存，可用於除錯
 function phpok_log($info='')
 {
 	global $app;
 	if(!$info){
-		$info = '没有提示内容';
+		$info = '沒有提示內容';
 	}
 	if(is_array($info) || is_object($info)){
 		$info = print_r($info,true);
@@ -974,7 +974,7 @@ function phpok_log($info='')
 	fclose($handle);
 }
 
-//邮箱合法性验证
+//郵箱合法性驗證
 function phpok_check_email($email)
 {
 	return $GLOBALS['app']->lib('common')->email_check($email);
@@ -985,7 +985,7 @@ function user_group($gid)
 	return $GLOBALS['app']->model('usergroup')->get_one($gid);
 }
 
-//详细页分页
+//詳細頁分頁
 function pageurl($pageurl,$pageid=1)
 {
 	if($pageid < 2) return $pageurl;
@@ -995,10 +995,10 @@ function pageurl($pageurl,$pageid=1)
 }
 
 
-//自定义表单中涉及到的内容获取
+//自定義表單中涉及到的內容獲取
 function opt_rslist($type='default',$group_id=0,$info='')
 {
-	//当类型为默认时
+	//當型別為預設時
 	if($type == 'default' && $info){
 		$list = explode("\n",$info);
 		$rslist = "";
@@ -1027,7 +1027,7 @@ function opt_rslist($type='default',$group_id=0,$info='')
 		}
 		return $rslist;
 	}
-	//读主题列表信息
+	//讀主題列表資訊
 	if($type == 'title'){
 		$tmplist = $GLOBALS['app']->model("list")->title_list($group_id);
 		if(!$tmplist) return false;
@@ -1038,7 +1038,7 @@ function opt_rslist($type='default',$group_id=0,$info='')
 		}
 		return $rslist;
 	}
-	//读子分类信息
+	//讀子分類資訊
 	if($type == 'cate'){
 		$tmplist = $GLOBALS['app']->model('cate')->catelist_sonlist($group_id,false);
 		if(!$tmplist) return false;
@@ -1084,8 +1084,8 @@ function token_userid()
 }
 
 /**
- * 视频链接自动解析成真实地址
- * @参数 $url
+ * 視訊連結自動解析成真實地址
+ * @引數 $url
 **/
 function phpok_video_url($url,$type="html")
 {
@@ -1121,7 +1121,7 @@ function phpok_sitelist($notin=false)
 	return $sitelist;
 }
 
-//智能使用CDN
+//智慧使用CDN
 function phpok_cdn()
 {
 	global $app;

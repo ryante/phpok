@@ -1,13 +1,13 @@
 <?php
 /**
- * Tag标签管理工具
+ * Tag標籤管理工具
  * @package phpok
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年04月20日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年04月20日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -22,13 +22,13 @@ class newtag_control extends phpok_control
 	}
 
 	/**
-	 * 标签管理列表
-	 * @参数 keywords 搜索关键字
+	 * 標籤管理列表
+	 * @引數 keywords 搜尋關鍵字
 	**/
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$pageurl = $this->url('tag');
 		$keywords = $this->get('keywords');
@@ -46,8 +46,8 @@ class newtag_control extends phpok_control
 		$total = $this->model('tag')->get_total($condition);
 		if($total>0){
 			$rslist = $this->model('tag')->get_list($condition,$offset,$psize);
-			$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=5';
-			$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+			$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=5';
+			$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 			$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 			$this->assign("rslist",$rslist);
 			$this->assign('pagelist',$pagelist);
@@ -56,43 +56,43 @@ class newtag_control extends phpok_control
 	}
 
 	/**
-	 * 添加或编辑标签
+	 * 新增或編輯標籤
 	**/
 	public function set_f()
 	{
 		$id = $this->get('id','int');
 		if($id){
 			if(!$this->popedom['modify']){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 			$rs = $this->model('tag')->get_one($id);
 			$this->assign('rs',$rs);
 			$this->assign('id',$id);
 		}else{
 			if(!$this->popedom['add']){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 		}
 		$this->view("tag_set");
 	}
 
 	/**
-	 * 保存标签数据
+	 * 儲存標籤資料
 	**/
 	public function save_f()
 	{
 		$id = $this->get('id','int');
 		$popedom = $id ? 'modify' : 'add';
 		if(!$this->popedom[$popedom]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$title = $this->get('title');
 		if(!$title){
-			$this->error(P_Lang('关键字名称不能为空'));
+			$this->error(P_Lang('關鍵字名稱不能為空'));
 		}
 		$chk = $this->model('tag')->chk_title($title,$id);
 		if($chk){
-			$this->error(P_Lang('关键字已存在，请检查'));
+			$this->error(P_Lang('關鍵字已存在，請檢查'));
 		}
 		$data = array('title'=>$title,'url'=>$this->get('url'),'target'=>$this->get('target','int'));
 		$data['site_id'] = $this->session->val('admin_site_id');
@@ -105,19 +105,19 @@ class newtag_control extends phpok_control
 		}
 		$insert_id = $this->model('tag')->save($data);
 		if(!$insert_id){
-			$this->error(P_Lang('添加失败，请检查'));
+			$this->error(P_Lang('新增失敗，請檢查'));
 		}
 		$this->success();
 	}
 
 	/**
-	 * 删除标签
-	 * @参数 id 要删除的标签对应的ID
+	 * 刪除標籤
+	 * @引數 id 要刪除的標籤對應的ID
 	**/
 	public function delete_f()
 	{
 		if(!$this->popedom['delete']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
@@ -128,12 +128,12 @@ class newtag_control extends phpok_control
 	}
 
 	/**
-	 * 配置Tag标签管理参数
+	 * 配置Tag標籤管理引數
 	**/
 	public function config_f()
 	{
 		if(!$this->session->val('admin_rs.if_system')){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$rs = $this->model('tag')->config();
 		if($rs){
@@ -143,12 +143,12 @@ class newtag_control extends phpok_control
 	}
 
 	/**
-	 * 存储配置信息
+	 * 儲存配置資訊
 	**/
 	public function config_save_f()
 	{
 		if(!$this->session->val('admin_rs.if_system')){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$data = array();
 		$data['separator'] = $this->get('separator');
@@ -161,12 +161,12 @@ class newtag_control extends phpok_control
 	}
 
 	/**
-	 * 弹出窗选择
+	 * 彈出窗選擇
 	**/
 	public function open_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$rs = $this->model('tag')->config();
 		if($rs){
@@ -188,8 +188,8 @@ class newtag_control extends phpok_control
 		$total = $this->model('tag')->get_total($condition);
 		if($total>0){
 			$rslist = $this->model('tag')->get_list($condition,$offset,$psize);
-			$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=5';
-			$string.= '&add='.P_Lang('数量：').'(total)/(psize)&always=1';
+			$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=5';
+			$string.= '&add='.P_Lang('數量：').'(total)/(psize)&always=1';
 			$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 			$this->assign("rslist",$rslist);
 			$this->assign('pagelist',$pagelist);

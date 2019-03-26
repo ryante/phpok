@@ -4,14 +4,14 @@ namespace Qiniu\Processing;
 use Qiniu;
 
 /**
- * 主要涉及图片链接拼接
+ * 主要涉及圖片連結拼接
  *
  * @link http://developer.qiniu.com/code/v6/api/kodo-api/image/imageview2.html
  */
 final class ImageUrlBuilder
 {
     /**
-     * mode合法范围值
+     * mode合法範圍值
      *
      * @var array
      */
@@ -25,7 +25,7 @@ final class ImageUrlBuilder
     protected $formatArr = array('psd', 'jpeg', 'png', 'gif', 'webp', 'tiff', 'bmp');
 
     /**
-     * 水印图片位置合法值
+     * 水印圖片位置合法值
      *
      * @var array
      */
@@ -33,16 +33,16 @@ final class ImageUrlBuilder
         'West', 'Center', 'East', 'SouthWest', 'South', 'SouthEast');
 
     /**
-     * 缩略图链接拼接
+     * 縮圖連結拼接
      *
-     * @param  string $url 图片链接
-     * @param  int $mode 缩略模式
-     * @param  int $width 宽度
-     * @param  int $height 长度
-     * @param  string $format 输出类型
-     * @param  int $quality 图片质量
-     * @param  int $interlace 是否支持渐进显示
-     * @param  int $ignoreError 忽略结果
+     * @param  string $url 圖片連結
+     * @param  int $mode 縮略模式
+     * @param  int $width 寬度
+     * @param  int $height 長度
+     * @param  string $format 輸出型別
+     * @param  int $quality 圖片質量
+     * @param  int $interlace 是否支援漸進顯示
+     * @param  int $ignoreError 忽略結果
      * @return string
      * @link http://developer.qiniu.com/code/v6/api/kodo-api/image/imageview2.html
      * @author Sherlock Ren <sherlock_ren@icloud.com>
@@ -58,12 +58,12 @@ final class ImageUrlBuilder
         $ignoreError = 1
     ) {
 
-        // url合法效验
+        // url合法效驗
         if (!$this->isUrl($url)) {
             return $url;
         }
 
-        // 参数合法性效验
+        // 引數合法性效驗
         if (!in_array(intval($mode), $this->modeArr, true)) {
             return $url;
         }
@@ -74,21 +74,21 @@ final class ImageUrlBuilder
 
         $thumbStr = 'imageView2/' . $mode . '/w/' . $width . '/h/' . $height . '/';
 
-        // 拼接输出格式
+        // 拼接輸出格式
         if (!is_null($format)
             && in_array($format, $this->formatArr)
         ) {
             $thumbStr .= 'format/' . $format . '/';
         }
 
-        // 拼接渐进显示
+        // 拼接漸進顯示
         if (!is_null($interlace)
             && in_array(intval($interlace), array(0, 1), true)
         ) {
             $thumbStr .= 'interlace/' . $interlace . '/';
         }
 
-        // 拼接图片质量
+        // 拼接圖片質量
         if (!is_null($quality)
             && intval($quality) >= 0
             && intval($quality) <= 100
@@ -98,20 +98,20 @@ final class ImageUrlBuilder
 
         $thumbStr .= 'ignore-error/' . $ignoreError . '/';
 
-        // 如果有query_string用|线分割实现多参数
+        // 如果有query_string用|線分割實現多引數
         return $url . ($this->hasQuery($url) ? '|' : '?') . $thumbStr;
     }
 
     /**
-     * 图片水印
+     * 圖片水印
      *
-     * @param  string $url 图片链接
-     * @param  string $image 水印图片链接
+     * @param  string $url 圖片連結
+     * @param  string $image 水印圖片連結
      * @param  numeric $dissolve 透明度
      * @param  string $gravity 水印位置
-     * @param  numeric $dx 横轴边距
-     * @param  numeric $dy 纵轴边距
-     * @param  numeric $watermarkScale 自适应原图的短边比例
+     * @param  numeric $dx 橫軸邊距
+     * @param  numeric $dy 縱軸邊距
+     * @param  numeric $watermarkScale 自適應原圖的短邊比例
      * @link   http://developer.qiniu.com/code/v6/api/kodo-api/image/watermark.html
      * @return string
      * @author Sherlock Ren <sherlock_ren@icloud.com>
@@ -125,7 +125,7 @@ final class ImageUrlBuilder
         $dy = null,
         $watermarkScale = null
     ) {
-        // url合法效验
+        // url合法效驗
         if (!$this->isUrl($url)) {
             return $url;
         }
@@ -144,21 +144,21 @@ final class ImageUrlBuilder
             $waterStr .= 'gravity/' . $gravity . '/';
         }
 
-        // 拼接横轴边距
+        // 拼接橫軸邊距
         if (!is_null($dx)
             && is_numeric($dx)
         ) {
             $waterStr .= 'dx/' . $dx . '/';
         }
 
-        // 拼接纵轴边距
+        // 拼接縱軸邊距
         if (!is_null($dy)
             && is_numeric($dy)
         ) {
             $waterStr .= 'dy/' . $dy . '/';
         }
 
-        // 拼接自适应原图的短边比例
+        // 拼接自適應原圖的短邊比例
         if (!is_null($watermarkScale)
             && is_numeric($watermarkScale)
             && $watermarkScale > 0
@@ -167,22 +167,22 @@ final class ImageUrlBuilder
             $waterStr .= 'ws/' . $watermarkScale . '/';
         }
 
-        // 如果有query_string用|线分割实现多参数
+        // 如果有query_string用|線分割實現多引數
         return $url . ($this->hasQuery($url) ? '|' : '?') . $waterStr;
     }
 
     /**
      * 文字水印
      *
-     * @param  string $url 图片链接
+     * @param  string $url 圖片連結
      * @param  string $text 文字
-     * @param  string $font 文字字体
-     * @param  string $fontSize 文字字号
-     * @param  string $fontColor 文字颜色
+     * @param  string $font 文字字型
+     * @param  string $fontSize 文字字號
+     * @param  string $fontColor 文字顏色
      * @param  numeric $dissolve 透明度
      * @param  string $gravity 水印位置
-     * @param  numeric $dx 横轴边距
-     * @param  numeric $dy 纵轴边距
+     * @param  numeric $dx 橫軸邊距
+     * @param  numeric $dy 縱軸邊距
      * @link   http://developer.qiniu.com/code/v6/api/kodo-api/image/watermark.html#text-watermark
      * @return string
      * @author Sherlock Ren <sherlock_ren@icloud.com>
@@ -190,7 +190,7 @@ final class ImageUrlBuilder
     public function waterText(
         $url,
         $text,
-        $font = '黑体',
+        $font = '黑體',
         $fontSize = 0,
         $fontColor = null,
         $dissolve = 100,
@@ -198,7 +198,7 @@ final class ImageUrlBuilder
         $dx = null,
         $dy = null
     ) {
-        // url合法效验
+        // url合法效驗
         if (!$this->isUrl($url)) {
             return $url;
         }
@@ -212,7 +212,7 @@ final class ImageUrlBuilder
             $waterStr .= 'fontsize/' . $fontSize . '/';
         }
 
-        // 拼接文字颜色
+        // 拼接文字顏色
         if (!is_null($fontColor)
             && $fontColor
         ) {
@@ -231,28 +231,28 @@ final class ImageUrlBuilder
             $waterStr .= 'gravity/' . $gravity . '/';
         }
 
-        // 拼接横轴边距
+        // 拼接橫軸邊距
         if (!is_null($dx)
             && is_numeric($dx)
         ) {
             $waterStr .= 'dx/' . $dx . '/';
         }
 
-        // 拼接纵轴边距
+        // 拼接縱軸邊距
         if (!is_null($dy)
             && is_numeric($dy)
         ) {
             $waterStr .= 'dy/' . $dy . '/';
         }
 
-        // 如果有query_string用|线分割实现多参数
+        // 如果有query_string用|線分割實現多引數
         return $url . ($this->hasQuery($url) ? '|' : '?') . $waterStr;
     }
 
     /**
-     * 效验url合法性
+     * 效驗url合法性
      *
-     * @param  string $url url链接
+     * @param  string $url url連結
      * @return string
      * @author Sherlock Ren <sherlock_ren@icloud.com>
      */
@@ -267,9 +267,9 @@ final class ImageUrlBuilder
     }
 
     /**
-     * 检测是否有query
+     * 檢測是否有query
      *
-     * @param  string $url url链接
+     * @param  string $url url連結
      * @return string
      * @author Sherlock Ren <sherlock_ren@icloud.com>
      */

@@ -1,16 +1,16 @@
 <?php
 /**
- * DB基类
+ * DB基類
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2017年12月04日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2017年12月04日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -35,11 +35,11 @@ class db
 	protected $pass = '';
 	protected $port = 3306;
 	protected $socket = '';
-	//保留字转义符，用于转义数据库保留字的转义
+	//保留字轉義符，用於轉義資料庫保留字的轉義
 	protected $kec_left = '`';
 	protected $kec_right = '`';
 
-	//使用远程链接
+	//使用遠端連結
 	protected $client_url = '';
 	
 	private $time = 0;
@@ -75,7 +75,7 @@ class db
 		}
 	}
 
-	//写入调试日志
+	//寫入除錯日誌
 	public function __destruct()
 	{
 		if($this->_slowlist){
@@ -109,9 +109,9 @@ class db
 	}
 
 	/**
-	 * 设定保留字的转义符
-	 * @参数 $left 左侧转义符
-	 * @参数 $right 右侧转义符，留空使用与左侧一样的转义符
+	 * 設定保留字的轉義符
+	 * @引數 $left 左側轉義符
+	 * @引數 $right 右側轉義符，留空使用與左側一樣的轉義符
 	**/
 	public function kec($left='',$right='')
 	{
@@ -123,8 +123,8 @@ class db
 	}
 
 	/**
-	 * 数据库服务器
-	 * @参数 $host 指定数据库服务器
+	 * 資料庫伺服器
+	 * @引數 $host 指定資料庫伺服器
 	**/
 	public function host($host='')
 	{
@@ -135,8 +135,8 @@ class db
 	}
 
 	/**
-	 * 数据库账号
-	 * @参数 $user 账号名称
+	 * 資料庫賬號
+	 * @引數 $user 賬號名稱
 	**/
 	public function user($user='')
 	{
@@ -147,8 +147,8 @@ class db
 	}
 
 	/**
-	 * 数据库密码
-	 * @参数 $pass 密码
+	 * 資料庫密碼
+	 * @引數 $pass 密碼
 	**/
 	public function pass($pass='')
 	{
@@ -159,8 +159,8 @@ class db
 	}
 
 	/**
-	 * 数据库端口
-	 * @参数 $port 端口，必须是数字
+	 * 資料庫埠
+	 * @引數 $port 埠，必須是數字
 	**/
 	public function port($port='')
 	{
@@ -171,8 +171,8 @@ class db
 	}
 
 	/**
-	 * Socket 套接字，使应用程序能够读写与收发通讯协定（protocol）与资料的程序
-	 * @参数 $socket 指定 socket 文件
+	 * Socket 套接字，使應用程式能夠讀寫與收發通訊協定（protocol）與資料的程式
+	 * @引數 $socket 指定 socket 檔案
 	**/
 	public function socket($socket='')
 	{
@@ -183,8 +183,8 @@ class db
 	}
 
 	/**
-	 * 指定数据库
-	 * @参数 $database 数据库名称
+	 * 指定資料庫
+	 * @引數 $database 資料庫名稱
 	**/
 	public function database($database='')
 	{
@@ -195,7 +195,7 @@ class db
 	}
 
 	/**
-	 * 判断是否有连接到数据库
+	 * 判斷是否有連線到資料庫
 	**/
 	public function status()
 	{
@@ -205,7 +205,7 @@ class db
 		return true;
 	}
 
-	//收集表名称
+	//收集表名稱
 	public function cache_index($id='')
 	{
 		if(!$id){
@@ -216,7 +216,7 @@ class db
 		return $info;
 	}
 
-	//重置表名称收集
+	//重置表名稱收集
 	public function cache_set($id)
 	{
 		if(!$id){
@@ -236,8 +236,8 @@ class db
 	}
 
 	/**
-	 * 报错类型
-	 * @参数 $type 仅支持 exit 和 json 两个字串
+	 * 報錯型別
+	 * @引數 $type 僅支援 exit 和 json 兩個字串
 	**/
 	public function error_type($type='')
 	{
@@ -248,16 +248,16 @@ class db
 	}
 
 	/**
-	 * 自定义错误
-	 * @参数 $error 错误信息
-	 * @参数 $errid 错误ID
+	 * 自定義錯誤
+	 * @引數 $error 錯誤資訊
+	 * @引數 $errid 錯誤ID
 	**/
 	public function error($error='',$errid='')
 	{
 		if($this->debug){
-			$info = P_Lang('SQL执行错误【ID：{errid}，错误信息是：{error}】',array('errid'=>$errid,'error'=>$error));
+			$info = P_Lang('SQL執行錯誤【ID：{errid}，錯誤資訊是：{error}】',array('errid'=>$errid,'error'=>$error));
 		}else{
-			$info = P_Lang('SQL执行错误，请检查');
+			$info = P_Lang('SQL執行錯誤，請檢查');
 		}
 		if($this->error_type == 'json'){
 			$array = array('status'=>'error','content'=>$info);
@@ -269,9 +269,9 @@ class db
 	}
 
 	/**
-	 * 调试，2018年11月24日后不再支持即时输出，改为写日志
-	 * @参数 $sql SQL语句
-	 * @参数 $time 当前SQL运行时间
+	 * 除錯，2018年11月24日後不再支援即時輸出，改為寫日誌
+	 * @引數 $sql SQL語句
+	 * @引數 $time 當前SQL執行時間
 	**/
 	public function debug($sql='',$time=0)
 	{
@@ -321,7 +321,7 @@ class db
 		return $this->conn;
 	}
 
-	//缓存运行计时器
+	//快取執行計時器
 	protected function _time()
 	{
 		$time = microtime(true);
@@ -335,14 +335,14 @@ class db
 		}
 	}
 
-	//计数器
+	//計數器
 	protected function _count($val=1)
 	{
 		$this->count += $val;
 	}
 
 
-	//通过正则获取表
+	//通過正則獲取表
 	protected function cache_sql($sql)
 	{
 		preg_match_all('/(FROM|JOIN|UPDATE|INTO)\s+([a-zA-Z0-9\_\.\-]+)(\s|\()+/isU',$sql,$list);
@@ -399,8 +399,8 @@ class db
 	}
 
 	/**
-	 * 检测是否需要即时缓存
-	 * @参数 $sql 要检测的SQL语句
+	 * 檢測是否需要即時快取
+	 * @引數 $sql 要檢測的SQL語句
 	**/
 	protected function cache_need($sql)
 	{
@@ -425,9 +425,9 @@ class db
 	}
 
 	/**
-	 * 需要即时缓存的数据
-	 * @参数 $sql SQL语句
-	 * @参数 $data 返回的结果集
+	 * 需要即時快取的資料
+	 * @引數 $sql SQL語句
+	 * @引數 $data 返回的結果集
 	**/
 	public function cache_save($sql,$data)
 	{
@@ -452,10 +452,10 @@ class db
 	}
 
 	/**
-	 * 格式化数组成SQL
-	 * @参数 $data 数组
-	 * @参数 $table 表名
-	 * @参数 $type 类型，仅支持 insert，replace 三种
+	 * 格式化陣列成SQL
+	 * @引數 $data 陣列
+	 * @引數 $table 表名
+	 * @引數 $type 型別，僅支援 insert，replace 三種
 	**/
 	protected function _insert_array($data,$table,$type='insert')
 	{
@@ -471,11 +471,11 @@ class db
 	}
 
 	/**
-	 * 写入操作
-	 * @参数 $sql 要插入的SQL或数组
-	 * @参数 $tbl 数据表名称
-	 * @参数 $type 插放入方式，仅限 $sql 为数组时有效，当为布尔值时表示是否前缀，此时type默认为 insert
-	 * @参数 $prefix 是否检查前缀
+	 * 寫入操作
+	 * @引數 $sql 要插入的SQL或陣列
+	 * @引數 $tbl 資料表名稱
+	 * @引數 $type 插放入方式，僅限 $sql 為陣列時有效，當為布林值時表示是否字首，此時type預設為 insert
+	 * @引數 $prefix 是否檢查字首
 	**/
 	public function insert($sql,$tbl='',$type='insert',$prefix=true)
 	{
@@ -491,11 +491,11 @@ class db
 	}
 
 	/**
-	 * 数组写入操作
-	 * @参数 $data 数组
-	 * @参数 $tbl 表名
-	 * @参数 $type 写入方式
-	 * @参数 $prefix 是否检查前缀
+	 * 陣列寫入操作
+	 * @引數 $data 陣列
+	 * @引數 $tbl 表名
+	 * @引數 $type 寫入方式
+	 * @引數 $prefix 是否檢查字首
 	**/
 	public function insert_array($data,$tbl,$type="insert",$prefix=true)
 	{
@@ -510,10 +510,10 @@ class db
 	}
 
 	/**
-	 * 删除表数据操作
-	 * @参数 $table 表名
-	 * @参数 $condition 查询条件
-	 * @参数 $prefix 是否检查前缀
+	 * 刪除表資料操作
+	 * @引數 $table 表名
+	 * @引數 $condition 查詢條件
+	 * @引數 $prefix 是否檢查字首
 	**/
 	public function delete($table,$condition='',$prefix=true)
 	{
@@ -539,10 +539,10 @@ class db
 
 	/**
 	 * 更新操作
-	 * @参数 $sql SQL语句或数组
-	 * @参数 $tbl 表格
-	 * @参数 $condition 更新条件
-	 * @参数 $prefix 是否检查前缀
+	 * @引數 $sql SQL語句或陣列
+	 * @引數 $tbl 表格
+	 * @引數 $condition 更新條件
+	 * @引數 $prefix 是否檢查字首
 	**/
 	public function update($sql,$tbl='',$condition='',$prefix=true)
 	{
@@ -553,11 +553,11 @@ class db
 	}
 
 	/**
-	 * 更新数据
-	 * @参数 $data SQL语句或数组
-	 * @参数 $tbl 表格
-	 * @参数 $condition 更新条件
-	 * @参数 $prefix 是否检查前缀
+	 * 更新資料
+	 * @引數 $data SQL語句或陣列
+	 * @引數 $tbl 表格
+	 * @引數 $condition 更新條件
+	 * @引數 $prefix 是否檢查字首
 	**/
 	public function update_array($data,$table,$condition,$prefix=true)
 	{

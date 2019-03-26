@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/libs/ext.php
-	Note	: 扩展表内容读取及格式化
+	Note	: 擴充套件表內容讀取及格式化
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -11,7 +11,7 @@ if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class ext_lib
 {
 	var $app;
-	//连接数据库类
+	//連線資料庫類
 	var $db;
 	function __construct()
 	{
@@ -27,7 +27,7 @@ class ext_lib
 		$sql.= "WHERE l.id IN(".$id.") ORDER BY SUBSTRING_INDEX('".$id."',l.id,1)";
 		$rslist = $GLOBALS['app']->db->get_all($sql,"id");
 		if(!$rslist) return false;
-		//获取模块列表
+		//獲取模組列表
 		$id_list = $mid_list = $cid_list = array();
 		foreach($rslist AS $key=>$value)
 		{
@@ -56,13 +56,13 @@ class ext_lib
 							$v[$vv["identifier"]] = $content;
 						}
 					}
-					//合并主题
+					//合併主題
 					$rslist[$v["id"]] = array_merge($rslist[$v["id"]],$v);
 				}
 				unset($extlist);
 			}
 		}
-		//获取分类相关信息
+		//獲取分類相關資訊
 		if(count($cid_list)>0)
 		{
 			$cate_string = implode(",",$cid_list);
@@ -83,7 +83,7 @@ class ext_lib
 		return false;
 	}
 
-	//取得项目的单个主题信息
+	//取得專案的單個主題資訊
 	function title_info($id)
 	{
 		if(!$id) return false;
@@ -140,7 +140,7 @@ class ext_lib
 		return $GLOBALS['app']->model('res')->get_list_from_id($id,true);
 	}
 
-	//取得单个附件信息
+	//取得單個附件資訊
 	function res_info($id)
 	{
 		if(!$id){
@@ -149,7 +149,7 @@ class ext_lib
 		return $GLOBALS['app']->model('res')->get_one($id,true);
 	}
 
-	//取得会员列表
+	//取得會員列表
 	function user_list($id)
 	{
 		$id = $this->safe_format($id);
@@ -182,7 +182,7 @@ class ext_lib
 		if($ext_rs)
 		{
 			unset($ext_rs["id"]);
-			//读取扩展会员表信息
+			//讀取擴充套件會員表資訊
 			$flist = $this->user_fields();
 			if($flist)
 			{
@@ -200,12 +200,12 @@ class ext_lib
 		return $rs;
 	}
 
-	//取得分类列表
+	//取得分類列表
 	function cate_list($id)
 	{
 		$id = $this->safe_format($id);
 		if(!$id) return false;
-		//取得分类列表
+		//取得分類列表
 		return $GLOBALS['app']->model('cate')->catelist_cid($id,true);
 	}
 
@@ -217,7 +217,7 @@ class ext_lib
 		return false;
 	}
 
-	//取得自定义选项列表
+	//取得自定義選項列表
 	function opt_list($id,$gid=0)
 	{
 		if(!$gid || !$id){
@@ -267,7 +267,7 @@ class ext_lib
 		return $rs;
 	}
 
-	//格式化内容
+	//格式化內容
 	function content_format($rs,$content="")
 	{
 		if(!$rs) return false;
@@ -300,7 +300,7 @@ class ext_lib
 		return $content;
 	}
 
-	//格式化单选框
+	//格式化單選框
 	function _format_radio($rs)
 	{
 		if(!$rs || !$rs["content"]) return false;
@@ -338,7 +338,7 @@ class ext_lib
 		
 	}
 
-	//格式化文本框信息
+	//格式化文字框資訊
 	function _format_text($rs)
 	{
 		if(!$rs || !$rs["content"]) return false;
@@ -360,7 +360,7 @@ class ext_lib
 		}
 	}
 
-	//格式化密码框
+	//格式化密碼框
 	function _format_password($rs)
 	{
 		if(!$rs || !$rs["content"]) return false;
@@ -379,7 +379,7 @@ class ext_lib
 		return array("info"=>$rs["content"],"_admin"=>$_admin);
 	}
 	
-	//格式化复选框
+	//格式化複選框
 	function _format_checkbox($rs)
 	{
 		if(!$rs || !$rs["content"]) return false;
@@ -387,7 +387,7 @@ class ext_lib
 		return $this->_global_format($rs);
 	}
 	
-	//格式化下拉菜单选项信息
+	//格式化下拉選單選項資訊
 	function _format_select($rs)
 	{
 		if(!$rs || !$rs["content"]) return false;
@@ -422,7 +422,7 @@ class ext_lib
 		if(!$rs || !$rs["content"]) return false;
 		$tmp = explode(":",$rs["ext"]["option_list"]);
 		if(!$tmp[1]) return $rs["content"];
-		//多项选择，不存在联动说法
+		//多項選擇，不存在聯動說法
 		if($rs["ext"]["is_multiple"])
 		{
 			$list = $this->opt_list($rs["content"],$tmp[1]);
@@ -439,7 +439,7 @@ class ext_lib
 		$tmp = explode("|",$rs["content"]);
 		if(count($tmp)>1)
 		{
-			//存在联动信息
+			//存在聯動資訊
 			$list = array();
 			foreach($tmp AS $key=>$value)
 			{
@@ -479,7 +479,7 @@ class ext_lib
 		return $list;
 	}
 
-	//格式化项目信息
+	//格式化專案資訊
 	function _format_project($rs)
 	{
 		if(!$rs || !$rs["content"]) return false;
@@ -501,7 +501,7 @@ class ext_lib
 		return $list;
 	}
 
-	//格式化分类信息
+	//格式化分類資訊
 	function _format_cate($rs)
 	{
 		if(!$rs || !$rs["content"]) return false;
@@ -523,7 +523,7 @@ class ext_lib
 		return $list;
 	}
 	
-	//格式化会员信息
+	//格式化會員資訊
 	function _format_user($rs)
 	{
 		if(!$rs || !$rs["content"]) return false;
@@ -565,7 +565,7 @@ class ext_lib
 		return $list;
 	}
 
-	//针对单个主题的格式化
+	//針對單個主題的格式化
 	function _format_title($rs)
 	{
 		if(!$rs || !$rs["content"]) return false;
@@ -587,7 +587,7 @@ class ext_lib
 		return $list;
 	}
 
-	//格式化网址信息
+	//格式化網址資訊
 	function _format_url($rs)
 	{
 		if(!$rs || !$rs["content"]) return false;
@@ -604,7 +604,7 @@ class ext_lib
 	}
 
 
-	//取得扩展模块字段内容信息
+	//取得擴充套件模組欄位內容資訊
 	function module_fields($mid)
 	{
 		if(!$mid) return false;
@@ -621,7 +621,7 @@ class ext_lib
 		return false;
 	}
 
-	//读取会员扩展模板字段内容信息
+	//讀取會員擴充套件模板欄位內容資訊
 	function user_fields()
 	{
 		$sql = "SELECT * FROM ".$GLOBALS['app']->db->prefix."fields WHERE ftype='user' ORDER BY taxis ASC,id DESC";
@@ -659,7 +659,7 @@ class ext_lib
 		return $extlist;
 	}
 	
-	//安全格式化外部传输过来的数据
+	//安全格式化外部傳輸過來的資料
 	function safe_format($id)
 	{
 		if(!$id) return false;

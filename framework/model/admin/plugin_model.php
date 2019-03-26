@@ -1,13 +1,13 @@
 <?php
 /**
- * 插件后台的一些专属模型
+ * 外掛後臺的一些專屬模型
  * @package phpok\model\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年07月24日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年07月24日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -18,7 +18,7 @@ class plugin_model extends plugin_model_base
 		parent::__construct();
 	}
 
-	//取得下一个默认排序
+	//取得下一個預設排序
 	public function get_next_taxis()
 	{
 		$sql = "SELECT taxis FROM ".$this->db->prefix."plugins";
@@ -115,9 +115,9 @@ class plugin_model extends plugin_model_base
 	}
 
 	/**
-	 * 快捷图标保存
-	 * @参数 $data 要保存的数据
-	 * @参数 $id 插件ID标识
+	 * 快捷圖示儲存
+	 * @引數 $data 要儲存的資料
+	 * @引數 $id 外掛ID標識
 	**/
 	public function icon_save($data,$id)
 	{
@@ -146,9 +146,9 @@ class plugin_model extends plugin_model_base
 	}
 
 	/**
-	 * 删除插件的快捷配置
-	 * @参数 $id 插件ID标识
-	 * @参数 $vid 要删除的快捷ID
+	 * 刪除外掛的快捷配置
+	 * @引數 $id 外掛ID標識
+	 * @引數 $vid 要刪除的快捷ID
 	**/
 	public function icon_delete($id,$vid)
 	{
@@ -231,10 +231,10 @@ class plugin_model extends plugin_model_base
 	}
 
 	/**
-	 * 执行SQL
-	 * @参数 $sql 要执行的SQL
-	 * @参数 $isfile 是否文件，有判断布尔值，如果是数组，会覆盖第三个参数
-	 * @参数 $breaktables 忽略的表
+	 * 執行SQL
+	 * @引數 $sql 要執行的SQL
+	 * @引數 $isfile 是否檔案，有判斷布林值，如果是陣列，會覆蓋第三個引數
+	 * @引數 $breaktables 忽略的表
 	**/
 	public function loadsql($sql='',$isfile=false,$breaktables=array())
 	{

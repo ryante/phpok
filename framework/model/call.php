@@ -1,13 +1,13 @@
 <?php
 /**
- * 数据调用中心涉及到的SQL操作
+ * 資料呼叫中心涉及到的SQL操作
  * @package phpok
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年08月23日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年08月23日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -20,7 +20,7 @@ class call_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得数据调用类型
+	 * 取得資料呼叫型別
 	**/
 	public function types()
 	{
@@ -32,7 +32,7 @@ class call_model_base extends phpok_model
 	}
 
 	/**
-	 * 页码
+	 * 頁碼
 	**/
 	public function psize($psize='')
 	{
@@ -43,9 +43,9 @@ class call_model_base extends phpok_model
 	}
 	
 	/**
-	 * 通过ID取得数据（此操作用于后台）
-	 * @参数 $id 主键ID
-	 * @参数 $identifier 标识，默认是id，也可以取identifier
+	 * 通過ID取得資料（此操作用於後臺）
+	 * @引數 $id 主鍵ID
+	 * @引數 $identifier 標識，預設是id，也可以取identifier
 	**/
 	public function get_one($id,$identifier='id')
 	{
@@ -59,9 +59,9 @@ class call_model_base extends phpok_model
 
 	/**
 	 * 取得列表
-	 * @参数 $condition 查询条件
-	 * @参数 $offset 初始位置
-	 * @参数 $psize 查询数量
+	 * @引數 $condition 查詢條件
+	 * @引數 $offset 初始位置
+	 * @引數 $psize 查詢數量
 	**/
 	public function get_list($condition="",$offset=0,$psize=30)
 	{
@@ -74,10 +74,10 @@ class call_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得站点下的全部数据
-	 * @参数 $site_id 站点ID
-	 * @参数 $status 为1或true时表示仅查已审核的数据
-	 * @参数 $pri 主键，留空使用identifier
+	 * 取得站點下的全部資料
+	 * @引數 $site_id 站點ID
+	 * @引數 $status 為1或true時表示僅查已稽核的資料
+	 * @引數 $pri 主鍵，留空使用identifier
 	**/
 	public function get_all($site_id=0,$status=0,$pri='identifier')
 	{
@@ -95,8 +95,8 @@ class call_model_base extends phpok_model
 	}
 
 	/**
-	 * 查询数量
-	 * @参数 $condition 查询条件
+	 * 查詢數量
+	 * @引數 $condition 查詢條件
 	**/
 	public function get_count($condition="")
 	{
@@ -108,8 +108,8 @@ class call_model_base extends phpok_model
 	}
 
 	/**
-	 * 检测标识串是否存在
-	 * @参数 $identifier 标识
+	 * 檢測標識串是否存在
+	 * @引數 $identifier 標識
 	**/
 	public function chk_identifier($identifier)
 	{
@@ -117,8 +117,8 @@ class call_model_base extends phpok_model
 	}
 
 	/**
-	 * 通过标识串取得调用的配置数据
-	 * @参数 $identifier 标识
+	 * 通過標識串取得呼叫的配置資料
+	 * @引數 $identifier 標識
 	**/
 	public function get_one_sign($identifier)
 	{
@@ -127,8 +127,8 @@ class call_model_base extends phpok_model
 	}
 
 	/**
-	 * 检测标识串是否存在
-	 * @参数 $identifier 标识
+	 * 檢測標識串是否存在
+	 * @引數 $identifier 標識
 	**/
 	public function chksign($identifier)
 	{
@@ -136,9 +136,9 @@ class call_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取一条数据，仅获取已通过审核的数据，并对扩展数据进行合并
-	 * @参数 $identifier 标识
-	 * @参数 $site_id 站点ID
+	 * 獲取一條資料，僅獲取已通過稽核的資料，並對擴充套件資料進行合併
+	 * @引數 $identifier 標識
+	 * @引數 $site_id 站點ID
 	**/
 	public function one($identifier,$site_id=0)
 	{
@@ -161,9 +161,9 @@ class call_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得站点下的全部数据，并对数据进行格式化
-	 * @参数 $site_id 站点ID
-	 * @参数 $status 为1或true时表示仅查已审核的数据
+	 * 取得站點下的全部資料，並對資料進行格式化
+	 * @引數 $site_id 站點ID
+	 * @引數 $status 為1或true時表示僅查已稽核的資料
 	**/
 	public function all($site_id=0,$pri='')
 	{

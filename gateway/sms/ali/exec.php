@@ -1,13 +1,13 @@
 <?php
 /**
- * 阿里云市场短信发送
+ * 阿里雲市場簡訊傳送
  * @package phpok\gateway\sms\ali
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年02月28日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年02月28日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -34,19 +34,19 @@ function ali_gateway_create_sign($xlist,$blist,$appsecret='')
 
 if(!$rs['ext']){
 	if($this->config['debug']){
-		phpok_log(P_Lang('阿里短信未配置参数'));
+		phpok_log(P_Lang('阿里簡訊未配置引數'));
 	}
 	return false;
 }
 if(!$rs['ext']['appcode'] && !$rs['ext']['appkey'] && !$rs['ext']['appsecret']){
 	if(!$this->config['debug']){
-		phpok_log(P_Lang('阿里短信未配置必填参数'));
+		phpok_log(P_Lang('阿里簡訊未配置必填引數'));
 	}
 	return false;
 }
 if(!$extinfo['mobile'] || !$extinfo['title']){
 	if($this->config['debug']){
-		phpok_log(P_Lang('阿里短信发送未指定接收手机号及发送的模板标签'));
+		phpok_log(P_Lang('阿里簡訊傳送未指定接收手機號及傳送的模板標籤'));
 	}
 	return false;
 }
@@ -97,14 +97,14 @@ if($rs['ext']['sendtype'] == 'appcode'){
 $info = $this->lib('html')->get_content($url);
 if(!$info){
 	if($this->config['debug']){
-		phpok_log('短信发送失败');
+		phpok_log('簡訊傳送失敗');
 	}
 	return false;
 }
 $info = $this->lib('json')->decode($info);
 if(!$info['success']){
 	if($this->config['debug']){
-		phpok_log('短信发送失败：'.$info['message']);
+		phpok_log('簡訊傳送失敗：'.$info['message']);
 	}
 	return false;
 }

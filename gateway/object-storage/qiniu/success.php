@@ -1,18 +1,18 @@
 <?php
 /**
- * 附件上传成功后，提交到服务端，增加登记
+ * 附件上傳成功後，提交到服務端，增加登記
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2019年1月19日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2019年1月19日
 **/
 
 $r = array('status'=>false);
 $ext = $this->get('ext');
 if(!$ext){
-	$r['info'] = P_Lang('未指定附件类型');
+	$r['info'] = P_Lang('未指定附件型別');
 	return $r;
 }
 $cate_id = $this->get('cate_id','int');
@@ -25,12 +25,12 @@ if(!$cate_rs){
 }
 $tmp = explode(",",$cate_rs['filetypes']);
 if(!in_array($ext,$tmp)){
-	$r['info'] = P_Lang('附件格式不符合系统要求');
+	$r['info'] = P_Lang('附件格式不符合系統要求');
 	return $r;
 }
 $filename = $this->get('filename');
 if(!$filename){
-	$this->error(P_Lang('附件不能为空'));
+	$this->error(P_Lang('附件不能為空'));
 }
 $name = $this->get('name');
 if(!$name){
@@ -48,7 +48,7 @@ if(!$title){
 }
 $ico = 'images/filetype-large/'.$ext.'.jpg';
 $extlist = array('png','gif','jpeg','jpg');
-//裁剪缩略图
+//裁剪縮圖
 if(in_array($ext,$extlist)){
 	$ico = $filename.'?imageView2/1/w/200';
 }else{
@@ -70,12 +70,12 @@ $data['admin_id'] = $this->session->val('admin_id');
 $data['addtime'] = $this->time;
 $insert_id = $this->model('res')->save($data);
 if(!$insert_id){
-	//删除七牛接口附件信息
+	//刪除七牛介面附件資訊
 	$this->lib('qiniu')->ak($extinfo['appkey']);
 	$this->lib('qiniu')->sk($extinfo['appsecret']);
 	$this->lib('qiniu')->bucket($extinfo['bucket']);
 	$this->lib('qiniu')->delete_file($name);
-	$r['info'] = P_Lang('附件信息写数据库失败');
+	$r['info'] = P_Lang('附件資訊寫資料庫失敗');
 	return $r;	
 }
 

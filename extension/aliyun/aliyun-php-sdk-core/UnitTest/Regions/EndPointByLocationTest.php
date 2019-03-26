@@ -18,7 +18,7 @@ class EndPointByLocationTest extends TestCase
 
     private function initClient()
     {
-        # 创建 DefaultAcsClient 实例并初始化
+        # 建立 DefaultAcsClient 例項並初始化
         $this->clientProfile = DefaultProfile::getProfile(
             "cn-shanghai",                   # 您的 Region ID
             "<your AK>",               # 您的 Access Key ID

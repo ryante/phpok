@@ -1,12 +1,12 @@
 <?php
 /**
- * 用户控制面板
+ * 使用者控制面板
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年12月04日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年12月04日
 **/
 
 class usercp_control extends phpok_control
@@ -20,27 +20,27 @@ class usercp_control extends phpok_control
 		$user_id = $this->session->val('user_id');
 		if(!$user_id){
 			$errurl = $this->url('login','',$this->url('usercp'));
-			$this->error(P_Lang('未登录会员不能执行此操作'),$errurl);
+			$this->error(P_Lang('未登入會員不能執行此操作'),$errurl);
 		}
 		$this->user = $this->model('user')->get_one($user_id);
 		$this->group_rs = $this->model('usergroup')->group_rs($user_id);
 		if(!$this->group_rs){
-			$this->error(P_Lang('您的账号有异常：无法获取相应的会员组信息，请联系管理员'));
+			$this->error(P_Lang('您的賬號有異常：無法獲取相應的會員組資訊，請聯絡管理員'));
 		}
 	}
 
-	//会员个人中心
+	//會員個人中心
 	public function index_f()
 	{
 		$user = $this->model('user')->get_one($this->session->val('user_id'));
 		$this->assign('rs',$user);
 		$this->assign('user',$user);
 
-		//读取最新下单信息
+		//讀取最新下單資訊
 		$condition = "user_id='".$this->session->val('user_id')."'";
 		$rslist = $this->model('order')->get_list($condition,0,10);
 		$this->assign('rslist',$rslist);
-		//读取会员上传的最新附件
+		//讀取會員上傳的最新附件
 		$reslist = $this->model('res')->get_list($condition,0,10);
 		$this->assign('reslist',$reslist);
 		//
@@ -51,12 +51,12 @@ class usercp_control extends phpok_control
 		$this->view($tplfile);
 	}
 
-	//修改个人资料
+	//修改個人資料
 	public function info_f()
 	{
 		$rs = $this->model('user')->get_one($this->session->val('user_id'));
 		$group_rs = $this->group_rs;
-		//读取扩展属性
+		//讀取擴充套件屬性
 		$condition = 'is_front=1';
 		if($group_rs['fields']){
 			$tmp = explode(",",$group_rs['fields']);
@@ -92,7 +92,7 @@ class usercp_control extends phpok_control
 		$this->view($tplfile);
 	}
 
-	//修改密码
+	//修改密碼
 	public function passwd_f()
 	{
 		$rs = $this->model('user')->get_one($this->session->val('user_id'));
@@ -104,11 +104,11 @@ class usercp_control extends phpok_control
 		$this->view($tplfile);
 	}
 
-	//修改邮箱
+	//修改郵箱
 	public function email_f()
 	{
 		$this->assign('rs',$this->user);
-		//判断后台是否配置好第三方网关
+		//判斷後臺是否配置好第三方閘道器
 		$sendemail = $this->model('gateway')->get_default('email') ? true : false;
 		$this->assign('sendemail',$sendemail);
 		$tplfile = $this->model('site')->tpl_file($this->ctrl,$this->func);
@@ -118,7 +118,7 @@ class usercp_control extends phpok_control
 		$this->view($tplfile);
 	}
 
-	//修改手机
+	//修改手機
 	public function mobile_f()
 	{
 		$this->assign('rs',$this->user);
@@ -131,7 +131,7 @@ class usercp_control extends phpok_control
 		$this->view($tplfile);
 	}
 
-	//发票管理
+	//發票管理
 	public function invoice_f()
 	{
 		$rslist = $this->model('user')->invoice($_SESSION['user_id']);
@@ -148,7 +148,7 @@ class usercp_control extends phpok_control
 		if($id){
 			$rs = $this->model('user')->invoice_one($id);
 			if(!$rs || $rs['user_id'] != $_SESSION['user_id']){
-				$this->error(P_Lang('发票信息不存在或您没有权限修改此发票设置'));
+				$this->error(P_Lang('發票資訊不存在或您沒有許可權修改此發票設定'));
 			}
 			$this->assign('id',$id);
 			$this->assign('rs',$rs);
@@ -156,36 +156,36 @@ class usercp_control extends phpok_control
 		$this->view("usercp_invoice_setting");
 	}
 
-	//获取项目列表
+	//獲取專案列表
 	public function list_f()
 	{
 		//$this->cache->close();
 		$id = $this->get("id");
 		if(!$id){
-			error(P_Lang('未指定项目'),$this->url('usercp'),'notice',10);
+			error(P_Lang('未指定專案'),$this->url('usercp'),'notice',10);
 		}
 		$this->assign('id',$id);
 		$pid = $this->model('id')->project_id($id,$this->site['id']);
 		if(!$pid){
-			error(P_Lang('项目信息不存在'),$this->url('usercp'),'error');
+			error(P_Lang('專案資訊不存在'),$this->url('usercp'),'error');
 		}
 		if(!$this->model('popedom')->check($pid,$this->group_rs['id'],'post')){
-			error(P_Lang('您没有这个权限功能，请联系网站管理员'),$this->url('usercp'),'error');
+			error(P_Lang('您沒有這個許可權功能，請聯絡網站管理員'),$this->url('usercp'),'error');
 		}
 		$project_rs = $this->model('project')->get_one($pid);
 		if(!$project_rs || !$project_rs['status']){
-			error(P_Lang('项目不存在或未启用'),$this->url('usercp'),'error');
+			error(P_Lang('專案不存在或未啟用'),$this->url('usercp'),'error');
 		}
 		$tplfile = 'usercp_'.$id;
 		$tplfile.= $project_rs['module'] ? '_list' : '_page';
-		//非列表项目直接指定
+		//非列表專案直接指定
 		$this->assign("page_rs",$project_rs);
 		if(!$project_rs['module']){
 			$this->view($tplfile);
 			exit;
 		}
 		$dt = array('pid'=>$project_rs['id'],'user_id'=>$_SESSION['user_id']);
-		//读取符合要求的内容
+		//讀取符合要求的內容
 		$pageurl = $this->url('usercp','list','id='.$id);
 		$pageid = $this->get($this->config['pageid'],'int');
 		if(!$pageid) $pageid = 1;
@@ -247,7 +247,7 @@ class usercp_control extends phpok_control
 		$this->view($tplfile);
 	}
 
-	//收货地址管理
+	//收貨地址管理
 	public function address_f()
 	{
 		$rslist = $this->model('user')->address_all($this->session->val('user_id'));
@@ -263,7 +263,7 @@ class usercp_control extends phpok_control
 	}
 
 	/**
-	 * 添加或是修改地址信息
+	 * 新增或是修改地址資訊
 	**/
 	public function address_setting_f()
 	{
@@ -271,7 +271,7 @@ class usercp_control extends phpok_control
 		if($id){
 			$rs = $this->model('user')->address_one($id);
 			if(!$rs || $rs['user_id'] != $_SESSION['user_id']){
-				$this->error(P_Lang('地址信息不存在或您没有权限修改此地址'));
+				$this->error(P_Lang('地址資訊不存在或您沒有許可權修改此地址'));
 			}
 			$this->assign('id',$id);
 			$this->assign('rs',$rs);
@@ -375,13 +375,13 @@ class usercp_control extends phpok_control
 	}
 
 	/**
-	 * 查看会员的推广链及推广统计
+	 * 檢視會員的推廣鏈及推廣統計
 	**/
 	public function introducer_f()
 	{
 		$vlink = $this->url("index","link","uid=".$this->session->val('user_id'));
 		$this->assign('vlink',$vlink);
-		//取得推荐人列表
+		//取得推薦人列表
 		$pageid = $this->get($this->config['pageid'],'int');
 		if(!$pageid){
 			$pageid = 1;
@@ -420,7 +420,7 @@ class usercp_control extends phpok_control
 	{
 		$rslist = $this->model('wealth')->get_all(1);
 		if(!$rslist){
-			$this->error(P_Lang('系统没有启用任何财富功能，请联系管理员'));
+			$this->error(P_Lang('系統沒有啟用任何財富功能，請聯絡管理員'));
 		}
 		$wealth = $this->user['wealth'];
 		foreach($rslist as $key=>$value){

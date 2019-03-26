@@ -3,18 +3,18 @@
 	<title>Paypal支付</title>
 	<code>
 		<at>
-			<title>PDT字符串</title>
-			<note>用于验证远程数据是否有效</note>
+			<title>PDT字串</title>
+			<note>用於驗證遠端資料是否有效</note>
 			<type>text</type>
 		</at>
 		<payid>
-			<title>Paypal账号</title>
-			<note>设置Paypal的接收账号</note>
+			<title>Paypal賬號</title>
+			<note>設定Paypal的接收賬號</note>
 			<type>text</type>
 		</payid>
 		<action>
-			<title>PayPal服务的模式</title>
-			<note>测试：https://www.sandbox.paypal.com/cgi-bin/webscr，正式：https://www.paypal.com/cgi-bin/webscr</note>
+			<title>PayPal服務的模式</title>
+			<note>測試：https://www.sandbox.paypal.com/cgi-bin/webscr，正式：https://www.paypal.com/cgi-bin/webscr</note>
 			<type>text</type>
 		</action>
 	</code>

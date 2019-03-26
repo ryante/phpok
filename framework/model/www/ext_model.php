@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/www/ext_model.php
-	备注： 前端扩展字段内容读取及格式化
+	檔案： {phpok}/model/www/ext_model.php
+	備註： 前端擴充套件欄位內容讀取及格式化
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年11月05日 10时57分
+	時間： 2014年11月05日 10時57分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class ext_model extends ext_model_base
@@ -16,7 +16,7 @@ class ext_model extends ext_model_base
 		parent::__construct();
 	}
 
-	//读取分类下的全部扩展
+	//讀取分類下的全部擴充套件
 	public function cate()
 	{
 		$sql = "SELECT e.*,c.content content_val FROM ".$this->db->prefix."fields e ";
@@ -48,7 +48,7 @@ class ext_model extends ext_model_base
 		return $tmplist;
 	}
 
-	//格式化内容
+	//格式化內容
 	private function _format($rslist)
 	{
 		if(!$rslist)

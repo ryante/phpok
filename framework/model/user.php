@@ -1,13 +1,13 @@
 <?php
 /**
- * 会员数据增删查改
+ * 會員資料增刪查改
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年09月07日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年09月07日
 **/
 
 class user_model_base extends phpok_model
@@ -19,11 +19,11 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得单条会员数组
-	 * @参数 $id 会员ID或其他唯一标识
-	 * @参数 $field 指定的标识，当为布尔值时表示是否格式化扩展数据
-	 * @参数 $ext 布尔值或1或0，当$field为布尔值时这里表示是否显示财富
-	 * @参数 $wealth 布尔值或1或0，表示财富
+	 * 取得單條會員陣列
+	 * @引數 $id 會員ID或其他唯一標識
+	 * @引數 $field 指定的標識，當為布林值時表示是否格式化擴充套件資料
+	 * @引數 $ext 布林值或1或0，當$field為布林值時這裡表示是否顯示財富
+	 * @引數 $wealth 布林值或1或0，表示財富
 	**/
 	public function get_one($id,$field='id',$ext=true,$wealth=true)
 	{
@@ -69,10 +69,10 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得会员的财富信息
-	 * @参数 $uid 会员ID
-	 * @参数 $wid 指定的财富ID，为0或空时返回会员下的所有财富信息
-	 * @参数 $return 返回，仅在$wid大于0时有效，支持两个参数，一个是value，返回值，一个是array，返回数组
+	 * 取得會員的財富資訊
+	 * @引數 $uid 會員ID
+	 * @引數 $wid 指定的財富ID，為0或空時返回會員下的所有財富資訊
+	 * @引數 $return 返回，僅在$wid大於0時有效，支援兩個引數，一個是value，返回值，一個是array，返回陣列
 	**/
 	public function wealth($uid,$wid=0,$return='value')
 	{
@@ -124,11 +124,11 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 根据条件取得会员列表数据
-	 * @参数 $condition 查询条件，主表使用关键字 u，扩展表使用关键字 e
-	 * @参数 $offset 起始位置
-	 * @参数 $psize 查询数量
-	 * @参数 $pri 绑定的主键
+	 * 根據條件取得會員列表資料
+	 * @引數 $condition 查詢條件，主表使用關鍵字 u，擴充套件表使用關鍵字 e
+	 * @引數 $offset 起始位置
+	 * @引數 $psize 查詢數量
+	 * @引數 $pri 繫結的主鍵
 	**/
 	public function get_list($condition="",$offset=0,$psize=30)
 	{
@@ -156,7 +156,7 @@ class user_model_base extends phpok_model
 			return false;
 		}
 		$idlist = array_keys($rslist);
-		//读取会员积分信息
+		//讀取會員積分資訊
 		$wlist = $this->model('wealth')->get_all(1,'id');
 		if($wlist){
 			$condition = "uid IN(".implode(",",$idlist).")";
@@ -183,8 +183,8 @@ class user_model_base extends phpok_model
 
 
 	/**
-	 * 取得指定条件下的会员数量
-	 * @参数 $condition 查询条件，主表使用关键字 u，扩展表使用关键字 e
+	 * 取得指定條件下的會員數量
+	 * @引數 $condition 查詢條件，主表使用關鍵字 u，擴充套件表使用關鍵字 e
 	**/
 	public function get_count($condition="")
 	{
@@ -197,9 +197,9 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 检测账号是否冲突
-	 * @参数 $name 账号名称
-	 * @参数 $id 会员ID，表示不包含这个会员ID
+	 * 檢測賬號是否衝突
+	 * @引數 $name 賬號名稱
+	 * @引數 $id 會員ID，表示不包含這個會員ID
 	**/
 	public function chk_email($email,$id=0)
 	{
@@ -211,9 +211,9 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 检测账号是否冲突
-	 * @参数 $name 账号名称
-	 * @参数 $id 会员ID，表示不包含这个会员ID
+	 * 檢測賬號是否衝突
+	 * @引數 $name 賬號名稱
+	 * @引數 $id 會員ID，表示不包含這個會員ID
 	**/
 	public function chk_name($name,$id=0)
 	{
@@ -225,9 +225,9 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得扩展字段的所有扩展信息
-	 * @参数 $condition 取得会员扩展字段配置
-	 * @参数 $pri_id 主键ID
+	 * 取得擴充套件欄位的所有擴充套件資訊
+	 * @引數 $condition 取得會員擴充套件欄位配置
+	 * @引數 $pri_id 主鍵ID
 	**/
 	public function fields_all($condition="",$pri_id="")
 	{
@@ -240,8 +240,8 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得指定表的字段
-	 * @参数 $tbl 表名
+	 * 取得指定表的欄位
+	 * @引數 $tbl 表名
 	**/
 	public function tbl_fields_list($tbl='user')
 	{
@@ -249,8 +249,8 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得某一条扩展字段配置信息
-	 * @参数 $id 主键ID
+	 * 取得某一條擴充套件欄位配置資訊
+	 * @引數 $id 主鍵ID
 	**/
 	public function field_one($id)
 	{
@@ -259,10 +259,10 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得指定会员ID下的全部会员主表信息
-	 * @参数 $uid 会员ID，多个ID用英文逗号隔开
-	 * @参数 $pri 绑定的主键
-	 * @参数 
+	 * 取得指定會員ID下的全部會員主表資訊
+	 * @引數 $uid 會員ID，多個ID用英文逗號隔開
+	 * @引數 $pri 繫結的主鍵
+	 * @引數 
 	**/
 	public function get_all_from_uid($uid,$pri="")
 	{
@@ -300,7 +300,7 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得会员主表字段
+	 * 取得會員主表字段
 	**/
 	public function fields()
 	{
@@ -308,9 +308,9 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 通过邮箱取得会员的ID
-	 * @参数 $email 指定的邮箱
-	 * @参数 $id 不包括会员ID
+	 * 通過郵箱取得會員的ID
+	 * @引數 $email 指定的郵箱
+	 * @引數 $id 不包括會員ID
 	**/
 	public function uid_from_email($email,$id="")
 	{
@@ -329,8 +329,8 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 通过验证串获取会员ID，注意，此项及有可能获得到的会员ID是不准确的，适用于忘记密码
-	 * @参数 $code 验证串
+	 * 通過驗證串獲取會員ID，注意，此項及有可能獲得到的會員ID是不準確的，適用於忘記密碼
+	 * @引數 $code 驗證串
 	**/
 	public function uid_from_chkcode($code)
 	{
@@ -346,9 +346,9 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存会员主要资料
-	 * @参数 $data 一维数组，会员内容
-	 * @参数 $id 会员ID，为空或0时表示新增
+	 * 儲存會員主要資料
+	 * @引數 $data 一維陣列，會員內容
+	 * @引數 $id 會員ID，為空或0時表示新增
 	**/
 	public function save($data,$id=0)
 	{
@@ -364,8 +364,8 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 写入会员扩展数据，适用于新注册会员
-	 * @参数 $data 一维数组
+	 * 寫入會員擴充套件資料，適用於新註冊會員
+	 * @引數 $data 一維陣列
 	**/
 	public function save_ext($data)
 	{
@@ -384,9 +384,9 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新会员扩展表数据
-	 * @参数 $data 一维数组，要更新的会员数据内容
-	 * @参数 $id 会员ID
+	 * 更新會員擴充套件表資料
+	 * @引數 $data 一維陣列，要更新的會員資料內容
+	 * @引數 $id 會員ID
 	**/
 	public function update_ext($data,$id)
 	{
@@ -403,8 +403,8 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得会员的推荐人会员ID
-	 * @参数 $uid 当前会员ID
+	 * 取得會員的推薦人會員ID
+	 * @引數 $uid 當前會員ID
 	**/
 	public function get_relation($uid)
 	{
@@ -417,9 +417,9 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存会员与推荐人关系
-	 * @参数 $uid 会员ID
-	 * @参数 $introducer 推荐人ID
+	 * 儲存會員與推薦人關係
+	 * @引數 $uid 會員ID
+	 * @引數 $introducer 推薦人ID
 	**/
 	public function save_relation($uid=0,$introducer=0)
 	{
@@ -431,11 +431,11 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得会员推荐列表
-	 * @参数 $uid 当前会员ID
-	 * @参数 $offset 初始位置
-	 * @参数 $psize 查询数量
-	 * @参数 $condition 其他查询条件
+	 * 取得會員推薦列表
+	 * @引數 $uid 當前會員ID
+	 * @引數 $offset 初始位置
+	 * @引數 $psize 查詢數量
+	 * @引數 $condition 其他查詢條件
 	**/
 	public function list_relation($uid,$offset=0,$psize=30,$condition='')
 	{
@@ -454,9 +454,9 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得总数量
-	 * @参数 $uid 当前会员ID
-	 * @参数 $condition 其他查询条件
+	 * 取得總數量
+	 * @引數 $uid 當前會員ID
+	 * @引數 $condition 其他查詢條件
 	**/
 	public function count_relation($uid,$condition="")
 	{
@@ -468,8 +468,8 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得最大时间和最小时间
-	 * @参数 $uid 会员ID
+	 * 取得最大時間和最小時間
+	 * @引數 $uid 會員ID
 	**/
 	public function time_relation($uid)
 	{
@@ -485,9 +485,9 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得会员有验证串是否一致，一致则自动登录
-	 * @参数 $uid 会员ID
-	 * @参数 $chk 验证串
+	 * 取得會員有驗證串是否一致，一致則自動登入
+	 * @引數 $uid 會員ID
+	 * @引數 $chk 驗證串
 	**/
 	public function token_check($uid,$sign)
 	{
@@ -510,8 +510,8 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 生成验证串
-	 * @参数 $uid 会员ID
+	 * 生成驗證串
+	 * @引數 $uid 會員ID
 	**/
 	public function token_create($uid,$keyid='')
 	{
@@ -530,9 +530,9 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新会员验证串
-	 * @参数 $code 验证码，为空表示清空验证码
-	 * @参数 $id 会员ID
+	 * 更新會員驗證串
+	 * @引數 $code 驗證碼，為空表示清空驗證碼
+	 * @引數 $id 會員ID
 	**/
 	public function update_code($code,$id)
 	{
@@ -541,9 +541,9 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 会员地址库保存
-	 * @参数 $data 要保存的数组
-	 * @参数 $id 地址ID
+	 * 會員地址庫儲存
+	 * @引數 $data 要儲存的陣列
+	 * @引數 $id 地址ID
 	**/
 	public function address_save($data,$id=0)
 	{
@@ -557,8 +557,8 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 会员下的地址信息
-	 * @参数 $uid 会员ID号
+	 * 會員下的地址資訊
+	 * @引數 $uid 會員ID號
 	**/
 	public function address_all($uid=0)
 	{
@@ -567,8 +567,8 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得单条地址信息
-	 * @参数 $id 地址ID
+	 * 取得單條地址資訊
+	 * @引數 $id 地址ID
 	**/
 	public function address_one($id)
 	{
@@ -577,8 +577,8 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 设置默认地址
-	 * @参数 $id 要指定的默认地址
+	 * 設定預設地址
+	 * @引數 $id 要指定的預設地址
 	**/
 	public function address_default($id)
 	{
@@ -592,8 +592,8 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除一条会员地址库
-	 * @参数 $id 指定的地址ID
+	 * 刪除一條會員地址庫
+	 * @引數 $id 指定的地址ID
 	**/
 	public function address_delete($id)
 	{
@@ -603,7 +603,7 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 设置会员状态
+	 * 設定會員狀態
 	**/
 	public function set_status($id,$status=0)
 	{
@@ -611,7 +611,7 @@ class user_model_base extends phpok_model
 		return $this->db->query($sql);
 	}
 
-	//邮箱登录
+	//郵箱登入
 	function user_email($email,$uid=0)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."user WHERE email='".$email."'";

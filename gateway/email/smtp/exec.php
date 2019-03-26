@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： gateway/email/smtp/exec.php
-	备注： 发送邮件
+	檔案： gateway/email/smtp/exec.php
+	備註： 傳送郵件
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年10月09日 17时08分
+	時間： 2015年10月09日 17時08分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 if(!$rs['ext'] || !$rs['ext']['server'] || !$rs['ext']['account'] || !$rs['ext']['password'] || !$rs['ext']['email']){
@@ -25,7 +25,7 @@ $email = new PHPMailer();
 $email->CharSet = ($rs['ext']['charset'] && $rs['ext']['charset'] == 'gbk') ? 'gbk' : 'utf8';
 $email->IsSMTP();
 $email->SMTPAuth = true;
-$email->SMTPDebug = false;//是否启用调试
+$email->SMTPDebug = false;//是否啟用除錯
 $email->IsHTML(true);
 $email->Username = trim($rs['ext']['account']);
 $email->Password = trim($rs['ext']['password']);
@@ -36,7 +36,7 @@ if($rs['ext']['ssl'] == 'yes'){
 }
 $email->LE = "\r\n";
 $email->Timeout = 15;
-//发件人
+//發件人
 $email->From = $rs['ext']['email'];
 $email->FromName = $rs['ext']['fullname'];
 if($email->CharSet != "utf8"){

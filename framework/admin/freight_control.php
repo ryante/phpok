@@ -1,12 +1,12 @@
 <?php
 /**
- * 运费模板管理
+ * 運費模板管理
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年11月27日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年11月27日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -26,7 +26,7 @@ class freight_control extends phpok_control
 		$this->assign('rslist',$rslist);
 		$taxis = $rslist ? (count($rslist)+1) * 10 : 10;
 		$this->assign('taxis',$taxis);
-		$typelist = array('weight'=>P_Lang('重量'),'volume'=>P_Lang('体积'),'number'=>P_Lang('数量'),'fixed'=>P_Lang('固定值'));
+		$typelist = array('weight'=>P_Lang('重量'),'volume'=>P_Lang('體積'),'number'=>P_Lang('數量'),'fixed'=>P_Lang('固定值'));
 		$this->assign('typelist',$typelist);
 		$currency_list = $this->model('currency')->get_list();
 		$this->assign('currency_list',$currency_list);
@@ -38,16 +38,16 @@ class freight_control extends phpok_control
 		$id = $this->get('id','int');
 		if($id){
 			if(!$this->popedom['modify']){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 		}else{
 			if(!$this->popedom['add']){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 		}
 		$title = $this->get('title');
 		if(!$title){
-			$this->error(P_Lang('名称不能为空'));
+			$this->error(P_Lang('名稱不能為空'));
 		}
 		$taxis = $this->get('taxis');
 		if(!$taxis){
@@ -62,7 +62,7 @@ class freight_control extends phpok_control
 	public function delete_f()
 	{
 		if(!$this->popedom['delete']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
@@ -72,12 +72,12 @@ class freight_control extends phpok_control
 		$this->success();
 	}
 
-	//区域设置
+	//區域設定
 	public function zone_f()
 	{
 		$fid = $this->get('fid');
 		if(!$fid){
-			$this->error(P_Lang('未指定运费模板'));
+			$this->error(P_Lang('未指定運費模板'));
 		}
 		$rslist = $this->model('freight')->zone_all($fid,'id,fid,title,taxis,note');
 		$this->assign('rslist',$rslist);
@@ -98,7 +98,7 @@ class freight_control extends phpok_control
 		if($id){
 			$rs = $this->model('freight')->zone_one($id);
 			if(!$rs){
-				$this->error(P_Lang('数据不存在，请检查'));
+				$this->error(P_Lang('資料不存在，請檢查'));
 			}
 			if($rs['area']){
 				$area = unserialize($rs['area']);
@@ -131,11 +131,11 @@ class freight_control extends phpok_control
 		}
 		$this->assign('area',$area);
 		$this->assign('fid',$fid);
-		//读取当前省市表信息
+		//讀取當前省市表資訊
 		$prolist = $this->lib('xml')->read($this->dir_data.'xml/provinces.xml');
 		$citylist = $this->lib('xml')->read($this->dir_data.'xml/cities.xml');
 		if(!$prolist && !$citylist){
-			$this->error(P_Lang('数据异常，省市表信息不存在'));
+			$this->error(P_Lang('資料異常，省市表資訊不存在'));
 		}
 		$province = array();
 		foreach($prolist['province'] as $key=>$value){
@@ -160,7 +160,7 @@ class freight_control extends phpok_control
 			}
 		}
 		if(!$prolist || count($prolist)<1){
-			$this->error(P_Lang('所有省市地址已分配完成，请点编辑进行调节'));
+			$this->error(P_Lang('所有省市地址已分配完成，請點編輯進行調節'));
 		}
 		$this->assign('prolist',$prolist);
 		$this->view('freight_zone_setting');
@@ -180,7 +180,7 @@ class freight_control extends phpok_control
 		$array = array('title'=>$this->get('title'),'note'=>$this->get('note'),'taxis'=>$this->get('taxis','int'));
 		$area = $this->get('area');
 		if(!$area){
-			$this->error(P_Lang('未选定所在省份'));
+			$this->error(P_Lang('未選定所在省份'));
 		}
 		$data = array();
 		foreach($area as $key=>$value){
@@ -226,14 +226,14 @@ class freight_control extends phpok_control
 		if(!$fid){
 			$this->error('未指定模板ID');
 		}
-		$typelist = array('weight'=>P_Lang('重量'),'volume'=>P_Lang('体积'),'number'=>P_Lang('数量'),'fixed'=>P_Lang('固定值'));
+		$typelist = array('weight'=>P_Lang('重量'),'volume'=>P_Lang('體積'),'number'=>P_Lang('數量'),'fixed'=>P_Lang('固定值'));
 		$rs = $this->model('freight')->get_one($fid);
 		$rs['type_title'] = $typelist[$rs['type']];
 		$this->assign('rs',$rs);
 		$this->assign('fid',$fid);
 		$zonelist = $this->model('freight')->zone_all($fid,'id,title','id');
 		if(!$zonelist){
-			$this->error(P_Lang('未分配省市，请先设置区域'));
+			$this->error(P_Lang('未分配省市，請先設定區域'));
 		}
 		$zoneids = implode(",",array_keys($zonelist));
 		$condition = "zid IN(".$zoneids.")";
@@ -249,7 +249,7 @@ class freight_control extends phpok_control
 			$this->assign('rslist',$pricelist);
 		}
 		$this->assign('zonelist',$zonelist);
-		//递增进度
+		//遞增進度
 		$step = 1;
 		if($rs['type'] == 'weight'){
 			$step = '0.5';
@@ -268,11 +268,11 @@ class freight_control extends phpok_control
 		}
 		$unit_val = $this->get('unit_val');
 		if(!$unit_val || !is_array($unit_val)){
-			$this->json(P_Lang('未设置相应的数值'));
+			$this->json(P_Lang('未設定相應的數值'));
 		}
 		$zonelist = $this->model('freight')->zone_all($fid,'id,title','id');
 		if(!$zonelist){
-			$this->json(P_Lang('未分配省市，请先设置区域'));
+			$this->json(P_Lang('未分配省市，請先設定區域'));
 		}
 		foreach($zonelist as $key=>$value){
 			$price[$value['id']] = $this->get('price'.$value['id']);

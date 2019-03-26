@@ -1,16 +1,16 @@
 <?php
 /**
- * 在PHPOK模板中常用的函数，此函数在action前才加载
+ * 在PHPOK模板中常用的函式，此函式在action前才載入
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年01月15日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年01月15日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -50,12 +50,12 @@ function token($data)
 
 
 /**
- * 模板中调用分页
- * @param string $url 网址
- * @param int $total 总数
- * @param int $num 当前页
- * @param int psize 每页显示数量
- * @param string ... 更多参数，格式是 变量id=变量值 如：home=首页&prev=上一页&next=下一页&last=尾页&half=5&opt=1&add={total}/{psize}
+ * 模板中呼叫分頁
+ * @param string $url 網址
+ * @param int $total 總數
+ * @param int $num 當前頁
+ * @param int psize 每頁顯示數量
+ * @param string ... 更多引數，格式是 變數id=變數值 如：home=首頁&prev=上一頁&next=下一頁&last=尾頁&half=5&opt=1&add={total}/{psize}
  * @date 2016年02月05日
  */
 function phpok_page($url,$total,$num=0,$psize=20)
@@ -132,7 +132,7 @@ function phpok_plugin()
 	$ctrl = $GLOBALS['app']->ctrl;
 	$func = $GLOBALS['app']->func;
 	
-	//装载插件
+	//裝載外掛
 	foreach($rslist AS $key=>$value)
 	{
 		if(is_file($GLOBALS['app']->dir_root.'plugins/'.$key.'/'.$id.'.php')){
@@ -151,15 +151,15 @@ function phpok_plugin()
 	}
 }
 
-// 根据图片存储的ID，获得图片信息
+// 根據圖片儲存的ID，獲得圖片資訊
 function phpok_image_rs($img_id)
 {
 	if(!$img_id) return false;
 	return $GLOBALS['app']->model('res')->get_one($img_id);
 }
 
-//显示评论信息
-//回复数据调用
+//顯示評論資訊
+//回覆資料呼叫
 function phpok_reply($id,$psize=10,$orderby="ASC",$vouch=false)
 {
 	$condition = "tid='".$id."' AND parent_id='0' ";
@@ -171,20 +171,20 @@ function phpok_reply($id,$psize=10,$orderby="ASC",$vouch=false)
 	}
 	$total = $GLOBALS['app']->model('reply')->get_total($condition);
 	if(!$total) return false;
-	//判断当前页
+	//判斷當前頁
 	$pageid = $GLOBALS['app']->get($GLOBALS['app']->config['pageid'],'int');
 	if(!$pageid) $pageid = 1;
 	$order = strtoupper($orderby) == 'ASC' ? 'id ASC' : 'id DESC';
 	$offset = ($pageid-1) * $psize;
 	$rslist = $GLOBALS['app']->model('reply')->get_list($condition,$offset,$psize,"",$order);
-	//读子主题
+	//讀子主題
 	$idlist = $userlist = array();
 	foreach($rslist as $key=>$value){
 		if($value["uid"]) $userlist[] = $value["uid"];
 		$idlist[] = $value["id"];
 	}
 	
-	//获取会员信息
+	//獲取會員資訊
 	if($userlist && count($userlist)>0){
 		$userlist = array_unique($userlist);
 		$user_idstring = implode(",",$userlist);
@@ -198,7 +198,7 @@ function phpok_reply($id,$psize=10,$orderby="ASC",$vouch=false)
 			$tmplist = "";
 		}
 	}
-	//整理回复列表
+	//整理回覆列表
 	foreach($rslist as $key=>$value)
 	{
 		if($value["uid"] && $userlist){
@@ -206,7 +206,7 @@ function phpok_reply($id,$psize=10,$orderby="ASC",$vouch=false)
 		}
 		$rslist[$key] = $value;
 	}
-	//返回结果集
+	//返回結果集
 	$array = array('list'=>$rslist,'psize'=>$psize,'pageid'=>$pageid,'total'=>$total);
 	return $array;
 }
@@ -216,7 +216,7 @@ function phpok_ip()
 	return $GLOBALS['app']->lib('common')->ip();
 }
 
-//网址，下划线分割字符法
+//網址，下劃線分割字元法
 function phpok_url($rs)
 {
 	if(!$rs){
@@ -326,7 +326,7 @@ if(!function_exists('admin_plugin_url')){
 	}
 }
 
-//读取会员拥有发布的权限信息
+//讀取會員擁有釋出的許可權資訊
 function usercp_project()
 {
 	if(!$_SESSION['user_id'] || !$_SESSION['user_gid']){
@@ -355,7 +355,7 @@ function usercp_project()
 	return $GLOBALS['app']->model('project')->plist($pids,true);
 }
 
-//读取会员信息，如果有ID，则读取该ID数组信息
+//讀取會員資訊，如果有ID，則讀取該ID陣列資訊
 function usercp_info($field="")
 {
 	if(!$_SESSION['user_id'] || !$_SESSION['user_rs']['group_id']) return false;
@@ -379,7 +379,7 @@ function usercp_info($field="")
 	return $rslist;
 }
 
-//读取我上传的最新图片
+//讀取我上傳的最新圖片
 function usercp_new_reslist($offset=0,$psize=10)
 {
 	if(!$_SESSION['user_id']) return false;
@@ -416,17 +416,17 @@ function time_format($timestamp)
 	{
         if(($output=floor($since/60)))
 		{
-            $output = $output.'分钟前';
+            $output = $output.'分鐘前';
         }
 		else
 		{
-			$output = '1分钟内';
+			$output = '1分鐘內';
 		}
     }
     return $output;
 }
 
-//前台取得地址表单
+//前臺取得地址表單
 function phpok_address($format=false)
 {
 	$shipping = $GLOBALS['app']->site['biz_shipping'];
@@ -446,7 +446,7 @@ function phpok_address($format=false)
 	return $rs;
 }
 
-//判断属性是否存在
+//判斷屬性是否存在
 function in_attr($str="",$info="")
 {
 	if(!$str || !$info) return false;
@@ -457,13 +457,13 @@ function in_attr($str="",$info="")
 	return false;
 }
 
-//读取会员信息
+//讀取會員資訊
 function phpok_user($id)
 {
 	return $GLOBALS['app']->model('user')->get_one($id);
 }
 
-//读取文本内容，并格式化文本内容
+//讀取文字內容，並格式化文字內容
 function phpok_txt($file,$pageid=0,$type='txt')
 {
 	if(!$file || !is_file($GLOBALS['app']->dir_root.$file))
@@ -487,8 +487,8 @@ function phpok_txt($file,$pageid=0,$type='txt')
 }
 
 /**
- * 生成 Token 或解析 Token，一个页面仅允许一个 Token，请注意使用
- * @参数 data 要加密的数据，为空表示解密
+ * 生成 Token 或解析 Token，一個頁面僅允許一個 Token，請注意使用
+ * @引數 data 要加密的資料，為空表示解密
 **/
 function phpok_token($data='')
 {

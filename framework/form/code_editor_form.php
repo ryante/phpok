@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/form/code_editor_form.php
-	备注： 代码编辑框
+	檔案： {phpok}/form/code_editor_form.php
+	備註： 程式碼編輯框
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年03月12日 22时03分
+	時間： 2015年03月12日 22時03分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class code_editor_form extends _init_auto

@@ -1,13 +1,13 @@
 <?php
 /**
- * 管理员信息管理
+ * 管理員資訊管理
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年08月23日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年08月23日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -19,8 +19,8 @@ class admin_model_base extends phpok_model
 	}
 
 	/**
-	 * 通过管理员账号取得管理员信息
-	 * @参数 $username
+	 * 通過管理員賬號取得管理員資訊
+	 * @引數 $username
 	**/
 	public function get_one_from_name($username)
 	{
@@ -29,9 +29,9 @@ class admin_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得一条管理员数据
-	 * @参数 $id 参数值
-	 * @参数 $field 参数名称，可选：account，id
+	 * 取得一條管理員資料
+	 * @引數 $id 引數值
+	 * @引數 $field 引數名稱，可選：account，id
 	**/
 	public function get_one($id,$field="id")
 	{
@@ -43,9 +43,9 @@ class admin_model_base extends phpok_model
 	}
 
 	/**
-	 * 检测管理员账号是否存在
-	 * @参数 $account 账号
-	 * @参数 $id 不包括指定的ID
+	 * 檢測管理員賬號是否存在
+	 * @引數 $account 賬號
+	 * @引數 $id 不包括指定的ID
 	**/
 	public function check_account($account,$id=0)
 	{
@@ -57,9 +57,9 @@ class admin_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新管理员密码 
-	 * @参数 $id 管理员ID
-	 * @参数 $password 密码，必须是已加密过的
+	 * 更新管理員密碼 
+	 * @引數 $id 管理員ID
+	 * @引數 $password 密碼，必須是已加密過的
 	**/
 	public function update_password($id,$password)
 	{
@@ -71,10 +71,10 @@ class admin_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得管理员列表
-	 * @参数 $condition 查询条件 
-	 * @参数 $offset 起始位置
-	 * @参数 $psize 查询数量
+	 * 取得管理員列表
+	 * @引數 $condition 查詢條件 
+	 * @引數 $offset 起始位置
+	 * @引數 $psize 查詢數量
 	**/
 	public function get_list($condition="",$offset=0,$psize=30)
 	{
@@ -91,8 +91,8 @@ class admin_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得管理员数量
-	 * @参数 $condition 查询条件
+	 * 取得管理員數量
+	 * @引數 $condition 查詢條件
 	**/
 	public function get_total($condition='')
 	{
@@ -104,8 +104,8 @@ class admin_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得管理员权限
-	 * @参数 $id 管理员ID
+	 * 取得管理員許可權
+	 * @引數 $id 管理員ID
 	**/
 	public function get_popedom_list($id)
 	{
@@ -122,8 +122,8 @@ class admin_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除管理员
-	 * @参数 $id 管理员ID
+	 * 刪除管理員
+	 * @引數 $id 管理員ID
 	**/
 	public function delete($id)
 	{
@@ -138,9 +138,9 @@ class admin_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存管理员信息
-	 * @参数 $data 管理员资料，一维数组
-	 * @参数 $id 不为空时表示更新，为空或0时表示新增
+	 * 儲存管理員資訊
+	 * @引數 $data 管理員資料，一維陣列
+	 * @引數 $id 不為空時表示更新，為空或0時表示新增
 	**/
 	public function save($data,$id=0)
 	{
@@ -155,8 +155,8 @@ class admin_model_base extends phpok_model
 	}
 
 	/**
-	 * 清除非系统管理中权限
-	 * @参数 $id 管理员ID
+	 * 清除非系統管理中許可權
+	 * @引數 $id 管理員ID
 	**/
 	public function clear_popedom($id)
 	{
@@ -165,9 +165,9 @@ class admin_model_base extends phpok_model
 	}
 
 	/**
-	 * 存储权限
-	 * @参数 $data 权限ID，支持数组及字串
-	 * @参数 $id 管理员ID
+	 * 儲存許可權
+	 * @引數 $data 許可權ID，支援陣列及字串
+	 * @引數 $id 管理員ID
 	**/
 	public function save_popedom($data,$id)
 	{
@@ -185,9 +185,9 @@ class admin_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新管理员状态
-	 * @参数 $id 管理员ID
-	 * @参数 $status 状态，0禁用，1使用
+	 * 更新管理員狀態
+	 * @引數 $id 管理員ID
+	 * @引數 $status 狀態，0禁用，1使用
 	**/
 	public function update_status($id,$status=0)
 	{

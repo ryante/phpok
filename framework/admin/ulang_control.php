@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/admin/ulang_control.php
-	备注： 提取后台模板语言包
+	檔案： {phpok}/admin/ulang_control.php
+	備註： 提取後臺模板語言包
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年06月12日 11时02分
+	時間： 2015年06月12日 11時02分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class ulang_control extends phpok_control
@@ -80,7 +80,7 @@ class ulang_control extends phpok_control
 		$sql = "SELECT id FROM ".$this->db->prefix."cate";
 		$rslist = $this->db->get_all($sql);
 		if(!$rslist){
-			$this->error('没有分类信息');
+			$this->error('沒有分類資訊');
 		}
 		$clist = array();
 		foreach($rslist as $key=>$value){
@@ -108,7 +108,7 @@ class ulang_control extends phpok_control
 		$sql = "SELECT id FROM ".$this->db->prefix."project";
 		$rslist = $this->db->get_all($sql);
 		if(!$rslist){
-			$this->error('没有项目信息');
+			$this->error('沒有專案資訊');
 		}
 		$clist = array();
 		foreach($rslist as $key=>$value){
@@ -136,7 +136,7 @@ class ulang_control extends phpok_control
 		$sql = "SELECT id FROM ".$this->db->prefix."all";
 		$rslist = $this->db->get_all($sql);
 		if(!$rslist){
-			$this->error('没有项目信息');
+			$this->error('沒有專案資訊');
 		}
 		$clist = array();
 		foreach($rslist as $key=>$value){
@@ -164,7 +164,7 @@ class ulang_control extends phpok_control
 		$sql = "SELECT id FROM ".$this->db->prefix."project";
 		$rslist = $this->db->get_all($sql);
 		if(!$rslist){
-			$this->error('没有项目信息');
+			$this->error('沒有專案資訊');
 		}
 		$plist = array();
 		foreach($rslist as $key=>$value){

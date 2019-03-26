@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/task_model.php
-	备注： 计划任务
+	檔案： {phpok}/model/admin/task_model.php
+	備註： 計劃任務
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年10月22日 01时09分
+	時間： 2015年10月22日 01時09分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class task_model extends task_model_base

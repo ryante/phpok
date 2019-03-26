@@ -1,16 +1,16 @@
 <?php
 /**
- * Authorize.Net 信用卡支付接口
+ * Authorize.Net 信用卡支付介面
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年08月21日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年08月21日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -19,7 +19,7 @@ if(!defined("PHPOK_SET")){
 
 class authorize_submit
 {
-	//支付接口初始化
+	//支付介面初始化
 	public $param;
 	public $order;
 	public $paydir;
@@ -46,7 +46,7 @@ class authorize_submit
 		$this->order = $order;
 	}
 
-	//创建订单
+	//建立訂單
 	function submit()
 	{
         $cc_data = $this->app->get('cc_data');
@@ -66,7 +66,7 @@ class authorize_submit
 		$pay->amount($total_fee);
 		
 
-        //付款信用卡信息
+        //付款信用卡資訊
         $data = array();
         if($cc_data['number']){
 	        $data['cardNumber'] = $cc_data['number'];
@@ -78,7 +78,7 @@ class authorize_submit
 	        $data['cardCode'] = $cc_data['cvv2'];
         }
         $pay->post('payment',array('creditCard'=>$data));
-        //订单信息
+        //訂單資訊
         $data = array('invoiceNumber'=>$this->order['sn']);
         if($this->order['content']){
 	        $data['description'] = $this->order['content'];
@@ -92,24 +92,24 @@ class authorize_submit
         $this->app->lib('curl')->post_data($pay->to_json());
         $data = $this->app->lib('curl')->get_json($pay->url());
         if(!$data){
-	        $this->app->error(P_Lang('数据获取失败'));
+	        $this->app->error(P_Lang('資料獲取失敗'));
         }
         if(!$data['messages'] || !$data['messages']['resultCode']){
-	        $this->app->error(P_Lang('数据异常'));
+	        $this->app->error(P_Lang('資料異常'));
         }
         if($data['messages']['resultCode'] != 'Ok'){
 	        $info = $data['messages']['message'][0];
 	        $this->app->error($info['text']);
         }
-        //更新订单信息
+        //更新訂單資訊
 		if($this->order['type'] == 'order' && $orderinfo){
 			$payinfo = $this->app->model('order')->order_payment_notend($orderinfo['id']);
 			if($payinfo){
 				$payment_data = array('dateline'=>$this->app->time);
 				$this->app->model('order')->save_payment($payment_data,$payinfo['id']);
-				//更新订单日志
+				//更新訂單日誌
 				$this->app->model('order')->update_order_status($order['id'],'paid');
-				$note = P_Lang('订单支付完成，编号：{sn}',array('sn'=>$orderinfo['sn']));
+				$note = P_Lang('訂單支付完成，編號：{sn}',array('sn'=>$orderinfo['sn']));
 				$log = array('order_id'=>$orderinfo['id'],'addtime'=>$this->app->time,'who'=>$this->app->user['user'],'note'=>$note);
 				$this->app->model('order')->log_save($log);
 			}

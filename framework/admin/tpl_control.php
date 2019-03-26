@@ -3,11 +3,11 @@
  * 模板控制器
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年06月29日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年06月29日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -27,7 +27,7 @@ class tpl_control extends phpok_control
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$rslist = $this->model('tpl')->get_all();
 		$this->assign("rslist",$rslist);
@@ -35,12 +35,12 @@ class tpl_control extends phpok_control
 	}
 
 	/**
-	 * 添加或修改风格信息
+	 * 新增或修改風格資訊
 	**/
 	public function set_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'),$this->url('tpl'));
+			$this->error(P_Lang('您沒有許可權執行此操作'),$this->url('tpl'));
 		}
 		$id = $this->get("id","int");
 		if($id){
@@ -52,27 +52,27 @@ class tpl_control extends phpok_control
 	}
 
 	/**
-	 * 保存模板信息
+	 * 儲存模板資訊
 	**/
 	public function save_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'),$this->url('tpl'));
+			$this->error(P_Lang('您沒有許可權執行此操作'),$this->url('tpl'));
 		}
 		$id = $this->get("id","int");
 		$error_url = $this->url("tpl","set");
 		if($id) $error_url .= '&id='.$id;
 		$title = $this->get("title");
 		if(!$title){
-			$this->error(P_Lang('名称不能为空'),$error_url);
+			$this->error(P_Lang('名稱不能為空'),$error_url);
 		}
 		$folder = $this->get("folder");
 		if(!$folder){
-			$this->error(P_Lang('文件夹目录名不能为空'),$error_url);
+			$this->error(P_Lang('資料夾目錄名不能為空'),$error_url);
 		}
 		$ext = $this->get("ext");
 		if(!$ext){
-			$this->error(P_Lang('后缀不允许为空'),$error_url);
+			$this->error(P_Lang('字尾不允許為空'),$error_url);
 		}
 		$array = array("title"=>$title,"folder"=>$folder,"ext"=>$ext);
 		$array["folder_change"] = $this->get("folder_change");
@@ -81,16 +81,16 @@ class tpl_control extends phpok_control
 		$array["refresh_auto"] = $this->get("refresh_auto","checkbox");
 		$array["refresh"] = $this->get("refresh","checkbox");
 		$this->model('tpl')->save($array,$id);
-		$this->success(P_Lang('风格方案配置成功'),$this->url("tpl"));
+		$this->success(P_Lang('風格方案配置成功'),$this->url("tpl"));
 	}
 
 	/**
-	 * 通过Ajax删除风格方案配置
+	 * 通過Ajax刪除風格方案配置
 	**/
 	public function delete_f()
 	{
 		if(!$this->popedom['delete']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -101,19 +101,19 @@ class tpl_control extends phpok_control
 	}
 
 	/**
-	 * 查看文件列表
+	 * 檢視檔案列表
 	**/
 	public function list_f()
 	{
 		if(!$this->popedom["filelist"]){
-			$this->error(P_Lang('您没有权限执行此操作'),$this->url('tpl'));
+			$this->error(P_Lang('您沒有許可權執行此操作'),$this->url('tpl'));
 		}
 		$id = $this->get("id","int");
-		if(!$id) error(P_Lang('未指定风格ID'),$this->url("tpl"));
+		if(!$id) error(P_Lang('未指定風格ID'),$this->url("tpl"));
 		$rs = $this->model('tpl')->get_one($id);
-		if(!$rs) error(P_Lang('风格信息不存在'),$this->url("tpl"));
+		if(!$rs) error(P_Lang('風格資訊不存在'),$this->url("tpl"));
 		if(!$rs["folder"] || !file_exists($this->dir_root."tpl/".$rs["folder"])){
-			$this->error(P_Lang('风格目录不存在，或未指定风格目录，请检查'),$this->url("tpl"));
+			$this->error(P_Lang('風格目錄不存在，或未指定風格目錄，請檢查'),$this->url("tpl"));
 		}
 		$this->assign("rs",$rs);
 		$folder = $this->get("folder");
@@ -127,7 +127,7 @@ class tpl_control extends phpok_control
 			$folder .= "/";
 		}
 		$this->assign("folder",$folder);
-		//绑定目录
+		//繫結目錄
 		$tpl_dir = $this->dir_root."tpl/".$rs["folder"].$folder;
 		$tpl_list = $this->lib('file')->ls($tpl_dir);
 		$ext_length = strlen($rs["ext"]);
@@ -177,23 +177,23 @@ class tpl_control extends phpok_control
 	}
 
 	/**
-	 * 文件夹改名
+	 * 資料夾改名
 	**/
 	public function rename_f()
 	{
 		if(!$this->popedom["filelist"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			$this->error(P_Lang('未指定风格ID'));
+			$this->error(P_Lang('未指定風格ID'));
 		}
 		$rs = $this->model('tpl')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('风格信息不存在'));
+			$this->error(P_Lang('風格資訊不存在'));
 		}
 		if(!$rs["folder"]){
-			$this->error(P_Lang('未设置风格文件夹'));
+			$this->error(P_Lang('未設定風格資料夾'));
 		}
 		$folder = $this->get("folder");
 		if(!$folder){
@@ -202,38 +202,38 @@ class tpl_control extends phpok_control
 		$title = $this->get("title");
 		$old = $this->get("old");
 		if($old ==  $title){
-			$this->error(P_Lang('新旧名称一样，不需要执行改名操作'));
+			$this->error(P_Lang('新舊名稱一樣，不需要執行改名操作'));
 		}
 		$file = $this->dir_root."tpl/".$rs["folder"].$folder.$old;
 		if(!file_exists($file)){
-			$this->error(P_Lang('文件（夹）不存在'));
+			$this->error(P_Lang('檔案（夾）不存在'));
 		}
 		$newfile = $this->dir_root."tpl/".$rs["folder"].$folder.$title;
 		if(file_exists($newfile)){
-			$this->error(P_Lang('新文件（夹）已经存在，请重新改名'));
+			$this->error(P_Lang('新檔案（夾）已經存在，請重新改名'));
 		}
 		$this->lib('file')->mv($file,$newfile);
 		$this->success();
 	}
 
 	/**
-	 * 创建文件（夹）
+	 * 建立檔案（夾）
 	**/
 	public function create_f()
 	{
 		if(!$this->popedom["filelist"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			$this->error(P_Lang('未指定风格ID'));
+			$this->error(P_Lang('未指定風格ID'));
 		}
 		$rs = $this->model('tpl')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('风格信息不存在'));
+			$this->error(P_Lang('風格資訊不存在'));
 		}
 		if(!$rs["folder"]){
-			$this->error(P_Lang('未设置风格文件夹'));
+			$this->error(P_Lang('未設定風格資料夾'));
 		}
 		$folder = $this->get("folder");
 		if(!$folder){
@@ -246,7 +246,7 @@ class tpl_control extends phpok_control
 		}
 		$file = $this->dir_root."tpl/".$rs["folder"].$folder.$title;
 		if(file_exists($file)){
-			$this->error(P_Lang('要创建的文件（夹）名称已经存在，请检查'));
+			$this->error(P_Lang('要建立的檔案（夾）名稱已經存在，請檢查'));
 		}
 		if($type == "folder"){
 			$this->lib('file')->make($file,"dir");
@@ -257,23 +257,23 @@ class tpl_control extends phpok_control
 	}
 
 	/**
-	 * 下载文件
+	 * 下載檔案
 	**/
 	public function download_f()
 	{
 		if(!$this->popedom["filelist"]){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			$this->json(P_Lang('未指定风格ID'));
+			$this->json(P_Lang('未指定風格ID'));
 		}
 		$rs = $this->model('tpl')->get_one($id);
 		if(!$rs){
-			$this->json(P_Lang('风格信息不存在'));
+			$this->json(P_Lang('風格資訊不存在'));
 		}
 		if(!$rs["folder"]){
-			$this->json(P_Lang('未设置风格文件夹'));
+			$this->json(P_Lang('未設定風格資料夾'));
 		}
 		$folder = $this->get("folder");
 		if(!$folder){
@@ -282,7 +282,7 @@ class tpl_control extends phpok_control
 		$title = $this->get("title");
 		$file = $this->dir_root."tpl/".$rs["folder"].$folder.$title;
 		if(!file_exists($file)){
-			$this->json(P_Lang('文件（夹）不存在'));
+			$this->json(P_Lang('檔案（夾）不存在'));
 		}
 		$filesize = filesize($file);
 		ob_end_clean();
@@ -298,23 +298,23 @@ class tpl_control extends phpok_control
 	}
 	
 	/**
-	 * 删除文件（夹）
+	 * 刪除檔案（夾）
 	**/
 	public function delfile_f()
 	{
 		if(!$this->popedom["filelist"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			$this->error(P_Lang('未指定风格ID'));
+			$this->error(P_Lang('未指定風格ID'));
 		}
 		$rs = $this->model('tpl')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('风格信息不存在'));
+			$this->error(P_Lang('風格資訊不存在'));
 		}
 		if(!$rs["folder"]){
-			$this->error(P_Lang('未设置风格文件夹'));
+			$this->error(P_Lang('未設定風格資料夾'));
 		}
 		$folder = $this->get("folder");
 		if(!$folder){
@@ -323,7 +323,7 @@ class tpl_control extends phpok_control
 		$title = $this->get("title");
 		$file = $this->dir_root."tpl/".$rs["folder"].$folder.$title;
 		if(!file_exists($file)){
-			$this->error(P_Lang('文件（夹）不存在'));
+			$this->error(P_Lang('檔案（夾）不存在'));
 		}
 		if(is_dir($file)){
 			$this->lib('file')->rm($file,"folder");
@@ -334,34 +334,34 @@ class tpl_control extends phpok_control
 	}
 
 	/**
-	 * 内容模板编辑
+	 * 內容模板編輯
 	**/
 	public function edit_f()
 	{
 		if(!$this->popedom["filelist"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			$this->error(P_Lang('未指定风格ID'));
+			$this->error(P_Lang('未指定風格ID'));
 		}
 		$rs = $this->model('tpl')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('风格信息不存在'));
+			$this->error(P_Lang('風格資訊不存在'));
 		}
 		if(!$rs["folder"]){
-			$this->error(P_Lang('未设置风格文件夹'));
+			$this->error(P_Lang('未設定風格資料夾'));
 		}
 		$folder = $this->get("folder");
 		if(!$folder) $folder = "/";
 		$title = $this->get("title");
 		$file = $this->dir_root."tpl/".$rs["folder"].$folder.$title;
 		if(!file_exists($file)){
-			$this->error(P_Lang('文件不存在'));
+			$this->error(P_Lang('檔案不存在'));
 		}
 		$is_edit = true;
 		if(!is_writable($file)){
-			$tips = P_Lang('文件无法写法，不支持在线编辑');
+			$tips = P_Lang('檔案無法寫法，不支援線上編輯');
 			$this->assign('tips',$tips);
 			$is_edit = false;
 		}
@@ -378,12 +378,12 @@ class tpl_control extends phpok_control
 	}
 
 	/**
-	 * 存储模板代码
+	 * 儲存模板程式碼
 	**/
 	public function edit_save_f()
 	{
 		if(!$this->popedom["filelist"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -391,10 +391,10 @@ class tpl_control extends phpok_control
 		}
 		$rs = $this->model('tpl')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('风格信息不存在'));
+			$this->error(P_Lang('風格資訊不存在'));
 		}
 		if(!$rs["folder"]){
-			$this->error(P_Lang('未设置风格文件夹'));
+			$this->error(P_Lang('未設定風格資料夾'));
 		}
 		$folder = $this->get("folder");
 		if(!$folder){
@@ -403,17 +403,17 @@ class tpl_control extends phpok_control
 		$title = $this->get("title");
 		$file = $this->dir_root."tpl/".$rs["folder"].$folder.$title;
 		if(!file_exists($file)){
-			$this->error(P_Lang('文件不存在'));
+			$this->error(P_Lang('檔案不存在'));
 		}
 		if(!is_writable($file)){
-			$this->error(P_Lang('文件无法写法，不支持在线编辑'));
+			$this->error(P_Lang('檔案無法寫法，不支援線上編輯'));
 		}
 		$content = $this->get("content","html_js");
 		$this->lib('file')->vim($content,$file);
 		$this->success();
 	}
 	
-	//模板弹出选择器
+	//模板彈出選擇器
 	public function open_f()
 	{
 		$id = $this->get("id");
@@ -422,10 +422,10 @@ class tpl_control extends phpok_control
 		}
 		$config = $this->model('site')->get_one($this->session->val('admin_site_id'));
 		if(!$config){
-			$this->error(P_Lang('站点信息不存在'));
+			$this->error(P_Lang('站點資訊不存在'));
 		}
 		if(!$config['tpl_id']){
-			$this->error(P_Lang('站点尚未设置默认风格，请先设置好'));
+			$this->error(P_Lang('站點尚未設定預設風格，請先設定好'));
 		}
 		$tpl_id = $this->get('tpl_id','int');
 		if(!$tpl_id){
@@ -433,14 +433,14 @@ class tpl_control extends phpok_control
 		}
 		$rs = $this->model('tpl')->get_one($tpl_id);
 		if(!$rs){
-			$this->error(P_Lang('风格文件信息不存在'));
+			$this->error(P_Lang('風格檔案資訊不存在'));
 		}
 		if(!$rs["ext"]){
 			$rs["ext"] = "html";
 		}
 		$this->assign("site_rs",$config);
 		$this->assign("rs",$rs);
-		//绑定目录
+		//繫結目錄
 		$tpl_dir = $this->dir_root."tpl/".$rs["folder"].'/';
 		$tpl_list = $this->lib('file')->ls($tpl_dir);
 		$ext_length = strlen($rs["ext"]);
@@ -461,7 +461,7 @@ class tpl_control extends phpok_control
 		}
 		$this->assign("rslist",$rslist);
 		$this->assign("id",$id);
-		//取得模板风格全部列表
+		//取得模板風格全部列表
 		$tplist = $this->model('tpl')->get_all();
 		if($tplist){
 			foreach($tplist as $key=>$value){

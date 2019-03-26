@@ -1,13 +1,13 @@
 <?php
 /**
- * 网站信息
+ * 網站資訊
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年09月08日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年09月08日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -20,9 +20,9 @@ class site_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取站点信息
-	 * @参数 $id 站点ID
-	 * @返回 数组
+	 * 獲取站點資訊
+	 * @引數 $id 站點ID
+	 * @返回 陣列
 	**/
 	public function get_one($id)
 	{
@@ -61,7 +61,7 @@ class site_model_base extends phpok_model
 		return $this->get_one($tmp['id']);
 	}
 
-	//有缓存读取
+	//有快取讀取
 	public function get_one_from_domain($domain='')
 	{
 		$sql = "SELECT site_id FROM ".$this->db->prefix."site_domain WHERE domain='".$domain."'";
@@ -139,10 +139,10 @@ class site_model_base extends phpok_model
 	}
 
 	/**
-	 * 订单状态设置
-	 * @参数 $sort 是否排序
-	 * @返回 false 或 数组
-	 * @更新时间 2016年09月28日
+	 * 訂單狀態設定
+	 * @引數 $sort 是否排序
+	 * @返回 false 或 陣列
+	 * @更新時間 2016年09月28日
 	**/
 	public function order_status_all($sort=false)
 	{
@@ -177,10 +177,10 @@ class site_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得订单价格方案
-	 * @参数 $sort 是否执行排序操作
-	 * @返回 false 或是 数组
-	 * @更新时间 2016年09月28日
+	 * 取得訂單價格方案
+	 * @引數 $sort 是否執行排序操作
+	 * @返回 false 或是 陣列
+	 * @更新時間 2016年09月28日
 	**/
 	public function price_status_all($sort=false)
 	{
@@ -223,9 +223,9 @@ class site_model_base extends phpok_model
 	}
 
 	/**
-	 * 前台及API接口获取的网站信息
-	 * @param mixed $id 网站ID或网站域名
-	 * @return array 为空时返回false，不为空返回网站相关信息 
+	 * 前臺及API介面獲取的網站資訊
+	 * @param mixed $id 網站ID或網站域名
+	 * @return array 為空時返回false，不為空返回網站相關資訊 
 	 * @date 2016年02月05日
 	 */
 	public function site_info($id='')
@@ -312,7 +312,7 @@ class site_model_base extends phpok_model
 	}
 
 	/**
-	 * 默认模板配置文件
+	 * 預設模板配置檔案
 	**/
 	public function tpl_default()
 	{
@@ -340,8 +340,8 @@ class site_model_base extends phpok_model
 	}
 
 	/**
-	 * 读写自定义的模板信息
-	 * @参数 $data 要保存的数据，留空表示读操作
+	 * 讀寫自定義的模板資訊
+	 * @引數 $data 要儲存的資料，留空表示讀操作
 	**/
 	public function tpl_setting($data='')
 	{
@@ -361,7 +361,7 @@ class site_model_base extends phpok_model
 	}
 
 	/**
-	 * 重置模板设置
+	 * 重置模板設定
 	**/
 	public function tpl_reset()
 	{
@@ -372,7 +372,7 @@ class site_model_base extends phpok_model
 	}
 
 	/**
-	 * 保留字符
+	 * 保留字元
 	**/
 	public function reserved()
 	{
@@ -410,9 +410,9 @@ class site_model_base extends phpok_model
 	}
 
 	/**
-	 * 是否启用验证码，返回 true 表示启用，返回 false 表示不启用
-	 * @参数 $id 值项目ID或是system
-	 * @参数 $act 动作标识，如为 system，支持 login register，使用项目支持 add，edit，comment
+	 * 是否啟用驗證碼，返回 true 表示啟用，返回 false 表示不啟用
+	 * @引數 $id 值專案ID或是system
+	 * @引數 $act 動作標識，如為 system，支援 login register，使用專案支援 add，edit，comment
 	**/
 	public function vcode($id,$act='')
 	{

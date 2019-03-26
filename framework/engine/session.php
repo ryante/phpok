@@ -1,12 +1,12 @@
 <?php
 /**
- * SESSION基类
+ * SESSION基類
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2017年12月19日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2017年12月19日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -18,7 +18,7 @@ class session
 	protected $sessid = '';
 
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct($config='')
 	{
@@ -103,9 +103,9 @@ class session
 	}
 
 	/**
-	 * 返回设定的SESSION信息，用$this->session->val('变量名')，替代写法 $_SESSION['变量名']
-	 * @参数 $var 变量名
-	 * @返回 session存储的信息，可以是对象，字符串，数值，布尔值等
+	 * 返回設定的SESSION資訊，用$this->session->val('變數名')，替代寫法 $_SESSION['變數名']
+	 * @引數 $var 變數名
+	 * @返回 session儲存的資訊，可以是物件，字串，數值，布林值等
 	**/
 	final public function val($var='')
 	{
@@ -141,10 +141,10 @@ class session
 	}
 
 	/**
-	 * 设定session信息，用$this->session->assign('变量名','变量值') 替代写法 $_SESSION['变量名'] = '变量值'
-	 * @参数 $var 变量名
-	 * @参数 $val 变量值
-	 * @返回 true，无论如何，都返回true
+	 * 設定session資訊，用$this->session->assign('變數名','變數值') 替代寫法 $_SESSION['變數名'] = '變數值'
+	 * @引數 $var 變數名
+	 * @引數 $val 變數值
+	 * @返回 true，無論如何，都返回true
 	**/
 	final public function assign($var,$val='')
 	{
@@ -187,10 +187,10 @@ class session
 	}
 
 	/**
-	 * 取消session设定的内容，用$this->session->unassign('变量名') 替代写法 unset($_SESSION['变量名'])
-	 * @参数 $var 要取消的变量
+	 * 取消session設定的內容，用$this->session->unassign('變數名') 替代寫法 unset($_SESSION['變數名'])
+	 * @引數 $var 要取消的變數
 	 * @返回 true
-	 * @更新时间 2016年07月25日
+	 * @更新時間 2016年07月25日
 	**/
 	final public function unassign($var)
 	{
@@ -228,7 +228,7 @@ class session
 	}
 
 	/**
-	 * 销毁SESSION
+	 * 銷燬SESSION
 	**/
 	public function destroy(){
 		session_destroy();
@@ -236,7 +236,7 @@ class session
 	}
 
 	/**
-	 * 销毁SESSION别名
+	 * 銷燬SESSION別名
 	**/
 	public function clean()
 	{
@@ -244,22 +244,22 @@ class session
 	}
 
 	/**
-	 * 报错提醒，直接中止运行
-	 * @参数 $error 错误信息
-	 * @参数 $errid 错误内码
+	 * 報錯提醒，直接中止執行
+	 * @引數 $error 錯誤資訊
+	 * @引數 $errid 錯誤內碼
 	**/
 	protected function error($error='',$errid='')
 	{
-		if(!$error) $error = "SESSION异常";
+		if(!$error) $error = "SESSION異常";
 		$html = '<!DOCTYPE html>'."\n";
 		$html.= '<html>'."\n";
 		$html.= '<head>'."\n";
 		$html.= '	<meta charset="utf-8" />'."\n";
-		$html.= '	<title>SESSION错误</title>'."\n";
+		$html.= '	<title>SESSION錯誤</title>'."\n";
 		$html.= '</head>'."\n";
 		$html.= '<body style="padding:10px;font-size:14px;">'."\n";
 		if($errid){
-			$html .= '错误ID：'.$errid.'：';
+			$html .= '錯誤ID：'.$errid.'：';
 		}
 		$html.= $error."\n";
 		$html.= '</body>'."\n";

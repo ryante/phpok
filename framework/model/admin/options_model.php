@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/options_model.php
-	备注： 产品属性管理
+	檔案： {phpok}/model/options_model.php
+	備註： 產品屬性管理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年08月07日 13时42分
+	時間： 2015年08月07日 13時42分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class options_model extends options_model_base
@@ -32,13 +32,13 @@ class options_model extends options_model_base
 
 	public function delete($id)
 	{
-		//删除主表
+		//刪除主表
 		$sql = "DELETE FROM ".$this->db->prefix."attr WHERE id='".$id."'";
 		$this->db->query($sql);
-		//删除参数表
+		//刪除引數表
 		$sql = "DELETE FROM ".$this->db->prefix."attr_values WHERE aid='".$id."'";
 		$this->db->query($sql);
-		//删除已经使用的
+		//刪除已經使用的
 		$sql = "DELETE FROM ".$this->db->prefix."list_attr WHERE aid='".$id."'";
 		$this->db->query($sql);
 		return true;

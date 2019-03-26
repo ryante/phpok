@@ -1,13 +1,13 @@
 <?php
 /**
- * 文件操作类
+ * 檔案操作類
  * @package phpok\libs
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年12月08日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年12月08日
 **/
 
 class file_lib
@@ -20,9 +20,9 @@ class file_lib
 	}
 
 	/**
-	 * 远程获取内容，这里直接调用html类来执行
-	 * @参数 $url 网址
-	 * @参数 $post 要提交的post数据
+	 * 遠端獲取內容，這裡直接呼叫html類來執行
+	 * @引數 $url 網址
+	 * @引數 $post 要提交的post資料
 	**/
 	public function remote($url,$post='')
 	{
@@ -30,11 +30,11 @@ class file_lib
 	}
 
 	/**
-	 * 读取数据
-	 * @参数 $file 要读取的文件，支持远程文件
-	 * @参数 $length 文件长度，为空表示读取全部，仅限本地文件有效
-	 * @参数 $filter 是否过滤安全字符，默认为true，不过滤请传参false，仅限本地文件有效
-	 * @返回 false 或 文件内容
+	 * 讀取資料
+	 * @引數 $file 要讀取的檔案，支援遠端檔案
+	 * @引數 $length 檔案長度，為空表示讀取全部，僅限本地檔案有效
+	 * @引數 $filter 是否過濾安全字元，預設為true，不過濾請傳參false，僅限本地檔案有效
+	 * @返回 false 或 檔案內容
 	**/
 	public function cat($file="",$length=0,$filter=true)
 	{
@@ -73,11 +73,11 @@ class file_lib
 	}
 
 	/**
-	 * 保存数据
-	 * @参数 $content 要保存的内容，支持字符串，数组，多维数组等
-	 * @参数 $file 保存的文件地址
-	 * @参数 $var 仅限$content为数组，此项不为空时使用
-	 * @参数 $type 写入方式，默认为wb，清零写入
+	 * 儲存資料
+	 * @引數 $content 要儲存的內容，支援字串，陣列，多維陣列等
+	 * @引數 $file 儲存的檔案地址
+	 * @引數 $var 僅限$content為陣列，此項不為空時使用
+	 * @引數 $type 寫入方式，預設為wb，清零寫入
 	 * @返回 true/false
 	**/
 	public function vi($content='',$file='',$var="",$type="wb")
@@ -100,10 +100,10 @@ class file_lib
 	}
 
 	/**
-	 * 存储php等源码文件，不会写入安全保护
-	 * @参数 $content 要保存的内容
-	 * @参数 $file 保存的地址
-	 * @参数 $type 写入模式，wb 表示完全写入，ab 表示追加写入
+	 * 儲存php等原始碼檔案，不會寫入安全保護
+	 * @引數 $content 要儲存的內容
+	 * @引數 $file 儲存的地址
+	 * @引數 $type 寫入模式，wb 表示完全寫入，ab 表示追加寫入
 	**/
 	public function vim($content,$file,$type="wb")
 	{
@@ -112,10 +112,10 @@ class file_lib
 	}
 
 	/**
-	 * 保存数据别名，不改写任何东西
-	 * @参数 $content 要保存的内容
-	 * @参数 $file 保存的地址
-	 * @参数 $type 写入模式，wb 表示完全写入，ab 表示追加写入
+	 * 儲存資料別名，不改寫任何東西
+	 * @引數 $content 要儲存的內容
+	 * @引數 $file 儲存的地址
+	 * @引數 $type 寫入模式，wb 表示完全寫入，ab 表示追加寫入
 	**/
 	public function save($content,$file,$type='wb')
 	{
@@ -123,11 +123,11 @@ class file_lib
 	}
 
 	/**
-	 * 存储图片，内容不进行stripslashes处理
-	 * @参数 $content 要保存的内容
-	 * @参数 $file 要保存的文件
+	 * 儲存圖片，內容不進行stripslashes處理
+	 * @引數 $content 要儲存的內容
+	 * @引數 $file 要儲存的檔案
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function save_pic($content,$file)
 	{
@@ -140,9 +140,9 @@ class file_lib
 	}
 
 	/**
-	 * 删除操作，请一定要小心，在程序中最好严格一些，不然有可能将整个目录删掉
-	 * @参数 $del 要删除的文件或文件夹
-	 * @参数 $type 仅支持file和folder，为file时仅删除$del文件，如果$del为文件夹，表示删除其下面的文件。为folder时，表示删除$del这个文件，如果为文件夹，表示删除此文件夹及子项
+	 * 刪除操作，請一定要小心，在程式中最好嚴格一些，不然有可能將整個目錄刪掉
+	 * @引數 $del 要刪除的檔案或資料夾
+	 * @引數 $type 僅支援file和folder，為file時僅刪除$del檔案，如果$del為資料夾，表示刪除其下面的檔案。為folder時，表示刪除$del這個檔案，如果為資料夾，表示刪除此資料夾及子項
 	 * @返回 true/false
 	**/
 	public function rm($del,$type="file")
@@ -177,9 +177,9 @@ class file_lib
 	}
 
 	/**
-	 * 创建文件或目录
-	 * @参数 $file 文件或目录
-	 * @参数 $type 默认是dir，表示创建目录
+	 * 建立檔案或目錄
+	 * @引數 $file 檔案或目錄
+	 * @引數 $type 預設是dir，表示建立目錄
 	 * @返回 true
 	**/
 	public function make($file,$type="dir")
@@ -191,7 +191,7 @@ class file_lib
 			if(substr($file,0,$root_strlen) == ROOT){
 				$newfile = substr($file,$root_strlen);
 			}
-			$msg = ROOT;//从根目录记算起是否有文件写入
+			$msg = ROOT;//從根目錄記算起是否有檔案寫入
 		}
 		$array = explode("/",$newfile);
 		$count = count($array);
@@ -212,17 +212,17 @@ class file_lib
 				$msg .= "/";
 			}
 			if(!file_exists($file)){
-				@touch($file);//创建文件
+				@touch($file);//建立檔案
 			}
 		}
 		return true;
 	}
 
 	/**
-	 * 复制操作
-	 * @参数 $old 旧文件（夹）
-	 * @参数 $new 新文件（夹）
-	 * @参数 $recover 是否覆盖
+	 * 複製操作
+	 * @引數 $old 舊檔案（夾）
+	 * @引數 $new 新檔案（夾）
+	 * @引數 $recover 是否覆蓋
 	 * @返回 false/true
 	**/
 	public function cp($old,$new,$recover=true)
@@ -231,7 +231,7 @@ class file_lib
 			return false;
 		}
 		if(is_file($old)){
-			//如果目标是文件夹
+			//如果目標是資料夾
 			if(substr($new,-1) == '/'){
 				$this->make($new,'dir');
 				$basename = basename($old);
@@ -260,10 +260,10 @@ class file_lib
 
 	#[]
 	/**
-	 * 文件移动操作
-	 * @参数 $old 旧文件（夹）
-	 * @参数 $new 新文件（夹）
-	 * @参数 $recover 是否覆盖
+	 * 檔案移動操作
+	 * @引數 $old 舊檔案（夾）
+	 * @引數 $new 新檔案（夾）
+	 * @引數 $recover 是否覆蓋
 	 * @返回 false/true
 	**/
 	public function mv($old,$new,$recover=true)
@@ -290,9 +290,9 @@ class file_lib
 	}
 
 	/**
-	 * 获取文件夹列表
-	 * @参数 $folder 获取指定文件夹下的列表（仅一层深度）
-	 * @返回 数组
+	 * 獲取資料夾列表
+	 * @引數 $folder 獲取指定資料夾下的列表（僅一層深度）
+	 * @返回 陣列
 	**/
 	public function ls($folder)
 	{
@@ -305,9 +305,9 @@ class file_lib
 	}
 
 	/**
-	 * 获取文件夹及子文件夹等多层文件列表（无限级，长度受系统限制）
-	 * @参数 $folder 文件夹
-	 * @参数 $list 引用变量
+	 * 獲取資料夾及子資料夾等多層檔案列表（無限級，長度受系統限制）
+	 * @引數 $folder 資料夾
+	 * @引數 $list 引用變數
 	**/
 	public function deep_ls($folder,&$list)
 	{
@@ -323,10 +323,10 @@ class file_lib
 	}
 
 	/**
-	 * 取得文件夹下的列表
-	 * @参数 $file 文件（夹）
-	 * @参数 $type 仅支持folder或file，为file，直接返回$file本身
-	 * @返回 $file或数组
+	 * 取得資料夾下的列表
+	 * @引數 $file 檔案（夾）
+	 * @引數 $type 僅支援folder或file，為file，直接返回$file本身
+	 * @返回 $file或陣列
 	**/
 	private function _dir_list($file,$type="folder")
 	{
@@ -350,12 +350,12 @@ class file_lib
 	}
 
 	/**
-	 * 数组转成字符串
-	 * @参数 $array 要转的数组的
-	 * @参数 $var 传递的变量
-	 * @参数 $content 内容
+	 * 陣列轉成字串
+	 * @引數 $array 要轉的陣列的
+	 * @引數 $var 傳遞的變數
+	 * @引數 $content 內容
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	private function __array($array,$var,$content="")
 	{
@@ -373,9 +373,9 @@ class file_lib
 	}
 
 	/**
-	 * 打开文件
-	 * @参数 $file 打开的文件
-	 * @参数 $type 打开类型，默认是wb
+	 * 開啟檔案
+	 * @引數 $file 開啟的檔案
+	 * @引數 $type 開啟型別，預設是wb
 	**/
 	private function _open($file,$type="wb")
 	{
@@ -385,10 +385,10 @@ class file_lib
 	}
 
 	/**
-	 * 写入信息
-	 * @参数 $content 内容
-	 * @参数 $file 要写入的文件
-	 * @参数 $type 打开方式
+	 * 寫入資訊
+	 * @引數 $content 內容
+	 * @引數 $file 要寫入的檔案
+	 * @引數 $type 開啟方式
 	 * @返回 true
 	**/
 	private function _write($content,$file,$type="wb")
@@ -404,8 +404,8 @@ class file_lib
 	}
 
 	/**
-	 * 关闭句柄
-	 * @参数 $handle 句柄
+	 * 關閉控制代碼
+	 * @引數 $handle 控制代碼
 	**/
 	private function _close($handle)
 	{
@@ -413,9 +413,9 @@ class file_lib
 	}
 
 	/**
-	 * 附件下载
-	 * @参数 $file 要下载的文件地址
-	 * @参数 $title 下载后的文件名
+	 * 附件下載
+	 * @引數 $file 要下載的檔案地址
+	 * @引數 $title 下載後的檔名
 	**/
 	public function download($file,$title='')
 	{
@@ -447,7 +447,7 @@ class file_lib
 		    list ($a, $range) = explode("=", $_SERVER['HTTP_RANGE']);
 		    $new_length = $size2 - $range;
 		    header("HTTP/1.1 206 Partial Content");
-		    header("Content-Length: ".$new_length); //输入总长
+		    header("Content-Length: ".$new_length); //輸入總長
 		    header("Content-Range: bytes ".$range."-".$size2."/".$filesize);
 		} else {
 		    header("Content-Range: bytes 0-".$size2."/".$filesize); //Content-Range: bytes 0-4988927/4988928

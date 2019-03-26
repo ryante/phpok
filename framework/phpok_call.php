@@ -1,13 +1,13 @@
 <?php
 /**
- * 调用中心类
+ * 呼叫中心類
  * @package phpok\framework
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 https://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 https://www.phpok.com
  * @版本 4.x
- * @授权 GNU Lesser General Public License (LGPL)
- * @时间 2017年04月02日
+ * @授權 GNU Lesser General Public License (LGPL)
+ * @時間 2017年04月02日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -52,17 +52,17 @@ class phpok_call extends _init_auto
 		return $array;
 	}
 
-	//执行数据调用
+	//執行資料呼叫
 	public function phpok($id,$rs="")
 	{
 		if(!$id){
 			return false;
 		}
-		//格式化参数
+		//格式化引數
 		if($rs && is_string($rs)){
 			parse_str($rs,$rs);
 		}
-		//扩展参数
+		//擴充套件引數
 		if(!$rs){
 			$rs = array('site'=>$this->site['id']);
 		}
@@ -85,7 +85,7 @@ class phpok_call extends _init_auto
 		}else{
 			$baseurl = $this->url;
 		}
-		//定义 _baseurl
+		//定義 _baseurl
 		$rs['_baseurl'] = $baseurl;
 		$this->model('url')->base_url($baseurl);
 		if(substr($id,0,1) != '_'){
@@ -115,7 +115,7 @@ class phpok_call extends _init_auto
 		if(!in_array($func,$this->mlist)){
 			return false;
 		}
-		//禁用缓存获取数据
+		//禁用快取獲取資料
 		if((is_bool($call_rs['cache']) && !$call_rs['cache']) || ($call_rs['cache'] && $call_rs['cache'] == 'false')){
 			return $this->$func($call_rs);
 		}
@@ -128,7 +128,7 @@ class phpok_call extends _init_auto
 		return $this->$func($call_rs,$cache_id);
 	}
 
-	//生成查询条件
+	//生成查詢條件
 	private function _condition($rs)
 	{
 		if($rs['project'] && is_array($rs['project'])){
@@ -151,7 +151,7 @@ class phpok_call extends _init_auto
 		}
 		return $this->_arc_condition($rs,$flist,$project);
 	}
-	//自定义SQL
+	//自定義SQL
 	private function _sql($rs,$cache_id='')
 	{
 		$rs['sqlinfo'] = str_replace(array('&#39;','&quot;','&apos;','&#34;'),array("'",'"',"'",'"'),$rs['sqlinfo']);
@@ -166,7 +166,7 @@ class phpok_call extends _init_auto
 		return $rslist;
 	}
 
-	//读取文章列表
+	//讀取文章列表
 	private function _arclist($rs,$cache_id='')
 	{
 		if(!$rs['pid'] && !$rs['phpok']){
@@ -193,7 +193,7 @@ class phpok_call extends _init_auto
 		if(!$module || $module['status'] != 1){
 			return false;
 		}
-		//如果使用了独立模块
+		//如果使用了獨立模組
 		if($module['mtype']){
 			return $this->_arclist_single($rs,$cache_id,$project,$module);
 		}
@@ -452,7 +452,7 @@ class phpok_call extends _init_auto
 				$condition .= " AND ".$key."='".$value."' ";
 			}
 		}
-		//判断是否有扩展字段
+		//判斷是否有擴充套件欄位
 		if($fields && is_array($fields)){
 			foreach($fields as $key=>$value){
 				$tmpid = 'e_'.$value['identifier'];
@@ -535,7 +535,7 @@ class phpok_call extends _init_auto
 			}
 			unset($cate_all,$array);
 		}
-		//绑定某个会员
+		//繫結某個會員
 		if($rs['user_id']){
 			if(is_array($rs['user_id'])) $rs['user_id'] = implode(",",$rs['user_id']);
 			$condition .= strpos($rs['user_id'],",") === false ? " AND l.user_id='".$rs['user_id']."'" : " AND l.user_id IN(".$rs['user_id'].")";
@@ -603,7 +603,7 @@ class phpok_call extends _init_auto
 				$condition .= " AND ext.".$key."='".$value."' ";
 			}
 		}
-		//判断是否有扩展字段
+		//判斷是否有擴充套件欄位
 		if($fields && is_array($fields)){
 			foreach($fields as $key=>$value){
 				$tmpid = 'e_'.$value['identifier'];
@@ -644,7 +644,7 @@ class phpok_call extends _init_auto
 		return $condition;
 	}
 
-	//格式化扩展数据
+	//格式化擴充套件資料
 	private function _format_ext_all($rslist)
 	{
 		$res = '';
@@ -654,7 +654,7 @@ class phpok_call extends _init_auto
 				$url = $this->site['url_type'] == 'rewrite' ? $value['content']['rewrite'] : $value['content']['default'];
 				if(!$url) $url = $value['content']['default'];
 				$value['content'] = $url;
-				//绑定扩展自定义url
+				//繫結擴充套件自定義url
 				if(!$rslist['url']) $rslist['url'] = array('form_type'=>'text','content'=>$url);
 			}elseif($value['form_type'] == 'upload' && $value['content']){
 				$tmp = explode(',',$value['content']);
@@ -674,7 +674,7 @@ class phpok_call extends _init_auto
 			}
 			$rslist[$key] = $value;
 		}
-		//格式化内容数据，并合并附件数据
+		//格式化內容資料，併合並附件資料
 		$flist = "";
 		foreach($rslist as $key=>$value){
 			$flist[$key] = $value;
@@ -738,7 +738,7 @@ class phpok_call extends _init_auto
 		return $this->model('list')->arc_count($project['module'],$condition);
 	}
 
-	//读取单篇文章
+	//讀取單篇文章
 	private function _arc($param,$cache_id='')
 	{
 		$tmpid = $param['phpok'] ? $param['phpok'] : ($param['title_id'] ? $param['title_id'] : $param['id']);
@@ -759,7 +759,7 @@ class phpok_call extends _init_auto
 			$arc['url'] = $this->url($url_id,'','project='.$project['identifier'],'www');
 			return $arc;
 		}
-		//读取这个主题可能涉及到的Tag
+		//讀取這個主題可能涉及到的Tag
 		$arc['tag'] = $this->model('tag')->tag_list($arc['id'],'list');
 		$flist = $this->model('module')->fields_all($arc['module_id']);
 		if(!$flist){
@@ -768,9 +768,9 @@ class phpok_call extends _init_auto
 			return $arc;
 		}
 		$taglist = array('tag'=>$arc['tag'],'list'=>array('title'=>$arc['title']));
-		//格式化扩展内容
+		//格式化擴充套件內容
 		foreach($flist as $key=>$value){
-			//指定分类
+			//指定分類
 			if($value['form_type'] == 'editor'){
 				$value['pageid'] = intval($param['pageid']);
 			}
@@ -780,7 +780,7 @@ class phpok_call extends _init_auto
 					$arc['url'] = $arc[$value['identifier']];
 				}
 			}
-			//针对编辑器内容的格式化
+			//針對編輯器內容的格式化
 			if($value['form_type'] == 'editor'){
 				if(is_array($arc[$value['identifier']])){
 					$arc[$value['identifier'].'_pagelist'] = $arc[$value['identifier']]['pagelist'];
@@ -798,7 +798,7 @@ class phpok_call extends _init_auto
 		if($arc['tag']){
 			$arc['tag'] = $this->model('tag')->tag_filter($taglist,$arc['id'],'list');
 		}
-		//如果未绑定网址
+		//如果未繫結網址
 		if(!$arc['url']){
 			$url_id = $arc['identifier'] ? $arc['identifier'] : $arc['id'];
 			$tmpext = '';
@@ -807,7 +807,7 @@ class phpok_call extends _init_auto
 			}
 			$arc['url'] = $this->url($url_id,'',$tmpext,'www');
 		}
-		//读取分类树
+		//讀取分類樹
 		$arc['_catelist'] = $this->model('cate')->ext_catelist($arc['id']);
 		if(!$arc['_catelist']){
 			return $arc;
@@ -825,7 +825,7 @@ class phpok_call extends _init_auto
 			}
 			return $arc;
 		}
-		//执行
+		//執行
 		foreach($arc['_catelist'] as $k=>$v){
 			$cate_tmp = isset($tmplist['cate-'.$v['id']]) ? $tmplist['cate-'.$v['id']] : false;
 			if(!$cate_tmp){
@@ -841,7 +841,7 @@ class phpok_call extends _init_auto
 		return $arc;
 	}
 
-	//取得项目信息
+	//取得專案資訊
 	private function _project($rs,$cache_id='')
 	{
 		if(!$rs['pid'] && !$rs['phpok']){
@@ -867,14 +867,14 @@ class phpok_call extends _init_auto
 		$project_tmp = $this->model('ext')->ext_all('project-'.$rs['pid'],true);
 		$project['tag'] = $this->model('tag')->tag_list($project['id'],'project',$project['site_id']);
 		$taglist = array('tag'=>$project['tag'],'list'=>array('title'=>$project['title']));
-		//格式化扩展内容
+		//格式化擴充套件內容
 		if($project_tmp){
 			foreach($project_tmp as $key=>$value){
 				$project_ext[$value['identifier']] = $this->lib('form')->show($value);
 				if($value['form_type'] == 'url' && !$project['url'] && $value['content']){
 					$project['url'] = $project_ext[$value['identifier']];
 				}
-				//针对编辑器内容的格式化
+				//針對編輯器內容的格式化
 				if($value['form_type'] == 'editor'){
 					if(is_array($project_ext[$value['identifier']])){
 						$project_ext[$value['identifier'].'_pagelist'] = $project_ext[$value['identifier']]['pagelist'];
@@ -905,7 +905,7 @@ class phpok_call extends _init_auto
 		return $project;
 	}
 
-	//读取分类树
+	//讀取分類樹
 	private function _catelist($rs,$cache_id='')
 	{
 		if(!$rs['pid'] && !$rs['phpok']){
@@ -961,16 +961,16 @@ class phpok_call extends _init_auto
 		if(!$list || !is_array($list) || count($list)<1){
 			return false;
 		}
-		//格式化分类
+		//格式化分類
 		$array = array('all'=>$list,'project'=>$project_rs);
 		$array['cate'] = $this->_cate(array('pid'=>$project_rs['id'],'cateid'=>$rs['cateid'],"site"=>$rs['site']));
-		//读子分类
+		//讀子分類
 		foreach($list as $key=>$value){
 			if($value['parent_id'] == $rs['cateid']){
 				$array['sublist'][$value['id']] = $value;
 			}
 		}
-		//取得分类树
+		//取得分類樹
 		$tree = array();
 		foreach($list as $key=>$value){
 			if($value['parent_id'] == $rs['cateid']){
@@ -985,7 +985,7 @@ class phpok_call extends _init_auto
 		return $array;
 	}
 
-	//读取当前分类信息
+	//讀取當前分類資訊
 	private function _cate($rs,$cache_id='')
 	{
 		if(!$rs['cateid'] && !$rs['phpok'] && !$rs['cate']){
@@ -1042,7 +1042,7 @@ class phpok_call extends _init_auto
 		return $this->_cate($rs);
 	}
 
-	//取得项目扩展字段
+	//取得專案擴充套件欄位
 	private function _fields($rs)
 	{
 		if(!$rs['pid'] && !$rs['phpok']){
@@ -1065,7 +1065,7 @@ class phpok_call extends _init_auto
 		$array = false;
 		if($rs['in_title']){
 			$tmp_id = $rs['prefix'].'title';
-			$tmp_title = $project_rs['alias_title'] ? $project_rs['alias_title'] : '主题';
+			$tmp_title = $project_rs['alias_title'] ? $project_rs['alias_title'] : '主題';
 			$array['title'] = array('id'=>0,"module_id"=>$project_rs['module'],'title'=>$tmp_title,'identifier'=>$tmp_id,'field_type'=>'varchar','form_type'=>'text','format'=>'safe','taxis'=>1,'width'=>'300','content'=>$rs['info']['title']);
 		}
 		$flist = $this->model('module')->fields_all($project_rs['module']);
@@ -1077,11 +1077,11 @@ class phpok_call extends _init_auto
 				if(!$value['is_front']){
 					continue;
 				}
-				//禁止游客上传时
+				//禁止遊客上傳時
 				if($value['form_type'] == 'upload' && !$this->site['upload_guest'] && !$_SESSION['user_id']){
 					continue;
 				}
-				//禁止会员上传时
+				//禁止會員上傳時
 				if($value['form_type'] == 'upload' && !$this->site['upload_user'] && $_SESSION['user_id']){
 					continue;
 				}
@@ -1097,7 +1097,7 @@ class phpok_call extends _init_auto
 		if(!$array){
 			return false;
 		}
-		//判断是否格式化
+		//判斷是否格式化
 		if($rs['fields_format']){
 			foreach($array as $key=>$value){
 				if($value['ext']){
@@ -1110,7 +1110,7 @@ class phpok_call extends _init_auto
 		return $array;
 	}
 
-	//取得上一级项目
+	//取得上一級專案
 	private function _parent($rs)
 	{
 		if(!$rs['pid'] && !$rs['phpok']){
@@ -1138,7 +1138,7 @@ class phpok_call extends _init_auto
 		return $project;
 	}
 
-	//读取当前项目下的子项目，支持多级
+	//讀取當前專案下的子專案，支援多級
 	private function _sublist($rs,$cache_id='')
 	{
 		if(!$rs['pid'] && !$rs['phpok']){
@@ -1192,7 +1192,7 @@ class phpok_call extends _init_auto
  		return $list;
 	}
 
-	//读取当前分类下的子分类
+	//讀取當前分類下的子分類
 	private function _subcate($rs,$cache_id='')
 	{
 		if(!$rs['cateid'] && !$rs['phpok'] && !$rs['cate']){
@@ -1257,7 +1257,7 @@ class phpok_call extends _init_auto
 		return $list;
 	}
 
-	//读取附件信息
+	//讀取附件資訊
 	private function _res($rs)
 	{
 		if(!$rs['fileid'] && !$rs['phpok']){
@@ -1267,7 +1267,7 @@ class phpok_call extends _init_auto
 		return $this->model('res')->get_one(intval($rs['fileid']),true);
 	}
 
-	//读取附件列表
+	//讀取附件列表
 	private function _reslist($rs)
 	{
 		if(!$rs['fileids'] && !$rs['phpok']){
@@ -1289,14 +1289,14 @@ class phpok_call extends _init_auto
 	}
 
 	/**
-	 * 获取会员数据
-	 * @参数 $rs 数组，数组参数分别是：
-	 *       phpok：会员 field 对应的字段值，默认为会员ID
-	 *       user_id：等同于 phpok
-	 *       field：要查询的字段ID，默认是id，支持mobile,email
-	 *       ext：是否显示扩展，默认为true，当参数字符为false时，不查询扩展数据
-	 *       weight：是否显示财富，默认为true，当参数字符为false时，不查询财富信息
-	 * @返回 false 或 数组
+	 * 獲取會員資料
+	 * @引數 $rs 陣列，陣列引數分別是：
+	 *       phpok：會員 field 對應的欄位值，預設為會員ID
+	 *       user_id：等同於 phpok
+	 *       field：要查詢的欄位ID，預設是id，支援mobile,email
+	 *       ext：是否顯示擴充套件，預設為true，當引數字元為false時，不查詢擴充套件資料
+	 *       weight：是否顯示財富，預設為true，當引數字元為false時，不查詢財富資訊
+	 * @返回 false 或 陣列
 	**/
 	private function _user($rs)
 	{
@@ -1317,13 +1317,13 @@ class phpok_call extends _init_auto
 	}
 
 	/**
-	 * 会员列表
-	 * @参数 $rs 数组，数组参数分别是：
-	 *       phpok：会员 field 对应的字段值，默认为会员ID
-	 *       status：未设置时，默认为true，已设置参数，为false时表示未审核会员数据也读取
-	 *       group_id：会员组ID
-	 *       sqlext：SQL扩展查询，会员主表使用字段u，扩展表用ext
-	 * @返回 多维数组
+	 * 會員列表
+	 * @引數 $rs 陣列，陣列引數分別是：
+	 *       phpok：會員 field 對應的欄位值，預設為會員ID
+	 *       status：未設定時，預設為true，已設定引數，為false時表示未稽核會員資料也讀取
+	 *       group_id：會員組ID
+	 *       sqlext：SQL擴充套件查詢，會員主表使用欄位u，擴充套件表用ext
+	 * @返回 多維陣列
 	**/
 	private function _userlist($rs,$cache_id='')
 	{
@@ -1374,7 +1374,7 @@ class phpok_call extends _init_auto
 		$pageid = ($rs['pageid'] && intval($rs['pageid'])) ? intval($rs['pageid']) : 1;
 		$offset = ($pageid-1) * $psize;
 		$condition = "tid=".intval($id)." AND admin_id=0 ";
-		$array = array('avatar'=>'images/avatar.gif','uid'=>0,'user'=>P_Lang('游客'));
+		$array = array('avatar'=>'images/avatar.gif','uid'=>0,'user'=>P_Lang('遊客'));
 		if($this->session->val('user_id')){
 			$user = $this->model('user')->get_one($this->session->val('user_id'),'id',false,false);
 			if($user){
@@ -1420,13 +1420,13 @@ class phpok_call extends _init_auto
 					if($value['uid'] && $userlist[$value['uid']]){
 						$value['uid'] = $userlist[$value['uid']];
 					}else{
-						$value['uid'] = array('id'=>0,'user'=>P_Lang('游客'),'avatar'=>'images/avatar.gif');
+						$value['uid'] = array('id'=>0,'user'=>P_Lang('遊客'),'avatar'=>'images/avatar.gif');
 					}
 					$rslist[$key] = $value;
 				}
 			}else{
 				foreach($rslist as $key=>$value){
-					$value['uid'] = array('id'=>0,'user'=>P_Lang('游客'),'avatar'=>'images/avatar.gif');
+					$value['uid'] = array('id'=>0,'user'=>P_Lang('遊客'),'avatar'=>'images/avatar.gif');
 					$rslist[$key] = $value;
 				}
 			}

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/form/radio_form.php
-	备注： 单选框处理操作
+	檔案： {phpok}/form/radio_form.php
+	備註： 單選框處理操作
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年02月27日 20时18分
+	時間： 2015年02月27日 20時18分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class radio_form extends _init_auto
@@ -70,7 +70,7 @@ class radio_form extends _init_auto
 		}
 	}
 
-	//输出内容
+	//輸出內容
 	public function phpok_show($rs,$appid='admin')
 	{
 		$ext = array();
@@ -142,7 +142,7 @@ class radio_form extends _init_auto
 	//
 	private function opt_rslist($type='default',$group_id=0,$info='')
 	{
-		//当类型为默认时
+		//當型別為預設時
 		if($type == 'default' && $info){
 			$list = explode("\n",$info);
 			$rslist = array();
@@ -159,12 +159,12 @@ class radio_form extends _init_auto
 			return $rslist;
 		}
 
-		//表单选项
+		//表單選項
 		if($type == "opt"){
 			return $this->model('opt')->opt_all("group_id=".$group_id);
 		}
 		
-		//读子项目信息
+		//讀子專案資訊
 		if($type == 'project'){
 			$tmplist = $this->model('project')->project_sonlist($group_id);
 			if(!$tmplist) return false;
@@ -175,7 +175,7 @@ class radio_form extends _init_auto
 			}
 			return $rslist;
 		}
-		//读主题列表信息
+		//讀主題列表資訊
 		if($type == 'title'){
 			$tmplist = $this->model("list")->title_list($group_id);
 			if(!$tmplist) return false;
@@ -186,7 +186,7 @@ class radio_form extends _init_auto
 			}
 			return $rslist;
 		}
-		//读子分类信息
+		//讀子分類資訊
 		if($type == 'cate'){
 			$tmplist = $this->model('cate')->catelist_sonlist($group_id,false,0);
 			if(!$tmplist) return false;

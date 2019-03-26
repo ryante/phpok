@@ -1,13 +1,13 @@
 <?php
 /**
- * 财富管理，后台Model类
+ * 財富管理，後臺Model類
  * @package phpok\model\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2015年07月17日 00时49分
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2015年07月17日 00時49分
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -62,11 +62,11 @@ class wealth_model extends wealth_model_base
 	}
 
 	/**
-	 * 保存规则
-	 * @参数 $data 要保存的数组
-	 * @参数 $id ID不为0时表示更新
+	 * 儲存規則
+	 * @引數 $data 要儲存的陣列
+	 * @引數 $id ID不為0時表示更新
 	 * @返回 true或false或新插入的ID
-	 * @更新时间 2016年07月25日
+	 * @更新時間 2016年07月25日
 	**/
 	public function save_rule($data,$id=0)
 	{
@@ -78,11 +78,11 @@ class wealth_model extends wealth_model_base
 	}
 
 	/**
-	 * 检查这规则是否使用，防止重复冲突
-	 * @参数 $action 执行动作
-	 * @参数 $goal 目标对象
-	 * @参数 $wid 财富ID
-	 * @返回 有数据返回true，无数据返回false
+	 * 檢查這規則是否使用，防止重複衝突
+	 * @引數 $action 執行動作
+	 * @引數 $goal 目標物件
+	 * @引數 $wid 財富ID
+	 * @返回 有資料返回true，無資料返回false
 	**/
 	public function check($action,$goal,$wid,$id=0)
 	{

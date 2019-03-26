@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/www/tpl_model.php
-	备注： 模板
+	檔案： {phpok}/model/www/tpl_model.php
+	備註： 模板
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年11月17日 00时18分
+	時間： 2015年11月17日 00時18分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class tpl_model extends tpl_model_base

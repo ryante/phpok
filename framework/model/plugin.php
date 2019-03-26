@@ -1,13 +1,13 @@
 <?php
 /**
- * 插件中心
+ * 外掛中心
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年10月07日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年10月07日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -19,8 +19,8 @@ class plugin_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取已安装的全部插件
-	 * @参数 $status 为1进，表示只读取正在使用的插件
+	 * 讀取已安裝的全部外掛
+	 * @引數 $status 為1進，表示只讀取正在使用的外掛
 	**/
 	public function get_all($status=0)
 	{
@@ -33,12 +33,12 @@ class plugin_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得全部的插件列表
+	 * 取得全部的外掛列表
 	**/
 	public function dir_list()
 	{
 		$folder = $this->dir_root."plugins/";
-		//读取列表
+		//讀取列表
 		$handle = opendir($folder);
 		$list = array();
 		while(false !== ($file = readdir($handle))){
@@ -51,8 +51,8 @@ class plugin_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取插件基本数据
-	 * @参数 $id 插件标识
+	 * 讀取外掛基本資料
+	 * @引數 $id 外掛標識
 	**/
 	public function get_one($id)
 	{
@@ -61,8 +61,8 @@ class plugin_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取插件配置文件XML数据，仅在安装时有效
-	 * @参数 $id 插件标识
+	 * 讀取外掛配置檔案XML資料，僅在安裝時有效
+	 * @引數 $id 外掛標識
 	**/
 	public function get_xml($id)
 	{
@@ -80,8 +80,8 @@ class plugin_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存安装的数据
-	 * @参数 $data 插件数据
+	 * 儲存安裝的資料
+	 * @引數 $data 外掛資料
 	**/
 	public function install_save($data)
 	{
@@ -98,9 +98,9 @@ class plugin_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新插件扩展数据
-	 * @参数 $id 插件标识
-	 * @参数 $info 插件扩展数据
+	 * 更新外掛擴充套件資料
+	 * @引數 $id 外掛標識
+	 * @引數 $info 外掛擴充套件資料
 	**/
 	public function update_param($id,$info='')
 	{
@@ -112,9 +112,9 @@ class plugin_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新插件信息
-	 * @参数 $data 插件基本数据
-	 * @参数 $id 插件标识
+	 * 更新外掛資訊
+	 * @引數 $data 外掛基本資料
+	 * @引數 $id 外掛標識
 	**/
 	public function update_plugin($data,$id)
 	{
@@ -125,8 +125,8 @@ class plugin_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除插件
-	 * @参数 $id 插件标识
+	 * 刪除外掛
+	 * @引數 $id 外掛標識
 	**/
 	public function delete($id)
 	{
@@ -135,9 +135,9 @@ class plugin_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新插件状态
-	 * @参数 $id 插件标识
-	 * @参数 $status 状态，1使用，0未使用
+	 * 更新外掛狀態
+	 * @引數 $id 外掛標識
+	 * @引數 $status 狀態，1使用，0未使用
 	**/
 	public function update_status($id,$status=0)
 	{

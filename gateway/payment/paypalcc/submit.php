@@ -2,15 +2,15 @@
 /**
  * 提交支付
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年04月07日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年04月07日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -50,13 +50,13 @@ class paypalcc_submit
 		if($cc_data){
 			$paypal->cc($cc_data);
 		}
-		//如果订单付款成功
+		//如果訂單付款成功
 		$rs = $paypal->submit();
 		if(!$rs || !is_array($rs)){
-			$app->error('付款失败，请联系管理员');
+			$app->error('付款失敗，請聯絡管理員');
 		}
 		if(!$rs['ACK']){
-			$app->error('请求失败，请检查');
+			$app->error('請求失敗，請檢查');
 		}
 		$state = strtolower($rs['ACK']);
 		if($state != 'success' && $state != 'successwithwarning'){
@@ -64,12 +64,12 @@ class paypalcc_submit
 			foreach($rs as $key=>$value){
 				if(strpos($key,'L_ERRORCOD') !== false){
 					$tmpid = str_replace('L_ERRORCOD','',$key);
-					$error[$tmpid] = '错误代码：'.$value.'，错误信息：'.$rs['L_LONGMESSAG'.$tmpid];
+					$error[$tmpid] = '錯誤程式碼：'.$value.'，錯誤資訊：'.$rs['L_LONGMESSAG'.$tmpid];
 				}
 			}
 			$app->error(implode('<br/>',$error));
 		}
-		//更新订单信息
+		//更新訂單資訊
 		if($this->order['type'] == 'order'){
 			$order = $app->model('order')->get_one_from_sn($this->order['sn']);
 			if($order){
@@ -77,9 +77,9 @@ class paypalcc_submit
 				if($payinfo){
 					$payment_data = array('dateline'=>$app->time);
 					$app->model('order')->save_payment($payment_data,$payinfo['id']);
-					//更新订单日志
+					//更新訂單日誌
 					$app->model('order')->update_order_status($order['id'],'paid');
-					$note = P_Lang('订单支付完成，编号：{sn}',array('sn'=>$order['sn']));
+					$note = P_Lang('訂單支付完成，編號：{sn}',array('sn'=>$order['sn']));
 					$log = array('order_id'=>$order['id'],'addtime'=>$app->time,'who'=>$app->user['user'],'note'=>$note);
 					$app->model('order')->log_save($log);
 				}

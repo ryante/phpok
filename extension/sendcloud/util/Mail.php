@@ -53,22 +53,22 @@ class Attachment implements JsonSerializable {
  * @author xjmfc
  * 
  * @param $x_smtpapi http://sendcloud.sohu.com/doc/guide/rule/#x-smtpapi
- * @param $subject string 邮件标题
- * @param $from  string 发件人
- * @param $content string 邮件正文
- * @param $attachments array 邮件附件
- * @param $headers string 邮件头部信息. JSON 格式, 比如:{"header1": "value1", "header2": "value2"}
- * @param $reply_to string 设置用户默认的回复邮件地址. 如果 replyTo 没有或者为空, 则默认的回复邮件地址为 from
- * @param $labelId string 本次发送所使用的标签ID. 此标签需要事先创建
- * @param $resp_email_id string 是否返回 emailId. 有多个收件人时, 会返回 emailId 的列表, 默认值: true
+ * @param $subject string 郵件標題
+ * @param $from  string 發件人
+ * @param $content string 郵件正文
+ * @param $attachments array 郵件附件
+ * @param $headers string 郵件頭部資訊. JSON 格式, 比如:{"header1": "value1", "header2": "value2"}
+ * @param $reply_to string 設定使用者預設的回覆郵件地址. 如果 replyTo 沒有或者為空, 則預設的回覆郵件地址為 from
+ * @param $labelId string 本次傳送所使用的標籤ID. 此標籤需要事先建立
+ * @param $resp_email_id string 是否返回 emailId. 有多個收件人時, 會返回 emailId 的列表, 預設值: true
  * @param $tos array 收件人地址  
  * @param $ccs array 抄送地址
  * @param $bccs array 密送地址
- * @param $template_content object 模板信息
- * @param $fromname string 发件人名称. 显示如: ifaxin客服支持<support@ifaxin.com>
- * @param $plain string 纯文本内容,仅适合v2版本
- * @param $use_notification  string 默认值: false. 是否使用回执
- * @param $gzip_compress string 仅适合v1版本,不建议使用  
+ * @param $template_content object 模板資訊
+ * @param $fromname string 發件人名稱. 顯示如: ifaxin客服支援<support@ifaxin.com>
+ * @param $plain string 純文字內容,僅適合v2版本
+ * @param $use_notification  string 預設值: false. 是否使用回執
+ * @param $gzip_compress string 僅適合v1版本,不建議使用  
  */
 class Mail implements JsonSerializable {
 	private $from;

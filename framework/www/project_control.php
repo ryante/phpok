@@ -1,13 +1,13 @@
 <?php
 /**
- * 项目信息，包括列表，自身项目
+ * 專案資訊，包括列表，自身專案
  * @package phpok\www
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年03月17日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年03月17日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -19,12 +19,12 @@ class project_control extends phpok_control
 		parent::control();
 		$groupid = $this->model('usergroup')->group_id($this->session->val('user_id'));
 		if(!$groupid){
-			$this->error(P_Lang('无法获取前端用户组信息'));
+			$this->error(P_Lang('無法獲取前端使用者組資訊'));
 		}
 		$this->user_groupid = $groupid;
 	}
 
-	//栏目
+	//欄目
 	public function index_f()
 	{
 		$id = $this->get("id","system");
@@ -37,7 +37,7 @@ class project_control extends phpok_control
 		}
 		$pid = $tmp['id'];
 		if(!$this->model('popedom')->check($pid,$this->user_groupid,'read')){
-			$this->error(P_Lang('您没有阅读权限，请联系网站管理员'));
+			$this->error(P_Lang('您沒有閱讀許可權，請聯絡網站管理員'));
 		}
 		$project = $this->call->phpok('_project',array('pid'=>$pid));
 		$this->phpok_seo($project);
@@ -45,7 +45,7 @@ class project_control extends phpok_control
 		if($project['parent_id']){
 			$parent_rs = $this->call->phpok('_project',array('pid'=>$project['parent_id']));
 			if(!$parent_rs || !$parent_rs['status']){
-				$this->error(P_Lang('父级项目不存在或未启用'));
+				$this->error(P_Lang('父級專案不存在或未啟用'));
 			}
 			$this->assign("parent_rs",$parent_rs);
 		}
@@ -71,17 +71,17 @@ class project_control extends phpok_control
 			$tpl = $project["identifier"]."_page";
 		}
 		if(!$this->tpl->check_exists($tpl)){
-			$this->error(P_Lang('模板文件缺少'));
+			$this->error(P_Lang('模板檔案缺少'));
 		}
 		$this->view($tpl);
 	}
 
-	//项目支持模型
+	//專案支援模型
 	private function load_module($rs,$parent_rs='')
 	{
 		$m_rs = $this->model('module')->get_one($rs["module"]);
 		if(!$m_rs || $m_rs["status"] != 1){
-			$this->error(P_Lang('模块不存在或未启用'));
+			$this->error(P_Lang('模組不存在或未啟用'));
 		}
 		$this->assign("m_rs",$m_rs);
 		$cate_root = $rs["cate"];
@@ -94,7 +94,7 @@ class project_control extends phpok_control
 					$this->error_404();
 				}
 				if(!$cate_rs['status']){
-					$this->error(P_Lang('分类已停用，请联系管理员'));
+					$this->error(P_Lang('分類已停用，請聯絡管理員'));
 				}
 				if($cate_rs['id'] != $cate_root){
 					$cateid = $cate_rs['id'];
@@ -107,17 +107,17 @@ class project_control extends phpok_control
 		$tag = $this->get("tag");
 		$uid = $this->get('uid','int');
 		$attr = $this->get('attr');
-		//价格，支持价格区间
+		//價格，支援價格區間
 		$price = $this->get('price','float');
 		$sort = $this->get('sort');
 		if($sort && !preg_match("/^[a-zA-Z][a-z0-9A-Z\_\-,\s\.]*[a-zA-Z]$/u",$sort)){
-			$this->error(P_Lang('参数格式不正确'));
+			$this->error(P_Lang('引數格式不正確'));
 		}
-		//判断该项目是否启用封面
+		//判斷該專案是否啟用封面
 		if($rs["tpl_index"] && !$cateid && !$keywords && !$ext && !$tag && !$uid && !$attr && !$price && !$sort && $this->tpl->check_exists($rs['tpl_index'])){
 			$this->view($rs["tpl_index"]);
 		}
-		//读取列表信息
+		//讀取列表資訊
 		$tplfile = $rs["tpl_list"];
 		$psize = $rs["psize"] ? $rs['psize'] : $this->config['psize'];
 		$pageurl = $this->url($rs['identifier']);
@@ -128,7 +128,7 @@ class project_control extends phpok_control
 					$this->error_404();
 				}
 				if(!$cate_rs['status']){
-					$this->error(P_Lang('分类已停用，请联系管理员'));
+					$this->error(P_Lang('分類已停用，請聯絡管理員'));
 				}
 				$this->assign('cate_rs',$cate_rs);
 				$this->phpok_seo($cate_rs);
@@ -142,7 +142,7 @@ class project_control extends phpok_control
 				if($cate_rs['parent_id'] && $cate_rs['parent_id'] != $cate_root){
 					$cate_parent_rs = $this->call->phpok('_cate',array('pid'=>$rs['id'],'cateid'=>$cate_rs['parent_id']));
 					if(!$cate_parent_rs || !$cate_parent_rs['status']){
-						$this->error(P_Lang('父级分类已停用，请联系管理员'));
+						$this->error(P_Lang('父級分類已停用，請聯絡管理員'));
 					}
 					$this->assign('cate_parent_rs',$cate_parent_rs);
 					if(!$tplfile && $cate_parent_rs['tpl_list'] && $this->tpl->check_exists($cate_parent_rs['tpl_list'])){
@@ -152,7 +152,7 @@ class project_control extends phpok_control
 			}
 			$cate_root_rs = $this->call->phpok('_cate',array('pid'=>$rs['id'],'cateid'=>$cate_root));
 			if(!$cate_root_rs || !$cate_root_rs['status']){
-				$this->error(P_Lang('项目所绑定的根分类已停用，请联系管理员'));
+				$this->error(P_Lang('專案所繫結的根分類已停用，請聯絡管理員'));
 			}
 			$this->assign('cate_root',$cate_root_rs);
 			unset($cate_root_rs);
@@ -161,7 +161,7 @@ class project_control extends phpok_control
 		if($cateid){
 			$dt['cateid'] = $cateid;
 		}
-		//读取列表信息
+		//讀取列表資訊
 		$condition = "l.project_id=".$rs["id"]." AND l.module_id=".$rs["module"];
 		if($tag || $keywords || $ext || $sort || $attr || $price || $uid){
 			$pageurl .= $this->site["url_type"] == "rewrite" ? "?" : "&";
@@ -186,7 +186,7 @@ class project_control extends phpok_control
 			}
 			$this->assign('ext',$ext);
 		}
-		//价格区间
+		//價格區間
 		if($price){
 			if(!is_array($price)){
 				$price = array('min'=>$price);
@@ -216,7 +216,7 @@ class project_control extends phpok_control
 			$pageurl .= "&uid=".$uid;
 			$dt['user_id'] = $uid;
 		}
-		//自定义排序
+		//自定義排序
 		if($sort){
 			$dt['orderby'] = $sort;
 			$pageurl .= 'sort='.rawurlencode($sort)."&";
@@ -268,7 +268,7 @@ class project_control extends phpok_control
 				$url = $rs['identifier'] ? $this->url($rs['identifier']) : $this->url($rs['id']);
 				$this->_location($url);
 			}
-			$this->error(P_Lang('未配置模板 {tplfile}，请配置相应的模板',array('tplfile'=>$tplfile)));
+			$this->error(P_Lang('未配置模板 {tplfile}，請配置相應的模板',array('tplfile'=>$tplfile)));
 		}
 		unset($rslist,$total,$pageurl,$psize,$pageid,$rs,$parent_rs);
 		$this->view($tplfile);

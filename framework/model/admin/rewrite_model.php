@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/rewrite_model.php
-	备注： 伪静态页后台相关操作
+	檔案： {phpok}/model/admin/rewrite_model.php
+	備註： 偽靜態頁後臺相關操作
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年02月03日 12时58分
+	時間： 2015年02月03日 12時58分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class rewrite_model extends rewrite_model_base
@@ -82,7 +82,7 @@ class rewrite_model extends rewrite_model_base
 				$fp = fopen($value,'rb');
 				$info = fread($fp,1024);
 				fclose($fp);
-				preg_match_all("/(Note|摘要|说明|内容|备注)\s*(\:|：)(.+)\n/isU",$info,$matches);
+				preg_match_all("/(Note|摘要|說明|內容|備註)\s*(\:|：)(.+)\n/isU",$info,$matches);
 				if($matches && $matches[3] && $matches[3][0]){
 					$title = trim($matches[3][0]).'('.ucwords($id).')';
 				}else{

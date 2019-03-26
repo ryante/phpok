@@ -3,21 +3,21 @@
 namespace Aliyun\DySDKLite;
 
 /**
- * 签名助手 2017/11/19
+ * 簽名助手 2017/11/19
  *
  * Class SignatureHelper
  */
 class SignatureHelper {
 
     /**
-     * 生成签名并发起请求
+     * 生成簽名併發起請求
      *
      * @param $accessKeyId string AccessKeyId (https://ak-console.aliyun.com/)
      * @param $accessKeySecret string AccessKeySecret
-     * @param $domain string API接口所在域名
-     * @param $params array API具体参数
+     * @param $domain string API介面所在域名
+     * @param $params array API具體引數
      * @param $security boolean 使用https
-     * @return bool|\stdClass 返回API接口调用结果，当发生错误时返回false
+     * @return bool|\stdClass 返回API介面呼叫結果，當發生錯誤時返回false
      */
     public function request($accessKeyId, $accessKeySecret, $domain, $params, $security=false) {
         $apiParams = array_merge(array (

@@ -1,13 +1,13 @@
 <?php
 /**
- * 后台首页控制台
+ * 後臺首頁控制檯
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年08月13日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年08月13日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -30,11 +30,11 @@ class index_control extends phpok_control
 			$this->license = "LGPL";
 		}
 		$license = strtoupper($this->license);
-		$code = P_Lang('LGPL开源授权');
+		$code = P_Lang('LGPL開源授權');
 		if($license == "PBIZ" && $this->license_code && $this->license_name){
-			$code = P_Lang('个人（{license}）商业授权',array('license'=>$this->license_name));
+			$code = P_Lang('個人（{license}）商業授權',array('license'=>$this->license_name));
 		}elseif($license == "CBIZ" && $this->license_code && $this->license_name){
-			$code = P_Lang('企业（{license}）商业授权',array('license'=>$this->license_name));
+			$code = P_Lang('企業（{license}）商業授權',array('license'=>$this->license_name));
 		}
 		$license_site = $this->license_site;
 		if(substr($license_site,0,1) == '.'){
@@ -52,7 +52,7 @@ class index_control extends phpok_control
 				}
 			}
 			if(!$sitelist){
-				$this->error(P_Lang('没有找到相关权限，请联系管理员'));
+				$this->error(P_Lang('沒有找到相關許可權，請聯絡管理員'));
 			}
 		}
 		$this->assign('sitelist',$sitelist);
@@ -133,7 +133,7 @@ class index_control extends phpok_control
 		if($this->session->val('admin_rs.if_system') && $this->session->val('adm_develop')){
 			$this->assign('menulist',$menulist);
 		}
-		//检测插件列表有没有快捷图标
+		//檢測外掛列表有沒有快捷圖示
 		$plugin_mlist = $plugin_alist = $plugin_glist = array();
 		if($this->plugin && is_array($this->plugin)){
 			foreach($this->plugin as $key=>$value){
@@ -194,7 +194,7 @@ class index_control extends phpok_control
 		if($this->config['multiple_language']){
 			$langlist = $this->model('lang')->get_list();
 			if($langlist){
-				$language = '简体中文';
+				$language = '簡體中文';
 				foreach($langlist as $key=>$value){
 					if($key == $this->session->val('admin_lang_id')){
 						$language = $value;
@@ -210,15 +210,15 @@ class index_control extends phpok_control
 	}
 
 	/**
-	 * 默认首页
+	 * 預設首頁
 	**/
 	public function homepage_f()
 	{
 		$this->_index();
-		//读取统计
+		//讀取統計
 		$all = $this->model('list')->status_all($this->session->val('admin_site_id'));
 		$this->assign('all_status',$all);
-		//读取服务器信息
+		//讀取伺服器資訊
 		$list = $this->_serverInfo();
 		if($list && count($list)>10){
 			$serverlist = array();
@@ -245,56 +245,56 @@ class index_control extends phpok_control
 		if(function_exists('zend_version')){
 			$list[]=array(P_Lang('Zend引擎版本'),zend_version());
 		}
-		$list[]=array(P_Lang('MySQL服务端'),$this->db->version());
-		$list[]=array(P_Lang('MySQL客户端'),$this->db->version('client'));
+		$list[]=array(P_Lang('MySQL服務端'),$this->db->version());
+		$list[]=array(P_Lang('MySQL客戶端'),$this->db->version('client'));
 		if($this->config['debug']){
-			$list[] = array(P_Lang('PHPOK调试'),P_Lang('开启，建议正式运行时关闭'),'color:red;font-weight:bold;',P_Lang('修改_config/global.ini.php，将 debug 设为 false 即可'));
+			$list[] = array(P_Lang('PHPOK除錯'),P_Lang('開啟，建議正式執行時關閉'),'color:red;font-weight:bold;',P_Lang('修改_config/global.ini.php，將 debug 設為 false 即可'));
 		}
 		if($this->config['develop']){
-			$list[] = array(P_Lang('PHPOK开发模式'),P_Lang('开启，建议正式运行时关闭'),'color:red;font-weight:bold;',P_Lang('修改_config/global.ini.php，将 develop 设为 false 即可'));
+			$list[] = array(P_Lang('PHPOK開發模式'),P_Lang('開啟，建議正式執行時關閉'),'color:red;font-weight:bold;',P_Lang('修改_config/global.ini.php，將 develop 設為 false 即可'));
 		}
 		if(isset($_SERVER['SERVER_SOFTWARE'])){
-			$list[]=array(P_Lang('服务器软件'),$_SERVER['SERVER_SOFTWARE']);
+			$list[]=array(P_Lang('伺服器軟體'),$_SERVER['SERVER_SOFTWARE']);
 		}
 		$list[] = array(P_Lang('IP地址'),$this->lib('common')->ip());
 		if(isset($_SERVER['HTTP_HOST']) || isset($_SERVER['SERVER_NAME'])){
 			$list[]=array(P_Lang('域名'),$_SERVER['HTTP_HOST'] ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME']);
 		}		
-		$list[]=array(P_Lang('协议端口'),$_SERVER['SERVER_PROTOCOL'].' '.$_SERVER['SERVER_PORT']);
-		$list[]=array(P_Lang('服务器时间'),date('Y-m-d H:i:s',$this->time));
+		$list[]=array(P_Lang('協議埠'),$_SERVER['SERVER_PROTOCOL'].' '.$_SERVER['SERVER_PORT']);
+		$list[]=array(P_Lang('伺服器時間'),date('Y-m-d H:i:s',$this->time));
 		if(function_exists('get_current_user')){
-			$list[]=array(P_Lang('当前系统用户'),get_current_user());
+			$list[]=array(P_Lang('當前系統使用者'),get_current_user());
 		}
 		if(function_exists('php_uname')){
-			$list[]=array(P_Lang('操作系统'),php_uname('s').' '.php_uname('r').' '.php_uname('v'));
+			$list[]=array(P_Lang('作業系統'),php_uname('s').' '.php_uname('r').' '.php_uname('v'));
 		}
 		if(function_exists('php_sapi_name')){
-			$list[]=array(P_Lang('PHP运行模式'),php_sapi_name());
+			$list[]=array(P_Lang('PHP執行模式'),php_sapi_name());
 		}
 		if(strtoupper(ini_get("display_errors")) == 'ON'){
-			$list[]=array(P_Lang('报错模式'),P_Lang('开启，正式运行建议关闭'),'color:red;font-weight:bold;',P_Lang('修改 php.ini 文件，将 display_errors 值改为 Off 即可'));
+			$list[]=array(P_Lang('報錯模式'),P_Lang('開啟，正式執行建議關閉'),'color:red;font-weight:bold;',P_Lang('修改 php.ini 檔案，將 display_errors 值改為 Off 即可'));
 		}else{
-			$list[]=array(P_Lang('报错模式'),P_Lang('关闭'),'color:darkblue;');
+			$list[]=array(P_Lang('報錯模式'),P_Lang('關閉'),'color:darkblue;');
 		}
 		$list[]=array(P_Lang('POST提交限制'),ini_get('post_max_size'));
-		$list[]=array(P_Lang('上传大小限制'),ini_get('upload_max_filesize'));
+		$list[]=array(P_Lang('上傳大小限制'),ini_get('upload_max_filesize'));
 		if(ini_get('max_execution_time')){
-			$list[]=array(P_Lang('脚本超时时间'),ini_get('max_execution_time').P_Lang('秒'),'color:red;font-weight:bold;');
+			$list[]=array(P_Lang('指令碼超時時間'),ini_get('max_execution_time').P_Lang('秒'),'color:red;font-weight:bold;');
 		}
 		
 		if (ini_get("safe_mode")==0){
-			$list[]=array(P_Lang('安全模式'),P_Lang('关闭'));
+			$list[]=array(P_Lang('安全模式'),P_Lang('關閉'));
 		}else{
-			$list[]=array(P_Lang('安全模式'),P_Lang('开启'));
+			$list[]=array(P_Lang('安全模式'),P_Lang('開啟'));
 		}
 		if (function_exists('memory_get_usage')){
-			$list[]=array(P_Lang('当前使用内存'),$this->lib('common')->num_format(memory_get_usage()));
+			$list[]=array(P_Lang('當前使用記憶體'),$this->lib('common')->num_format(memory_get_usage()));
 		}
 		return $list;
 	}
 
 	/**
-	 * 模式切换
+	 * 模式切換
 	**/
 	public function develop_f()
 	{
@@ -333,13 +333,13 @@ class index_control extends phpok_control
 		if($alist && is_array($alist)){
 			$this->assign('plugin_alist',$alist);
 		}
-		//是否显示验证码信息
+		//是否顯示驗證碼資訊
 		$show_vcode_setting = false;
 		if($rs['register_status'] || $rs['login_status']){
 			$show_vcode_setting = true;
 		}
 		if(!$show_vcode_setting){
-			//读取项目是否有开放评论及发布功能
+			//讀取專案是否有開放評論及釋出功能
 			$condition = "module>0 AND (post_status=1 || comment_status=1)";
 			$plist = $this->model('project')->project_all($this->session->val('admin_site_id'),'id',$condition);
 			if($plist){
@@ -411,7 +411,7 @@ class index_control extends phpok_control
 	}
 
 	/**
-	 * 清空缓存，包括过时的购物车，及Data目录下的Session文件
+	 * 清空快取，包括過時的購物車，及Data目錄下的Session檔案
 	**/
 	public function clear_f()
 	{
@@ -419,7 +419,7 @@ class index_control extends phpok_control
 		$this->lib('file')->rm($this->dir_data."tpl_www/");
 		$this->lib('file')->rm($this->dir_data."tpl_admin/");
 		$this->lib('file')->rm($this->dir_cache);
-		//清空SESSION过期的SESSION文件
+		//清空SESSION過期的SESSION檔案
 		$list = $this->lib('file')->ls($this->dir_data.'session/');
 		if($list){
 			foreach($list as $key=>$value){
@@ -434,31 +434,31 @@ class index_control extends phpok_control
 	}
 
 	/**
-	 * 站点切换提示
+	 * 站點切換提示
 	**/
 	public function site_f()
 	{
 		$siteid = $this->get("id","int");
 		if(!$siteid){
-			$this->error(P_Lang('请选择要维护的站点'),$this->ur('index'));
+			$this->error(P_Lang('請選擇要維護的站點'),$this->ur('index'));
 		}
 		$rs = $this->model("site")->get_one($siteid);
 		if(!$rs){
-			$this->error(P_Lang('站点信息不存在'),$this->url("index"));
+			$this->error(P_Lang('站點資訊不存在'),$this->url("index"));
 		}
 		$this->session->assign('admin_site_id',$siteid);
-		$tip = P_Lang('您正在切换到网站：{sitename}，请稍候…',array('sitename'=>"<span style='color:red;font-weight:bold;'>".$rs['title']."</span>"));
+		$tip = P_Lang('您正在切換到網站：{sitename}，請稍候…',array('sitename'=>"<span style='color:red;font-weight:bold;'>".$rs['title']."</span>"));
 		$this->success($tip,$this->url("index"));
 	}
 
 	/**
-	 * 获取待处理信息
+	 * 獲取待處理資訊
 	**/
 	public function pendding_f()
 	{
 		$this->config('is_ajax',true);
 		$list = false;
-		//读取未操作的主题
+		//讀取未操作的主題
 		$rslist = $this->model('list')->pending_info($this->session->val('admin_site_id'));
 		if($rslist){
 			foreach($rslist as $key=>$value){
@@ -469,19 +469,19 @@ class index_control extends phpok_control
 				$list['project_'.$value['pid']] = array("title"=>$value["title"],"total"=>$value["total"],"url"=>$url,'id'=>$value['pid']);
 			}
 		}
-		//读取未审核的会员信息
+		//讀取未稽核的會員資訊
 		$condition = "u.status=0";
 		$user_total = $this->model('user')->get_count($condition);
 		if($user_total > 0){
 			$url = $this->url("user","","status=3");
-			$list['ctrl_user'] = array("title"=>P_Lang('会员列表'),"total"=>$user_total,"url"=>$url,'id'=>'user');
+			$list['ctrl_user'] = array("title"=>P_Lang('會員列表'),"total"=>$user_total,"url"=>$url,'id'=>'user');
 		}
-		//读取未审核的回复信息
+		//讀取未稽核的回覆資訊
 		$condition = "status=0";
 		$reply_total = $this->model('reply')->get_total($condition);
 		if($reply_total>0){
 			$url = $this->url("reply","","status=3");
-			$list['ctrl_reply'] = array("title"=>P_Lang('评论管理'),"total"=>$reply_total,"url"=>$url,'id'=>'reply');
+			$list['ctrl_reply'] = array("title"=>P_Lang('評論管理'),"total"=>$reply_total,"url"=>$url,'id'=>'reply');
 		}
 		if($this->config['async']['status']){
 			$taskurl = api_url('task','index','',true);
@@ -490,7 +490,7 @@ class index_control extends phpok_control
 			}
 			$this->lib('async')->start($taskurl);
 		}
-		//远程检查更新
+		//遠端檢查更新
 		if(file_exists($this->dir_data.'update.php')){
 			include($this->dir_data.'update.php');
 			$time = 0;

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： payment/unionpay/submit.php
-	备注： 生成提交按钮
+	檔案： payment/unionpay/submit.php
+	備註： 生成提交按鈕
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年08月28日 14时06分
+	時間： 2015年08月28日 14時06分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class unionpay_submit

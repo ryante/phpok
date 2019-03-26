@@ -1,13 +1,13 @@
 <?php
 /**
- * 资源分类
+ * 資源分類
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年03月21日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年03月21日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -66,8 +66,8 @@ class rescate_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取分类信息，分类ID内容不存在时读默认分类
-	 * @参数 $id 分类ID，为空读默认分类
+	 * 獲取分類資訊，分類ID內容不存在時讀預設分類
+	 * @引數 $id 分類ID，為空讀預設分類
 	 * @返回 false 或 array
 	**/
 	public function cate_info($id='')
@@ -81,8 +81,8 @@ class rescate_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得附件下的全部分类
-	 * @返回 数组
+	 * 取得附件下的全部分類
+	 * @返回 陣列
 	**/
 	public function cate_all()
 	{
@@ -91,7 +91,7 @@ class rescate_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取存储类别样式
+	 * 獲取儲存類別樣式
 	**/
 	public function etypes_all()
 	{

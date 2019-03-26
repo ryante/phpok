@@ -1,8 +1,8 @@
 <?php
 /**
- * 仅限WEB接口调用的内容块
+ * 僅限WEB介面呼叫的內容塊
  * @author phpok.com <admin@phpok.com>
- * @copyright 2015-2016 深圳市锟铻科技有限公司
+ * @copyright 2015-2016 深圳市錕鋙科技有限公司
  * @version 5.0.0
  * @date 2016年02月05日
  */

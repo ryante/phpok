@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： gateway/payment/wxpay/wxpay.php
-	备注： 微信支付类
+	檔案： gateway/payment/wxpay/wxpay.php
+	備註： 微信支付類
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年11月04日 14时22分
+	時間： 2015年11月04日 14時22分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class wxpay_lib
@@ -47,7 +47,7 @@ class wxpay_lib
 		}
 	}
 
-	//定义公众账号ID
+	//定義公眾賬號ID
 	public function appid($val='')
 	{
 		if($val){
@@ -174,9 +174,9 @@ class wxpay_lib
 
 	/**
 	 * 
-	 * 构造获取code的url连接
-	 * @param string $redirectUrl 微信服务器回跳的url，需要url编码
-	 * @return 返回构造好的url
+	 * 構造獲取code的url連線
+	 * @param string $redirectUrl 微信伺服器回跳的url，需要url編碼
+	 * @return 返回構造好的url
 	 */
 	private function __CreateOauthUrlForCode($redirectUrl)
 	{
@@ -192,8 +192,8 @@ class wxpay_lib
 
 	/**
 	 * 
-	 * 通过code从工作平台获取openid机器access_token
-	 * @param string $code 微信跳转回来带上的code
+	 * 通過code從工作平臺獲取openid機器access_token
+	 * @param string $code 微信跳轉回來帶上的code
 	 * 
 	 * @return openid
 	 */
@@ -202,7 +202,7 @@ class wxpay_lib
 		$url = $this->__CreateOauthUrlForOpenid($code);
 		//初始化curl
 		$ch = curl_init();
-		//设置超时
+		//設定超時
 		curl_setopt($ch, CURLOPT_TIMEOUT, $this->timeout);
 		curl_setopt($ch, CURLOPT_URL, $url);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER,false);
@@ -213,7 +213,7 @@ class wxpay_lib
 			curl_setopt($ch,CURLOPT_PROXY,$this->proxy_host);
 			curl_setopt($ch,CURLOPT_PROXYPORT,$this->proxy_port);
 		}
-		//运行curl，结果以jason形式返回
+		//執行curl，結果以jason形式返回
 		$res = curl_exec($ch);
 		curl_close($ch);
 		//取出openid
@@ -249,7 +249,7 @@ class wxpay_lib
 	public function query($sn)
 	{
 		if(!$sn){
-			$this->errmsg('未指定订单编号');
+			$this->errmsg('未指定訂單編號');
 			return false;
 		}
 		$url = "https://api.mch.weixin.qq.com/pay/orderquery";
@@ -266,20 +266,20 @@ class wxpay_lib
 		return $rs;
 	}
 
-	//创建订单
+	//建立訂單
 	public function create($data)
 	{
 		$url = "https://api.mch.weixin.qq.com/pay/unifiedorder";
 		if(!$data['out_trade_no'] || !$data['total_fee'] || !$data['body']){
-			$this->errmsg('参数不完整：价格，订单号，订单内容');
+			$this->errmsg('引數不完整：價格，訂單號，訂單內容');
 			return false;
 		}
 		if($this->trade_type == 'native' && !$data['product_id']){
-			$this->errmsg('统一支付接口中，缺少必填参数product_id！trade_type为NATIVE时，product_id为必填参数');
+			$this->errmsg('統一支付介面中，缺少必填引數product_id！trade_type為NATIVE時，product_id為必填引數');
 			return false;
 		}
 		if($this->trade_type == 'jsapi' && !$data['openid']){
-			$this->errmsg('统一支付接口中，缺少必填参数openid！trade_type为JSAPI时，openid为必填参数！');
+			$this->errmsg('統一支付介面中，缺少必填引數openid！trade_type為JSAPI時，openid為必填引數！');
 			return false;
 		}
 		$data['appid'] = $this->appid;
@@ -382,9 +382,9 @@ class wxpay_lib
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 		if($useCert){
 			if($this->pem_ca){
-				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // 只信任CA颁布的证书 
-				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2); // 检查证书中是否设置域名，并且是否与提供的主机名匹配
-				curl_setopt($ch, CURLOPT_CAINFO, $this->pem_ca); // CA根证书（用来验证的网站证书是否是CA颁布）
+				curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, true); // 只信任CA頒佈的證書 
+				curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 2); // 檢查證書中是否設定域名，並且是否與提供的主機名匹配
+				curl_setopt($ch, CURLOPT_CAINFO, $this->pem_ca); // CA根證書（用來驗證的網站證書是否是CA頒佈）
 			}else{
 				curl_setopt($ch,CURLOPT_SSL_VERIFYPEER,false);
 				curl_setopt($ch,CURLOPT_SSL_VERIFYHOST,false);
@@ -406,13 +406,13 @@ class wxpay_lib
 		} else { 
 			$error = curl_errno($ch);
 			curl_close($ch);
-			throw new Exception("curl出错，错误码：".$error);
+			throw new Exception("curl出錯，錯誤碼：".$error);
 		}
 	}
 
 	private function getMillisecond()
 	{
-		//获取毫秒的时间戳
+		//獲取毫秒的時間戳
 		$time = explode ( " ", microtime () );
 		$time = $time[1] . ($time[0] * 1000);
 		$time2 = explode( ".", $time );
@@ -424,7 +424,7 @@ class wxpay_lib
 	public function GetJsApiParameters($data)
 	{
 		if(!array_key_exists("appid", $data) || !array_key_exists("prepay_id", $data) || $data['prepay_id'] == ""){
-			$this->errmsg('参数错误');
+			$this->errmsg('引數錯誤');
 			return false;
 		}
 		$values = array();
@@ -441,7 +441,7 @@ class wxpay_lib
 	public function get_jsapi_param($data)
 	{
 		if(!array_key_exists("appid", $data) || !array_key_exists("prepay_id", $data) || $data['prepay_id'] == ""){
-			$this->errmsg('参数错误');
+			$this->errmsg('引數錯誤');
 			return false;
 		}
 		$values = array();
@@ -455,8 +455,8 @@ class wxpay_lib
 		return $values;
 	}
 
-	//红包活动参数
-	//支持参数有：act_name：活动名称，wishing：活动祝愿
+	//紅包活動引數
+	//支援引數有：act_name：活動名稱，wishing：活動祝願
 	public function red_config($config='')
 	{
 		if($config && is_array($config)){
@@ -465,9 +465,9 @@ class wxpay_lib
 		return $this->red_config;
 	}
 
-	//发送红包给商户
-	//openid，目标ID
-	//price，价格，单位是：分
+	//傳送紅包給商戶
+	//openid，目標ID
+	//price，價格，單位是：分
 	public function hongbao($openid,$price)
 	{
 		$url = 'https://api.mch.weixin.qq.com/mmpaymkttransfers/sendredpack';

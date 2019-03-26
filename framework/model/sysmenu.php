@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: phpok/model/sysmenu.php
-	Note	: 后台核心应用管理，主表：qinggan_sysmenu
+	Note	: 後臺核心應用管理，主表：qinggan_sysmenu
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -15,7 +15,7 @@ class sysmenu_model_base extends phpok_model
 		parent::model();
 	}
 
-	# 获取一条信息
+	# 獲取一條資訊
 	function get_one($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."sysmenu WHERE id='".$id."'";
@@ -32,10 +32,10 @@ class sysmenu_model_base extends phpok_model
 		return $this->db->get_one($sql);
 	}
 
-	# 取得指定菜单
+	# 取得指定選單
 	public function get_list($parent_id=0,$status=0)
 	{
-		# 当未指定子菜单时，直接获取父栏目信息
+		# 當未指定子選單時，直接獲取父欄目資訊
 		$parent_id = intval($parent_id);
 		$sql = "SELECT * FROM ".$this->db->prefix."sysmenu WHERE parent_id=".intval($parent_id)." ";
 		if($status){
@@ -45,7 +45,7 @@ class sysmenu_model_base extends phpok_model
 		return $this->db->get_all($sql);
 	}
 
-	//取得全部菜单，并生成树状分类，仅限后台使用
+	//取得全部選單，並生成樹狀分類，僅限後臺使用
 	public function get_all($site_id=0,$status=0,$condition='')
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."sysmenu WHERE 1=1 ";
@@ -81,7 +81,7 @@ class sysmenu_model_base extends phpok_model
 		return $rslist;
 	}
 
-	//根据菜单取得导航高亮对应的菜单ID
+	//根據選單取得導航高亮對應的選單ID
 	function get_current_id($site_id=0,$ctrl='',$condition=array())
 	{
 		$site_id = $site_id ? '0,'.$site_id : '0';
@@ -95,7 +95,7 @@ class sysmenu_model_base extends phpok_model
 		if(!$rslist){
 			return false;
 		}
-		//计算相似度
+		//計算相似度
 		$ulist = array();
 		foreach($rslist AS $key=>$value){
 			$tmp = array();
@@ -111,7 +111,7 @@ class sysmenu_model_base extends phpok_model
 			}
 			$ulist[$value['id']] = $i;
 		}
-		//比较两个数据的相似度
+		//比較兩個資料的相似度
 		$r = array_search(max($ulist),$ulist);
 		return $r;
 	}

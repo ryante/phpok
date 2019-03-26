@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/rewrite_control.php
-	备注： Rewrite规则配置
+	檔案： {phpok}/model/admin/rewrite_control.php
+	備註： Rewrite規則配置
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年02月02日 14时18分
+	時間： 2015年02月02日 14時18分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class rewrite_control extends phpok_control
@@ -21,7 +21,7 @@ class rewrite_control extends phpok_control
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			error(P_Lang('您没有权限执行此操作'),'','error');
+			error(P_Lang('您沒有許可權執行此操作'),'','error');
 		}
 		$rslist = $this->model('rewrite')->get_all();
 		$this->assign('rslist',$rslist);
@@ -31,7 +31,7 @@ class rewrite_control extends phpok_control
 	public function set_f()
 	{
 		if(!$this->popedom['set']){
-			error(P_Lang('您没有权限执行此操作'),'','error');
+			error(P_Lang('您沒有許可權執行此操作'),'','error');
 		}
 		$id = $this->get('id');
 		if($id){
@@ -39,7 +39,7 @@ class rewrite_control extends phpok_control
 			$this->assign('rs',$rs);
 			$this->assign('id',$id);
 		}
-		//读取控制器
+		//讀取控制器
 		$clist = $this->model('rewrite')->ctrl_list();
 		$this->assign('clist',$clist);
 		$this->view("rewrite_set");
@@ -67,7 +67,7 @@ class rewrite_control extends phpok_control
 	public function save_f()
 	{
 		if(!$this->popedom['set']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id');
 		$data = array();
@@ -76,23 +76,23 @@ class rewrite_control extends phpok_control
 		}
 		$data['title'] = $this->get('title');
 		if(!$data['title']){
-			$this->json(P_Lang('主题不能为空'));
+			$this->json(P_Lang('主題不能為空'));
 		}
 		$data['rule'] = $this->get('rule','html');
 		if(!$data['rule']){
-			$this->json(P_Lang('规则不能为空'));
+			$this->json(P_Lang('規則不能為空'));
 		}
 		$data['val'] = $this->get('val');
 		if(!$data['val']){
-			$this->json(P_Lang('目标网址不能为空'));
+			$this->json(P_Lang('目標網址不能為空'));
 		}
 		$data['format'] = $this->get('format');
 		if(!$data['format']){
-			$this->json(P_Lang('格式化方法不能为空'));
+			$this->json(P_Lang('格式化方法不能為空'));
 		}
 		$data['ctrl'] = $this->get('ctrl');
 		if(!$data['ctrl']){
-			$this->json(P_Lang('控制器不能为空'));
+			$this->json(P_Lang('控制器不能為空'));
 		}
 		$data['func'] = $this->get('func');
 		$data['var'] = $this->get('var');
@@ -104,7 +104,7 @@ class rewrite_control extends phpok_control
 	public function taxis_f()
 	{
 		if(!$this->popedom['set']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id');
 		if(!$id){
@@ -118,7 +118,7 @@ class rewrite_control extends phpok_control
 	public function delete_f()
 	{
 		if(!$this->popedom['set']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id');
 		if(!$id){
@@ -131,7 +131,7 @@ class rewrite_control extends phpok_control
 	public function copy_f()
 	{
 		if(!$this->popedom['set']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id');
 		if(!$id){

@@ -1,25 +1,25 @@
 <?php
 /**
- * 购物车接口请求相关
+ * 購物車介面請求相關
  * @package phpok\api
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年08月19日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年08月19日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class cart_control extends phpok_control
 {
 	/**
-	 * 购物车ID，该ID将贯穿整个购物过程
+	 * 購物車ID，該ID將貫穿整個購物過程
 	**/
 	private $cart_id = 0;
 
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -28,21 +28,21 @@ class cart_control extends phpok_control
 	}
 
 	/**
-	 * 加入购物车
-	 * @参数 id 产品ID
-	 * @参数 title 产品名称（当产品ID不存在时）
-	 * @参数 qty 产品数量，仅支持数字
-	 * @参数 ext 产品性属，仅有id时有效，只支持数字
-	 * @参数 price 产品价格，仅当id为空时有效
-	 * @参数 thumb 产品缩略图，仅当id为空时有效
-	 * @参数 _clear 设为1表示立即订购
-	 * @返回 JSON数据
-	 * @更新时间 2018年04月22日
+	 * 加入購物車
+	 * @引數 id 產品ID
+	 * @引數 title 產品名稱（當產品ID不存在時）
+	 * @引數 qty 產品數量，僅支援數字
+	 * @引數 ext 產品性屬，僅有id時有效，只支援數字
+	 * @引數 price 產品價格，僅當id為空時有效
+	 * @引數 thumb 產品縮圖，僅當id為空時有效
+	 * @引數 _clear 設為1表示立即訂購
+	 * @返回 JSON資料
+	 * @更新時間 2018年04月22日
 	**/
 	public function add_f()
 	{
 		if(!$this->cart_id){
-			$this->error(P_Lang('购物车编号异常'));
+			$this->error(P_Lang('購物車編號異常'));
 		}
 		$clear = $this->get('_clear');
 		$id = $this->get('id','int');
@@ -83,7 +83,7 @@ class cart_control extends phpok_control
 	{
 		$title = $this->get('title');
 		if(!$title){
-			$this->error(P_Lang('产品名称不能为空'));
+			$this->error(P_Lang('產品名稱不能為空'));
 		}
 		$array = array('cart_id'=>$this->cart_id);
 		$array['title'] = $title;
@@ -102,16 +102,16 @@ class cart_control extends phpok_control
 	}
 
 	/**
-	 * 产品数据从id传过来的值生成
-	 * @参数 $id 产品ID
-	 * @参数 $qty 数量
+	 * 產品資料從id傳過來的值生成
+	 * @引數 $id 產品ID
+	 * @引數 $qty 數量
 	**/
 	private function product_from_tid($id,$qty=0)
 	{
 		$array = array('tid'=>$id,'cart_id'=>$this->cart_id);
 		$rs = $this->call->phpok('_arc',array('site'=>$this->site['id'],'title_id'=>$id));		
 		if(!$rs){
-			$this->error(P_Lang('产品信息不存在或未启用'));
+			$this->error(P_Lang('產品資訊不存在或未啟用'));
 		}
 		$thumb_id = $this->config['cart']['thumb_id'] ? $this->config['cart']['thumb_id'] : 'thumb';
 		if($rs[$thumb_id]){
@@ -164,7 +164,7 @@ class cart_control extends phpok_control
 	}
 
 	/**
-	 * 获取购物车里的产品总数
+	 * 獲取購物車裡的產品總數
 	**/
 	public function total_f()
 	{
@@ -179,24 +179,24 @@ class cart_control extends phpok_control
 	}
 
 	/**
-	 * 更新购物车里的产品数量
-	 * @参数 id 购物车里的产品ID，即表（cart_product）的主键id，不是产品ID
-	 * @参数 qty 更新购物车数量，不能小于1
+	 * 更新購物車裡的產品數量
+	 * @引數 id 購物車裡的產品ID，即表（cart_product）的主鍵id，不是產品ID
+	 * @引數 qty 更新購物車數量，不能小於1
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function qty_f()
 	{
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定产品ID'));
+			$this->error(P_Lang('未指定產品ID'));
 		}
 		$rs = $this->model('cart')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('产品不存在'));
+			$this->error(P_Lang('產品不存在'));
 		}
 		if($rs['cart_id'] != $this->cart_id){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$qty = $this->get('qty');
 		if(!$qty){
@@ -208,15 +208,15 @@ class cart_control extends phpok_control
 	}
 
 	/**
-	 * 删除购物车产品数据
-	 * @参数 id 购物车里的产品ID，即表（cart_product）的主键id，不是产品ID
-	 * @返回 JSON数据
+	 * 刪除購物車產品資料
+	 * @引數 id 購物車裡的產品ID，即表（cart_product）的主鍵id，不是產品ID
+	 * @返回 JSON資料
 	**/
 	public function delete_f()
 	{
 		$id = $this->get('id');
 		if(!$id){
-			$this->error(P_Lang('未指定产品ID'));
+			$this->error(P_Lang('未指定產品ID'));
 		}
 		if(is_string($id)){
 			$list = explode(",",$id);
@@ -236,15 +236,15 @@ class cart_control extends phpok_control
 			}
 		}
 		if(!$id || count($id)<1){
-			$this->error(P_Lang('没有有效的产品ID'));
+			$this->error(P_Lang('沒有有效的產品ID'));
 		}
 		foreach($id as $key=>$value){
 			$rs = $this->model('cart')->get_one($value);
 			if(!$rs){
-				$this->error(P_Lang('产品不存在'));
+				$this->error(P_Lang('產品不存在'));
 			}
 			if($rs['cart_id'] != $this->cart_id){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 			$this->model('cart')->delete_product($value);
 		}
@@ -252,10 +252,10 @@ class cart_control extends phpok_control
 	}
 
 	/**
-	 * 格式化价格，带货币符号
-	 * @参数 price 单个价格或多个价格
-	 * @返回 返回字符串（单个价格）或数组（多个价格）
-	 * @更新时间 2016年09月01日
+	 * 格式化價格，帶貨幣符號
+	 * @引數 price 單個價格或多個價格
+	 * @返回 返回字串（單個價格）或陣列（多個價格）
+	 * @更新時間 2016年09月01日
 	**/
 	public function price_format_f()
 	{
@@ -271,10 +271,10 @@ class cart_control extends phpok_control
 	}
 
 	/**
-	 * 格式化价格，无货币符号
-	 * @参数 price 单个价格或多个价格
-	 * @返回 返回字符串（单个价格）或数组（多个价格）
-	 * @更新时间 2016年09月01日
+	 * 格式化價格，無貨幣符號
+	 * @引數 price 單個價格或多個價格
+	 * @返回 返回字串（單個價格）或陣列（多個價格）
+	 * @更新時間 2016年09月01日
 	**/
 	public function price_format_val_f()
 	{
@@ -293,7 +293,7 @@ class cart_control extends phpok_control
 	{
 		$id = $this->get('id');
 		if(!$id){
-			$this->error(P_Lang('未指定要计算的产品ID'));
+			$this->error(P_Lang('未指定要計算的產品ID'));
 		}
 		if(is_string($id)){
 			$list = explode(",",$id);
@@ -313,12 +313,12 @@ class cart_control extends phpok_control
 			}
 		}
 		if(!$id || count($id)<1){
-			$this->error(P_Lang('没有有效的产品ID'));
+			$this->error(P_Lang('沒有有效的產品ID'));
 		}
 		$price = 0;
 		$rslist = $this->model('cart')->get_all($this->cart_id);
 		if(!$rslist){
-			$this->error(P_Lang('购物车信息为空'));
+			$this->error(P_Lang('購物車資訊為空'));
 		}
 		foreach($rslist as $key=>$value){
 			if(in_array($value['id'],$id)){
@@ -334,7 +334,7 @@ class cart_control extends phpok_control
 	{
 		$ids = $this->get('ids');
 		if(!$ids){
-			$this->error(P_Lang('未指定要计算的产品'));
+			$this->error(P_Lang('未指定要計算的產品'));
 		}
 		$idlist = explode(",",$ids);
 		unset($ids);
@@ -347,11 +347,11 @@ class cart_control extends phpok_control
 		}
 		unset($idlist);
 		if(!$ids || count($ids)<1){
-			$this->error(P_Lang('购物车里没有产品信息'));
+			$this->error(P_Lang('購物車裡沒有產品資訊'));
 		}
 		$rslist = $this->model('cart')->get_all($this->cart_id,$ids);
 		if(!$rslist){
-			$this->error(P_Lang('未找到产品信息'));
+			$this->error(P_Lang('未找到產品資訊'));
 		}
 		$address = array();
 		if($this->session->val('user_id')){
@@ -370,7 +370,7 @@ class cart_control extends phpok_control
 		$shipping = 0;
 		foreach($rslist as $key=>$value){
 			$total += floatval($value['price']) * intval($value['qty']);
-			//判断是否有运费
+			//判斷是否有運費
 			if($address && $address['province'] && $address['city'] && !$value['is_virtual'] && ($value['weight'] || $value['volume'])){
 				$tmp = array('number'=>$value['qty']);
 				$tmp['weight'] = floatval($value['weight']) * intval($value['qty']);

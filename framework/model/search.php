@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/model/search.php
-	Note	: 搜索涉及到的查询，这里仅用于全站搜索简单查询
+	Note	: 搜尋涉及到的查詢，這裡僅用於全站搜尋簡單查詢
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -15,7 +15,7 @@ class search_model_base extends phpok_model
 		parent::model();
 	}
 
-	//取得查询结果数量
+	//取得查詢結果數量
 	function get_total($condition="")
 	{
 		$sql = "SELECT count(l.id) FROM ".$this->db->prefix."list l WHERE l.status=1 AND l.hidden=0 ";
@@ -26,7 +26,7 @@ class search_model_base extends phpok_model
 		return $this->db->count($sql);
 	}
 
-	//查询ID数量
+	//查詢ID數量
 	function id_list($condition="",$offset=0,$psize=30)
 	{
 		$sql .= "SELECT l.id FROM ".$this->db->prefix."list l WHERE l.status=1 AND l.hidden=0 ";

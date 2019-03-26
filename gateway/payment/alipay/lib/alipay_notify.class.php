@@ -1,16 +1,16 @@
 <?php
 /* *
- * 类名：AlipayNotify
- * 功能：支付宝通知处理类
- * 详细：处理支付宝各接口通知返回
+ * 類名：AlipayNotify
+ * 功能：支付寶通知處理類
+ * 詳細：處理支付寶各介面通知返回
  * 版本：3.2
  * 日期：2011-03-25
- * 说明：
- * 以下代码只是为了方便商户测试而提供的样例代码，商户可以根据自己网站的需要，按照技术文档编写,并非一定要使用该代码。
- * 该代码仅供学习和研究支付宝接口使用，只是提供一个参考
+ * 說明：
+ * 以下程式碼只是為了方便商戶測試而提供的樣例程式碼，商戶可以根據自己網站的需要，按照技術文件編寫,並非一定要使用該程式碼。
+ * 該程式碼僅供學習和研究支付寶介面使用，只是提供一個參考
 
  *************************注意*************************
- * 调试通知返回时，可查看或改写log日志的写入TXT里的数据，来检查通知返回是否正常
+ * 除錯通知返回時，可檢視或改寫log日誌的寫入TXT裡的資料，來檢查通知返回是否正常
  */
 
 require_once("alipay_core.function.php");
@@ -18,11 +18,11 @@ require_once("alipay_md5.function.php");
 
 class AlipayNotify {
     /**
-     * HTTPS形式消息验证地址
+     * HTTPS形式訊息驗證地址
      */
 	var $https_verify_url = 'https://mapi.alipay.com/gateway.do?service=notify_verify&';
 	/**
-     * HTTP形式消息验证地址
+     * HTTP形式訊息驗證地址
      */
 	var $http_verify_url = 'http://notify.alipay.com/trade/notify_query.do?';
 	var $alipay_config;
@@ -32,11 +32,11 @@ class AlipayNotify {
 	}
 
     /**
-     * 验证消息是否是支付宝发出的合法消息
-     * @return 验证结果
+     * 驗證訊息是否是支付寶發出的合法訊息
+     * @return 驗證結果
      */
 	function verify($data){
-		//当数据为空时，返回否
+		//當資料為空時，返回否
 		if(!$data || !is_array($data)) return false;
 		$isSign = $this->getSignVeryfy($data, $data["sign"]);
 		$responseTxt = 'true';
@@ -49,19 +49,19 @@ class AlipayNotify {
 	}
 	
     /**
-     * 获取返回时的签名验证结果
-     * @param $para_temp 通知返回来的参数数组
-     * @param $sign 返回的签名结果
-     * @return 签名验证结果
+     * 獲取返回時的簽名驗證結果
+     * @param $para_temp 通知返回來的引數陣列
+     * @param $sign 返回的簽名結果
+     * @return 簽名驗證結果
      */
 	function getSignVeryfy($para_temp, $sign) {
-		//除去待签名参数数组中的空值和签名参数
+		//除去待簽名引數陣列中的空值和簽名引數
 		$para_filter = paraFilter($para_temp);
 		
-		//对待签名参数数组排序
+		//對待簽名引數陣列排序
 		$para_sort = argSort($para_filter);
 		
-		//把数组所有元素，按照“参数=参数值”的模式用“&”字符拼接成字符串
+		//把陣列所有元素，按照“引數=引數值”的模式用“&”字元拼接成字串
 		$prestr = createLinkstring($para_sort);
 		$isSgin = false;
 		switch (strtoupper(trim($this->alipay_config['sign_type']))) {
@@ -76,13 +76,13 @@ class AlipayNotify {
 	}
 
     /**
-     * 获取远程服务器ATN结果,验证返回URL
-     * @param $notify_id 通知校验ID
-     * @return 服务器ATN结果
-     * 验证结果集：
-     * invalid命令参数不对 出现这个错误，请检测返回处理中partner和key是否为空 
-     * true 返回正确信息
-     * false 请检查防火墙或者是服务器阻止端口问题以及验证时间是否超过一分钟
+     * 獲取遠端伺服器ATN結果,驗證返回URL
+     * @param $notify_id 通知校驗ID
+     * @return 伺服器ATN結果
+     * 驗證結果集：
+     * invalid命令引數不對 出現這個錯誤，請檢測返回處理中partner和key是否為空 
+     * true 返回正確資訊
+     * false 請檢查防火牆或者是伺服器阻止埠問題以及驗證時間是否超過一分鐘
      */
 	function getResponse($notify_id) {
 		$transport = strtolower(trim($this->alipay_config['transport']));

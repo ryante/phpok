@@ -1,20 +1,20 @@
 <?php
 /**
- * 读取主题内容
+ * 讀取主題內容
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年08月23日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年08月23日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class content_model_base extends phpok_model
 {
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -23,9 +23,9 @@ class content_model_base extends phpok_model
 
 
 	/**
-	 * 取得单个主题信息
-	 * @参数 $id 主题ID或标识
-	 * @参数 $status 是否已审核
+	 * 取得單個主題資訊
+	 * @引數 $id 主題ID或標識
+	 * @引數 $status 是否已稽核
 	**/
 	public function get_one($id,$status=true)
 	{
@@ -53,7 +53,7 @@ class content_model_base extends phpok_model
 				$rs = array_merge($ext_rs,$rs);
 			}
 		}
-		//读取属性
+		//讀取屬性
 		$sql = "SELECT * FROM ".$this->db->prefix."list_attr WHERE tid='".$rs['id']."' ORDER BY taxis ASC,id DESC";
 		$attrlist = $this->db->get_all($sql);
 		if($attrlist){
@@ -93,8 +93,8 @@ class content_model_base extends phpok_model
 	}
 
 	/**
-	 * 通过主题ID获取对应的模块ID
-	 * @参数 $id 主题ID
+	 * 通過主題ID獲取對應的模組ID
+	 * @引數 $id 主題ID
 	**/
 	public function get_mid($id)
 	{
@@ -107,10 +107,10 @@ class content_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取扩展字段并格式化内容
-	 * @参数 $mid 模块ID
-	 * @参数 $ids 主题，多个主题用英文逗号隔开
-	 * @参数 
+	 * 獲取擴充套件欄位並格式化內容
+	 * @引數 $mid 模組ID
+	 * @引數 $ids 主題，多個主題用英文逗號隔開
+	 * @引數 
 	**/
 	public function ext_list($mid,$ids)
 	{

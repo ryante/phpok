@@ -19,11 +19,11 @@ class AppClient
     }
 
     /*
-     * hub: 直播空间名
-     * title: app 的名称  注意，Title 不是唯一标识，重复 create 动作将生成多个 app
-     * maxUsers：人数限制
-     * NoAutoKickUser: bool 类型，可选，禁止自动踢人（抢流）。默认为 false ，
-       即同一个身份的 client (app/room/user) ，新的连麦请求可以成功，旧连接被关闭。
+     * hub: 直播空間名
+     * title: app 的名稱  注意，Title 不是唯一標識，重複 create 動作將生成多個 app
+     * maxUsers：人數限制
+     * NoAutoKickUser: bool 型別，可選，禁止自動踢人（搶流）。預設為 false ，
+       即同一個身份的 client (app/room/user) ，新的連麥請求可以成功，舊連線被關閉。
      */
     public function createApp($hub, $title, $maxUsers = null, $noAutoKickUser = null)
     {
@@ -41,19 +41,19 @@ class AppClient
     }
 
     /*
-     * appId: app 的唯一标识，创建的时候由系统生成。
-     * Title: app 的名称， 可选。
-     * Hub: 绑定的直播 hub，可选，用于合流后 rtmp 推流。
-     * MaxUsers: int 类型，可选，连麦房间支持的最大在线人数。
-     * NoAutoKickUser: bool 类型，可选，禁止自动踢人。
-     * MergePublishRtmp: 连麦合流转推 RTMP 的配置，可选择。其详细配置包括如下
-            Enable: 布尔类型，用于开启和关闭所有房间的合流功能。
-            AudioOnly: 布尔类型，可选，指定是否只合成音频。
-            Height, Width: int64，可选，指定合流输出的高和宽，默认为 640 x 480。
-            OutputFps: int64，可选，指定合流输出的帧率，默认为 25 fps 。
-            OutputKbps: int64，可选，指定合流输出的码率，默认为 1000 。
-            URL: 合流后转推旁路直播的地址，可选，支持魔法变量配置按照连麦房间号生成不同的推流地址。如果是转推到七牛直播云，不建议使用该配置。
-            StreamTitle: 转推七牛直播云的流名，可选，支持魔法变量配置按照连麦房间号生成不同的流名。例如，配置 Hub 为 qn-zhibo ，配置 StreamTitle 为 $(roomName) ，则房间 meeting-001 的合流将会被转推到 rtmp://pili-publish.qn-zhibo.***.com/qn-zhibo/meeting-001地址。详细配置细则，请咨询七牛技术支持。
+     * appId: app 的唯一標識，建立的時候由系統生成。
+     * Title: app 的名稱， 可選。
+     * Hub: 繫結的直播 hub，可選，用於合流後 rtmp 推流。
+     * MaxUsers: int 型別，可選，連麥房間支援的最大線上人數。
+     * NoAutoKickUser: bool 型別，可選，禁止自動踢人。
+     * MergePublishRtmp: 連麥合流轉推 RTMP 的配置，可選擇。其詳細配置包括如下
+            Enable: 布林型別，用於開啟和關閉所有房間的合流功能。
+            AudioOnly: 布林型別，可選，指定是否只合成音訊。
+            Height, Width: int64，可選，指定合流輸出的高和寬，預設為 640 x 480。
+            OutputFps: int64，可選，指定合流輸出的幀率，預設為 25 fps 。
+            OutputKbps: int64，可選，指定合流輸出的位元速率，預設為 1000 。
+            URL: 合流後轉推旁路直播的地址，可選，支援魔法變數配置按照連麥房間號生成不同的推流地址。如果是轉推到七牛直播雲，不建議使用該配置。
+            StreamTitle: 轉推七牛直播雲的流名，可選，支援魔法變數配置按照連麥房間號生成不同的流名。例如，配置 Hub 為 qn-zhibo ，配置 StreamTitle 為 $(roomName) ，則房間 meeting-001 的合流將會被轉推到 rtmp://pili-publish.qn-zhibo.***.com/qn-zhibo/meeting-001地址。詳細配置細則，請諮詢七牛技術支援。
      */
     public function updateApp($appId, $hub, $title, $maxUsers = null, $mergePublishRtmp = null, $noAutoKickUser = null)
     {
@@ -75,7 +75,7 @@ class AppClient
     }
 
     /*
-     * appId: app 的唯一标识，创建的时候由系统生成。
+     * appId: app 的唯一標識，建立的時候由系統生成。
      */
     public function getApp($appId)
     {
@@ -85,7 +85,7 @@ class AppClient
     }
 
     /*
-     * appId: app 的唯一标识，创建的时候由系统生成
+     * appId: app 的唯一標識，建立的時候由系統生成
      */
     public function deleteApp($appId)
     {
@@ -95,9 +95,9 @@ class AppClient
     }
 
     /*
-     * 获取房间的人数
-     * appId: app 的唯一标识，创建的时候由系统生成。
-     * roomName: 操作所查询的连麦房间。
+     * 獲取房間的人數
+     * appId: app 的唯一標識，建立的時候由系統生成。
+     * roomName: 操作所查詢的連麥房間。
      */
     public function listUser($appId, $roomName)
     {
@@ -108,9 +108,9 @@ class AppClient
 
    /*
     * 踢出玩家
-    * appId: app 的唯一标识，创建的时候由系统生成。
-    * roomName: 连麦房间
-    * userId: 请求加入房间的用户ID
+    * appId: app 的唯一標識，建立的時候由系統生成。
+    * roomName: 連麥房間
+    * userId: 請求加入房間的使用者ID
     */
     public function kickUser($appId, $roomName, $userId)
     {
@@ -120,11 +120,11 @@ class AppClient
     }
 
     /*
-     * 获取房间的人数
-     * appId: app 的唯一标识，创建的时候由系统生成。
-     * prefix: 所查询房间名的前缀索引，可以为空。
-     * offset: int 类型，分页查询的位移标记。
-     * limit: int 类型，此次查询的最大长度。
+     * 獲取房間的人數
+     * appId: app 的唯一標識，建立的時候由系統生成。
+     * prefix: 所查詢房間名的字首索引，可以為空。
+     * offset: int 型別，分頁查詢的位移標記。
+     * limit: int 型別，此次查詢的最大長度。
      * GET /v3/apps/<AppID>/rooms?prefix=<RoomNamePrefix>&offset=<Offset>&limit=<Limit>
      */
     public function listActiveRooms($appId, $prefix = null, $offset = null, $limit = null)
@@ -149,13 +149,13 @@ class AppClient
     }
 
     /*
-     * appId: app 的唯一标识，创建的时候由系统生成。
-     * roomName: 房间名称，需满足规格 ^[a-zA-Z0-9_-]{3,64}$
-     * userId: 请求加入房间的用户 ID，需满足规格 ^[a-zA-Z0-9_-]{3,50}$
-     * expireAt: int64 类型，鉴权的有效时间，传入以秒为单位的64位Unix
-       绝对时间，token 将在该时间后失效。
-     * permission: 该用户的房间管理权限，"admin" 或 "user"，默认为 "user" 。
-       当权限角色为 "admin" 时，拥有将其他用户移除出房间等特权.
+     * appId: app 的唯一標識，建立的時候由系統生成。
+     * roomName: 房間名稱，需滿足規格 ^[a-zA-Z0-9_-]{3,64}$
+     * userId: 請求加入房間的使用者 ID，需滿足規格 ^[a-zA-Z0-9_-]{3,50}$
+     * expireAt: int64 型別，鑑權的有效時間，傳入以秒為單位的64位Unix
+       絕對時間，token 將在該時間後失效。
+     * permission: 該使用者的房間管理許可權，"admin" 或 "user"，預設為 "user" 。
+       當權限角色為 "admin" 時，擁有將其他使用者移除出房間等特權.
      */
     public function appToken($appId, $roomName, $userId, $expireAt, $permission)
     {

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/form/editor_form.php
-	备注： 可视化编辑器配置
+	檔案： {phpok}/form/editor_form.php
+	備註： 視覺化編輯器配置
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年03月12日 22时37分
+	時間： 2015年03月12日 22時37分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class editor_form extends _init_auto
@@ -79,7 +79,7 @@ class editor_form extends _init_auto
 				}
 				$save_path = "['". implode("','",$save_path_array) ."']";
 			}else{
-				$save_path = '["默认分类"]';
+				$save_path = '["預設分類"]';
 			}
 			$this->assign("_save_path",$save_path);
 			$file = $this->dir_phpok.'form/html/editor_admin_tpl.html';

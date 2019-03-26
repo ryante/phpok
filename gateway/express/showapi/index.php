@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： express/showapi/index.php
-	备注： 易源接口之快递查询
+	檔案： express/showapi/index.php
+	備註： 易源介面之快遞查詢
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年09月19日 18时18分
+	時間： 2015年09月19日 18時18分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 //date_default_timezone_set("PRC");
@@ -13,8 +13,8 @@ if(!$express || !$rs || !$rs['code']){
 	return false;
 }
 $ext = ($express['ext'] && is_string($express['ext'])) ? unserialize($express['ext']) : array();
-$showapi_appid = trim($ext['app_id']);  //替换此值
-$showapi_sign = trim($ext['app_secret']);  //替换此值。
+$showapi_appid = trim($ext['app_id']);  //替換此值
+$showapi_sign = trim($ext['app_secret']);  //替換此值。
 $showapi_com = trim($ext['app_com']); 
 $showapi_timestamp = date('YmdHis',$this->time);
 $paramArr = array('showapi_appid'=>$showapi_appid,'showapi_timestamp' =>$showapi_timestamp,'com'=>$showapi_com,'nu'=>$rs['code']);
@@ -50,28 +50,28 @@ curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_HEADER, 0);
 $output = curl_exec($ch);
 if(!$output){
-	return array('content'=>P_Lang('远程获取数据失败'));
+	return array('content'=>P_Lang('遠端獲取資料失敗'));
 }
 $curl_info = curl_getinfo($ch);
 if($curl_info['http_code'] != '200'){
-	return array('content'=>P_Lang('远程获取数据失败'));
+	return array('content'=>P_Lang('遠端獲取資料失敗'));
 }
 curl_close($ch);
 $tmplist = $this->lib('json')->decode($output);
 if(!$tmplist){
-	return array('content'=>P_Lang('检索异常'));
+	return array('content'=>P_Lang('檢索異常'));
 }
 if($tmplist['showapi_res_code']){
 	return array('content'=>$tmplist['showapi_res_error']);
 }
 $array = array('is_end'=>false);
-//-1 待查询 0 查询异常 1 暂无记录 2 在途中 3 派送中 4 已签收 5 用户拒签 6 疑难件 7 无效单 8 超时单 9 签收失败 10 退回
+//-1 待查詢 0 查詢異常 1 暫無記錄 2 在途中 3 派送中 4 已簽收 5 使用者拒籤 6 疑難件 7 無效單 8 超時單 9 簽收失敗 10 退回
 $tmp = array(4,5,6,7,8,9,10);
 if($tmplist['showapi_res_body'] && $tmplist['showapi_res_body']['status'] && in_array($tmplist['showapi_res_body']['status'],$tmp)){
 	$array['is_end'] = true;
 }
 if(!$tmplist['showapi_res_body']['status']){
-	return array('content'=>P_Lang('查询结果异常'));
+	return array('content'=>P_Lang('查詢結果異常'));
 }
 if($tmplist['showapi_res_body'] && $tmplist['showapi_res_body']['data']){
 	$array['content'] = array();

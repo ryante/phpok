@@ -1,13 +1,13 @@
 <?php
 /**
- * 回复内容管理
+ * 回覆內容管理
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年07月31日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年07月31日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -15,7 +15,7 @@ class reply_control extends phpok_control
 {
 	var $popedom;
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -25,15 +25,15 @@ class reply_control extends phpok_control
 	}
 
 	/**
-	 * 取得网站全部评论
-	 * @参数 status 状态，1为已审核，2为未审核，0或空为全部
-	 * @参数 keywords 关键字，要检索的关键字
-	 * @参数 pageid 分页ID
+	 * 取得網站全部評論
+	 * @引數 status 狀態，1為已稽核，2為未稽核，0或空為全部
+	 * @引數 keywords 關鍵字，要檢索的關鍵字
+	 * @引數 pageid 分頁ID
 	**/
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$pageurl = $this->url("reply");
 		$status = $this->get("status","int");
@@ -44,7 +44,7 @@ class reply_control extends phpok_control
 			$pageurl .= "&status=".$status; 
 			$this->assign("status",$status);
 		}
-		//关键字
+		//關鍵字
 		$keywords = $this->get("keywords");
 		if($keywords){
 			$condition .= "AND (title LIKE '%".$keywords."%' OR content LIKE '%".$keywords."%') ";
@@ -61,8 +61,8 @@ class reply_control extends phpok_control
 			$offset = ($pageid-1) * $psize;
 			$rslist = $this->model('reply')->get_all($condition,$offset,$psize);
 			$this->assign("rslist",$rslist);
-			$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=5';
-			$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+			$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=5';
+			$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 			$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 			$this->assign("pagelist",$pagelist);
 		}
@@ -71,16 +71,16 @@ class reply_control extends phpok_control
 	}
 
 	/**
-	 * 读取某个主题下的全部评论
-	 * @参数 tid 主题ID
-	 * @参数 status 状态，1已审核，2未审核，0或空表示全部
-	 * @参数 keywords 关键字，检索评论关键字
-	 * @参数 pageid 分页ID
+	 * 讀取某個主題下的全部評論
+	 * @引數 tid 主題ID
+	 * @引數 status 狀態，1已稽核，2未稽核，0或空表示全部
+	 * @引數 keywords 關鍵字，檢索評論關鍵字
+	 * @引數 pageid 分頁ID
 	**/
 	public function list_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$tid = $this->get("tid","int");
 		if(!$tid){
@@ -108,12 +108,12 @@ class reply_control extends phpok_control
 		$psize = $this->config["psize"] ? $this->config["psize"] : 30;
 		$total = $this->model('reply')->get_total($condition);
 		if(!$total){
-			$this->error(P_Lang('没有评论内容'));
+			$this->error(P_Lang('沒有評論內容'));
 		}
 		$offset = ($pageid-1) * $psize;
 		$rslist = $this->model('reply')->get_list($condition,$offset,$psize,"id");
 		if(!$rslist){
-			$this->error(P_Lang('没有找到评论内容'));
+			$this->error(P_Lang('沒有找到評論內容'));
 		}
 		$uidlist = array();
 		foreach($rslist AS $key=>$value){
@@ -155,8 +155,8 @@ class reply_control extends phpok_control
 		}
 		$this->assign("rslist",$rslist);
 		if($total>$psize){
-			$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=5';
-			$string.= '&add='.P_Lang('数量').' (total)/(psize) '.P_Lang('页码').' (num)/(total_page)&always=1';
+			$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=5';
+			$string.= '&add='.P_Lang('數量').' (total)/(psize) '.P_Lang('頁碼').' (num)/(total_page)&always=1';
 			$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 			$this->assign("pagelist",$pagelist);
 		}
@@ -165,14 +165,14 @@ class reply_control extends phpok_control
 	}
 
 	/**
-	 * 变更评论的状态
-	 * @参数 status 要变更的状态
-	 * @参数 id 评论ID
+	 * 變更評論的狀態
+	 * @引數 status 要變更的狀態
+	 * @引數 id 評論ID
 	**/
 	public function status_f()
 	{
 		if(!$this->popedom['status']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -183,21 +183,21 @@ class reply_control extends phpok_control
 		$array = array("status"=>$status);
 		$this->model('reply')->save($array,$id);
 		if($status && $rs['tid'] && $rs['uid'] && ($rs['vtype'] == 'title' || $rs['vtype'] == 'order')){
-			$this->model('wealth')->add_integral($rs['tid'],$rs['uid'],'comment',P_Lang('管理员审核评论#{id}',array('id'=>$id)));
+			$this->model('wealth')->add_integral($rs['tid'],$rs['uid'],'comment',P_Lang('管理員稽核評論#{id}',array('id'=>$id)));
 		}
 		$this->success($status);
 	}
 
 	/**
-	 * 删除回复
-	 * @参数 
+	 * 刪除回覆
+	 * @引數 
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function delete_f()
 	{
 		if(!$this->popedom['delete']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -208,13 +208,13 @@ class reply_control extends phpok_control
 	}
 
 	/**
-	 * 编辑评论内容
-	 * @参数 id 评论ID
+	 * 編輯評論內容
+	 * @引數 id 評論ID
 	**/
 	public function edit_f()
 	{
 		if(!$this->popedom["modify"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -222,7 +222,7 @@ class reply_control extends phpok_control
 		}
 		$rs = $this->model('reply')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('数据记录不存在'));
+			$this->error(P_Lang('資料記錄不存在'));
 		}
 		$this->assign("id",$id);
 		$this->assign("rs",$rs);
@@ -237,11 +237,11 @@ class reply_control extends phpok_control
 	}
 
 	/**
-	 * 保存编辑的评论
-	 * @参数 id 评论ID
-	 * @参数 star 星数，最多5，最少为0
-	 * @参数 content 评论内容
-	 * @参数 status 状态
+	 * 儲存編輯的評論
+	 * @引數 id 評論ID
+	 * @引數 star 星數，最多5，最少為0
+	 * @引數 content 評論內容
+	 * @引數 status 狀態
 	**/
 	public function edit_save_f()
 	{
@@ -257,14 +257,14 @@ class reply_control extends phpok_control
 		$this->model('reply')->save($array,$id);
 		$rs = $this->model('reply')->get_one($id);
 		if($array["status"] && $rs['tid'] && $rs['uid']){
-			$this->model('wealth')->add_integral($rs['tid'],$rs['uid'],'comment',P_Lang('管理员编辑评论#{id}',array('id'=>$rs['id'])));
+			$this->model('wealth')->add_integral($rs['tid'],$rs['uid'],'comment',P_Lang('管理員編輯評論#{id}',array('id'=>$rs['id'])));
 		}
 		$this->success();
 	}
 
 	/**
-	 * 管理员回复评论
-	 * @参数 id 评论ID
+	 * 管理員回覆評論
+	 * @引數 id 評論ID
 	**/
 	public function adm_f()
 	{
@@ -274,7 +274,7 @@ class reply_control extends phpok_control
 		}
 		$rs = $this->model('reply')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('数据记录不存在'));
+			$this->error(P_Lang('資料記錄不存在'));
 		}
 		$this->assign("id",$id);
 		$this->assign("rs",$rs);

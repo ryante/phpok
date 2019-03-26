@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<sms>短信网关</sms>
-	<email>Email邮件</email>
-	<object-storage>云对象存储</object-storage>
+	<sms>簡訊閘道器</sms>
+	<email>Email郵件</email>
+	<object-storage>雲物件儲存</object-storage>
 </root>

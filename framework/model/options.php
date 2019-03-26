@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/options.php
-	备注： 产品属性
+	檔案： {phpok}/model/options.php
+	備註： 產品屬性
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年08月07日 13时32分
+	時間： 2015年08月07日 13時32分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class options_model_base extends phpok_model

@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: phpok/model/project.php
-	Note	: 应用信息
+	Note	: 應用資訊
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -15,7 +15,7 @@ class project_model_base extends phpok_model
 		parent::model();
 	}
 
-	//首页取得简单的项目信息，通过ID
+	//首頁取得簡單的專案資訊，通過ID
 	function simple_project_from_identifier($identifier="",$site_id=0)
 	{
 		if(!$identifier) return false;
@@ -28,9 +28,9 @@ class project_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得项目信息
-	 * @参数 $id 标识ID，可以是主键，也可以是标识
-	 * @参数 $ext 是否加载扩展
+	 * 取得專案資訊
+	 * @引數 $id 標識ID，可以是主鍵，也可以是標識
+	 * @引數 $ext 是否載入擴充套件
 	**/
 	public function get_one($id,$ext=true)
 	{
@@ -56,7 +56,7 @@ class project_model_base extends phpok_model
 		return $rs;
 	}
 
-	//通过identifier获取项目信息
+	//通過identifier獲取專案資訊
 	function identifier_one($id,$site_id=0,$ext=true)
 	{
 		$site_id = $site_id ? '0,'.intval($site_id) : '0';
@@ -70,7 +70,7 @@ class project_model_base extends phpok_model
 	}
 
 
-	//前台获取相应的get_one信息
+	//前臺獲取相應的get_one資訊
 	function www_one($id)
 	{
 		return $this->get_one($id,true);
@@ -86,7 +86,7 @@ class project_model_base extends phpok_model
 		return $this->db->get_all($sql,$pri);
 	}
 
-	//取得单项
+	//取得單項
 	public function project_one($site_id,$id)
 	{
 		if(!$id){
@@ -99,7 +99,7 @@ class project_model_base extends phpok_model
 		return $this->db->get_one($sql);
 	}
 
-	//取得当前分类下的父级分类信息，无父级分类则调用当前分类
+	//取得當前分類下的父級分類資訊，無父級分類則呼叫當前分類
 	function get_parent($id)
 	{
 		$sql = "SELECT id,parent_id FROM ".$this->db->prefix."project WHERE id='".intval($id)."'";
@@ -124,13 +124,13 @@ class project_model_base extends phpok_model
 		return $this->db->get_one($sql);
 	}
 
-	//取得子栏目信息
+	//取得子欄目資訊
 	function sublist($id,$condition="")
 	{
 		return $this->project_sonlist($id);
 	}
 
-	//取得子分类列表
+	//取得子分類列表
 	function get_sonlist(&$list,$id="0")
 	{
 		$mylist = $this->sublist($id);
@@ -218,14 +218,14 @@ class project_model_base extends phpok_model
 	}
 
 
-	//子项目
+	//子專案
 	function get_son($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."project WHERE parent_id='".$id."'";
 		return $this->db->get_all($sql);
 	}
 
-	//检测模块是否被项目调用
+	//檢測模組是否被專案呼叫
 	function chk_module($module_id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."project WHERE module='".$module_id."'";
@@ -238,7 +238,7 @@ class project_model_base extends phpok_model
 		return $this->db->get_one($sql);
 	}
 
-	//取得子项目信息
+	//取得子專案資訊
 	function project_sonlist($pid=0)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."project WHERE parent_id=".intval($pid)." AND status=1 ";
@@ -276,7 +276,7 @@ class project_model_base extends phpok_model
 		return $list;
 	}
 
-	//取得项目信息
+	//取得專案資訊
 	function plist($id,$status=0)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."project WHERE id IN(".$id.") AND hidden=0 ";

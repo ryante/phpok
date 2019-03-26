@@ -1,9 +1,9 @@
 <?php
 /**
- * 网址格式生成规范
+ * 網址格式生成規範
  * @file framework/model/admin/url_model.php
  * @author phpok.com <admin@phpok.com>
- * @copyright 2015-2016 深圳市锟铻科技有限公司
+ * @copyright 2015-2016 深圳市錕鋙科技有限公司
  * @version 4.5.0
  * @date 2016年01月27日
  */

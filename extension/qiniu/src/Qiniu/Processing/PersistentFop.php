@@ -7,19 +7,19 @@ use Qiniu\Http\Error;
 use Qiniu\Processing\Operation;
 
 /**
- * 持久化处理类,该类用于主动触发异步持久化操作.
+ * 持久化處理類,該類用於主動觸發非同步持久化操作.
  *
  * @link http://developer.qiniu.com/docs/v6/api/reference/fop/pfop/pfop.html
  */
 final class PersistentFop
 {
     /**
-     * @var 账号管理密钥对，Auth对象
+     * @var 賬號管理金鑰對，Auth物件
      */
     private $auth;
 
     /*
-     * @var 配置对象，Config 对象
+     * @var 配置物件，Config 物件
      * */
     private $config;
 
@@ -35,17 +35,17 @@ final class PersistentFop
     }
 
     /**
-     * 对资源文件进行异步持久化处理
-     * @param $bucket     资源所在空间
-     * @param $key        待处理的源文件
-     * @param $fops       string|array  待处理的pfop操作，多个pfop操作以array的形式传入。
+     * 對資原始檔進行非同步持久化處理
+     * @param $bucket     資源所在空間
+     * @param $key        待處理的原始檔
+     * @param $fops       string|array  待處理的pfop操作，多個pfop操作以array的形式傳入。
      *                    eg. avthumb/mp3/ab/192k, vframe/jpg/offset/7/w/480/h/360
-     * @param $pipeline   资源处理队列
-     * @param $notify_url 处理结果通知地址
-     * @param $force      是否强制执行一次新的指令
+     * @param $pipeline   資源處理佇列
+     * @param $notify_url 處理結果通知地址
+     * @param $force      是否強制執行一次新的指令
      *
      *
-     * @return array 返回持久化处理的persistentId, 和返回的错误。
+     * @return array 返回持久化處理的persistentId, 和返回的錯誤。
      *
      * @link http://developer.qiniu.com/docs/v6/api/reference/fop/
      */

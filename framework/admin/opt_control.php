@@ -1,13 +1,13 @@
 <?php
 /**
- * 下拉菜单管理器，支持无限级别下拉菜单
+ * 下拉選單管理器，支援無限級別下拉選單
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年01月18日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年01月18日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -22,12 +22,12 @@ class opt_control extends phpok_control
 	}
 
 	/**
-	 * 读取全部组信息
+	 * 讀取全部組資訊
 	**/
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$rslist = $this->model('opt')->group_all();
 		if($rslist){
@@ -47,7 +47,7 @@ class opt_control extends phpok_control
 	public function group_set_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if($id){
@@ -59,16 +59,16 @@ class opt_control extends phpok_control
 	}
 
 	/**
-	 * 存储选项组
+	 * 儲存選項組
 	**/
 	public function group_save_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$title = $this->get("title");
 		if(!$title){
-			$this->error(P_Lang('组名称不能为空'));
+			$this->error(P_Lang('組名稱不能為空'));
 		}
 		$link_symbol = $this->get('link_symbol');
 		$data = array('title'=>$title,'link_symbol'=>$link_symbol);
@@ -78,38 +78,38 @@ class opt_control extends phpok_control
 	}
 
 	/**
-	 * 删除选项组，同时删除选项组下的数据
+	 * 刪除選項組，同時刪除選項組下的資料
 	**/
 	public function group_del_f()
 	{
 		if(!$this->popedom["set"]){
-			exit(P_Lang('您没有权限执行此操作'));
+			exit(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			exit(P_Lang('未指定选项组'));
+			exit(P_Lang('未指定選項組'));
 		}
 		$this->model('opt')->group_del($id);
 		exit("ok");
 	}
 
 	/**
-	 * 取得指定选项组下的内容，支持分页
+	 * 取得指定選項組下的內容，支援分頁
 	**/
 	public function list_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$pid = $this->get("pid","int");
 		$group_id = $this->get("group_id","int");
 		if(!$group_id && !$pid){
-			$this->error(P_Lang('未指定选项组'),$this->url("opt"));
+			$this->error(P_Lang('未指定選項組'),$this->url("opt"));
 		}
 		if($pid){
 			$p_rs = $this->model('opt')->opt_one($pid);
 			if(!$p_rs){
-				$this->error(P_Lang('操作异常，请检查'),$this->url("opt"));
+				$this->error(P_Lang('操作異常，請檢查'),$this->url("opt"));
 			}
 			$group_id = $p_rs["group_id"];
 			$list[0] = $p_rs;
@@ -156,8 +156,8 @@ class opt_control extends phpok_control
 		$this->assign("_export",$_export);
 		$total = $this->model('opt')->opt_count($condition);
 		if($total > $psize){
-			$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=5';
-			$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+			$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=5';
+			$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 			$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 			$this->assign("pagelist",$pagelist);
 		}
@@ -171,27 +171,27 @@ class opt_control extends phpok_control
 	}
 
 	/**
-	 * 添加选项内容
+	 * 新增選項內容
 	**/
 	public function add_f()
 	{
 		if(!$this->popedom["set"]){
-			exit(P_Lang('您没有权限执行此操作'));
+			exit(P_Lang('您沒有許可權執行此操作'));
 		}
 		$group_id = $this->get("group_id","int");
 		if(!$group_id){
-			exit(P_Lang('未指定选项组'));
+			exit(P_Lang('未指定選項組'));
 		}
 		$title = $this->get("title");
 		$val = $this->get("val");
 		$pid = $this->get("pid","int");
 		$taxis = $this->get("taxis","int");
 		if(!$title || $val == ""){
-			exit(P_Lang('显示或值不能为空'));
+			exit(P_Lang('顯示或值不能為空'));
 		}
 		$chk_exists = $this->model('opt')->chk_val($group_id,$val,$pid);
 		if($chk_exists){
-			exit(P_Lang('值已存在不允许重复创建'));
+			exit(P_Lang('值已存在不允許重複建立'));
 		}
 		$array = array("group_id"=>$group_id,"parent_id"=>$pid,"title"=>$title,"val"=>$val,"taxis"=>$taxis);
 		$this->model('opt')->opt_save($array);
@@ -199,31 +199,31 @@ class opt_control extends phpok_control
 	}
 
 	/**
-	 * 更新值选项信息
+	 * 更新值選項資訊
 	**/
 	public function edit_f()
 	{
 		if(!$this->popedom["set"]){
-			exit(P_Lang('您没有权限执行此操作'));
+			exit(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			exit(P_Lang('未指定要编辑的ID'));
+			exit(P_Lang('未指定要編輯的ID'));
 		}
 		$rs = $this->model('opt')->opt_one($id);
 		if(!$rs){
-			exit(P_Lang('没有此项内容'));
+			exit(P_Lang('沒有此項內容'));
 		}
 		$pid = $rs["parent_id"];
 		$title = $this->get("title");
 		$val = $this->get("val");
 		$taxis = $this->get("taxis","int");
 		if(!$title || $val == ""){
-			exit(P_Lang('显示或值不能为空'));
+			exit(P_Lang('顯示或值不能為空'));
 		}
 		$chk_exists = $this->model('opt')->chk_val($rs["group_id"],$val,$pid,$id);
 		if($chk_exists){
-			exit(P_Lang('值已存在不允许重复'));
+			exit(P_Lang('值已存在不允許重複'));
 		}
 		$array = array("title"=>$title,"val"=>$val,"taxis"=>$taxis);
 		$this->model('opt')->opt_save($array,$id);
@@ -231,20 +231,20 @@ class opt_control extends phpok_control
 	}
 
 	/**
-	 * 删除选项内容
+	 * 刪除選項內容
 	**/
 	public function del_f()
 	{
 		if(!$this->popedom["set"]){
-			exit(P_Lang('您没有权限执行此操作'));
+			exit(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			exit(P_Lang('未指定要编辑的ID'));
+			exit(P_Lang('未指定要編輯的ID'));
 		}
 		$rs = $this->model('opt')->opt_one($id);
 		if(!$rs){
-			exit(P_Lang('没有此项内容'));
+			exit(P_Lang('沒有此項內容'));
 		}
 		$list[0] = $rs;
 		$this->model('opt')->opt_son($list,$id);
@@ -255,19 +255,19 @@ class opt_control extends phpok_control
 	}
 
 	/**
-	 * 导入数据上传界面
+	 * 匯入資料上傳介面
 	**/
 	public function import_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if($id){
 			$this->assign('id',$id);
 			$rs = $this->model('opt')->group_one($id);
 			if(!$rs){
-				$this->error(P_Lang('组信息不存在'));
+				$this->error(P_Lang('組資訊不存在'));
 			}
 			$this->assign('rs',$rs);
 		}
@@ -285,32 +285,32 @@ class opt_control extends phpok_control
 	}
 
 	/**
-	 * 导入数据操作
+	 * 匯入資料操作
 	**/
 	public function import_data_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		$pid = $this->get('pid','int');
 		$zipfile = $this->get('zipfile');
 		if(!$zipfile){
-			$this->error(P_Lang('没有ZIP文件'));
+			$this->error(P_Lang('沒有ZIP檔案'));
 		}
 		if(!file_exists($this->dir_root.$zipfile)){
-			$this->error(P_Lang('ZIP文件不存在'));
+			$this->error(P_Lang('ZIP檔案不存在'));
 		}
 		$tmpdir = $this->dir_cache.$this->session->val('admin_id').'_'.$this->time;
 		$this->lib('file')->make($tmpdir);
 		$this->lib('phpzip')->unzip($this->dir_root.$zipfile,$tmpdir);
 		$flist = $this->lib('file')->ls($tmpdir);
 		if(!$flist){
-			$this->error(P_Lang('没有文件'));
+			$this->error(P_Lang('沒有檔案'));
 		}
 		$file = current($flist);
 		if(strtolower(substr($file,-4)) != '.xml'){
-			$this->error(P_Lang('压缩包有异常，不是XML文件'));
+			$this->error(P_Lang('壓縮包有異常，不是XML檔案'));
 		}
 		$data = $this->lib('xml')->read($file);
 		$this->lib('file')->rm($tmpdir,'folder');
@@ -319,7 +319,7 @@ class opt_control extends phpok_control
 			$id = $this->model('opt')->group_save($data['title']);
 		}
 		if(!$id){
-			$this->error('导入失败');
+			$this->error('匯入失敗');
 		}
 		$data = $data['data'];
 		$this->_import($data,$id,$pid);
@@ -358,23 +358,23 @@ class opt_control extends phpok_control
 	}
 
 	/**
-	 * 导出数据
+	 * 匯出資料
 	**/
 	public function export_f()
 	{
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('项目组ID未指定'),$this->url('opt'));
+			$this->error(P_Lang('專案組ID未指定'),$this->url('opt'));
 		}
 		$pid = $this->get('pid','int');
 		$sub = $this->get('sub','int');
 		$rs = $this->model('opt')->group_one($id);
 		if(!$rs){
-			$this->error(P_Lang('组信息不存在'),$this->url('opt'));
+			$this->error(P_Lang('組資訊不存在'),$this->url('opt'));
 		}
 		$rslist = $this->model('opt')->opt_all("group_id=".$id." AND parent_id=".$pid);
 		if(!$rslist){
-			$this->error(P_Lang('没有选项内容数据'),$this->url('opt'));
+			$this->error(P_Lang('沒有選項內容資料'),$this->url('opt'));
 		}
 		$tmpfile = 'opt_'.$this->session->val('admin_id').'_'.$id.'.xml';
 		$data  = '<root>'."\n";

@@ -1,13 +1,13 @@
 <?php
 /**
- * 异步请求PHP，跳过页面，直接在PHP里执行，要求服务器支持fsockopen或pfsockopen或stream_socket_client或curl
+ * 非同步請求PHP，跳過頁面，直接在PHP裡執行，要求伺服器支援fsockopen或pfsockopen或stream_socket_client或curl
  * @package phpok\libs
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年09月06日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年09月06日
 **/
 
 if(!defined("PHPOK_SET")){
@@ -87,7 +87,7 @@ class async_lib
 	}
 
 	/**
-	 * 通过Curl实现异步请求，有1秒延迟
+	 * 通過Curl實現非同步請求，有1秒延遲
 	**/
 	private function _phpok_curl()
 	{
@@ -99,10 +99,10 @@ class async_lib
 		}
 		$myurl = $https ? 'https://'.$this->ip."/".$data['path'] : 'http://'.$this->ip.'/'.$data['path'];
 		$fp = curl_init();
-		curl_setopt($fp, CURLOPT_FORBID_REUSE, true); // 处理完后，关闭连接，释放资源
+		curl_setopt($fp, CURLOPT_FORBID_REUSE, true); // 處理完後，關閉連線，釋放資源
 		curl_setopt($fp,CURLOPT_TIMEOUT,1);
 		curl_setopt($fp,CURLOPT_RETURNTRANSFER,1);
-		curl_setopt($fp,CURLOPT_ENCODING ,'gzip');//GZIP压缩
+		curl_setopt($fp,CURLOPT_ENCODING ,'gzip');//GZIP壓縮
 		$header = array();
 		$header[] = "Host: ".$data['host'].':'.$data['port'];
 		curl_setopt($fp, CURLOPT_URL, $myurl);
@@ -117,7 +117,7 @@ class async_lib
 	}
 
 	/**
-	 * 通过stream_socket_client异步请求PHP
+	 * 通過stream_socket_client非同步請求PHP
 	**/
 	private function _phpok_stream()
 	{
@@ -129,9 +129,9 @@ class async_lib
 		stream_set_blocking($fp,0);
 		$header = "GET ".$data['path']." HTTP/1.1\r\n";
 		$header.="Host: ".$data['host']."\r\n";
-		$header.="Connection: close\r\n\r\n";//长连接关闭
+		$header.="Connection: close\r\n\r\n";//長連線關閉
 		fwrite($fp, $header);
-		usleep(1000); // 这一句也是关键，如果没有这延时，可能在nginx服务器上就无法执行成功
+		usleep(1000); // 這一句也是關鍵，如果沒有這延時，可能在nginx伺服器上就無法執行成功
 		fclose($fp);
 		return array('error_code' => 0);
 	}
@@ -151,15 +151,15 @@ class async_lib
 		stream_set_timeout($fp,1);
 		$header = "GET ".$data['path']." HTTP/1.1\r\n";
 		$header.="Host: ".$data['host']."\r\n";
-		$header.="Connection: close\r\n\r\n";//长连接关闭
+		$header.="Connection: close\r\n\r\n";//長連線關閉
 		fwrite($fp, $header);
-		usleep(1000); // 这一句也是关键，如果没有这延时，可能在nginx服务器上就无法执行成功
+		usleep(1000); // 這一句也是關鍵，如果沒有這延時，可能在nginx伺服器上就無法執行成功
 		fclose($fp);
 		return array('error_code' => 0);
 	}
 
 	/**
-	 * 检查是支持哪种类型的异步
+	 * 檢查是支援哪種型別的非同步
 	**/
 	private function _load_func()
 	{
@@ -192,7 +192,7 @@ class async_lib
 	}
 
 	/**
-	 * 格式化网址
+	 * 格式化網址
 	**/
 	private function _url_data()
 	{

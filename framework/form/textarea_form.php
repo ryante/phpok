@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/form/textarea_form.php
-	备注： 文本区内容
+	檔案： {phpok}/form/textarea_form.php
+	備註： 文字區內容
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年03月08日 23时06分
+	時間： 2015年03月08日 23時06分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class textarea_form extends _init_auto

@@ -1,13 +1,13 @@
 <?php
 /**
- * 扩展字段快速添加动作
+ * 擴充套件欄位快速新增動作
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年06月14日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年06月14日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -21,7 +21,7 @@ class ext_control extends phpok_control
 		$this->assign("format_list",$this->model('form')->format_all());
 	}
 
-	//创建扩展字段
+	//建立擴充套件欄位
 	public function create_f()
 	{
 		$id = $this->get('id');
@@ -45,12 +45,12 @@ class ext_control extends phpok_control
 		$array = array();
 		$array['title'] = $this->get("title");
 		if(!$array['title']){
-			$this->json(P_Lang('未指定标题'));
+			$this->json(P_Lang('未指定標題'));
 		}
 		$array['note'] = $this->get("note");
 		$array['form_type'] = $this->get("form_type");
 		if(!$array['form_type']){
-			$this->json(P_Lang('未选择配置表单类型'));
+			$this->json(P_Lang('未選擇配置表單型別'));
 		}
 		$array['form_style'] = $this->get("form_style","html");
 		$array['content'] = $this->get("content","html");
@@ -77,10 +77,10 @@ class ext_control extends phpok_control
 			if(!$tid){
 				$identifier = $this->get('identifier');
 				if(!$identifier){
-					$this->json(P_Lang('未指定标识串'));
+					$this->json(P_Lang('未指定標識串'));
 				}
 				if(!$this->model('ext')->check_identifier_add($identifier,$info[1])){
-					$this->json(P_Lang('标识串不符合要求，请检查'));
+					$this->json(P_Lang('標識串不符合要求，請檢查'));
 				}
 				$array['identifier'] = $identifier;
 			}
@@ -92,13 +92,13 @@ class ext_control extends phpok_control
 		if(!$tmpid){
 			$identifier = $this->get('identifier');
 			if(!$identifier){
-				$this->json(P_Lang('未指定标识串'));
+				$this->json(P_Lang('未指定標識串'));
 			}
 			if(!$this->model('ext')->check_identifier_add($identifier,$info[1])){
-				$this->json(P_Lang('标识串不符合验证要求，请检查'));
+				$this->json(P_Lang('標識串不符合驗證要求，請檢查'));
 			}
 			if($_SESSION['admin-'.$id] && $_SESSION['admin-'.$id][$identifier]){
-				$this->json(P_Lang('标识符已被使用'));
+				$this->json(P_Lang('識別符號已被使用'));
 			}
 		}else{
 			$identifier = $tmpid;
@@ -146,7 +146,7 @@ class ext_control extends phpok_control
 	}
 
 	/**
-	 * 主题增加扩展字段操作
+	 * 主題增加擴充套件欄位操作
 	**/
 	public function add_f()
 	{
@@ -156,24 +156,24 @@ class ext_control extends phpok_control
 			$this->json(P_Lang('未指定ID'));
 		}
 		if(!$module){
-			$this->json(P_Lang('未指哪个模型要添加扩展字段'));
+			$this->json(P_Lang('未指哪個模型要新增擴充套件欄位'));
 		}
 		$list = explode("-",$module);
 		$rs = $this->model('fields')->default_one($id);
 		if(!$rs){
-			$this->json(P_Lang('常用字段不存在'));
+			$this->json(P_Lang('常用欄位不存在'));
 		}
 		if($list[0] == "add"){
 			$tmp = 'admin-'.$module;
 			if($this->session->val($tmp) && $this->session->val($tmp.'.'.$id)){
-				$this->json(P_Lang('标识已被使用'));
+				$this->json(P_Lang('標識已被使用'));
 			}
 			$this->session->assign($tmp.'.'.$id,$rs);
 			$this->json(true);
 		}
 		$chk_rs = $this->model('ext')->check_identifier($rs["identifier"],$module);
 		if($chk_rs){
-			$this->json(P_Lang('标识已被使用'));
+			$this->json(P_Lang('標識已被使用'));
 		}
 		$array = array();
 		$array["module"] = $module;
@@ -206,7 +206,7 @@ class ext_control extends phpok_control
 			$this->json(P_Lang('未指定ID'));
 		}
 		if(!$module){
-			$this->json(P_Lang('未指哪个模型要添加扩展字段'));
+			$this->json(P_Lang('未指哪個模型要新增擴充套件欄位'));
 		}
 		$list = explode("-",$module);
 		if($list[0] == "add"){
@@ -223,7 +223,7 @@ class ext_control extends phpok_control
 	{
 		$module = $this->get("module");
 		if(!$module){
-			$this->json(P_Lang('未指定模块'));
+			$this->json(P_Lang('未指定模組'));
 		}
 		if(substr($module,0,3) == "add"){
 			$idstring = $_SESSION[$module.'-ext-id'];
@@ -250,7 +250,7 @@ class ext_control extends phpok_control
 		$this->json($array,true);
 	}
 
-	# 编辑扩展属性
+	# 編輯擴充套件屬性
 	public function edit_f()
 	{
 		$id = $this->get("id");
@@ -259,7 +259,7 @@ class ext_control extends phpok_control
 		}
 		$module = $this->get("module");
 		if(!$module){
-			$this->error(P_Lang('未指定模块'));
+			$this->error(P_Lang('未指定模組'));
 		}
 		$info = explode('-',$module);
 		if(in_array('add',$info)){
@@ -272,7 +272,7 @@ class ext_control extends phpok_control
 			$this->assign('tid',$rs['id']);
 		}
 		if(!$rs){
-			$this->error(P_Lang('自定义字段不存在！'));
+			$this->error(P_Lang('自定義欄位不存在！'));
 		}
 		$this->assign("module",$module);
 		$this->assign("rs",$rs);

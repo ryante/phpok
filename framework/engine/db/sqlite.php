@@ -1,16 +1,16 @@
 <?php
 /**
- * 文件型数据库 SQLite 3 引挈，该引挈仅支持 PHP5.3 及更高版本
+ * 檔案型資料庫 SQLite 3 引挈，該引挈僅支援 PHP5.3 及更高版本
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @许可 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年09月08日
+ * @許可 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年09月08日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -37,20 +37,20 @@ class db_sqlite extends db
 	}
 
 	/**
-	 * 连接SQLite数据库
+	 * 連線SQLite資料庫
 	**/
 	public function connect()
 	{
 		if(!$this->database){
-			$this->error('数据库文件未设置');
+			$this->error('資料庫檔案未設定');
 		}
 		if(!file_exists($this->database)){
-			$this->error('数据库文件不存在');
+			$this->error('資料庫檔案不存在');
 		}
 		$this->_time();
 		$this->conn = new SQLite3($this->database,SQLITE3_OPEN_READWRITE);
 		if(!$this->conn){
-			$this->error('数据库连接失败');
+			$this->error('資料庫連線失敗');
 		}
 		$this->conn->busyTimeout(100);
 		$this->_time();
@@ -86,7 +86,7 @@ class db_sqlite extends db
 	}
 
 	/**
-	 * 检测链接是否存在
+	 * 檢測連結是否存在
 	**/
 	private function check_connect()
 	{
@@ -243,10 +243,10 @@ class db_sqlite extends db
 	}
 
 	/**
-	 * 查看有多少数量
-	 * @参数 $sql 要查询的SQL
-	 * @参数 $is_count 是否使用 SQL 自带的 count 
-	 * @参数 
+	 * 檢視有多少數量
+	 * @引數 $sql 要查詢的SQL
+	 * @引數 $is_count 是否使用 SQL 自帶的 count 
+	 * @引數 
 	**/
 	public function count($sql="",$is_count=true)
 	{
@@ -272,8 +272,8 @@ class db_sqlite extends db
 	}
 
 	/**
-	 * 查询字段个数
-	 * @参数 $sql 要查询的语句
+	 * 查詢欄位個數
+	 * @引數 $sql 要查詢的語句
 	**/
 	public function num_fields($sql="")
 	{
@@ -340,7 +340,7 @@ class db_sqlite extends db
 		return $rs;
 	}
 
-	//显示表名
+	//顯示錶名
 	public function table_name($table_list,$i)
 	{
 		return $table_list[$i];
@@ -366,7 +366,7 @@ class db_sqlite extends db
 	}
 
 	/**
-	 * 取得版本号
+	 * 取得版本號
 	**/
 	public function version($type="server")
 	{

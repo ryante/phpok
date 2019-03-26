@@ -1,8 +1,8 @@
 <?php
 /***********************************************************
-	备注：评论列表读取
+	備註：評論列表讀取
 	版本：5.0.0
-	官网：www.phpok.com
+	官網：www.phpok.com
 	作者：qinggan <qinggan@188.com>
 	更新：2016年02月07日
 ***********************************************************/ 
@@ -17,7 +17,7 @@ class comment_control extends phpok_control
 		$this->model('popedom')->siteid($this->site['id']);
 		$groupid = $this->model('usergroup')->group_id($this->session->val('user_id'));
 		if(!$groupid){
-			$this->error(P_Lang('无法获取前端用户组信息'));
+			$this->error(P_Lang('無法獲取前端使用者組資訊'));
 		}
 		$this->user_groupid = $groupid;
 	}
@@ -26,24 +26,24 @@ class comment_control extends phpok_control
 	{
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定主题ID'));
+			$this->error(P_Lang('未指定主題ID'));
 		}
 		$rs = $this->model('content')->get_one($id,true);
 		if(!$rs){
-			$this->error(P_Lang('内容不存在'),$this->url,5);
+			$this->error(P_Lang('內容不存在'),$this->url,5);
 		}
 		if(!$rs['project_id']){
-			$this->error(P_Lang('未绑定项目'),$this->url,5);
+			$this->error(P_Lang('未繫結專案'),$this->url,5);
 		}
 		if(!$rs['module_id']){
-			$this->error(P_Lang('未绑定相应的模块'));
+			$this->error(P_Lang('未繫結相應的模組'));
 		}
 		$project = $this->call->phpok('_project',array('pid'=>$rs['project_id']));
 		if(!$project || !$project['status']){
-			$this->error(P_Lang('项目不存在或未启用'));
+			$this->error(P_Lang('專案不存在或未啟用'));
 		}
 		if(!$this->model('popedom')->check($project['id'],$this->user_groupid,'read')){
-			$this->error(P_Lang('您没有阅读此文章权限'));
+			$this->error(P_Lang('您沒有閱讀此文章許可權'));
 		}
 		$this->assign('page_rs',$project);
 		$url_id = $rs['identifier'] ? $rs['identifier'] : $rs['id'];

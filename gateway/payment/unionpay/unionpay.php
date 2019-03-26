@@ -1,12 +1,12 @@
 <?php
 /**
- * 银联支付
+ * 銀聯支付
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年04月02日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年04月02日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -23,23 +23,23 @@ class unionpay_lib
 	public function __construct()
 	{
 		$this->form_params = array(
-			'version' => '5.0.0',				//版本号
-			'encoding' => 'utf-8',				//编码方式
-			'txnType' => '01',				//交易类型	
-			'txnSubType' => '01',				//交易子类
-			'bizType' => '000201',				//业务类型
-			'signMethod' => '01',		//签名方法
-			'channelType' => '07',		//渠道类型，07-PC，08-手机
-			'accessType' => '0',		//接入类型
-			'currencyCode' => '156',	//交易币种
-			'defaultPayType' => '0001'	//默认支付方式	
+			'version' => '5.0.0',				//版本號
+			'encoding' => 'utf-8',				//編碼方式
+			'txnType' => '01',				//交易型別	
+			'txnSubType' => '01',				//交易子類
+			'bizType' => '000201',				//業務型別
+			'signMethod' => '01',		//簽名方法
+			'channelType' => '07',		//渠道型別，07-PC，08-手機
+			'accessType' => '0',		//接入型別
+			'currencyCode' => '156',	//交易幣種
+			'defaultPayType' => '0001'	//預設支付方式	
 		);
 	}
 
 	/**
-	 * 定义自定义参数
-	 * @参数 $id 参数名称
-	 * @参数 $val 参数值
+	 * 定義自定義引數
+	 * @引數 $id 引數名稱
+	 * @引數 $val 引數值
 	**/
 	public function form_param($id='',$val='')
 	{
@@ -57,7 +57,7 @@ class unionpay_lib
 	}
 
 	/**
-	 * 返回参数
+	 * 返回引數
 	**/
 	public function params()
 	{

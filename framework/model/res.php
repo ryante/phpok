@@ -1,12 +1,12 @@
 <?php
 /**
- * 附件管理基础类
+ * 附件管理基礎類
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2018年01月17日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2018年01月17日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -14,7 +14,7 @@ class res_model_base extends phpok_model
 {
 	private $gdlist = array();
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -23,10 +23,10 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得资源信息
-	 * @参数 $id 附件ID
-	 * @参数 $is_ext 是否读取扩展
-	 * @返回 数组
+	 * 取得資源資訊
+	 * @引數 $id 附件ID
+	 * @引數 $is_ext 是否讀取擴充套件
+	 * @返回 陣列
 	**/
 	public function get_one($id,$is_ext=false)
 	{
@@ -44,7 +44,7 @@ class res_model_base extends phpok_model
 			$attr = unserialize($rs["attr"]);
 			$rs["attr"] = $attr;
 		}
-		//判断附件方案
+		//判斷附件方案
 		$list = array("jpg","gif","png","jpeg");
 		if(!$rs['ico'] && in_array($rs['ext'],$list)){
 			$rs['ico'] = $this->get_ico($rs['filename']);
@@ -69,8 +69,8 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 检测文件是否本地址
-	 * @参数 $file 文件名，对应数据表 qinggan_res 下的 filename
+	 * 檢測檔案是否本地址
+	 * @引數 $file 檔名，對應資料表 qinggan_res 下的 filename
 	 * @返回 true 或 false
 	**/
 	public function is_local($file)
@@ -87,10 +87,10 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得扩展GD图片
-	 * @参数 $id，附件ID，多个ID用英文逗号隔开
-	 * @参数 $is_list，这里人工设置是否多个附件ID，设为true时将写成多维数组
-	 * @返回 多维数组或一维数组（受$is_list控制）
+	 * 取得擴充套件GD圖片
+	 * @引數 $id，附件ID，多個ID用英文逗號隔開
+	 * @引數 $is_list，這裡人工設定是否多個附件ID，設為true時將寫成多維陣列
+	 * @返回 多維陣列或一維陣列（受$is_list控制）
 	**/
 	public function get_gd_pic($id,$is_list=false)
 	{
@@ -130,10 +130,10 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得单个扩展图片的GD
-	 * @参数 $res_id 附件ID
-	 * @参数 $gd_id GD库ID
-	 * @返回 数组
+	 * 取得單個擴充套件圖片的GD
+	 * @引數 $res_id 附件ID
+	 * @引數 $gd_id GD庫ID
+	 * @返回 陣列
 	**/
 	public function get_pic($res_id,$gd_id)
 	{
@@ -166,9 +166,9 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 通过名字查找附件，仅查一条
-	 * @参数 $name 附件名称
-	 * @返回 数组
+	 * 通過名字查詢附件，僅查一條
+	 * @引數 $name 附件名稱
+	 * @返回 陣列
 	**/
 	public function get_name($name)
 	{
@@ -188,12 +188,12 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得资源列表
-	 * @参数 $condition 条件
-	 * @参数 $offset 查询初始位置
-	 * @参数 $psize 查询数量
-	 * @参数 $is_ext 是否包含扩展
-	 * @返回 多维数组
+	 * 取得資源列表
+	 * @引數 $condition 條件
+	 * @引數 $offset 查詢初始位置
+	 * @引數 $psize 查詢數量
+	 * @引數 $is_ext 是否包含擴充套件
+	 * @返回 多維陣列
 	**/
 	public function get_list($condition="",$offset=0,$psize=20,$is_ext=false)
 	{
@@ -236,11 +236,11 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得指定ID下的附件，基于ID排序
-	 * @参数 $id 附件ID，多个ID用英文逗号隔开
-	 * @参数 $is_ext 是否读取扩展表数据
+	 * 取得指定ID下的附件，基於ID排序
+	 * @引數 $id 附件ID，多個ID用英文逗號隔開
+	 * @引數 $is_ext 是否讀取擴充套件表資料
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function get_list_from_id($id,$is_ext=false)
 	{
@@ -278,11 +278,11 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除GD库对应的附件信息
-	 * @参数 $id GD库记录的ID
-	 * @参数 $root_dir 根目录ID
+	 * 刪除GD庫對應的附件資訊
+	 * @引數 $id GD庫記錄的ID
+	 * @引數 $root_dir 根目錄ID
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function delete_gd_id($id,$root_dir="")
 	{
@@ -290,9 +290,9 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得资源数量
-	 * @参数 $condition 条件，单表查询
-	 * @返回 数字
+	 * 取得資源數量
+	 * @引數 $condition 條件，單表查詢
+	 * @返回 數字
 	**/
 	public function get_count($condition="")
 	{
@@ -305,10 +305,10 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得附件信息
-	 * @参数 $filename 附件文件名
-	 * @参数 $is_ext 是否读取扩展信息
-	 * @返回 false / 数组
+	 * 取得附件資訊
+	 * @引數 $filename 附件檔名
+	 * @引數 $is_ext 是否讀取擴充套件資訊
+	 * @返回 false / 陣列
 	**/
 	public function get_one_filename($filename,$is_ext=true)
 	{
@@ -324,8 +324,8 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除资源
-	 * @参数 $id 附件ID
+	 * 刪除資源
+	 * @引數 $id 附件ID
 	**/
 	public function delete($id)
 	{
@@ -339,7 +339,7 @@ class res_model_base extends phpok_model
 		if($rs["ico"] && $this->is_local($rs['ico']) && substr($rs["ico"],0,7) != "images/"){
 			$this->lib('file')->rm($this->dir_root.$rs['ico']);
 		}
-		//删除远程附件
+		//刪除遠端附件
 		if($rs['etype']){
 			$this->control('gateway','api')->exec_file($rs['etype'],'delete',array('filename'=>$rs['name']));			
 		}
@@ -348,9 +348,9 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存数据
-	 * @参数 $data 数组
-	 * @参数 $id 附件ID，为空表示添加，反之为修改
+	 * 儲存資料
+	 * @引數 $data 陣列
+	 * @引數 $id 附件ID，為空表示新增，反之為修改
 	**/
 	public function save($data,$id=0)
 	{
@@ -369,9 +369,9 @@ class res_model_base extends phpok_model
 
 
 	/**
-	 * 取得资源分类
-	 * @参数 $id 分类ID，为空读默认分类
-	 * @返回 false或分类数组信息
+	 * 取得資源分類
+	 * @引數 $id 分類ID，為空讀預設分類
+	 * @返回 false或分類陣列資訊
 	**/
 	public function cate_one($id=0)
 	{
@@ -384,10 +384,10 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 根据分类标题取得分类信息，如果标题一样，仅读取第一条数据
-	 * @参数 $title
+	 * 根據分類標題取得分類資訊，如果標題一樣，僅讀取第一條資料
+	 * @引數 $title
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function cate_one_from_title($title='')
 	{
@@ -399,7 +399,7 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得全部分类
+	 * 取得全部分類
 	**/
 	public function cate_all()
 	{
@@ -408,7 +408,7 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得默认分类ID
+	 * 取得預設分類ID
 	**/
 	function cate_default()
 	{
@@ -417,8 +417,8 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 设置默认分类
-	 * @参数 $id 要设置的默认分类
+	 * 設定預設分類
+	 * @引數 $id 要設定的預設分類
 	**/
 	public function cate_default_set($id=0)
 	{
@@ -433,9 +433,9 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 分类存储操作
-	 * @参数 $data 数组，附件分类信息
-	 * @参数 $id 分类ID，为空或为0表示添加，不为空表示编辑
+	 * 分類儲存操作
+	 * @引數 $data 陣列，附件分類資訊
+	 * @引數 $id 分類ID，為空或為0表示新增，不為空表示編輯
 	**/
 	public function cate_save($data,$id=0)
 	{
@@ -450,9 +450,9 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除图片附件分类
-	 * @参数 $id 要删除的附件分类ID
-	 * @参数 $default_id 要变更的分类ID
+	 * 刪除圖片附件分類
+	 * @引數 $id 要刪除的附件分類ID
+	 * @引數 $default_id 要變更的分類ID
 	**/
 	public function cate_delete($id,$default_id=0)
 	{
@@ -470,9 +470,9 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新附件名称
-	 * @参数 $title 附件名称
-	 * @参数 $id 附件ID
+	 * 更新附件名稱
+	 * @引數 $title 附件名稱
+	 * @引數 $id 附件ID
 	**/
 	public function update_title($title,$id)
 	{
@@ -481,9 +481,9 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新附件备注
-	 * @参数 $note 附件备注
-	 * @参数 $id 附件ID
+	 * 更新附件備註
+	 * @引數 $note 附件備註
+	 * @引數 $id 附件ID
 	**/
 	public function update_note($note='',$id=0)
 	{
@@ -495,14 +495,14 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得所有的附件类型
+	 * 取得所有的附件型別
 	**/
 	public function type_list()
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."res_cate ORDER BY is_default DESC,id ASC";
 		$rslist = $this->db->get_all($sql);
 		if(!$rslist){
-			$array = array("picture"=>array("name"=>"图片","swfupload"=>"*.jpg;*.png;*.gif;*.jpeg","ext"=>"jpg,png,gif,jpeg","gd"=>1));
+			$array = array("picture"=>array("name"=>"圖片","swfupload"=>"*.jpg;*.png;*.gif;*.jpeg","ext"=>"jpg,png,gif,jpeg","gd"=>1));
 			return $array;
 		}
 		$array = array();
@@ -520,8 +520,8 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 批量删除附件
-	 * @参数 $id 附件ID，数组或整数或多个字串
+	 * 批量刪除附件
+	 * @引數 $id 附件ID，陣列或整數或多個字串
 	**/
 	public function pl_delete($id=0)
 	{
@@ -553,7 +553,7 @@ class res_model_base extends phpok_model
 				if($value['ico'] && substr($value["ico"],0,7) != "images/" && $this->is_local($value['ico']) && file_exists($this->dir_root.$value["ico"])){
 					$this->lib('file')->rm($this->dir_root.$value['ico']);
 				}
-				//批量删除云端数据
+				//批量刪除雲端資料
 				if($value['etype'] && !$this->is_local($value['filename'])){
 					$this->control('gateway','api')->exec_file($value['etype'],'delete',array('filename'=>$value['name']));
 				}
@@ -565,12 +565,12 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得编辑器中的图片列表
-	 * @参数 $condition 查询条件，扩展表别名是e，主表别名是res
-	 * @参数 $offset 起始值，默认是0
-	 * @参数 $psize 数量，默认是30条
-	 * @参数 $gd 是否读扩展表里的数据
-	 * @返回 false 或 多维数组
+	 * 取得編輯器中的圖片列表
+	 * @引數 $condition 查詢條件，擴充套件表別名是e，主表別名是res
+	 * @引數 $offset 起始值，預設是0
+	 * @引數 $psize 數量，預設是30條
+	 * @引數 $gd 是否讀擴充套件表裡的資料
+	 * @返回 false 或 多維陣列
 	**/
 	public function edit_pic_list($condition="",$offset=0,$psize=30,$gd=false)
 	{
@@ -607,10 +607,10 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 统计可在编辑器调用的图片总数
-	 * @参数 $condition 查询条件，扩展表别名是e，主表别名是res
-	 * @参数 $gd 是否读扩展表里的数据
-	 * @返回 数字
+	 * 統計可在編輯器呼叫的圖片總數
+	 * @引數 $condition 查詢條件，擴充套件表別名是e，主表別名是res
+	 * @引數 $gd 是否讀擴充套件表裡的資料
+	 * @返回 數字
 	**/
 	public function edit_pic_total($condition="",$gd=false)
 	{
@@ -623,9 +623,9 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取附件信息
-	 * @参数 $string 要读取的附件ID，多个ID用英文逗号隔开，或数组
-	 * @参数 $ext 读取扩展字段内容
+	 * 讀取附件資訊
+	 * @引數 $string 要讀取的附件ID，多個ID用英文逗號隔開，或陣列
+	 * @引數 $ext 讀取擴充套件欄位內容
 	**/
 	public function reslist($string,$ext=true)
 	{
@@ -674,7 +674,7 @@ class res_model_base extends phpok_model
 
 	/**
 	 * 更新附件GD
-	 * @参数 $id 附件ID
+	 * @引數 $id 附件ID
 	 * @返回 false / true
 	**/
 	public function gd_update($id)
@@ -740,11 +740,11 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新附件到新的分类
-	 * @参数 $id 要更新的附件ID，多个ID用英文逗号隔开
-	 * @参数 $newcate 新的分类ID
+	 * 更新附件到新的分類
+	 * @引數 $id 要更新的附件ID，多個ID用英文逗號隔開
+	 * @引數 $newcate 新的分類ID
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function update_cate($id='',$newcate=0)
 	{
@@ -757,9 +757,9 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * ID的安全过滤
-	 * @参数 $id，支持数组，字符串，数字
-	 * @返回 false 或 数字+英文逗号的字符串
+	 * ID的安全過濾
+	 * @引數 $id，支援陣列，字串，數字
+	 * @返回 false 或 數字+英文逗號的字串
 	**/
 	private function ids_safe($id)
 	{
@@ -781,8 +781,8 @@ class res_model_base extends phpok_model
 	}
 
 	/**
-	 * 读写附件远程配置
-	 * @参数 $data 不为空且为数组时，表示保存信息
+	 * 讀寫附件遠端配置
+	 * @引數 $data 不為空且為陣列時，表示儲存資訊
 	**/
 	public function remote_config($data='')
 	{

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/html_model.php
-	备注： HTML生成工具涉及到的Model信息
+	檔案： {phpok}/model/admin/html_model.php
+	備註： HTML生成工具涉及到的Model資訊
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年7月30日
+	時間： 2014年7月30日
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class html_model extends html_model_base
@@ -15,7 +15,7 @@ class html_model extends html_model_base
 		parent::__construct();
 	}
 
-	//获取模板信息
+	//獲取模板資訊
 	function get_tpl($siteid,$mobile=false)
 	{
 		$sql = "SELECT tpl_id FROM ".$this->db->prefix."site WHERE id=".intval($siteid)." AND status=1";
@@ -28,7 +28,7 @@ class html_model extends html_model_base
 		return $this->db->get_one($sql);
 	}
 
-	//获取模板文件
+	//獲取模板檔案
 	function list_tpl($dir,$ext='html')
 	{
 		$tlist = $this->lib('file')->ls($dir);
@@ -56,7 +56,7 @@ class html_model extends html_model_base
 		return $tlist;
 	}
 
-	//取得ID对应的日期目录
+	//取得ID對應的日期目錄
 	function subject_folder($id,$type="Ym/d/")
 	{
 		$sql = "SELECT dateline FROM ".$this->db->prefix."list WHERE id='".$id."' LIMIT 1";
@@ -68,7 +68,7 @@ class html_model extends html_model_base
 		return date($type,$rs['dateline']);
 	}
 
-	//取得指定项目下的模块主题数
+	//取得指定專案下的模組主題數
 	function get_subject_total($pid=0,$mid=0,$site_id=0,$cateid='')
 	{
 		$sql = "SELECT count(id) FROM ".$this->db->prefix."list WHERE site_id=".intval($site_id)." ";
@@ -81,7 +81,7 @@ class html_model extends html_model_base
 	}
 
 
-	//取得分类，及其子分类
+	//取得分類，及其子分類
 	function get_catelist($siteid=0,$cateid=0)
 	{
 		$list = array();
@@ -96,7 +96,7 @@ class html_model extends html_model_base
 		return $this->db->get_all($sql,'id');
 	}
 	
-	//取得分类下的子项信息
+	//取得分類下的子項資訊
 	function _subcate(&$list,$id=0,$siteid=0)
 	{
 		$sql = "SELECT id,parent_id,title,psize FROM ".$this->db->prefix."cate WHERE site_id='".$siteid."' AND parent_id='".$id."'";

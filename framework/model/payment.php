@@ -27,7 +27,7 @@ class payment_model_base extends phpok_model
 		return $this->db->get_one($sql);
 	}
 
-	//更新状态
+	//更新狀態
 	function status($id=0,$status=0,$is_id=false)
 	{
 		$sql = "UPDATE ".$this->db->prefix."payment SET status='".$status."' WHERE ";
@@ -35,7 +35,7 @@ class payment_model_base extends phpok_model
 		return $this->db->query($sql);
 	}
 
-	//更新手机端状态
+	//更新手機端狀態
 	function wap($id=0,$wap=0,$is_id=false)
 	{
 		$sql = "UPDATE ".$this->db->prefix."payment SET wap='".$wap."' WHERE ";
@@ -43,7 +43,7 @@ class payment_model_base extends phpok_model
 		return $this->db->query($sql);
 	}
 
-	//删除支付接口
+	//刪除支付介面
 	function delete_code($code)
 	{
 		if(!$code) return false;
@@ -61,9 +61,9 @@ class payment_model_base extends phpok_model
 	}
 
 	/**
-	 * 检查订单是否有未支付日志
-	 * @参数 $sn 订单标识
-	 * @参数 $type 类型
+	 * 檢查訂單是否有未支付日誌
+	 * @引數 $sn 訂單標識
+	 * @引數 $type 型別
 	**/
 	public function log_check_notstatus($sn,$type='')
 	{
@@ -109,9 +109,9 @@ class payment_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除未支付完成的支付请求
-	 * @参数 $sn 订单编号
-	 * @参数 $type 订单类型
+	 * 刪除未支付完成的支付請求
+	 * @引數 $sn 訂單編號
+	 * @引數 $type 訂單型別
 	**/
 	public function log_delete_notstatus($sn,$type='')
 	{

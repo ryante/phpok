@@ -1,12 +1,12 @@
 <?php
 /**
- * Redis缓存引挈
+ * Redis快取引挈
  * @package phpok\engine\cache\redis
  * @author qinggan <admin@phpok.com>
- * @copyright 2015-2016 深圳市锟铻科技有限公司
+ * @copyright 2015-2016 深圳市錕鋙科技有限公司
  * @homepage http://www.phpok.com
  * @version 4.x
- * @license http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @license http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @update 2016年07月19日
 **/
 
@@ -43,7 +43,7 @@ class cache_redis extends cache
 	}
 
 	/**
-	 * 连接Redis
+	 * 連線Redis
 	**/
 	private function start()
 	{
@@ -60,13 +60,13 @@ class cache_redis extends cache
 			}
 			return true;
 		}
-		$this->error('连接Redis服务器失败，请检查');
+		$this->error('連線Redis伺服器失敗，請檢查');
 		$this->status(false);
 		$this->__destruct();
 		return false;
 	}
 
-	//设置缓存状态
+	//設定快取狀態
 	public function status($status="")
 	{
 		if(is_bool($status) || is_numeric($status)){
@@ -78,7 +78,7 @@ class cache_redis extends cache
 		return $this->status;
 	}
 
-	//写入缓存信息
+	//寫入快取資訊
 	public function save($id,$content='')
 	{
 		if(!$this->status || $content === ''){

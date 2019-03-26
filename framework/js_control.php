@@ -3,11 +3,11 @@
  * JS 控制器
  * @package phpok\framework
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年11月13日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年11月13日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -19,7 +19,7 @@ class js_control extends phpok_control
 	}
 
 	/**
-	 * 通用 JS，包括加载 form.js
+	 * 通用 JS，包括載入 form.js
 	**/
 	public function index_f()
 	{
@@ -63,7 +63,7 @@ class js_control extends phpok_control
 		if($this->app_id == 'admin' && $myctrl && $myfunc){
 			$list[] = $myctrl.'/admin.'.$myfunc.'.js';
 		}
-		//自动装载前端下的js
+		//自動裝載前端下的js
 		if($this->app_id == 'www'){
 			$tlist = $this->model('url')->protected_ctrl();
 			if($tlist){
@@ -92,7 +92,7 @@ class js_control extends phpok_control
 	}
 
 	/**
-	 * 加载扩展JS，不包括核心JS
+	 * 載入擴充套件JS，不包括核心JS
 	**/
 	public function ext_f()
 	{
@@ -105,7 +105,7 @@ class js_control extends phpok_control
 	}
 
 	/**
-	 * 最小核心JS加载（只加载 jquery.js 及 system.js 文件）
+	 * 最小核心JS載入（只加載 jquery.js 及 system.js 檔案）
 	**/
 	public function mini_f()
 	{
@@ -160,8 +160,8 @@ class js_control extends phpok_control
 	{
 		echo "\n";
 		echo '(function (config) {'."\n\t";
-		echo 'config["title"] = "'.P_Lang('消息').'";'."\n\t";
-		echo 'config["okVal"] = "'.P_Lang('确定').'";'."\n\t";
+		echo 'config["title"] = "'.P_Lang('訊息').'";'."\n\t";
+		echo 'config["okVal"] = "'.P_Lang('確定').'";'."\n\t";
 		echo 'config["cancelVal"] = "'.P_Lang('取消').'";'."\n";
 		if($this->app_id == 'admin'){
 			echo 'config["opacity"] = "0.2";'."\n";
@@ -170,7 +170,7 @@ class js_control extends phpok_control
 	}
 
 	/**
-	 * 加载基本的JS
+	 * 載入基本的JS
 	**/
 	private function js_base()
 	{
@@ -179,7 +179,7 @@ class js_control extends phpok_control
 		$this->assign('basefile',$file);
 		$this->load_language_js();
 		$file = $this->dir_root.'js/jquery.js';
-		//实现jQuery.js文件的自定义
+		//實現jQuery.js檔案的自定義
 		if($this->app_id != 'admin'){
 			if(is_file($this->dir_root.$this->tpl->dir_tpl.'js/jquery.js')){
 				$file = $this->dir_root.$this->tpl->dir_tpl.'js/jquery.js';
@@ -205,7 +205,7 @@ class js_control extends phpok_control
 	}
 
 	/**
-	 * 加载JS下的语言包
+	 * 載入JS下的語言包
 	**/
 	private function load_language_js()
 	{

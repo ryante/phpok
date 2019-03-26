@@ -1,12 +1,12 @@
 <?php
 /**
- * 表单选择器
+ * 表單選擇器
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年01月20日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年01月20日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -21,8 +21,8 @@ class form_model_base extends phpok_model
 	}
 
 	/**
-	 * 表单类型
-	 * @参数 $note 是否显示备注，默认为 false
+	 * 表單型別
+	 * @引數 $note 是否顯示備註，預設為 false
 	**/
 	public function form_all($note = false)
 	{
@@ -41,7 +41,7 @@ class form_model_base extends phpok_model
 
 	/**
 	 * 格式化方式
-	 * @参数 $note 是否显示备注，默认为 false
+	 * @引數 $note 是否顯示備註，預設為 false
 	**/
 	public function format_all($note = false)
 	{
@@ -59,8 +59,8 @@ class form_model_base extends phpok_model
 	}
 
 	/**
-	 * 字段类型
-	 * @参数 $note 是否显示备注，默认为 false
+	 * 欄位型別
+	 * @引數 $note 是否顯示備註，預設為 false
 	**/
 	public function field_all($note = false)
 	{
@@ -77,7 +77,7 @@ class form_model_base extends phpok_model
 		return false;
 	}
 
-	//读取表单下的子项目信息
+	//讀取表單下的子專案資訊
 	public function project_sublist($pid)
 	{
 		$sql = "SELECT id as val,title FROM ".$this->db->prefix."project WHERE parent_id=".intval($pid)." AND status=1 ";
@@ -86,10 +86,10 @@ class form_model_base extends phpok_model
 	}
 
 	/**
-	 * 通过搜索扩展字段的关键字，找回存储的val值
-	 * @参数 $fid qinggan_fields 表中的主键ID 或是 数组
-	 * @参数 $keywords 要搜索的值
-	 * @参数 $ext 扩展表前缀
+	 * 通過搜尋擴充套件欄位的關鍵字，找回儲存的val值
+	 * @引數 $fid qinggan_fields 表中的主鍵ID 或是 陣列
+	 * @引數 $keywords 要搜尋的值
+	 * @引數 $ext 擴充套件表字首
 	**/
 	public function search($fid,$keywords,$ext='ext')
 	{
@@ -105,7 +105,7 @@ class form_model_base extends phpok_model
 		if(!$rs){
 			return false;
 		}
-		//不支持搜索
+		//不支援搜尋
 		if(!$rs['search']){
 			return false;
 		}
@@ -117,7 +117,7 @@ class form_model_base extends phpok_model
 				$ext .= '.';
 			}
 		}
-		//区间检索
+		//區間檢索
 		if($rs['search'] == 3){
 			if(!$rs['search_separator']){
 				return false;
@@ -149,7 +149,7 @@ class form_model_base extends phpok_model
 			$condition = $ext.$rs['identifier'].">=".$min." AND ".$ext.$rs['identifier']."<=".$max;
 			return $condition;
 		}
-		//文本搜索
+		//文字搜尋
 		$txtlist = array('text','password','textarea','editor','code_editor','param','pca','url');
 		if($rs['form_type'] && in_array($rs['form_type'],$txtlist)){
 			$keywords = str_replace($this->space_array(),'|',$keywords);
@@ -172,7 +172,7 @@ class form_model_base extends phpok_model
 		$keywords = str_replace($this->space_array(),'|',$keywords);
 		$tmplist = explode("|",$keywords);
 		$tmp_condition = array();
-		//会员信息检索
+		//會員資訊檢索
 		if($rs['form_type'] == 'user'){
 			foreach($tmplist as $key=>$value){
 				if(!$value || !trim($value)){
@@ -193,7 +193,7 @@ class form_model_base extends phpok_model
 			$condition = $ext.$rs['identifier']." IN(".$sql.")";
 			return $condition;
 		}
-		//上传附件检索
+		//上傳附件檢索
 		if($rs['form_type'] == 'upload'){
 			foreach($tmplist as $key=>$value){
 				if(!$value || !trim($value)){
@@ -214,7 +214,7 @@ class form_model_base extends phpok_model
 			$condition = $ext.$rs['identifier']." IN(".$sql.")";
 			return $condition;
 		}
-		//扩展主题检索
+		//擴充套件主題檢索
 		if($rs['form_type'] == 'title'){
 			foreach($tmplist as $key=>$value){
 				if(!$value || !trim($value)){
@@ -231,7 +231,7 @@ class form_model_base extends phpok_model
 			$condition = $ext.$rs['identifier']." IN(".$sql.")";
 			return $condition;
 		}
-		//扩展模型检索
+		//擴充套件模型檢索
 		if($rs['form_type'] == 'extitle'){
 			if(!$rs['ext'] || !$rs['ext']['form_pid']){
 				return false;
@@ -295,7 +295,7 @@ class form_model_base extends phpok_model
 			}
 			return false;
 		}
-		//单选框 下拉 复选框 检索
+		//單選框 下拉 複選框 檢索
 		$txtlist = array('radio','checkbox','select');
 		if(in_array($rs['form_type'],$txtlist)){
 			$jz_search = false;

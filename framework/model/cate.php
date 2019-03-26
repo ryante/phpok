@@ -1,20 +1,20 @@
 <?php
 /**
- * 栏目管理
+ * 欄目管理
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年08月23日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年08月23日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class cate_model_base extends phpok_model
 {
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -22,10 +22,10 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得单条分类信息
-	 * @参数 $id 主键或是指定的字段名对应的值
-	 * @参数 $field 字段名，支持id，identifier
-	 * @参数 $ext 是否读取扩展数据
+	 * 取得單條分類資訊
+	 * @引數 $id 主鍵或是指定的欄位名對應的值
+	 * @引數 $field 欄位名，支援id，identifier
+	 * @引數 $ext 是否讀取擴充套件資料
 	**/
 	public function get_one($id,$field="id",$ext=true)
 	{
@@ -53,9 +53,9 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 分类信息
-	 * @参数 $id 分类ID
-	 * @参数 $ext 是扩包含扩展
+	 * 分類資訊
+	 * @引數 $id 分類ID
+	 * @引數 $ext 是擴包含擴充套件
 	**/
 	public function cate_info($id,$ext=false)
 	{
@@ -67,9 +67,9 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得当前分类
-	 * @参数 $id 分类ID
-	 * @参数 $site_id 站点ID
+	 * 取得當前分類
+	 * @引數 $id 分類ID
+	 * @引數 $site_id 站點ID
 	**/
 	public function cate_one($id,$site_id=0)
 	{
@@ -86,10 +86,10 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得全部分类信息
-	 * @参数 $site_id 站点ID
-	 * @参数 $status 状态，为1时表示仅读已审核数据
-	 * @参数 $pid 父级分类ID
+	 * 取得全部分類資訊
+	 * @引數 $site_id 站點ID
+	 * @引數 $status 狀態，為1時表示僅讀已稽核資料
+	 * @引數 $pid 父級分類ID
 	**/
 	public function get_all($site_id=0,$status=0,$pid=0)
 	{
@@ -104,9 +104,9 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得全部的分类信息（不格式化）
-	 * @参数 $site_id 站点ID
-	 * @参数 $status 状态，为1时表示仅读已审核数据
+	 * 取得全部的分類資訊（不格式化）
+	 * @引數 $site_id 站點ID
+	 * @引數 $status 狀態，為1時表示僅讀已稽核資料
 	**/
 	public function cate_all($site_id=0,$status=0)
 	{
@@ -119,11 +119,11 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 格式化分类数组
-	 * @参数 $rslist 存储目标
-	 * @参数 $tmplist 原始数据
-	 * @参数 $parent_id 父级ID
-	 * @参数 $layer 层级位置
+	 * 格式化分類陣列
+	 * @引數 $rslist 儲存目標
+	 * @引數 $tmplist 原始資料
+	 * @引數 $parent_id 父級ID
+	 * @引數 $layer 層級位置
 	**/
 	public function format_list(&$rslist,$tmplist,$parent_id=0,$layer=0)
 	{
@@ -142,7 +142,7 @@ class cate_model_base extends phpok_model
 				$value["_layer"] = $layer;
 				$value["_is_end"] = $is_end;
 				$rslist[] = $value;
-				//执行子级
+				//執行子級
 				$new_layer = $layer+1;
 				$this->format_list($rslist,$tmplist,$value["id"],$new_layer);
 			}
@@ -150,8 +150,8 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 生成适用于select的下拉菜单中的参数
-	 * @参数 $list 列表
+	 * 生成適用於select的下拉選單中的引數
+	 * @引數 $list 列表
 	**/
 	public function cate_option_list($list)
 	{
@@ -173,8 +173,8 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取分类表中的字段名，用于检测字段名防止重复
-	 * @参数 $idlist 字段名存储目标
+	 * 讀取分類表中的欄位名，用於檢測欄位名防止重複
+	 * @引數 $idlist 欄位名儲存目標
 	**/
 	public function cate_fields(&$idlist)
 	{
@@ -188,9 +188,9 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得子分类ID信息
-	 * @参数 $id 分类ID，支持多个分类ID，用英文逗号格开
-	 * @参数 $status 状态，为1时表示仅读已审核数据
+	 * 取得子分類ID資訊
+	 * @引數 $id 分類ID，支援多個分類ID，用英文逗號格開
+	 * @引數 $status 狀態，為1時表示僅讀已稽核資料
 	**/
 	public function get_son_id_list($id,$status=0)
 	{
@@ -210,10 +210,10 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得子分类信息
-	 * @参数 $list 存储目标
-	 * @参数 $id 父分类ID
-	 * @参数 $space 空格补尝
+	 * 取得子分類資訊
+	 * @引數 $list 儲存目標
+	 * @引數 $id 父分類ID
+	 * @引數 $space 空格補嘗
 	**/
 	public function get_sublist(&$list,$id,$space="")
 	{
@@ -233,9 +233,9 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得子分类信息
-	 * @参数 $id 父级分类ID，多个分类ID用英文逗号隔开
-	 * @参数 $status 1为仅读审核过的
+	 * 取得子分類資訊
+	 * @引數 $id 父級分類ID，多個分類ID用英文逗號隔開
+	 * @引數 $status 1為僅讀稽核過的
 	**/
 	public function get_sonlist($id=0,$status=0)
 	{
@@ -257,10 +257,10 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取子分类ID信息
-	 * @参数 $list 存储目标
-	 * @参数 $id 父级分类ID，多个分类ID用英文逗号隔开
-	 * @参数 $status 1为仅读审核过的
+	 * 讀取子分類ID資訊
+	 * @引數 $list 儲存目標
+	 * @引數 $id 父級分類ID，多個分類ID用英文逗號隔開
+	 * @引數 $status 1為僅讀稽核過的
 	**/
 	public function get_sonlist_id(&$list,$id=0,$status=0)
 	{
@@ -286,8 +286,8 @@ class cate_model_base extends phpok_model
 
 	/**
 	 * 更新排序
-	 * @参数 $id 分类ID
-	 * @参数 $taxis 排序值
+	 * @引數 $id 分類ID
+	 * @引數 $taxis 排序值
 	**/
 	public function update_taxis($id,$taxis=255)
 	{
@@ -296,8 +296,8 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除分类
-	 * @参数 $id 分类ID
+	 * 刪除分類
+	 * @引數 $id 分類ID
 	**/
 	public function cate_delete($id)
 	{
@@ -311,7 +311,7 @@ class cate_model_base extends phpok_model
 			$idlist = array_keys($rslist);
 			$sql = "DELETE FROM ".$this->db->prefix."extc WHERE id IN(".implode(',',$idlist).")";
 			$this->db->query($sql);
-			//删除当前分类的扩展
+			//刪除當前分類的擴充套件
 			$sql = "DELETE FROM ".$this->db->prefix."fields WHERE id IN(".implode(',',$idlist).")";
 			$this->db->query($sql);
 		}
@@ -319,8 +319,8 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得根分类信息
-	 * @参数 $site_id 站点ID
+	 * 取得根分類資訊
+	 * @引數 $site_id 站點ID
 	**/
 	public function root_catelist($site_id=0)
 	{
@@ -335,9 +335,9 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 通过分类ID获取分类内容
-	 * @参数 $cid 分类ID，多个分类ID用英文逗号隔开
-	 * @参数 $ext 是否读取扩展数据
+	 * 通過分類ID獲取分類內容
+	 * @引數 $cid 分類ID，多個分類ID用英文逗號隔開
+	 * @引數 $ext 是否讀取擴充套件資料
 	**/
 	public function catelist_cid($cid,$ext=true)
 	{
@@ -356,10 +356,10 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 前台调用当前分类下的子分类
-	 * @参数 $cid 父级分类ID，多个分类ID用英文逗号隔开
-	 * @参数 $ext 是否读取扩展数据
-	 * @参数 $status 1为仅读审核过的
+	 * 前臺呼叫當前分類下的子分類
+	 * @引數 $cid 父級分類ID，多個分類ID用英文逗號隔開
+	 * @引數 $ext 是否讀取擴充套件資料
+	 * @引數 $status 1為僅讀稽核過的
 	**/
 	public function catelist_sonlist($cid,$ext=true,$status=1)
 	{
@@ -382,8 +382,8 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 通过主表数据，读取扩展数据
-	 * @参数 $rslist 多级数组，即主表中的分类信息，KEY值为主键ID
+	 * 通過主表資料，讀取擴充套件資料
+	 * @引數 $rslist 多級陣列，即主表中的分類資訊，KEY值為主鍵ID
 	**/
 	public function cate_ext($rslist)
 	{
@@ -408,10 +408,10 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 递归获取分类信息
-	 * @参数 $array 存储目标
-	 * @参数 $parent_id 父级分类ID
-	 * @参数 $rslist 数据来源
+	 * 遞迴獲取分類資訊
+	 * @引數 $array 儲存目標
+	 * @引數 $parent_id 父級分類ID
+	 * @引數 $rslist 資料來源
 	**/
 	public function cate_ids(&$array,$parent_id=0,$rslist='')
 	{
@@ -426,8 +426,8 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取主题下绑定的扩展分类信息
-	 * @参数 $id 主题ID
+	 * 讀取主題下繫結的擴充套件分類資訊
+	 * @引數 $id 主題ID
 	**/
 	public function ext_catelist($id)
 	{
@@ -437,9 +437,9 @@ class cate_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取分类信息
-	 * @参数 $ids 多个分类ID用英文逗号隔开，或数组
-	 * @参数 $project_identifier 项目标识
+	 * 讀取分類資訊
+	 * @引數 $ids 多個分類ID用英文逗號隔開，或陣列
+	 * @引數 $project_identifier 專案標識
 	**/
 	public function list_ids($ids,$project_identifier='')
 	{

@@ -3,7 +3,7 @@
  * 內容控制器
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版權 深圳市錕铻科技有限公司
+ * @版權 深圳市錕鋙科技有限公司
  * @主頁 http://www.phpok.com
  * @版本 4.x
  * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
@@ -39,17 +39,17 @@ class list_control extends phpok_control
         }
         if(!$this->session->val('admin_rs.if_system')){
             if(!$this->session->val('admin_popedom')){
-                $this->error(P_Lang('該管理員未配置權限，請檢查'));
+                $this->error(P_Lang('該管理員未配置許可權，請檢查'));
             }
             $condition = "parent_id>0 AND appfile='list' AND func=''";
             $p_rs = $this->model('sysmenu')->get_one_condition($condition);
             if(!$p_rs){
-                $this->error(P_Lang('數據獲取異常，請檢查'));
+                $this->error(P_Lang('資料獲取異常，請檢查'));
             }
             $gid = $p_rs["id"];
             $popedom_list = $this->model('popedom')->get_all("gid='".$gid."' AND pid>0",false,false);
             if(!$popedom_list){
-                $this->error(P_Lang('未配置站點內容權限，請檢查'));
+                $this->error(P_Lang('未配置站點內容許可權，請檢查'));
             }
             $popedom = array();
             foreach($popedom_list as $key=>$value){
@@ -76,11 +76,11 @@ class list_control extends phpok_control
         }
         $this->popedom_auto($id);
         if(!$this->popedom["list"]){
-            $this->error(P_Lang('您沒有權限執行此操作'));
+            $this->error(P_Lang('您沒有許可權執行此操作'));
         }
         $rs = $this->model('project')->get_one($id);
         if(!$rs){
-            $this->error(P_Lang('項目信息不存在'),$this->url("list"));
+            $this->error(P_Lang('專案資訊不存在'),$this->url("list"));
         }
         $son_list = $this->model('project')->get_all($rs["site_id"],$id,"p.status=1 AND p.hidden=0");
         if($son_list){
@@ -155,7 +155,7 @@ class list_control extends phpok_control
         }
         // new add end
 
-        //設置內容列表
+        //設定內容列表
         if($rs["module"]){
             if($m_rs['mtype']){
                 $this->standalone_app($rs,$m_rs);
@@ -190,11 +190,11 @@ class list_control extends phpok_control
         }
         $this->popedom_auto($id);
         if(!$this->popedom["set"]){
-            $this->error(P_Lang('您沒有權限執行此操作'));
+            $this->error(P_Lang('您沒有許可權執行此操作'));
         }
         $rs = $this->model('project')->get_one($id);
         if(!$rs){
-            $this->error(P_Lang('項目信息不存在'),$this->url("list"),"error");
+            $this->error(P_Lang('專案資訊不存在'),$this->url("list"),"error");
         }
         $this->assign("rs",$rs);
         $this->assign("id",$id);
@@ -220,17 +220,17 @@ class list_control extends phpok_control
     }
 
     /**
-     * 保存項目信息
+     * 儲存專案資訊
      **/
     public function save_f()
     {
         $id = $this->get("id","int");
         if(!$id){
-            $this->error(P_Lang('未指定項目ID'));
+            $this->error(P_Lang('未指定專案ID'));
         }
         $this->popedom_auto($id);
         if(!$this->popedom["set"]){
-            $this->error(P_Lang('您沒有權限執行此操作'));
+            $this->error(P_Lang('您沒有許可權執行此操作'));
         }
         $title = $this->get("title");
         if(!$title){
@@ -254,7 +254,7 @@ class list_control extends phpok_control
             return P_Lang('標識串不能為空');
         }
         $sign = strtolower($sign);
-        //字符串是否符合條件
+        //字串是否符合條件
         if(!preg_match("/[a-z][a-z0-9\_\-\.]+/",$sign)){
             return P_Lang('標識不符合系統要求，限字母、數字及下劃線（中劃線）且必須是字母開頭');
         }
@@ -263,15 +263,15 @@ class list_control extends phpok_control
         }
         $check = $this->model('id')->check_id($sign,$site_id,$id);
         if($check){
-            return P_Lang('標識符已被使用');
+            return P_Lang('識別符號已被使用');
         }
         return 'ok';
     }
 
     /**
-     * 獨立模塊應用
-     * @參數 $project 項目信息，數組
-     * @參數 $module 模塊信息，數組
+     * 獨立模組應用
+     * @引數 $project 專案資訊，陣列
+     * @引數 $module 模組資訊，陣列
      **/
     private function standalone_app($project,$module)
     {
@@ -349,22 +349,22 @@ class list_control extends phpok_control
     private function content_list($project_rs)
     {
         if(!$project_rs){
-            $this->error(P_Lang('項目信息不能為空'));
+            $this->error(P_Lang('專案資訊不能為空'));
         }
         $pid = $project_rs["id"];
         $mid = $project_rs["module"];
         $site_id = $project_rs["site_id"];
         $orderby = $project_rs["orderby"];
         if(!$pid || !$mid || !$site_id){
-            $this->error(P_Lang('數據異常'));
+            $this->error(P_Lang('資料異常'));
         }
-        //讀取電商數據
+        //讀取電商資料
         $this->model('list')->is_biz(($project_rs['is_biz'] ? true : false));
         //讀取多級分類
         $this->model('list')->multiple_cate(($project_rs['cate_multiple'] ? true : false));
-        //綁定會員
+        //繫結會員
         $this->model('list')->is_user(($project_rs['is_userid'] ? true : false));
-        //內容布局維護
+        //內容佈局維護
         $layout = $m_list = array();
         $m_rs = $this->model('module')->get_one($mid);
         $m_list = $this->model('module')->fields_all($mid,"identifier");
@@ -372,14 +372,14 @@ class list_control extends phpok_control
         if($m_rs["layout"]) $layout = explode(",",$m_rs["layout"]);
 
         $this->assign("m_rs",$m_rs);
-        //布局
+        //佈局
         $layout_list = array();
         foreach($layout as $key=>$value){
             if (empty($value)) {
                 continue;
             }
             if($value == "hits"){
-                $layout_list[$value] = P_Lang('查看次數');
+                $layout_list[$value] = P_Lang('檢視次數');
             }elseif($value == "dateline"){
                 $layout_list[$value] = P_Lang('發布時間');
             }elseif($value == 'user_id'){
@@ -533,7 +533,7 @@ class list_control extends phpok_control
             }
             $pageurl .= "&keywords[orderby_search]=".$keywords['orderby_search'];
         }
-        //取得列表信息
+        //取得列表資訊
         $total = $this->model('list')->get_total($mid,$condition);
         if($total > 0){
             $rslist = $this->model('list')->get_list($mid,$condition,$offset,$psize,$orderby);
@@ -572,19 +572,19 @@ class list_control extends phpok_control
     }
 
     /**
-     * 添加或編輯獨立模塊下的內容
-     * @參數 id 主題ID
-     * @參數 pid 項目ID
+     * 新增或編輯獨立模組下的內容
+     * @引數 id 主題ID
+     * @引數 pid 專案ID
      **/
     public function edit2_f()
     {
         $pid = $this->get("pid","int");
         if(!$pid){
-            $this->error(P_Lang('操作異常，未指定項目'),$this->url("list"));
+            $this->error(P_Lang('操作異常，未指定專案'),$this->url("list"));
         }
         $project = $this->model('project')->get_one($pid);
         if(!$project){
-            $this->error(P_Lang('項目信息不存在'));
+            $this->error(P_Lang('專案資訊不存在'));
         }
         $this->assign('p_rs',$project);
         $this->assign('pid',$pid);
@@ -598,14 +598,14 @@ class list_control extends phpok_control
         $id = $this->get('id','int');
         $popedom_id = $id ? 'modify' : 'add';
         if(!$this->popedom[$popedom_id]){
-            $this->error(P_Lang('您沒有權限執行此操作'));
+            $this->error(P_Lang('您沒有許可權執行此操作'));
         }
         $module = $this->model('module')->get_one($project['module']);
         $this->assign('m_rs',$module);
         if($id){
             $rs = $this->model('list')->single_one($id,$project['module']);
             if(!$rs){
-                $this->error(P_Lang('主題信息不存在'));
+                $this->error(P_Lang('主題資訊不存在'));
             }
             $this->assign('rs',$rs);
             $this->assign("id",$rs["id"]);
@@ -631,7 +631,7 @@ class list_control extends phpok_control
     }
 
     /**
-     * 添加或編輯內容，這裏的內容是帶模塊的
+     * 新增或編輯內容，這裡的內容是帶模組的
      **/
     public function edit_f()
     {
@@ -650,7 +650,7 @@ class list_control extends phpok_control
         }else{
             $cateid = $this->get("cateid","int");
             $rs = $extcate = array();
-            //判斷是否有臨時未保存的數據
+            //判斷是否有臨時未儲存的資料
             $autosave = $this->lib('file')->cat($this->dir_data.'cache/autosave_'.$this->session->val('admin_id').'_'.$pid.'.php');
             if($autosave){
                 $rs = unserialize($autosave);
@@ -672,14 +672,14 @@ class list_control extends phpok_control
         $this->popedom_auto($pid);
         $popedom_id = $id ? 'modify' : 'add';
         if(!$this->popedom[$popedom_id]){
-            error(P_Lang('您沒有權限執行此操作'),'','error');
+            error(P_Lang('您沒有許可權執行此操作'),'','error');
         }
         $p_rs = $this->model('project')->get_one($pid);
         if(!$p_rs){
             error(P_Lang('操作異常'),$this->url("list"),"error");
         }
         $m_rs = $this->model('module')->get_one($p_rs["module"]);
-        //讀取擴展屬性
+        //讀取擴充套件屬性
         $ext_list = $this->model('module')->fields_all($p_rs["module"]);
         $extlist = array();
         foreach(($ext_list ? $ext_list : array()) as $key=>$value){
@@ -759,7 +759,7 @@ class list_control extends phpok_control
                 if($biz_attrlist){
                     $this->assign('biz_attrlist',$biz_attrlist);
                 }
-                //加載現有電商屬性
+                //載入現有電商屬性
                 if($rs['id']){
                     $tmplist = $this->model('list')->biz_attrlist($rs['id']);
                     if($tmplist){
@@ -808,7 +808,7 @@ class list_control extends phpok_control
         }
 
 
-        // 擴展字段管理
+        // 擴充套件欄位管理
         if($this->popedom['ext']){
             $ext_module = $id ? 'list-'.$id : 'add-list';
             $this->assign("ext_module",$ext_module);
@@ -849,7 +849,7 @@ class list_control extends phpok_control
         $pid = $this->get("pid","int");
         $parent_id = $this->get("parent_id","int");
         if(!$pid && !$id){
-            $this->json(P_Lang('操作異常，無法取得項目信息'));
+            $this->json(P_Lang('操作異常，無法取得專案資訊'));
         }
         $is_add = true;
         if($id){
@@ -860,21 +860,21 @@ class list_control extends phpok_control
             $is_add = false;
         }
         if(!$pid){
-            $this->json(P_Lang('操作異常，無法取得項目信息'));
+            $this->json(P_Lang('操作異常，無法取得專案資訊'));
         }
         $this->popedom_auto($pid);
         if($id){
             if(!$this->popedom['modify']){
-                $this->json(P_Lang('您沒有權限執行此操作'));
+                $this->json(P_Lang('您沒有許可權執行此操作'));
             }
         }else{
             if(!$this->popedom['add']){
-                $this->json(P_Lang('您沒有權限執行此操作'));
+                $this->json(P_Lang('您沒有許可權執行此操作'));
             }
         }
         $p_rs = $this->model('project')->get_one($pid);
         if(!$p_rs){
-            $this->json(P_Lang('操作異常，無法取得項目信息'));
+            $this->json(P_Lang('操作異常，無法取得專案資訊'));
         }
         $array = array();
         $title = $this->get("title");
@@ -894,7 +894,7 @@ class list_control extends phpok_control
         //更新標識串
         $array['identifier'] = $this->get("identifier");
         if(!$array['identifier'] && $p_rs['is_identifier'] == 2){
-            $this->json(P_Lang('自定義標識不能為空，此項是系統設置必填項'));
+            $this->json(P_Lang('自定義標識不能為空，此項是系統設定必填項'));
         }
         if($array['identifier']){
             $check = $this->check_identifier($array['identifier'],$id,$p_rs["site_id"]);
@@ -981,7 +981,7 @@ class list_control extends phpok_control
             $this->model('list')->save($array,$id);
         }
         if(!$id){
-            $this->json(P_Lang('存儲數據失敗，請檢查'));
+            $this->json(P_Lang('儲存資料失敗，請檢查'));
         }
         $crontab_list = $this->lib('file')->ls($this->dir_data.'crontab');
         if($crontab_list){
@@ -998,7 +998,7 @@ class list_control extends phpok_control
         if($crontab){
             $this->lib('file')->vi($id,$this->dir_data.'crontab/'.$crontab.'-'.$id.'.php');
         }
-        //保存電商信息
+        //儲存電商資訊
         if($p_rs['is_biz']){
             $biz = array('price'=>$this->get('price','float'),'currency_id'=>$this->get('currency_id','int'));
             $biz['weight'] = $this->get('weight','float');
@@ -1040,7 +1040,7 @@ class list_control extends phpok_control
                 }
             }
         }
-        //更新擴展分類
+        //更新擴充套件分類
         $this->model('list')->list_cate_clear($id);
         if($cate_id){
             $ext_cate = $this->get('ext_cate_id');
@@ -1070,7 +1070,7 @@ class list_control extends phpok_control
             }
             $this->model('list')->save_ext($tmplist,$p_rs["module"]);
         }
-        //保存內容擴展字段
+        //儲存內容擴充套件欄位
         if($tmpadd){
             ext_save("admin-add-list",true,"list-".$id);
         }else{
@@ -1088,16 +1088,16 @@ class list_control extends phpok_control
         $id = $this->get("id","int");
         $pid = $this->get("pid","int");
         if(!$pid){
-            $this->error(P_Lang('未指定項目ID'));
+            $this->error(P_Lang('未指定專案ID'));
         }
         $this->popedom_auto($pid);
         $popedom_id = $id ? 'modify' : 'add';
         if(!$this->popedom[$popedom_id]){
-            $this->error(P_Lang('您沒有權限執行此操作'));
+            $this->error(P_Lang('您沒有許可權執行此操作'));
         }
         $project = $this->model('project')->get_one($pid);
         if(!$project){
-            $this->error(P_Lang('操作異常，無法取得項目信息'));
+            $this->error(P_Lang('操作異常，無法取得專案資訊'));
         }
         $array = array();
         $array["project_id"] = $pid;
@@ -1108,17 +1108,17 @@ class list_control extends phpok_control
                 $array[$value['identifier']] = $this->lib('form')->get($value);
             }
         }
-        //保存數據
+        //儲存資料
         if($id){
             $array['id'] = $id;
             $state = $this->model('list')->single_save($array,$project["module"]);
             if(!$state){
-                $this->error(P_Lang('更新數據失敗，請檢查'));
+                $this->error(P_Lang('更新資料失敗，請檢查'));
             }
         }else{
             $id = $this->model('list')->single_save($array,$project["module"]);
             if(!$id){
-                $this->error(P_Lang('保存數據失敗，請檢查'));
+                $this->error(P_Lang('儲存資料失敗，請檢查'));
             }
         }
         $this->plugin('system_admin_title_success',$id,$project);
@@ -1140,7 +1140,7 @@ class list_control extends phpok_control
         $pid = $rs["project_id"];
         $this->popedom_auto($pid);
         if(!$this->popedom['delete']){
-            $this->json(P_Lang('您沒有權限執行此操作'));
+            $this->json(P_Lang('您沒有許可權執行此操作'));
         }
         foreach($idlist as $key=>$value){
             $value = intval($value);
@@ -1150,7 +1150,7 @@ class list_control extends phpok_control
     }
 
     /**
-     * 單獨模塊主題刪除
+     * 單獨模組主題刪除
      **/
     public function single_delete_f()
     {
@@ -1160,11 +1160,11 @@ class list_control extends phpok_control
         }
         $pid = $this->get('pid');
         if(!$pid){
-            $this->error(P_Lang('未指定項目'));
+            $this->error(P_Lang('未指定專案'));
         }
         $this->popedom_auto($pid);
         if(!$this->popedom['delete']){
-            $this->error(P_Lang('您沒有權限執行此操作'));
+            $this->error(P_Lang('您沒有許可權執行此操作'));
         }
         $project = $this->model('project')->get_one($pid);
         $idlist = explode(",",$id);
@@ -1177,7 +1177,7 @@ class list_control extends phpok_control
 
     /**
      * 主題審核，通過主題原來的狀態取1或0
-     * @參數 id 主題ID
+     * @引數 id 主題ID
      **/
     public function content_status_f()
     {
@@ -1188,7 +1188,7 @@ class list_control extends phpok_control
         $rs = $this->model('list')->get_one($id);
         $this->popedom_auto($rs['project_id']);
         if(!$this->popedom["status"]){
-            $this->error("您沒有啟用/禁用權限");
+            $this->error("您沒有啟用/禁用許可權");
         }
         $status = $rs["status"] ? 0 : 1;
         $action = $this->model('list')->update_status($id,$status);
@@ -1198,7 +1198,7 @@ class list_control extends phpok_control
         if($status && $rs['user_id']){
             $this->model('wealth')->add_integral($id,$rs['user_id'],'post',P_Lang('管理員操作審核主題發布#{id}',array('id'=>$rs['id'])));
         }
-        //執行插件接入點
+        //執行外掛接入點
         $this->plugin("ap-list-status",$id);
         $this->success($status);
     }
@@ -1216,7 +1216,7 @@ class list_control extends phpok_control
         $rs = $this->model('list')->get_one($tmp1);
         $this->popedom_auto($rs['project_id']);
         if(!$this->popedom['status']){
-            $this->json(P_Lang('您沒有權限執行此操作'));
+            $this->json(P_Lang('您沒有許可權執行此操作'));
         }
         foreach($list as $key=>$value){
             $value = intval($value);
@@ -1257,7 +1257,7 @@ class list_control extends phpok_control
         $cate_id = $this->get("cate_id");
         $type = $this->get('type');
         if(!$cate_id || !$ids || !$type){
-            $this->json(P_Lang('參數傳遞不完整'));
+            $this->json(P_Lang('引數傳遞不完整'));
         }
         $list = explode(",",$ids);
         $delete_ok = true;
@@ -1290,7 +1290,7 @@ class list_control extends phpok_control
         $this->json(P_Lang('更新成功'),true);
     }
 
-    //設置屬性
+    //設定屬性
     public function attr_set_f()
     {
         $ids = $this->get("ids");
@@ -1298,7 +1298,7 @@ class list_control extends phpok_control
         $type = $this->get("type");
         if(!$val || !$ids || !$type)
         {
-            $this->json(P_Lang('參數傳遞不完整'));
+            $this->json(P_Lang('引數傳遞不完整'));
         }
         if($type != "add" && $type != "delete") $type = "add";
         $list = explode(",",$ids);
@@ -1356,16 +1356,16 @@ class list_control extends phpok_control
         }
         $this->popedom_auto($id);
         if(!$this->popedom["list"]){
-            error(P_Lang('您沒有權限執行此操作'),'','error');
+            error(P_Lang('您沒有許可權執行此操作'),'','error');
         }
         $project_rs = $this->model('project')->get_one($id);
         if(!$project_rs)
         {
-            error(P_Lang("項目信息不存在"),$this->url("list"),"error");
+            error(P_Lang("專案資訊不存在"),$this->url("list"),"error");
         }
         if(!$project_rs['module'])
         {
-            error(P_Lang('未綁定模塊，不能使用此功能'),$this->url('list','action','id='.$id),'error');
+            error(P_Lang('未繫結模組，不能使用此功能'),$this->url('list','action','id='.$id),'error');
         }
         $this->assign('page_rs',$project_rs);
         $this->view('list_plaction');
@@ -1375,22 +1375,22 @@ class list_control extends phpok_control
     {
         $pid = $this->get('pid');
         if(!$pid){
-            $this->json(P_Lang('未指定項目ID'));
+            $this->json(P_Lang('未指定專案ID'));
         }
         $this->popedom_auto($id);
         $project_rs = $this->model('project')->get_one($pid);
         if(!$project_rs){
-            $this->json(P_Lang("項目信息不存在"));
+            $this->json(P_Lang("專案資訊不存在"));
         }
         if(!$project_rs['module']){
-            $this->json(P_Lang('未綁定模塊，不能使用此功能'));
+            $this->json(P_Lang('未繫結模組，不能使用此功能'));
         }
         $startid = $this->get('startid','int');
         $endid = $this->get('endid','int');
         $plaction = $this->get('plaction');
         if($plaction == 'delete'){
             if(!$this->popedom['delete']){
-                $this->json(P_Lang('您沒有權限執行此操作'));
+                $this->json(P_Lang('您沒有許可權執行此操作'));
             }
             $condition = "project_id=".$pid." ";
             if($startid){
@@ -1405,12 +1405,12 @@ class list_control extends phpok_control
         $sql = "UPDATE ".$this->db->prefix."list SET ";
         if($plaction == 'status' || $plaction == 'unstatus'){
             if(!$this->popedom['status']){
-                $this->json(P_Lang('您沒有權限執行此操作'));
+                $this->json(P_Lang('您沒有許可權執行此操作'));
             }
             $sql .= " status=".($plaction == 'status' ? '1' : '0')." ";
         }elseif($plaction == 'hidden' || $plaction == 'show'){
             if(!$this->popedom['list']){
-                $this->json(P_Lang('您沒有權限執行此操作'));
+                $this->json(P_Lang('您沒有許可權執行此操作'));
             }
             $sql .= " hidden=".($plaction == 'hidden' ? '1' : '0')." ";
         }
@@ -1437,7 +1437,7 @@ class list_control extends phpok_control
         }
         $rs = $this->model('options')->get_one($aid);
         if(!$rs){
-            $this->error(P_Lang('屬性信息不存在'));
+            $this->error(P_Lang('屬性資訊不存在'));
         }
         $this->assign('rs',$rs);
         $optlist = $this->model('options')->values_list("aid='".$aid."'",0,9999,'id');
@@ -1470,11 +1470,11 @@ class list_control extends phpok_control
         }
         $rs = $this->model('list')->get_one($id);
         if(!$rs){
-            $this->error(P_Lang('數據不存在'));
+            $this->error(P_Lang('資料不存在'));
         }
         $this->popedom_auto($rs['project_id']);
         if(!$this->popedom['comment']){
-            $this->error(P_Lang('您沒有權限執行此操作'));
+            $this->error(P_Lang('您沒有許可權執行此操作'));
         }
         $this->assign("rs",$rs);
         $pageurl = $this->url("list","comment","id=".$id);
@@ -1500,9 +1500,9 @@ class list_control extends phpok_control
 
     /**
      * 設定主題的父層關系
-     * @參數 id 指定的父層
-     * @參數 ids 要綁定的主題，多個主題用英文逗號隔開
-     * @返回 JSON數據
+     * @引數 id 指定的父層
+     * @引數 ids 要繫結的主題，多個主題用英文逗號隔開
+     * @返回 JSON資料
      * @更新時間 2016年10月25日
      **/
     public function set_parent_f()
@@ -1525,7 +1525,7 @@ class list_control extends phpok_control
             }
         }
         if($isin){
-            $this->error(P_Lang('ID有沖突，要變更的主題ID和內置ID重復了'));
+            $this->error(P_Lang('ID有沖突，要變更的主題ID和內建ID重復了'));
         }
         $rs = $this->model('list')->get_one($id,false);
         if($rs['parent_id']){
@@ -1543,7 +1543,7 @@ class list_control extends phpok_control
 
     /**
      * 取消父層主題
-     * @參數 ids 要取消的主題，多個主題用英文逗號隔開
+     * @引數 ids 要取消的主題，多個主題用英文逗號隔開
      * @返回 JSON
      * @更新時間 2016年10月25日
      **/
@@ -1563,7 +1563,7 @@ class list_control extends phpok_control
             }
         }
         if($isin){
-            $this->error(P_Lang('ID有沖突，要變更的主題ID和內置ID重復了'));
+            $this->error(P_Lang('ID有沖突，要變更的主題ID和內建ID重復了'));
         }
         foreach($list as $key=>$value){
             $value = intval($value);

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/ext_model.php
-	备注： 扩展字段管理
+	檔案： {phpok}/model/admin/ext_model.php
+	備註： 擴充套件欄位管理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年02月20日 12时42分
+	時間： 2015年02月20日 12時42分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class ext_model extends ext_model_base
@@ -15,7 +15,7 @@ class ext_model extends ext_model_base
 		parent::__construct();
 	}
 
-	//添加验证
+	//新增驗證
 	public function check_identifier_add($identifier,$type='')
 	{
 		if(!$identifier || !$type){
@@ -77,7 +77,7 @@ class ext_model extends ext_model_base
 		return true;
 	}
 
-	//存储表单
+	//儲存表單
 	public function save($data,$id=0)
 	{
 		if(!$data || !is_array($data)) return false;
@@ -95,8 +95,8 @@ class ext_model extends ext_model_base
 	}
 
 	/**
-	 * 删除表单
-	 * @参数 $module 对应 qinggan_fields 表里的 ftype 值
+	 * 刪除表單
+	 * @引數 $module 對應 qinggan_fields 表裡的 ftype 值
 	**/
 	public function del($module)
 	{

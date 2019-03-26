@@ -1,13 +1,13 @@
 <?php
 /**
- * 管理评论
+ * 管理評論
  * @package phpok\model\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年07月29日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年07月29日
 **/
 
 if(!defined("PHPOK_SET")){
@@ -21,8 +21,8 @@ class reply_model extends reply_model_base
 	}
 
 	/**
-	 * 获取指定主题下的评论数统计，返回统计数组，为空返回false
-	 * @param mixed $ids 主题ID，字符串或数组
+	 * 獲取指定主題下的評論數統計，返回統計陣列，為空返回false
+	 * @param mixed $ids 主題ID，字串或陣列
 	 * @date 2016年02月14日
 	 */
 	public function comment_stat($ids)
@@ -54,10 +54,10 @@ class reply_model extends reply_model_base
 	}
 
 	/**
-	 * 取得回复统计
-	 * @参数 $condition 查询条件
-	 * @参数 $offset 起始值
-	 * @参数 $psize 每页查询数
+	 * 取得回覆統計
+	 * @引數 $condition 查詢條件
+	 * @引數 $offset 起始值
+	 * @引數 $psize 每頁查詢數
 	**/
 	public function get_all($condition="",$offset=0,$psize=30)
 	{
@@ -71,11 +71,11 @@ class reply_model extends reply_model_base
 	}
 
 	/**
-	 * 评论类型
+	 * 評論型別
 	**/
 	public function types()
 	{
-		$list = array('title'=>P_Lang('主题'),'cate'=>P_Lang('分类'),'project'=>P_Lang('分类'),'order'=>P_Lang('订单'));
+		$list = array('title'=>P_Lang('主題'),'cate'=>P_Lang('分類'),'project'=>P_Lang('分類'),'order'=>P_Lang('訂單'));
 		return $list;
 	}
 

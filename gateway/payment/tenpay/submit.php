@@ -1,16 +1,16 @@
 <?php
 /*****************************************************************************************
-	文件： payment/tenpay/submit.php
-	备注： 财付通确认支付
+	檔案： payment/tenpay/submit.php
+	備註： 財付通確認支付
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年5月3日
+	時間： 2014年5月3日
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class tenpay_submit
 {
-	//支付接口初始化
+	//支付介面初始化
 	var $param;
 	var $order;
 	var $paydir;
@@ -36,7 +36,7 @@ class tenpay_submit
         $return_url = $app->url('payment','notice','id='.$this->order['id'],'www',true);
 		$currency_id = $this->param['currency'] ? $this->param['currency']['id'] : $this->order['currency_id'];
 		$total_fee = price_format_val($this->order['price'],$this->order['currency_id'],$currency_id);
-		//商户编号
+		//商戶編號
 		$desc = $this->order['title'];
 		$tenpay->param('partner',$this->param['param']['pid']);
 		$tenpay->param("out_trade_no", $this->order['sn']);
@@ -49,31 +49,31 @@ class tenpay_submit
 		}else{
 			$tenpay->param("bank_type", "DEFAULT");
 		}
-		$tenpay->param("spbill_create_ip",$app->lib('common')->ip());//客户端IP
+		$tenpay->param("spbill_create_ip",$app->lib('common')->ip());//客戶端IP
 		$tenpay->param("fee_type", "1");
 		$tenpay->param("subject",$desc);
 
-		//系统可选参数
-		$tenpay->param("sign_type", "MD5");  	 	  //签名方式，默认为MD5，可选RSA
-		$tenpay->param("service_version", "1.0"); 	  //接口版本号
+		//系統可選引數
+		$tenpay->param("sign_type", "MD5");  	 	  //簽名方式，預設為MD5，可選RSA
+		$tenpay->param("service_version", "1.0"); 	  //介面版本號
 		$tenpay->param("input_charset", "utf-8");   	  //字符集
-		$tenpay->param("sign_key_index", "1");    	  //密钥序号
+		$tenpay->param("sign_key_index", "1");    	  //金鑰序號
 
-		//业务可选参数
+		//業務可選引數
 		$ptype = $this->param['param']['ptype'] == 'create_direct_pay_by_user' ? 1 : 2;
-		$tenpay->param("attach", $this->order['passwd']);      //附件数据，原样返回就可以了
-		$tenpay->param("product_fee", "");        	  //商品手续费用
-		$tenpay->param("transport_fee", "0");      	  //物流费用
-		$tenpay->param("time_start", date("YmdHis",$this->time));  //订单生成时间
-		$tenpay->param("time_expire", "");             //订单失效时间
-		$tenpay->param("buyer_id", "");                //买方财付通帐号
-		$tenpay->param("goods_tag", "");               //商品标记
-		$tenpay->param("trade_mode",$ptype);      //交易模式（1.即时到帐模式，2.中介担保模式，3.后台选择（卖家进入支付中心列表选择））
-		$tenpay->param("transport_desc","");              //物流说明
-		$tenpay->param("trans_type","1");              //交易类型
-		$tenpay->param("agentid","");                  //平台ID
-		$tenpay->param("agent_type",0);               //代理模式（0.无代理，1.表示卡易售模式，2.表示网店模式）
-		$tenpay->param("seller_id","");                //卖家的商户号
+		$tenpay->param("attach", $this->order['passwd']);      //附件資料，原樣返回就可以了
+		$tenpay->param("product_fee", "");        	  //商品手續費用
+		$tenpay->param("transport_fee", "0");      	  //物流費用
+		$tenpay->param("time_start", date("YmdHis",$this->time));  //訂單生成時間
+		$tenpay->param("time_expire", "");             //訂單失效時間
+		$tenpay->param("buyer_id", "");                //買方財付通帳號
+		$tenpay->param("goods_tag", "");               //商品標記
+		$tenpay->param("trade_mode",$ptype);      //交易模式（1.即時到帳模式，2.中介擔保模式，3.後臺選擇（賣家進入支付中心列表選擇））
+		$tenpay->param("transport_desc","");              //物流說明
+		$tenpay->param("trans_type","1");              //交易型別
+		$tenpay->param("agentid","");                  //平臺ID
+		$tenpay->param("agent_type",0);               //代理模式（0.無代理，1.表示卡易售模式，2.表示網店模式）
+		$tenpay->param("seller_id","");                //賣家的商戶號
 		$url = $tenpay->url();
 		$app->_location($url);
 		exit;

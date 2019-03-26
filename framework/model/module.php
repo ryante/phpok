@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/model/module.php
-	Note	: 模型管理维护
+	Note	: 模型管理維護
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -32,7 +32,7 @@ class module_model_base extends phpok_model
 		return $this->db->get_one($sql);
 	}
 
-	//取得扩展字段的所有扩展信息
+	//取得擴充套件欄位的所有擴充套件資訊
 	public function fields_all($module_id=0,$pri_id="")
 	{
 		if(!$module_id){
@@ -61,7 +61,7 @@ class module_model_base extends phpok_model
 		return $this->db->get_all($sql);
 	}
 
-	//检查表是否存在
+	//檢查表是否存在
 	public function chk_tbl_exists($id,$mtype=0)
 	{
 		if(!$id){
@@ -84,8 +84,8 @@ class module_model_base extends phpok_model
 	}
 
 	/**
-	 * 模块字段内容
-	 * @参数 $id 字段 ID
+	 * 模組欄位內容
+	 * @引數 $id 欄位 ID
 	**/
 	public function field_one($id)
 	{

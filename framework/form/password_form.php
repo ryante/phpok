@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/form/password_form.php
-	备注： 密码字段
+	檔案： {phpok}/form/password_form.php
+	備註： 密碼欄位
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年03月12日 22时09分
+	時間： 2015年03月12日 22時09分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class password_form extends _init_auto

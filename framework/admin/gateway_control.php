@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/admin/gateway_control.php
-	备注： 第三方接入网关管理工具
+	檔案： {phpok}/admin/gateway_control.php
+	備註： 第三方接入閘道器管理工具
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年09月29日 23时56分
+	時間： 2015年09月29日 23時56分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class gateway_control extends phpok_control
@@ -21,7 +21,7 @@ class gateway_control extends phpok_control
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			error(P_Lang('您没有权限执行此操作'),'','error');
+			error(P_Lang('您沒有許可權執行此操作'),'','error');
 		}
 		$rslist = $this->model('gateway')->get_all();
 		if($rslist){
@@ -58,7 +58,7 @@ class gateway_control extends phpok_control
 		}
 		$codelist = $this->model('gateway')->code_all($id);
 		if(!$codelist || count($codelist)<1){
-			$this->json(P_Lang('没有相关网关可用'));
+			$this->json(P_Lang('沒有相關閘道器可用'));
 		}
 		$this->json($codelist,true);
 	}
@@ -68,7 +68,7 @@ class gateway_control extends phpok_control
 		$id = $this->get('id');
 		if($id){
 			if(!$this->popedom["modify"]){
-				error(P_Lang('您没有权限执行此操作'),'','error');
+				error(P_Lang('您沒有許可權執行此操作'),'','error');
 			}
 			$rs = $this->model('gateway')->get_one($id);
 			$this->assign('rs',$rs);
@@ -77,12 +77,12 @@ class gateway_control extends phpok_control
 			$code = $rs['code'];
 		}else{
 			if(!$this->popedom["add"]){
-				error(P_Lang('您没有权限执行此操作'),'','error');
+				error(P_Lang('您沒有許可權執行此操作'),'','error');
 			}
 			$type = $this->get('type');
 			$code = $this->get('code');
 			if(!$type || !$code){
-				error(P_Lang('未指网关类型或接口引挈'),$this->url('gateway'),'error');
+				error(P_Lang('未指閘道器型別或介面引挈'),$this->url('gateway'),'error');
 			}
 			$taxis = $this->model('gateway')->next_taxis($type,$code);
 			$this->assign('rs',array('taxis'=>$taxis));
@@ -103,19 +103,19 @@ class gateway_control extends phpok_control
 		$array = array('site_id'=>$_SESSION['admin_site_id']);
 		if($id){
 			if(!$this->popedom["modify"]){
-				error(P_Lang('您没有权限执行此操作'),'','error');
+				error(P_Lang('您沒有許可權執行此操作'),'','error');
 			}
 			$rs = $this->model('gateway')->get_one($id);
 			$type = $rs['type'];
 			$code = $rs['code'];
 		}else{
 			if(!$this->popedom["add"]){
-				error(P_Lang('您没有权限执行此操作'),'','error');
+				error(P_Lang('您沒有許可權執行此操作'),'','error');
 			}
 			$type = $this->get('type');
 			$code = $this->get('code');
 			if(!$type || !$code){
-				error(P_Lang('未指网关类型或引挈类型'),$this->url('gateway'),'error');
+				error(P_Lang('未指閘道器型別或引挈型別'),$this->url('gateway'),'error');
 			}
 			$array['type'] = $type;
 			$array['code'] = $code;
@@ -149,7 +149,7 @@ class gateway_control extends phpok_control
 			$tip = P_Lang('更新成功');
 		}else{
 			$id = $this->model('gateway')->save($array);
-			$tip = P_Lang('添加成功');
+			$tip = P_Lang('新增成功');
 		}
 		$is_default = $this->get('is_default','int');
 		if($is_default){
@@ -173,7 +173,7 @@ class gateway_control extends phpok_control
 	public function status_f()
 	{
 		if(!$this->popedom['status']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		$status = $this->get('status','int');
@@ -184,7 +184,7 @@ class gateway_control extends phpok_control
 	public function default_f()
 	{
 		if(!$this->popedom['isdefault']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		$this->model('gateway')->update_default($id);
@@ -194,7 +194,7 @@ class gateway_control extends phpok_control
 	public function delete_f()
 	{
 		if(!$this->popedom['delete']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
@@ -207,7 +207,7 @@ class gateway_control extends phpok_control
 	public function extmanage_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		$manageid = $this->get('manageid');
@@ -215,27 +215,27 @@ class gateway_control extends phpok_control
 			$this->error(P_Lang('未指定ID'));
 		}
 		if(!$manageid){
-			$this->error(P_Lang('未指定管理文件'));
+			$this->error(P_Lang('未指定管理檔案'));
 		}
 		$rs = $this->model('gateway')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('网关路由不存在'));
+			$this->error(P_Lang('閘道器路由不存在'));
 		}
 		$this->assign('rs',$rs);
 		$code = $this->model('gateway')->code_one($rs['type'],$rs['code']);
 		if(!$code){
-			$this->error(P_Lang('配置文件有损坏，请检查'));
+			$this->error(P_Lang('配置檔案有損壞，請檢查'));
 		}
 		if(!$code['manage']){
-			$this->error(P_Lang('没有扩展管理项'));
+			$this->error(P_Lang('沒有擴充套件管理項'));
 		}
 		if(!$code['manage'][$manageid]){
-			$this->error(P_Lang('网关路由扩展管理项不存在'));
+			$this->error(P_Lang('閘道器路由擴充套件管理項不存在'));
 		}
 		if($code['code']){
 			foreach($code['code'] as $key=>$value){
 				if($value['required'] && $value['required'] != 'false' && $rs['ext'][$key] == ''){
-					$this->error(P_Lang('参数配置不完整'));
+					$this->error(P_Lang('引數配置不完整'));
 				}
 			}
 		}
@@ -246,17 +246,17 @@ class gateway_control extends phpok_control
 		}
 		$execfile = $this->dir_root.'gateway/'.$rs['type'].'/'.$rs['code'].'/'.$exec;
 		if(!file_exists($execfile)){
-			$this->error(P_Lang('执行文件不存在'));
+			$this->error(P_Lang('執行檔案不存在'));
 		}
 		$type = $this->get('type');
 		if(!$type){
 			$type = $code['type'];
 		}
-		//判断必填的参数是否存在
+		//判斷必填的引數是否存在
 		if($type == 'ajax'){
 			$info = include $execfile;
 			if(!$info){
-				$this->error(P_Lang('获取数据失败'));
+				$this->error(P_Lang('獲取資料失敗'));
 			}
 			$this->success($info);
 		}

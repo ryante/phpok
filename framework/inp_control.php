@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/inp_control.php
-	Note	: 自定义表单数据获取接口
+	Note	: 自定義表單資料獲取介面
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -21,11 +21,11 @@ class inp_control extends phpok_control
 		$this->format_list = $this->model("form")->format_list();
 	}
 
-	//取得表单数据
+	//取得表單資料
 	public function index_f()
 	{
 		if(!$_SESSION['admin_id']){
-			$this->json(P_Lang('仅限后台接入'));
+			$this->json(P_Lang('僅限後臺接入'));
 		}
 		$type = $this->get("type");
 		$content = $this->get("content");
@@ -44,10 +44,10 @@ class inp_control extends phpok_control
 	{
 		$file = $this->get('file',"system");
 		if(!$file){
-			$this->json(P_Lang('未指定XML文件'));
+			$this->json(P_Lang('未指定XML檔案'));
 		}
 		if(!file_exists($this->dir_data.'xml/'.$file.'.xml')){
-			$this->json(P_Lang('XML文件不存在'));
+			$this->json(P_Lang('XML檔案不存在'));
 		}
 		$info = $this->lib('xml')->read($this->dir_data.'xml/'.$file.'.xml');
 		$this->json($info,true);
@@ -96,11 +96,11 @@ class inp_control extends phpok_control
 	}
 
 	/**
-	 * 取得主题列表
-	 * @参数 pageid 页码
-	 * @参数 identifier 表单标识，对应输出的变量是$input
-	 * @参数 multi 是否多选，1为多选，其他为单选
-	 * @参数 project_id 项目ID
+	 * 取得主題列表
+	 * @引數 pageid 頁碼
+	 * @引數 identifier 表單標識，對應輸出的變數是$input
+	 * @引數 multi 是否多選，1為多選，其他為單選
+	 * @引數 project_id 專案ID
 	**/
 	public function title_f()
 	{
@@ -116,7 +116,7 @@ class inp_control extends phpok_control
 		$offset = ($pageid-1) * $psize;
 		$input = $this->get("identifier");
 		if(!$input){
-			$this->error("未指定表单ID");
+			$this->error("未指定表單ID");
 		}
 		$multi = $this->get("multi","int");
 		$pageurl = $this->url("inp","title")."&identifier=".rawurlencode($input);
@@ -125,7 +125,7 @@ class inp_control extends phpok_control
 		}
 		$project_id = $this->get("project_id");
 		if(!$project_id){
-			$this->error("未指定项目ID");
+			$this->error("未指定專案ID");
 		}
 		$tmp = explode(",",$project_id);
 		$lst = array();
@@ -138,7 +138,7 @@ class inp_control extends phpok_control
 		$lst = array_unique($lst);
 		$project_id = implode(",",$lst);
 		if(!$project_id){
-			$this->error("指定项目异常");
+			$this->error("指定專案異常");
 		}
 		$pageurl .="&project_id=".rawurlencode($project_id);
 		$formurl = $pageurl;
@@ -154,7 +154,7 @@ class inp_control extends phpok_control
 			$rslist = $this->model('list')->get_all($condition,$offset,$psize);
 			$this->assign("total",$total);
 			$this->assign("rslist",$rslist);
-			$string = "home=".P_Lang('首页')."&prev=".P_Lang('上一页')."&next=".P_Lang('下一页')."&last=".P_Lang('尾页')."&half=5&add=(total)/(psize)&always=1";
+			$string = "home=".P_Lang('首頁')."&prev=".P_Lang('上一頁')."&next=".P_Lang('下一頁')."&last=".P_Lang('尾頁')."&half=5&add=(total)/(psize)&always=1";
 			$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 			$this->assign("pagelist",$pagelist);
 		}

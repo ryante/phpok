@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/model/data.php
-	Note	: 前台用于调用的数据
+	Note	: 前臺用於呼叫的資料
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -24,10 +24,10 @@ class data_model_base extends phpok_model
 	}
 
 
-	//取得单篇ID
+	//取得單篇ID
 	private function _list_info($id)
 	{
-		//读取内容
+		//讀取內容
 		$sql  = "SELECT * FROM ".$this->db->prefix."list WHERE ";
 		$sql .= is_numeric($id) ? " id='".$id."' " : " identifier='".$id."' ";
 		$sql .= " AND site_id='".$this->site['id']."' AND status=1";
@@ -36,19 +36,19 @@ class data_model_base extends phpok_model
 		{
 			return false;
 		}
-		//取得项目基本信息
+		//取得專案基本資訊
 		$rs['project_id'] = $this->_project_info($rs['project_id']);
 		if(!$rs['project_id'])
 		{
 			return false;
 		}
 		$rs['project_id']['url'] = $this->url($rs['project_id']['identifier']);
-		//读取会员信息及扩展
+		//讀取會員資訊及擴充套件
 		if($rs['user_id'])
 		{
 			$rs['user_id'] = $this->_user_info($rs['user_id']);
 		}
-		//读分类及其扩展信息
+		//讀分類及其擴充套件資訊
 		if($rs['cate_id'])
 		{
 			$rs['cate_id'] = $this->_cate_info($rs['cate_id']);
@@ -57,7 +57,7 @@ class data_model_base extends phpok_model
 				$rs['cate_id']['url'] = $this->url($rs['project_id']['identifier'],$rs['cate_id']['identifier']);
 			}
 		}
-		//读模块信息及其扩展
+		//讀模組資訊及其擴充套件
 		if($rs['module_id'])
 		{
 			$ext = $this->_list_ext_info($rs['id'],$rs['module_id']);
@@ -69,7 +69,7 @@ class data_model_base extends phpok_model
 		return $rs;
 	}
 
-	//读单篇主题的扩展信息
+	//讀單篇主題的擴充套件資訊
 	private function _list_ext_info($id=0,$mid=0)
 	{
 		if(!$id || !$mid)
@@ -82,7 +82,7 @@ class data_model_base extends phpok_model
 		{
 			return false;
 		}
-		//清除四个核心变量
+		//清除四個核心變數
 		unset($rs['id'],$rs['site_id'],$rs['project_id'],$rs['cate_id']);
 		if($rs && count($rs)>0)
 		{
@@ -91,7 +91,7 @@ class data_model_base extends phpok_model
 		return false;
 	}
 
-	//项目信息内容
+	//專案資訊內容
 	private function _project_info($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."project WHERE id='".$id."' AND status=1";
@@ -100,7 +100,7 @@ class data_model_base extends phpok_model
 		{
 			return false;
 		}
-		//获取扩展内容
+		//獲取擴充套件內容
 		$extlist = $this->_ext_info('project-'.$id);
 		if($extlist)
 		{
@@ -109,7 +109,7 @@ class data_model_base extends phpok_model
 		return $rs;
 	}
 
-	//读取分类及期扩展信息，但并不格式化
+	//讀取分類及期擴充套件資訊，但並不格式化
 	private function _cate_info($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."cate WHERE id='".$id."' AND status=1";
@@ -118,7 +118,7 @@ class data_model_base extends phpok_model
 		{
 			return false;
 		}
-		//获取扩展内容
+		//獲取擴充套件內容
 		$extlist = $this->_ext_info('cate-'.$id);
 		if($extlist)
 		{
@@ -127,7 +127,7 @@ class data_model_base extends phpok_model
 		return $rs;
 	}
 
-	//读取扩展内容，未格式化
+	//讀取擴充套件內容，未格式化
 	private function _ext_info($module)
 	{
 		$sql = "SELECT e.identifier,c.content FROM ".$this->db->prefix."fields e ";
@@ -143,13 +143,13 @@ class data_model_base extends phpok_model
 		return $list;
 	}
 	
-	//取得会员内容及未格式化的扩展信息
+	//取得會員內容及未格式化的擴充套件資訊
 	private function _user_info($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."user WHERE id='".$id."' AND status=1";
 		$rs = $this->db->get_one($sql);
 		if(!$rs) return false;
-		//读取会员扩展
+		//讀取會員擴充套件
 		$sql = "SELECT * FROM ".$this->db->prefix."user_ext WHERE id='".$id."'";
 		$ext_rs = $this->db->get_one($sql);
 		if($ext_rs)
@@ -158,7 +158,7 @@ class data_model_base extends phpok_model
 		}
 		return $rs;
 	}
-	//内容分页
+	//內容分頁
 	function info_page($content,$pageid=0)
 	{
 		if(!$content) return false;
@@ -181,7 +181,7 @@ class data_model_base extends phpok_model
 		return $lst[0];
 	}
 
-	//取得当前分类信息
+	//取得當前分類資訊
 	public function cate($rs)
 	{
 		if(!$rs['pid'] && !$rs['phpok']) return false;
@@ -192,7 +192,7 @@ class data_model_base extends phpok_model
 			$rs['pid'] = $tmp['id'];
 		}
 		if(!$rs['pid']) return false;
-		//取得项目信息
+		//取得專案資訊
 		$project_rs = $this->_project($rs['pid'],false);
 		if(!$project_rs['cate']) return false;
 		if($rs['cate'])
@@ -216,7 +216,7 @@ class data_model_base extends phpok_model
 		return $cate_rs;
 	}
 
-	//取得分类，不带项目
+	//取得分類，不帶專案
 	function cate_id($rs)
 	{
 		$id = $rs['id'] ? $rs['id'] : $rs['cateid'];
@@ -238,7 +238,7 @@ class data_model_base extends phpok_model
 		return $cate_rs;
 	}
 
-	//取得当前分类下的子类
+	//取得當前分類下的子類
 	public function subcate($rs)
 	{
 		if(!$rs['cateid'] && !$rs['phpok']) return false;
@@ -266,7 +266,7 @@ class data_model_base extends phpok_model
 		}
 	}
 
-	//取得项目信息
+	//取得專案資訊
 	public function project($rs)
 	{
 		if(!$rs['pid'] && !$rs['phpok']) return false;
@@ -279,12 +279,12 @@ class data_model_base extends phpok_model
 		if(!$rs['pid']) return false;
 		$rs = $this->_project($rs['pid'],$rs['project_ext']);
 		if(!$rs) return false;
-		//绑定链接
+		//繫結連結
 		if(!$rs['url']) $rs['url'] = $GLOBALS['app']->url($rs['identifier']);
 		return $rs;
 	}
 
-	//取得父级项目信息
+	//取得父級專案資訊
 	public function _project_parent($rs)
 	{
 		if(!$rs['pid'] && !$rs['phpok']) return false;
@@ -299,12 +299,12 @@ class data_model_base extends phpok_model
 		if(!$project_rs || !$project_rs['parent_id']) return false;
 		$rs = $this->_project($project_rs['parent_id'],$rs['parent_ext']);
 		if(!$rs) return false;
-		//绑定链接
+		//繫結連結
 		if(!$rs['url']) $rs['url'] = $GLOBALS['app']->url($rs['identifier']);
 		return $rs;
 	}
 	
-	//取得子项目信息
+	//取得子專案資訊
 	public function sublist($rs)
 	{
 		if(!$rs['pid'] && !$rs['phpok']) return false;
@@ -337,7 +337,7 @@ class data_model_base extends phpok_model
  		return $rslist;
 
 	}
-	//读取当前分类的子分类
+	//讀取當前分類的子分類
 	public function cate_sublist(&$list,$parent_id=0,$rslist='',$identifier='')
 	{
 		if($rslist)
@@ -362,7 +362,7 @@ class data_model_base extends phpok_model
 		}
 	}
 
-	//取得自定义字段信息
+	//取得自定義欄位資訊
 	public function fields($rs)
 	{
 		if(!$rs['pid'] && !$rs['phpok']) return false;
@@ -375,10 +375,10 @@ class data_model_base extends phpok_model
 		if(!$rs['pid']) return false;
 		$project_rs = $this->_project($rs['pid'],false);
 		if(!$project_rs || !$project_rs['module']) return false;
-		//自定义字段
+		//自定義欄位
 		$array = array();
 		$flist = $this->module_field($project_rs['module']);
-		//如果存在扩展字段，对扩展字段进行处理，标前识加前缀等
+		//如果存在擴充套件欄位，對擴充套件欄位進行處理，標前識加字首等
 		if($flist)
 		{
 			foreach($flist AS $key=>$value)
@@ -398,11 +398,11 @@ class data_model_base extends phpok_model
 				}
 				$flist[$key] = $value;
 			}
-			//如果包含主题
+			//如果包含主題
 			if($rs['in_title'])
 			{
 				$tmp_id = $rs['prefix'].'title';
-				$array['title'] = array('id'=>0,"module_id"=>$project_rs['module'],'title'=>($project_rs['alias_title'] ? $project_rs['alias_title'] : '主题'),'identifier'=>$tmp_id,'field_type'=>'varchar','form_type'=>'text','format'=>'safe','taxis'=>1,'width'=>'300','content'=>$rs['info']['title']);
+				$array['title'] = array('id'=>0,"module_id"=>$project_rs['module'],'title'=>($project_rs['alias_title'] ? $project_rs['alias_title'] : '主題'),'identifier'=>$tmp_id,'field_type'=>'varchar','form_type'=>'text','format'=>'safe','taxis'=>1,'width'=>'300','content'=>$rs['info']['title']);
 				$array = array_merge($array,$flist);
 			}
 			else
@@ -410,7 +410,7 @@ class data_model_base extends phpok_model
 				$array = $flist;
 			}
 		}
-		//判断是否格式化
+		//判斷是否格式化
 		if($rs['fields_format'])
 		{
 			foreach($array AS $key=>$value)
@@ -427,7 +427,7 @@ class data_model_base extends phpok_model
 		return $array;
 	}
 	
-	//取得项目信息
+	//取得專案資訊
 	public function _project($id,$ext=false)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."project WHERE id=".intval($id);
@@ -480,7 +480,7 @@ class data_model_base extends phpok_model
 		return $this->model('id')->id($identifier,$site_id,true);
 	}
 
-	//获取项目，分类的扩展信息
+	//獲取專案，分類的擴充套件資訊
 	public function ext_all($id,$baseinfo='')
 	{
 		$sql = "SELECT ext.ext,ext.identifier,ext.form_type,c.content FROM ".$this->db->prefix."fields ext ";
@@ -494,7 +494,7 @@ class data_model_base extends phpok_model
 		$res = '';
 		$type = substr($id,0,4) == "cate" ? 'c' : 'p';
 		foreach($rslist as $key=>$value){
-			//当内容表单为网址时
+			//當內容表單為網址時
 			if($value['form_type'] == 'url' && $value['content']){
 				$value['content'] = unserialize($value['content']);
 				$url = $this->site['url_type'] == 'rewrite' ? $value['content']['rewrite'] : $value['content']['default'];
@@ -502,7 +502,7 @@ class data_model_base extends phpok_model
 					$url = $value['content']['default'];
 				}
 				$value['content'] = $url;
-				//绑定扩展自定义url
+				//繫結擴充套件自定義url
 				if(!$rslist['url']){
 					$rslist['url'] = array('form_type'=>'text','content'=>$url);
 				}
@@ -526,7 +526,7 @@ class data_model_base extends phpok_model
 			}
 			$rslist[$key] = $value;
 		}
-		//格式化内容数据，并合并附件数据
+		//格式化內容資料，併合並附件資料
 		$flist = "";
 		foreach($rslist AS $key=>$value)
 		{
@@ -539,7 +539,7 @@ class data_model_base extends phpok_model
 		return $rslist;
 	}
 
-	//读取分类下的子分类id
+	//讀取分類下的子分類id
 	private function _cate_id(&$array,$parent_id=0,$rslist='')
 	{
 		if($rslist && is_array($rslist))
@@ -560,7 +560,7 @@ class data_model_base extends phpok_model
 		return $this->_res_info2($id);
 	}
 
-	//读取附件信息
+	//讀取附件資訊
 	private function _res_info2($id)
 	{
 		if(!$id){
@@ -574,7 +574,7 @@ class data_model_base extends phpok_model
 		return $this->model('res')->get_list_from_id($id,true);
 	}
 
-	//格式化单列信息
+	//格式化單列資訊
 	private function _format($rs,$flist="",$reslist="",$catelist="",$userlist="",$tlist="")
 	{
 		if(!$rs || !is_array($rs)) return false;
@@ -587,7 +587,7 @@ class data_model_base extends phpok_model
 				{
 					$ext = unserialize($ext);
 				}
-				//格式化附件信息
+				//格式化附件資訊
 				if($value['form_type'] == "upload" && $rs[$value['identifier']] && $reslist && is_array($reslist))
 				{
 					if($ext['is_multiple'])
@@ -609,14 +609,14 @@ class data_model_base extends phpok_model
 			}
 			unset($flist);
 		}
-		//格式化分类信息
+		//格式化分類資訊
 		if($rs['cate_id'] && $catelist && $catelist[$rs['cate_id']]) $rs['cate_id'] = $catelist[$rs['cate_id']];
-		//格式化会员信息
+		//格式化會員資訊
 		if($rs['user_id'] && $userlist && $userlist[$rs['user_id']]) $rs['user_id'] = $userlist[$rs['user_id']];
 		return $rs;
 	}
 
-	//读取分类基础信息
+	//讀取分類基礎資訊
 	private function _cate_info2($id)
 	{
 		if(!$id) return false;
@@ -627,7 +627,7 @@ class data_model_base extends phpok_model
 		return $this->db->get_all($sql,"id");
 	}
 
-	//读取会员基础信息
+	//讀取會員基礎資訊
 	private function _user_info2($id)
 	{
 		if(!$id) return false;
@@ -638,7 +638,7 @@ class data_model_base extends phpok_model
 		return $this->db->get_all($sql,"id");
 	}
 
-	//读取内容基础信息
+	//讀取內容基礎資訊
 	private function _title_info($id)
 	{
 		if(!$id) return false;

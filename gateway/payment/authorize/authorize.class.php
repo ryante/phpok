@@ -1,12 +1,12 @@
 <?php
 /**
- * Authorize 支付类
+ * Authorize 支付類
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年08月21日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年08月21日
 **/
 
 class authorize_lib
@@ -17,7 +17,7 @@ class authorize_lib
 	private $api_name = '';
 	private $api_key = '';
 	private $ref_id = '';
-	private $amount = 0; //订单金额
+	private $amount = 0; //訂單金額
 	private $sandbox = false;
 	private $request_data = array();
 	
@@ -79,7 +79,7 @@ class authorize_lib
 	}
 
 	/**
-	 * 设置要Post的数据，仅限一级
+	 * 設定要Post的資料，僅限一級
 	**/
 	public function post($key,$data)
 	{
@@ -94,8 +94,8 @@ class authorize_lib
 	}
 
 	/**
-	 * 订单编号，用于连接本地和远程的ID
-	 * @参数 $id 唯一的订单编号
+	 * 訂單編號，用於連線本地和遠端的ID
+	 * @引數 $id 唯一的訂單編號
 	**/
 	public function ref_id($id='')
 	{

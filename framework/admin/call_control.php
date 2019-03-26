@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/admin/call_control.php
-	Note	: 数据调用中心
+	Note	: 資料呼叫中心
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -11,7 +11,7 @@ if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class call_control extends phpok_control
 {
 	private $psize = 20;
-	private $phpok_type_list;//可调用类型
+	private $phpok_type_list;//可呼叫型別
 	private $popedom;
 	public function __construct()
 	{
@@ -33,7 +33,7 @@ class call_control extends phpok_control
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$this->phpok_autoload();
 		$psize = $this->config["psize"] ? $this->config["psize"] : 20;
@@ -54,7 +54,7 @@ class call_control extends phpok_control
 		$this->assign("rslist",$rslist);
 		$total = $this->model('call')->get_count($condition);
 		$this->assign("total",$total);
-		$string = P_Lang("home=首页&prev=上一页&next=下一页&last=尾页&half=5&add=数量：(total)/(psize)，页码：(num)/(total_page)&always=1");
+		$string = P_Lang("home=首頁&prev=上一頁&next=下一頁&last=尾頁&half=5&add=數量：(total)/(psize)，頁碼：(num)/(total_page)&always=1");
 		$pagelist = phpok_page($pageurl,$total,$pageid,$this->psize,$string);
 		$this->assign("pagelist",$pagelist);
 		$attrlist = $this->model('list')->attr_list();
@@ -68,7 +68,7 @@ class call_control extends phpok_control
 		$id = $this->get("id");
 		if($id){
 			if(!$this->popedom["modify"]){
-				error(P_Lang('您没有权限执行此操作'),'','error');
+				error(P_Lang('您沒有許可權執行此操作'),'','error');
 			}
 			$rs = $this->model('call')->get_one($id);
 			if($rs['ext']){
@@ -80,7 +80,7 @@ class call_control extends phpok_control
 			$this->assign("id",$id);
 		}else{
 			if(!$this->popedom["add"]){
-				error(P_Lang('您没有权限执行此操作'),'','error');
+				error(P_Lang('您沒有許可權執行此操作'),'','error');
 			}
 		}
 		$site_id = $_SESSION["admin_site_id"];
@@ -89,21 +89,21 @@ class call_control extends phpok_control
 		$attrlist = $this->model('list')->attr_list();
 		$this->assign("attrlist",$attrlist);
 
-		//读取会员组
+		//讀取會員組
 		$ugroup = $this->model('usergroup')->get_all("is_guest=0");
 		$this->assign("usergroup",$ugroup);
 		
 		$this->view("phpok_set");
 	}
 
-	//取得分类列表
+	//取得分類列表
 	public function cate_list_f()
 	{
 		$id = $this->get("id","int");
 		if($id){
 			$rs = $this->model('project')->get_one($id);
 			if(!$rs["cate"]){
-				$this->error(P_Lang('无分类'));
+				$this->error(P_Lang('無分類'));
 			}
 			$cate_rs = $this->model('cate')->cate_info($rs["cate"],false);
 			$catelist = $this->model('cate')->get_all($rs["site_id"],0,$rs["cate"]);
@@ -153,7 +153,7 @@ class call_control extends phpok_control
 		}
 		$p_rs = $this->model('project')->get_one($pid,false);
 		if(!$p_rs['module']){
-			$this->json(P_Lang('未绑定模块'));
+			$this->json(P_Lang('未繫結模組'));
 		}
 		$rslist = $this->model('module')->fields_all($p_rs['module']);
 		$this->assign('rslist',$rslist);
@@ -169,7 +169,7 @@ class call_control extends phpok_control
 		}
 		$p_rs = $this->model('project')->get_one($pid,false);
 		if(!$p_rs['module']){
-			$this->error(P_Lang('未绑定模块'));
+			$this->error(P_Lang('未繫結模組'));
 		}
 		$module = $this->model('module')->get_one($p_rs['module']);
 		$rslist = $this->model('module')->fields_all($p_rs['module']);
@@ -183,15 +183,15 @@ class call_control extends phpok_control
 	private function check_identifier($identifier)
 	{
 		if(!$identifier){
-			return P_Lang('未指定标识串');
+			return P_Lang('未指定標識串');
 		}
 		$identifier = strtolower($identifier);
 		if(!preg_match("/^[a-z][a-z0-9\_\-]+$/u",$identifier)){
-			return P_Lang('字段标识不符合系统要求，限小写字母、数字、中划线及下划线且必须是小写字母开头');
+			return P_Lang('欄位標識不符合系統要求，限小寫字母、數字、中劃線及下劃線且必須是小寫字母開頭');
 		}
 		$rs = $this->model('call')->chk_identifier($identifier);
 		if($rs){
-			return P_Lang('字符串已被使用');
+			return P_Lang('字串已被使用');
 		}
 		return "ok";		
 	}
@@ -211,10 +211,10 @@ class call_control extends phpok_control
 		$array = array();
 		if(!$id){
 			if(!$this->popedom["add"]){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 			if(!$title){
-				$this->error(P_Lang('标题不能为空'),$error_url);
+				$this->error(P_Lang('標題不能為空'),$error_url);
 			}
 			$identifier = $this->get("identifier");
 			$chk = $this->check_identifier($identifier);
@@ -225,10 +225,10 @@ class call_control extends phpok_control
 			$array["site_id"] = $this->session->val('admin_site_id');
 		}else{
 			if(!$this->popedom["modify"]){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 			if(!$title){
-				$this->error(P_Lang('标题不能为空'),$error_url);
+				$this->error(P_Lang('標題不能為空'),$error_url);
 			}
 			$identifier = $this->get('identifier','system');
 			$rs = $this->model('call')->get_one($id);
@@ -272,13 +272,13 @@ class call_control extends phpok_control
 	}
 
 	/**
-	 * 删除数据调用
-	 * @参数 id 要删除的调用ID
+	 * 刪除資料呼叫
+	 * @引數 id 要刪除的呼叫ID
 	**/
 	public function delete_f()
 	{
 		if(!$this->popedom['delete']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -288,21 +288,21 @@ class call_control extends phpok_control
 		$this->success();
 	}
 
-	//取得模块的扩展字段
+	//取得模組的擴充套件欄位
 	public function mfields_f()
 	{
 		$id = $this->get("id");
 		if(!$id){
-			$this->json(P_Lang('未指定项目ID'));
+			$this->json(P_Lang('未指定專案ID'));
 		}
 		$rs = $this->model('project')->get_one($id);
 		if(!$rs || !$rs["module"]){
-			$this->json(P_Lang('无数据或未设置模块'));
+			$this->json(P_Lang('無資料或未設定模組'));
 		}
 		$mid = $rs["module"];
 		$rslist = $this->model('module')->fields_all($mid);
 		if(!$rslist){
-			$this->json(P_Lang('没有自定义字段'));
+			$this->json(P_Lang('沒有自定義欄位'));
 		}
 		$list = array();
 		foreach($rslist AS $key=>$value){

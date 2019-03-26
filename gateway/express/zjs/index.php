@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： express/zjs/index.php
-	备注： 获取数据
+	檔案： express/zjs/index.php
+	備註： 獲取資料
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年09月07日 15时45分
+	時間： 2015年09月07日 15時45分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 if(!$express || !$rs || !$rs['code']){
@@ -17,28 +17,28 @@ $rdm2 ="0000" ;
 $clientFlag = $ext['logisticProviderID'];
 $xml ="<BatchQueryRequest><logisticProviderID>".trim($ext['logisticProviderID'])."</logisticProviderID>";
 $xml.= "<orders><order><mailNo>".trim($rs['code'])."</mailNo></order></orders></BatchQueryRequest>";
-$strSeed = $ext['keyseed'];//客户密钥
+$strSeed = $ext['keyseed'];//客戶金鑰
 $strConst = $ext['fixed_string'];//常量值
 $str = $rdm1.$clientFlag.$xml.$strSeed.$strConst.$rdm2;
-$strVerifyData=$rdm1.substr(md5($str),7,21).$rdm2;//生成密钥
+$strVerifyData=$rdm1.substr(md5($str),7,21).$rdm2;//生成金鑰
 $postdata='clientFlag='.$clientFlag.'&xml='.($xml).'&verifyData='.$strVerifyData;
 
-$ch = curl_init(); //创建一个curl
-// 2. 设置选项，包括URL
+$ch = curl_init(); //建立一個curl
+// 2. 設定選項，包括URL
 curl_setopt($ch, CURLOPT_URL, "http://edi.zjs.com.cn/svst/tracking.asmx/Get");
 curl_setopt($ch, CURLOPT_POST, 1);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_HEADER, 0);
-curl_setopt($ch, CURLOPT_REFERER, "http://www.zjs.com.cn/"); //构造来路
-// 3. 执行并获取HTML文档内容
+curl_setopt($ch, CURLOPT_REFERER, "http://www.zjs.com.cn/"); //構造來路
+// 3. 執行並獲取HTML文件內容
 $output = curl_exec($ch);
 if(!$output){
-	return array('content'=>P_Lang('远程获取数据失败'));
+	return array('content'=>P_Lang('遠端獲取資料失敗'));
 }
 $curl_info = curl_getinfo($ch);
 if($curl_info['http_code'] != '200'){
-	return array('content'=>P_Lang('远程获取数据失败'));
+	return array('content'=>P_Lang('遠端獲取資料失敗'));
 }
 curl_close($ch);
 $output=str_replace(array('&lt;', '&gt;'), array('<','>'),$output);
@@ -51,14 +51,14 @@ if(!$xmlinfo){
 if($xmlinfo['BatchQueryResponse']){
 	$xmlinfo = $xmlinfo['BatchQueryResponse'];
 }
-$logisticProviderID=$xmlinfo['logisticProviderID'];//客户标识
+$logisticProviderID=$xmlinfo['logisticProviderID'];//客戶標識
 $orders=$xmlinfo['orders'];
 $order=$orders['order'];
 $steps=$order['steps'];
 $step=$steps['step'];
-$mailNo=$order['mailNo'];//运单号
-$orderStatus=$order['orderStatus'];//当前订单状态，订单状态值：GOT 物流公司已经取件、SIGNED 订单已经签收、FAILED 订单签收失败
-$statusTime=$order['statusTime'];//当前状态时间
+$mailNo=$order['mailNo'];//運單號
+$orderStatus=$order['orderStatus'];//當前訂單狀態，訂單狀態值：GOT 物流公司已經取件、SIGNED 訂單已經簽收、FAILED 訂單簽收失敗
+$statusTime=$order['statusTime'];//當前狀態時間
 $tmplist = array();
 if($step && is_array($step)){
 	if($step['acceptTime']){
@@ -74,16 +74,16 @@ if($step && is_array($step)){
 $is_end = false;
 if($orderStatus=="SIGNED"){
 	$is_end = true;
-	$last = array('title'=>$statusTime,'content'=>'订单已经签收，签收人是'.$order['signinPer']);
+	$last = array('title'=>$statusTime,'content'=>'訂單已經簽收，簽收人是'.$order['signinPer']);
 	$tmplist[] = $last;
 }elseif($orderStatus == 'GOT'){
 	$tmp = array('time'=>$statusTime,'content'=>'物流公司已取件');
 	$tmplist[] = $tmp;
 }elseif($orderStatus == 'FAILED'){
-	$tmp = array('time'=>$statusTime,'content'=>'订单签收失败，原因说明：'.$order['error']);
+	$tmp = array('time'=>$statusTime,'content'=>'訂單簽收失敗，原因說明：'.$order['error']);
 	$tmplist[] = $tmp;
 }else{
-	$tmp = array('time'=>date("Y-m-d H:i:s",$this->time),'content'=>'查无结果！请检查运单号是否正确，若正确，原因可能为：物流公司还没有录入信息，请4小时后再查询');
+	$tmp = array('time'=>date("Y-m-d H:i:s",$this->time),'content'=>'查無結果！請檢查運單號是否正確，若正確，原因可能為：物流公司還沒有錄入資訊，請4小時後再查詢');
 	$tmplist[] = $tmp;
 }
 return array('is_end'=>$is_end,'content'=>$tmplist,'status'=>true);

@@ -1,12 +1,12 @@
 <?php
 /**
- * 评论信息
+ * 評論資訊
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年08月28日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年08月28日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -20,17 +20,17 @@ class comment_control extends phpok_control
 		$groupid = $this->model('usergroup')->group_id($_SESSION['user_id']);
 		if(!$groupid)
 		{
-			$this->json(P_Lang('无法获取前端用户组信息'));
+			$this->json(P_Lang('無法獲取前端使用者組資訊'));
 		}
 		$this->user_groupid = $groupid;
 	}
 
-	//获取评论信息
+	//獲取評論資訊
 	public function index_f()
 	{
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->json(P_Lang('未指定主题'));
+			$this->json(P_Lang('未指定主題'));
 		}
 		$condition = "tid='".$id."' AND parent_id='0' ";
 		$condition .= " AND (status=1 OR (status=0 AND (uid=".$_SESSION['user_id']." OR session_id='".session_id()."'))) ";
@@ -40,7 +40,7 @@ class comment_control extends phpok_control
 		}
 		$total = $this->model('reply')->get_total($condition);
 		if(!$total){
-			$this->json(P_Lang('暂无评论信息'));
+			$this->json(P_Lang('暫無評論資訊'));
 		}
 		$pageid = $this->get($this->config['pageid'],'int');
 		if(!$pageid){
@@ -59,7 +59,7 @@ class comment_control extends phpok_control
 			}
 			$idlist[] = $value["id"];
 		}
-		//读取回复的回复
+		//讀取回復的回覆
 		$idstring = implode(",",$idlist);
 		$condition  = " parent_id IN(".$idstring.") ";
 		$condition .= " AND (status=1 OR (status=0 AND (uid=".$_SESSION['user_id']." OR session_id='".session_id()."'))) ";
@@ -74,7 +74,7 @@ class comment_control extends phpok_control
 			}
 		}
 		
-		//获取会员信息
+		//獲取會員資訊
 		if($userlist && count($userlist)>0){
 			$userlist = array_unique($userlist);
 			$user_idstring = implode(",",$userlist);
@@ -88,7 +88,7 @@ class comment_control extends phpok_control
 				$tmplist = "";
 			}
 		}
-		//整理回复列表
+		//整理回覆列表
 		foreach($rslist as $key=>$value){
 			if($mylist && $mylist[$value["id"]]){
 				foreach($mylist[$value["id"]] AS $k=>$v){
@@ -115,15 +115,15 @@ class comment_control extends phpok_control
 	}
 
 	/**
-	 * 存储评论信息
-	 * @参数 vtype 评论类型，仅支持：title 主题，project 项目，cate 分类，order 订单，留空或是没有获取成功则读取主题
-	 * @参数 tid 主题ID，当type为title时此项必填，当为order时， tid指为订单中的具体某个产品
-	 * @参数 _chkcode 验证码，仅限评论为主题时有效，其他的评论必须是会员
-	 * @参数 parent_id 父级评论ID
-	 * @参数 star 评论等级，留空默认为3
-	 * @参数 comment 评论内容，会员评论时支持HTML，游客仅支持文本
-	 * @参数 pictures 评论的时候上传的一些图片，或附件
-	 * @参数 order_id 订单ID
+	 * 儲存評論資訊
+	 * @引數 vtype 評論型別，僅支援：title 主題，project 專案，cate 分類，order 訂單，留空或是沒有獲取成功則讀取主題
+	 * @引數 tid 主題ID，當type為title時此項必填，當為order時， tid指為訂單中的具體某個產品
+	 * @引數 _chkcode 驗證碼，僅限評論為主題時有效，其他的評論必須是會員
+	 * @引數 parent_id 父級評論ID
+	 * @引數 star 評論等級，留空預設為3
+	 * @引數 comment 評論內容，會員評論時支援HTML，遊客僅支援文字
+	 * @引數 pictures 評論的時候上傳的一些圖片，或附件
+	 * @引數 order_id 訂單ID
 	**/
 	public function save_f()
 	{
@@ -132,7 +132,7 @@ class comment_control extends phpok_control
 			$type = 'title';
 		}
 		if(!$type || !in_array($type,array('title','project','cate','order'))){
-			$this->error(P_Lang('评论类型不对，请检查'));
+			$this->error(P_Lang('評論型別不對，請檢查'));
 		}
 		$data = array('vtype'=>$type);
 		$uid = $this->session->val('user_id');
@@ -141,7 +141,7 @@ class comment_control extends phpok_control
 		}
 		$user_groupid = $this->model('usergroup')->group_id($uid);
 		if(!$user_groupid){
-			$this->error(P_Lang('无法获取用户组信息，请检查'));
+			$this->error(P_Lang('無法獲取使用者組資訊，請檢查'));
 		}
 		$parent_id = $this->get("parent_id","int");
 		if($parent_id){
@@ -158,33 +158,33 @@ class comment_control extends phpok_control
 		if($type == 'title'){
 			$tid = $this->get('tid','int');
 			if(!$tid && !$parent_id){
-				$this->error(P_Lang('未指定要评论主题'));
+				$this->error(P_Lang('未指定要評論主題'));
 			}
 			if(!$tid && $parent_id){
 				$comment = $this->model('reply')->get_one($parent_id);
 				if(!$comment || !$comment['tid']){
-					$this->error(P_Lang('未指定要评论主题'));
+					$this->error(P_Lang('未指定要評論主題'));
 				}
 				$tid = $comment['tid'];
 			}
 			$rs = $this->model('list')->call_one($tid);
 			if(!$rs){
-				$this->error(P_Lang('要评论的主题不存在'));
+				$this->error(P_Lang('要評論的主題不存在'));
 			}
 			$project_rs = $this->model('project')->get_one($rs['project_id'],false);
 			if(!$project_rs['comment_status']){
-				$this->error(P_Lang('未启用评论功能'));
+				$this->error(P_Lang('未啟用評論功能'));
 			}
 			$data['tid'] = $rs['id'];
 			$data['title'] = $rs['title'];
 			if($this->model('site')->vcode($rs['project_id'],'comment')){
 				$code = $this->get('_chkcode');
 				if(!$code){
-					$this->error(P_Lang('验证码不能为空'));
+					$this->error(P_Lang('驗證碼不能為空'));
 				}
 				$code = md5(strtolower($code));
 				if($code != $this->session->val('vcode')){
-					$this->error(P_Lang('验证码填写不正确'));
+					$this->error(P_Lang('驗證碼填寫不正確'));
 				}
 				$_clearVcode = true;
 			}
@@ -192,29 +192,29 @@ class comment_control extends phpok_control
 			$sessid = $this->session->sessid();
 			$chk = $this->model('reply')->check_time($tid,$uid,$data["session_id"]);
 			if(!$chk){
-				$this->error(P_Lang('30秒内同一主题只能回复一次'));
+				$this->error(P_Lang('30秒內同一主題只能回覆一次'));
 			}
 		}elseif($type == 'order'){
 			if(!$uid){
-				$this->error(P_Lang('非会员不能对订单进行评论'));
+				$this->error(P_Lang('非會員不能對訂單進行評論'));
 			}
 			$order_id = $this->get('order_id','int');
 			if(!$order_id){
-				$this->error(P_Lang('未指定订单ID'));
+				$this->error(P_Lang('未指定訂單ID'));
 			}
 			$order = $this->model('order')->get_one($order_id);
 			if(!$order){
-				$this->error(P_Lang('订单信息不存在'));
+				$this->error(P_Lang('訂單資訊不存在'));
 			}
 			if($order['user_id'] != $uid){
-				$this->error(P_Lang('您没有权限对此订单产品进行评论'));
+				$this->error(P_Lang('您沒有許可權對此訂單產品進行評論'));
 			}
 			$data['order_id'] = $order_id;
 			$tid = $this->get('tid','int');
 			if($tid){
 				$plist = $this->model('order')->product_list($order_id);
 				if(!$plist){
-					$this->error(P_Lang('订单中没有指定的产品'));
+					$this->error(P_Lang('訂單中沒有指定的產品'));
 				}
 				$check = false;
 				$rs = array();
@@ -226,65 +226,65 @@ class comment_control extends phpok_control
 					}
 				}
 				if(!$check){
-					$this->error(P_Lang('订单中没有此产品'));
+					$this->error(P_Lang('訂單中沒有此產品'));
 				}
 				$data['title'] = '#'.$order['sn'].'_'.$rs['title'];
 			}else{
-				$data['title'] = P_Lang('订单编号').'#'.$order['sn'];
+				$data['title'] = P_Lang('訂單編號').'#'.$order['sn'];
 			}
 			$data["status"] = 0;
 		}elseif($type == 'project'){
 			if(!$uid){
-				$this->error(P_Lang('非会员不能对项目进行评论'));
+				$this->error(P_Lang('非會員不能對專案進行評論'));
 			}
 			$tid = $this->get('tid','int');
 			if(!$tid && !$parent_id){
-				$this->error(P_Lang('未指定哪个项目'));
+				$this->error(P_Lang('未指定哪個專案'));
 			}
 			if(!$tid && $parent_id){
 				$comment = $this->model('reply')->get_one($parent_id);
 				if(!$comment || !$comment['tid']){
-					$this->error(P_Lang('未指定要评论的项目'));
+					$this->error(P_Lang('未指定要評論的專案'));
 				}
 				$tid = $comment['tid'];
 			}
 			$project_rs = $this->model('project')->get_one($tid,false);
 			if(!$project_rs){
-				$this->error(P_Lang('项目不存在'));
+				$this->error(P_Lang('專案不存在'));
 			}
 			$data['title'] = $project_rs['title'];
 			$data["status"] = 0;
 		}elseif($type == 'cate'){
 			if(!$uid){
-				$this->error(P_Lang('非会员不能对分类进行评论'));
+				$this->error(P_Lang('非會員不能對分類進行評論'));
 			}
 			$tid = $this->get('tid','int');
 			if(!$tid && !$parent_id){
-				$this->error(P_Lang('未指定分类'));
+				$this->error(P_Lang('未指定分類'));
 			}
 			if(!$tid && $parent_id){
 				$comment = $this->model('reply')->get_one($parent_id);
 				if(!$comment || !$comment['tid']){
-					$this->error(P_Lang('未指定要评论的项目'));
+					$this->error(P_Lang('未指定要評論的專案'));
 				}
 				$tid = $comment['tid'];
 			}
 			$cate_rs = $this->model('cate')->get_one($tid,'id',false);
 			if(!$cate_rs){
-				$this->error(P_Lang('分类不存在'));
+				$this->error(P_Lang('分類不存在'));
 			}
 			$data['title'] = $cate_rs['title'];
 			$data["status"] = 0;
 		}
 		$content = $uid ? $this->get('comment','html') : $this->get('comment');
 		if(!$content){
-			$this->error(P_Lang('评论内容不能为空'));
+			$this->error(P_Lang('評論內容不能為空'));
 		}
 		$data['content'] = $content;
-		$data['res'] = $this->get('pictures'); //绑定附件，如果用户有上传附件，仅支持jpg,gif,png,zip,rar
+		$data['res'] = $this->get('pictures'); //繫結附件，如果使用者有上傳附件，僅支援jpg,gif,png,zip,rar
 		$insert_id = $this->model("reply")->save($data);
 		if(!$insert_id){
-			$this->error(P_Lang('评论保存失败，请联系管理员'));
+			$this->error(P_Lang('評論儲存失敗，請聯絡管理員'));
 		}
 		if($_clearVcode){
 			$this->session->unassign('vcode');
@@ -293,11 +293,11 @@ class comment_control extends phpok_control
 			$update = array("replydate"=>$this->time);
 			$this->model("list")->save($update,$tid);
 		}
-		//评论送积分
+		//評論送積分
 		if($tid && $uid && $data["status"]){
-			$this->model('wealth')->add_integral($tid,$uid,'comment',P_Lang('评论：{title}',array('title'=>$rs['title'])));
+			$this->model('wealth')->add_integral($tid,$uid,'comment',P_Lang('評論：{title}',array('title'=>$rs['title'])));
 		}
-		//增加通知任务
+		//增加通知任務
 		if($project_rs && $project_rs['etpl_comment_admin'] || $project_rs['etpl_comment_user']){
 			$param = 'id='.$insert_id;
 			$this->model('task')->add_once('comment',$param);

@@ -1,16 +1,16 @@
 <?php
 /**
- * MySQL读取引挈
+ * MySQL讀取引挈
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年09月26日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年09月26日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -23,13 +23,13 @@ class db_mysqli extends db
 	public function __construct($config=array())
 	{
 		parent::__construct($config);
-		//定义MySQL的保留字转义符
+		//定義MySQL的保留字轉義符
 		$this->kec("`","`");
 	}
 
 	/**
-	 * 类型设置
-	 * @参数 $type ，为 num 时使用 MYSQLI_NUM ，返之为 MYSQLI_ASSOC
+	 * 型別設定
+	 * @引數 $type ，為 num 時使用 MYSQLI_NUM ，返之為 MYSQLI_ASSOC
 	**/
 	public function type($type='')
 	{
@@ -42,7 +42,7 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 数据库连接
+	 * 資料庫連線
 	**/
 	public function connect()
 	{
@@ -62,7 +62,7 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 检测链接是否存在
+	 * 檢測連結是否存在
 	**/
 	private function check_connect()
 	{
@@ -75,12 +75,12 @@ class db_mysqli extends db
 			}
 		}
 		if(!$this->conn || !is_object($this->conn)){
-			$this->error('数据库连接失败');
+			$this->error('資料庫連線失敗');
 		}
 	}
 
 	/**
-	 * 析构函数，结束链接
+	 * 解構函式，結束連結
 	**/
 	public function __destruct()
 	{
@@ -91,7 +91,7 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 设置参数
+	 * 設定引數
 	**/
 	public function set($name,$value)
 	{
@@ -104,7 +104,7 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 执行SQL
+	 * 執行SQL
 	**/
 	public function query($sql,$loadcache=true)
 	{
@@ -127,9 +127,9 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 获取列表数据
-	 * @参数 $sql 要查询的SQL
-	 * @参数 $primary 绑定主键
+	 * 獲取列表資料
+	 * @引數 $sql 要查詢的SQL
+	 * @引數 $primary 繫結主鍵
 	**/
 	public function get_all($sql='',$primary="")
 	{
@@ -169,8 +169,8 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 获取一条数据
-	 * @参数 $sql 要执行的SQL
+	 * 獲取一條資料
+	 * @引數 $sql 要執行的SQL
 	**/
 	public function get_one($sql='')
 	{
@@ -203,7 +203,7 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 返回最后插入的ID
+	 * 返回最後插入的ID
 	**/
 	public function insert_id()
 	{
@@ -211,9 +211,9 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 返回行数
-	 * @参数 $sql 要执行的SQL语句
-	 * @参数 $is_count 是否计算数量，仅限 sql 中使用 count() 时有效
+	 * 返回行數
+	 * @引數 $sql 要執行的SQL語句
+	 * @引數 $is_count 是否計算數量，僅限 sql 中使用 count() 時有效
 	**/
 	public function count($sql="",$is_count=true)
 	{
@@ -234,8 +234,8 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 返回被筛选出来的字段数目
-	 * @参数 $sql 要执行的SQL语句
+	 * 返回被篩選出來的欄位數目
+	 * @引數 $sql 要執行的SQL語句
 	**/
 	public function num_fields($sql="")
 	{
@@ -249,10 +249,10 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 显示表字段，仅限字段名，没有字段属性
-	 * @参数 $table 表名
-	 * @参数 $prefix 是否检查数据表前缀
-	 * @返回 无值或表字段数组
+	 * 顯示錶欄位，僅限欄位名，沒有欄位屬性
+	 * @引數 $table 表名
+	 * @引數 $prefix 是否檢查資料表字首
+	 * @返回 無值或表字段陣列
 	**/
 	public function list_fields($table,$prefix=true)
 	{
@@ -270,9 +270,9 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 取得明细的字段管理
-	 * @参数 $table 表名
-	 * @参数 $check_prefix 是否检查数据表前缀
+	 * 取得明細的欄位管理
+	 * @引數 $table 表名
+	 * @引數 $check_prefix 是否檢查資料表字首
 	**/
 	public function list_fields_more($table,$check_prefix=true)
 	{
@@ -294,7 +294,7 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 显示数据库表
+	 * 顯示資料庫表
 	**/
 	public function list_tables()
 	{
@@ -311,9 +311,9 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 显示表名
-	 * @参数 $table_list 数组，整个数据库中的表
-	 * @参数 $i 顺序ID
+	 * 顯示錶名
+	 * @引數 $table_list 陣列，整個資料庫中的表
+	 * @引數 $i 順序ID
 	**/
 	public function table_name($table_list,$i)
 	{
@@ -321,8 +321,8 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 字符转义
-	 * @参数 $char 要转义的字符
+	 * 字元轉義
+	 * @引數 $char 要轉義的字元
 	**/
 	public function escape_string($char)
 	{
@@ -334,8 +334,8 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 取得数据库服务版本
-	 * @参数 $type 支持server和client两种类型
+	 * 取得資料庫服務版本
+	 * @引數 $type 支援server和client兩種型別
 	**/
 	public function version($type="server")
 	{
@@ -347,11 +347,11 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 创建主表操作
-	 * @参数 $tblname 表名称
-	 * @参数 $pri_id 主键ID
-	 * @参数 $note 表摘要
-	 * @参数 $engine 引挈，默认是 InnoDB
+	 * 建立主表操作
+	 * @引數 $tblname 表名稱
+	 * @引數 $pri_id 主鍵ID
+	 * @引數 $note 表摘要
+	 * @引數 $engine 引挈，預設是 InnoDB
 	**/
 	public function create_table_main($tblname,$pri_id='',$note='',$engine='')
 	{
@@ -369,9 +369,9 @@ class db_mysqli extends db
 
 	/**
 	 * 增加或修改表字段
-	 * @参数 $tblname 表名称，带前缀
-	 * @参数 $data 要更新的表信息，包括字段有：id 表ID，type类型，length长度，unsigned是否无符号，notnull是否非空，default默认值，comment备注
-	 * @参数 $old 旧表字段ID，如果检查不能，表示新增
+	 * @引數 $tblname 表名稱，帶字首
+	 * @引數 $data 要更新的表資訊，包括欄位有：id 表ID，type型別，length長度，unsigned是否無符號，notnull是否非空，default預設值，comment備註
+	 * @引數 $old 舊錶欄位ID，如果檢查不能，表示新增
 	**/
 	public function update_table_fields($tblname,$data,$old='')
 	{
@@ -426,11 +426,11 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 创建更新索引
-	 * @参数 $tblname 表名
-	 * @参数 $indexname 索引名，也可以是字段名
-	 * @参数 $fields 字段名，支持字段数组，留空使用索引名
-	 * @参数 $old 删除旧索引
+	 * 建立更新索引
+	 * @引數 $tblname 表名
+	 * @引數 $indexname 索引名，也可以是欄位名
+	 * @引數 $fields 欄位名，支援欄位陣列，留空使用索引名
+	 * @引數 $old 刪除舊索引
 	**/
 	public function update_table_index($tblname,$indexname,$fields='',$old='')
 	{
@@ -449,9 +449,9 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 删除表字段
-	 * @参数 $tblname 表名称
-	 * @参数 $id 要删除的字段
+	 * 刪除表字段
+	 * @引數 $tblname 表名稱
+	 * @引數 $id 要刪除的欄位
 	**/
 	public function delete_table_fields($tblname,$id)
 	{
@@ -460,9 +460,9 @@ class db_mysqli extends db
 	}
 
 	/**
-	 * 删除表操作
-	 * @参数 $table 表名称，要求带前缀
-	 * @参数 $check_prefix 是否加前缀
+	 * 刪除表操作
+	 * @引數 $table 表名稱，要求帶字首
+	 * @引數 $check_prefix 是否加字首
 	**/
 	public function delete_table($table,$check_prefix=true)
 	{

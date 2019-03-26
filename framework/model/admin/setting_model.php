@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/setting_model.php
-	备注： 常规项目配置
+	檔案： {phpok}/model/admin/setting_model.php
+	備註： 常規專案配置
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年09月09日 13时00分
+	時間： 2015年09月09日 13時00分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class setting_model extends setting_model_base
@@ -42,7 +42,7 @@ class setting_model extends setting_model_base
 
 	private function order_status_create()
 	{
-		//删除记录
+		//刪除記錄
 		$sql = "DELETE FROM ".$this->db->prefix."setting_status WHERE site_id='".$this->site_id."'";
 		$this->db->query($sql);
 		$string = $this->config['order']['status'];

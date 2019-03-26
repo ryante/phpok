@@ -1,13 +1,13 @@
 <?php
 /**
- * 报表及统计相关
+ * 報表及統計相關
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @许可 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年10月19日
+ * @許可 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年10月19日
 **/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class report_model_base extends phpok_model
@@ -18,10 +18,10 @@ class report_model_base extends phpok_model
 	}
 
 	/**
-	 * 会员统计数据
-	 * @参数 $x X轴数据
-	 * @参数 $start 开始时间，格式是：0000-00-00 00:00
-	 * @参数 $stop 结束时间，格式是：0000-00-00 00:00
+	 * 會員統計資料
+	 * @引數 $x X軸資料
+	 * @引數 $start 開始時間，格式是：0000-00-00 00:00
+	 * @引數 $stop 結束時間，格式是：0000-00-00 00:00
 	**/
 	public function user_data($x='date',$start='',$stop='')
 	{
@@ -54,10 +54,10 @@ class report_model_base extends phpok_model
 	}
 
 	/**
-	 * 订单统计数据
-	 * @参数 $x X轴数据
-	 * @参数 $start 开始时间，格式是：0000-00-00 00:00
-	 * @参数 $stop 结束时间，格式是：0000-00-00 00:00
+	 * 訂單統計資料
+	 * @引數 $x X軸資料
+	 * @引數 $start 開始時間，格式是：0000-00-00 00:00
+	 * @引數 $stop 結束時間，格式是：0000-00-00 00:00
 	**/
 	public function order_data($x='date',$start='',$stop='')
 	{
@@ -88,10 +88,10 @@ class report_model_base extends phpok_model
 	}
 
 	/**
-	 * 主题统计数据
-	 * @参数 $x X轴数据
-	 * @参数 $start 开始时间，格式是：0000-00-00 00:00
-	 * @参数 $stop 结束时间，格式是：0000-00-00 00:00
+	 * 主題統計資料
+	 * @引數 $x X軸資料
+	 * @引數 $start 開始時間，格式是：0000-00-00 00:00
+	 * @引數 $stop 結束時間，格式是：0000-00-00 00:00
 	**/
 	public function title_data($x='date',$start='',$stop='')
 	{
@@ -123,11 +123,11 @@ class report_model_base extends phpok_model
 	}
 
 	/**
-	 * 财富统计
-	 * @参数 $x X轴数据
-	 * @参数 $y 要统计的财富，数组
-	 * @参数 $start 开始时间，格式是：0000-00-00 00:00
-	 * @参数 $stop 结束时间，格式是：0000-00-00 00:00
+	 * 財富統計
+	 * @引數 $x X軸資料
+	 * @引數 $y 要統計的財富，陣列
+	 * @引數 $start 開始時間，格式是：0000-00-00 00:00
+	 * @引數 $stop 結束時間，格式是：0000-00-00 00:00
 	**/
 	public function wealth_data($x='date',$y='',$start='',$stop='')
 	{
@@ -180,13 +180,13 @@ class report_model_base extends phpok_model
 	}
 
 	/**
-	 * 扩展的主题统计数据
-	 * @参数 $pid 项目ID
-	 * @参数 $x X轴数据
-	 * @参数 $y 要生成的座标
-	 * @参数 $mode 模式，仅支持 count 和 sum
-	 * @参数 $start 开始时间，格式是：0000-00-00 00:00
-	 * @参数 $stop 结束时间，格式是：0000-00-00 00:00
+	 * 擴充套件的主題統計資料
+	 * @引數 $pid 專案ID
+	 * @引數 $x X軸資料
+	 * @引數 $y 要生成的座標
+	 * @引數 $mode 模式，僅支援 count 和 sum
+	 * @引數 $start 開始時間，格式是：0000-00-00 00:00
+	 * @引數 $stop 結束時間，格式是：0000-00-00 00:00
 	**/
 	public function list_data($pid=0,$x='date',$y='',$mode='',$start='',$stop='')
 	{

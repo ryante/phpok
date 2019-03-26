@@ -52,7 +52,7 @@ class cache_memcache extends cache
 			$info = $this->conn->getExtendedStats();
 			$str = $this->server.':'.$this->port;
 			if(!$info || !$info[$str]){
-				$this->error("连接Memcache服务器失败，请检查");
+				$this->error("連線Memcache伺服器失敗，請檢查");
 				$this->status(false);
 				$this->__destruct();
 				return false;
@@ -68,7 +68,7 @@ class cache_memcache extends cache
 		}
 	}
 
-	//设置缓存状态
+	//設定快取狀態
 	public function status($status="")
 	{
 		if(is_bool($status) || is_numeric($status)){
@@ -80,7 +80,7 @@ class cache_memcache extends cache
 		return $this->status;
 	}
 
-	//写入缓存信息
+	//寫入快取資訊
 	public function save($id,$content='')
 	{
 		if(!$this->status || $content === ''){

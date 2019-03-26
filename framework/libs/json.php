@@ -1,13 +1,13 @@
 <?php
 /**
- * JSON 编码解码操作
+ * JSON 編碼解碼操作
  * @package phpok\framework\libs
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK 开源授权协议：GNU Lesser General Public License
- * @时间 2017年11月14日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK 開源授權協議：GNU Lesser General Public License
+ * @時間 2017年11月14日
 **/
 
 class json_lib
@@ -18,10 +18,10 @@ class json_lib
 	}
 
 	/**
-	 * 将数组转成JSON数据
-	 * @参数 $var 要转换的数据
-	 * @参数 $unicode 是否转换中文等非字母数据
-	 * @参数 $pretty 设置为true时表示优雅输出，可视效果
+	 * 將陣列轉成JSON資料
+	 * @引數 $var 要轉換的資料
+	 * @引數 $unicode 是否轉換中文等非字母資料
+	 * @引數 $pretty 設定為true時表示優雅輸出，可視效果
 	**/
 	public function encode($var,$unicode=true,$pretty=false)
 	{
@@ -39,9 +39,9 @@ class json_lib
 	}
 
 	/**
-	 * JSON数据转化为数组或对像
-	 * @参数 $str 要解码的数据
-	 * @参数 $is_array 是否转成数组，为否将转成对像
+	 * JSON資料轉化為陣列或對像
+	 * @引數 $str 要解碼的資料
+	 * @引數 $is_array 是否轉成陣列，為否將轉成對像
 	**/
 	public function decode($str,$is_array=true)
 	{

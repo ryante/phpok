@@ -1,13 +1,13 @@
 <?php
 /**
- * 取得全部标识
+ * 取得全部標識
  * @package phpok\model\www
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年08月22日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年08月22日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}

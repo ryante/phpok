@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/model/popedom.php
-	Note	: 权限信息参数设置
+	Note	: 許可權資訊引數設定
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -18,7 +18,7 @@ class popedom_model extends popedom_model_base
 	function delete($id)
 	{
 		if(!$id) return false;
-		//取得项目信息
+		//取得專案資訊
 		$sql = "SELECT p.identifier,p.pid,s.appfile FROM ".$this->db->prefix."popedom p ";
 		$sql.= " JOIN ".$this->db->prefix."sysmenu s ON(p.gid=s.id) ";
 		$sql.= " WHERE p.id='".$id."'";
@@ -30,17 +30,17 @@ class popedom_model extends popedom_model_base
 			if($rslist)
 			{
 				$idstring = implode(",",array_keys($rslist));
-				//删除配置
+				//刪除配置
 				$sql = "DELETE FROM ".$this->db->prefix."popedom WHERE id IN(".$idstring.")";
 				$this->db->query($sql);
-				//删除管理员权限
+				//刪除管理員許可權
 				$sql = "DELETE FROM ".$this->db->prefix."adm_popedom WHERE pid IN(".$idstring.")";
 				$this->db->query($sql);
 			}
 		}
 		$sql = "DELETE FROM ".$this->db->prefix."popedom WHERE id='".$id."'";
 		$this->db->query($sql);
-		//删除已分配的权限
+		//刪除已分配的許可權
 		$sql = "DELETE FROM ".$this->db->prefix."adm_popedom WHERE pid='".$id."'";
 		$this->db->query($sql);
 		return true;
@@ -60,7 +60,7 @@ class popedom_model extends popedom_model_base
 		return $this->db->get_one($sql);
 	}
 
-	//取得模块模型下的权限ID
+	//取得模組模型下的許可權ID
 	function get_list($gid,$pid=0)
 	{
 		if(!$gid) return false;
@@ -69,7 +69,7 @@ class popedom_model extends popedom_model_base
 		return $this->db->get_all($sql);
 	}
 
-	//更新权限，仅限当前一个
+	//更新許可權，僅限當前一個
 	function save($data,$id=0)
 	{
 		if(!$data || !is_array($data)) return false;
@@ -83,7 +83,7 @@ class popedom_model extends popedom_model_base
 		}
 	}
 
-	//更新内容模块的权限字段
+	//更新內容模組的許可權欄位
 	function update_popedom_list($data,$gid,$identifier="")
 	{
 		if(!$identifier || !$gid || !$data || count($data) < 1 || !is_array($data))
@@ -184,7 +184,7 @@ class popedom_model extends popedom_model_base
 		return $rs['site_id'];
 	}
 
-	//检测是否有站点权限
+	//檢測是否有站點許可權
 	public function site_popedom($site_id,$user_id)
 	{
 		$sql = "SELECT pid FROM ".$this->db->prefix."adm_popedom WHERE id='".$user_id."'";
@@ -205,7 +205,7 @@ class popedom_model extends popedom_model_base
 			return false;
 		}
 		$idlist = array_keys($list);
-		//检查chklist和idlist是否有交集
+		//檢查chklist和idlist是否有交集
 		$array = array_intersect($idlist,$chklist);
 		if(!$array || ($array && count($array)<1)){
 			return false;

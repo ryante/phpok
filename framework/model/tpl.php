@@ -1,13 +1,13 @@
 <?php
 /**
- * 模板相关操作
+ * 模板相關操作
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年06月30日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年06月30日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -19,8 +19,8 @@ class tpl_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取模板信息
-	 * @参数 $id 模板ID，数字
+	 * 獲取模板資訊
+	 * @引數 $id 模板ID，數字
 	**/
 	public function get_one($id)
 	{
@@ -29,7 +29,7 @@ class tpl_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得全部风格列表，不限站点
+	 * 取得全部風格列表，不限站點
 	**/
 	public function get_all()
 	{
@@ -38,9 +38,9 @@ class tpl_model_base extends phpok_model
 	}
 
 	/**
-	 * 存储或添加风格信息
-	 * @参数 $data 数组，保存模板参数信息
-	 * @参数 $id 主键ID，留空或为0表示添加新模板记录
+	 * 儲存或新增風格資訊
+	 * @引數 $data 陣列，儲存模板引數資訊
+	 * @引數 $id 主鍵ID，留空或為0表示新增新模板記錄
 	**/
 	public function save($data,$id=0)
 	{
@@ -55,8 +55,8 @@ class tpl_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除模板记录
-	 * @参数 $id 主键ID
+	 * 刪除模板記錄
+	 * @引數 $id 主鍵ID
 	**/
 	public function delete($id)
 	{
@@ -112,8 +112,8 @@ class tpl_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取文件列表，过滤掉文件夹和block_开头的文件
-	 * @参数 $rs 数组或数字，模板基础数据
+	 * 讀取檔案列表，過濾掉資料夾和block_開頭的檔案
+	 * @引數 $rs 陣列或數字，模板基礎資料
 	**/
 	public function files($rs=0)
 	{

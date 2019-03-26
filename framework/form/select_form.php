@@ -1,16 +1,16 @@
 <?php
 /**
- * 下拉菜单项
+ * 下拉選單項
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2017年12月11日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2017年12月11日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -166,7 +166,7 @@ class select_form extends _init_auto
 		$rs = array('val'=>$val,'title'=>$val);
 		if($type == 'opt'){
 			$group_rs = $this->model('opt')->group_one($group_id);
-			//检查是否是联动数据
+			//檢查是否是聯動資料
 			if($group_rs && $group_rs['link_symbol'] && strpos($val,$group_rs['link_symbol']) !== false){
 				$list = explode($group_rs['link_symbol'],$val);
 				$list2 = array();
@@ -226,7 +226,7 @@ class select_form extends _init_auto
 	//
 	private function opt_rslist($type='default',$group_id=0,$info='')
 	{
-		//当类型为默认时
+		//當型別為預設時
 		if($type == 'default' && $info){
 			$list = explode("\n",$info);
 			$rslist = "";
@@ -242,12 +242,12 @@ class select_form extends _init_auto
 			return $rslist;
 		}
 
-		//表单选项
+		//表單選項
 		if($type == "opt"){
 			return $this->model('opt')->opt_all("group_id=".$group_id);
 		}
 		
-		//读子项目信息
+		//讀子專案資訊
 		if($type == 'project'){
 			$tmplist = $this->model('project')->project_sonlist($group_id);
 			if(!$tmplist) return false;
@@ -258,7 +258,7 @@ class select_form extends _init_auto
 			}
 			return $rslist;
 		}
-		//读主题列表信息
+		//讀主題列表資訊
 		if($type == 'title')
 		{
 			$tmplist = $this->model("list")->title_list($group_id);
@@ -270,7 +270,7 @@ class select_form extends _init_auto
 			}
 			return $rslist;
 		}
-		//读子分类信息
+		//讀子分類資訊
 		if($type == 'cate')
 		{
 			$tmplist = $this->model('cate')->catelist_sonlist($group_id,false,0);

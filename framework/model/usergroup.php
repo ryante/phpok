@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/model/usergroup.php
-	Note	: 会员组模块
+	Note	: 會員組模組
 	Version : 3.0
 	Author  : qinggan
 	Update  : 2011-03-14
@@ -30,7 +30,7 @@ class usergroup_model_base extends phpok_model
 		return $this->db->get_all($sql,$pri);
 	}
 
-	//存储会员数据
+	//儲存會員資料
 	function save($data,$id=0)
 	{
 		if($id)
@@ -55,18 +55,18 @@ class usergroup_model_base extends phpok_model
 		return $this->db->get_one($sql);
 	}
 
-	//删除操作
+	//刪除操作
 	function del($id)
 	{
 		$default_rs = $this->get_default();
 		if(!$default_rs) return false;
-		//删除会员所属组字段
+		//刪除會員所屬組欄位
 		$sql = "UPDATE ".$this->db->prefix."user SET group_id='".$default_rs["id"]."' WHERE group_id='".$id."'";
 		$this->db->query($sql);
-		//删除主表字段
+		//刪除主表字段
 		$sql = "DELETE FROM ".$this->db->prefix."user_group WHERE id='".$id."'";
 		$this->db->query($sql);
-		//删除扩展字段
+		//刪除擴充套件欄位
 		ext_delete("usergroup-".$id);
 	}
 
@@ -109,7 +109,7 @@ class usergroup_model_base extends phpok_model
 	}
 
 
-	//取得会员组ID
+	//取得會員組ID
 	public function group_id($uid=0)
 	{
 		$groupid = 0;

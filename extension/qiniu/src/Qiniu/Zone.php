@@ -7,20 +7,20 @@ use Qiniu\Http\Error;
 final class Zone
 {
 
-    //源站上传域名
+    //源站上傳域名
     public $srcUpHosts;
-    //CDN加速上传域名
+    //CDN加速上傳域名
     public $cdnUpHosts;
-    //资源管理域名
+    //資源管理域名
     public $rsHost;
-    //资源列举域名
+    //資源列舉域名
     public $rsfHost;
-    //资源处理域名
+    //資源處理域名
     public $apiHost;
     //IOVIP域名
     public $iovipHost;
 
-    //构造一个Zone对象
+    //構造一個Zone物件
     public function __construct(
         $srcUpHosts = array(),
         $cdnUpHosts = array(),
@@ -38,7 +38,7 @@ final class Zone
         $this->iovipHost = $iovipHost;
     }
 
-    //华东机房
+    //華東機房
     public static function zone0()
     {
         $Zone_z0 = new Zone(
@@ -52,7 +52,7 @@ final class Zone
         return $Zone_z0;
     }
 
-    //华东机房内网上传
+    //華東機房內網上傳
     public static function zoneZ0()
     {
         $Zone_z01 = new Zone(
@@ -65,7 +65,7 @@ final class Zone
         return $Zone_z01;
     }
 
-    //华北机房内网上传
+    //華北機房內網上傳
     public static function zoneZ1()
     {
         $Zone_z12 = new Zone(
@@ -78,7 +78,7 @@ final class Zone
         return $Zone_z12;
     }
 
-    //华北机房
+    //華北機房
     public static function zone1()
     {
         $Zone_z1 = new Zone(
@@ -93,7 +93,7 @@ final class Zone
         return $Zone_z1;
     }
 
-    //华南机房
+    //華南機房
     public static function zone2()
     {
         $Zone_z2 = new Zone(
@@ -107,10 +107,10 @@ final class Zone
         return $Zone_z2;
     }
 
-    //北美机房
+    //北美機房
     public static function zoneNa0()
     {
-        //北美机房
+        //北美機房
         $Zone_na0 = new Zone(
             array('up-na0.qiniup.com'),
             array('upload-na0.qiniup.com'),
@@ -122,10 +122,10 @@ final class Zone
         return $Zone_na0;
     }
 
-    //新加坡机房
+    //新加坡機房
     public static function zoneAs0()
     {
-        //新加坡机房
+        //新加坡機房
         $Zone_as0 = new Zone(
             array('up-as0.qiniup.com'),
             array('upload-as0.qiniup.com'),

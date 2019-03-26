@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/api/admin_model.php
-	备注： 管理员相关操作，这里仅在API接口调用时有效
+	檔案： {phpok}/model/api/admin_model.php
+	備註： 管理員相關操作，這裡僅在API介面呼叫時有效
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年6月3日
+	時間： 2014年6月3日
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class admin_model extends admin_model_base

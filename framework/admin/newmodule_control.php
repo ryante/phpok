@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/admin/module_control.php
-	Note	: 模块管理器
+	Note	: 模組管理器
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -28,7 +28,7 @@ class newmodule_control extends phpok_control
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			error(P_Lang('您没有权限执行此操作'),'','error');
+			error(P_Lang('您沒有許可權執行此操作'),'','error');
 		}
 		$rslist = $this->model('module')->get_all();
 		$this->assign("rslist",$rslist);
@@ -38,7 +38,7 @@ class newmodule_control extends phpok_control
 	public function set_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if($id){
@@ -70,7 +70,7 @@ class newmodule_control extends phpok_control
 	{
 		$id = $this->get("id");
 		if(!$id){
-			$this->error(P_Lang('未指定模块ID'));
+			$this->error(P_Lang('未指定模組ID'));
 		}
 		$rs = $this->model('module')->get_one($id);
 		$this->assign("id",$id);
@@ -96,7 +96,7 @@ class newmodule_control extends phpok_control
 	{
 		$id = $this->get("id");
 		if(!$id){
-			$this->error(P_Lang('未指定模块ID'));
+			$this->error(P_Lang('未指定模組ID'));
 		}
 		$layout = $this->get("layout");
 		if($layout && is_array($layout)){
@@ -110,32 +110,32 @@ class newmodule_control extends phpok_control
 	}
 
 	/**
-	 * 模块复制
-	 * @参数 id 要复制的模块ID
-	 * @参数 title 新的模块名称
+	 * 模組複製
+	 * @引數 id 要複製的模組ID
+	 * @引數 title 新的模組名稱
 	**/
 	public function copy_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			$this->error(P_Lang('未指定模块ID'));
+			$this->error(P_Lang('未指定模組ID'));
 		}
 		$rs = $this->model('module')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('模块信息不存在'));
+			$this->error(P_Lang('模組資訊不存在'));
 		}
 		$title = $this->get("title");
 		if(!$title){
-			$title = $rs["title"].P_Lang('(复制)');
+			$title = $rs["title"].P_Lang('(複製)');
 		}
 		$rs["title"] = $title;
 		unset($rs["id"]);
 		$new_id = $this->model('module')->save($rs);
 		if(!$new_id){
-			$this->error(P_Lang('模块复制失败，请检查'));
+			$this->error(P_Lang('模組複製失敗，請檢查'));
 		}
 		$list = $this->model('module')->fields_all($id);
 		if($list){
@@ -151,7 +151,7 @@ class newmodule_control extends phpok_control
 		$this->model('module')->create_tbl($new_id);
 		$tbl_exists = $this->model('module')->chk_tbl_exists($new_id,$rs['mtype']);
 		if(!$tbl_exists){
-			$this->error(P_Lang('模块创建表失败，请检查'));
+			$this->error(P_Lang('模組建立表失敗，請檢查'));
 		}
 		$rslist = $this->model('module')->fields_all($new_id);
 		if($rslist){
@@ -163,17 +163,17 @@ class newmodule_control extends phpok_control
 	}
 
 	/**
-	 * 存储或更新模型
+	 * 儲存或更新模型
 	**/
 	public function save_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		$title = $this->get("title");
 		if(!$title){
-			$this->error(P_Lang('模块名称不能为空'));
+			$this->error(P_Lang('模組名稱不能為空'));
 		}
 		$note = $this->get("note");
 		$taxis = $this->get("taxis","int");
@@ -192,7 +192,7 @@ class newmodule_control extends phpok_control
 			$id = $this->model('module')->save($array);
 		}
 		if(!$id){
-			$this->error(P_Lang('数据存储失败，请检查'));
+			$this->error(P_Lang('資料儲存失敗，請檢查'));
 		}
 		$rs = $this->model('module')->get_one($id);
 		$tbl_exists = $this->model('module')->chk_tbl_exists($id,$rs['mtype']);
@@ -203,12 +203,12 @@ class newmodule_control extends phpok_control
 	}
 
 	/**
-	 * 字段管理器
+	 * 欄位管理器
 	**/
 	public function fields_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -253,7 +253,7 @@ class newmodule_control extends phpok_control
 	public function field_add_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -261,16 +261,16 @@ class newmodule_control extends phpok_control
 		}
 		$fid = $this->get("fid");
 		if(!$fid){
-			$this->error(P_Lang('未指定要添加的字段ID'));
+			$this->error(P_Lang('未指定要新增的欄位ID'));
 		}
 		$rs = $this->model('module')->get_one($id);
 		if(!$rs){
 			$this->error(P_Lang('模型不存在'));
 		}
-		//取得fid的内容信息
+		//取得fid的內容資訊
 		$f_rs = $this->model('fields')->default_one($fid);
 		if(!$f_rs){
-			$this->error(P_Lang('字段不存在'));
+			$this->error(P_Lang('欄位不存在'));
 		}
 		$title = $this->get("title");
 		if(!$title){
@@ -296,13 +296,13 @@ class newmodule_control extends phpok_control
 			$tmp_array["ext"] = serialize($f_rs['ext']);
 		}
 		$this->model('module')->fields_save($tmp_array);
-		//更新扩展表信息
+		//更新擴充套件表資訊
 		$tbl_exists = $this->model('module')->chk_tbl_exists($id,$rs['mtype']);
 		if(!$tbl_exists){
 			$this->model('module')->create_tbl($id);
 			$tbl_exists2 = $this->model('module')->chk_tbl_exists($id,$rs['mtype']);
 			if(!$tbl_exists2){
-				$this->error(P_Lang('模块创建表失败，请检查'));
+				$this->error(P_Lang('模組建立表失敗，請檢查'));
 			}
 		}
 		$list = $this->model('module')->fields_all($id);
@@ -315,13 +315,13 @@ class newmodule_control extends phpok_control
 	}
 
 	/**
-	 * 创建扩展字段
+	 * 建立擴充套件欄位
 	**/
 	public function field_create_f()
 	{
 		$mid = $this->get('mid','int');
 		if(!$mid){
-			$this->error(P_Lang('未指定模块ID'));
+			$this->error(P_Lang('未指定模組ID'));
 		}
 		$m_rs = $this->model('module')->get_one($mid);
 		$this->assign('m_rs',$m_rs);
@@ -332,55 +332,55 @@ class newmodule_control extends phpok_control
 	}
 	
 	/**
-	 * 删除字段
+	 * 刪除欄位
 	**/
 	public function field_delete_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			$this->error(P_Lang('未指定要删除的字段'));
+			$this->error(P_Lang('未指定要刪除的欄位'));
 		}
 		$this->model('module')->field_delete($id);
 		$this->success();
 	}
 
 	/**
-	 * 删除模块
+	 * 刪除模組
 	**/
 	public function delete_f()
 	{
 		if(!$this->popedom['set']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			$this->error(P_Lang('未指定要删除的模块'));
+			$this->error(P_Lang('未指定要刪除的模組'));
 		}
 		$rs = $this->model('module')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('模块不存在'));
+			$this->error(P_Lang('模組不存在'));
 		}
 		if($rs["status"] == '1'){
-			$this->error(P_Lang('模块使用中，请先停用模块信息'));
+			$this->error(P_Lang('模組使用中，請先停用模組資訊'));
 		}
 		$this->model("module")->delete($id);
 		$this->success();
 	}
 
 	/**
-	 * 更新模块状态
+	 * 更新模組狀態
 	**/
 	public function status_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			$this->error(P_Lang('没有指定ID'));
+			$this->error(P_Lang('沒有指定ID'));
 		}
 		$rs = $this->model('module')->get_one($id);
 		$status = $rs["status"];
@@ -390,17 +390,17 @@ class newmodule_control extends phpok_control
 		}
 		$action = $this->model('module')->update_status($id,$status);
 		if(!$action){
-			$this->error(P_Lang('操作失败，请检查SQL语句'));
+			$this->error(P_Lang('操作失敗，請檢查SQL語句'));
 		}
 		$this->success($status);
 	}
 
 	/**
-	 * 更新模块排序
-	 * @参数 $id，数值，要排序的模块ID
-	 * @参数 $taxis，排序值
+	 * 更新模組排序
+	 * @引數 $id，數值，要排序的模組ID
+	 * @引數 $taxis，排序值
 	 * @返回 JSON
-	 * @更新时间 2016年07月12日
+	 * @更新時間 2016年07月12日
 	**/
 	public function taxis_f()
 	{
@@ -416,7 +416,7 @@ class newmodule_control extends phpok_control
 	public function field_edit_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -431,18 +431,18 @@ class newmodule_control extends phpok_control
 	}
 
 	/**
-	 * 保存更新的字段排序
-	 * @参数 $id，要排序的字段ID
-	 * @参数 $taxis，排序值
-	 * @返回 JSON数据
-	 * @更新时间 2016年07月12日
+	 * 儲存更新的欄位排序
+	 * @引數 $id，要排序的欄位ID
+	 * @引數 $taxis，排序值
+	 * @返回 JSON資料
+	 * @更新時間 2016年07月12日
 	**/
 	public function field_taxis_f()
 	{
 		$taxis = $this->get('taxis','int');
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定要编辑的ID'));
+			$this->error(P_Lang('未指定要編輯的ID'));
 		}
 		$array = array('taxis'=>$taxis);
 		$this->model('module')->fields_save($array,$id);
@@ -452,7 +452,7 @@ class newmodule_control extends phpok_control
 	public function field_edit_save_f()
 	{
 		if(!$this->popedom['set']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
@@ -462,7 +462,7 @@ class newmodule_control extends phpok_control
 		$module_id = $rs['ftype'];
 		$title = $this->get("title");
 		if(!$title){
-			$this->json(P_Lang('字段名称不能为空'));
+			$this->json(P_Lang('欄位名稱不能為空'));
 		}
 		$ext_form_id = $this->get("ext_form_id");
 		$ext = array();
@@ -497,7 +497,7 @@ class newmodule_control extends phpok_control
 		$this->model('module')->update_fields($id);
 
 
-		// new add start 更新后台列表显示的字段
+		// new add start 更新後臺列表顯示的欄位
         $layout = '';
         $m_list = $this->model('module')->fields_all($module_id,"identifier");
         if (!empty($m_list)) {
@@ -517,7 +517,7 @@ class newmodule_control extends phpok_control
 	public function field_addok_f()
 	{
 		if(!$this->popedom['set']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$mid = $this->get('mid','int');
 		if(!$mid){
@@ -525,35 +525,35 @@ class newmodule_control extends phpok_control
 		}
 		$rs = $this->model('module')->get_one($mid);
 		if(!$rs){
-			$this->error(P_Lang('模块信息不存在'));
+			$this->error(P_Lang('模組資訊不存在'));
 		}
 		$array = array('module_id'=>$mid);
 		$array['title'] = $this->get("title");
 		if(!$array['title']){
-			$this->error(P_Lang('名称不能为空'));
+			$this->error(P_Lang('名稱不能為空'));
 		}
 		$array['note'] = $this->get("note");
 		$identifier = $this->get('identifier');
 		if(!$identifier){
-			$this->error(P_Lang('标识串不能为空'));
+			$this->error(P_Lang('標識串不能為空'));
 		}
 		$identifier = strtolower($identifier);
 		if(!preg_match("/^[a-z][a-z0-9\_]+$/u",$identifier)){
-			$this->error(P_Lang('字段标识不符合系统要求，限字母、数字及下划线且必须是字母开头'));
+			$this->error(P_Lang('欄位標識不符合系統要求，限字母、數字及下劃線且必須是字母開頭'));
 		}
 		if($identifier == 'phpok'){
-			$this->error(P_Lang('phpok是系统禁用字符，请不要使用'));
+			$this->error(P_Lang('phpok是系統禁用字元，請不要使用'));
 		}
 		if(!$rs['mtype']){
 			$flist = $this->model('fields')->tbl_fields('list');
 			if($flist && in_array($identifier,$flist)){
-				$this->json(P_Lang('字符已经存在'));
+				$this->json(P_Lang('字元已經存在'));
 			}
 		}
 		$tblname = $rs['mtype'] ? $mid : 'list_'.$mid;
 		$flist = $this->model('fields')->tbl_fields($tblname);
 		if($flist && in_array($identifier,$flist)){
-			$this->error(P_Lang('字符在扩展表中已使用'));
+			$this->error(P_Lang('字元在擴充套件表中已使用'));
 		}
 		$array['identifier'] = $identifier;
 		$array['field_type'] = $this->get("field_type");
@@ -587,7 +587,7 @@ class newmodule_control extends phpok_control
 			$this->model('module')->create_tbl($mid);
 			$tbl_exists2 = $this->model('module')->chk_tbl_exists($mid,$rs['mtype']);
 			if(!$tbl_exists2){
-				$this->error(P_Lang('模块：[title]创建表失败',array('title'=>$rs['title'])));
+				$this->error(P_Lang('模組：[title]建立表失敗',array('title'=>$rs['title'])));
 			}
 		}
 		$list = $this->model('module')->fields_all($mid);
@@ -603,8 +603,8 @@ class newmodule_control extends phpok_control
 	}
 
 	/**
-	 * 导出模块字段，此项仅用于导出XML配置文件，如果模块中绑定主题或其他一些选项，在这里不会被体现，需要您手动再绑定
-	 * @参数 $id，要导出的模块字段ID
+	 * 匯出模組欄位，此項僅用於匯出XML配置檔案，如果模組中繫結主題或其他一些選項，在這裡不會被體現，需要您手動再繫結
+	 * @引數 $id，要匯出的模組欄位ID
 	**/
 	public function export_f()
 	{
@@ -614,7 +614,7 @@ class newmodule_control extends phpok_control
 		}
 		$rs = $this->model('module')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('模块数据不存在'),$this->url('module'));
+			$this->error(P_Lang('模組資料不存在'),$this->url('module'));
 		}
 		unset($rs['id']);
 		$rslist = $this->model('module')->fields_all($id,'identifier');
@@ -629,20 +629,20 @@ class newmodule_control extends phpok_control
 			}
 			$rs['_fields'] = $tmplist;
 		}
-		//将数据写成XML
+		//將資料寫成XML
 		$tmpfile = $this->dir_cache.'module.xml';
 		$this->lib('xml')->save($rs,$tmpfile);
 		$this->lib('phpzip')->set_root($this->dir_cache);
 		$zipfile = $this->dir_cache.$this->time.'.zip';
 		$this->lib('phpzip')->zip($tmpfile,$zipfile);
 		$this->lib('file')->rm($tmpfile);
-		//下载zipfile
+		//下載zipfile
 		$this->lib('file')->download($zipfile,$rs['title']);
 	}
 
 	/**
-	 * 模块导入
-	 * @变量 zipfile 指定的ZIP文件地址
+	 * 模組匯入
+	 * @變數 zipfile 指定的ZIP檔案地址
 	**/
 	public function import_f()
 	{
@@ -653,18 +653,18 @@ class newmodule_control extends phpok_control
 			$this->view('module_import');
 		}
 		if(strpos($zipfile,'..') !== false){
-			$this->error(P_Lang('不支持带..上级路径'));
+			$this->error(P_Lang('不支援帶..上級路徑'));
 		}
 		if(!file_exists($this->dir_root.$zipfile)){
-			$this->error(P_Lang('ZIP文件不存在'));
+			$this->error(P_Lang('ZIP檔案不存在'));
 		}
 		$this->lib('phpzip')->unzip($this->dir_root.$zipfile,$this->dir_cache);
 		if(!file_exists($this->dir_cache.'module.xml')){
-			$this->error(P_Lang('导入模块失败，请检查解压缩是否成功'));
+			$this->error(P_Lang('匯入模組失敗，請檢查解壓縮是否成功'));
 		}
 		$rs = $info = $this->lib('xml')->read($this->dir_cache.'module.xml',true);
 		if(!$rs){
-			$this->error(P_Lang('XML内容解析异常'));
+			$this->error(P_Lang('XML內容解析異常'));
 		}
 		$tmp = $rs;
 		if(isset($tmp['_fields'])){
@@ -673,13 +673,13 @@ class newmodule_control extends phpok_control
 		
 		$insert_id = $this->model('module')->save($tmp);
 		if(!$insert_id){
-			$this->error(P_Lang('模块导入失败，保存模块基本信息错误'));
+			$this->error(P_Lang('模組匯入失敗，儲存模組基本資訊錯誤'));
 		}
 		$this->model('module')->create_tbl($insert_id);
 		$tbl_exists = $this->model('module')->chk_tbl_exists($insert_id,$tmp['mtype']);
 		if(!$tbl_exists){
 			$this->model('module')->delete($insert_id);
-			$this->error(P_Lang('创建模块表失败'));
+			$this->error(P_Lang('建立模組表失敗'));
 		}
 		if(isset($rs['_fields']) && $rs['_fields']){
 			foreach($rs['_fields'] as $key=>$value){

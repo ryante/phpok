@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/rewrite.php
-	备注： 伪静态页规则配置器
+	檔案： {phpok}/model/rewrite.php
+	備註： 偽靜態頁規則配置器
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年02月03日 12时57分
+	時間： 2015年02月03日 12時57分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class rewrite_model_base extends phpok_model
@@ -67,7 +67,7 @@ class rewrite_model_base extends phpok_model
 		$this->rlist();
 		$rs = false;
 		foreach($this->rlist as $key=>$value){
-			//规则长度是不一致，跳过
+			//規則長度是不一致，跳過
 			$matches = false;
 			preg_match_all('/'.$value['rule'].'/isU',$uri,$matches);
 			if($matches !== false && $matches[0] && $matches[0][0] == $uri){
@@ -98,7 +98,7 @@ class rewrite_model_base extends phpok_model
 
 	public function rlist()
 	{
-		//如果存在，无需再读取，直接使用
+		//如果存在，無需再讀取，直接使用
 		if($this->rlist && is_array($this->rlist)){
 			return $this->rlist;
 		}

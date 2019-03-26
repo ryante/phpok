@@ -6,8 +6,8 @@ use Qiniu\Http\Client;
 use Qiniu\Http\Error;
 
 /**
- * 断点续上传类, 该类主要实现了断点续上传中的分块上传,
- * 以及相应地创建块和创建文件过程.
+ * 斷點續上傳類, 該類主要實現了斷點續上傳中的分塊上傳,
+ * 以及相應地建立塊和建立檔案過程.
  *
  * @link http://developer.qiniu.com/docs/v6/api/reference/up/mkblk.html
  * @link http://developer.qiniu.com/docs/v6/api/reference/up/mkfile.html
@@ -26,14 +26,14 @@ final class ResumeUploader
     private $config;
 
     /**
-     * 上传二进制流到七牛
+     * 上傳二進位制流到七牛
      *
-     * @param $upToken    上传凭证
-     * @param $key        上传文件名
-     * @param $inputStream 上传二进制流
-     * @param $size       上传流的大小
-     * @param $params     自定义变量
-     * @param $mime       上传数据的mimeType
+     * @param $upToken    上傳憑證
+     * @param $key        上傳檔名
+     * @param $inputStream 上傳二進位制流
+     * @param $size       上傳流的大小
+     * @param $params     自定義變數
+     * @param $mime       上傳資料的mimeType
      *
      * @link http://developer.qiniu.com/docs/v6/api/overview/up/response/vars.html#xvar
      */
@@ -69,7 +69,7 @@ final class ResumeUploader
     }
 
     /**
-     * 上传操作
+     * 上傳操作
      */
     public function upload($fname)
     {
@@ -110,7 +110,7 @@ final class ResumeUploader
     }
 
     /**
-     * 创建块
+     * 建立塊
      */
     private function makeBlock($block, $blockSize)
     {
@@ -136,7 +136,7 @@ final class ResumeUploader
     }
 
     /**
-     * 创建文件
+     * 建立檔案
      */
     private function makeFile($fname)
     {

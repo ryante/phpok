@@ -1,12 +1,12 @@
 <?php
 /**
- * 页面设计器
+ * 頁面設計器
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年05月30日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年05月30日
 **/
 
 class design_control extends phpok_control
@@ -20,7 +20,7 @@ class design_control extends phpok_control
 	}
 
 	/**
-	 * 装载设计器
+	 * 裝載設計器
 	**/
 	public function index_f()
 	{

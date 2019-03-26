@@ -1,12 +1,12 @@
 <?php
 /**
- * 七牛云对象存储接口
+ * 七牛雲物件儲存介面
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2019年1月13日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2019年1月13日
 **/
 include_once(__DIR__ .'/autoload.php');
 
@@ -76,8 +76,8 @@ class qiniu_lib
 	}
 
 	/**
-	 * 删除文件
-	 * @参数 $id 就是对应七牛传过来的 hash和key中的key值
+	 * 刪除檔案
+	 * @引數 $id 就是對應七牛傳過來的 hash和key中的key值
 	**/
 	public function delete_file($id)
 	{

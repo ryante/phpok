@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/api/payment_model.php
-	备注： 支付信息
+	檔案： {phpok}/model/api/payment_model.php
+	備註： 支付資訊
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年5月2日
+	時間： 2014年5月2日
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class payment_model extends payment_model_base
@@ -27,7 +27,7 @@ class payment_model extends payment_model_base
 		{
 			$rs['param'] = unserialize($rs['param']);
 		}
-		//货币类型
+		//貨幣型別
 		if($rs['currency'])
 		{
 			$sql = "SELECT * FROM ".$this->db->prefix."currency WHERE code='".$rs['currency']."'";

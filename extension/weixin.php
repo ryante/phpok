@@ -1,8 +1,8 @@
 <?php
 /***********************************************************
-	备注：微信响应类
+	備註：微信響應類
 	版本：5.0.0
-	官网：www.phpok.com
+	官網：www.phpok.com
 	作者：qinggan <qinggan@188.com>
 	更新：2016年02月21日
 ***********************************************************/
@@ -12,14 +12,14 @@ if(!defined("PHPOK_SET")){
 class weixin_lib
 {
 	private $obj;
-	private $app_id; //微信开放平台申请到的APP ID
-	private $app_secret = ''; // 微信开放平台申请到的APP Secret
+	private $app_id; //微信開放平臺申請到的APP ID
+	private $app_secret = ''; // 微信開放平臺申請到的APP Secret
 	private $expire_time = 0;
 	private $token = '';
 	private $debug = false;
 	private $error = '';
-	private $openid = '';//目标用户的open ID
-	private $account = '';//微信公众号原始账号
+	private $openid = '';//目標使用者的open ID
+	private $account = '';//微信公眾號原始賬號
     private $datadir;
 	
 	public function __construct()
@@ -185,7 +185,7 @@ EOT;
 	    return $info;
     }
 
-	//获取access_token
+	//獲取access_token
 	public function access_token()
 	{
 		$cachefile = $this->datadir.'weixin_access_token.php';
@@ -203,7 +203,7 @@ EOT;
 		$info = $this->curl($url);
 		if(!$info){
 			if($this->debug){
-				phpok_log($info['errcode'].':'.$info['errmsg'].'异常：获取数据失败');
+				phpok_log($info['errcode'].':'.$info['errmsg'].'異常：獲取資料失敗');
 			}
 			return false;
 		}
@@ -244,8 +244,8 @@ EOT;
 		$url = trim($url);
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_FORBID_REUSE, true);
-		curl_setopt($curl, CURLOPT_HEADER,true);//结果中包含头部信息
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);//把结果返回，而非直接输出
+		curl_setopt($curl, CURLOPT_HEADER,true);//結果中包含頭部資訊
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER,true);//把結果返回，而非直接輸出
 		if($post){
 			if($headers && $headers == 'upload'){
 				if(class_exists('CURLFile')){
@@ -262,7 +262,7 @@ EOT;
 			curl_setopt($curl, CURLOPT_HTTPGET,true);
 		}
 		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT,30);
-		curl_setopt($curl,CURLOPT_ENCODING ,'gzip');//GZIP压缩
+		curl_setopt($curl,CURLOPT_ENCODING ,'gzip');//GZIP壓縮
 		curl_setopt($curl, CURLOPT_TIMEOUT,30);
 		$purl = $this->format_url($url);
 		if($headers && is_array($headers)){
@@ -300,9 +300,9 @@ EOT;
 			}
 			return false;
 		}
-		//判断是否是301或302跳转
+		//判斷是否是301或302跳轉
 		if ($http_code == 301 || $http_code == 302){
-			//判断
+			//判斷
 			$matches = array();
 			preg_match('/Location:(.*?)\n/', $http_header, $matches);
 			$url = @parse_url(trim(array_pop($matches)));
@@ -388,7 +388,7 @@ EOT;
 		$info = $this->curl($url);
 		if(!$info){
 			if($this->debug){
-				phpok_log($info['errcode'].':'.$info['errmsg'].'异常：获取数据失败');
+				phpok_log($info['errcode'].':'.$info['errmsg'].'異常：獲取資料失敗');
 			}
 			return false;
 		}
@@ -417,7 +417,7 @@ EOT;
 	}
 
 	/**
-	 * JSAPI 签名生成
+	 * JSAPI 簽名生成
 	**/
 	public function jsapi_sign($data)
 	{
@@ -426,7 +426,7 @@ EOT;
 	}
 
 	/**
-	 * 随机码
+	 * 隨機碼
 	**/
 	public function noncestr()
 	{
@@ -434,7 +434,7 @@ EOT;
 	}
 
     /**
-     * 获取素材列表
+     * 獲取素材列表
      */
     public function get_material_count()
     {
@@ -445,7 +445,7 @@ EOT;
         $info = $this->curl($url);
         if(!$info){
             if($this->debug){
-                phpok_log($info['errcode'].':'.$info['errmsg'].'异常：获取数据失败');
+                phpok_log($info['errcode'].':'.$info['errmsg'].'異常：獲取資料失敗');
             }
             return false;
         }
@@ -461,10 +461,10 @@ EOT;
     }
 
     /**
-     * 获取素材列表
-     * @param $type string 素材类型
-     * @param $offset int 开始位置
-     * @param $count int 条数
+     * 獲取素材列表
+     * @param $type string 素材型別
+     * @param $offset int 開始位置
+     * @param $count int 條數
      * @return bool|mixed|void
      */
     public function get_material_list($type,$offset='0',$count=20)
@@ -481,7 +481,7 @@ EOT;
         $info = $this->curl($url,json_encode($data,JSON_UNESCAPED_UNICODE));
         if(!$info){
             if($this->debug){
-                phpok_log($info['errcode'].':'.$info['errmsg'].'异常：获取数据失败');
+                phpok_log($info['errcode'].':'.$info['errmsg'].'異常：獲取資料失敗');
             }
             return false;
         }
@@ -497,7 +497,7 @@ EOT;
 	}
 
     /**
-     * 添加图文素材
+     * 新增圖文素材
      * @param $articles
      * @return bool|array
      */
@@ -522,7 +522,7 @@ EOT;
 	}
 
     /**
-     * 更新图文素材
+     * 更新圖文素材
      * @param $media_id
      * @param $index
      * @param $articles
@@ -539,7 +539,7 @@ EOT;
         $result = $this->curl($url,json_encode($data));
         if(!$result){
             if($this->debug){
-                phpok_log($result['errcode'].':'.$result['errmsg'].'异常：获取数据失败');
+                phpok_log($result['errcode'].':'.$result['errmsg'].'異常：獲取資料失敗');
             }
             return false;
         }
@@ -577,7 +577,7 @@ EOT;
         }
         $result = $this->curl($url,$data);
         if(!$result){
-            $this->error('上传素材失败');
+            $this->error('上傳素材失敗');
             return false;
         }
         $info = json_decode($result,true);
@@ -600,7 +600,7 @@ EOT;
         $data= array('media_id'=>$media_id);
         $result = $this->curl($url,json_encode($data));
         if(!$result){
-            $this->error('获取素材失败');
+            $this->error('獲取素材失敗');
             return false;
         }
         $info = json_decode($result,true);
@@ -630,7 +630,7 @@ EOT;
         }
         $info = $this->curl("https://api.weixin.qq.com/cgi-bin/media/uploadimg?access_token=".$this->access_token()."&type=image",$data,'upload');
         if(!$info){
-            $this->error('上传图片素材失败');
+            $this->error('上傳圖片素材失敗');
             return false;
         }
         $info = json_decode($info,true);
@@ -645,7 +645,7 @@ EOT;
     }
 
     /**
-     * 删除永久素材
+     * 刪除永久素材
      * @param $media_id int 素材id
      * @return bool|string
      */
@@ -664,10 +664,10 @@ EOT;
     }
     
     /**
-     * 群发消息
-     * @param $touser array 用户openid
-     * @param $msgtype string 消息类型
-     * @param $text array 消息内容
+     * 群發訊息
+     * @param $touser array 使用者openid
+     * @param $msgtype string 訊息型別
+     * @param $text array 訊息內容
      */
     public function send_text($touser,$msgtype,$content)
     {
@@ -680,7 +680,7 @@ EOT;
         $result = $this->curl($url,json_encode($data,JSON_UNESCAPED_UNICODE));
         if(!$result){
             if($this->debug){
-                phpok_log($result['errcode'].':'.$result['errmsg'].'异常：获取数据失败');
+                phpok_log($result['errcode'].':'.$result['errmsg'].'異常：獲取資料失敗');
             }
             return false;
         }
@@ -696,9 +696,9 @@ EOT;
     }
 
     /**
-     * 修改模版消息所属行业行业
-     * @param $industry_id1 主行业
-     * @param $industry_id2 副行业
+     * 修改模版訊息所屬行業行業
+     * @param $industry_id1 主行業
+     * @param $industry_id2 副行業
      */
     public function set_industry($industry_id1,$industry_id2)
     {
@@ -710,7 +710,7 @@ EOT;
         $result = $this->curl($url,json_encode($data,JSON_UNESCAPED_UNICODE));
         if(!$result){
             if($this->debug){
-                phpok_log($result['errcode'].':'.$result['errmsg'].'异常：获取数据失败');
+                phpok_log($result['errcode'].':'.$result['errmsg'].'異常：獲取資料失敗');
             }
             return false;
         }
@@ -726,7 +726,7 @@ EOT;
     }
 
     /**
-     * 获取设置的行业信息
+     * 獲取設定的行業資訊
      */
     public function get_industry()
     {
@@ -734,7 +734,7 @@ EOT;
         $result = $this->curl($url);
         if(!$result){
             if($this->debug){
-                phpok_log($result['errcode'].':'.$result['errmsg'].'异常：获取数据失败');
+                phpok_log($result['errcode'].':'.$result['errmsg'].'異常：獲取資料失敗');
             }
             return false;
         }
@@ -750,7 +750,7 @@ EOT;
     }
 
     /**
-     * 获取模板列表
+     * 獲取模板列表
      */
     public function get_all_template()
     {
@@ -758,7 +758,7 @@ EOT;
         $result = $this->curl($url);
         if(!$result){
             if($this->debug){
-                phpok_log($result['errcode'].':'.$result['errmsg'].'异常：获取数据失败');
+                phpok_log($result['errcode'].':'.$result['errmsg'].'異常：獲取資料失敗');
             }
             return false;
         }
@@ -775,7 +775,7 @@ EOT;
     }
 
     /**
-     * 删除模版
+     * 刪除模版
      * @param $template_id 模版ID
      * @return bool|array
      */
@@ -788,7 +788,7 @@ EOT;
         $result = $this->curl($url,json_encode($data,JSON_UNESCAPED_UNICODE));
         if(!$result){
             if($this->debug){
-                phpok_log($result['errcode'].':'.$result['errmsg'].'异常：获取数据失败');
+                phpok_log($result['errcode'].':'.$result['errmsg'].'異常：獲取資料失敗');
             }
             return false;
         }
@@ -804,8 +804,8 @@ EOT;
     }
 
     /**
-     * 发送模版消息
-     * @param $message array 模板消息
+     * 傳送模版訊息
+     * @param $message array 模板訊息
      * @return bool|array
      */
     public function send_template($message)
@@ -814,7 +814,7 @@ EOT;
         $result = $this->curl($url,json_encode($message,JSON_UNESCAPED_UNICODE));
         if(!$result){
             if($this->debug){
-                phpok_log($result['errcode'].':'.$result['errmsg'].'异常：获取数据失败');
+                phpok_log($result['errcode'].':'.$result['errmsg'].'異常：獲取資料失敗');
             }
             return false;
         }

@@ -1,13 +1,13 @@
 <?php
 /**
- * 附件常见动作操作
+ * 附件常見動作操作
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年03月30日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年03月30日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -77,7 +77,7 @@ class res_action_control extends phpok_control
 		$ext = substr($file,-4);
 		$ext = strtolower($ext);
 		if($ext != '.mp4' && $ext != 'webp'){
-			$this->error(P_Lang('系统暂时只支持MP4/WebP视频预览'));
+			$this->error(P_Lang('系統暫時只支援MP4/WebP視訊預覽'));
 		}
 		$this->assign("file",$file);
 		$this->view("res_action_video");

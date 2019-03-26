@@ -1,13 +1,13 @@
 <?php
 /**
- * 后台订单相关数据库操作
+ * 後臺訂單相關資料庫操作
  * @package phpok\model\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年10月04日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年10月04日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -19,10 +19,10 @@ class order_model extends order_model_base
 	}
 
 	/**
-	 * 后台订单删除操作
-	 * @参数 $id 订单ID号
+	 * 後臺訂單刪除操作
+	 * @引數 $id 訂單ID號
 	 * @返回 false 或 true
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function delete($id)
 	{
@@ -30,31 +30,31 @@ class order_model extends order_model_base
 		if(!$id){
 			return false;
 		}
-		//删除订单主表
+		//刪除訂單主表
 		$sql = "DELETE FROM ".$this->db->prefix."order WHERE id=".$id;
 		$this->db->query($sql);
-		//删除订单地址信息
+		//刪除訂單地址資訊
 		$sql = "DELETE FROM ".$this->db->prefix."order_address WHERE order_id=".$id;
 		$this->db->query($sql);
-		//删除订单物流信息
+		//刪除訂單物流資訊
 		$sql = "DELETE FROM ".$this->db->prefix."order_express WHERE order_id=".$id;
 		$this->db->query($sql);
-		//删除订单发票信息
+		//刪除訂單發票資訊
 		$sql = "DELETE FROM ".$this->db->prefix."order_invoice WHERE order_id=".$id;
 		$this->db->query($sql);
-		//删除订单日志
+		//刪除訂單日誌
 		$sql = "DELETE FROM ".$this->db->prefix."order_log WHERE order_id=".$id;
 		$this->db->query($sql);
-		//删除付款信息
+		//刪除付款資訊
 		$sql = "DELETE FROM ".$this->db->prefix."order_payment WHERE order_id=".$id;
 		$this->db->query($sql);
-		//删除订单产品信息
+		//刪除訂單產品資訊
 		$sql = "DELETE FROM ".$this->db->prefix."order_product WHERE order_id=".$id;
 		$this->db->query($sql);
 		return true;
 	}
 
-	//保存订单各种状态下的价格
+	//儲存訂單各種狀態下的價格
 	public function save_order_price($data)
 	{
 		return $this->db->insert_array($data,'order_price');
@@ -159,12 +159,12 @@ class order_model extends order_model_base
 	}
 
 	/**
-	 * 更新订单状态，仅限后台管理员有效
-	 * @参数 $id 订单ID
-	 * @参数 $status 订单状态
-	 * @参数 $note 订单状态
+	 * 更新訂單狀態，僅限後臺管理員有效
+	 * @引數 $id 訂單ID
+	 * @引數 $status 訂單狀態
+	 * @引數 $note 訂單狀態
 	 * @返回 true
-	 * @更新时间 2016年10月04日
+	 * @更新時間 2016年10月04日
 	**/
 	public function update_order_status($id,$status='',$note='')
 	{
@@ -181,17 +181,17 @@ class order_model extends order_model_base
 			$statuslist = $this->status_list();
 			$note = $statuslist[$status];
 		}
-		$log = P_Lang('订单（{sn}）状态变更为：{status}',array('sn'=>$rs['sn'],'status'=>$note));
-		$who = P_Lang('管理员：{admin}',array('admin'=>$this->session->val('admin_account')));
+		$log = P_Lang('訂單（{sn}）狀態變更為：{status}',array('sn'=>$rs['sn'],'status'=>$note));
+		$who = P_Lang('管理員：{admin}',array('admin'=>$this->session->val('admin_account')));
 		$log = array('order_id'=>$id,'addtime'=>$this->time,'who'=>$who,'note'=>$log);
 		$this->log_save($log);
 		return true;
 	}
 
 	/**
-	 * 整理订单里的产品，仅保留有效产品
-	 * @参数 $id 订单ID
-	 * @参数 $order_product_ids 订单里的产品ID，多个ID用英文逗号隔开
+	 * 整理訂單裡的產品，僅保留有效產品
+	 * @引數 $id 訂單ID
+	 * @引數 $order_product_ids 訂單裡的產品ID，多個ID用英文逗號隔開
 	 * @返回 true
 	**/
 	public function order_product_clearup($id,$order_product_ids='')
@@ -208,9 +208,9 @@ class order_model extends order_model_base
 	}
 
 	/**
-	 * 检测订单是否需要物流，数量大于0表示需要，小于0或空或false为不需要
-	 * @参数 $id 订单ID号
-	 * @返回 数值或false
+	 * 檢測訂單是否需要物流，數量大於0表示需要，小於0或空或false為不需要
+	 * @引數 $id 訂單ID號
+	 * @返回 數值或false
 	**/
 	public function check_need_express($id)
 	{

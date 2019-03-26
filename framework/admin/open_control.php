@@ -1,12 +1,12 @@
 <?php
 /**
- * 虚弹窗口管理器
+ * 虛彈視窗管理器
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年01月18日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年01月18日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -17,23 +17,23 @@ class open_control extends phpok_control
 		parent::control();
 		$keytype_list = array(
 			'id'=>"ID",
-			'title'=>P_Lang('名称'),
-			'name'=>P_Lang('文件名'),
-			'ext'=>P_Lang('附件扩展名'),
-			'start_date'=>P_Lang('开始时间'),
-			'stop_date'=>P_Lang('结束时间')
+			'title'=>P_Lang('名稱'),
+			'name'=>P_Lang('檔名'),
+			'ext'=>P_Lang('附件副檔名'),
+			'start_date'=>P_Lang('開始時間'),
+			'stop_date'=>P_Lang('結束時間')
 		);
 		$this->assign('keytype_list',$keytype_list);
 	}
 
 	/**
-	 * 附件资源选择器
+	 * 附件資源選擇器
 	**/
 	public function upload_f()
 	{
 		$id = $this->get('id');
 		if(!$id){
-			$this->error(P_Lang('未指定表单ID'));
+			$this->error(P_Lang('未指定表單ID'));
 		}
 		$this->assign('id',$id);
 		$multiple = $this->get('multiple','int');
@@ -104,8 +104,8 @@ class open_control extends phpok_control
 		}
 		$rslist = $this->model('res')->get_list($condition,$offset,$psize);
 		$total = $this->model('res')->get_count($condition);
-		$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=3';
-		$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+		$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=3';
+		$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 		$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 		$this->assign("rslist",$rslist);
 		$this->assign("total",$total);
@@ -117,7 +117,7 @@ class open_control extends phpok_control
 	
 
 	/**
-	 * 附件选择器
+	 * 附件選擇器
 	**/
 	public function input_f()
 	{
@@ -182,8 +182,8 @@ class open_control extends phpok_control
 		$this->assign("rslist",$rslist);
 		$total = $this->model('res')->get_count($condition);
 		$this->assign("total",$total);
-		$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=3';
-		$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+		$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=3';
+		$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 		$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 		$this->assign("pagelist",$pagelist);
 		$this->assign("pageurl",$pageurl);
@@ -199,7 +199,7 @@ class open_control extends phpok_control
 		if(!$pageid) $pageid = 1;
 		$psize = 28;
 		$offset = ($pageid - 1) * $psize;
-		# 关键字
+		# 關鍵字
 		$condition = "1=1";
 		$keywords = $this->get("keywords");
 		if($keywords)
@@ -239,14 +239,14 @@ class open_control extends phpok_control
 		$this->assign("rslist",$rslist);
 		$total = $this->model('res')->get_count($condition);
 		$this->assign("total",$total);
-		$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=3';
-		$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+		$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=3';
+		$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 		$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 		$this->assign("pagelist",$pagelist);
 	}
 
 	/**
-	 * 网址列表，这里读的是项目的网址列表
+	 * 網址列表，這裡讀的是專案的網址列表
 	**/
 	public function url_f()
 	{
@@ -260,7 +260,7 @@ class open_control extends phpok_control
 			$p_rs = $this->model('project')->get_one($pid);
 			$type = $this->get("type");
 			if(!$p_rs){
-				$this->error(P_Lang('项目不存在'));
+				$this->error(P_Lang('專案不存在'));
 			}
 			if($type == "cate" && $p_rs["cate"]){
 				$catelist = $this->model('cate')->get_all($p_rs["site_id"],1,$p_rs["cate"]);
@@ -293,10 +293,10 @@ class open_control extends phpok_control
 						}
 					}
 				}
-				//读子主题
+				//讀子主題
 				$total = $this->model('list')->get_total($p_rs["module"],$condition);
-				$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=3';
-				$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+				$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=3';
+				$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 				$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 				$this->assign("pagelist",$pagelist);
 				$this->assign("p_rs",$p_rs);
@@ -313,7 +313,7 @@ class open_control extends phpok_control
 	}
 
 	/**
-	 * 读取会员列表
+	 * 讀取會員列表
 	**/
 	public function user_f()
 	{
@@ -342,8 +342,8 @@ class open_control extends phpok_control
 		$offset = ($pageid - 1) * $psize;
 		$rslist = $this->model('user')->get_list($condition,$offset,$psize);
 		$count = $this->model('user')->get_count($condition);
-		$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=2';
-		$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+		$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=2';
+		$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 		$pagelist = phpok_page($page_url,$count,$pageid,$psize,$string);
 		$this->assign("total",$count);
 		$this->assign("rslist",$rslist);
@@ -353,7 +353,7 @@ class open_control extends phpok_control
 	}
 
 	/**
-	 * 会员选择
+	 * 會員選擇
 	**/
 	public function user2_f()
 	{
@@ -373,8 +373,8 @@ class open_control extends phpok_control
 		$offset = ($pageid - 1) * $psize;
 		$rslist = $this->model('user')->get_list($condition,$offset,$psize);
 		$count = $this->model('user')->get_count($condition);
-		$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=2';
-		$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+		$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=2';
+		$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 		$pagelist = phpok_page($page_url,$count,$pageid,$psize,$string);
 		$this->assign("total",$count);
 		$this->assign("rslist",$rslist);

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： payment/alipay/notify.php
-	备注： 订单异步通知处理
+	檔案： payment/alipay/notify.php
+	備註： 訂單非同步通知處理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年5月2日
+	時間： 2014年5月2日
 *****************************************************************************************/
 error_reporting(E_ALL ^ E_NOTICE);
 define('PHPOK_SET',true);

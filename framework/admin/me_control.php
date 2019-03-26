@@ -1,12 +1,12 @@
 <?php
 /**
- * 管理员面板信息
+ * 管理員面板資訊
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年03月17日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年03月17日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -18,7 +18,7 @@ class me_control extends phpok_control
 	}
 
 	/**
-	 * 个人信息设置页
+	 * 個人資訊設定頁
 	**/
 	public function setting_f()
 	{
@@ -28,7 +28,7 @@ class me_control extends phpok_control
 	}
 
 	/**
-	 * 修改密码弹出页
+	 * 修改密碼彈出頁
 	**/
 	public function pass_f()
 	{
@@ -38,32 +38,32 @@ class me_control extends phpok_control
 	}
 
 	/**
-	 * 提交修改密码
+	 * 提交修改密碼
 	**/
 	public function pass_submit_f()
 	{
 		$this->config('is_ajax',true);
 		$oldpass = $this->get("oldpass");
 		if(!$oldpass){
-			$this->error(P_Lang('管理员密码验证不能为空'));
+			$this->error(P_Lang('管理員密碼驗證不能為空'));
 		}
 		$rs = $this->model('admin')->get_one($this->session->val('admin_id'));
 		if(!$rs){
-			$this->error(P_Lang('管理员信息不存在'));
+			$this->error(P_Lang('管理員資訊不存在'));
 		}
 		if(!password_check($oldpass,$rs["pass"])){
-			$this->error(P_Lang("管理员密码不正确"));
+			$this->error(P_Lang("管理員密碼不正確"));
 		}
 		$newpass = $this->get("newpass");
 		if(!$newpass){
-			$this->error(P_Lang('新密码不能为空'));
+			$this->error(P_Lang('新密碼不能為空'));
 		}
 		$chkpass = $this->get("chkpass");
 		if(!$chkpass){
-			$this->error(P_Lang('确认密码不能为空'));
+			$this->error(P_Lang('確認密碼不能為空'));
 		}
 		if($newpass != $chkpass){
-			$this->error(P_Lang("两次输入的新密码不一致"));
+			$this->error(P_Lang("兩次輸入的新密碼不一致"));
 		}
 		$array = array('pass'=>password_create($newpass));
 		$this->model('admin')->save($array,$this->session->val('admin_id'));
@@ -73,14 +73,14 @@ class me_control extends phpok_control
 	}
 
 	/**
-	 * 提交修改个人信息
+	 * 提交修改個人資訊
 	**/
 	public function submit_f()
 	{
 		$this->config('is_ajax',true);
 		$rs = $this->model('admin')->get_one($this->session->val('admin_id'));
 		if(!$rs){
-			$this->error(P_Lang('管理员信息不存在'));
+			$this->error(P_Lang('管理員資訊不存在'));
 		}
 		$array = array();
 		$name = $this->get('name');
@@ -90,7 +90,7 @@ class me_control extends phpok_control
 		if($name && $name != $rs['account']){
 			$check = $this->model('admin')->check_account($name,$this->session->val('admin_id'));
 			if($check){
-				$this->error(P_Lang('管理员账号已经存在，请重新设置'));
+				$this->error(P_Lang('管理員賬號已經存在，請重新設定'));
 			}
 			$array['account'] = $name;
 		}

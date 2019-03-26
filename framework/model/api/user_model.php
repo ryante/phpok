@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {$phpok}/model/user.php
-	Note	: 会员模块
+	Note	: 會員模組
 	Version : 3.0
 	Author  : qinggan
 	Update  : 2013年5月4日
@@ -13,7 +13,7 @@ class user_model extends user_model_base
 		parent::__construct();
 	}
 
-	//邮箱登录
+	//郵箱登入
 	function user_email($email,$uid=0)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."user WHERE email='".$email."'";
@@ -23,7 +23,7 @@ class user_model extends user_model_base
 		return $this->db->get_one($sql);
 	}
 
-	//手机登录
+	//手機登入
 	public function user_mobile($mobile,$uid=0)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."user WHERE mobile='".$mobile."'";
@@ -33,35 +33,35 @@ class user_model extends user_model_base
 		return $this->db->get_one($sql);
 	}
 
-	//更新会员密码
+	//更新會員密碼
 	function update_password($pass,$id)
 	{
 		$sql = "UPDATE ".$this->db->prefix."user SET pass='".$pass."' WHERE id='".$id."'";
 		return $this->db->query($sql);
 	}
 
-	//短信更新会员密码
+	//簡訊更新會員密碼
 	function update_smspass($pass,$mobile)
 	{
 		$sql = "UPDATE ".$this->db->prefix."user SET pass='".$pass."' WHERE mobile='".$mobile."'";
 		return $this->db->query($sql);
 	}
 
-	//更新会员手机
+	//更新會員手機
 	function update_mobile($mobile,$id)
 	{
 		$sql = "UPDATE ".$this->db->prefix."user SET mobile='".$mobile."' WHERE id='".$id."'";
 		return $this->db->query($sql);
 	}
 
-	//更新会员邮箱
+	//更新會員郵箱
 	function update_email($email,$id=0,$chk=0)
 	{
 		$sql = "UPDATE ".$this->db->prefix."user SET email='".$email."',email_chk='".$chk."' WHERE id='".$id."'";
 		return $this->db->query($sql);
 	}
 
-	//取得全部会员ID
+	//取得全部會員ID
 	function get_all_from_uid($uid,$pri="")
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."user WHERE id IN(".$uid.")";
@@ -109,14 +109,14 @@ class user_model extends user_model_base
 		return $rs['id'];
 	}
 
-	//更新会员头像
+	//更新會員頭像
 	function update_avatar($file,$uid)
 	{
 		$sql = "UPDATE ".$this->db->prefix."user SET avatar='".$file."' WHERE id='".$uid."'";
 		return $this->db->query($sql);
 	}
 
-	//更新会员登录操作
+	//更新會員登入操作
 	public function update_session($uid)
 	{
 		$rs = $this->get_one($uid);

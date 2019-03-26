@@ -1,13 +1,13 @@
 <?php
 /**
- * 报表统计，包括会员，订单，自定义模块的数据统计
+ * 報表統計，包括會員，訂單，自定義模組的資料統計
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @许可 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年10月17日
+ * @許可 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年10月17日
 **/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class report_control extends phpok_control
@@ -21,19 +21,19 @@ class report_control extends phpok_control
 	}
 
 	/**
-	 * 报表统计
-	 * @参数 type 统计类型，user 为会员，order 为订单，数字为要统计的项目
-	 * @参数 fields 要统计的字段，多个字段用英文逗号隔开
-	 * @参数 group 分组执行
-	 * @参数 times 统计的时间范围，数组，包括开始时间和结束时间
-	 * @参数 
+	 * 報表統計
+	 * @引數 type 統計型別，user 為會員，order 為訂單，數字為要統計的專案
+	 * @引數 fields 要統計的欄位，多個欄位用英文逗號隔開
+	 * @引數 group 分組執行
+	 * @引數 times 統計的時間範圍，陣列，包括開始時間和結束時間
+	 * @引數 
 	**/
 	public function index_f()
 	{
-		$list = array('user'=>P_Lang('会员'),'order'=>P_Lang('订单'),'title'=>P_Lang('主题数'));
+		$list = array('user'=>P_Lang('會員'),'order'=>P_Lang('訂單'),'title'=>P_Lang('主題數'));
 		$wealth_list = $this->model('wealth')->get_all();
 		if($wealth_list){
-			$list['wealth'] = P_Lang('财富');
+			$list['wealth'] = P_Lang('財富');
 		}
 		$project_list = $this->model('project')->project_all($this->session->val('admin_site_id'),'id',$condition);
 		if($project_list){
@@ -119,7 +119,7 @@ class report_control extends phpok_control
 		if($type == 'wealth'){
 			$info = $this->_wealth_type();
 			if(!$info){
-				$this->error(P_Lang('未设置相应的财富信息'));
+				$this->error(P_Lang('未設定相應的財富資訊'));
 			}
 			$this->success($info);
 		}
@@ -142,7 +142,7 @@ class report_control extends phpok_control
 				$ylist[$value['identifier']] = $value['title'];
 			}
 		}
-		$xlist = array('date'=>P_Lang('日期'),'week'=>P_Lang('周'),'month'=>P_Lang('月份'),'year'=>P_Lang('年度'),'user'=>P_Lang('会员'));
+		$xlist = array('date'=>P_Lang('日期'),'week'=>P_Lang('周'),'month'=>P_Lang('月份'),'year'=>P_Lang('年度'),'user'=>P_Lang('會員'));
 		$this->assign('xlist',$xlist);
 		$this->assign('ylist',$ylist);
 		return array('x'=>$xlist,'y'=>$ylist);
@@ -150,7 +150,7 @@ class report_control extends phpok_control
 
 	private function _list_type($pid)
 	{
-		$ylist = array('count'=>P_Lang('数量'));
+		$ylist = array('count'=>P_Lang('數量'));
 		$project = $this->model('project')->get_one($pid,false);
 		if(!$project || !$project['module']){
 			return false;
@@ -161,7 +161,7 @@ class report_control extends phpok_control
 		}
 		$xlist = array();
 		if(!$module['mtype']){
-			$ylist['hits'] = P_Lang('点击');
+			$ylist['hits'] = P_Lang('點選');
 			$xlist = array('date'=>P_Lang('日期'),'week'=>P_Lang('周'),'month'=>P_Lang('月份'),'year'=>P_Lang('年度'));
 		}
 		$zlist = false;
@@ -188,7 +188,7 @@ class report_control extends phpok_control
 
 	private function _title_type()
 	{
-		$ylist = array('count'=>P_Lang('数量'),'hits'=>P_Lang('点击'),'reply'=>P_Lang('回复'));
+		$ylist = array('count'=>P_Lang('數量'),'hits'=>P_Lang('點選'),'reply'=>P_Lang('回覆'));
 		$xlist = array('date'=>P_Lang('日期'),'week'=>P_Lang('周'),'month'=>P_Lang('月份'),'year'=>P_Lang('年度'));
 		$this->assign('xlist',$xlist);
 		$this->assign('ylist',$ylist);
@@ -197,9 +197,9 @@ class report_control extends phpok_control
 
 	private function _order_type()
 	{
-		$ylist = array('count'=>P_Lang('订单数量'),'price'=>P_Lang('订单价格'),'user'=>P_Lang('会员数'));
-		$xlist = array('date'=>P_Lang('日期'),'week'=>P_Lang('周'),'month'=>P_Lang('月份'),'year'=>P_Lang('年度'),'order'=>P_Lang('订单状态'));
-		$xlist['user'] = P_Lang('会员');
+		$ylist = array('count'=>P_Lang('訂單數量'),'price'=>P_Lang('訂單價格'),'user'=>P_Lang('會員數'));
+		$xlist = array('date'=>P_Lang('日期'),'week'=>P_Lang('周'),'month'=>P_Lang('月份'),'year'=>P_Lang('年度'),'order'=>P_Lang('訂單狀態'));
+		$xlist['user'] = P_Lang('會員');
 		$this->assign('xlist',$xlist);
 		$this->assign('ylist',$ylist);
 		return array('x'=>$xlist,'y'=>$ylist);
@@ -207,23 +207,23 @@ class report_control extends phpok_control
 
 	private function _user_type()
 	{
-		$ylist = array('count'=>P_Lang('注册数量'));
+		$ylist = array('count'=>P_Lang('註冊數量'));
 		$flist = $this->model('user')->fields_all('field_type NOT IN("longtext","longblob","text")');
 		if($flist){
 			foreach($flist as $key=>$value){
 				$ylist[$value['identifier']] = $value['title'];
 			}
 		}
-		$xlist = array('date'=>P_Lang('日期'),'week'=>P_Lang('周'),'month'=>P_Lang('月份'),'year'=>P_Lang('年度'),'group_id'=>P_Lang('会员组'));
+		$xlist = array('date'=>P_Lang('日期'),'week'=>P_Lang('周'),'month'=>P_Lang('月份'),'year'=>P_Lang('年度'),'group_id'=>P_Lang('會員組'));
 		$this->assign('xlist',$xlist);
 		$this->assign('ylist',$ylist);
 		return array('x'=>$xlist,'y'=>$ylist);
 	}
 
 	/**
-	 * 格式化X坐标里的数据
-	 * @参数 $x X的数据
-	 * @参数 $rslist 数据
+	 * 格式化X座標裡的資料
+	 * @引數 $x X的資料
+	 * @引數 $rslist 資料
 	**/
 	private function _format_rslist_x($x='date',$rslist)
 	{

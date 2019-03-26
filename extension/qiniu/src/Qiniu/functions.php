@@ -8,11 +8,11 @@ if (!defined('QINIU_FUNCTIONS_VERSION')) {
     define('QINIU_FUNCTIONS_VERSION', Config::SDK_VER);
 
     /**
-     * 计算文件的crc32检验码:
+     * 計算檔案的crc32檢驗碼:
      *
-     * @param $file string  待计算校验码的文件路径
+     * @param $file string  待計算校驗碼的檔案路徑
      *
-     * @return string 文件内容的crc32校验码
+     * @return string 檔案內容的crc32校驗碼
      */
     function crc32_file($file)
     {
@@ -22,11 +22,11 @@ if (!defined('QINIU_FUNCTIONS_VERSION')) {
     }
 
     /**
-     * 计算输入流的crc32检验码
+     * 計算輸入流的crc32檢驗碼
      *
-     * @param $data 待计算校验码的字符串
+     * @param $data 待計算校驗碼的字串
      *
-     * @return string 输入字符串的crc32校验码
+     * @return string 輸入字串的crc32校驗碼
      */
     function crc32_data($data)
     {
@@ -36,11 +36,11 @@ if (!defined('QINIU_FUNCTIONS_VERSION')) {
     }
 
     /**
-     * 对提供的数据进行urlsafe的base64编码。
+     * 對提供的資料進行urlsafe的base64編碼。
      *
-     * @param string $data 待编码的数据，一般为字符串
+     * @param string $data 待編碼的資料，一般為字串
      *
-     * @return string 编码后的字符串
+     * @return string 編碼後的字串
      * @link http://developer.qiniu.com/docs/v6/api/overview/appendix.html#urlsafe-base64
      */
     function base64_urlSafeEncode($data)
@@ -51,11 +51,11 @@ if (!defined('QINIU_FUNCTIONS_VERSION')) {
     }
 
     /**
-     * 对提供的urlsafe的base64编码的数据进行解码
+     * 對提供的urlsafe的base64編碼的資料進行解碼
      *
-     * @param string $str 待解码的数据，一般为字符串
+     * @param string $str 待解碼的資料，一般為字串
      *
-     * @return string 解码后的字符串
+     * @return string 解碼後的字串
      */
     function base64_urlSafeDecode($str)
     {
@@ -106,12 +106,12 @@ if (!defined('QINIU_FUNCTIONS_VERSION')) {
     }
 
     /**
-     * 计算七牛API中的数据格式
+     * 計算七牛API中的資料格式
      *
-     * @param $bucket 待操作的空间名
-     * @param $key 待操作的文件名
+     * @param $bucket 待操作的空間名
+     * @param $key 待操作的檔名
      *
-     * @return string  符合七牛API规格的数据格式
+     * @return string  符合七牛API規格的資料格式
      * @link http://developer.qiniu.com/docs/v6/api/reference/data-formats.html
      */
     function entry($bucket, $key)
@@ -124,13 +124,13 @@ if (!defined('QINIU_FUNCTIONS_VERSION')) {
     }
 
     /**
-     * array 辅助方法，无值时不set
+     * array 輔助方法，無值時不set
      *
      * @param $array 待操作array
      * @param $key key
-     * @param $value value 为null时 不设置
+     * @param $value value 為null時 不設定
      *
-     * @return array 原来的array，便于连续操作
+     * @return array 原來的array，便於連續操作
      */
     function setWithoutEmpty(&$array, $key, $value)
     {
@@ -141,16 +141,16 @@ if (!defined('QINIU_FUNCTIONS_VERSION')) {
     }
 
     /**
-     * 缩略图链接拼接
+     * 縮圖連結拼接
      *
-     * @param  string $url 图片链接
-     * @param  int $mode 缩略模式
-     * @param  int $width 宽度
-     * @param  int $height 长度
-     * @param  string $format 输出类型
-     * @param  int $quality 图片质量
-     * @param  int $interlace 是否支持渐进显示
-     * @param  int $ignoreError 忽略结果
+     * @param  string $url 圖片連結
+     * @param  int $mode 縮略模式
+     * @param  int $width 寬度
+     * @param  int $height 長度
+     * @param  string $format 輸出型別
+     * @param  int $quality 圖片質量
+     * @param  int $interlace 是否支援漸進顯示
+     * @param  int $ignoreError 忽略結果
      * @return string
      * @link http://developer.qiniu.com/code/v6/api/kodo-api/image/imageview2.html
      * @author Sherlock Ren <sherlock_ren@icloud.com>
@@ -175,15 +175,15 @@ if (!defined('QINIU_FUNCTIONS_VERSION')) {
     }
 
     /**
-     * 图片水印
+     * 圖片水印
      *
-     * @param  string $url 图片链接
-     * @param  string $image 水印图片链接
+     * @param  string $url 圖片連結
+     * @param  string $image 水印圖片連結
      * @param  numeric $dissolve 透明度
      * @param  string $gravity 水印位置
-     * @param  numeric $dx 横轴边距
-     * @param  numeric $dy 纵轴边距
-     * @param  numeric $watermarkScale 自适应原图的短边比例
+     * @param  numeric $dx 橫軸邊距
+     * @param  numeric $dy 縱軸邊距
+     * @param  numeric $watermarkScale 自適應原圖的短邊比例
      * @link   http://developer.qiniu.com/code/v6/api/kodo-api/image/watermark.html
      * @return string
      * @author Sherlock Ren <sherlock_ren@icloud.com>
@@ -209,15 +209,15 @@ if (!defined('QINIU_FUNCTIONS_VERSION')) {
     /**
      * 文字水印
      *
-     * @param  string $url 图片链接
+     * @param  string $url 圖片連結
      * @param  string $text 文字
-     * @param  string $font 文字字体
-     * @param  string $fontSize 文字字号
-     * @param  string $fontColor 文字颜色
+     * @param  string $font 文字字型
+     * @param  string $fontSize 文字字號
+     * @param  string $fontColor 文字顏色
      * @param  numeric $dissolve 透明度
      * @param  string $gravity 水印位置
-     * @param  numeric $dx 横轴边距
-     * @param  numeric $dy 纵轴边距
+     * @param  numeric $dx 橫軸邊距
+     * @param  numeric $dy 縱軸邊距
      * @link   http://developer.qiniu.com/code/v6/api/kodo-api/image/watermark.html#text-watermark
      * @return string
      * @author Sherlock Ren <sherlock_ren@icloud.com>
@@ -225,7 +225,7 @@ if (!defined('QINIU_FUNCTIONS_VERSION')) {
     function waterText(
         $url,
         $text,
-        $font = '黑体',
+        $font = '黑體',
         $fontSize = 0,
         $fontColor = null,
         $dissolve = 100,
@@ -243,7 +243,7 @@ if (!defined('QINIU_FUNCTIONS_VERSION')) {
     }
 
     /**
-     *  从uptoken解析accessKey和bucket
+     *  從uptoken解析accessKey和bucket
      *
      * @param $upToken
      * @return array(ak,bucket,err=null)

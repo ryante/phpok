@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: phpok/admin/global.func.php
-	Note	: 后台通用函数加载
+	Note	: 後臺通用函式載入
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -9,7 +9,7 @@
 ***********************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 
-# 自动加载函数
+# 自動載入函式
 function autoload_sysmenu()
 {
 	$list = phpok_sys_menu();
@@ -31,14 +31,14 @@ function autoload_sysmenu()
 	return $list;
 }
 
-//后台核心菜单调用
+//後臺核心選單呼叫
 function phpok_sys_menu()
 {
-	//非管理员不能执行此操作
+	//非管理員不能執行此操作
 	if(!$_SESSION["admin_id"]){
 		return false;
 	}
-	//取得所有的权限字段
+	//取得所有的許可權欄位
 	$plist = $GLOBALS['app']->model('popedom')->get_all('',false,false);
 	if(!$plist){
 		$plist = array();
@@ -58,12 +58,12 @@ function phpok_sys_menu()
 	}
 	$ftmp = array('list','index','res');
 	foreach($menulist AS $key=>$value){
-		//如果不存在子类，则清空该级栏目
+		//如果不存在子類，則清空該級欄目
 		if(!$value["sublist"] || !is_array($value["sublist"]) || count($value["sublist"]) < 1){
 			unset($menulist[$key]);
 			continue;
 		}
-		//定义sublist信息
+		//定義sublist資訊
 		foreach($value["sublist"] AS $k=>$v){
 			if(!in_array($v['appfile'],$ftmp) && !$_SESSION['admin_rs']['if_system'] && $popedom_m[$v['id']]){
 				$tmp = array_intersect($popedom,$popedom_m[$v["id"]]);
@@ -93,7 +93,7 @@ function phpok_sys_menu()
 	}
 
 	if(!$menulist || count($menulist) < 1 || !is_array($menulist)){
-		$GLOBALS['app']->error(P_Lang('导航菜单异常：无法获取后台导航菜单，请检查表qinggan_sysmenu'));
+		$GLOBALS['app']->error(P_Lang('導航選單異常：無法獲取後臺導航選單，請檢查表qinggan_sysmenu'));
 	}
 
 	$top_list = array();
@@ -120,7 +120,7 @@ function phpok_sys_menu()
 	$ctrl = $GLOBALS['app']->get($GLOBALS['app']->config["ctrl_id"],"system");
 	$func = $GLOBALS['app']->get($GLOBALS['app']->config["func_id"],"system");
 	$identifier = $GLOBALS['app']->get("identifier","system");
-	// 计算当前高亮ID，这里是头部的
+	// 計算當前高亮ID，這裡是頭部的
 	$menu_id = $GLOBALS['app']->get("menu_id","int");
 	if(!$menu_id){
 		$condition = array();
@@ -152,10 +152,10 @@ function phpok_sys_menu()
 	}
 	$array["top_id"] = $top_id;
 
-	// 循环得到子列表页
+	// 迴圈得到子列表頁
 	$i = 0;
 	$sub_list = array();
-	//计算左侧菜单
+	//計算左側選單
 	foreach($menulist AS $k=>$v){
 		if($k == $top_id){
 			foreach($v["sublist"] AS $key=>$value){
@@ -171,7 +171,7 @@ function phpok_sys_menu()
 		}
 	}
 	$array["sub_list"] = $sub_list;
-	// 现在计算子页的高亮
+	// 現在計運算元頁的高亮
 	if($menu_id && $menu_id == $first_id){
 		ob_clean();
 		header("Location:".$GLOBALS['app']->url("index"));
@@ -197,7 +197,7 @@ function phpok_sys_menu()
 function show_pending_info()
 {
 	$site_id = $_SESSION["admin_site_id"];
-	//取得所有未审核的主题列表
+	//取得所有未稽核的主題列表
 	$list = array();
 	$rslist = $GLOBALS['app']->model('list')->pending_info($site_id);
 	if($rslist){
@@ -208,19 +208,19 @@ function show_pending_info()
 			}
 		}
 	}
-	//读取未审核的会员信息
+	//讀取未稽核的會員資訊
 	$condition = "u.status=0";
 	$user_total = $GLOBALS['app']->model('user')->get_count($condition);
 	if($user_total > 0){
 		$url = $GLOBALS['app']->url("user","","status=3");
-		$list[] = array("title"=>"待审核会员","total"=>$user_total,"url"=>$url);
+		$list[] = array("title"=>"待稽核會員","total"=>$user_total,"url"=>$url);
 	}
-	//读取未审核的回复信息
+	//讀取未稽核的回覆資訊
 	$condition = "status=0";
 	$reply_total = $GLOBALS['app']->model('reply')->get_total($condition);
 	if($reply_total>0){
 		$url = $GLOBALS['app']->url("reply","","status=3");
-		$list[] = array("title"=>P_Lang('未审核评论'),"total"=>$reply_total,"url"=>$url);
+		$list[] = array("title"=>P_Lang('未稽核評論'),"total"=>$reply_total,"url"=>$url);
 	}
 	return $list;
 }
@@ -249,11 +249,11 @@ function include_js($js="",$mini=false,$injs=false)
 	return $url;
 }
 
-# 读取扩展
+# 讀取擴充套件
 function get_phpok_ext($module,$words="id,identifier")
 {
 	if(!$module){
-		return array_return(P_Lang('未指定模块'));
+		return array_return(P_Lang('未指定模組'));
 	}
 	if(substr($module,0,3) == "add"){
 		$idstring = $_SESSION[$module.'-ext-id'];
@@ -316,8 +316,8 @@ function appfile_popedom($string,$project_id=0)
 	return $list;
 }
 
-//权限判断
-//string，权限ID，用于处理
+//許可權判斷
+//string，許可權ID，用於處理
 function system_popedom($string,$return_type="")
 {
 	if($_SESSION["admin_rs"]["if_system"]){
@@ -325,11 +325,11 @@ function system_popedom($string,$return_type="")
 	}
 	if(!$_SESSION["admin_popedom"] || !is_array($_SESSION["admin_popedom"]) || !$string){
 		if($return_type == "tips" || $return_type == "tpl" || $return_type == "tip"){
-			error(P_Lang('您没有权限执行此操作'),"","error");
+			error(P_Lang('您沒有許可權執行此操作'),"","error");
 		}elseif($return_type == "json"){
-			$GLOBALS['app']->json(P_Lang('您没有权限执行此操作'));
+			$GLOBALS['app']->json(P_Lang('您沒有許可權執行此操作'));
 		}elseif($return_type == "ajax"){
-			exit(P_Lang('您没有权限执行此操作'));
+			exit(P_Lang('您沒有許可權執行此操作'));
 		}else{
 			return false;
 		}
@@ -341,11 +341,11 @@ function system_popedom($string,$return_type="")
 	$plist = appfile_popedom($type);
 	if(!$identify || !$plist || !$plist[$identify]){
 		if($return_type == "tips" || $return_type == "tpl" || $return_type == "tip"){
-			error(P_Lang('您没有权限执行此操作'),"","error");
+			error(P_Lang('您沒有許可權執行此操作'),"","error");
 		}elseif($return_type == "json"){
-			$GLOBALS['app']->json(P_Lang('您没有权限执行此操作'));
+			$GLOBALS['app']->json(P_Lang('您沒有許可權執行此操作'));
 		}elseif($return_type == "ajax"){
-			exit(P_Lang('您没有权限执行此操作'));
+			exit(P_Lang('您沒有許可權執行此操作'));
 		}else{
 			return false;
 		}

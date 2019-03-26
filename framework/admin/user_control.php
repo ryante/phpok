@@ -1,13 +1,13 @@
 <?php
 /**
- * 会员相关处理
+ * 會員相關處理
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年06月08日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年06月08日
 **/
 
 class user_control extends phpok_control
@@ -23,12 +23,12 @@ class user_control extends phpok_control
 	}
 
 	/**
-	 * 配置要显示的会员字段，仅在后台有效
+	 * 配置要顯示的會員欄位，僅在後臺有效
 	**/
 	public function show_setting_f()
 	{
 		if(!$this->session->val('admin_rs.if_system')){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$list = $this->lib('xml')->read($this->dir_data.'xml/admin_user.xml');
 		if($list){
@@ -36,7 +36,7 @@ class user_control extends phpok_control
 			$keys = array_keys($list);
 			$this->assign('keys',$keys);
 		}
-		$rslist = array('user'=>P_Lang('账号'),'group_id'=>P_Lang('会员组'),'email'=>P_Lang('邮箱'),'mobile'=>P_Lang('手机号'));
+		$rslist = array('user'=>P_Lang('賬號'),'group_id'=>P_Lang('會員組'),'email'=>P_Lang('郵箱'),'mobile'=>P_Lang('手機號'));
 		$flist = $this->model('user')->fields_all();
 		if($flist){
 			foreach($flist as $key=>$value){
@@ -51,13 +51,13 @@ class user_control extends phpok_control
 	public function show_setting_save_f()
 	{
 		if(!$this->session->val('admin_rs.if_system')){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$array = $this->get('setting','checkbox');
 		if(!$array){
 			$array = array('user');
 		}
-		$rslist = array('user'=>P_Lang('账号'),'group_id'=>P_Lang('会员组'),'email'=>P_Lang('邮箱'),'mobile'=>P_Lang('手机号'));
+		$rslist = array('user'=>P_Lang('賬號'),'group_id'=>P_Lang('會員組'),'email'=>P_Lang('郵箱'),'mobile'=>P_Lang('手機號'));
 		$flist = $this->model('user')->fields_all();
 		if($flist){
 			foreach($flist as $key=>$value){
@@ -75,13 +75,13 @@ class user_control extends phpok_control
 	}
 
 
-	//会员列表
+	//會員列表
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
-		$flist = array('user'=>P_Lang('账号'),'mobile'=>P_Lang('手机号'),'email'=>P_Lang('邮箱'));
+		$flist = array('user'=>P_Lang('賬號'),'mobile'=>P_Lang('手機號'),'email'=>P_Lang('郵箱'));
 		$tmplist = $this->model('user')->fields_all("field_type NOT IN('longtext','text','longblob','blog') AND form_type='text'");
 		if($tmplist){
 			foreach($tmplist as $key=>$value){
@@ -124,8 +124,8 @@ class user_control extends phpok_control
 		$offset = ($pageid-1) * $psize;
 		$rslist = $this->model('user')->get_list($condition,$offset,$psize);
 		$count = $this->model('user')->get_count($condition);
-		$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=3';
-		$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+		$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=3';
+		$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 		$pagelist = phpok_page($page_url,$count,$pageid,$psize,$string);
 		$this->assign("total",$count);
 		$this->assign("rslist",$rslist);
@@ -153,17 +153,17 @@ class user_control extends phpok_control
 		$group_id = 0;
 		if($id){
 			if(!$this->popedom["modify"]){
-				error(P_Lang('您没有权限执行此操作'),'','error');
+				error(P_Lang('您沒有許可權執行此操作'),'','error');
 			}
 			$rs = $this->model('user')->get_one($id);
 			$group_id = $rs['group_id'];
 		}else{
 			if(!$this->popedom["add"]){
-				error(P_Lang('您没有权限执行此操作'),'','error');
+				error(P_Lang('您沒有許可權執行此操作'),'','error');
 			}
 		}
-		//创建扩展字段的表单
-		//读取扩展属性
+		//建立擴充套件欄位的表單
+		//讀取擴充套件屬性
 		$this->lib("form")->cssjs();
 		$ext_list = $this->model('user')->fields_all();
 		$extlist = array();
@@ -181,7 +181,7 @@ class user_control extends phpok_control
 			$extlist[] = $this->lib('form')->format($value);
 		}
 		$this->assign("extlist",$extlist);
-		//会员组
+		//會員組
 		$grouplist = $this->model('usergroup')->get_all("is_guest=0 AND status=1");
 		if(!$group_id){
 			foreach($grouplist as $key=>$value){
@@ -203,94 +203,94 @@ class user_control extends phpok_control
 		$id = $this->get("id","int");
 		$user = $this->get("user");
 		if(!$user){
-			$this->json(P_Lang('会员账号不允许为空'));
+			$this->json(P_Lang('會員賬號不允許為空'));
 		}
 		$rs_name = $this->model('user')->chk_name($user,$id);
 		if($rs_name){
-			$this->json(P_Lang('会员账号已经存在'));
+			$this->json(P_Lang('會員賬號已經存在'));
 		}
 		$mobile = $this->get('mobile');
 		if($mobile){
 			if(!$this->lib('common')->tel_check($mobile)){
-				$this->json(P_Lang('手机号填写不正确'));
+				$this->json(P_Lang('手機號填寫不正確'));
 			}
 			$chk = $this->model('user')->get_one($mobile,'mobile');
 			if($id){
 				if($chk && $chk['id'] != $id){
-					$this->json(P_Lang('手机号已被占用'));
+					$this->json(P_Lang('手機號已被佔用'));
 				}
 			}else{
 				if($chk){
-					$this->json(P_Lang('手机号已被占用'));
+					$this->json(P_Lang('手機號已被佔用'));
 				}
 			}
 		}
 		$email = $this->get('email');
 		if($email){
 			if(!$this->lib('common')->email_check($email)){
-				$this->json(P_Lang('邮箱填写不正确'));
+				$this->json(P_Lang('郵箱填寫不正確'));
 			}
 			$chk = $this->model('user')->get_one($email,'email');
 			if($id){
 				if($chk && $chk['id'] != $id){
-					$this->json(P_Lang('邮箱已被占用'));
+					$this->json(P_Lang('郵箱已被佔用'));
 				}
 			}else{
 				if($chk){
-					$this->json(P_Lang('邮箱已被占用'));
+					$this->json(P_Lang('郵箱已被佔用'));
 				}
 			}
 		}
-		$this->json(P_Lang('验证通过'),true);
+		$this->json(P_Lang('驗證通過'),true);
 	}
 
-	//存储信息
+	//儲存資訊
 	public function setok_f()
 	{
 		$id = $this->get("id","int");
 		$popedom_id = $id ? 'modify' : 'add';
 		if(!$this->popedom[$popedom_id]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$array = array();
 		$array["user"] = $this->get("user");
 		if(!$array["user"]){
-			$this->error(P_Lang('会员账号不允许为空'));
+			$this->error(P_Lang('會員賬號不允許為空'));
 		}
 		$rs_name = $this->model('user')->chk_name($array["user"],$id);
 		if($rs_name){
-			$this->error(P_Lang('会员账号已经存在'));
+			$this->error(P_Lang('會員賬號已經存在'));
 		}
 		$array['avatar'] = $this->get('avatar');
 		$array['email'] = $this->get('email');
 		if($array['email']){
 			if(!$this->lib('common')->email_check($array['email'])){
-				$this->error(P_Lang('邮箱填写不正确'));
+				$this->error(P_Lang('郵箱填寫不正確'));
 			}
 			$chk = $this->model('user')->get_one($array['email'],'email');
 			if($id){
 				if($chk && $chk['id'] != $id){
-					$this->error(P_Lang('邮箱已被占用'));
+					$this->error(P_Lang('郵箱已被佔用'));
 				}
 			}else{
 				if($chk){
-					$this->error(P_Lang('邮箱已被占用'));
+					$this->error(P_Lang('郵箱已被佔用'));
 				}
 			}
 		}
 		$array['mobile'] = $this->get('mobile');
 		if($array['mobile']){
 			if(!$this->lib('common')->tel_check($array['mobile'])){
-				$this->error(P_Lang('手机号填写不正确'));
+				$this->error(P_Lang('手機號填寫不正確'));
 			}
 			$chk = $this->model('user')->get_one($array['mobile'],'mobile');
 			if($id){
 				if($chk && $chk['id'] != $id){
-					$this->error(P_Lang('手机号已被占用'));
+					$this->error(P_Lang('手機號已被佔用'));
 				}
 			}else{
 				if($chk){
-					$this->error(P_Lang('手机号已被占用'));
+					$this->error(P_Lang('手機號已被佔用'));
 				}
 			}
 		}
@@ -299,7 +299,7 @@ class user_control extends phpok_control
 			$array["pass"] = password_create($pass);
 		}else{
 			if(!$id){
-				$this->error(P_Lang('密码不能为空'));
+				$this->error(P_Lang('密碼不能為空'));
 			}
 		}
 
@@ -338,16 +338,16 @@ class user_control extends phpok_control
 	 		}
  		}
 		$this->model('user')->save_ext($tmplist);
-		$note = $id ? P_Lang('会员编辑成功') : P_Lang('新会员添加成功');
+		$note = $id ? P_Lang('會員編輯成功') : P_Lang('新會員新增成功');
 		$this->success($note,$this->url('user'));
 	}
 
 	public function ajax_status_f()
 	{
-		if(!$this->popedom["status"]) exit(P_Lang('您没有权限执行此操作'));
+		if(!$this->popedom["status"]) exit(P_Lang('您沒有許可權執行此操作'));
 		$id = $this->get("id","int");
 		if(!$id){
-			exit(P_Lang('没有指定ID'));
+			exit(P_Lang('沒有指定ID'));
 		}
 		$rs = $this->model('user')->get_one($id);
 		$status = $rs["status"] ? 0 : 1;
@@ -357,7 +357,7 @@ class user_control extends phpok_control
 
 	public function ajax_del_f()
 	{
-		if(!$this->popedom["delete"]) exit(P_Lang('您没有权限执行此操作'));
+		if(!$this->popedom["delete"]) exit(P_Lang('您沒有許可權執行此操作'));
 		$id = $this->get("id","int");
 		if(!$id){
 			exit(P_Lang('未指定ID'));
@@ -367,7 +367,7 @@ class user_control extends phpok_control
 	}
 
 	/**
-	 * 会员字段管理器中涉及到的字段
+	 * 會員欄位管理器中涉及到的欄位
 	**/
 	private function fields_auto()
 	{
@@ -385,9 +385,9 @@ class user_control extends phpok_control
 	{
 		$this->fields_auto();
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
-		// 取得现有全部字段
+		// 取得現有全部欄位
 		$condition = "area LIKE '%user%'";
 		$used_list = $this->model('user')->fields_all("","identifier");
 		if($used_list){
@@ -416,16 +416,16 @@ class user_control extends phpok_control
 	}
 
 	/**
-	 * 保存自定义字段
-	 * @参数 
+	 * 儲存自定義欄位
+	 * @引數 
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function fields_save_f()
 	{
 		$this->fields_auto();
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id');
 		if(!$id){
@@ -433,7 +433,7 @@ class user_control extends phpok_control
 		}
 		$rs = $this->model('fields')->default_one($id);
 		if(!$rs){
-			$this->error(P_Lang('字段内容不存在'));
+			$this->error(P_Lang('欄位內容不存在'));
 		}
 		$tmp_array = array('title'=>$rs['title'],'note'=>$rs['note']);
 		$tmp_array["identifier"] = $rs["identifier"];
@@ -457,13 +457,13 @@ class user_control extends phpok_control
 	}
 
 	/**
-	 * 会员字段添加修改操作
+	 * 會員欄位新增修改操作
 	**/
 	public function field_edit_f()
 	{
 		$this->fields_auto();
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if($id){
@@ -475,36 +475,36 @@ class user_control extends phpok_control
 	}
 
 	/**
-	 * 保存会员字段
+	 * 儲存會員欄位
 	**/
 	public function field_edit_save_f()
 	{
 		$this->fields_auto();
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$title = $this->get("title");
 		if(!$title){
-			$this->error(P_Lang('名称不能为空'));
+			$this->error(P_Lang('名稱不能為空'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
 			$identifier = $this->get('identifier','system');
 			if(!$identifier){
-				$this->error(P_Lang('标识不能为空或不符合要求'));
+				$this->error(P_Lang('標識不能為空或不符合要求'));
 			}
-			//检查标识是否已被使用
+			//檢查標識是否已被使用
 			if(!$this->model('user')->identifier_chk($identifier)){
-				$this->error(P_Lang('标识检测到已经使用，请更换标识'));
+				$this->error(P_Lang('標識檢測到已經使用，請更換標識'));
 			}
 			$field_type = $this->get('field_type');
 			if(!$field_type){
-				$this->error(P_Lang('请选择字段类型'));
+				$this->error(P_Lang('請選擇欄位型別'));
 			}
 		}
 		$form_type = $this->get("form_type");
 		if(!$form_type){
-			$this->error(P_Lang('表单类型不能为空'));
+			$this->error(P_Lang('表單型別不能為空'));
 		}
 		$ext_form_id = $this->get("ext_form_id");
 		$ext = array();
@@ -519,7 +519,7 @@ class user_control extends phpok_control
 					$value = $val[0];
 					$ext[$value] = $this->get($value);
 					if($val[2] && $val[2] == 'required' && $ext[$value] == ''){
-						$this->error(P_Lang('扩展参数属性有必填选项没有写'));
+						$this->error(P_Lang('擴充套件引數屬性有必填選項沒有寫'));
 					}
 				}
 			}
@@ -551,19 +551,19 @@ class user_control extends phpok_control
 	}
 
 	/**
-	 * 删除字段
-	 * @参数 id 要删除的字段ID，数字
-	 * @返回 JSON数据
+	 * 刪除欄位
+	 * @引數 id 要刪除的欄位ID，數字
+	 * @返回 JSON資料
 	**/
 	public function field_delete_f()
 	{
 		$this->fields_auto();
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
-			$this->error(P_Lang('未指定要删除的字段'));
+			$this->error(P_Lang('未指定要刪除的欄位'));
 		}
 		$this->model('user')->field_delete($id);
 		$this->success();
@@ -573,13 +573,13 @@ class user_control extends phpok_control
 	{
 		$uid = $this->get('uid');
 		if(!$uid){
-			$this->json(P_Lang('未指定会员ID'));
+			$this->json(P_Lang('未指定會員ID'));
 		}
 		$type = $this->get('type');
 		if($type == 'invoice'){
 			$rslist = $this->model('user')->invoice($uid);
 			if(!$rslist){
-				$this->json(P_Lang('该会员未设置发票信息'));
+				$this->json(P_Lang('該會員未設定發票資訊'));
 			}
 			$first = $default = false;
 			foreach($rslist as $key=>$value){
@@ -598,7 +598,7 @@ class user_control extends phpok_control
 		}elseif($type == 'address'){
 			$rslist = $this->model('user')->address($uid);
 			if(!$rslist){
-				$this->json(P_Lang('该会员未设置收件人信息'));
+				$this->json(P_Lang('該會員未設定收件人資訊'));
 			}
 			$first = $default = false;
 			foreach($rslist as $key=>$value){
@@ -617,7 +617,7 @@ class user_control extends phpok_control
 		}else{
 			$info = $this->model('user')->get_one($uid);
 			if(!$info){
-				$this->json(P_Lang('会员信息不存在'));
+				$this->json(P_Lang('會員資訊不存在'));
 			}
 		}
 		$this->json($info,true);
@@ -626,11 +626,11 @@ class user_control extends phpok_control
 	public function address_list_f()
 	{
 		if(!$this->popedom['list']){
-			$this->error(P_Lang('您没有权限查看会员地址信息'));
+			$this->error(P_Lang('您沒有許可權檢視會員地址資訊'));
 		}
 		$uid = $this->get('uid','int');
 		if(!$uid){
-			$this->error(P_Lang('未指定会员ID'));
+			$this->error(P_Lang('未指定會員ID'));
 		}
 		$rslist = $this->model('user')->address_all($uid);
 		if($rslist){

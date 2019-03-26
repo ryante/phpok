@@ -1,20 +1,20 @@
 <?php
 /**
- * 会员财富管理
+ * 會員財富管理
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年07月25日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年07月25日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class wealth_model_base extends phpok_model
 {
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -22,10 +22,10 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得全部财富规则
-	 * @参数 $status 状态，为1时只读有效状态，为0读全部，为2只读无效状态
-	 * @参数 $pri 主键值
-	 * @返回 二维数组
+	 * 取得全部財富規則
+	 * @引數 $status 狀態，為1時只讀有效狀態，為0讀全部，為2只讀無效狀態
+	 * @引數 $pri 主鍵值
+	 * @返回 二維陣列
 	**/
 	public function get_all($status=0,$pri='')
 	{
@@ -38,10 +38,10 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得某个财富规则配置信息
-	 * @参数 $id 财富ID
-	 * @参数 $typeid 字段ID
-	 * @返回 一维数组
+	 * 取得某個財富規則配置資訊
+	 * @引數 $id 財富ID
+	 * @引數 $typeid 欄位ID
+	 * @返回 一維陣列
 	**/
 	public function get_one($id,$typeid='id')
 	{
@@ -56,9 +56,9 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 根据查询条件，获取财富规则，条件为空获取全部财富规则
-	 * @参数 $condition 查询条件
-	 * @返回 二给维组
+	 * 根據查詢條件，獲取財富規則，條件為空獲取全部財富規則
+	 * @引數 $condition 查詢條件
+	 * @返回 二給維組
 	**/
 	public function rule_all($condition='')
 	{
@@ -71,8 +71,8 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存财富日志
-	 * @参数 $data 一维数组
+	 * 儲存財富日誌
+	 * @引數 $data 一維陣列
 	 * @返回 插入的ID或false
 	**/
 	public function save_log($data)
@@ -81,8 +81,8 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新会员财富信息
-	 * @参数 $data 一维数组，替代式更新
+	 * 更新會員財富資訊
+	 * @引數 $data 一維陣列，替代式更新
 	 * @返回 插入的ID或false
 	**/
 	public function save_info($data)
@@ -91,10 +91,10 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取指定的会员及指定的财富方案对应的财富内容
-	 * @参数 $uid 会员ID
-	 * @参数 $wid 财富ID
-	 * @返回 0 或 财富值（数字或浮点）
+	 * 獲取指定的會員及指定的財富方案對應的財富內容
+	 * @引數 $uid 會員ID
+	 * @引數 $wid 財富ID
+	 * @返回 0 或 財富值（數字或浮點）
 	**/
 	public function get_val($uid,$wid)
 	{
@@ -110,8 +110,8 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 根据查询条件获取财富值信息
-	 * @参数 $condition 查询条件
+	 * 根據查詢條件獲取財富值資訊
+	 * @引數 $condition 查詢條件
 	**/
 	public function vals($condition='')
 	{
@@ -123,13 +123,13 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得目标用户列表
+	 * 取得目標使用者列表
 	**/
 	public function goal_userlist()
 	{
 		$xmlfile = $this->dir_data.'xml/user_agent.xml';
 		if(!file_exists($xmlfile)){
-			return array('user'=>'用户','introducer'=>'一级推荐人','introducer2'=>'二级推荐人','introducer3'=>'三级推荐人');
+			return array('user'=>'使用者','introducer'=>'一級推薦人','introducer2'=>'二級推薦人','introducer3'=>'三級推薦人');
 		}
 		$rslist = $this->lib('xml')->read($xmlfile);
 		if(isset($rslist[$this->langid])){
@@ -142,9 +142,9 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取一条规则
-	 * @参数 $id 规则ID
-	 * @返回 false或数组
+	 * 獲取一條規則
+	 * @引數 $id 規則ID
+	 * @返回 false或陣列
 	**/
 	public function rule_one($id)
 	{
@@ -153,9 +153,9 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 财富日志，系统自动生成的
-	 * @参数 $note 备注
-	 * @返回 数组
+	 * 財富日誌，系統自動生成的
+	 * @引數 $note 備註
+	 * @返回 陣列
 	**/
 	private function _data($note='')
 	{
@@ -172,11 +172,11 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 目标ID
-	 * @参数 $id 当前会员ID号
-	 * @参数 $goal 目标类型
+	 * 目標ID
+	 * @引數 $id 當前會員ID號
+	 * @引數 $goal 目標型別
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	private function _goal($id,$goal='user')
 	{
@@ -201,11 +201,11 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 订单支付送财富
-	 * @参数 $id 订单ID号，以防止重复赠送
-	 * @参数 $note 备注
+	 * 訂單支付送財富
+	 * @引數 $id 訂單ID號，以防止重複贈送
+	 * @引數 $note 備註
 	 * @返回 true 或 false
-	 * @更新时间 2016年08月16日
+	 * @更新時間 2016年08月16日
 	**/
 	public function order($id,$note='')
 	{
@@ -257,8 +257,8 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 充值到账对积分进行转换
-	 * @参数 $logid 支付ID
+	 * 充值到賬對積分進行轉換
+	 * @引數 $logid 支付ID
 	**/
 	public function recharge($logid)
 	{
@@ -271,8 +271,8 @@ class wealth_model_base extends phpok_model
 		if($ext['phpok_status'] || !$ext['goal']){
 			return true;
 		}
-		//查看金额
-		$data = $this->_data(P_Lang('在线充值'));
+		//檢視金額
+		$data = $this->_data(P_Lang('線上充值'));
 		$rs = $this->get_one($ext['goal']);
 		if(!$rs || !$rs['status'] || !$rs['ifpay']){
 			return false;
@@ -300,13 +300,13 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 阅读/发布/评论赠送财富
-	 * @参数 $id 主题ID
-	 * @参数 $uid 会员ID
-	 * @参数 $type 类型，content读主题，comment评论主题，post发布主题
-	 * @参数 $note 备注
+	 * 閱讀/釋出/評論贈送財富
+	 * @引數 $id 主題ID
+	 * @引數 $uid 會員ID
+	 * @引數 $type 型別，content讀主題，comment評論主題，post釋出主題
+	 * @引數 $note 備註
 	 * @返回 true 或 false
-	 * @更新时间 2016年08月16日
+	 * @更新時間 2016年08月16日
 	**/
 	public function add_integral($id=0,$uid=0,$type='content',$note='')
 	{
@@ -368,11 +368,11 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 注册送财富（如果规则的值是负值，表示扣除）
-	 * @参数 $uid 会员ID
-	 * @参数 $note 备注
+	 * 註冊送財富（如果規則的值是負值，表示扣除）
+	 * @引數 $uid 會員ID
+	 * @引數 $note 備註
 	 * @返回 true 或者 false
-	 * @更新时间 2016年07月30日
+	 * @更新時間 2016年07月30日
 	**/
 	public function register($uid,$note='')
 	{
@@ -404,11 +404,11 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 登录送财富，一天仅一次有效（如果规则的值是负值，表示扣除）
-	 * @参数 $uid 会员ID
-	 * @参数 $note 备注
+	 * 登入送財富，一天僅一次有效（如果規則的值是負值，表示扣除）
+	 * @引數 $uid 會員ID
+	 * @引數 $note 備註
 	 * @返回 true 或 false
-	 * @更新时间 2016年07月25日
+	 * @更新時間 2016年07月25日
 	**/
 	public function login($uid,$note='')
 	{
@@ -444,11 +444,11 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 手动增加或减去财富
-	 * @参数 $wid 财富ID，支持数字ID或标识
-	 * @参数 $uid 目标会员ID，仅支持数字
-	 * @参数 $val 要增加多少，为负数时表示减去
-	 * @参数 $note 备注
+	 * 手動增加或減去財富
+	 * @引數 $wid 財富ID，支援數字ID或標識
+	 * @引數 $uid 目標會員ID，僅支援數字
+	 * @引數 $val 要增加多少，為負數時表示減去
+	 * @引數 $note 備註
 	**/
 	public function save_val($wid,$uid,$val=0,$note='')
 	{
@@ -492,10 +492,10 @@ class wealth_model_base extends phpok_model
 	}
 
 	/**
-	 * 检查日志，主要是检查是否有记录，如主题防止多次刷新，登录24小时内只计一次等
-	 * @参数 $data 一维数组
+	 * 檢查日誌，主要是檢查是否有記錄，如主題防止多次重新整理，登入24小時內只計一次等
+	 * @引數 $data 一維陣列
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	private function chk_log($data)
 	{

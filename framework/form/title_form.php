@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/form/title_form.php
-	备注： 主题选择维护
+	檔案： {phpok}/form/title_form.php
+	備註： 主題選擇維護
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年03月13日 14时04分
+	時間： 2015年03月13日 14時04分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class title_form extends _init_auto
@@ -25,18 +25,18 @@ class title_form extends _init_auto
 	public function phpok_format($rs,$appid="admin")
 	{
 		if(!$rs["optlist_id"]){
-			return P_Lang('未指定选项组');
+			return P_Lang('未指定選項組');
 		}
 		$idlist = $rs["optlist_id"];
 		if(!$idlist || !is_array($idlist)){
-			return P_Lang('未指定项目，请配置');
+			return P_Lang('未指定專案，請配置');
 		}
 		$project_id = implode(",",$idlist);
 		$project_list = $this->model("project")->title_list($project_id);
 		if($project_list){
-			$open_title = implode(" / ",$project_list) ." - 主题列表";
+			$open_title = implode(" / ",$project_list) ." - 主題列表";
 		}else{
-			$open_title = "主题资源";
+			$open_title = "主題資源";
 		}
 		$condition = " l.project_id IN(".$project_id.") ";
 		$total = $this->model("list")->get_all_total($condition);

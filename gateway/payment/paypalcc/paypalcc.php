@@ -2,15 +2,15 @@
 /**
  * Paypal信用卡支付操作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年04月07日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年04月07日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -29,7 +29,7 @@ class paypalcc_payment
 	private $price;
 
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct($act_type='product')
 	{
@@ -42,20 +42,20 @@ class paypalcc_payment
 	}
 
 	/**
-	 * 信用卡信息设置
-	 * @参数 $name 参数名称（也支持数组写法），支持以下参数：
+	 * 信用卡資訊設定
+	 * @引數 $name 引數名稱（也支援陣列寫法），支援以下引數：
 	 *             firstname 名
 	 *             lastname 姓
-	 *             cvv2 CVV2 号码（信用卡背面三位数）
-	 *             type 类型
-	 *             number 号码
-	 *             expdate 过期时间
+	 *             cvv2 CVV2 號碼（信用卡背面三位數）
+	 *             type 型別
+	 *             number 號碼
+	 *             expdate 過期時間
 	 *             street 街道
 	 *             city 城市
 	 *             state 省份
-	 *             zipcode 邮编
-	 *             countrycode 国家编码
-	 * @参数 $val 值
+	 *             zipcode 郵編
+	 *             countrycode 國家編碼
+	 * @引數 $val 值
 	**/
 	public function cc($name,$val='')
 	{
@@ -75,8 +75,8 @@ class paypalcc_payment
 	}
 
 	/**
-	 * 价格
-	 * @参数 $val 值，留空返回默认值
+	 * 價格
+	 * @引數 $val 值，留空返回預設值
 	**/
 	public function price($val='')
 	{
@@ -86,8 +86,8 @@ class paypalcc_payment
 		return $this->price;
 	}
 	/**
-	 * 货币
-	 * @参数 $val 值，留空返回默认值
+	 * 貨幣
+	 * @引數 $val 值，留空返回預設值
 	**/
 	public function currency($val='')
 	{
@@ -98,8 +98,8 @@ class paypalcc_payment
 	}
 
 	/**
-	 * 账号
-	 * @参数 $val 值，留空返回默认值
+	 * 賬號
+	 * @引數 $val 值，留空返回預設值
 	**/
 	public function api_username($val='')
 	{
@@ -110,8 +110,8 @@ class paypalcc_payment
 	}
 
 	/**
-	 * 密码
-	 * @参数 $val 值，留空返回默认值
+	 * 密碼
+	 * @引數 $val 值，留空返回預設值
 	**/
 	public function api_password($val='')
 	{
@@ -122,8 +122,8 @@ class paypalcc_payment
 	}
 
 	/**
-	 * 签名
-	 * @参数 $val 值，留空返回默认值
+	 * 簽名
+	 * @引數 $val 值，留空返回預設值
 	**/
 	public function api_signature($val='')
 	{
@@ -135,7 +135,7 @@ class paypalcc_payment
 
 	/**
 	 * 版本
-	 * @参数 $val 值，留空返回默认值
+	 * @引數 $val 值，留空返回預設值
 	**/
 	public function api_version($val='')
 	{
@@ -147,7 +147,7 @@ class paypalcc_payment
 
 	/**
 	 * 付款地址
-	 * @参数 $val 值，留空返回默认值
+	 * @引數 $val 值，留空返回預設值
 	**/
 	public function server_url($val='')
 	{

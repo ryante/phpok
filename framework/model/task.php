@@ -1,13 +1,13 @@
 <?php
 /**
- * 计划任务
+ * 計劃任務
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年08月22日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年08月22日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -19,7 +19,7 @@ class task_model_base extends phpok_model
 		parent::model();
 	}
 
-	//增加一次性执行的动作
+	//增加一次性執行的動作
 	public function add_once($action,$param='')
 	{
 		if(!$action){
@@ -120,7 +120,7 @@ class task_model_base extends phpok_model
 	}
 
 	/**
-	 * 定时更新主题状态，此项仅限访问首页时会自动执行
+	 * 定時更新主題狀態，此項僅限訪問首頁時會自動執行
 	 * @date 2016年02月05日
 	 */
 	public function set_title_status()

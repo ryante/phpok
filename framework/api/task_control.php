@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/api/task_control.php
-	备注： 计划任务通知
+	檔案： {phpok}/api/task_control.php
+	備註： 計劃任務通知
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年09月20日 10时05分
+	時間： 2015年09月20日 10時05分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class task_control extends phpok_control
@@ -15,14 +15,14 @@ class task_control extends phpok_control
 		parent::control();
 	}
 
-	//计划任务，每次只执行一条
+	//計劃任務，每次只執行一條
 	public function index_f()
 	{
-		//解除锁定
+		//解除鎖定
 		$this->model('task')->unlock();
-		//指定未来时间发布，自动写入到计划任务上来
+		//指定未來時間釋出，自動寫入到計劃任務上來
 		$this->crontab_title();
-		//获取计划任务
+		//獲取計劃任務
 		$rslist = $this->model('task')->get_all();
 		if(!$rslist){
 			$this->json(true);
@@ -35,11 +35,11 @@ class task_control extends phpok_control
 
 	private function exec_action($rs)
 	{
-		//锁定计划任务执行
+		//鎖定計劃任務執行
 		$_id = $rs['id'];
 		$_only_once = $rs['only_once'];
 		$this->model('task')->lock($_id);
-		//年份处理
+		//年份處理
 		$rs['year'] = $rs['year'] == '*' ? date("Y",$this->time) : $rs['year'];
 		$rs['month'] = $rs['month'] == '*' ? date("m",$this->time) : $rs['month'];
 		$rs['day'] = $rs['day'] == '*' ? date("d",$this->time) : $rs['day'];
@@ -48,12 +48,12 @@ class task_control extends phpok_control
 		$rs['second'] = $rs['second'] == '*' ? date('s',$this->time) : $rs['second'];
 		$time = $rs['year'].'-'.$rs['month'].'-'.$rs['day'].' '.$rs['hour'].':'.$rs['minute'].':'.$rs['second'];
 		$time = strtotime($time) - 5;
-		//五分钟内只执行一次
+		//五分鐘內只執行一次
 		if($rs['exec_time'] && ($rs['exec_time'] + 300)>$this->time){
 			$this->model('task')->unlock($_id);
 			return true;
 		}
-		//只执行一天内的计划任务，超过一天的不再执行
+		//只執行一天內的計劃任務，超過一天的不再執行
 		$if_delete = false;
 		if($time <= $this->time && (($time+24*3600)>$this->time || $rs['only_once'])){
 			$this->model('task')->exec_start($_id);
@@ -77,11 +77,11 @@ class task_control extends phpok_control
 	}
 
 	/**
-	 * 检测 _data/crontab/文件夹下有没有相应的文件
+	 * 檢測 _data/crontab/資料夾下有沒有相應的檔案
 	**/
 	private function crontab_title()
 	{
-		//检测锁定缓存文件
+		//檢測鎖定快取檔案
 		if(!is_file($this->dir_cache.'ttime.php')){
 			$time = $this->lib('file')->cat($this->dir_cache.'ttime.php');
 		}else{

@@ -1,13 +1,13 @@
 <?php
 /**
- * 标签管理器
+ * 標籤管理器
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年04月21日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年04月21日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -19,11 +19,11 @@ class tag_model_base extends phpok_model
 	}
 
 	/**
-	 * 根据指定主题下的可能用到的标签，其中 $type 为主题/分类/项目时，本身读不到标签时会尝试读取系统设置的分类/项目/站点里的标签
-	 * @参数 $id 指主题ID或是项目ID或是分类ID或是站点ID
-	 * @参数 $type 仅支持：list（主题），cate（分类），project（项目），site（全局）
-	 * @参数 $site_id 站点ID
-	 * @返回 格式化后的标签数组
+	 * 根據指定主題下的可能用到的標籤，其中 $type 為主題/分類/專案時，本身讀不到標籤時會嘗試讀取系統設定的分類/專案/站點裡的標籤
+	 * @引數 $id 指主題ID或是專案ID或是分類ID或是站點ID
+	 * @引數 $type 僅支援：list（主題），cate（分類），project（專案），site（全域性）
+	 * @引數 $site_id 站點ID
+	 * @返回 格式化後的標籤陣列
 	**/
 	public function tag_list($id,$type="list",$site_id=0)
 	{
@@ -156,7 +156,7 @@ class tag_model_base extends phpok_model
 		return $rs['parent_id'];
 	}
 
-	//取得主题下的Tag记录
+	//取得主題下的Tag記錄
 	private function get_record_from_stat($id)
 	{
 		$sql = "SELECT t.*,s.title_id FROM ".$this->db->prefix."tag_stat s ";
@@ -182,7 +182,7 @@ class tag_model_base extends phpok_model
 			return false;
 		}
 		foreach($tag as $key=>$value){
-			//将已存在的网址内容提取出来
+			//將已存在的網址內容提取出來
 			preg_match_all('/<a.*>.*<\/a>/isU',$content,$matches);
 			if($matches && $matches[0]){
 				$matches[0] = array_unique($matches[0]);
@@ -191,9 +191,9 @@ class tag_model_base extends phpok_model
 					$content = str_replace($v,$string,$content);
 				}
 			}
-			//将其他HTML分离出来
+			//將其他HTML分離出來
 			preg_match_all('/<.*>/isU',$content,$matches2);
-			//将已存在title或是alt内容提取出来
+			//將已存在title或是alt內容提取出來
 			//preg_match_all('/title=["|\'](.+)["|\']/isU',$content,$matches2);
 			if($matches2 && $matches2[0]){
 				$matches2[0] = array_unique($matches2[0]);
@@ -255,8 +255,8 @@ class tag_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取标签配置信息
-	 * @参数 $data 要保存的标签数据，必须是数组。为空或非数组时，表示读标签配置信息
+	 * 讀取標籤配置資訊
+	 * @引數 $data 要儲存的標籤資料，必須是陣列。為空或非陣列時，表示讀標籤配置資訊
 	**/
 	public function config($data='')
 	{
@@ -274,9 +274,9 @@ class tag_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得指定主题、项目，分类下的标签
-	 * @参数 $id 主题ID或是项目ID（p前缀）或是分类ID（c前缀）
-	 * @返回 合并后的标签字符串
+	 * 取得指定主題、專案，分類下的標籤
+	 * @引數 $id 主題ID或是專案ID（p字首）或是分類ID（c字首）
+	 * @返回 合併後的標籤字串
 	**/
 	public function get_tags($id)
 	{

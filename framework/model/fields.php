@@ -1,13 +1,13 @@
 <?php
 /**
- * 字段增删查改
+ * 欄位增刪查改
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2018年05月18日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2018年05月18日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -20,8 +20,8 @@ class fields_model_base extends phpok_model
 
 	
 	/**
-	 * 读取 qigngan_fields 表下的一条字段配置信息，返回的 ext 信息已经自动转成数组
-	 * @参数 $id 主键ID
+	 * 讀取 qigngan_fields 表下的一條欄位配置資訊，返回的 ext 資訊已經自動轉成陣列
+	 * @引數 $id 主鍵ID
 	**/
 	public function one($id)
 	{
@@ -40,9 +40,9 @@ class fields_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取模块下的所有扩展字段信息，返回的 ext 信息已自动转成数组模式
-	 * @参数 $ftype 模块ID 或 模块类型
-	 * @参数 $primary 自定义 key 键，默认为空，支持 id 和 identifier
+	 * 讀取模組下的所有擴充套件欄位資訊，返回的 ext 資訊已自動轉成陣列模式
+	 * @引數 $ftype 模組ID 或 模組型別
+	 * @引數 $primary 自定義 key 鍵，預設為空，支援 id 和 identifier
 	**/
 	public function flist($ftype,$primary='')
 	{
@@ -64,7 +64,7 @@ class fields_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得指定页面下的字段
+	 * 取得指定頁面下的欄位
 	**/
 	public function fields_list($words="",$offset=0,$psize=40,$type="")
 	{
@@ -126,7 +126,7 @@ class fields_model_base extends phpok_model
 		return $this->db->get_all($sql);
 	}
 
-	//判断字段是否被使用了
+	//判斷欄位是否被使用了
 	function is_has_sign($identifier,$id=0)
 	{
 		if(!$identifier){
@@ -172,17 +172,17 @@ class fields_model_base extends phpok_model
 	}
 
 
-	//取得数据表字段设置的字段类型
+	//取得資料表字段設定的欄位型別
 	function type_all()
 	{
 		$array = array(
-			"varchar"=>"字符串",
+			"varchar"=>"字串",
 			"int"=>"整型",
-			"float"=>"浮点型",
+			"float"=>"浮點型",
 			"date"=>"日期",
-			"datetime"=>"日期时间",
-			"longtext"=>"长文本",
-			"longblob"=>"二进制信息"
+			"datetime"=>"日期時間",
+			"longtext"=>"長文字",
+			"longblob"=>"二進位制資訊"
 		);
 		return $array;
 	}

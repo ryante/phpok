@@ -1,12 +1,12 @@
 <?php
 /**
- * 附件上传操作类
+ * 附件上傳操作類
  * @package phpok\libs\upload
  * @author qinggan <admin@phpok.com>
- * @copyright 2015-2016 深圳市锟铻科技有限公司
+ * @copyright 2015-2016 深圳市錕鋙科技有限公司
  * @homepage http://www.phpok.com
  * @version 4.x
- * @license http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @license http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @update 2014年7月10日
 **/
 
@@ -26,19 +26,19 @@ class upload_lib
 		$this->dir_root = $app->dir_root;
 		$this->dir_cache = $app->dir_cache;
 		$this->up_error = array(
-			 0 => P_Lang('上传成功'),
-			 1 => P_Lang('上传的文件超过了 php.ini 中 upload_max_filesize 选项限制的值'),
-			 2 => P_Lang('上传文件的大小超过了 HTML 表单中 MAX_FILE_SIZE 选项指定的值'),
-			 3 => P_Lang('文件只有部分被上传'),
-			 4 => P_Lang('没有文件被上传'),
-			 6 => P_Lang('找不到临时文件夹，通过php.ini配置参数：upload_tmp_dir'),
-			 7 => P_Lang('文件写入失败'),
-			 8 => P_Lang('PHP扩展停止了文件上传。')
+			 0 => P_Lang('上傳成功'),
+			 1 => P_Lang('上傳的檔案超過了 php.ini 中 upload_max_filesize 選項限制的值'),
+			 2 => P_Lang('上傳檔案的大小超過了 HTML 表單中 MAX_FILE_SIZE 選項指定的值'),
+			 3 => P_Lang('檔案只有部分被上傳'),
+			 4 => P_Lang('沒有檔案被上傳'),
+			 6 => P_Lang('找不到臨時資料夾，通過php.ini配置引數：upload_tmp_dir'),
+			 7 => P_Lang('檔案寫入失敗'),
+			 8 => P_Lang('PHP擴充套件停止了檔案上傳。')
 		 );
 	}
 
-	//设置附件上传的目录
-	//目录不存在，就自动创建，创建失败即就存到res/根目录下
+	//設定附件上傳的目錄
+	//目錄不存在，就自動建立，建立失敗即就存到res/根目錄下
 	public function set_dir($dir="")
 	{
 		global $app;
@@ -68,7 +68,7 @@ class upload_lib
 		return $dir;
 	}
 
-	//自定义设置要上传的附件类型
+	//自定義設定要上傳的附件型別
 	public function set_type($type='')
 	{
 		if(!$type){
@@ -81,7 +81,7 @@ class upload_lib
 		$this->file_type = $type;
 	}
 
-	//设置分类
+	//設定分類
 	public function set_cate($cate_rs)
 	{
 		global $app;
@@ -99,7 +99,7 @@ class upload_lib
 	public function getfile($input='upfile',$cateid=0)
 	{
 		if(!$input){
-			return array('status'=>'error','content'=>P_Lang('未指定表单名称'));
+			return array('status'=>'error','content'=>P_Lang('未指定表單名稱'));
 		}
 		$this->_cate($cateid);
 		if(isset($_FILES[$input])){
@@ -115,18 +115,18 @@ class upload_lib
 	}
 
 	/**
-	 * 上传ZIP文件
-	 * @参数 $input，表单名
-	 * @参数 $folder，存储目录，为空使用_cache
-	 * @返回 数组，上传状态status及保存的路径
-	 * @更新时间 2016年07月18日
+	 * 上傳ZIP檔案
+	 * @引數 $input，表單名
+	 * @引數 $folder，儲存目錄，為空使用_cache
+	 * @返回 陣列，上傳狀態status及儲存的路徑
+	 * @更新時間 2016年07月18日
 	**/
 	public function zipfile($input,$folder='')
 	{
 		if(!$input){
-			return array('status'=>'error','content'=>P_Lang('未指定表单名称'));
+			return array('status'=>'error','content'=>P_Lang('未指定表單名稱'));
 		}
-		//如果未指定存储文件夹，则使用
+		//如果未指定儲存資料夾，則使用
 		if(!$folder){
 			$folder = $this->dir_cache;
 		}
@@ -147,14 +147,14 @@ class upload_lib
 	}
 
 	/**
-	 * 上传图片文件
+	 * 上傳圖片檔案
 	**/
 	public function imgfile($input,$folder='')
 	{
 		if(!$input){
-			return array('status'=>'error','content'=>P_Lang('未指定表单名称'));
+			return array('status'=>'error','content'=>P_Lang('未指定表單名稱'));
 		}
-		//如果未指定存储文件夹，则使用
+		//如果未指定儲存資料夾，則使用
 		if(!$folder){
 			$folder = $this->dir_cache;
 		}
@@ -212,17 +212,17 @@ class upload_lib
 		$ext = $this->file_ext($tmpname);
 		$out_tmpfile = $this->dir_cache.$tmpid.'_'.$chunk;
 		if (!$out = @fopen($out_tmpfile.".parttmp", "wb")) {
-			return array('status'=>'error','error'=>P_Lang('无法打开输出流'));
+			return array('status'=>'error','error'=>P_Lang('無法開啟輸出流'));
 		}
 		$error_id = $_FILES[$input]['error'] ? $_FILES[$input]['error'] : 0;
 		if($error_id){
 			return array('status'=>'error','error'=>$this->up_error[$error_id]);
 		}
 		if(!is_uploaded_file($_FILES[$input]['tmp_name'])){
-			return array('status'=>'error','error'=>P_Lang('上传失败，临时文件无法写入'));
+			return array('status'=>'error','error'=>P_Lang('上傳失敗，臨時檔案無法寫入'));
 		}
 		if(!$in = @fopen($_FILES[$input]["tmp_name"], "rb")) {
-			return array('status'=>'error','error'=>P_Lang('无法打开输入流'));
+			return array('status'=>'error','error'=>P_Lang('無法開啟輸入流'));
 	    }
 	    while ($buff = fread($in, 4096)) {
 		    fwrite($out, $buff);
@@ -239,11 +239,11 @@ class upload_lib
 		    }
 		}
 		if(!$done){
-			return array('status'=>'error','error'=>'上传的文件异常');
+			return array('status'=>'error','error'=>'上傳的檔案異常');
 		}
 		$outfile = $this->folder.$basename.'.'.$ext;
 	    if(!$out = @fopen($this->dir_root.$outfile,"wb")) {
-		    return array('status'=>'error','error'=>P_Lang('无法打开输出流'));
+		    return array('status'=>'error','error'=>P_Lang('無法開啟輸出流'));
 	    }
 	    if(flock($out,LOCK_EX)){
 	        for($index=0;$index<$chunks;$index++) {
@@ -269,13 +269,13 @@ class upload_lib
 		$basename = substr(md5(time().uniqid()),9,16);
 		$tmpname = $app->get('name');
 	    $tmpname = $app->lib('string')->to_utf8($tmpname);
-	    $tmpname = $app->format($tmpname); //安全格式化数据
+	    $tmpname = $app->format($tmpname); //安全格式化資料
 		if(!$tmpname){
 			$tmpname = uniqid($input.'_');
 		}
 		$ext = $this->file_ext($tmpname);
 		if(!$ext){
-			return array('status'=>'error','error'=>P_Lang('附件类型不符合要求'));
+			return array('status'=>'error','error'=>P_Lang('附件型別不符合要求'));
 		}
 		$chunk = $app->get('chunk','int');
 		$chunks = $app->get('chunks','int');
@@ -285,10 +285,10 @@ class upload_lib
 		$tmpid = 's_'.md5($tmpname);
 		$out_tmpfile = $this->dir_cache.$tmpid.'_'.$chunk;
 		if (!$out = @fopen($out_tmpfile.".parttmp", "wb")) {
-			return array('status'=>'error','error'=>P_Lang('无法打开输出流'));
+			return array('status'=>'error','error'=>P_Lang('無法開啟輸出流'));
 		}
 		if (!$in = @fopen("php://input", "rb")) {
-			return array('status'=>'error','error'=>P_Lang('无法打开输入流'));
+			return array('status'=>'error','error'=>P_Lang('無法開啟輸入流'));
 	    }
 	    while ($buff = fread($in, 4096)) {
 		    fwrite($out, $buff);
@@ -305,11 +305,11 @@ class upload_lib
 		    }
 		}
 		if(!$done){
-			return array('status'=>'error','error'=>'上传的文件异常');
+			return array('status'=>'error','error'=>'上傳的檔案異常');
 		}
 		$outfile = $this->folder.$basename.'.'.$ext;
 	    if(!$out = @fopen($this->dir_root.$outfile,"wb")) {
-		    return array('status'=>'error','error'=>P_Lang('无法打开输出流'));
+		    return array('status'=>'error','error'=>P_Lang('無法開啟輸出流'));
 	    }
 	    if(flock($out,LOCK_EX)){
 	        for($index=0;$index<$chunks;$index++) {
@@ -359,13 +359,13 @@ class upload_lib
 	}
 
 	/**
-	 * 附件上传
-	 * @参数 $inputname 上传表单名
+	 * 附件上傳
+	 * @引數 $inputname 上傳表單名
 	**/
 	public function upload($inputname)
 	{
 		if(!$inputname){
-			return array('status'=>'error','content'=>P_Lang('未指定表单名称'));
+			return array('status'=>'error','content'=>P_Lang('未指定表單名稱'));
 		}
 		if(isset($_FILES[$inputname])){
 			return $this->_upload($inputname);

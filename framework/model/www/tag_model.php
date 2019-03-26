@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/www/tag_model.php
-	备注： Tag标签前端调用
+	檔案： {phpok}/model/www/tag_model.php
+	備註： Tag標籤前端呼叫
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年01月22日 01时04分
+	時間： 2015年01月22日 01時04分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class tag_model extends tag_model_base

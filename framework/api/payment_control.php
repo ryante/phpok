@@ -19,14 +19,14 @@ class payment_control extends phpok_control
 	{
 		$token = $this->get('token');
 		if(!$token){
-			$this->json(P_Lang('数据传参不完整，请检查'));
+			$this->json(P_Lang('資料傳參不完整，請檢查'));
 		}
 		if(!$this->site){
-			$this->json(P_Lang('数据异常，无法获取站点信息'));
+			$this->json(P_Lang('資料異常，無法獲取站點資訊'));
 		}
 		$info = $this->lib('token')->decode($token);
 		if(!$info || !$info['price']){
-			$this->json(P_Lang('数据不完整，请检查'));
+			$this->json(P_Lang('資料不完整，請檢查'));
 		}
 		if(!$info['sn']){
 			$info['sn'] = $this->_create_sn();
@@ -38,7 +38,7 @@ class payment_control extends phpok_control
 			$info['currency_id'] = $this->site['currency_id'];
 		}
 		if($info['type'] == 'order'){
-			$title = P_Lang('订单：{sn}',array('sn'=>$sn));
+			$title = P_Lang('訂單：{sn}',array('sn'=>$sn));
 		}elseif($info['type'] == 'recharge'){
 			$title = P_Lang('充值：{sn}',array('sn'=>$sn));
 		}else{
@@ -56,12 +56,12 @@ class payment_control extends phpok_control
 			$this->json(P_Lang('支付方式不存在'));
 		}
 		if(!$payment_rs['status']){
-			$this->json(P_Lang('支付方式未启用'));
+			$this->json(P_Lang('支付方式未啟用'));
 		}
 		$chk = $this->model('payment')->log_check($info['sn']);
 		if($chk){
 			if($chk['status']){
-				$this->json(P_Lang('订单{sn}已支付完成，不能重复执行',array('sn'=>$info['sn'])));
+				$this->json(P_Lang('訂單{sn}已支付完成，不能重複執行',array('sn'=>$info['sn'])));
 			}
 			$array = array('type'=>$info['type'],'payment_id'=>$payment,'title'=>$title,'content'=>$title);
 			$array['dateline'] = $this->time;
@@ -77,19 +77,19 @@ class payment_control extends phpok_control
 		$array['currency_id'] = $info['currency_id'];
 		$insert_id = $this->model('payment')->log_create($array);
 		if(!$insert_id){
-			$this->json(P_Lang('支付记录创建失败'));
+			$this->json(P_Lang('支付記錄建立失敗'));
 		}
-		//更新订单状态
+		//更新訂單狀態
 		if($info['type'] == 'order'){
 			$order = $this->model('order')->get_one_from_sn($info['sn']);
 			if(!$order){
 				$this->model('payment')->log_delete($insert_id);
-				$this->json(P_Lang('订单信息不存在'));
+				$this->json(P_Lang('訂單資訊不存在'));
 			}
-			//更新支付状态
+			//更新支付狀態
 			$this->model('order')->update_order_status($order['id'],'unpaid');
-			//写入日志
-			$note = P_Lang('订单进入等待支付状态，编号：{sn}',array('sn'=>$sn));
+			//寫入日誌
+			$note = P_Lang('訂單進入等待支付狀態，編號：{sn}',array('sn'=>$sn));
 			$log = array('order_id'=>$order['id'],'addtime'=>$this->time,'who'=>$this->user['user'],'note'=>$note);
 			$this->model('order')->log_save($log);
 			//增加order_payment
@@ -119,7 +119,7 @@ class payment_control extends phpok_control
 		return $rand_str;
 	}
 
-	//异步通知
+	//非同步通知
 	public function notify_f()
 	{
 		$sn = $this->get('sn');
@@ -153,7 +153,7 @@ class payment_control extends phpok_control
 		}
 		$rs = $this->model('payment')->log_one($id);
 		if(!$rs){
-			$this->json(P_Lang('支付信息不存在'));
+			$this->json(P_Lang('支付資訊不存在'));
 		}
 		if($rs['status']){
 			$this->json(true);
@@ -162,12 +162,12 @@ class payment_control extends phpok_control
 		}
 	}
 
-	//查询订单接口
+	//查詢訂單介面
 	public function query_f()
 	{
 		$sn = $this->get('sn');
 		if(!$sn){
-			$this->json(P_Lang('未指定订单编号'));
+			$this->json(P_Lang('未指定訂單編號'));
 		}
 		if(strpos($sn,'-') !== false){
 			$tmp = explode("-",$sn);
@@ -177,7 +177,7 @@ class payment_control extends phpok_control
 			$rs = $this->model('payment')->log_check_notstatus($sn);
 		}
 		if(!$rs){
-			$this->json(P_Lang('订单不存在'));
+			$this->json(P_Lang('訂單不存在'));
 		}
 		$payment_rs = $this->model('payment')->get_one($rs['payment_id']);
 		if(!$payment_rs){
@@ -185,7 +185,7 @@ class payment_control extends phpok_control
 		}
 		$file = $this->dir_root.'gateway/payment/'.$payment_rs['code'].'/query.php';
 		if(!file_exists($file)){
-			$this->json(P_Lang('查询接口不存在'));
+			$this->json(P_Lang('查詢介面不存在'));
 		}
 		include_once($file);
 		$name = $payment_rs['code'].'_query';
@@ -194,30 +194,30 @@ class payment_control extends phpok_control
 	}
 
 	
-	//权限验证
+	//許可權驗證
 	private function auth_check()
 	{
 		$sn = $this->get('sn');
 		$back = $this->get('back');
 		if(!$back) $back = $_SERVER['HTTP_REFERER'] ? $_SERVER['HTTP_REFERER'] : $this->url;
-		//判断订单是否存在
+		//判斷訂單是否存在
 		if($sn) $rs = $this->model('order')->get_one_from_sn($sn,$_SESSION['user_id']);
 		if(!$rs)
 		{
 			$id = $this->get('id','int');
-			if(!$id) error("无法获取订单信息，请检查！",$back,'error');
+			if(!$id) error("無法獲取訂單資訊，請檢查！",$back,'error');
 			$rs = $this->model('order')->get_one($id);
-			if(!$rs) error("订单信息不存在，请检查！",$back,'error');
+			if(!$rs) error("訂單資訊不存在，請檢查！",$back,'error');
 		}
-		//判断是否有维护订单权限
+		//判斷是否有維護訂單許可權
 		if($_SESSION['user_id'])
 		{
-			if($rs['user_id'] != $_SESSION['user_id']) error('您没有权限维护此订单：'.$rs['sn'],$back,'error');
+			if($rs['user_id'] != $_SESSION['user_id']) error('您沒有許可權維護此訂單：'.$rs['sn'],$back,'error');
 		}
 		else
 		{
 			$passwd = $this->get('passwd');
-			if($passwd != $rs['passwd']) error('您没有权限维护此订单：'.$rs['sn'],$back,'error');
+			if($passwd != $rs['passwd']) error('您沒有許可權維護此訂單：'.$rs['sn'],$back,'error');
 		}
 		return $rs;
 	}

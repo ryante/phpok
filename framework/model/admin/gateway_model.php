@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/gateway_model.php
-	备注： 第三方网关后台管理
+	檔案： {phpok}/model/admin/gateway_model.php
+	備註： 第三方閘道器後臺管理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年10月09日 15时14分
+	時間： 2015年10月09日 15時14分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class gateway_model extends gateway_model_base
@@ -39,9 +39,9 @@ class gateway_model extends gateway_model_base
 	{
 		$file = $this->dir_root.'gateway/config.xml';
 		if(!file_exists($file)){
-			$tmplist = array('sms'=>P_Lang('短信'));
-			$tmplist['email'] = P_Lang('Email邮件');
-			$tmplist['object-storage'] = P_Lang('对象存储');
+			$tmplist = array('sms'=>P_Lang('簡訊'));
+			$tmplist['email'] = P_Lang('Email郵件');
+			$tmplist['object-storage'] = P_Lang('物件儲存');
 			return $tmplist;
 		}
 		return $this->lib('xml')->read($file);
@@ -52,7 +52,7 @@ class gateway_model extends gateway_model_base
 		if(!$type){
 			return false;
 		}
-		//读取目录下的
+		//讀取目錄下的
 		$handle = opendir($this->dir_root.'gateway/'.$type);
 		$list = array();
 		while(false !== ($myfile = readdir($handle))){

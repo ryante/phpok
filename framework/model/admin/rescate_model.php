@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/rescate_model.php
-	备注： 附件分类管理
+	檔案： {phpok}/model/admin/rescate_model.php
+	備註： 附件分類管理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年04月25日 13时20分
+	時間： 2015年04月25日 13時20分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class rescate_model extends rescate_model_base

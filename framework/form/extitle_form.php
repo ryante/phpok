@@ -1,12 +1,12 @@
 <?php
 /**
- * 扩展模型定义
+ * 擴充套件模型定義
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年01月20日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年01月20日
 **/
 class extitle_form extends _init_auto
 {
@@ -36,7 +36,7 @@ class extitle_form extends _init_auto
 				$module = $this->model('module')->get_one($project['module']);
 				$flist = array();
 				if(!$module['mtype']){
-					$tmptitle = $project['alias_title'] ? $project['alias_title'] : P_Lang('主题');
+					$tmptitle = $project['alias_title'] ? $project['alias_title'] : P_Lang('主題');
 					$flist['title'] = array('title'=>$tmptitle,'status'=>false);
 				}
 				$elist = $this->model('module')->fields_all($project['module']);
@@ -54,28 +54,28 @@ class extitle_form extends _init_auto
 	public function phpok_format($rs,$appid="admin")
 	{
 		if(!$rs){
-			return P_Lang('参数异常');
+			return P_Lang('引數異常');
 		}
 		if(!$rs['form_pid']){
 			$ext = ($rs['ext'] && is_string($rs['ext'])) ? unserialize($rs['ext']) : array();
 			if(!$ext){
-				return P_Lang('字段没有配置好，不能执行');
+				return P_Lang('欄位沒有配置好，不能執行');
 			}
 			$rs = array_merge($ext,$rs);
 		}
 		if(!$rs['form_pid']){
-			return P_Lang('字段没有配置好，不能执行');
+			return P_Lang('欄位沒有配置好，不能執行');
 		}
 		$project = $this->model('project')->get_one($rs['form_pid'],false);
 		if(!$project){
-			return P_Lang('项目不存在');
+			return P_Lang('專案不存在');
 		}
 		if(!$project['module']){
-			return P_Lang('项目没有绑定模块');
+			return P_Lang('專案沒有繫結模組');
 		}
 		$module = $this->model('module')->get_one($project['module']);
 		if(!$module){
-			return P_Lang('模块信息不存在，请检查');
+			return P_Lang('模組資訊不存在，請檢查');
 		}
 		if($rs['form_is_single']){
 			$rs['form_maxcount'] = 1;
@@ -87,7 +87,7 @@ class extitle_form extends _init_auto
 		$this->assign("_rs",$rs);
 		$this->assign("_id",$rs['id']);
 		$this->assign("_identifier",$rs['identifier']);
-		//格式化内容及项目信息
+		//格式化內容及專案資訊
 		$this->assign('p_rs',$project);
 		$this->assign('m_rs',$module);
 		$content = $rs['content'];
@@ -104,28 +104,28 @@ class extitle_form extends _init_auto
 	public function phpok_show($rs,$appid="admin")
 	{
 		if(!$rs){
-			return P_Lang('参数异常');
+			return P_Lang('引數異常');
 		}
 		if(!$rs['form_pid']){
 			$ext = ($rs['ext'] && is_string($rs['ext'])) ? unserialize($rs['ext']) : ($rs['ext'] ? $rs['ext'] : array());
 			if(!$ext){
-				return P_Lang('字段没有配置好，不能执行');
+				return P_Lang('欄位沒有配置好，不能執行');
 			}
 			$rs = array_merge($ext,$rs);
 		}
 		if(!$rs['form_pid']){
-			return P_Lang('字段没有配置好，不能执行');
+			return P_Lang('欄位沒有配置好，不能執行');
 		}
 		$project = $this->model('project')->get_one($rs['form_pid'],false);
 		if(!$project){
-			return P_Lang('项目不存在');
+			return P_Lang('專案不存在');
 		}
 		if(!$project['module']){
-			return P_Lang('项目没有绑定模块');
+			return P_Lang('專案沒有繫結模組');
 		}
 		$module = $this->model('module')->get_one($project['module']);
 		if(!$module){
-			return P_Lang('模块信息不存在，请检查');
+			return P_Lang('模組資訊不存在，請檢查');
 		}
 		if(!$rs['content']){
 			return false;
@@ -170,11 +170,11 @@ class extitle_form extends _init_auto
 	}
 
 	/**
-	 * 通过内容生成HTML内容
-	 * @参数 $field 模块字段内容属性
-	 * @参数 $content 值
-	 * @参数 $project 项目信息
-	 * @参数 $module 模块信息
+	 * 通過內容生成HTML內容
+	 * @引數 $field 模組欄位內容屬性
+	 * @引數 $content 值
+	 * @引數 $project 專案資訊
+	 * @引數 $module 模組資訊
 	**/
 	public function content_format($field,$content,$project,$module,$empty_reback=false)
 	{
@@ -232,7 +232,7 @@ class extitle_form extends _init_auto
 		$layout = array();
 		foreach($showids as $key=>$value){
 			if($value == 'title'){
-				$layout[$value] = $project['alias_title'] ? $project['alias_title'] : P_Lang('主题');
+				$layout[$value] = $project['alias_title'] ? $project['alias_title'] : P_Lang('主題');
 				continue;
 			}
 			if($flist[$value]){

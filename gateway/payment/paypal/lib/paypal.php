@@ -8,31 +8,31 @@
 ***********************************************************/
 class paypal_payment
 {
-	#[付款接收的账号]
+	#[付款接收的賬號]
 	var $payid;
-	#[自动返回的认证串，在启用paypal自动返回功能时使用]
+	#[自動返回的認證串，在啟用paypal自動返回功能時使用]
 	var $pdt;
-	#[支持的货币类型]
+	#[支援的貨幣型別]
 	var $currency_string = "USD,AUD,CAD,EUR,GBP,CHF,CZK,DKK,HKD,HUF,JPY,NOK,NZD,PLN,SEK,SGD,THB";
-	#[当前正在使用的货币类型，如果不符合系统限定，则使用默认USD]
+	#[當前正在使用的貨幣型別，如果不符合系統限定，則使用預設USD]
 	var $currency = "USD";
-	#[付款按钮目标地址，调试和正式使用是不一样的]
-	#[调试地址：https://www.sandbox.paypal.com/cgi-bin/webscr]
+	#[付款按鈕目標地址，除錯和正式使用是不一樣的]
+	#[除錯地址：https://www.sandbox.paypal.com/cgi-bin/webscr]
 	#[正式地址：https://www.paypal.com/cgi-bin/webscr]
 	var $action_url = "https://www.paypal.com/cgi-bin/webscr";
-	#[附款成功后自动跳回页面]
+	#[附款成功後自動跳回頁面]
 	var $return_url;
-	#[取消付款自动返回的网址]
+	#[取消付款自動返回的網址]
 	var $cancel_return;
-	#[订单编号，在不使用产品购物车时用于显示相关名称]
+	#[訂單編號，在不使用產品購物車時用於顯示相關名稱]
 	var $ordersn;
-	#[付款金额，不允许为空和0]
+	#[付款金額，不允許為空和0]
 	var $amount;
 
-	#[指定按钮的唯一ID号]
+	#[指定按鈕的唯一ID號]
 	var $address_html;
 
-	#[在操作成功后，执行的脚本]
+	#[在操作成功後，執行的指令碼]
 	var $notify_url;
 	var $logo = "";
 
@@ -48,7 +48,7 @@ class paypal_payment
 		$this->pdt = $pdt;
 	}
 
-	//设置货币
+	//設定貨幣
 	function set_currency($value)
 	{
 		if(!in_array($value,explode(",",$this->currency_string))){
@@ -58,7 +58,7 @@ class paypal_payment
 		}
 	}
 
-	//设置其他变量
+	//設定其他變數
 	function set_value($var,$value)
 	{
 		$this->$var = $value;

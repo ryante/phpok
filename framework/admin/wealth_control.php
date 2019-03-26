@@ -1,13 +1,13 @@
 <?php
 /**
- * 财富规则管理
+ * 財富規則管理
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年07月25日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年07月25日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -16,7 +16,7 @@ class wealth_control extends phpok_control
 	private $popedom;
 
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -26,7 +26,7 @@ class wealth_control extends phpok_control
 	}
 
 	/**
-	 * 全部财富规则
+	 * 全部財富規則
 	**/
 	public function index_f()
 	{
@@ -36,8 +36,8 @@ class wealth_control extends phpok_control
 	}
 
 	/**
-	 * 财富明细，会员下的财宣清单
-	 * @参数 id 财富ID
+	 * 財富明細，會員下的財宣清單
+	 * @引數 id 財富ID
 	**/
 	public function info_f()
 	{
@@ -63,8 +63,8 @@ class wealth_control extends phpok_control
 			}
 			$offset = ($pageid-1) * $psize;
 			$rslist = $this->model('wealth')->info_list($condition,$offset,$psize);
-			$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=5';
-			$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+			$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=5';
+			$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 			$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 			$this->assign('pagelist',$pagelist);
 			$this->assign('rslist',$rslist);
@@ -75,19 +75,19 @@ class wealth_control extends phpok_control
 	}
 
 	/**
-	 * 每个会员的财富日志
-	 * @参数 wid 财富ID
-	 * @参数 uid 会员ID
+	 * 每個會員的財富日誌
+	 * @引數 wid 財富ID
+	 * @引數 uid 會員ID
 	**/
 	public function log_f()
 	{
 		$wid = $this->get('wid','int');
 		$uid = $this->get('uid','int');
 		if(!$wid){
-			$this->error(P_Lang('未指定财富ID'));
+			$this->error(P_Lang('未指定財富ID'));
 		}
 		if(!$uid){
-			$this->error(P_Lang('未指定会员ID'));
+			$this->error(P_Lang('未指定會員ID'));
 		}
 		$rs = $this->model('wealth')->get_one($wid);
 		$this->assign('rs',$rs);
@@ -102,7 +102,7 @@ class wealth_control extends phpok_control
 			}
 			$offset = ($pageid-1) * $psize;
 			$rslist = $this->model('wealth')->log_list($condition,$offset,$psize);
-			$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=3&always=1';
+			$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=3&always=1';
 			$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 			$this->assign('pagelist',$pagelist);
 			$this->assign('rslist',$rslist);
@@ -113,27 +113,27 @@ class wealth_control extends phpok_control
 	}
 
 	/**
-	 * 新增或扣除财富
-	 * @参数 wid 财富ID
-	 * @参数 uid 会员ID
-	 * @参数 note 备注
-	 * @参数 val 财富值
-	 * @参数 type 为-号时表示扣除
+	 * 新增或扣除財富
+	 * @引數 wid 財富ID
+	 * @引數 uid 會員ID
+	 * @引數 note 備註
+	 * @引數 val 財富值
+	 * @引數 type 為-號時表示扣除
 	**/
 	public function val_f()
 	{
 		$wid = $this->get('wid','int');
 		$uid = $this->get('uid','int');
 		if(!$wid){
-			$this->json(P_Lang('未指定财富ID'));
+			$this->json(P_Lang('未指定財富ID'));
 		}
 		if(!$uid){
-			$this->json(P_Lang('未指定会员ID'));
+			$this->json(P_Lang('未指定會員ID'));
 		}
 		$note = $this->get('note');
 		$val = $this->get('val');
 		if(!$val){
-			$this->json(P_Lang('未指定数值'));
+			$this->json(P_Lang('未指定數值'));
 		}
 		$val = abs($val);
 		$type = $this->get('type');
@@ -142,17 +142,17 @@ class wealth_control extends phpok_control
 		if($from_uid == 'vouch'){
 			$vouch_user_id = $this->get('vouch','int');
 			if(!$vouch_user_id){
-				$this->json('未指定推荐人');
+				$this->json('未指定推薦人');
 			}
 		}
 		if($from_uid == 'other'){
 			$tmp = $this->get('username');
 			if(!$tmp){
-				$this->json('请填写会员账号');
+				$this->json('請填寫會員賬號');
 			}
 			$tmp_rs = $this->model('user')->chk_name($tmp);
 			if(!$tmp_rs){
-				$this->json('会员不存在');
+				$this->json('會員不存在');
 			}
 			$vouch_user_id = $tmp_rs['id'];
 		}
@@ -170,7 +170,7 @@ class wealth_control extends phpok_control
 			$savelogs['ctrlid'] = 'wealth';
 			$savelogs['funcid'] = 'val';
 			$savelogs['url'] = 'admin.php...';
-			$savelogs['note'] = $note ? $note : P_Lang('管理员操作');
+			$savelogs['note'] = $note ? $note : P_Lang('管理員操作');
 			$savelogs['status'] = 1;
 			$data = array('wid'=>$wid,'uid'=>$uid,'lasttime'=>$this->time);
 			$user_val = $this->model('wealth')->get_val($uid,$wid);
@@ -188,7 +188,7 @@ class wealth_control extends phpok_control
 			$this->model('wealth')->save_log($savelogs);
 			$this->model('wealth')->save_info($data);
 		}else{
-			//增加日志记录
+			//增加日誌記錄
 			$savelogs = array('wid'=>$wid,'goal_id'=>$uid,'mid'=>0,'val'=>$val);
 			$savelogs['appid'] = $this->app_id;
 			$savelogs['dateline'] = $time;
@@ -197,11 +197,11 @@ class wealth_control extends phpok_control
 			$savelogs['ctrlid'] = 'wealth';
 			$savelogs['funcid'] = 'val';
 			$savelogs['url'] = 'admin.php...';
-			$savelogs['note'] = $note ? $note : P_Lang('管理员操作');
+			$savelogs['note'] = $note ? $note : P_Lang('管理員操作');
 			$savelogs['status'] = 1;
 			$data = array('wid'=>$wid,'uid'=>$uid,'lasttime'=>$this->time);
 			$this->model('wealth')->save_log($savelogs);
-			//更新统计
+			//更新統計
 			$user_val = $this->model('wealth')->get_val($uid,$wid);
 			if($user_val){
 				$data['val'] = round(($user_val+$val),2);
@@ -214,19 +214,19 @@ class wealth_control extends phpok_control
 	}
 
 	/**
-	 * 配置财富信息，要求新增有增加权限（wealth:add），修改需要有修改权限（wealth:modify）
-	 * @参数 id 财富ID
+	 * 配置財富資訊，要求新增有增加許可權（wealth:add），修改需要有修改許可權（wealth:modify）
+	 * @引數 id 財富ID
 	**/
 	public function set_f()
 	{
 		$id = $this->get('id','int');
 		if(!$id){
 			if(!$this->popedom["add"]){
-				error(P_Lang('您没有权限执行此操作'),'','error');
+				error(P_Lang('您沒有許可權執行此操作'),'','error');
 			}
 		}else{
 			if(!$this->popedom["modify"]){
-				error(P_Lang('您没有权限执行此操作'),'','error');
+				error(P_Lang('您沒有許可權執行此操作'),'','error');
 			}
 			$rs = $this->model('wealth')->get_one($id);
 			$this->assign('rs',$rs);
@@ -236,18 +236,18 @@ class wealth_control extends phpok_control
 	}
 
 	/**
-	 * 保存财富配置信息
-	 * @参数 id 财富ID，为0或空表示添加新财富
-	 * @参数 title 财富名称，如积分，威望，金币等
-	 * @参数 identifer 财富标识
-	 * @参数 unit 计量单位，如点，元，星等
-	 * @参数 dnum 财富计量类型，整数，一位小数，及两位小数
-	 * @参数 ifpay 是否支持前台充值
-	 * @参数 pay_ratio 充值兑换比例
-	 * @参数 ifcash 是否支持提现
-	 * @参数 cash_ratio 提现兑换比例
-	 * @参数 ifcheck 是否审核，请慎用。建议启用审核
-	 * @参数 taxis 排序，范围0-255 值越小越往前靠
+	 * 儲存財富配置資訊
+	 * @引數 id 財富ID，為0或空表示新增新財富
+	 * @引數 title 財富名稱，如積分，威望，金幣等
+	 * @引數 identifer 財富標識
+	 * @引數 unit 計量單位，如點，元，星等
+	 * @引數 dnum 財富計量型別，整數，一位小數，及兩位小數
+	 * @引數 ifpay 是否支援前臺充值
+	 * @引數 pay_ratio 充值兌換比例
+	 * @引數 ifcash 是否支援提現
+	 * @引數 cash_ratio 提現兌換比例
+	 * @引數 ifcheck 是否稽核，請慎用。建議啟用稽核
+	 * @引數 taxis 排序，範圍0-255 值越小越往前靠
 	**/
 	public function save_f()
 	{
@@ -255,33 +255,33 @@ class wealth_control extends phpok_control
 		$array = array();
 		if($id){
 			if(!$this->popedom['modify']){
-				$this->json(P_Lang('您没有权限执行此操作'));
+				$this->json(P_Lang('您沒有許可權執行此操作'));
 			}
 		}else{
 			if(!$this->popedom['add']){
-				$this->json(P_Lang('您没有权限执行此操作'));
+				$this->json(P_Lang('您沒有許可權執行此操作'));
 			}
 			$array['site_id'] = $_SESSION['admin_site_id'];
 		}
 		$array['title'] = $this->get('title');
 		if(!$array['title']){
-			$this->json(P_Lang('名称不能为空'));
+			$this->json(P_Lang('名稱不能為空'));
 		}
 		$array['identifier'] = $this->get('identifier');
 		if(!$array['identifier']){
-			$this->json(P_Lang('标识不能为空'));
+			$this->json(P_Lang('標識不能為空'));
 		}
 		$array['identifier'] = $this->format($array['identifier'],'system');
 		if(!$array['identifier']){
-			$this->json(P_Lang('标识不符合系统要求'));
+			$this->json(P_Lang('標識不符合系統要求'));
 		}
 		$chk = $this->model('wealth')->chk_identifier($array['identifier'],$id);
 		if($chk){
-			$this->json(P_Lang('标识已被使用'));
+			$this->json(P_Lang('標識已被使用'));
 		}
 		$array['unit'] = $this->get('unit');
 		if(!$array['unit']){
-			$this->json(P_Lang('计量单位不能为空'));
+			$this->json(P_Lang('計量單位不能為空'));
 		}
 		$array['dnum'] = $this->get('dnum','int');
 		$array['ifpay'] = $this->get('ifpay');
@@ -310,8 +310,8 @@ class wealth_control extends phpok_control
 	}
 
 	/**
-	 * 财富状态
-	 * @参数 id 财富ID
+	 * 財富狀態
+	 * @引數 id 財富ID
 	**/
 	public function status_f()
 	{
@@ -320,7 +320,7 @@ class wealth_control extends phpok_control
 			$this->json(P_Lang('未指定ID'));
 		}
 		if(!$this->popedom['status']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$rs = $this->model('wealth')->get_one($id);
 		$status = $rs['status'] ? 0 : 1;
@@ -329,8 +329,8 @@ class wealth_control extends phpok_control
 	}
 
 	/**
-	 * 财富删除
-	 * @参数 id 财富ID
+	 * 財富刪除
+	 * @引數 id 財富ID
 	**/
 	public function delete_f()
 	{
@@ -339,15 +339,15 @@ class wealth_control extends phpok_control
 			$this->json(P_Lang('未指定ID'));
 		}
 		if(!$this->popedom['delete']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$this->model('wealth')->delete($id);
 		$this->json(true);
 	}
 
 	/**
-	 * 财富规则配置
-	 * @参数 id 财富ID
+	 * 財富規則配置
+	 * @引數 id 財富ID
 	**/
 	public function rule_f()
 	{
@@ -356,16 +356,16 @@ class wealth_control extends phpok_control
 			error(P_Lang('未指定ID'),$this->url('wealth'),'error');
 		}
 		if(!$this->popedom["setting"]){
-			error(P_Lang('您没有权限执行此操作'),$this->url('wealth'),'error');
+			error(P_Lang('您沒有許可權執行此操作'),$this->url('wealth'),'error');
 		}
 		$rs = $this->model('wealth')->get_one($id);
 		$this->assign('rs',$rs);
 		$rslist = $this->model('wealth')->rule_all("wid='".$id."'");
 		$this->assign('rslist',$rslist);
-		$alist = array('register'=>P_Lang('会员注册'),'login'=>P_Lang('会员登录'),'payment'=>P_Lang('购物付款'));
-		$alist['comment'] = P_Lang('评论文章');
-		$alist['post'] = P_Lang('发布文章');
-		$alist['content'] = P_Lang('阅读文章');
+		$alist = array('register'=>P_Lang('會員註冊'),'login'=>P_Lang('會員登入'),'payment'=>P_Lang('購物付款'));
+		$alist['comment'] = P_Lang('評論文章');
+		$alist['post'] = P_Lang('釋出文章');
+		$alist['content'] = P_Lang('閱讀文章');
 		$this->assign('alist',$alist);
 		$agentlist = $this->model('wealth')->goal_userlist();
 		$this->assign('agentlist',$agentlist);
@@ -379,54 +379,54 @@ class wealth_control extends phpok_control
 			$this->json(P_Lang('未指定ID'));
 		}
 		if(!$this->popedom['setting']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$this->model('wealth')->delete_rule($id);
 		$this->json(true);
 	}
 
 	/**
-	 * 保存规则
-	 * @参数 wid 财富ID，不为空时表示添加
-	 * @参数 id 当前规则ID，为空时wid不能为空
+	 * 儲存規則
+	 * @引數 wid 財富ID，不為空時表示新增
+	 * @引數 id 當前規則ID，為空時wid不能為空
 	 * @返回 Json字串
 	**/
 	public function save_rule_f()
 	{
 		if(!$this->popedom['setting']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$wid = $this->get('wid','int');
 		if(!$wid){
 			$id = $this->get('id','int');
 			if(!$id){
-				$this->error(P_Lang('未指定规则ID'));
+				$this->error(P_Lang('未指定規則ID'));
 			}
 		}
 		$action = $this->get('action');
 		if(!$action){
-			$this->error(P_Lang('动作未指定'));
+			$this->error(P_Lang('動作未指定'));
 		}
 		$val = $this->get('val');
 		if(!$val){
-			$this->error(P_Lang('值为空的规则不需要创建'));
+			$this->error(P_Lang('值為空的規則不需要建立'));
 		}
 		$goal = $this->get('goal');
 		if(!$goal){
-			$this->error(P_Lang('未指定目标对象'));
+			$this->error(P_Lang('未指定目標物件'));
 		}
 		$taxis = $this->get('taxis','int');
 		$data = array('action'=>$action,'val'=>$val,'goal'=>$goal,'taxis'=>$taxis);
 		if($wid){
 			if($this->model('wealth')->check($action,$goal,$wid)){
-				$this->error(P_Lang('执行动作及对象已存在，不能重复创建'));
+				$this->error(P_Lang('執行動作及物件已存在，不能重複建立'));
 			}
 			$data['wid'] = $wid;
 			$this->model('wealth')->save_rule($data);
 		}else{
 			$old = $this->model('wealth')->rule_one($id);
 			if($this->model('wealth')->check($action,$goal,$old['wid'],$id)){
-				$this->error(P_Lang('执行动作及对象已存在，不能重复更新'));
+				$this->error(P_Lang('執行動作及物件已存在，不能重複更新'));
 			}
 			$this->model('wealth')->save_rule($data,$id);
 		}
@@ -446,7 +446,7 @@ class wealth_control extends phpok_control
 			}
 			$offset = ($pageid-1) * $psize;
 			$rslist = $this->model('wealth')->log_list_notcheck($condition,$offset,$psize);
-			$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=3&always=1';
+			$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=3&always=1';
 			$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 			$this->assign('pagelist',$pagelist);
 			$this->assign('rslist',$rslist);
@@ -457,9 +457,9 @@ class wealth_control extends phpok_control
 	}
 
 	/**
-	 * 财富审核
-	 * @参数 id 日志ID
-	 * @参数 $action 动作
+	 * 財富稽核
+	 * @引數 id 日誌ID
+	 * @引數 $action 動作
 	**/
 	public function action_f()
 	{
@@ -484,7 +484,7 @@ class wealth_control extends phpok_control
 		}
 		$uid = $this->get('uid','int');
 		if(!$uid){
-			$this->error(P_Lang('未指定会员ID'));
+			$this->error(P_Lang('未指定會員ID'));
 		}
 		$rs = $this->model('wealth')->get_one($id);
 		$this->assign('rs',$rs);

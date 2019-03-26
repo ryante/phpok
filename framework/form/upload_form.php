@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/form/upload_form.php
-	备注： 上传控件管理
+	檔案： {phpok}/form/upload_form.php
+	備註： 上傳控制元件管理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年03月07日 17时54分
+	時間： 2015年03月07日 17時54分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class upload_form extends _init_auto
@@ -163,8 +163,8 @@ class upload_form extends _init_auto
 		}else{
 			$rs["content_list"] = array(); //附件列表
 		}
-		//上传类型
-		$upload_type = array('title'=>'图片','ext'=>'jpg,gif,png','maxsize'=>'512000','swfupload'=>'*.jpg,*.png,*.gif');
+		//上傳型別
+		$upload_type = array('title'=>'圖片','ext'=>'jpg,gif,png','maxsize'=>'512000','swfupload'=>'*.jpg,*.png,*.gif');
 		if($rs['ext']){
 			$ext = is_string($rs['ext']) ? unserialize($rs['ext']) : $rs['ext'];
 		}else{
@@ -209,7 +209,7 @@ class upload_form extends _init_auto
 		}
 		$rs['upload_type'] = $upload_type;
 		unset($tmp);
-		//二进制上传设置
+		//二進位制上傳設定
 		$rs['upload_binary'] = 'false';
 		if($ext['upload_binary']){
 			$rs['upload_binary'] = 'true';
@@ -217,7 +217,7 @@ class upload_form extends _init_auto
 		if($rs['upload_binary'] == 'false' && !ini_get('upload_tmp_dir')){
 			$rs['upload_binary'] = 'true';
 		}
-		//上传压缩属性
+		//上傳壓縮屬性
 		$compress = 'false';
 		if($upload_type['compress']){
 			$compress = "{width:".$upload_type['compress'].",height:".$upload_type['compress'].",quality:100,allowMagnify:false,crop:false}";
@@ -260,8 +260,8 @@ class upload_form extends _init_auto
 			$rs["content_list"] = array(); //附件列表
 		}
 
-		//上传类型
-		$upload_type = array('title'=>'图片','ext'=>'jpg,gif,png','maxsize'=>'512000','swfupload'=>'*.jpg,*.png,*.gif');
+		//上傳型別
+		$upload_type = array('title'=>'圖片','ext'=>'jpg,gif,png','maxsize'=>'512000','swfupload'=>'*.jpg,*.png,*.gif');
 		$ext = ($rs['ext'] && is_string($rs['ext'])) ? unserialize($rs['ext']) : ($rs['ext'] ? $rs['ext'] : array());
 		$cateinfo = $this->model('rescate')->cate_info($ext['cate_id']);
 		if($cateinfo){
@@ -290,7 +290,7 @@ class upload_form extends _init_auto
 		$upload_type['swfupload'] = implode(", ",$tmp);
 		$rs['upload_type'] = $upload_type;
 
-		//二进制上传设置
+		//二進位制上傳設定
 		$rs['upload_binary'] = 'false';
 		if($ext['upload_binary']){
 			$rs['upload_binary'] = 'true';
@@ -298,7 +298,7 @@ class upload_form extends _init_auto
 		if($rs['upload_binary'] == 'false' && !ini_get('upload_tmp_dir')){
 			$rs['upload_binary'] = 'true';
 		}
-		//上传压缩属性
+		//上傳壓縮屬性
 		$compress = 'false';
 		if($ext['upload_compress']){
 			$compress = "{width:".$ext['upload_compress_wh'].",height:".$ext['upload_compress_wh'].",quality:100,allowMagnify:false,crop:false}";

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： task/order.php
-	备注： 订单通知
+	檔案： task/order.php
+	備註： 訂單通知
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年09月29日 23时17分
+	時間： 2015年09月29日 23時17分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 if(!$param['id'] || !$param['status']){
@@ -33,7 +33,7 @@ if(!$status_list || !$status_list[$param['status']]){
 $status = $status_list[$param['status']];
 $this->assign('status',$status);
 
-//通知会员
+//通知會員
 if($status['email_tpl_user']){
 	$tpl = $this->model('email')->tpl($status['email_tpl_user']);
 	if($tpl){
@@ -99,7 +99,7 @@ if($status['email_tpl_admin']){
 		}
 	}
 }
-//短信通知管理员
+//簡訊通知管理員
 if($status['sms_tpl_admin']){
 	$tpl = $this->model('email')->tpl($status['sms_tpl_admin']);
 	if($tpl){

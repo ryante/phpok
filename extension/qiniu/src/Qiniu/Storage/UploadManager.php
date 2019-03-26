@@ -7,7 +7,7 @@ use Qiniu\Storage\ResumeUploader;
 use Qiniu\Storage\FormUploader;
 
 /**
- * 主要涉及了资源上传接口的实现
+ * 主要涉及了資源上傳介面的實現
  *
  * @link http://developer.qiniu.com/docs/v6/api/reference/up/
  */
@@ -24,17 +24,17 @@ final class UploadManager
     }
 
     /**
-     * 上传二进制流到七牛
+     * 上傳二進位制流到七牛
      *
-     * @param $upToken    上传凭证
-     * @param $key        上传文件名
-     * @param $data       上传二进制流
-     * @param $params     自定义变量，规格参考
+     * @param $upToken    上傳憑證
+     * @param $key        上傳檔名
+     * @param $data       上傳二進位制流
+     * @param $params     自定義變數，規格參考
      *                    http://developer.qiniu.com/docs/v6/api/overview/up/response/vars.html#xvar
-     * @param $mime       上传数据的mimeType
-     * @param $checkCrc   是否校验crc32
+     * @param $mime       上傳資料的mimeType
+     * @param $checkCrc   是否校驗crc32
      *
-     * @return array    包含已上传文件的信息，类似：
+     * @return array    包含已上傳檔案的資訊，類似：
      *                                              [
      *                                                  "hash" => "<Hash string>",
      *                                                  "key" => "<Key string>"
@@ -63,17 +63,17 @@ final class UploadManager
 
 
     /**
-     * 上传文件到七牛
+     * 上傳檔案到七牛
      *
-     * @param $upToken    上传凭证
-     * @param $key        上传文件名
-     * @param $filePath   上传文件的路径
-     * @param $params     自定义变量，规格参考
+     * @param $upToken    上傳憑證
+     * @param $key        上傳檔名
+     * @param $filePath   上傳檔案的路徑
+     * @param $params     自定義變數，規格參考
      *                    http://developer.qiniu.com/docs/v6/api/overview/up/response/vars.html#xvar
-     * @param $mime       上传数据的mimeType
-     * @param $checkCrc   是否校验crc32
+     * @param $mime       上傳資料的mimeType
+     * @param $checkCrc   是否校驗crc32
      *
-     * @return array    包含已上传文件的信息，类似：
+     * @return array    包含已上傳檔案的資訊，類似：
      *                                              [
      *                                                  "hash" => "<Hash string>",
      *                                                  "key" => "<Key string>"

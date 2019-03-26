@@ -1,49 +1,49 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<title>易源接口之快递查询</title>
+	<title>易源介面之快遞查詢</title>
 	<code>
 		<app_id>
-			<title>应用id</title>
-			<note>即showapi.com里的：appid</note>
+			<title>應用id</title>
+			<note>即showapi.com裡的：appid</note>
 			<type>text</type>
 		</app_id>
 		<app_secret>
-			<title>密钥</title>
-			<note>即showapi.com里的secret</note>
+			<title>金鑰</title>
+			<note>即showapi.com裡的secret</note>
 			<type>text</type>
 		</app_secret>
 		<app_com>
-			<title>快递公司</title>
-			<note>请选择要支持的快递公司</note>
+			<title>快遞公司</title>
+			<note>請選擇要支援的快遞公司</note>
 			<type>select</type>
 			<option>
-				<pingyou>包裹/挂号信/小包</pingyou>
-				<gdems>广东EMS快递</gdems>
-				<gjbg>国际包裹</gjbg>
-				<yitongda>易通达</yitongda>
-				<gtsd>高铁速递</gtsd>
-				<hkpost>香港邮政</hkpost>
-				<intmail>中国邮政国际包裹</intmail>
-				<zhongxinda>中信达快递</zhongxinda>
-				<tiantian>天天快递</tiantian>
-				<shentong>申通快递</shentong>
-				<ups>UPS快递</ups>
-				<yousu>优速快递</yousu>
-				<yuantong>圆通快递</yuantong>
-				<yunda>韵达快递</yunda>
-				<zhongtong>中通快递</zhongtong>
-				<zhongtie>中铁快运</zhongtie>
-				<jingdong>京东快递</jingdong>
-				<bgpyghx>包裹、平邮、挂号信</bgpyghx>
+				<pingyou>包裹/掛號信/小包</pingyou>
+				<gdems>廣東EMS快遞</gdems>
+				<gjbg>國際包裹</gjbg>
+				<yitongda>易通達</yitongda>
+				<gtsd>高鐵速遞</gtsd>
+				<hkpost>香港郵政</hkpost>
+				<intmail>中國郵政國際包裹</intmail>
+				<zhongxinda>中信達快遞</zhongxinda>
+				<tiantian>天天快遞</tiantian>
+				<shentong>申通快遞</shentong>
+				<ups>UPS快遞</ups>
+				<yousu>優速快遞</yousu>
+				<yuantong>圓通快遞</yuantong>
+				<yunda>韻達快遞</yunda>
+				<zhongtong>中通快遞</zhongtong>
+				<zhongtie>中鐵快運</zhongtie>
+				<jingdong>京東快遞</jingdong>
+				<bgpyghx>包裹、平郵、掛號信</bgpyghx>
 				<ems>EMS</ems>
 				<zjs>宅急送</zjs>
-				<chengji>城际快递</chengji>
-				<chengshi100>城市100快递</chengshi100>
-				<dhl>DHL快递</dhl>
-				<fedexcn>Fedex联邦快递(国内)</fedexcn>
-				<fedex>Fedex联邦快递(国际)</fedex>
-				<guotong>国通快递</guotong>
-				<shunfeng>顺丰快递</shunfeng>
+				<chengji>城際快遞</chengji>
+				<chengshi100>城市100快遞</chengshi100>
+				<dhl>DHL快遞</dhl>
+				<fedexcn>Fedex聯邦快遞(國內)</fedexcn>
+				<fedex>Fedex聯邦快遞(國際)</fedex>
+				<guotong>國通快遞</guotong>
+				<shunfeng>順豐快遞</shunfeng>
 			</option>
 		</app_com>
 	</code>

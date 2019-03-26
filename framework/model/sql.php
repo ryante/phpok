@@ -1,13 +1,13 @@
 <?php
 /**
- * 数据库操作基础类
+ * 資料庫操作基礎類
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年10月04日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年10月04日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -17,7 +17,7 @@ class sql_model_base extends phpok_model
 	public function __construct()
 	{
 		parent::model();
-		$this->tbl_key = array('PRI'=>P_Lang('主键'),'MUL'=>P_Lang('索引'),'UNI'=>P_Lang('唯一'));
+		$this->tbl_key = array('PRI'=>P_Lang('主鍵'),'MUL'=>P_Lang('索引'),'UNI'=>P_Lang('唯一'));
 	}
 
 	public function table_info($table='')
@@ -33,7 +33,7 @@ class sql_model_base extends phpok_model
 		foreach($tmplist as $key=>$value){
 			$comment = array();
 			if($value['extra'] && $value['extra'] == 'auto_increment'){
-				$comment[] = P_Lang('自动增量');
+				$comment[] = P_Lang('自動增量');
 				unset($value['extra']);
 			}
 			if($value['key'] && $this->tbl_key[$value['key']]){

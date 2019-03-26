@@ -1,12 +1,12 @@
 <?php
 /**
- * 常用字段管理器
+ * 常用欄位管理器
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年05月18日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年05月18日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -29,12 +29,12 @@ class fields_control extends phpok_control
 	}
 
 	/**
-	 * 取得全部常用字段列表
+	 * 取得全部常用欄位列表
 	**/
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$rslist = $this->model('fields')->default_all();
 		if($rslist){
@@ -49,14 +49,14 @@ class fields_control extends phpok_control
 	}
 
 	/**
-	 * 添加字段
+	 * 新增欄位
 	**/
 	public function set_f()
 	{
 		$id = $this->get("id");
 		if($id){
 			if(!$this->popedom["modify"]){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 			$rs = $this->model('fields')->default_one($id);
 			if($rs["ext"]){
@@ -74,7 +74,7 @@ class fields_control extends phpok_control
 			$this->assign("id",$id);
 		}else{
 			if(!$this->popedom["add"]){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 		}
 		$opt_list = $this->model('opt')->group_all();
@@ -83,32 +83,32 @@ class fields_control extends phpok_control
 	}
 
 	/**
-	 * 保存表单信息
+	 * 儲存表單資訊
 	**/
 	public function save_f()
 	{
 		$id = $this->get('id','system');
 		if($id){
 			if(!$this->popedom['modify']){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 			$identifier = $id;
 		}else{
 			if(!$this->popedom["add"]){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 			$identifier = $this->get('identifier');
 			if(!$identifier){
-				$this->error(P_Lang('字段标识不能为空'));
+				$this->error(P_Lang('欄位標識不能為空'));
 			}
 			$identifier = strtolower($identifier);
 			if(!preg_match("/^[a-z][a-z0-9\_]+$/u",$identifier)){
-				$this->error(P_Lang('字段标识不符合系统要求，限字母、数字及下划线且必须是字母开头'));
+				$this->error(P_Lang('欄位標識不符合系統要求，限字母、數字及下劃線且必須是字母開頭'));
 			}
-			//检测标识是否存在
+			//檢測標識是否存在
 			$chk = $this->model('fields')->default_one($identifier);
 			if($chk){
-				$this->error(P_Lang('标识已被使用'));
+				$this->error(P_Lang('標識已被使用'));
 			}
 		}
 		$title = $this->get("title");
@@ -150,11 +150,11 @@ class fields_control extends phpok_control
 	public function delete_f()
 	{
 		if(!$this->popedom['delete']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id");
 		if(!$id){
-			$this->error(P_Lang('未指定字段ID'));
+			$this->error(P_Lang('未指定欄位ID'));
 		}
 		$this->model('fields')->default_delete($id);
 		$this->success();

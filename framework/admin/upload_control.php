@@ -1,13 +1,13 @@
 <?php
 /**
- * 附件上传操作
+ * 附件上傳操作
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年07月18日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年07月18日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -19,8 +19,8 @@ class upload_control extends phpok_control
 	}
 
 	/**
-	 * 附件上传，上传的表单ID固定用upfile
-	 * @参数 cateid 分类ID，数值
+	 * 附件上傳，上傳的表單ID固定用upfile
+	 * @引數 cateid 分類ID，數值
 	**/
 	public function save_f()
 	{
@@ -36,7 +36,7 @@ class upload_control extends phpok_control
 	}
 
 	/**
-	 * 接收ZIP包上传，主要用于更新及数据导入，上传的表单ID固定用upfile
+	 * 接收ZIP包上傳，主要用於更新及資料匯入，上傳的表單ID固定用upfile
 	**/
 	public function zip_f()
 	{
@@ -48,19 +48,19 @@ class upload_control extends phpok_control
 	}
 
 	/**
-	 * 上传图片
+	 * 上傳圖片
 	**/
 	public function img_f()
 	{
 		$folder = $this->get('folder');
 		if(!$folder){
-			$this->json(P_Lang('未指附件路径'));
+			$this->json(P_Lang('未指附件路徑'));
 		}
 		if(substr($folder,0,1) == '/'){
-			$this->json(P_Lang('目标路径不能以/开头'));
+			$this->json(P_Lang('目標路徑不能以/開頭'));
 		}
 		if(!is_dir($this->dir_root.$folder)){
-			$this->json(P_Lang('目标文件夹不存在'));
+			$this->json(P_Lang('目標資料夾不存在'));
 		}
 		$rs = $this->lib('upload')->imgfile('upfile',$folder);
 		if($rs['status'] != 'ok'){
@@ -71,9 +71,9 @@ class upload_control extends phpok_control
 
 
 	/**
-	 * 基础上传
-	 * @参数 $input_name，表单ID，默认是upfile
-	 * @参数 $cateid，附件保存到哪个分类下
+	 * 基礎上傳
+	 * @引數 $input_name，表單ID，預設是upfile
+	 * @引數 $cateid，附件儲存到哪個分類下
 	**/
 	public function upload_base($input_name='upfile',$cateid=0)
 	{
@@ -99,7 +99,7 @@ class upload_control extends phpok_control
 		$id = $this->model('res')->save($array);
 		if(!$id){
 			$this->lib('file')->rm($this->dir_root.$rs['filename']);
-			return array('status'=>'error','error'=>P_Lang('图片存储失败'));
+			return array('status'=>'error','error'=>P_Lang('圖片儲存失敗'));
 		}
 		$this->model('res')->gd_update($id);
 		$rs = $this->model('res')->get_one($id);
@@ -108,22 +108,22 @@ class upload_control extends phpok_control
 	}
 
 	/**
-	 * 附件替换式上传，新文件表单ID固定用upfile
-	 * @参数 oldid，旧附件ID
+	 * 附件替換式上傳，新檔案表單ID固定用upfile
+	 * @引數 oldid，舊附件ID
 	**/
 	public function replace_f()
 	{
 		$id = $this->get("oldid",'int');
 		if(!$id){
-			$this->json(P_Lang('没有指定要替换的附件'));
+			$this->json(P_Lang('沒有指定要替換的附件'));
 		}
 		$old_rs = $this->model('res')->get_one($id);
 		if(!$old_rs){
-			$this->json(P_Lang('资源不存在'));
+			$this->json(P_Lang('資源不存在'));
 		}
 		$rs = $this->lib('upload')->upload('upfile');
 		if($rs["status"] != "ok"){
-			$this->json(P_Lang('附件上传失败'));
+			$this->json(P_Lang('附件上傳失敗'));
 		}
 		$arraylist = array("jpg","gif","png","jpeg");
 		$my_ext = array();
@@ -142,8 +142,8 @@ class upload_control extends phpok_control
 	}
 
 	/**
-	 * 缩略图列表
-	 * @参数 id 多个附件ID用英文逗号隔开
+	 * 縮圖列表
+	 * @引數 id 多個附件ID用英文逗號隔開
 	 * @返回 Json字串
 	**/
 	public function thumbshow_f()
@@ -162,7 +162,7 @@ class upload_control extends phpok_control
 		}
 		$id = implode(",",$newlist);
 		if(!$id){
-			$this->json(P_Lang('请传递正确的附件ID'));
+			$this->json(P_Lang('請傳遞正確的附件ID'));
 		}
 		$rslist = $this->model("res")->get_list_from_id($id);
 		if($rslist){
@@ -175,12 +175,12 @@ class upload_control extends phpok_control
 			}
 			$this->json($reslist,true);
 		}
-		$this->json(P_Lang('附件信息获取失败，可能已经删除，请检查'));
+		$this->json(P_Lang('附件資訊獲取失敗，可能已經刪除，請檢查'));
 	}
 
 	/**
-	 * 弹出窗口编辑附件信息
-	 * @参数 id 附件ID
+	 * 彈出視窗編輯附件資訊
+	 * @引數 id 附件ID
 	**/
 	public function editopen_f()
 	{
@@ -188,10 +188,10 @@ class upload_control extends phpok_control
 	}
 
 	/**
-	 * 保存附件信息
-	 * @参数 id 附件ID
-	 * @参数 title 附件名称
-	 * @参数 note 附件备注，支持HTML代码
+	 * 儲存附件資訊
+	 * @引數 id 附件ID
+	 * @引數 title 附件名稱
+	 * @引數 note 附件備註，支援HTML程式碼
 	 * @返回 Json字串
 	**/
 	public function editopen_save_f()
@@ -202,7 +202,7 @@ class upload_control extends phpok_control
 		}
 		$title = $this->get('title');
 		if(!$title){
-			$this->json(P_Lang('附件标题不能为空'));
+			$this->json(P_Lang('附件標題不能為空'));
 		}
 		$note = $this->get('note','html');
 		$this->model('res')->save(array('title'=>$title,'note'=>$note),$id);
@@ -210,8 +210,8 @@ class upload_control extends phpok_control
 	}
 
 	/**
-	 * 附件预览
-	 * @参数 id 附件ID
+	 * 附件預覽
+	 * @引數 id 附件ID
 	**/
 	public function preview_f()
 	{
@@ -229,8 +229,8 @@ class upload_control extends phpok_control
 	}
 
 	/**
-	 * 附件删除
-	 * @参数 id 附件ID
+	 * 附件刪除
+	 * @引數 id 附件ID
 	**/
 	public function delete_f()
 	{
@@ -240,10 +240,10 @@ class upload_control extends phpok_control
 		}
 		$rs = $this->model('res')->get_one($id);
 		if(!$rs){
-			$this->json(P_Lang('附件信息不存在'));
+			$this->json(P_Lang('附件資訊不存在'));
 		}
 		if(!$this->session->val('admin_rs.if_system') && $rs['admin_id'] != $this->session->val('admin_id')){
-			$this->json(P_Lang('非系统管理员不能删除其他管理员上传的附件'));
+			$this->json(P_Lang('非系統管理員不能刪除其他管理員上傳的附件'));
 		}
 		$this->model('res')->delete($id);
 		$this->json(true);

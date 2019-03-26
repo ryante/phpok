@@ -1,20 +1,20 @@
 <?php
 /**
- * 站点信息管理
+ * 站點資訊管理
  * @package phpok\model\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年09月08日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年09月08日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class site_model extends site_model_base
 {
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -22,17 +22,17 @@ class site_model extends site_model_base
 	}
 
 	/**
-	 * 保存站点数据
-	 * @参数 $data 数组，要保存的站点数据
-	 * @参数 $id 站点ID，留空或为0表示创建新站点
-	 * @返回 true/false/站点ID
+	 * 儲存站點資料
+	 * @引數 $data 陣列，要儲存的站點資料
+	 * @引數 $id 站點ID，留空或為0表示建立新站點
+	 * @返回 true/false/站點ID
 	**/
 	public function save($data,$id=0)
 	{
 		if(!$data || !is_array($data)){
 			return false;
 		}
-		//检查表字段
+		//檢查表字段
 		$fields = $this->db->list_fields('site');
 		$xmldata = false;
 		foreach($data as $key=>$value){
@@ -61,8 +61,8 @@ class site_model extends site_model_base
 
 	/**
 	 * 更新域名
-	 * @参数 $domain 域名
-	 * @参数 $id site_domain表的主键ID
+	 * @引數 $domain 域名
+	 * @引數 $id site_domain表的主鍵ID
 	 * @返回 true/false
 	**/
 	public function domain_update($domain,$id)
@@ -75,9 +75,9 @@ class site_model extends site_model_base
 	}
 
 	/**
-	 * 域名添加
-	 * @参数 $domain 域名
-	 * @参数 $site_id 站点ID
+	 * 域名新增
+	 * @引數 $domain 域名
+	 * @引數 $site_id 站點ID
 	 * @返回 true/false
 	**/
 	public function domain_add($domain,$site_id)
@@ -90,8 +90,8 @@ class site_model extends site_model_base
 	}
 
 	/**
-	 * 删除域名
-	 * @参数 $id site_domain表的主键ID
+	 * 刪除域名
+	 * @引數 $id site_domain表的主鍵ID
 	 * @返回 true/false
 	**/
 	public function domain_delete($id)
@@ -101,9 +101,9 @@ class site_model extends site_model_base
 	}
 
 	/**
-	 * 存储全局变量扩展配置
-	 * @参数 $data 数组，全局变量信息
-	 * @参数 $id all表中的主键ID
+	 * 儲存全域性變數擴充套件配置
+	 * @引數 $data 陣列，全域性變數資訊
+	 * @引數 $id all表中的主鍵ID
 	**/
 	public function all_save($data,$id=0)
 	{
@@ -118,8 +118,8 @@ class site_model extends site_model_base
 	}
 
 	/**
-	 * 删除全局扩展
-	 * @参数 $id all表中的主键ID
+	 * 刪除全域性擴充套件
+	 * @引數 $id all表中的主鍵ID
 	 * @返回 true/false
 	**/
 	public function ext_delete($id)
@@ -133,8 +133,8 @@ class site_model extends site_model_base
 	}
 
 	/**
-	 * 删除全局扩展中的扩展模块字段，仅限私有使用，不允许外调
-	 * @参数 $module 模块标识
+	 * 刪除全域性擴充套件中的擴充套件模組欄位，僅限私有使用，不允許外調
+	 * @引數 $module 模組標識
 	 * @返回 true/false
 	**/
 	private function _ext_delete($module='')
@@ -156,13 +156,13 @@ class site_model extends site_model_base
 	}
 
 	/**
-	 * 删除站点信息，此方法请慎用，删除操作没有任何判断及备份操作
-	 * @参数 $id 站点ID
+	 * 刪除站點資訊，此方法請慎用，刪除操作沒有任何判斷及備份操作
+	 * @引數 $id 站點ID
 	 * @返回 true
 	**/
 	public function site_delete($id)
 	{
-		//删除站点全局扩展字段
+		//刪除站點全域性擴充套件欄位
 		$sql = "SELECT id FROM ".$this->db->prefix."all WHERE site_id='".$id."'";
 		$tmplist = $this->db->get_all($sql);
 		if($tmplist){
@@ -170,7 +170,7 @@ class site_model extends site_model_base
 				$this->ext_delete($value['id']);
 			}
 		}
-		//删除项目全局扩展字段
+		//刪除專案全域性擴充套件欄位
 		$sql = "SELECT id FROM ".$this->db->prefix."project WHERE site_id='".$id."'";
 		$tmplist = $this->db->get_all($sql);
 		if($tmplist){
@@ -183,7 +183,7 @@ class site_model extends site_model_base
 			$sql = "DELETE FROM ".$this->db->prefix."tag_stat WHERE title_id IN('".$tmpids."')";
 			$this->db->query($sql);
 		}
-		//删除分类下的扩展
+		//刪除分類下的擴充套件
 		$sql = "SELECT id FROM ".$this->db->prefix."cate WHERE site_id='".$id."'";
 		$tmplist = $this->db->get_all($sql);
 		if($tmplist){
@@ -196,7 +196,7 @@ class site_model extends site_model_base
 			$sql = "DELETE FROM ".$this->db->prefix."tag_stat WHERE title_id IN('".$tmpids."')";
 			$this->db->query($sql);
 		}
-		//删除尺码属性
+		//刪除尺碼屬性
 		$sql = "SELECT id FROM ".$this->db->prefix."attr WHERE site_id='".$id."'";
 		$tmplist = $this->db->get_all($sql);
 		if($tmplist){
@@ -207,16 +207,16 @@ class site_model extends site_model_base
 		}
 		$sql = "DELETE FROM ".$this->db->prefix."attr WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除分类
+		//刪除分類
 		$sql = "DELETE FROM ".$this->db->prefix."cate WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除Email模板
+		//刪除Email模板
 		$sql = "DELETE FROM ".$this->db->prefix."email WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除物流
+		//刪除物流
 		$sql = "DELETE FROM ".$this->db->prefix."express WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除运费模板
+		//刪除運費模板
 		$sql = "SELECT id FROM ".$this->db->prefix."freight WHERE site_id='".$id."'";
 		$tmplist = $this->db->get_all($sql);
 		if($tmplist){
@@ -238,10 +238,10 @@ class site_model extends site_model_base
 		}
 		$sql = "DELETE FROM ".$this->db->prefix."freight WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除第三方网关
+		//刪除第三方閘道器
 		$sql = "DELETE FROM ".$this->db->prefix."gateway WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除支付组
+		//刪除支付組
 		$sql = "SELECT id FROM ".$this->db->prefix."payment_group WHERE site_id='".$id."'";
 		$tmplist = $this->db->get_all($sql);
 		if($tmplist){
@@ -252,10 +252,10 @@ class site_model extends site_model_base
 		}
 		$sql = "DELETE FROM ".$this->db->prefix."payment_group WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除数据调用
+		//刪除資料呼叫
 		$sql = "DELETE FROM ".$this->db->prefix."phpok WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除项目信息
+		//刪除專案資訊
 		$sql = "SELECT id,module FROM ".$this->db->prefix."project WHERE site_id='".$id."'";
 		$tmplist = $this->db->get_all($sql);
 		if($tmplist){
@@ -273,27 +273,27 @@ class site_model extends site_model_base
 				$tmpids[] = $value['id'];
 			}
 			$tmpids = implode(",",$tmpids);
-			//删除相应的权限
+			//刪除相應的許可權
 			$sql = "DELETE FROM ".$this->db->prefix."popedom WHERE pid IN(".$tmpids.")";
 			$this->db->query($sql);
 		}
 		$sql = "DELETE FROM ".$this->db->prefix."project WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除回复
+		//刪除回覆
 		$sql = "DELETE FROM ".$this->db->prefix."reply WHERE id IN(SELECT id FROM ".$this->db->prefix."list WHERE site_id='".$id."')";
 		$this->db->query($sql);
-		//删除站点域名
+		//刪除站點域名
 		$sql = "DELETE FROM ".$this->db->prefix."site_domain WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除系统菜单
+		//刪除系統選單
 		$sql = "DELETE FROM ".$this->db->prefix."sysmenu WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除Tag及Tag_stat信息
+		//刪除Tag及Tag_stat資訊
 		$sql = "DELETE FROM ".$this->db->prefix."tag_stat WHERE tag_id IN(SELECT id FROM ".$this->db->prefix."tag WHERE site_id=".$id.")";
 		$this->db->query($sql);
 		$sql = "DELETE FROM ".$this->db->prefix."tag WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除财富操作
+		//刪除財富操作
 		$sql = "SELECT id FROM ".$this->db->prefix."wealth WHERE site_id='".$id."'";
 		$tmplist = $this->db->get_all($sql);
 		if($tmplist){
@@ -308,21 +308,21 @@ class site_model extends site_model_base
 		}
 		$sql = "DELETE FROM ".$this->db->prefix."wealth WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除扩展分类
+		//刪除擴充套件分類
 		$sql = "DELETE FROM ".$this->db->prefix."list_cate WHERE id IN(SELECT id FROM ".$this->db->prefix."list WHERE site_id='".$id."')";
 		$this->db->query($sql);
-		//删除list表中的数据
+		//刪除list表中的資料
 		$sql = "DELETE FROM ".$this->db->prefix."list WHERE site_id='".$id."'";
 		$this->db->query($sql);
-		//删除站点信息
+		//刪除站點資訊
 		$sql = "DELETE FROM ".$this->db->prefix."site WHERE id='".$id."'";
 		$this->db->query($sql);
 		return true;
 	}
 
 	/**
-	 * 设置默认站点
-	 * @参数 $id 要设为默认的站点ID
+	 * 設定預設站點
+	 * @引數 $id 要設為預設的站點ID
 	 * @返回 true/false
 	**/
 	public function set_default($id)
@@ -338,9 +338,9 @@ class site_model extends site_model_base
 	}
 
 	/**
-	 * 设置是否手机专用域名
-	 * @参数 $id site_domain表中的主键ID
-	 * @参数 $act 激活
+	 * 設定是否手機專用域名
+	 * @引數 $id site_domain表中的主鍵ID
+	 * @引數 $act 啟用
 	 * @返回 true/false
 	**/
 	public function set_mobile($id=0,$act=1)
@@ -354,7 +354,7 @@ class site_model extends site_model_base
 	}
 
 	/**
-	 * 清空手机专用域名
+	 * 清空手機專用域名
 	**/
 	public function clear_mobile_domain()
 	{
@@ -363,9 +363,9 @@ class site_model extends site_model_base
 	}
 
 	/**
-	 * 订单价格方案
-	 * @参数 $data 数组，多维
-	 * @参数 $id 唯一标识串，用于变更
+	 * 訂單價格方案
+	 * @引數 $data 陣列，多維
+	 * @引數 $id 唯一標識串，用於變更
 	**/
 	public function price_status_update($data,$id=0)
 	{
@@ -393,7 +393,7 @@ class site_model extends site_model_base
 		return false;
 	}
 
-	//更新状态
+	//更新狀態
 	public function order_status_update($data,$id=0)
 	{
 		if(!$id || !$data){
@@ -425,7 +425,7 @@ class site_model extends site_model_base
 				$rslist[$key] = $value;
 			}
 		}
-		//读别名
+		//讀別名
 		$file = $this->dir_data.'xml/site_alias.xml';
 		if(!file_exists($file)){
 			return $rslist;
@@ -493,8 +493,8 @@ class site_model extends site_model_base
 	}
 
 	/**
-	 * 管理员状态读取
-	 * @参数 $id 读取标识
+	 * 管理員狀態讀取
+	 * @引數 $id 讀取標識
 	**/
 	public function admin_order_status_one($id)
 	{
@@ -511,9 +511,9 @@ class site_model extends site_model_base
 	}
 
 	/**
-	 * 更新管理员内部订单状态
-	 * @参数 $data 状态信息
-	 * @参数 $id 要更新的ID
+	 * 更新管理員內部訂單狀態
+	 * @引數 $data 狀態資訊
+	 * @引數 $id 要更新的ID
 	**/
 	public function admin_order_status_update($data,$id=0)
 	{

@@ -1,16 +1,16 @@
 <?php
 /**
- * 数据调用新版专用
+ * 資料呼叫新版專用
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @许可 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2018年11月02日
+ * @許可 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2018年11月02日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -27,7 +27,7 @@ class call_control extends phpok_control
 	{
 		$data = $this->get('data','html');
 		if(!$data){
-			$this->error(P_Lang('未指定参数变量'));
+			$this->error(P_Lang('未指定引數變數'));
 		}
 		if(substr($data,0,1) == '{'){
 			$data = $this->lib('json')->decode(stripslashes($data));
@@ -54,14 +54,14 @@ class call_control extends phpok_control
 			}else{
 				$fid = $value['_alias'] ? $value['_alias'] : $key;
 				if($call_all && $call_all[$key] && !$call_all[$key]['is_api']){
-					$rslist[$fid] = array('status'=>0,'info'=>P_Lang('未启用远程调用，请检查'));
+					$rslist[$fid] = array('status'=>0,'info'=>P_Lang('未啟用遠端呼叫，請檢查'));
 				}else{
-					$rslist[$fid] = array('status'=>0,'info'=>P_Lang('没有找到数据调用参数，请检查'));
+					$rslist[$fid] = array('status'=>0,'info'=>P_Lang('沒有找到資料呼叫引數，請檢查'));
 				}
 			}
 		}
 		if(!$is_ok){
-			$this->error(P_Lang('未启用远程调用或没有相关调用参数，请检查'));
+			$this->error(P_Lang('未啟用遠端呼叫或沒有相關呼叫引數，請檢查'));
 		}
 		$this->success($rslist);
 	}

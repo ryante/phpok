@@ -1,11 +1,11 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/www/index_control.php
-	Note	: 网站首页及APP的封面页
+	Note	: 網站首頁及APP的封面頁
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
-	Update  : 2015年06月06日 09时09分
+	Update  : 2015年06月06日 09時09分
 ***********************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class index_control extends phpok_control
@@ -21,7 +21,7 @@ class index_control extends phpok_control
 		if(!$tplfile){
 			$tplfile = 'index';
 		}
-		//检测是否有指定
+		//檢測是否有指定
 		$tmp = $this->model('id')->id('index',$this->site['id'],true);
 		if($tmp){
 			$pid = $tmp['id'];
@@ -52,8 +52,8 @@ class index_control extends phpok_control
 	}
 
 	/**
-	 * 推荐人
-	 * @参数 uid 推荐人ID
+	 * 推薦人
+	 * @引數 uid 推薦人ID
 	**/
 	public function link_f()
 	{
@@ -76,11 +76,11 @@ class index_control extends phpok_control
 	{
 		$phpfile = $this->get('phpfile','system');
 		if(!$phpfile){
-			$this->error(P_Lang('未指定合法的 PHP 文件'));
+			$this->error(P_Lang('未指定合法的 PHP 檔案'));
 		}
 		$phpfile .= ".php";
 		if(!file_exists($this->dir_root.'phpinc/'.$phpfile)){
-			$this->error(P_Lang('PHP 文件不存在'));
+			$this->error(P_Lang('PHP 檔案不存在'));
 		}
 		global $app;
 		include($this->dir_root.'phpinc/'.$phpfile);

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： gateway/sms/duanxincm/exec.php
-	备注： 执行操作
+	檔案： gateway/sms/duanxincm/exec.php
+	備註： 執行操作
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年10月09日 16时43分
+	時間： 2015年10月09日 16時43分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 if(!$rs['ext'] || !$rs['ext']['password'] || !$rs['ext']['account']){

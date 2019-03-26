@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： gateway/payment/wxpay/notify.php
-	备注： 异步通知
+	檔案： gateway/payment/wxpay/notify.php
+	備註： 非同步通知
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年11月09日 03时35分
+	時間： 2015年11月09日 03時35分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class wxpay_notify
@@ -31,17 +31,17 @@ class wxpay_notify
 		$data = $app->lib('xml')->read('<root>'.$xml.'</root>',false);
 		$rs = $app->model('payment')->log_one($this->order['id']);
 		if(!$rs){
-			$this->error('订单信息不存在');
+			$this->error('訂單資訊不存在');
 		}
 		if($rs['status']){
 			$this->ok();
 		}
-		//验证接收的信息是否符合要求
+		//驗證接收的資訊是否符合要求
 		$sign = $wxpay->create_sign($data);
 		if($sign != $data['sign']){
-			$this->error('签名验证不通过');
+			$this->error('簽名驗證不通過');
 		}
-		//保存订单信息
+		//儲存訂單資訊
 		$ext = $this->order['ext'] ? unserialize($this->order['ext']) : array();
 		$ext['openid'] = $data['openid'];
 		$ext['trade_type'] = $data['trade_type'];
@@ -77,9 +77,9 @@ class wxpay_notify
 				if($payinfo){
 					$payment_data = array('dateline'=>$mytime,'ext'=>serialize($ext));
 					$app->model('order')->save_payment($payment_data,$payinfo['id']);
-					//更新订单日志
+					//更新訂單日誌
 					$app->model('order')->update_order_status($order['id'],'paid');
-					$note = P_Lang('订单支付完成，编号：{sn}',array('sn'=>$order['sn']));
+					$note = P_Lang('訂單支付完成，編號：{sn}',array('sn'=>$order['sn']));
 					$log = array('order_id'=>$order['id'],'addtime'=>$app->time,'who'=>$app->user['user'],'note'=>$note);
 					$app->model('order')->log_save($log);
 				}

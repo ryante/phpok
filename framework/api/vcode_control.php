@@ -1,12 +1,12 @@
 <?php
 /**
- * 验证码接口
+ * 驗證碼介面
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年11月22日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年11月22日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -18,7 +18,7 @@ class vcode_control extends phpok_control
 	}
 
 	/**
-	 * 图形验证码
+	 * 圖形驗證碼
 	**/
 	public function index_f()
 	{
@@ -29,25 +29,25 @@ class vcode_control extends phpok_control
 	}
 
 	/**
-	 * 短信验证码
-	 * @参数 mobile 手机号，目前仅限中国大陆手机号有效
-	 * @参数 tplid 验证码模板ID，未设置使用后台设置的验证码模板ID
-	 * @参数 gateid 短信网关ID，未设置使用默认的网关
+	 * 簡訊驗證碼
+	 * @引數 mobile 手機號，目前僅限中國大陸手機號有效
+	 * @引數 tplid 驗證碼模板ID，未設定使用後臺設定的驗證碼模板ID
+	 * @引數 gateid 簡訊閘道器ID，未設定使用預設的閘道器
 	**/
 	public function sms_f()
 	{
 		$mobile = $this->get('mobile');
 		if(!$mobile){
-			$this->error(P_Lang('手机号不能为空'));
+			$this->error(P_Lang('手機號不能為空'));
 		}
 		if(!$this->lib('common')->tel_check($mobile,'mobile')){
-			$this->error(P_Lang('手机号不符合格式要求'));
+			$this->error(P_Lang('手機號不符合格式要求'));
 		}
 		$tplid = $this->get('tplid','int');
 		if(!$tplid){
 			$tplid = $this->site['login_type_sms'];
 			if(!$tplid){
-				$this->error(P_Lang('未配置短信验证码模板'));
+				$this->error(P_Lang('未配置簡訊驗證碼模板'));
 			}
 		}
 		$gateid = $this->get('gateid','int');
@@ -58,7 +58,7 @@ class vcode_control extends phpok_control
 			$rs = $this->model('gateway')->get_default('sms');
 		}
 		if(!$rs){
-			$this->error(P_Lang('没有安装短信发送引挈，请先安装并设置默认'),$backurl);
+			$this->error(P_Lang('沒有安裝簡訊傳送引挈，請先安裝並設定預設'),$backurl);
 		}
 		$data = $this->model('vcode')->create('sms',4);
 		if(!$data){
@@ -67,11 +67,11 @@ class vcode_control extends phpok_control
 		$this->gateway('type','sms');
 		$this->gateway('param',$rs['id']);
 		if(!$this->gateway('check')){
-			$this->error(P_Lang('网关参数信息未配置'));
+			$this->error(P_Lang('閘道器引數資訊未配置'));
 		}
 		$code = $this->model('gateway')->code_one($this->gateway['param']['type'],$this->gateway['param']['code']);
 		if(!$code){
-			$this->error(P_Lang('网关配置错误，请联系工作人员'));
+			$this->error(P_Lang('閘道器配置錯誤，請聯絡工作人員'));
 		}
 		if($code['code']){
 			$error = false;
@@ -82,12 +82,12 @@ class vcode_control extends phpok_control
 				}
 			}
 			if($error){
-				$this->error(P_Lang('网关配置不完整，请联系工作人员'));
+				$this->error(P_Lang('閘道器配置不完整，請聯絡工作人員'));
 			}
 		}
 		$tpl = $this->model('email')->tpl($tplid);
 		if(!$tpl){
-			$this->error(P_Lang('短信模板不存在'));
+			$this->error(P_Lang('簡訊模板不存在'));
 		}
 		$this->assign('code',$data['code']);
 		$this->assign('mobile',$mobile);
@@ -101,16 +101,16 @@ class vcode_control extends phpok_control
 	}
 
 	/**
-	 * 邮件验证码
-	 * @参数 email 邮箱
-	 * @参数 tplid 验证码模板ID，未设置使用后台设置的验证码模板ID
-	 * @参数 gateyid 网关ID，未设置使用默认的网关
+	 * 郵件驗證碼
+	 * @引數 email 郵箱
+	 * @引數 tplid 驗證碼模板ID，未設定使用後臺設定的驗證碼模板ID
+	 * @引數 gateyid 閘道器ID，未設定使用預設的閘道器
 	**/
 	public function email_f()
 	{
 		$email = $this->get('email');
 		if(!$email){
-			$this->error(P_Lang('Email不能为空'));
+			$this->error(P_Lang('Email不能為空'));
 		}
 		if(!$this->lib('common')->email_check($email)){
 			$this->error(P_Lang('Email地址不符合要求'));
@@ -127,16 +127,16 @@ class vcode_control extends phpok_control
 			$rs = $this->model('gateway')->get_default('email');
 		}
 		if(!$rs){
-			$this->error(P_Lang('没有安装邮件发送引挈，请先安装并设置默认'),$backurl);
+			$this->error(P_Lang('沒有安裝郵件傳送引挈，請先安裝並設定預設'),$backurl);
 		}
 		$this->gateway('type','email');
 		$this->gateway('param',$rs['id']);
 		if(!$this->gateway('check')){
-			$this->error(P_Lang('网关参数信息未配置'));
+			$this->error(P_Lang('閘道器引數資訊未配置'));
 		}
 		$code = $this->model('gateway')->code_one($this->gateway['param']['type'],$this->gateway['param']['code']);
 		if(!$code){
-			$this->error(P_Lang('网关配置错误，请联系工作人员'));
+			$this->error(P_Lang('閘道器配置錯誤，請聯絡工作人員'));
 		}
 		if($code['code']){
 			$error = false;
@@ -147,15 +147,15 @@ class vcode_control extends phpok_control
 				}
 			}
 			if($error){
-				$this->error(P_Lang('网关配置不完整，请联系工作人员'));
+				$this->error(P_Lang('閘道器配置不完整，請聯絡工作人員'));
 			}
 		}
 		$data = $this->model('vcode')->create('email',6);
 		if(!$data){
 			$this->error($this->model('vcode')->error_info());
 		}
-		$tpltitle = P_Lang('获取验证码');
-		$tplcontent = P_Lang('您的验证码是：').'{$code}';
+		$tpltitle = P_Lang('獲取驗證碼');
+		$tplcontent = P_Lang('您的驗證碼是：').'{$code}';
 		if($tplid){
 			$tpl = $this->model('email')->tpl($tplid);
 			if($tpl && $tpl['content'] && strip_tags($tpl['content'])){

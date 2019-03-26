@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/api/opt_control.php
-	Note	: OPT选项功能前后台数据读取
+	Note	: OPT選項功能前後臺數據讀取
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -16,13 +16,13 @@ class opt_control extends phpok_control
 		parent::control();
 	}
 
-	//获取
+	//獲取
 	public function index_f()
 	{
 		$val = $this->get("val");
 		$group_id = $this->get("group_id",'int');
 		if(!$group_id){
-			exit(P_Lang('没有指定选项组'));
+			exit(P_Lang('沒有指定選項組'));
 		}
 		$group_rs = $this->model('opt')->group_one($group_id);
 		if($group_rs && $group_rs['link_symbol']){
@@ -30,11 +30,11 @@ class opt_control extends phpok_control
 		}
 		$identifier = $this->get("identifier");
 		if(!$identifier){
-			exit(P_Lang('未定义变量'));
+			exit(P_Lang('未定義變數'));
 		}
 		$rootlist = $this->model('opt')->opt_all('group_id='.$group_id.' AND parent_id=0');
 		if(!$rootlist){
-			exit(P_Lang('没有内容选项'));
+			exit(P_Lang('沒有內容選項'));
 		}
 		if(!$val){
 			$html  = '<ul class="select"><li>';
@@ -54,7 +54,7 @@ class opt_control extends phpok_control
 					$first[] = $list[$m];
 				}
 				$first = implode($this->symbol,$first);
-				//检测是否有子项
+				//檢測是否有子項
 				$sub = false;
 				foreach($tmplist as $key=>$value){
 					if($value['val'] == $list[$i]){
@@ -104,7 +104,7 @@ class opt_control extends phpok_control
 			$html .= 'name="'.$identifier.'" id="'.$identifier.'" ';
 		}
 		$html .= 'onchange="$.phpok_form_select.change('.$group_id.',\''.$identifier.'\',this.value)">';
-		$html .= '<option value="'.$first.'">'.P_Lang('请选择…').'</option>';
+		$html .= '<option value="'.$first.'">'.P_Lang('請選擇…').'</option>';
 		foreach($rslist as $key=>$value){
 			$tmp = $first ?  $first.$this->symbol.$value['val'] : $value['val'];
 			$html .= '<option value="'.$tmp.'"';

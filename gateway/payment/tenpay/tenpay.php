@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: plugins/tenpay/tenpay.php
-	Note	: 腾讯通即时到账 / 担保交易引挈
+	Note	: 騰訊通即時到賬 / 擔保交易引挈
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -10,58 +10,58 @@
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class tenpay_lib
 {
-	//网关地址
+	//閘道器地址
 	public $gate_url = "https://www.tenpay.com/cgi-bin/v1.0/service_gate.cgi";
-	//密钥
+	//金鑰
 	public $key = '';
-	//参数
+	//引數
 	public $params='';
-	//商户号
+	//商戶號
 	public $biz = '';
-	//财付通账号
+	//財付通賬號
 	public $email = '';
 
-	//Cert证书，双向https时需要使用
+	//Cert證書，雙向https時需要使用
 	public $cert_file = '';
 	public $cert_pass = '';
 	public $cert_type = 'PEM';
 
 
-	//设置CA
+	//設定CA
 	public $ca_file = '';
 
-	//返回结果信息
+	//返回結果資訊
 	public $rs_info = '';
 
-	//返回的错误信息
+	//返回的錯誤資訊
 	public $rs_error = '';
 
-	//初始化信息
+	//初始化資訊
 	public function __construct()
 	{
 		$this->params = array();
 	}
 
-	//设置网关地址
+	//設定閘道器地址
 	public function set_url($url='')
 	{
 		if($url) $this->gate_url = $url;
 		return true;
 	}
 
-	//取得网关地址
+	//取得閘道器地址
 	public function get_url()
 	{
 		return $this->gate_url;
 	}
 
-	//取得密钥
+	//取得金鑰
 	public function get_key()
 	{
 		return $this->key;
 	}
 
-	//设置密钥，商户号及财付通账号
+	//設定金鑰，商戶號及財付通賬號
 	public function set($array='')
 	{
 		if($array && is_array($array))
@@ -73,28 +73,28 @@ class tenpay_lib
 		}
 	}
 
-	//设置商户号
+	//設定商戶號
 	public function set_biz($biz='')
 	{
 		if($biz) $this->biz = $biz;
 		return true;
 	}
 
-	//设置密钥
+	//設定金鑰
 	public function set_key($key='')
 	{
 		if($key) $this->key = $key;
 		return true;
 	}
 
-	//设置财付通账号
+	//設定財付通賬號
 	public function set_email($email='')
 	{
 		if($email) $this->email = $email;
 		return true;
 	}
 
-	//设置参数
+	//設定引數
 	public function param($id,$value='')
 	{
 		if($id && $value !='') $this->params[$id] = $value;
@@ -111,8 +111,8 @@ class tenpay_lib
 		return true;
 	}
 
-	//创建签名
-	//创建md5摘要,规则是:按参数名称a-z排序,遇到空值的参数不参加签名。
+	//建立簽名
+	//建立md5摘要,規則是:按引數名稱a-z排序,遇到空值的引數不參加簽名。
 	private function create_sign() 
 	{
 		$info = '';
@@ -130,10 +130,10 @@ class tenpay_lib
 		$this->param("sign",$sign);
 	}
 
-	//生成请求网址
+	//生成請求網址
 	public function url()
 	{
-		//创建一个签名
+		//建立一個簽名
 		$this->create_sign();
 		ksort($this->params);
 		$urlext = '';
@@ -145,8 +145,8 @@ class tenpay_lib
 		return $this->get_url().'?'.$urlext;
 	}
 
-	//验证签名
-	//nocheck，数组，表示这些参数不加入参数验证
+	//驗證簽名
+	//nocheck，陣列，表示這些引數不加入引數驗證
 	public function check_sign($nocheck='')
 	{
 		if(!$nocheck || !is_array($nocheck)) $nocheck = array('sign');
@@ -183,7 +183,7 @@ class tenpay_lib
 		return false;
 	}
 
-	//设置cert证书
+	//設定cert證書
 	function cert($cert_file='',$cert_pass='',$cert_type='')
 	{
 		$this->cert_file = $cert_file;
@@ -191,22 +191,22 @@ class tenpay_lib
 		$this->cert_type = $cert_type;
 	}
 
-	//设置ca
+	//設定ca
 	function ca($ca_file='')
 	{
 		$this->ca_file = $ca_file;
 	}
 
-	//请Curl请求
+	//請Curl請求
 	function call($url,$type="post",$timeout=10)
 	{
-		//启动一个CURL会话
+		//啟動一個CURL會話
 		$ch = curl_init();
-		// 设置curl允许执行的最长秒数
+		// 設定curl允許執行的最長秒數
 		curl_setopt($ch, CURLOPT_TIMEOUT,$timeout);
-		// 获取的信息以文件流的形式返回，而不是直接输出。
+		// 獲取的資訊以檔案流的形式返回，而不是直接輸出。
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-		// 从证书中检查SSL加密算法是否存在
+		// 從證書中檢查SSL加密演算法是否存在
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
 		$arr = explode("?", $url);
 		if(count($arr) >= 2 && $type == "post")
@@ -220,7 +220,7 @@ class tenpay_lib
 			curl_setopt($ch, CURLOPT_URL, $this->reqContent);
 		}
 		
-		//设置证书信息
+		//設定證書資訊
 		if($this->cert_file != "")
 		{
 			curl_setopt($ch, CURLOPT_SSLCERT, $this->cert_file);
@@ -228,20 +228,20 @@ class tenpay_lib
 			curl_setopt($ch, CURLOPT_SSLCERTTYPE, $this->cert_type);
 		}
 		
-		//设置CA
+		//設定CA
 		if($this->ca_file != "")
 		{
-			// 对认证证书来源的检查，0表示阻止对证书的合法性的检查。1需要设置CURLOPT_CAINFO
+			// 對認證證書來源的檢查，0表示阻止對證書的合法性的檢查。1需要設定CURLOPT_CAINFO
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 1);
 			curl_setopt($ch, CURLOPT_CAINFO, $this->caFile);
 		}
 		else
 		{
-			// 对认证证书来源的检查，0表示阻止对证书的合法性的检查。1需要设置CURLOPT_CAINFO
+			// 對認證證書來源的檢查，0表示阻止對證書的合法性的檢查。1需要設定CURLOPT_CAINFO
 			curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 		}
 		
-		// 执行操作
+		// 執行操作
 		$res = curl_exec($ch);
 		$this->rs_info = curl_getinfo($ch, CURLINFO_HTTP_CODE);
 		
@@ -277,7 +277,7 @@ class tenpay_lib
 		{
 			foreach ($xml->children() as $node)
 			{
-				//有子节点
+				//有子節點
 				if($node->children())
 				{
 					$k = $node->getName();
@@ -301,7 +301,7 @@ class tenpay_lib
 		}
 	}
 
-	//获取xml编码
+	//獲取xml編碼
 	function get_xml_encode($xml)
 	{
 		$ret = preg_match ("/<?xml[^>]* encoding=\"(.*)\"[^>]* ?>/i", $xml, $arr);
@@ -312,7 +312,7 @@ class tenpay_lib
 		}
 	}
 
-	//取得时间
+	//取得時間
 	function get_date()
 	{
 		$time = $this->param('time_end');

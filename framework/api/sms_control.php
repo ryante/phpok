@@ -1,16 +1,16 @@
 <?php
 /**
- * 短信验证码接口
+ * 簡訊驗證碼介面
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @许可 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年12月04日
+ * @許可 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年12月04日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -25,22 +25,22 @@ class sms_control extends phpok_control
 	}
 
 	/**
-	 * 获取验证码
+	 * 獲取驗證碼
 	**/
 	public function index_f()
 	{
 		$mobile = $this->get('mobile');
 		if(!$mobile){
-			$this->error(P_Lang('手机号不能为空'));
+			$this->error(P_Lang('手機號不能為空'));
 		}
 		if(!$this->lib('common')->tel_check($mobile,'mobile')){
-			$this->error(P_Lang('手机号不符合格式要求'));
+			$this->error(P_Lang('手機號不符合格式要求'));
 		}
 		$tplid = $this->get('tplid','int');
 		if(!$tplid){
 			$tplid = $this->site['login_type_sms'];
 			if(!$tplid){
-				$this->error(P_Lang('未指定短信模板ID'));
+				$this->error(P_Lang('未指定簡訊模板ID'));
 			}
 		}
 		$code = $this->session->val('sms_code');
@@ -50,7 +50,7 @@ class sms_control extends phpok_control
 			$code = $tmp[0];
 			$chktime = $this->time - 60;
 			if($time && $time > $chktime){
-				$this->error(P_Lang('验证码已发送，请等待一分钟后再获取'));
+				$this->error(P_Lang('驗證碼已傳送，請等待一分鐘後再獲取'));
 			}
 		}
 		$gateway = $this->get('gateway','int');
@@ -60,29 +60,29 @@ class sms_control extends phpok_control
 		$this->gateway('type','sms');
 		$this->gateway('param',$gateway);
 		if(!$this->gateway('check')){
-			$this->error(P_Lang('网关参数信息未配置'));
+			$this->error(P_Lang('閘道器引數資訊未配置'));
 		}
 		$code = $this->model('gateway')->code_one($this->gateway['param']['type'],$this->gateway['param']['code']);
 		if(!$code){
-			$this->error(P_Lang('网关配置错误，请联系工作人员'));
+			$this->error(P_Lang('閘道器配置錯誤，請聯絡工作人員'));
 		}
 		if($code['code']){
 			foreach($code['code'] as $key=>$value){
 				if($value['required'] && $value['required'] == 'true' && !$this->gateway['param']['ext'][$key]){
-					$this->error(P_Lang('网关配置不完整，请联系工作人员'));
+					$this->error(P_Lang('閘道器配置不完整，請聯絡工作人員'));
 				}
 			}
 		}
 		$tpl = $this->model('email')->tpl($tplid);
 		if(!$tpl){
-			$this->error(P_Lang('短信验证模板获取失败，请检查'));
+			$this->error(P_Lang('簡訊驗證模板獲取失敗，請檢查'));
 		}
 		if(!$tpl['content']){
-			$this->error(P_Lang('短信模板内容为空，请联系管理员'));
+			$this->error(P_Lang('簡訊模板內容為空，請聯絡管理員'));
 		}
 		$tplcontent = strip_tags($tpl['content']);
 		if(!$tplcontent){
-			$this->error(P_Lang('短信模板内容是空的，请联系管理员'));
+			$this->error(P_Lang('簡訊模板內容是空的，請聯絡管理員'));
 		}
 		$info = $this->lib("vcode")->word();
 		$this->assign('code',$info);
@@ -95,7 +95,7 @@ class sms_control extends phpok_control
 	}
 
 	/**
-	 * 验证码验证
+	 * 驗證碼驗證
 	**/
 	public function check_f()
 	{
@@ -108,46 +108,46 @@ class sms_control extends phpok_control
 	}
 
 	/**
-	 * 用于被调用的验证码
-	 * @参数 $code 验证码
+	 * 用於被呼叫的驗證碼
+	 * @引數 $code 驗證碼
 	**/
 	public function smscheck($code='')
 	{
 		$data = array('status'=>false,'info'=>'');
 		if(!$code){
-			$data['info'] = P_Lang('验证码不能为空');
+			$data['info'] = P_Lang('驗證碼不能為空');
 			return $data;
 		}
 		$chk_code = $this->session->val('sms_code');
 		if(!$chk_code){
-			$data['info'] = P_Lang('验证码没有记录，请重新获取');
+			$data['info'] = P_Lang('驗證碼沒有記錄，請重新獲取');
 			return $data;
 		}
 		if(strpos($chk_code,'-') !== true){
-			$data['info'] = P_Lang('验证码记录有误，请重新获取');
+			$data['info'] = P_Lang('驗證碼記錄有誤，請重新獲取');
 			return $data;
 		}
 		$tmp = explode('-',$chk_code);
 		$time = $tmp[1];
 		if(!$time){
-			$data['info'] = P_Lang('验证码记录有误，请重新获取');
+			$data['info'] = P_Lang('驗證碼記錄有誤，請重新獲取');
 			return $data;
 		}
 		$chk_code = $tmp[0];
 		if(!$chk_code){
-			$data['info'] = P_Lang('验证码记录有误，请重新获取');
+			$data['info'] = P_Lang('驗證碼記錄有誤，請重新獲取');
 			return $data;
 		}
 		$chktime = $this->time - 300;
 		if($time < $chktime){
-			$data['info'] = P_Lang('验证码已过期，请重新获取');
+			$data['info'] = P_Lang('驗證碼已過期，請重新獲取');
 			return $data;
 		}
 		if($chk_code != $code){
-			$data['info'] = P_Lang('验证码填写不正确，请修改或重新获取');
+			$data['info'] = P_Lang('驗證碼填寫不正確，請修改或重新獲取');
 			return $data;
 		}
-		//验证码检测通过，清除 session 记录
+		//驗證碼檢測通過，清除 session 記錄
 		$this->session->unassign('sms_code');
 		return array('status'=>true);
 	}

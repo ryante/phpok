@@ -1,12 +1,12 @@
 <?php
 /**
- * PHPOK框架入口引挈文件，请不要改动此文件
+ * PHPOK框架入口引挈檔案，請不要改動此檔案
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年07月21日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年07月21日
 **/
 
 /**
@@ -17,7 +17,7 @@ if(!defined("PHPOK_SET")){
 }
 
 /**
- * 强制使用UTF-8编码
+ * 強制使用UTF-8編碼
 **/
 header("Content-type: text/html; charset=utf-8");
 header("Cache-control: no-cache,no-store,must-revalidate");
@@ -27,9 +27,9 @@ header("X-Frame-Options: sameorigin");
 //setcookie("phpokcom", "test", null, null, null, null, true);
 
 /**
- * 计算执行的时间
- * @参数 $is_end 布尔值
- * @返回 参数为true时返回执行的时间，为false定义常量 SYS_TIME_START 为当前时间
+ * 計算執行的時間
+ * @引數 $is_end 布林值
+ * @返回 引數為true時返回執行的時間，為false定義常量 SYS_TIME_START 為當前時間
 **/
 function run_time($is_end=false)
 {
@@ -47,9 +47,9 @@ function run_time($is_end=false)
 }
 
 /**
- * 登记内存
- * @参数 $is_end 布尔值
- * @返回 参数为true时返回使用的内存值，为false定义常量 SYS_MEMORY_START 为当前内存值
+ * 登記記憶體
+ * @引數 $is_end 布林值
+ * @返回 引數為true時返回使用的記憶體值，為false定義常量 SYS_MEMORY_START 為當前記憶體值
 **/
 function run_memory($is_end=false)
 {
@@ -79,7 +79,7 @@ run_time();
 run_memory();
 
 /**
- * 用于调试统计时间，无参数，启用数据库调试的结果会在这里输出，需要在模板适当位置写上：{func debug_time} 
+ * 用於除錯統計時間，無引數，啟用資料庫除錯的結果會在這裡輸出，需要在模板適當位置寫上：{func debug_time} 
 **/
 function debug_time()
 {
@@ -90,8 +90,8 @@ function debug_time()
 	$sql_db_time = $app->db->sql_time();
 	$cache_count = $app->cache->count();
 	$cache_time = $app->cache->time();
-	$string = '运行 {total} 秒，内存使用 {mem_total}，数据库执行 {sql_count} 次，';
-	$string.= '用时 {sql_time} 秒，缓存执行 {cache_count} 次，用时 {cache_time} 秒';
+	$string = '執行 {total} 秒，記憶體使用 {mem_total}，資料庫執行 {sql_count} 次，';
+	$string.= '用時 {sql_time} 秒，快取執行 {cache_count} 次，用時 {cache_time} 秒';
 	$array = array('total'=>$time,'mem_total'=>$memory);
 	$array['sql_count']= $app->db->sql_count();
 	$array['sql_time'] = $app->db->sql_time();
@@ -102,13 +102,13 @@ function debug_time()
 }
 
 /**
- * PHPOK4最新框架，一般不直接调用此框架
- * @更新时间 2016年06月05日
+ * PHPOK4最新框架，一般不直接呼叫此框架
+ * @更新時間 2016年06月05日
 **/
 class _init_phpok
 {
 	/**
-	 * 指定app_id，该id是通过入口的**APP_ID**来获取，留空使用www
+	 * 指定app_id，該id是通過入口的**APP_ID**來獲取，留空使用www
 	**/
 	public $app_id = "www";
 
@@ -119,12 +119,12 @@ class _init_phpok
 	public $func = 'index';
 
 	/**
-	 * 定义网站程序根目录，对应入口的**ROOT**，为空使用./
+	 * 定義網站程式根目錄，對應入口的**ROOT**，為空使用./
 	**/
 	public $dir_root = "./";
 
 	/**
-	 * 框架目录，对应入口的**FRAMEWORK**，为空使用phpok/
+	 * 框架目錄，對應入口的**FRAMEWORK**，為空使用phpok/
 	**/
 	public $dir_phpok = "phpok/";
 
@@ -136,108 +136,108 @@ class _init_phpok
 	public $dir_app = './_app/';
 
 	/**
-	 * 定义引挈，在P4中，将MySQL，Cache，Session设为三个引挈（后续版本可能会改动）
+	 * 定義引挈，在P4中，將MySQL，Cache，Session設為三個引挈（後續版本可能會改動）
 	**/
 	public $engine;
 
 	/**
-	 * 配置信息，对应framework/config/目录下的内容及根目录的config.php里的信息
+	 * 配置資訊，對應framework/config/目錄下的內容及根目錄的config.php裡的資訊
 	**/
 	public $config;
 
 	/**
-	 * 定义版本，该参数会被常量VERSION改变，如使用了在线升级，会被update.xml里改变，即
-	 * 优先级是：update.xml > version.php > 自身
+	 * 定義版本，該引數會被常量VERSION改變，如使用了線上升級，會被update.xml裡改變，即
+	 * 優先順序是：update.xml > version.php > 自身
 	**/
 	public $version = "4.0";
 
 	/**
-	 * 当前时间，该时间是经常config里的两个参数timezone和timetuning调整过的，适用于虚拟主机用户无法较正服务器时间用的
+	 * 當前時間，該時間是經常config裡的兩個引數timezone和timetuning調整過的，適用於虛擬主機使用者無法較正伺服器時間用的
 	**/
 	public $time;
 
 	/**
-	 * 当前网址，由系统生成，在模板中直接使用{$sys.url}输出
+	 * 當前網址，由系統生成，在模板中直接使用{$sys.url}輸出
 	**/
 	public $url;
 	
 	/**
-	 * 授权类型，对应license.php里的常量LICENSE
+	 * 授權型別，對應license.php裡的常量LICENSE
 	**/
 	public $license = "LGPL";
 
 	/**
-	 * 授权码，16位或32位的授权码，要求全部大写，对应license.php里的常量LICENSE_CODE
+	 * 授權碼，16位或32位的授權碼，要求全部大寫，對應license.php裡的常量LICENSE_CODE
 	**/
 	public $license_code = "";
 
 	/**
-	 * 授权时间，对应license.php里的常量LICENSE_DATE
+	 * 授權時間，對應license.php裡的常量LICENSE_DATE
 	**/
 	public $license_date = "";
 
 	/**
-	 * 授权者称呼，企业授权填写公司名称，个人授权填写姓名，对应license.php里的常量LICENSE_NAME
+	 * 授權者稱呼，企業授權填寫公司名稱，個人授權填寫姓名，對應license.php裡的常量LICENSE_NAME
 	**/
 	public $license_name = "phpok";
 
 	/**
-	 * 授权的域名，注意必须以.开始，仅支持国际域名，二级域名享有国际域名授权，对应license.php里的常量LICENSE_SITE
+	 * 授權的域名，注意必須以.開始，僅支援國際域名，二級域名享有國際域名授權，對應license.php裡的常量LICENSE_SITE
 	**/
 	public $license_site = "phpok.com";
 
 	/**
-	 * 显示开发者信息，即Powered by信息，对应license.php里的常量LICENSE_POWERED
+	 * 顯示開發者資訊，即Powered by資訊，對應license.php裡的常量LICENSE_POWERED
 	**/
 	public $license_powered = true;
 
 	/**
-	 * 是否是手机端，如果使用手机端可能会改写网址，此项受config配置里的mobile相关参数影响
+	 * 是否是手機端，如果使用手機端可能會改寫網址，此項受config配置裡的mobile相關引數影響
 	**/
 	public $is_mobile = false;
 
 	/**
-	 * 定义插件
+	 * 定義外掛
 	**/
 	public $plugin;
 
 	/**
-	 * 通过framework/form/里实现自定义扩展动态调用CSS样式，后续版本将抛弃此功能
+	 * 通過framework/form/裡實現自定義擴充套件動態呼叫CSS樣式，後續版本將拋棄此功能
 	**/
 	public $csslist;
 
 	/**
-	 * 通过framework/form/里实现自定义扩展动态调用js文件，后续版本将抛弃此功能
+	 * 通過framework/form/裡實現自定義擴充套件動態呼叫js檔案，後續版本將拋棄此功能
 	**/
 	public $jslist;
 
 	/**
-	 * 语言包，默认使用gettext方法，系统不支持将使用第三方扩展读取pomo文件
+	 * 語言包，預設使用gettext方法，系統不支援將使用第三方擴充套件讀取pomo檔案
 	**/
 	public $lang;
 
 	/**
-	 * 语言ID，暂时生成的网址不支持带语言参数
+	 * 語言ID，暫時生成的網址不支援帶語言引數
 	**/
 	public $langid;
 
 	/**
-	 * 语言读取言式，通过系统检测，支持gettext和user两种
+	 * 語言讀取言式，通過系統檢測，支援gettext和user兩種
 	**/
 	private $language_status = 'user';
 
 	/**
-	 * 网关路由接口，对应文件夹gateway里的PHP执行
+	 * 閘道器路由介面，對應資料夾gateway裡的PHP執行
 	**/
 	public $gateway;
 
 	/**
-	 * 用于api.php接口接入传递token参数，此项功能还不成熟，请慎用
+	 * 用於api.php介面接入傳遞token引數，此項功能還不成熟，請慎用
 	**/
 	public $token;
 
 	/**
-	 * 数据传输是否使用Ajax
+	 * 資料傳輸是否使用Ajax
 	**/
 	public $is_ajax = false;
 
@@ -246,7 +246,7 @@ class _init_phpok
 	private $_dataParams = array();
 
 	/**
-	 * 构造函数，用于初化一些数据
+	 * 建構函式，用於初化一些資料
 	**/
 	public function __construct()
 	{
@@ -259,10 +259,10 @@ class _init_phpok
 	}
 
 	/**
-	 * 变量参数核心处理
-	 * @参数 $id 变量名
-	 * @参数 $val 变量值
-	 * @参数 $type 变量类型，system 系统变量，config 配置变量，site 站点变量
+	 * 變數引數核心處理
+	 * @引數 $id 變數名
+	 * @引數 $val 變數值
+	 * @引數 $type 變數型別，system 系統變數，config 配置變數，site 站點變數
 	**/
 	final public function config($id,$val='',$type='system')
 	{
@@ -379,7 +379,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 初始化网址要输出的一些全局信息，如网站信息，初始化后的SEO信息
+	 * 初始化網址要輸出的一些全域性資訊，如網站資訊，初始化後的SEO資訊
 	**/
 	private function init_assign()
 	{
@@ -419,9 +419,9 @@ class _init_phpok
 	}
 
 	/**
-	 * 加载语言包
-	 * @参数 $langid 字符串，留空加载default，中文不需要加载语言包
-	 * @更新时间 2016年06月05日
+	 * 載入語言包
+	 * @引數 $langid 字串，留空載入default，中文不需要載入語言包
+	 * @更新時間 2016年06月05日
 	**/
 	public function language($langid='default')
 	{
@@ -440,11 +440,11 @@ class _init_phpok
 	}
 
 	/**
-	 * 语言包变量格式化，$info将转化成系统的语言包，同是将$info里的带{变量}替换成$var里传过来的信息
-	 * @参数 $info 字符串，要替变的字符串用**{}**包围，包围的内容对应$var里的$key
-	 * @参数 $var 数组，要替换的字符。
-	 * @返回 字符串，$info为空返回false
-	 * @更新时间 2016年06月05日
+	 * 語言包變數格式化，$info將轉化成系統的語言包，同是將$info裡的帶{變數}替換成$var裡傳過來的資訊
+	 * @引數 $info 字串，要替變的字串用**{}**包圍，包圍的內容對應$var裡的$key
+	 * @引數 $var 陣列，要替換的字元。
+	 * @返回 字串，$info為空返回false
+	 * @更新時間 2016年06月05日
 	**/
 	final public function lang_format($info,$var='')
 	{
@@ -471,7 +471,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 加载视图引挈，后台加载framework/view/下的模板文件，css，js，images路径不会修改。前端加载tpl/下的模板文件
+	 * 載入檢視引挈，後臺載入framework/view/下的模板檔案，css，js，images路徑不會修改。前端載入tpl/下的模板檔案
 	**/
 	public function init_view()
 	{
@@ -487,7 +487,7 @@ class _init_phpok
 			$tpl_rs["dir_root"] = $this->dir_root;
 			$tpl_rs["refresh_auto"] = true;
 			$tpl_rs["tpl_ext"] = "html";
-			//定制语言模板ID
+			//定製語言模板ID
 			$tpl_rs['langid'] = 'default';
 			if($this->session->val('admin_lang_id')){
 				$tpl_rs['langid'] = $this->session->val('admin_lang_id');
@@ -496,14 +496,14 @@ class _init_phpok
 		}else{
 			if($this->app_id == 'www'){
 				if(!$this->site["tpl_id"] || ($this->site["tpl_id"] && !is_array($this->site["tpl_id"]))){
-					$this->_error("未指定模板文件");
+					$this->_error("未指定模板檔案");
 				}
 			}
 			$this->model('site')->site_id($this->site['id']);
 			$this->model('url')->base_url($this->url);
 			$this->model('url')->set_type($this->site['url_type']);
 			$this->model('url')->protected_ctrl($this->model('site')->reserved());
-			//初始化伪静态中需要的东西
+			//初始化偽靜態中需要的東西
 			if($this->site['url_type'] == 'rewrite'){
 				$this->model('url')->site_id($this->site['id']);
 				$this->model('rewrite')->site_id($this->site['id']);
@@ -516,13 +516,13 @@ class _init_phpok
 		}
 		include_once($this->dir_phpok."phpok_tpl_helper.php");
 		if($this->app_id == 'www' && !$this->site['status']){
-			$close = $this->site['content'] ? $this->site['content'] : P_Lang('网站暂停关闭');
+			$close = $this->site['content'] ? $this->site['content'] : P_Lang('網站暫停關閉');
 			$this->_tip($close,2);
 		}
 	}
 
 	/**
-	 * 手机判断，使用了第三方扩展extension里的mobile类
+	 * 手機判斷，使用了第三方擴充套件extension裡的mobile類
 	**/
 	public function is_mobile()
 	{
@@ -533,7 +533,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 初始化加载站点信息，后台仅加载站点信息，返回true，前端会执行域名判断，手机判断，及模板加载
+	 * 初始化載入站點資訊，後臺僅載入站點資訊，返回true，前端會執行域名判斷，手機判斷，及模板載入
 	**/
 	public function init_site()
 	{
@@ -553,11 +553,11 @@ class _init_phpok
 		}
 		$domain = $this->lib('server')->domain($this->config['get_domain_method']);
 		if(!$domain){
-			$this->_error('无法获取网站域名信息，请检查环境是否支持$_SERVER["SERVER_NAME"]或$_SERVER["HTTP_HOST"]');
+			$this->_error('無法獲取網站域名資訊，請檢查環境是否支援$_SERVER["SERVER_NAME"]或$_SERVER["HTTP_HOST"]');
 		}
 		$site_rs = $this->model('site')->site_info(($site_id ? $site_id : $domain));
 		if(!$site_rs && $this->app_id == 'www'){
-			$this->_error('网站信息不存在或未启用');
+			$this->_error('網站資訊不存在或未啟用');
 		}
 		if(!$site_rs['is_default']){
 			$site_default = $this->model('site')->get_one_default();
@@ -663,7 +663,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 判断是否启用https
+	 * 判斷是否啟用https
 	**/
 	protected function is_https()
 	{
@@ -674,8 +674,8 @@ class _init_phpok
 	}
 
 	/**
-	 * 装载插件，程序在初始化时就执行插件加载，一次性加载但未运行，
-	 * 如果插件编写有问题，会直接无法运行。因此加载插件时请仔细检查。
+	 * 裝載外掛，程式在初始化時就執行外掛載入，一次性載入但未執行，
+	 * 如果外掛編寫有問題，會直接無法執行。因此載入外掛時請仔細檢查。
 	**/
 	public function init_plugin()
 	{
@@ -701,12 +701,12 @@ class _init_phpok
 	}
 
 	/**
-	 * 动态引态第三方类包，官方提供的类包在framework/libs/下，用户自行编写的class放在extension目录下。
-	 * 请注意，extension支持下的类支持config.inc.php配置自动执行
-	 * config.inc.php支持的参数有：
-	 * 		1. auto，自动运行的方法
-	 *		2. include，包含这个类下需要调用的其他php文件，多个文件用英文逗号隔开，仅支持相对路径
-	 * @参数 $class，类的名称，第三方对应的是文件夹名称，要求全部小写
+	 * 動態引態第三方類包，官方提供的類包在framework/libs/下，使用者自行編寫的class放在extension目錄下。
+	 * 請注意，extension支援下的類支援config.inc.php配置自動執行
+	 * config.inc.php支援的引數有：
+	 * 		1. auto，自動執行的方法
+	 *		2. include，包含這個類下需要呼叫的其他php檔案，多個檔案用英文逗號隔開，僅支援相對路徑
+	 * @引數 $class，類的名稱，第三方對應的是資料夾名稱，要求全部小寫
 	**/
 	public function lib($class='')
 	{
@@ -750,7 +750,7 @@ class _init_phpok
 			}
 		}
 		if(!$chkstatus){
-			$this->error(P_Lang('类文件{classfile}不存在',array('classfile'=>$class.'.php')));
+			$this->error(P_Lang('類檔案{classfile}不存在',array('classfile'=>$class.'.php')));
 		}
 		$this->$tmp = new $tmp($config['param']);
 		if($config['auto']){
@@ -763,9 +763,9 @@ class _init_phpok
 	}
 
 	/**
-	 * 按需加载 Control 类文件，以实现control里数据交叉处理
-	 * @参数 $name 字符串，方法名称
-	 * @参数 $appid 字符串，指定APP_ID，不指定使用内置
+	 * 按需載入 Control 類檔案，以實現control裡資料交叉處理
+	 * @引數 $name 字串，方法名稱
+	 * @引數 $appid 字串，指定APP_ID，不指定使用內建
 	**/
 	public function control($name,$appid='')
 	{
@@ -798,31 +798,31 @@ class _init_phpok
 	}
 
 	/**
-	 * 按需加载Model信息，所有的文件均放在framework/model/目录下。会根据**app_id**自动加载同名但不同入口的文件
-	 * @参数 $name，字符串
-	 * @返回 实例化后的类，出错则中止运行报错
-	 * @更新时间 2016年06月05日
+	 * 按需載入Model資訊，所有的檔案均放在framework/model/目錄下。會根據**app_id**自動載入同名但不同入口的檔案
+	 * @引數 $name，字串
+	 * @返回 例項化後的類，出錯則中止執行報錯
+	 * @更新時間 2016年06月05日
 	**/
 	public function model($name)
 	{
 		$class_name = $name."_model";
 		$class_base = $name."_model_base";
-		//扩展类存在，读扩展类
+		//擴充套件類存在，讀擴充套件類
 		if($this->$class_name && is_object($this->$class_name)){
 			return $this->$class_name;
 		}
-		//扩展类不存在，只有基类，则读基类
+		//擴充套件類不存在，只有基類，則讀基類
 		if($this->$class_base && is_object($this->$class_base)){
 			return $this->$class_base;
 		}
-		//检查是否有 phpok5 使用的类
+		//檢查是否有 phpok5 使用的類
 		$model_file = $this->dir_app.$name.'/model.php';
 		if(is_file($model_file)){
 			return $this->_model_phpok5($name);
 		}
 		$basefile = $this->dir_phpok.'model/'.$name.'.php';
 		if(!file_exists($basefile)){
-			$this->error_404("Model基础类：".$name." 不存在，请检查");
+			$this->error_404("Model基礎類：".$name." 不存在，請檢查");
 		}
 		include($basefile);
 		$extfile = $this->dir_phpok.'model/'.$this->app_id.'/'.$name.'_model.php';
@@ -861,18 +861,18 @@ class _init_phpok
 	}
 
 	/**
-	 * 运行插件
-	 * @参数 $ap 字符串，对应插件下的方法
-	 * @参数 $param 执行方法中涉及到的参数，字符串，可根据实际情况传入
-	 * @返回 视插件运行返回，默认返回true或false
-	 * @更新时间 2016年06月05日
+	 * 執行外掛
+	 * @引數 $ap 字串，對應外掛下的方法
+	 * @引數 $param 執行方法中涉及到的引數，字串，可根據實際情況傳入
+	 * @返回 視外掛執行返回，預設返回true或false
+	 * @更新時間 2016年06月05日
 	**/
 	public function plugin($ap,$param="")
 	{
 		if(!$ap){
 			return false;
 		}
-		$ap = str_replace("-","_",$ap);//替换节点的中划线为下划线
+		$ap = str_replace("-","_",$ap);//替換節點的中劃線為下劃線
 		if(!$this->plugin || count($this->plugin)<1 || !is_array($this->plugin)){
 			return false;
 		}
@@ -903,7 +903,7 @@ class _init_phpok
 		if(!$ap){
 			return false;
 		}
-		$ap = str_replace("-","_",$ap);//替换节点的中划线为下划线
+		$ap = str_replace("-","_",$ap);//替換節點的中劃線為下劃線
 		$applist = $this->model('appsys')->installed();
 		if(!$applist){
 			return false;
@@ -933,8 +933,8 @@ class _init_phpok
 	}
 
 	/**
-	 * 加载HTML插件节点
-	 * @参数 $name 插件节点名称
+	 * 載入HTML外掛節點
+	 * @引數 $name 外掛節點名稱
 	**/
 	public function plugin_html_ap($name)
 	{
@@ -950,12 +950,12 @@ class _init_phpok
 	}
 
 	/**
-	 * 装载资源引挈，默认引挈加载将在config里配置
+	 * 裝載資源引挈，預設引挈載入將在config裡配置
 	**/
 	private function init_engine()
 	{
 		if(!$this->config["db"] && !$this->config["engine"]){
-			$this->_error("资源引挈装载失败，请检查您的资源引挈配置，如数据库连接配置等");
+			$this->_error("資源引挈裝載失敗，請檢查您的資源引挈配置，如資料庫連線配置等");
 		}
 		if($this->config["db"] && !$this->config["engine"]["db"]){
 			$this->config["engine"]["db"] = $this->config["db"];
@@ -1018,8 +1018,8 @@ class _init_phpok
 	}
 
 	/**
-	 * 读取网站参数配置
-	 * @更新时间 2016年02月05日
+	 * 讀取網站引數配置
+	 * @更新時間 2016年02月05日
 	 */
 	private function init_config()
 	{
@@ -1027,7 +1027,7 @@ class _init_phpok
 		if(file_exists($this->dir_config.'global.ini.php')){
 			$config = parse_ini_file($this->dir_config.'global.ini.php',true);
 		}
-		//装载引挈参数
+		//裝載引挈引數
 		if(file_exists($this->dir_config.'engine.ini.php')){
 			$ext = parse_ini_file($this->dir_config.'engine.ini.php',true);
 			if($ext && is_array($ext)){
@@ -1035,7 +1035,7 @@ class _init_phpok
 				unset($ext);
 			}
 		}
-		//连接数据库
+		//連線資料庫
 		if(file_exists($this->dir_config.'db.ini.php')){
 			$ext = parse_ini_file($this->dir_config.'db.ini.php',true);
 			if($ext && is_array($ext)){
@@ -1051,8 +1051,8 @@ class _init_phpok
 			}
 		}
 
-		//兼容旧版本操作，继续读取 config.php 文件
-		//将在下一版本更新取消
+		//相容舊版本操作，繼續讀取 config.php 檔案
+		//將在下一版本更新取消
 		if(file_exists($this->dir_root.'config.php')){
 			include_once($this->dir_root.'config.php');
 		}
@@ -1088,14 +1088,14 @@ class _init_phpok
 	}
 
 	/**
-	 * 网址生成，在模板中通过{url ctrl=控制器 func=方法 id=标识 …/}生成网址
-	 * @参数 $ctrl 字符串或数字，系统保留字串（$config[reserved]）为系统，非保留字符自动移成标识符或ID
-	 * @参数 $func 字符串，当ctrl为标识或ID是，该参数对应cate里的标识
-	 * @参数 $ext 字符串，扩展参数，格式为：变量名=变量值，多个扩展参数用&符号连接，示例：pageid=1&param=1
-	 * @参数 $appid 字符串，留空自动调用当前页面系统使用的app_id，支持的字符串有：api，www，admin三个
-	 * @参数 $baseurl 布尔值，为true时网址会带上{$sys.url}，即http://****，为false时，仅返回相对网址
-	 * @返回 字符串，网址链接
-	 * @更新时间 2016年06月05日
+	 * 網址生成，在模板中通過{url ctrl=控制器 func=方法 id=標識 …/}生成網址
+	 * @引數 $ctrl 字串或數字，系統保留字串（$config[reserved]）為系統，非保留字元自動移成識別符號或ID
+	 * @引數 $func 字串，當ctrl為標識或ID是，該引數對應cate裡的標識
+	 * @引數 $ext 字串，擴充套件引數，格式為：變數名=變數值，多個擴充套件引數用&符號連線，示例：pageid=1&param=1
+	 * @引數 $appid 字串，留空自動呼叫當前頁面系統使用的app_id，支援的字串有：api，www，admin三個
+	 * @引數 $baseurl 布林值，為true時網址會帶上{$sys.url}，即http://****，為false時，僅返回相對網址
+	 * @返回 字串，網址連結
+	 * @更新時間 2016年06月05日
 	**/
 	final public function url($ctrl="",$func="",$ext="",$appid='',$baseurl=false)
 	{
@@ -1116,7 +1116,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 自动生成网址，系统自带
+	 * 自動生成網址，系統自帶
 	**/
 	final public function root_url($siteId=0)
 	{
@@ -1129,7 +1129,7 @@ class _init_phpok
 			$myurl = $this->lib('server')->domain($this->config['get_domain_method']);
 		}
 		if(!$myurl){
-			$this->_error('无法获取网站域名信息，请检查环境是否支持$_SERVER["SERVER_NAME"]或$_SERVER["HTTP_HOST"]');
+			$this->_error('無法獲取網站域名資訊，請檢查環境是否支援$_SERVER["SERVER_NAME"]或$_SERVER["HTTP_HOST"]');
 		}
 		if($port != "80" && $port != "443"){
 			$myurl .= ":".$port;
@@ -1155,11 +1155,11 @@ class _init_phpok
 	}
 	
 	/**
-	 * 配置网站全局常量
+	 * 配置網站全域性常量
 	 */
 	private function init_constant()
 	{
-		//配置程序根目录
+		//配置程式根目錄
 		if(!defined("ROOT")){
 			define("ROOT",str_replace("\\","/",dirname(__FILE__))."/../");
 		}
@@ -1167,7 +1167,7 @@ class _init_phpok
 		if(substr($this->dir_root,-1) != "/"){
 			$this->dir_root .= "/";
 		}
-		//配置访问根目录
+		//配置訪問根目錄
 		if(!defined("WEBROOT")){
 			define("WEBROOT",'/');
 		}
@@ -1178,7 +1178,7 @@ class _init_phpok
 		if($this->dir_webroot && substr($this->dir_webroot,-1) != "/"){
 			$this->dir_webroot .= "/";
 		}
-		//配置框架根目录
+		//配置框架根目錄
 		if(!defined("FRAMEWORK")){
 			define("FRAMEWORK",$this->dir_root."framework/");
 		}
@@ -1203,12 +1203,12 @@ class _init_phpok
 			define('OKAPP',ROOT.'_app/');
 		}
 		$this->dir_app = OKAPP;
-		//定义APP_ID
+		//定義APP_ID
 		if(!defined("APP_ID")){
 			define("APP_ID","www");
 		}
 		$this->app_id = APP_ID;
-		//判断加载的版本及授权方式
+		//判斷載入的版本及授權方式
 		if(file_exists($this->dir_root."version.php")){
 			include($this->dir_root."version.php");
 			$this->version = defined("VERSION") ? VERSION : "4.5.0";
@@ -1237,11 +1237,11 @@ class _init_phpok
 	}
 
 	/**
-	 * 通过post或get取得数据，自动判断是否转义，未转义将自动转义，转义后执行格式化操作
-	 * @参数 $id 字符串，要取得的数据ID，对应网页中的input里的name信息
-	 * @参数 $type 字符串，格式化方式，默认是safe，支持：safe，html，html_js，float，int，checkbox，time，text，system等多种格式化方式
-	 * @参数 $ext 数值或布尔值，为1或true时，在type为html时，等同于html_js，当type为func时，则ext为直接运行的函数
-	 * @返回 格式化后的数据
+	 * 通過post或get取得資料，自動判斷是否轉義，未轉義將自動轉義，轉義後執行格式化操作
+	 * @引數 $id 字串，要取得的資料ID，對應網頁中的input裡的name資訊
+	 * @引數 $type 字串，格式化方式，預設是safe，支援：safe，html，html_js，float，int，checkbox，time，text，system等多種格式化方式
+	 * @引數 $ext 數值或布林值，為1或true時，在type為html時，等同於html_js，當type為func時，則ext為直接執行的函式
+	 * @返回 格式化後的資料
 	**/
 	final public function get($id,$type="safe",$ext="")
 	{
@@ -1253,7 +1253,7 @@ class _init_phpok
 				return '';
 			}
 		}
-		//判断内容是否有转义，所有未转义的数据都直接转义
+		//判斷內容是否有轉義，所有未轉義的資料都直接轉義
 		$addslashes = false;
 		if(function_exists("get_magic_quotes_gpc") && get_magic_quotes_gpc()){
 			$addslashes = true;
@@ -1265,10 +1265,10 @@ class _init_phpok
 	}
 
 	/**
-	 * 格式化内容
-	 * @参数 $msg，要格式化的内容，该内容已经转义了
-	 * @参数 $type，类型，支持：safe，text，html，html_js，func，int，float，system
-	 * @参数 $ext，扩展，当type为html时，ext存在表示支持js，不存在表示不支持js，当type为func属性时，表示ext直接执行函数
+	 * 格式化內容
+	 * @引數 $msg，要格式化的內容，該內容已經轉義了
+	 * @引數 $type，型別，支援：safe，text，html，html_js，func，int，float，system
+	 * @引數 $ext，擴充套件，當type為html時，ext存在表示支援js，不存在表示不支援js，當type為func屬性時，表示ext直接執行函式
 	**/
 	final public function format($msg,$type="safe",$ext="")
 	{
@@ -1300,7 +1300,7 @@ class _init_phpok
 			return addslashes($msg);
 		}
 		$msg = stripslashes($msg);
-		//格式化处理内容
+		//格式化處理內容
 		switch ($type){
 			case 'safe':
 				$msg = str_replace(array("\\","'",'"',"<",">"),array("&#92;","&#39;","&quot;","&lt;","&gt;"),$msg);
@@ -1353,7 +1353,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 安全的HTML信息，用于过滤iframe,script,link及html中涉及到的一些触发信息
+	 * 安全的HTML資訊，用於過濾iframe,script,link及html中涉及到的一些觸發資訊
 	**/
 	public function safe_html($info)
 	{
@@ -1361,7 +1361,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 转义数据
+	 * 轉義資料
 	**/
 	private function _addslashes($val)
 	{
@@ -1376,9 +1376,9 @@ class _init_phpok
 	}
 
 	/**
-	 * 分配信息给模板，使用模板中可调用
-	 * @参数 $var 模板中要使用的变量名
-	 * @参数 $val 要分配的信息
+	 * 分配資訊給模板，使用模板中可呼叫
+	 * @引數 $var 模板中要使用的變數名
+	 * @引數 $val 要分配的資訊
 	**/
 	final public function assign($var,$val)
 	{
@@ -1386,8 +1386,8 @@ class _init_phpok
 	}
 
 	/**
-	 * 注销分配给模板中的变量信息
-	 * @参数 $var 要注销的变量
+	 * 登出分配給模板中的變數資訊
+	 * @引數 $var 要登出的變數
 	**/
 	final public function unassign($var)
 	{
@@ -1395,8 +1395,8 @@ class _init_phpok
 	}
 
 	/**
-	 * 视图输出，这是针对 phpok5 版写的，实现不同的路径的模板文件识别，不适合插件
-	 * @参数 $file 相对文件
+	 * 檢視輸出，這是針對 phpok5 版寫的，實現不同的路徑的模板檔案識別，不適合外掛
+	 * @引數 $file 相對檔案
 	**/
 	final public function display($file)
 	{
@@ -1408,19 +1408,19 @@ class _init_phpok
 	}
 
 	/**
-	 * 输出HTML信息
-	 * @参数 $file 字符串，指定的模板文件，支持不带后缀的模板名称，也支持完整的模板名称，也支持HTML内容，具体受参数$type影响
-	 * @参数 $type 字符串，支持 file：不带后缀的模板名，file-ext：带后缀的模板名，
-	 *                         content：直接是内容，msg：等同于content，abs-file：完整路径的模板文件
-	 * @参数 $path_format 布尔值 是否格式化路径信息，慎用，模板里有大量嵌套，可能会混乱（未深度测试）
-	 * @返回 无，直接输出HTML信息到设备上
+	 * 輸出HTML資訊
+	 * @引數 $file 字串，指定的模板檔案，支援不帶字尾的模板名稱，也支援完整的模板名稱，也支援HTML內容，具體受引數$type影響
+	 * @引數 $type 字串，支援 file：不帶字尾的模板名，file-ext：帶字尾的模板名，
+	 *                         content：直接是內容，msg：等同於content，abs-file：完整路徑的模板檔案
+	 * @引數 $path_format 布林值 是否格式化路徑資訊，慎用，模板裡有大量巢狀，可能會混亂（未深度測試）
+	 * @返回 無，直接輸出HTML資訊到裝置上
 	**/
 	final public function view($file,$type="file",$path_format=true)
 	{
 		$this->plugin('phpok-after');
 		$this->plugin('ap-'.$this->ctrl.'-'.$this->func.'-after');
 		
-		//是否启用异步通知
+		//是否啟用非同步通知
 		if($this->config['async']['status'] && $this->config['async']['interval_times']){
 			$check = false;
 			if(!file_exists($this->dir_cache.'async_interval_times.php')){
@@ -1448,12 +1448,12 @@ class _init_phpok
 	}
 
 	/**
-	 * 取得HTML信息，不输出到设备上，方便二次更改
-	 * @参数 $file 字符串，指定的模板文件，支持不带后缀的模板名称，也支持完整的模板名称，也支持HTML内容，具体受参数$type影响
-	 * @参数 $type 字符串，支持 file：不带后缀的模板名，file-ext：带后缀的模板名，
-	 *                         content：直接是内容，msg：等同于content，abs-file：完整路径的模板文件
-	 * @参数 $path_format 布尔值 是否格式化路径信息，慎用，模板里有大量嵌套，可能会混乱（未深度测试）
-	 * @返回 字符串
+	 * 取得HTML資訊，不輸出到裝置上，方便二次更改
+	 * @引數 $file 字串，指定的模板檔案，支援不帶字尾的模板名稱，也支援完整的模板名稱，也支援HTML內容，具體受引數$type影響
+	 * @引數 $type 字串，支援 file：不帶字尾的模板名，file-ext：帶字尾的模板名，
+	 *                         content：直接是內容，msg：等同於content，abs-file：完整路徑的模板檔案
+	 * @引數 $path_format 布林值 是否格式化路徑資訊，慎用，模板裡有大量巢狀，可能會混亂（未深度測試）
+	 * @返回 字串
 	**/
 	final public function fetch($file,$type="file",$path_format=true)
 	{
@@ -1463,7 +1463,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 取得系统URL
+	 * 取得系統URL
 	**/
 	final public function get_url()
 	{
@@ -1471,12 +1471,12 @@ class _init_phpok
 	}
 
 	/**
-	 * 异常抛出，该错误主要用于未加载模板时使用，出现这个错误，表示程序无法正常运行，直接中止
-	 * @参数 $content 字符串，在设备上要打印的错误信息
+	 * 異常丟擲，該錯誤主要用於未載入模板時使用，出現這個錯誤，表示程式無法正常執行，直接中止
+	 * @引數 $content 字串，在裝置上要列印的錯誤資訊
 	**/
 	final public function _error($content="")
 	{
-		if(!$content) $content = "异常请检查";
+		if(!$content) $content = "異常請檢查";
 		$html = '<!DOCTYPE html>'."\n";
 		$html.= '<html>'."\n";
 		$html.= '<head>'."\n";
@@ -1537,8 +1537,8 @@ class _init_phpok
 	}
 
 	/**
-	 * 执行应用，三个入口（前端，接口，后台）都是从这里执行，进行初始化处理
-	 * token 及 user_id 在 phpok5.0 中将剥离，不会放在核心引挈里
+	 * 執行應用，三個入口（前端，介面，後臺）都是從這裡執行，進行初始化處理
+	 * token 及 user_id 在 phpok5.0 中將剝離，不會放在核心引挈裡
 	**/
 	final public function action()
 	{
@@ -1558,7 +1558,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 接口入口处理
+	 * 介面入口處理
 	**/
 	private function action_api()
 	{
@@ -1622,7 +1622,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 前台入口处理
+	 * 前臺入口處理
 	**/
 	private function action_www()
 	{
@@ -1657,7 +1657,7 @@ class _init_phpok
 		if(!$func){
 			$func = 'index';
 		}
-		//针对乱七八糟的网址，或是路径进行清理
+		//針對亂七八糟的網址，或是路徑進行清理
 		if($ctrl == 'index' && $func == 'index'){
 			$uri = $this->data('uri.url');
 			$query = $this->data('uri.query');
@@ -1670,7 +1670,7 @@ class _init_phpok
 					}
 				}
 				if($tmp && is_array($tmp) && count($tmp)>0){
-					$this->error_404(P_Lang('您的请求信息不正确，请检查（无效参数）'));
+					$this->error_404(P_Lang('您的請求資訊不正確，請檢查（無效引數）'));
 				}
 			}
 			$docu = $this->data('uri.folder');
@@ -1689,14 +1689,14 @@ class _init_phpok
 				}
 			}
 			if($uri && $uri != '/' && $folder && $uri != $folder && !$exit){
-				$this->error_404(P_Lang('您的请求信息不正确，请检查（无效路由）'));
+				$this->error_404(P_Lang('您的請求資訊不正確，請檢查（無效路由）'));
 			}
 		}
 		$this->_action($ctrl,$func);
 	}
 
 	/**
-	 * 后台入口处理
+	 * 後臺入口處理
 	**/
 	private function action_admin()
 	{
@@ -1731,8 +1731,8 @@ class _init_phpok
 	}
 
 	/**
-	 * 网页跳转，此跳转基于PHP执行
-	 * @参数 $url 字符串，要跳转的网址
+	 * 網頁跳轉，此跳轉基於PHP執行
+	 * @引數 $url 字串，要跳轉的網址
 	**/
 	public function _location($url)
 	{
@@ -1749,13 +1749,13 @@ class _init_phpok
 	}
 
 	/**
-	 * 调用控制器及方法执行
-	 * @参数 $ctrl 控制器名称，根据不同的入口调用不同的控制器
-	 * @参数 $func 要执行的方法
+	 * 呼叫控制器及方法執行
+	 * @引數 $ctrl 控制器名稱，根據不同的入口呼叫不同的控制器
+	 * @引數 $func 要執行的方法
 	**/
 	private function _action($ctrl='index',$func='index')
 	{
-		//如果App_id非指定的三种，强制初始化
+		//如果App_id非指定的三種，強制初始化
 		if(!in_array($this->app_id,array('api','www','admin'))){
 			$this->app_id = 'www';
 		}
@@ -1782,7 +1782,7 @@ class _init_phpok
 		if(file_exists($this->dir_phpok.$this->app_id."/global.func.php")){
 			include($this->dir_phpok.$this->app_id."/global.func.php");
 		}
-		//前台后台都支持自定义加载的 global.func.php
+		//前臺後臺都支援自定義載入的 global.func.php
 		if(file_exists($this->dir_plugin."global.func.php")){
 			include($this->dir_plugin."global.func.php");
 		}
@@ -1792,8 +1792,8 @@ class _init_phpok
 		if(file_exists($this->dir_root."gateway/global.func.php")){
 			include($this->dir_root."gateway/global.func.php");
 		}
-		//允许用户自定义加载 global.func.php 文件
-		//前台及接口支持二个地方加载，分别是：data，phpinc
+		//允許使用者自定義載入 global.func.php 檔案
+		//前臺及介面支援二個地方載入，分別是：data，phpinc
 		if($this->app_id != 'admin'){
 			if(file_exists($this->dir_data."global.func.php")){
 				include($this->dir_data."global.func.php");
@@ -1803,7 +1803,7 @@ class _init_phpok
 			}
 		}
 
-		//--- 增加 phpok5 写法
+		//--- 增加 phpok5 寫法
 		if(file_exists($this->dir_app.'global.func.php')){
 			include($this->dir_app."global.func.php");
 		}
@@ -1825,7 +1825,7 @@ class _init_phpok
 		}
 		$this->model('url')->protected_ctrl($protected_ctrl);
 
-		//自动运行的函数
+		//自動執行的函式
 		if($this->config[$this->app_id]["autoload_func"]){
 			$list = explode(",",$this->config[$this->app_id]["autoload_func"]);
 			foreach($list as $key=>$value){
@@ -1849,9 +1849,9 @@ class _init_phpok
 		if($ctrl == 'js' || $ctrl == 'ajax' || $ctrl == "inp"){
 			$dir_root = $this->dir_phpok;
 		}
-		//加载应用文件
+		//載入應用檔案
 		if(!file_exists($dir_root.$ctrl.'_control.php')){
-			$this->error_404('应用文件：'.$ctrl.'_control.php 不存在，请检查');
+			$this->error_404('應用檔案：'.$ctrl.'_control.php 不存在，請檢查');
 		}
 		include($dir_root.$ctrl.'_control.php');
 
@@ -1903,12 +1903,12 @@ class _init_phpok
 	}
 
 	/**
-	 * JSON数据输出，要注意的是在输出时会触发插件，故该方法在插件使用要小心，防止出现死循环
-	 * @参数 $content 要输出的内容，支持字符串，数组及布尔值，为布尔值是true直接输出 status=>ok，为false时输出 status=>error
-	 * @参数 $status 布尔值，为true时输出status=>ok，false输出status=>error，并附带相应的内容content=>$content
-	 * @参数 $exit 布尔值，为false时，不中止运行，会继续执行下面的PHP文件，一般不需要用到
-	 * @返回 格式化后json数据
-	 * @更新时间 2016年06月05日
+	 * JSON資料輸出，要注意的是在輸出時會觸發外掛，故該方法在外掛使用要小心，防止出現死迴圈
+	 * @引數 $content 要輸出的內容，支援字串，陣列及布林值，為布林值是true直接輸出 status=>ok，為false時輸出 status=>error
+	 * @引數 $status 布林值，為true時輸出status=>ok，false輸出status=>error，並附帶相應的內容content=>$content
+	 * @引數 $exit 布林值，為false時，不中止執行，會繼續執行下面的PHP檔案，一般不需要用到
+	 * @返回 格式化後json資料
+	 * @更新時間 2016年06月05日
 	**/
 	final public function json($content,$status=false,$exit=true)
 	{
@@ -1925,7 +1925,7 @@ class _init_phpok
 			$rs = array('status'=>'error');
 			exit($this->lib('json')->encode($rs));
 		}
-		//当content内容为true 且为布尔类型，直接返回正确通知结果
+		//當content內容為true 且為布林型別，直接返回正確通知結果
 		if($content && is_bool($content)){
 			$rs = array('status'=>'ok');
 			$this->plugin('phpok-after');
@@ -1949,12 +1949,12 @@ class _init_phpok
 
 
 	/**
-	 * JSONP数据返回操作
-	 * @参数 $content，混合型，为字符串或数组时，表示内容。为true或false时，status里的内容表示网址
-	 * @参数 $status，状态，如果为字符串时，表示网址
-	 * @参数 $url，网址，如果为true或false时表示状态
-	 * @返回 字符串
-	 * @更新时间 2016年06月11日
+	 * JSONP資料返回操作
+	 * @引數 $content，混合型，為字串或陣列時，表示內容。為true或false時，status裡的內容表示網址
+	 * @引數 $status，狀態，如果為字串時，表示網址
+	 * @引數 $url，網址，如果為true或false時表示狀態
+	 * @返回 字串
+	 * @更新時間 2016年06月11日
 	**/
 	final public function jsonp($content,$status=false,$url='')
 	{
@@ -2013,7 +2013,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 404错误，基于页面
+	 * 404錯誤，基於頁面
 	**/
 	final public function error_404($ajax=false)
 	{
@@ -2022,7 +2022,7 @@ class _init_phpok
 		header('Status: 404 Not Found');
 		if(true === $ajax || $this->is_ajax){
 			header('Content-Type:application/json; charset=utf-8');
-			exit($this->lib('json')->encode(array('status'=>false,'info'=>P_Lang('404错误'))));
+			exit($this->lib('json')->encode(array('status'=>false,'info'=>P_Lang('404錯誤'))));
 		}
 		if($ajax && is_string($ajax)){
 			$this->tpl->assign('info',$ajax);
@@ -2031,21 +2031,21 @@ class _init_phpok
 			$this->tpl->display('404');
 			exit;
 		}
-		echo '<h1>404错误</h1>';
+		echo '<h1>404錯誤</h1>';
 		if($ajax && is_string($ajax)){
 			echo "<p>".$ajax.'</p>';
 		}else{
-			echo '<p>您要访问的页面不存在</p>';
+			echo '<p>您要訪問的頁面不存在</p>';
 		}
 		exit;
 	}
 
 	/**
-	 * 友情错误提示，支持Ajax
-	 * @参数 $info 错误信息
-	 * @参数 $url 跳转网址
-	 * @参数 $ajax 是否为Ajax方式 当数字时指定跳转时间
-	 * @更新时间 2016年01月22日
+	 * 友情錯誤提示，支援Ajax
+	 * @引數 $info 錯誤資訊
+	 * @引數 $url 跳轉網址
+	 * @引數 $ajax 是否為Ajax方式 當數字時指定跳轉時間
+	 * @更新時間 2016年01月22日
 	**/
 	public function error($info='',$url='',$ajax=false)
 	{
@@ -2059,11 +2059,11 @@ class _init_phpok
 	}
 
 	/**
-	 * 友情成功提示，支持Ajax
-	 * @参数 $info 错误信息
-	 * @参数 $url 跳转网址
-	 * @参数 $ajax 是否为Ajax方式 当数字时指定跳转时间
-	 * @更新时间 2016年01月22日
+	 * 友情成功提示，支援Ajax
+	 * @引數 $info 錯誤資訊
+	 * @引數 $url 跳轉網址
+	 * @引數 $ajax 是否為Ajax方式 當數字時指定跳轉時間
+	 * @更新時間 2016年01月22日
 	 */
 	public function success($info='',$url='',$ajax=false)
 	{
@@ -2077,11 +2077,11 @@ class _init_phpok
 	}
 
 	/**
-	 * 提示信息
-	 * @参数 $info 错误信息
-	 * @参数 $url 跳转网址
-	 * @参数 $ajax 是否为Ajax方式 当数字时指定跳转时间
-	 * @更新时间 2016年01月22日
+	 * 提示資訊
+	 * @引數 $info 錯誤資訊
+	 * @引數 $url 跳轉網址
+	 * @引數 $ajax 是否為Ajax方式 當數字時指定跳轉時間
+	 * @更新時間 2016年01月22日
 	**/
 	public function tip($info='',$url='',$ajax=false)
 	{
@@ -2096,11 +2096,11 @@ class _init_phpok
 
 	/**
 	 * 友好提示
-	 * @参数 $info 错误信息
-     * @参数 $status 状态，1或true为成功，0或false为失败，2为提示
-	 * @参数 $url 跳转网址
-	 * @参数 $ajax 是否为Ajax方式 当数字时指定跳转时间
-	 * @更新时间 2016年01月22日
+	 * @引數 $info 錯誤資訊
+     * @引數 $status 狀態，1或true為成功，0或false為失敗，2為提示
+	 * @引數 $url 跳轉網址
+	 * @引數 $ajax 是否為Ajax方式 當數字時指定跳轉時間
+	 * @更新時間 2016年01月22日
 	**/
 	protected function _tip($info='',$status=0,$url='',$ajax=false)
 	{
@@ -2127,7 +2127,7 @@ class _init_phpok
 	        }
 	        $this->assign('url',$url);
         }
-        $this->assign('title',($status ? P_Lang('操作成功') : P_Lang('操作失败')));
+        $this->assign('title',($status ? P_Lang('操作成功') : P_Lang('操作失敗')));
         $this->assign('type',($status ? 'success' : 'error'));
         if($status == 2){
 	        $this->assign('type','notice');
@@ -2159,9 +2159,9 @@ class _init_phpok
 	}
 
 	/**
-	 * 针对PHPOK4前台执行SEO优化
-	 * @参数 $rs 数组，要替换的数据，需要包含：keywords或kw或keyword表示SEO里的关键字，
-	 *                                       description或desc表示优化描述，title表示优化标题
+	 * 針對PHPOK4前臺執行SEO優化
+	 * @引數 $rs 陣列，要替換的資料，需要包含：keywords或kw或keyword表示SEO裡的關鍵字，
+	 *                                       description或desc表示優化描述，title表示優化標題
 	**/
 	final public function phpok_seo($rs)
 	{
@@ -2187,7 +2187,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 增加js库，在HTML模板里可以直接使用 phpok_head_js，将生成符合标准的js文件链接
+	 * 增加js庫，在HTML模板裡可以直接使用 phpok_head_js，將生成符合標準的js檔案連結
 	**/
 	public function addjs($url='')
 	{
@@ -2195,7 +2195,7 @@ class _init_phpok
 	}
 
 	/**
-	 * 增加css文件链接，在HTML里可以直接使用 phpok_head_css，将生成符合标准的CSS文件链接
+	 * 增加css檔案連結，在HTML裡可以直接使用 phpok_head_css，將生成符合標準的CSS檔案連結
 	**/
 	public function addcss($url='')
 	{
@@ -2203,10 +2203,10 @@ class _init_phpok
 	}
 
 	/**
-	 * 第三方网关执行
-	 * @参数 $action 要执行的网关，param表示读取网关信息，extinfo表示变更网关扩展信息extinfo，exec表示网关路由文件的执行
-	 * @参数 $param action为param时表示网关ID，default表示读默认网关，action为extinfo时，param表示内容，
-	 *              action为exec时表示输出方式，为空返回，支持json，action为check时表示检测网关是否存在
+	 * 第三方閘道器執行
+	 * @引數 $action 要執行的閘道器，param表示讀取閘道器資訊，extinfo表示變更閘道器擴充套件資訊extinfo，exec表示閘道器路由檔案的執行
+	 * @引數 $param action為param時表示閘道器ID，default表示讀預設閘道器，action為extinfo時，param表示內容，
+	 *              action為exec時表示輸出方式，為空返回，支援json，action為check時表示檢測閘道器是否存在
 	**/
 	final public function gateway($action,$param='')
 	{
@@ -2263,7 +2263,7 @@ class _init_phpok
 }
 
 /**
- * 核心魔术方法，此项可实现类，方法的自动加载，PHPOK里的Control，Model及Plugin都继承了这个类
+ * 核心魔術方法，此項可實現類，方法的自動載入，PHPOK裡的Control，Model及Plugin都繼承了這個類
 **/
 class _init_auto
 {
@@ -2273,9 +2273,9 @@ class _init_auto
 	}
 
 	/**
-	 * 魔术方法之方法重载
-	 * @参数 $method $GLOBALS['app']下的方法，如果存在，直接调用，不存在，通过分析动态加载lib或是model
-	 * @参数 $param 传递过来的变量
+	 * 魔術方法之方法過載
+	 * @引數 $method $GLOBALS['app']下的方法，如果存在，直接呼叫，不存在，通過分析動態載入lib或是model
+	 * @引數 $param 傳遞過來的變數
 	**/
 	public function __call($method,$param)
 	{
@@ -2294,8 +2294,8 @@ class _init_auto
 	}
 
 	/**
-	 * 属性重载，读取不可访问属性的值时，尝试通过这里重载
-	 * @参数 $id $GLOBALS['app']下的属性
+	 * 屬性過載，讀取不可訪問屬性的值時，嘗試通過這裡過載
+	 * @引數 $id $GLOBALS['app']下的屬性
 	**/
 	public function __get($id)
 	{
@@ -2309,8 +2309,8 @@ class _init_auto
 	}
 
 	/**
-	 * 属性重载，当对不可访问属性调用
-	 * @参数 $id $GLOBALS['app']下的属性
+	 * 屬性過載，當對不可訪問屬性呼叫
+	 * @引數 $id $GLOBALS['app']下的屬性
 	**/
 	public function __isset($id)
 	{
@@ -2319,13 +2319,13 @@ class _init_auto
 }
 
 /**
- * 初始化第三方类，如果第三方类继承该类，则可以直接使用一些变量，而无需再定位及初化，
- * 继承该类后可以直接使用下类属性：<br />
- *     1. $this->dir_root，程序根目录<br />
- *     2. $this->dir_phpok，程序框架目录<br />
- *     3. $this->dir_data，程序数据保存目录<br />
- *     4. $this->dir_cache，缓存目录<br />
- *     5. $this->dir_extension，第三方扩展类根目录
+ * 初始化第三方類，如果第三方類繼承該類，則可以直接使用一些變數，而無需再定位及初化，
+ * 繼承該類後可以直接使用下類屬性：<br />
+ *     1. $this->dir_root，程式根目錄<br />
+ *     2. $this->dir_phpok，程式框架目錄<br />
+ *     3. $this->dir_data，程式資料儲存目錄<br />
+ *     4. $this->dir_cache，快取目錄<br />
+ *     5. $this->dir_extension，第三方擴充套件類根目錄
 **/
 class _init_lib
 {
@@ -2385,7 +2385,7 @@ class _init_lib
 }
 
 /**
- * PHPOK控制器，里面大部分函数将通过Global功能调用核心引挈
+ * PHPOK控制器，裡面大部分函式將通過Global功能呼叫核心引挈
 **/
 class phpok_control extends _init_auto
 {
@@ -2400,23 +2400,23 @@ class phpok_control extends _init_auto
 }
 
 /**
- * Model根类，继承了_into_auto类，支持直接调用核心引挈里的信息
+ * Model根類，繼承了_into_auto類，支援直接呼叫核心引挈裡的資訊
 **/
 class phpok_model extends _init_auto
 {
 	/**
-	 * 站点ID，所有的Model类都可以直接用这个
+	 * 站點ID，所有的Model類都可以直接用這個
 	**/
 	public $site_id = 0;
 
 	/**
-	 * 缓冲区，用于即时缓存信息，同一条SQL多次请求时直接从缓冲区获取，注意需要手动更新数据
+	 * 緩衝區，用於即時快取資訊，同一條SQL多次請求時直接從緩衝區獲取，注意需要手動更新資料
 	**/
 	protected $_buffer = array();
 
 	/**
-	 * 动态加载Model
-	 * @参数 $id 为空用于继承父构造函数，不为空时动态加载其他model类，即实现了多个model的互相调用
+	 * 動態載入Model
+	 * @引數 $id 為空用於繼承父建構函式，不為空時動態載入其他model類，即實現了多個model的互相呼叫
 	**/
 	public function model($id='')
 	{
@@ -2434,8 +2434,8 @@ class phpok_model extends _init_auto
 	}
 
 	/**
-	 * 定义站点ID，用于实现同一个程序里有多个站点
-	 * @参数 $site_id，站点ID
+	 * 定義站點ID，用於實現同一個程式裡有多個站點
+	 * @引數 $site_id，站點ID
 	**/
 	public function site_id($site_id=0)
 	{
@@ -2443,9 +2443,9 @@ class phpok_model extends _init_auto
 	}
 
 	/**
-	 * 动态获取下一个排序
-	 * @参数 $rs 数组或数字，为数字时返回该值+10后的数字，为数组时，尝试获取taxis或sort对应的数值，并返回+10后的数字，为空时返回10
-	 * @返回 数字，下一个排序
+	 * 動態獲取下一個排序
+	 * @引數 $rs 陣列或數字，為數字時返回該值+10後的數字，為陣列時，嘗試獲取taxis或sort對應的數值，並返回+10後的數字，為空時返回10
+	 * @返回 數字，下一個排序
 	**/
 	protected function return_next_taxis($rs='')
 	{
@@ -2463,9 +2463,9 @@ class phpok_model extends _init_auto
 	}
 
 	/**
-	 * 获取或保存缓冲区信息
-	 * @参数 $sql 缓冲区标识
-	 * @参数 $data 要保存的缓存信息
+	 * 獲取或儲存緩衝區資訊
+	 * @引數 $sql 緩衝區標識
+	 * @引數 $data 要儲存的快取資訊
 	**/
 	protected function _buffer($sql,$data='')
 	{
@@ -2482,7 +2482,7 @@ class phpok_model extends _init_auto
 }
 
 /**
- * 初始化插件类，即在插件中，也可以使用$this->model或是$this->lib等方法来获取相应的核心信息
+ * 初始化外掛類，即在外掛中，也可以使用$this->model或是$this->lib等方法來獲取相應的核心資訊
 **/
 class phpok_plugin extends _init_auto
 {
@@ -2492,7 +2492,7 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 返回插件的ID
+	 * 返回外掛的ID
 	**/
 	final public function _id()
 	{
@@ -2503,10 +2503,10 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 返回插件信息
-	 * @参数 $id 插件ID，为空时尝试读取当前插件ID
-	 * @返回 数组 id插件ID，title名称，author作者，version版本，note说明，param插件扩展保存的数据，这个是一个数组，path插件路径
-	 * @更新时间 
+	 * 返回外掛資訊
+	 * @引數 $id 外掛ID，為空時嘗試讀取當前外掛ID
+	 * @返回 陣列 id外掛ID，title名稱，author作者，version版本，note說明，param外掛擴充套件儲存的資料，這個是一個數組，path外掛路徑
+	 * @更新時間 
 	**/
 	final public function _info($id='')
 	{
@@ -2525,9 +2525,9 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 保存插件扩展数据，注意，这里仅保存插件的扩展数据
-	 * @参数 $ext 数组，要保存的数组
-	 * @参数 $id 字符串，指定的插件ID，为空尝试获取当前插件ID
+	 * 儲存外掛擴充套件資料，注意，這裡僅儲存外掛的擴充套件資料
+	 * @引數 $ext 陣列，要儲存的陣列
+	 * @引數 $id 字串，指定的外掛ID，為空嘗試獲取當前外掛ID
 	**/
 	final public function _save($ext,$id='')
 	{
@@ -2546,10 +2546,10 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 返回插件输出的HTML数据，请注意，这里并没有输出，只是返回
-	 * @参数 $name 模板名称，带后缀的模板名称，相对路径，系统会依次检查，具体请看：<b>private function _tplfile()</b>
-	 * @参数 $id 字符串，指定的插件ID，为空尝试获取当前插件ID
-	 * @返回 正确时返回模板内容，错误时返回false 
+	 * 返回外掛輸出的HTML資料，請注意，這裡並沒有輸出，只是返回
+	 * @引數 $name 模板名稱，帶字尾的模板名稱，相對路徑，系統會依次檢查，具體請看：<b>private function _tplfile()</b>
+	 * @引數 $id 字串，指定的外掛ID，為空嘗試獲取當前外掛ID
+	 * @返回 正確時返回模板內容，錯誤時返回false 
 	**/
 	final public function _tpl($name,$id='')
 	{
@@ -2561,10 +2561,10 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 输出的HTML数据到设备上，请注意，这里是输出，不是返回，同时也要注意，这里没有中止
-	 * @参数 $name 模板名称，带后缀的模板名称，相对路径，系统会依次检查，具体请看：<b>private function _tplfile()</b>
-	 * @参数 $id 字符串，指定的插件ID，为空尝试获取当前插件ID
-	 * @返回 正确时输出HTML，错误时跳过没有任何输出
+	 * 輸出的HTML資料到裝置上，請注意，這裡是輸出，不是返回，同時也要注意，這裡沒有中止
+	 * @引數 $name 模板名稱，帶字尾的模板名稱，相對路徑，系統會依次檢查，具體請看：<b>private function _tplfile()</b>
+	 * @引數 $id 字串，指定的外掛ID，為空嘗試獲取當前外掛ID
+	 * @返回 正確時輸出HTML，錯誤時跳過沒有任何輸出
 	**/
 	final public function _show($name,$id='')
 	{
@@ -2575,10 +2575,10 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 输出的HTML数据到设备上并中断后续操作，请注意，这里是输出，有中断
-	 * @参数 $name 模板名称，带后缀的模板名称，相对路径，系统会依次检查，具体请看：<b>private function _tplfile()</b>
-	 * @参数 $id 字符串，指定的插件ID，为空尝试获取当前插件ID
-	 * @返回 正确时输出HTML，错误时跳过没有任何输出
+	 * 輸出的HTML資料到裝置上並中斷後續操作，請注意，這裡是輸出，有中斷
+	 * @引數 $name 模板名稱，帶字尾的模板名稱，相對路徑，系統會依次檢查，具體請看：<b>private function _tplfile()</b>
+	 * @引數 $id 字串，指定的外掛ID，為空嘗試獲取當前外掛ID
+	 * @返回 正確時輸出HTML，錯誤時跳過沒有任何輸出
 	**/
 	final public function _view($name,$id='')
 	{
@@ -2590,17 +2590,17 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 按顺序读取挑出最近的一个模板
-	 * @参数 $name 模板名称，带后缀的模板名称，相对路径，系统会依次检查这些文件是否存在，只要有一个符合要求即可<br />
-	 * 1. 当前模板目录/plugins/插件ID/template/$name<br />
-	 * 2. 当前模板目录/plugins/插件ID/$name<br />
-	 * 3. 当前模板目录/插件ID/$name<br />
-	 * 4. 当前模板目录/plugins_插件ID_$name<br />
-	 * 5. 当前模板目录/插件ID_$name<br />
-	 * 6. 程序根目录/plugins/插件ID/template/$name<br />
-	 * 7. 程序根目录/plugins/插件ID/$name
-	 * @参数 $id 字符串，指定的插件ID，为空尝试获取当前插件ID
-	 * @返回 正确时输出HTML，错误时跳过没有任何输出
+	 * 按順序讀取挑出最近的一個模板
+	 * @引數 $name 模板名稱，帶字尾的模板名稱，相對路徑，系統會依次檢查這些檔案是否存在，只要有一個符合要求即可<br />
+	 * 1. 當前模板目錄/plugins/外掛ID/template/$name<br />
+	 * 2. 當前模板目錄/plugins/外掛ID/$name<br />
+	 * 3. 當前模板目錄/外掛ID/$name<br />
+	 * 4. 當前模板目錄/plugins_外掛ID_$name<br />
+	 * 5. 當前模板目錄/外掛ID_$name<br />
+	 * 6. 程式根目錄/plugins/外掛ID/template/$name<br />
+	 * 7. 程式根目錄/plugins/外掛ID/$name
+	 * @引數 $id 字串，指定的外掛ID，為空嘗試獲取當前外掛ID
+	 * @返回 正確時輸出HTML，錯誤時跳過沒有任何輸出
 	**/
 	private function _tplfile($name,$id='')
 	{
@@ -2627,7 +2627,7 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 旧版本写法，与之对应新的写法是：$this->_id()
+	 * 舊版本寫法，與之對應新的寫法是：$this->_id()
 	**/
 	protected function plugin_id()
 	{
@@ -2635,7 +2635,7 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 旧版本写法，与之对应新的写法是：$this->_info()
+	 * 舊版本寫法，與之對應新的寫法是：$this->_info()
 	**/
 	protected function plugin_info($id='')
 	{
@@ -2643,7 +2643,7 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 旧版本写法，与之对应新的写法是：$this->_save()
+	 * 舊版本寫法，與之對應新的寫法是：$this->_save()
 	**/
 	protected function plugin_save($ext,$id="")
 	{
@@ -2651,7 +2651,7 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 旧版本写法，与之对应新的写法是：$this->_tpl()
+	 * 舊版本寫法，與之對應新的寫法是：$this->_tpl()
 	**/
 	protected function plugin_tpl($name,$id='')
 	{
@@ -2659,7 +2659,7 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 旧版本写法，与之对应新的写法是：$this->_show()
+	 * 舊版本寫法，與之對應新的寫法是：$this->_show()
 	**/
 	protected function show_tpl($name,$id='')
 	{
@@ -2667,7 +2667,7 @@ class phpok_plugin extends _init_auto
 	}
 
 	/**
-	 * 旧版本写法，与之对应新的写法是：$this->_view()
+	 * 舊版本寫法，與之對應新的寫法是：$this->_view()
 	**/
 	protected function echo_tpl($name,$id='')
 	{
@@ -2676,7 +2676,7 @@ class phpok_plugin extends _init_auto
 }
 
 /**
- * 安全注销全局变量
+ * 安全登出全域性變數
 **/
 unset($_ENV, $_SERVER['MIBDIRS'],$_SERVER['MYSQL_HOME'],$_SERVER['OPENSSL_CONF'],$_SERVER['PHP_PEAR_SYSCONF_DIR'],$_SERVER['PHPRC'],$_SERVER['SystemRoot'],$_SERVER['COMSPEC'],$_SERVER['PATHEXT'], $_SERVER['WINDIR'],$_SERVER['PATH']);
 
@@ -2686,14 +2686,14 @@ $app->init_site();
 $app->init_view();
 
 /**
- * 引用全局 app
+ * 引用全域性 app
 **/
 function init_app(){
 	return $GLOBALS['app'];
 }
 
 /**
- * 核心函数，phpok_head_js，用于加载自定义扩展中涉及到的js
+ * 核心函式，phpok_head_js，用於載入自定義擴充套件中涉及到的js
 **/
 function phpok_head_js()
 {
@@ -2714,7 +2714,7 @@ function phpok_head_js()
 }
 
 /**
- * 核心函数，phpok_head_css，用于加载自定义扩展中涉及到的css
+ * 核心函式，phpok_head_css，用於載入自定義擴充套件中涉及到的css
 **/
 function phpok_head_css()
 {
@@ -2735,11 +2735,11 @@ function phpok_head_css()
 }
 
 /**
- * 语言包变量格式化，$info将转化成系统的语言包，同是将$info里的带{变量}替换成$var里传过来的信息
- * @参数 $info 字符串，要替变的字符串用**{}**包围，包围的内容对应$var里的$key
- * @参数 $replace 数组，要替换的字符。
- * @返回 字符串，$info为空返回false
- * @更新时间 2016年06月05日
+ * 語言包變數格式化，$info將轉化成系統的語言包，同是將$info裡的帶{變數}替換成$var裡傳過來的資訊
+ * @引數 $info 字串，要替變的字串用**{}**包圍，包圍的內容對應$var裡的$key
+ * @引數 $replace 陣列，要替換的字元。
+ * @返回 字串，$info為空返回false
+ * @更新時間 2016年06月05日
 **/
 function P_Lang($info,$replace='')
 {
@@ -2759,7 +2759,7 @@ function P_Lang($info,$replace='')
 }
 
 /**
- * 核心函数，动态加CSS
+ * 核心函式，動態加CSS
 **/
 function phpok_add_css($file='')
 {
@@ -2767,7 +2767,7 @@ function phpok_add_css($file='')
 }
 
 /**
- * 核心函数，动态加js
+ * 核心函式，動態加js
 **/
 function phpok_add_js($file='')
 {
@@ -2775,6 +2775,6 @@ function phpok_add_js($file='')
 }
 
 /**
- * 执行动作
+ * 執行動作
 **/
 $app->action();

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/admin/workflow_control.php
-	备注： 工作流管理
+	檔案： {phpok}/admin/workflow_control.php
+	備註： 工作流管理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年06月20日 15时42分
+	時間： 2015年06月20日 15時42分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class workflow_control extends phpok_control
@@ -38,7 +38,7 @@ class workflow_control extends phpok_control
 			}
 		}
 		if(!$rslist){
-			$this->error(P_Lang('指定的主题已经授权且已完成维护'));
+			$this->error(P_Lang('指定的主題已經授權且已完成維護'));
 		}
 		$ids = implode(",",$rslist);
 		$this->assign('ids',$ids);
@@ -47,7 +47,7 @@ class workflow_control extends phpok_control
 		$this->assign('endlist',$endlist);
 		$alist = $this->model('admin')->all_manager();
 		if(!$alist){
-			$this->error(P_Lang('系统没有普通管理员，不能执行此操作'));
+			$this->error(P_Lang('系統沒有普通管理員，不能執行此操作'));
 		}
 		$this->assign('alist',$alist);
 		$this->view('workflow_title');
@@ -62,7 +62,7 @@ class workflow_control extends phpok_control
 			$this->json(P_Lang('未指定ID'));
 		}
 		if(!$admin_id){
-			$this->json(P_Lang('未指定管理员'));
+			$this->json(P_Lang('未指定管理員'));
 		}
 		$list = explode(",",$id);
 		foreach($list as $key=>$value){
@@ -95,8 +95,8 @@ class workflow_control extends phpok_control
 		$this->assign('total',$total);
 		$this->assign('psize',$psize);
 		$this->assign('pageid',$pageid);
-		$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=5';
-		$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+		$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=5';
+		$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 		$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 		$this->assign('pagelist',$pagelist);
 		$this->view('workflow_manage');
@@ -109,7 +109,7 @@ class workflow_control extends phpok_control
 			$this->json(P_Lang('未指定ID'));
 		}
 		if(!$_SESSION['admin_rs']['if_system']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$this->model('workflow')->delete($id);
 		$this->json(true);
@@ -123,12 +123,12 @@ class workflow_control extends phpok_control
 		}
 		$rs = $this->model('workflow')->get_one($id);
 		if(!$rs){
-			error(P_Lang('数据不存在'));
+			error(P_Lang('資料不存在'));
 		}
 		$this->assign('rs',$rs);
 		$alist = $this->model('admin')->all_manager();
 		if(!$alist){
-			$this->error(P_Lang('系统没有普通管理员，不能执行此操作'));
+			$this->error(P_Lang('系統沒有普通管理員，不能執行此操作'));
 		}
 		$this->assign('alist',$alist);
 		$this->view('workflow_reset');
@@ -142,12 +142,12 @@ class workflow_control extends phpok_control
 		}
 		$rs = $this->model('workflow')->get_one($id);
 		if(!$rs){
-			$this->json(P_Lang('数据不存在'));
+			$this->json(P_Lang('資料不存在'));
 		}
 		$admin_id = $this->get('admin_id','int');
 		$note = $this->get('note');
 		if(!$admin_id){
-			$this->json(P_Lang('未指定管理员'));
+			$this->json(P_Lang('未指定管理員'));
 		}
 		$array = array('admin_id'=>$admin_id,'dateline'=>$this->time,'note'=>$note);
 		$this->model('workflow')->update($array,$id);
@@ -169,8 +169,8 @@ class workflow_control extends phpok_control
 		$this->assign('total',$total);
 		$this->assign('psize',$psize);
 		$this->assign('pageid',$pageid);
-		$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=5';
-		$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+		$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=5';
+		$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 		$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 		$this->assign('pagelist',$pagelist);
 		$this->view('workflow_list');
@@ -184,13 +184,13 @@ class workflow_control extends phpok_control
 		}
 		$wf = $this->model('workflow')->get_one($id);
 		if(!$wf){
-			error(P_Lang('数据不存在'),$this->url('workflow','list'),'error');
+			error(P_Lang('資料不存在'),$this->url('workflow','list'),'error');
 		}
 		$this->assign("wf",$wf);
 		//更新操作
 		$array = array('actting'=>1);
 		$this->model('workflow')->update($array,$id);
-		//读取内容
+		//讀取內容
 		$rs = $this->model('list')->get_one($wf['tid'],false);
 		$pid = $rs["project_id"];
 		$extcate = $this->model('list')->ext_catelist($wf['tid']);
@@ -198,11 +198,11 @@ class workflow_control extends phpok_control
 			$extcate = array();
 		}
 		if(!$pid){
-			error(P_Lang('操作异常'),$this->url('workflow','list'),"error");
+			error(P_Lang('操作異常'),$this->url('workflow','list'),"error");
 		}
 		$p_rs = $this->model('project')->get_one($pid);
 		if(!$p_rs){
-			error(P_Lang('操作异常'),$this->url('workflow','list'),"error");
+			error(P_Lang('操作異常'),$this->url('workflow','list'),"error");
 		}
 		$m_rs = $this->model('module')->get_one($p_rs["module"]);
 		$ext_list = $this->model('module')->fields_all($p_rs["module"]);
@@ -246,19 +246,19 @@ class workflow_control extends phpok_control
 	private function check_identifier($sign,$id=0,$site_id=0)
 	{
 		if(!$sign){
-			return P_Lang('标识串不能为空');
+			return P_Lang('標識串不能為空');
 		}
 		$sign = strtolower($sign);
-		//字符串是否符合条件
+		//字串是否符合條件
 		if(!preg_match("/[a-z][a-z0-9\_\-\.]+/",$sign)){
-			return P_Lang('标识不符合系统要求，限字母、数字及下划线（中划线）且必须是字母开头');
+			return P_Lang('標識不符合系統要求，限字母、數字及下劃線（中劃線）且必須是字母開頭');
 		}
 		if(!$site_id){
 			$site_id = $_SESSION["admin_site_id"];
 		}
 		$check = $this->model('id')->check_id($sign,$site_id,$id);
 		if($check){
-			return P_Lang('标识符已被使用');
+			return P_Lang('識別符號已被使用');
 		}
 		return 'ok';
 	}
@@ -271,17 +271,17 @@ class workflow_control extends phpok_control
 		}
 		$wf = $this->model('workflow')->get_one($id);
 		if(!$wf){
-			$this->json(P_Lang('工作任务不存在'));
+			$this->json(P_Lang('工作任務不存在'));
 		}
 		$rs = $this->model('list')->get_one($wf['tid']);
 		$pid = $rs["project_id"];
 		$parent_id = $rs["parent_id"];
 		$p_rs = $this->model('project')->get_one($pid);
 		if(!$p_rs){
-			$this->json(P_Lang('操作异常，无法取得项目信息'));
+			$this->json(P_Lang('操作異常，無法取得專案資訊'));
 		}
 		$array = array();
-		//更新标识串
+		//更新標識串
  		$array['identifier'] = $this->get("identifier");
  		if($array['identifier']){
 	 		$check = $this->check_identifier($array['identifier'],$wf['tid'],$p_rs["site_id"]);

@@ -1,13 +1,13 @@
 <?php
 /**
- * Excel类，调用扩展PHPExcel
+ * Excel類，呼叫擴充套件PHPExcel
  * @package phpok\libs
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年08月09日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年08月09日
 **/
 
 if(!defined("PHPOK_SET")){
@@ -18,7 +18,7 @@ class excel_lib
 	private $app;
 
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -27,17 +27,17 @@ class excel_lib
 			if(!file_exists($this->app->dir_root.'extension/phpexcel/phpexcel.zip')){
 				exit("Not Found PHPExcel Classes");
 			}
-			//执行解压
+			//執行解壓
 			$this->app->lib('phpzip')->unzip($this->app->dir_root.'extension/phpexcel/phpexcel.zip',$this->app->dir_root.'extension/phpexcel/');
 			sleep(1);
 		}
 	}
 
 	/**
-	 * 创建一个Excel文件
-	 * @参数 
+	 * 建立一個Excel檔案
+	 * @引數 
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function add($title='',$saveto='')
 	{

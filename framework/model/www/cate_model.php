@@ -1,12 +1,12 @@
 <?php
 /**
- * 前端分类读取
+ * 前端分類讀取
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年02月04日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年02月04日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -18,7 +18,7 @@ class cate_model extends cate_model_base
 		parent::__construct();
 	}
 
-	//读取当前分类信息
+	//讀取當前分類資訊
 	public function get_one($id,$field="id",$ext=true)
 	{
 		$cate_all = $this->cate_all($this->site_id);
@@ -35,7 +35,7 @@ class cate_model extends cate_model_base
 		return $rs;
 	}
 
-	//前端读取分类，带格式化
+	//前端讀取分類，帶格式化
 	public function get_all($site_id=0,$status=0,$pid=0)
 	{
 		$cate_all = $this->cate_all($siteid);
@@ -43,7 +43,7 @@ class cate_model extends cate_model_base
 		$this->_format($tmplist,$cate_all,$pid);
 	}
 
-	//格式化分类数组
+	//格式化分類陣列
 	private function _format(&$rslist,$tmplist,$parent_id=0,$layer=0)
 	{
 		foreach($tmplist AS $key=>$value)
@@ -62,14 +62,14 @@ class cate_model extends cate_model_base
 				$value["_layer"] = $layer;
 				$value["_is_end"] = $is_end;
 				$rslist[] = $value;
-				//执行子级
+				//執行子級
 				$new_layer = $layer+1;
 				$this->_format($rslist,$tmplist,$value["id"],$new_layer);
 			}
 		}
 	}
 
-	//前端中涉及到的缓存
+	//前端中涉及到的快取
 	public function cate_all($site_id=0,$status=0)
 	{
 		$siteid = intval($site_id);
@@ -99,7 +99,7 @@ class cate_model extends cate_model_base
 		return $rslist;
 	}
 
-	//读取子类
+	//讀取子類
 	public function sublist(&$catelist,$parent_id=0,$cate_all=0)
 	{
 		if(!$cate_all)
@@ -120,7 +120,7 @@ class cate_model extends cate_model_base
 		}
 	}
 
-	//生成适用于select的下拉菜单中的参数
+	//生成適用於select的下拉選單中的引數
 	public function cate_option_list($list)
 	{
 		if(!$list || !is_array($list)) return false;

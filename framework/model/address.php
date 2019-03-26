@@ -1,13 +1,13 @@
 <?php
 /**
- * 会员地址库
+ * 會員地址庫
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年06月05日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年06月05日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -24,8 +24,8 @@ class address_model_base extends phpok_model
 	}
 
 	/**
-	 * 按条件取得会员地址库数量
-	 * @参数 $condition 查询条件
+	 * 按條件取得會員地址庫數量
+	 * @引數 $condition 查詢條件
 	**/
 	public function count($condition='')
 	{
@@ -37,10 +37,10 @@ class address_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得会员地址库
-	 * @参数 $condition 查询条件
-	 * @参数 $offset 定位
-	 * @参数 $psize 读取数量
+	 * 取得會員地址庫
+	 * @引數 $condition 查詢條件
+	 * @引數 $offset 定位
+	 * @引數 $psize 讀取數量
 	**/
 	public function get_list($condition='',$offset=0,$psize=20)
 	{
@@ -53,8 +53,8 @@ class address_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得单条地址信息
-	 * @参数 $id 地址ID
+	 * 取得單條地址資訊
+	 * @引數 $id 地址ID
 	**/
 	public function get_one($id)
 	{
@@ -63,9 +63,9 @@ class address_model_base extends phpok_model
 	}
 
 	/**
-	 * 存储更新地址库信息
-	 * @参数 $data 要保存的数据，一维数组
-	 * @参数 $id 要更新的地址ID，留空表示添加
+	 * 儲存更新地址庫資訊
+	 * @引數 $data 要儲存的資料，一維陣列
+	 * @引數 $id 要更新的地址ID，留空表示新增
 	**/
 	public function save($data,$id=0)
 	{
@@ -80,8 +80,8 @@ class address_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除地址信息
-	 * @参数 $id 要删除的地址ID 
+	 * 刪除地址資訊
+	 * @引數 $id 要刪除的地址ID 
 	**/
 	public function delete($id)
 	{

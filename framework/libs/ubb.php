@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/libs/ubb.php
-	备注： UBB类，暂时仅支持UBB转HTML
+	檔案： {phpok}/libs/ubb.php
+	備註： UBB類，暫時僅支援UBB轉HTML
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年02月03日 11时47分
+	時間： 2015年02月03日 11時47分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class ubb_lib
@@ -56,10 +56,10 @@ class ubb_lib
 		return $info;
 	}
 
-	//PHPOK扩展格式化附件下载
+	//PHPOK擴充套件格式化附件下載
 	private function _download($Text)
 	{
-		//UBB下载格式化
+		//UBB下載格式化
 		preg_match_all("/\[download[:|：|=]*([0-9]*)\](.*)\[\/download\]/isU",$Text,$list);
 		if($list && count($list)>0)
 		{
@@ -85,7 +85,7 @@ class ubb_lib
 			}
 		}
 		$list = '';
-		//格式化旧版的UBB附件下载
+		//格式化舊版的UBB附件下載
 		preg_match_all("/\[download[:|：]*([0-9]+)\]/isU",$Text,$list);
 		if($list && count($list)>0)
 		{
@@ -109,7 +109,7 @@ class ubb_lib
 
 	private function _title($Text)
 	{
-		//格式化主题列表
+		//格式化主題列表
 		$list = '';
 		preg_match_all("/\[title[:|：]*([0-9a-zA-Z\_\-]+)\](.+)\[\/title\]/isU",$Text,$list);
 		if($list && count($list)>0)
@@ -127,7 +127,7 @@ class ubb_lib
 
 	private function _video($Text)
 	{
-		//格式化视频链接地址，主要是格式化FLV格式的转换
+		//格式化視訊連結地址，主要是格式化FLV格式的轉換
 		$list = false;
 		preg_match_all("/<embed(.+)src=[\"|'](.+\.flv)[\"|'](.*)>/isU",$Text,$list);
 		if($list && $list[2] && $list[0])

@@ -1,13 +1,13 @@
 <?php
 /**
- * 会员地址库
+ * 會員地址庫
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @许可 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年06月03日
+ * @許可 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年06月03日
 **/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class address_control extends phpok_control
@@ -21,14 +21,14 @@ class address_control extends phpok_control
 	}
 
 	/**
-	 * 弹窗查看会员的地址库信息
-	 * @参数 type 查询类型
-	 * @参数 keywords 关键字
+	 * 彈窗檢視會員的地址庫資訊
+	 * @引數 type 查詢型別
+	 * @引數 keywords 關鍵字
 	**/
 	public function open_f()
 	{
 		if(!$this->popedom['list']){
-			$this->error(P_Lang('您没有此权限操作'));
+			$this->error(P_Lang('您沒有此許可權操作'));
 		}
 		$tpl = $this->get('tpl');
 		if(!$tpl){
@@ -45,20 +45,20 @@ class address_control extends phpok_control
 		}
 		$status = $this->_index($pageurl,$keywords);
 		if(!$status){
-			$this->tip(P_Lang('该会员还没有设置地址信息'));
+			$this->tip(P_Lang('該會員還沒有設定地址資訊'));
 		}
 		$this->view($tpl);
 	}
 
 	/**
-	 * 会员地址库
-	 * @参数 type 查询类型
-	 * @参数 keywords 关键字
+	 * 會員地址庫
+	 * @引數 type 查詢型別
+	 * @引數 keywords 關鍵字
 	**/
 	public function index_f()
 	{
 		if(!$this->popedom['list']){
-			$this->error(P_Lang('您没有此权限操作'));
+			$this->error(P_Lang('您沒有此許可權操作'));
 		}
 		$pageurl = $this->url('address');
 		$type = $this->get('type');
@@ -81,7 +81,7 @@ class address_control extends phpok_control
 		}
 		$rs = $this->model('address')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('地址信息不存在'));
+			$this->error(P_Lang('地址資訊不存在'));
 		}
 		$this->success($rs);
 	}
@@ -140,8 +140,8 @@ class address_control extends phpok_control
 		$this->assign('pageid',$pageid);
 		$this->assign('psize',$psize);
 		$this->assign('offset',$offset);
-		$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=5';
-		$string.= '&add='.P_Lang('数量：').'(total)/(psize)&always=1';
+		$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=5';
+		$string.= '&add='.P_Lang('數量：').'(total)/(psize)&always=1';
 		$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 		$this->assign("pagelist",$pagelist);
 		return true;
@@ -152,14 +152,14 @@ class address_control extends phpok_control
 		$id = $this->get('id','int');
 		if($id){
 			if(!$this->popedom['modify']){
-				$this->error(P_Lang('您没有修改地址库权限'));
+				$this->error(P_Lang('您沒有修改地址庫許可權'));
 			}
 			$rs = $this->model('user')->address_one($id);
 			$this->assign('rs',$rs);
 			$this->assign('id',$id);
 		}else{
 			if(!$this->popedom['add']){
-				$this->error(P_Lang('您没有添加地址库权限'));
+				$this->error(P_Lang('您沒有新增地址庫許可權'));
 			}
 		}
 		$this->view("address_set");
@@ -170,21 +170,21 @@ class address_control extends phpok_control
 		$id = $this->get('id','int');
 		if($id){
 			if(!$this->popedom['modify']){
-				$this->error(P_Lang('您没有修改地址库权限'));
+				$this->error(P_Lang('您沒有修改地址庫許可權'));
 			}
 		}else{
 			if(!$this->popedom['add']){
-				$this->error(P_Lang('您没有添加地址库权限'));
+				$this->error(P_Lang('您沒有新增地址庫許可權'));
 			}
 		}
 		$array = array();
 		$array['user_id'] = $this->get('user_id','int');
 		if(!$array['user_id']){
-			$this->error(P_Lang('未绑定会员'));
+			$this->error(P_Lang('未繫結會員'));
 		}
 		$array['fullname'] = $this->get('fullname');
 		if(!$array['fullname']){
-			$this->error(P_Lang('收件人姓名不能为空'));
+			$this->error(P_Lang('收件人姓名不能為空'));
 		}
 		$array['country'] = $this->get('country');
 		$array['province'] = $this->get('province');
@@ -192,34 +192,34 @@ class address_control extends phpok_control
 		$array['county'] = $this->get('county');
 		$array['address'] = $this->get('address');
 		if(!$array['country']){
-			$this->error(P_Lang('国家不能为空'));
+			$this->error(P_Lang('國家不能為空'));
 		}
 		if(!$array['province']){
-			$this->error(P_Lang('省份名称不能为空'));
+			$this->error(P_Lang('省份名稱不能為空'));
 		}
 		if(!$array['address']){
-			$this->error(P_Lang('地址信息不能为空'));
+			$this->error(P_Lang('地址資訊不能為空'));
 		}
 		$array['zipcode'] = $this->get('zipcode');
 		$array['mobile'] = $this->get('mobile');
 		$array['tel'] = $this->get('tel');
 		if(!$array['mobile'] && !$array['tel']){
-			$this->error(P_Lang('手机号或电话，必须至少填写一个'));
+			$this->error(P_Lang('手機號或電話，必須至少填寫一個'));
 		}
 		$array['email'] = $this->get('email');
 		$this->model('user')->address_save($array,$id);
-		$tip = $id ? P_Lang('地址信息编辑成功') : P_Lang('地址信息添加成功');
+		$tip = $id ? P_Lang('地址資訊編輯成功') : P_Lang('地址資訊新增成功');
 		$this->success($tip);
 	}
 
 	public function delete_f()
 	{
 		if(!$this->popedom['delete']){
-			$this->error(P_Lang('您没有删除地址库权限'));
+			$this->error(P_Lang('您沒有刪除地址庫許可權'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定要删除的ID'));
+			$this->error(P_Lang('未指定要刪除的ID'));
 		}
 		$this->model('address')->delete($id);
 		$this->success();

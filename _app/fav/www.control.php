@@ -1,17 +1,17 @@
 <?php
 /**
- * 收藏夹
+ * 收藏夾
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @许可 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2018年06月04日
+ * @許可 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2018年06月04日
 **/
 namespace phpok\app\control\fav;
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -27,7 +27,7 @@ class www_control extends \phpok_control
 	public function index_f()
 	{
 		if(!$this->session->val('user_id')){
-			$this->error(P_Lang('您还未登录，不能执行此操作'));
+			$this->error(P_Lang('您還未登入，不能執行此操作'));
 		}
 		$condition = "f.user_id='".$this->session->val('user_id')."'";
 		$total = $this->model('fav')->get_count($condition);

@@ -1,13 +1,13 @@
 <?php
 /**
- * 自定义表单的字段异步处理
+ * 自定義表單的欄位非同步處理
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年06月13日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年06月13日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -70,21 +70,21 @@ class form_control extends phpok_control
 	}
 
 	/**
-	 * 项目字段信息
+	 * 專案欄位資訊
 	**/
 	public function project_fields_f()
 	{
 		$this->config('is_ajax',true);
 		$pid = $this->get('pid','int');
 		if(!$pid){
-			$this->error(P_Lang('未指定项目ID'));
+			$this->error(P_Lang('未指定專案ID'));
 		}
 		$project = $this->model('project')->get_one($pid);
 		if(!$project){
-			$this->error(P_Lang('项目信息不存在'));
+			$this->error(P_Lang('專案資訊不存在'));
 		}
 		if(!$project['module']){
-			$this->error(P_Lang('项目未绑定模块'));
+			$this->error(P_Lang('專案未繫結模組'));
 		}
 		$eid = $this->get('eid','int');
 		$etype = $this->get('etype');
@@ -98,7 +98,7 @@ class form_control extends phpok_control
 		$module = $this->model('module')->get_one($project['module']);
 		$flist = array();
 		if(!$module['mtype']){
-			$tmptitle = $project['alias_title'] ? $project['alias_title'] : P_Lang('主题');
+			$tmptitle = $project['alias_title'] ? $project['alias_title'] : P_Lang('主題');
 			$flist['title'] = array('title'=>$tmptitle,'status'=>false);
 		}
 		$elist = $this->model('module')->fields_all($project['module']);
@@ -133,40 +133,40 @@ class form_control extends phpok_control
 	}
 
 	/**
-	 * 项目主题快速添加及修改
+	 * 專案主題快速新增及修改
 	**/
 	public function quickadd_f()
 	{
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定字段ID'));
+			$this->error(P_Lang('未指定欄位ID'));
 		}
 		$field = $this->model('module')->field_one($id);
 		if(!$field){
-			$this->error(P_Lang('字段信息不存在'));
+			$this->error(P_Lang('欄位資訊不存在'));
 		}
 		$ext = ($field['ext'] && is_string($field['ext'])) ? unserialize($field['ext']) : array();
 		if(!$ext || !$ext['form_pid']){
-			$this->error(P_Lang('扩展项目没有配置成功'));
+			$this->error(P_Lang('擴充套件專案沒有配置成功'));
 		}
 		$pid = $ext['form_pid'];
 		$identifier = $field['identifier'];
 		if(!$identifier){
-			$this->error(P_Lang('配置无效，未指定标识'));
+			$this->error(P_Lang('配置無效，未指定標識'));
 		}
 		$this->assign('id',$id);
 		$this->assign('pid',$pid);
 		$this->assign('identifier',$identifier);
 		$project = $this->model('project')->get_one($pid,false);
 		if(!$project){
-			$this->error(P_Lang('项目不存在'));
+			$this->error(P_Lang('專案不存在'));
 		}
 		if(!$project['module']){
-			$this->error(P_Lang('项目没有绑定模块'));
+			$this->error(P_Lang('專案沒有繫結模組'));
 		}
 		$module = $this->model('module')->get_one($project['module']);
 		if(!$module){
-			$this->error(P_Lang('模块信息不存在，请检查'));
+			$this->error(P_Lang('模組資訊不存在，請檢查'));
 		}
 		$this->assign('p_rs',$project);
 		$this->assign('m_rs',$module);
@@ -196,32 +196,32 @@ class form_control extends phpok_control
 	}
 
 	/**
-	 * 快速添加对应的保存操作
+	 * 快速新增對應的儲存操作
 	**/
 	public function quick_save_f()
 	{
 		$this->config('is_ajax',true);
 		$pid = $this->get('pid','int');
 		if(!$pid){
-			$this->error(P_Lang('未指定项目'));
+			$this->error(P_Lang('未指定專案'));
 		}
 		$project = $this->model('project')->get_one($pid,false);
 		if(!$project){
-			$this->error(P_Lang('项目不存在'));
+			$this->error(P_Lang('專案不存在'));
 		}
 		if(!$project['module']){
-			$this->error(P_Lang('项目没有绑定模块'));
+			$this->error(P_Lang('專案沒有繫結模組'));
 		}
 		$module = $this->model('module')->get_one($project['module']);
 		if(!$module){
-			$this->error(P_Lang('模块信息不存在，请检查'));
+			$this->error(P_Lang('模組資訊不存在，請檢查'));
 		}
 		$extlist = $this->model('module')->fields_all($project["module"]);
  		if(!$extlist){
 	 		$extlist = array();
  		}
 		$id = $this->get('tid','int');
-		//独立运行
+		//獨立執行
 		if($module['mtype']){
 			if($id){
 				$rs = $this->model('list')->single_one($id,$project['module']);
@@ -239,20 +239,20 @@ class form_control extends phpok_control
 				$array['id'] = $id;
 				$state = $this->model('list')->single_save($array,$project["module"]);
 				if(!$state){
-					$this->error(P_Lang('更新数据失败，请检查'));
+					$this->error(P_Lang('更新資料失敗，請檢查'));
 				}
 			}else{
 				$id = $this->model('list')->single_save($array,$project["module"]);
 				if(!$id){
-					$this->error(P_Lang('保存数据失败，请检查'));
+					$this->error(P_Lang('儲存資料失敗，請檢查'));
 				}
 			}
 			$this->success($id);
 		}
 		$title = $this->get('title');
 		if(!$title){
-			$tmptitle = $project['alias_title'] ? $project['alias_title'] : P_Lang('主题');
-			$this->error(P_Lang('{title}不能为空',array('title'=>$tmptitle)));
+			$tmptitle = $project['alias_title'] ? $project['alias_title'] : P_Lang('主題');
+			$this->error(P_Lang('{title}不能為空',array('title'=>$tmptitle)));
 		}
 		$array = array('title'=>$title);
 		if(!$id){
@@ -263,16 +263,16 @@ class form_control extends phpok_control
 			$array["site_id"] = $project["site_id"];
 			$id = $this->model('list')->save($array);
 			if(!$id){
-				$this->error(P_Lang('保存信息失败，请联系管理员'));
+				$this->error(P_Lang('儲存資訊失敗，請聯絡管理員'));
 			}
 		}else{
 			$status = $this->model('list')->save($array,$id);
 			if(!$status){
-				$this->error(P_Lang('更新信息失败'));
+				$this->error(P_Lang('更新資訊失敗'));
 			}
 			$rs = $this->model('list')->get_one($id);
 		}
-		//更新扩展表信息
+		//更新擴充套件表資訊
  		$tmplist = array();
  		$tmplist["id"] = $id;
  		$tmplist["site_id"] = $project["site_id"];
@@ -288,39 +288,39 @@ class form_control extends phpok_control
 	}
 
 	/**
-	 * 重加载扩展信息
+	 * 重載入擴充套件資訊
 	**/
 	public function redata_f()
 	{
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定字段ID'));
+			$this->error(P_Lang('未指定欄位ID'));
 		}
 		$field = $this->model('module')->field_one($id);
 		if(!$field){
-			$this->error(P_Lang('字段信息不存在'));
+			$this->error(P_Lang('欄位資訊不存在'));
 		}
 		$ext = ($field['ext'] && is_string($field['ext'])) ? unserialize($field['ext']) : array();
 		if(!$ext || !$ext['form_pid']){
-			$this->error(P_Lang('扩展项目没有配置成功'));
+			$this->error(P_Lang('擴充套件專案沒有配置成功'));
 		}
 		$pid = $ext['form_pid'];
 		$identifier = $field['identifier'];
 		if(!$identifier){
-			$this->error(P_Lang('配置无效，未指定标识'));
+			$this->error(P_Lang('配置無效，未指定標識'));
 		}
 		$this->assign('_id',$id);
 		$this->assign('_identifier',$identifier);
 		$project = $this->model('project')->get_one($pid,false);
 		if(!$project){
-			$this->error(P_Lang('项目不存在'));
+			$this->error(P_Lang('專案不存在'));
 		}
 		if(!$project['module']){
-			$this->error(P_Lang('项目没有绑定模块'));
+			$this->error(P_Lang('專案沒有繫結模組'));
 		}
 		$module = $this->model('module')->get_one($project['module']);
 		if(!$module){
-			$this->error(P_Lang('模块信息不存在，请检查'));
+			$this->error(P_Lang('模組資訊不存在，請檢查'));
 		}
 		$this->assign('p_rs',$project);
 		$this->assign('m_rs',$module);
@@ -330,40 +330,40 @@ class form_control extends phpok_control
 	}
 
 	/**
-	 * 读取主题列表
+	 * 讀取主題列表
 	**/
 	public function quicklist_f()
 	{
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定字段ID'));
+			$this->error(P_Lang('未指定欄位ID'));
 		}
 		$field = $this->model('module')->field_one($id);
 		if(!$field){
-			$this->error(P_Lang('字段信息不存在'));
+			$this->error(P_Lang('欄位資訊不存在'));
 		}
 		$ext = ($field['ext'] && is_string($field['ext'])) ? unserialize($field['ext']) : array();
 		if(!$ext || !$ext['form_pid']){
-			$this->error(P_Lang('扩展项目没有配置成功'));
+			$this->error(P_Lang('擴充套件專案沒有配置成功'));
 		}
 		$pid = $ext['form_pid'];
 		$layoutids = $ext['form_show_editing'] ? $ext['form_show_editing'] : array();
 		$identifier = $field['identifier'];
 		if(!$identifier){
-			$this->error(P_Lang('配置无效，未指定标识'));
+			$this->error(P_Lang('配置無效，未指定標識'));
 		}
 		$this->assign('id',$id);
 		$this->assign('identifier',$identifier);
 		$project = $this->model('project')->get_one($pid,false);
 		if(!$project){
-			$this->error(P_Lang('项目不存在'));
+			$this->error(P_Lang('專案不存在'));
 		}
 		if(!$project['module']){
-			$this->error(P_Lang('项目没有绑定模块'));
+			$this->error(P_Lang('專案沒有繫結模組'));
 		}
 		$module = $this->model('module')->get_one($project['module']);
 		if(!$module){
-			$this->error(P_Lang('模块信息不存在，请检查'));
+			$this->error(P_Lang('模組資訊不存在，請檢查'));
 		}
 		$this->assign('p_rs',$project);
 		$this->assign('m_rs',$module);
@@ -453,7 +453,7 @@ class form_control extends phpok_control
 					}
 				}
 			}
-			$tmptitle = $project['alias_title'] ? $project['alias_title'] : P_Lang('主题');
+			$tmptitle = $project['alias_title'] ? $project['alias_title'] : P_Lang('主題');
 			$layout = array();
 			if(in_array('title',$layoutids)){
 				$layout['title'] = $tmptitle;
@@ -466,8 +466,8 @@ class form_control extends phpok_control
 			$this->assign('layout',$layout);
 		}
 		if($total>0){
-			$string = 'home='.P_Lang('首页').'&prev='.P_Lang('上一页').'&next='.P_Lang('下一页').'&last='.P_Lang('尾页').'&half=1';
-			$string.= '&add='.P_Lang('数量：').'(total)/(psize)'.P_Lang('，').P_Lang('页码：').'(num)/(total_page)&always=1';
+			$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=1';
+			$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
 			$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
 			$this->assign("pagelist",$pagelist);
 			$this->assign("rslist",$rslist);
@@ -481,18 +481,18 @@ class form_control extends phpok_control
 	}
 
 	/**
-	 * 删除操作
+	 * 刪除操作
 	**/
 	public function quickdelete_f()
 	{
 		$fid = $this->get('fid','int');
 		$id = $this->get('id','int');
 		if(!$id || !$fid){
-			$this->error(P_Lang('参数不完整，请检查'));
+			$this->error(P_Lang('引數不完整，請檢查'));
 		}
 		$field = $this->model('module')->field_one($fid);
 		if(!$field){
-			$this->error(P_Lang('字段信息不存在'));
+			$this->error(P_Lang('欄位資訊不存在'));
 		}
 		$delete = false;
 		if($field['ext'] && is_string($field['ext'])){
@@ -506,55 +506,55 @@ class form_control extends phpok_control
 		}
 		$pid = $field['ext']['form_pid'];
 		if(!$pid){
-			$this->error(P_Lang('字段没有配置好'));
+			$this->error(P_Lang('欄位沒有配置好'));
 		}
 		$project = $this->model('project')->get_one($pid,false);
 		if(!$project){
-			$this->error(P_Lang('项目不存在'));
+			$this->error(P_Lang('專案不存在'));
 		}
 		if(!$project['module']){
-			$this->error(P_Lang('项目没有绑定模块'));
+			$this->error(P_Lang('專案沒有繫結模組'));
 		}
 		$module = $this->model('module')->get_one($project['module']);
 		if(!$module){
-			$this->error(P_Lang('模块信息不存在，请检查'));
+			$this->error(P_Lang('模組資訊不存在，請檢查'));
 		}
 		if($module['mtype']){
 			$rs = $this->model('list')->single_one($id,$project['module']);
 			if(!$rs){
-				$this->error(P_Lang('数据不存在'));
+				$this->error(P_Lang('資料不存在'));
 			}
 			$this->model('list')->single_delete($id,$project['module']);
 			$this->success();
 		}
 		$rs = $this->model('list')->get_one($id,false);
 		if(!$rs){
-			$this->error(P_Lang('数据不存在'));
+			$this->error(P_Lang('資料不存在'));
 		}
 		$this->model('list')->delete($id,$project['module']);
 		$this->success();
 	}
 	
 	/**
-	 * 预览
+	 * 預覽
 	**/
 	public function preview_f()
 	{
 		$id = $this->get('id','int');
 		$pid = $this->get('pid','int');
 		if(!$id || !$pid){
-			$this->error(P_Lang('参数不完整，请检查'));
+			$this->error(P_Lang('引數不完整，請檢查'));
 		}
 		$project = $this->model('project')->get_one($pid,false);
 		if(!$project){
-			$this->error(P_Lang('项目不存在'));
+			$this->error(P_Lang('專案不存在'));
 		}
 		if(!$project['module']){
-			$this->error(P_Lang('项目没有绑定模块'));
+			$this->error(P_Lang('專案沒有繫結模組'));
 		}
 		$module = $this->model('module')->get_one($project['module']);
 		if(!$module){
-			$this->error(P_Lang('模块信息不存在，请检查'));
+			$this->error(P_Lang('模組資訊不存在，請檢查'));
 		}
 		$this->assign('p_rs',$project);
 		$this->assign('m_rs',$module);
@@ -564,7 +564,7 @@ class form_control extends phpok_control
 			$rs = $this->model('list')->get_one($id,false);
 		}
 		if(!$rs){
-			$this->error(P_Lang('数据不存在'));
+			$this->error(P_Lang('資料不存在'));
 		}
 		$this->assign('rs',$rs);
 		$this->assign("id",$rs["id"]);

@@ -1,12 +1,12 @@
 <?php
 /**
- * 管理付款信息
+ * 管理付款資訊
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年09月26日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年09月26日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -17,7 +17,7 @@ class payment_model extends payment_model_base
 		parent::__construct();
 	}
 
-	//取得所支持的付款组
+	//取得所支援的付款組
 	function group_all($site_id=0,$status=0)
 	{
 		$condition = $site_id ? "site_id IN(0,".$site_id.")" : "site_id=0";
@@ -67,10 +67,10 @@ class payment_model extends payment_model_base
 		return $rslist;
 	}
 
-	//获取本站系统中存储的所有支付引挈
+	//獲取本站系統中儲存的所有支付引挈
 	public function code_all()
 	{
-		//读取目录下的
+		//讀取目錄下的
 		$handle = opendir($this->dir_root.'gateway/payment');
 		$list = array();
 		while(false !== ($myfile = readdir($handle))){
@@ -90,7 +90,7 @@ class payment_model extends payment_model_base
 		return $list;
 	}
 
-	//取得当前Code信息
+	//取得當前Code資訊
 	public function code_one($id)
 	{
 		$rs = array('id'=>$id,'dir'=>$this->dir_root.'gateway/payment/'.$id);
@@ -105,7 +105,7 @@ class payment_model extends payment_model_base
 		return $rs;
 	}
 
-	//存储组信息
+	//儲存組資訊
 	public function groupsave($data,$id=0)
 	{
 		if(!$data || !is_array($data)){
@@ -130,27 +130,27 @@ class payment_model extends payment_model_base
 		return $this->db->query($sql);
 	}
 
-	//取得单个支付组
+	//取得單個支付組
 	public function group_one($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."payment_group WHERE id=".intval($id);
 		return $this->db->get_one($sql);
 	}
 
-	//删除支付组
+	//刪除支付組
 	public function group_delete($id)
 	{
 		$sql = "DELETE FROM ".$this->db->prefix."payment_group WHERE id=".intval($id);
 		return $this->db->query($sql);
 	}
-	//取得单个支付方式
+	//取得單個支付方式
 	public function get_one($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."payment WHERE id=".intval($id);
 		return $this->db->get_one($sql);
 	}
 
-	//存储表单信息
+	//儲存表單資訊
 	public function save($data,$id=0)
 	{
 		if(!$data || !is_array($data))

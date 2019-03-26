@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/tag.php
-	备注： Tag标签在后台的调用
+	檔案： {phpok}/model/tag.php
+	備註： Tag標籤在後臺的呼叫
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年5月25日
+	時間： 2014年5月25日
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class tag_model extends tag_model_base
@@ -89,7 +89,7 @@ class tag_model extends tag_model_base
 
 	public function delete($id)
 	{
-		//删除记录
+		//刪除記錄
 		$this->stat_delete($id,'tag_id');
 		$sql = "DELETE FROM ".$this->db->prefix."tag WHERE id='".$id."'";
 		return $this->db->query($sql);
@@ -102,9 +102,9 @@ class tag_model extends tag_model_base
 	}
 
 	/**
-	 * 批量更新标签及标签统计
-	 * @参数 $data 标签数据，可以是数组也可以是字符串
-	 * @参数 $list_id 主题ID（项目ID，p前缀）（分类ID，c前缀）
+	 * 批量更新標籤及標籤統計
+	 * @引數 $data 標籤資料，可以是陣列也可以是字串
+	 * @引數 $list_id 主題ID（專案ID，p字首）（分類ID，c字首）
 	**/
 	public function update_tag($data='',$list_id=0)
 	{
@@ -112,7 +112,7 @@ class tag_model extends tag_model_base
 			return false;
 		}
 
-		//没有要更新的tag标签时，删除原有记录
+		//沒有要更新的tag標籤時，刪除原有記錄
 		if(!$data){
 			return $this->stat_delete($list_id,'title_id');
 		}
@@ -140,8 +140,8 @@ class tag_model extends tag_model_base
 	}
 
 	/**
-	 * 通过标签中的记录，获取相应的站点ID
-	 * @参数 $id 标签ID
+	 * 通過標籤中的記錄，獲取相應的站點ID
+	 * @引數 $id 標籤ID
 	**/
 	private function _tag_site_id($id)
 	{
@@ -162,9 +162,9 @@ class tag_model extends tag_model_base
 	}
 
 	/**
-	 * 字符串转数组
-	 * @参数 $string 要转化的字符串
-	 * @返回 数组
+	 * 字串轉陣列
+	 * @引數 $string 要轉化的字串
+	 * @返回 陣列
 	**/
 	private function string_to_array($string)
 	{

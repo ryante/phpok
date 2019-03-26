@@ -1,16 +1,16 @@
 <?php
 /**
- * 七牛获取Token请求
+ * 七牛獲取Token請求
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2019年1月18日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2019年1月18日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -18,18 +18,18 @@ if(!defined("PHPOK_SET")){
 
 $r = array('status'=>false);
 if(!$extinfo){
-	$r['info'] = P_Lang('参数不完整，请检查');
+	$r['info'] = P_Lang('引數不完整，請檢查');
 	return $r;
 }
 
-//非管理员，检测是否有上传权限
+//非管理員，檢測是否有上傳許可權
 if(!$this->session->val('admin_id')){
 	if(!$this->session->val('user_id') && !$this->site['upload_guest']){
-		$r['info'] = P_Lang('你没有上传权限');
+		$r['info'] = P_Lang('你沒有上傳許可權');
 		return $r;
 	}
 	if($this->session->val('user_id') && !$this->site['upload_user']){
-		$r['info'] = P_Lang('你没有上传权限');
+		$r['info'] = P_Lang('你沒有上傳許可權');
 		return $r;
 	}
 }

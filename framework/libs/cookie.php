@@ -1,30 +1,30 @@
 <?php
 /**
- * Cookie 信息处理
+ * Cookie 資訊處理
  * @package phpok\libs
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年08月11日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年08月11日
 **/
 class cookie_lib
 {
 	private $domain;
 
 	/**
-	 * Cookie 前缀
+	 * Cookie 字首
 	**/
 	private $prefix = 'phpok_';
 
 	/**
-	 * 超时时间，单位是秒
+	 * 超時時間，單位是秒
 	**/
 	private $expire_time = 3600;
 
 	/**
-	 * 密钥
+	 * 金鑰
 	**/
 	private $encode_key = '';
 
@@ -44,8 +44,8 @@ class cookie_lib
 	}
 
 	/**
-	 * Cookie 前缀设定及读取
-	 * @参数 $prefix 前缀，可用于实现
+	 * Cookie 字首設定及讀取
+	 * @引數 $prefix 字首，可用於實現
 	**/
 	public function prefix($prefix='')
 	{
@@ -57,8 +57,8 @@ class cookie_lib
 
 
 	/**
-	 * 过期时间
-	 * @参数 $expire_time 时间，单位秒
+	 * 過期時間
+	 * @引數 $expire_time 時間，單位秒
 	**/
 	public function expire_time($expire_time='')
 	{
@@ -69,10 +69,10 @@ class cookie_lib
 	}
 
 	/**
-	 * 设置cookie
-	 * @参数 $name   cookie 名称
-	 * @参数 $value  cookie 值 可以是字符串,数组,对象等
-	 * @参数 $expire 过期时间
+	 * 設定cookie
+	 * @引數 $name   cookie 名稱
+	 * @引數 $value  cookie 值 可以是字串,陣列,物件等
+	 * @引數 $expire 過期時間
 	**/
 	public function set($name, $value, $expire_time=0)
 	{
@@ -86,8 +86,8 @@ class cookie_lib
 	}
 
 	/**
-	 * 读取cookie
-	 * @参数 $name Cookie的名称
+	 * 讀取cookie
+	 * @引數 $name Cookie的名稱
 	**/
 	public function get($name)
 	{
@@ -102,7 +102,7 @@ class cookie_lib
 
 	/**
 	 * 清除cookie
-	 * @参数 $name cookie name
+	 * @引數 $name cookie name
 	**/
 	public function clear($name)
 	{
@@ -111,8 +111,8 @@ class cookie_lib
 	}
 
 	/**
-	 * 获取cookie name
-	 * @参数  String $name
+	 * 獲取cookie name
+	 * @引數  String $name
 	**/
 	private function _name($name)
 	{
@@ -124,9 +124,9 @@ class cookie_lib
 	}
 
 	/**
-	 * 打包时间
-	 * @参数 $data 数据
-	 * @参数 $expire 过期时间 用于判断
+	 * 打包時間
+	 * @引數 $data 資料
+	 * @引數 $expire 過期時間 用於判斷
 	**/
 	private function _pack($data, $expire)
 	{
@@ -141,7 +141,7 @@ class cookie_lib
 
 	/**
 	 * 解包
-	 * @参数 $data 数据
+	 * @引數 $data 資料
 	**/
 	private function _unpack($data)
 	{
@@ -158,13 +158,13 @@ class cookie_lib
 	}
 
 	/**
-	 * 加密/解密数据
-	 * @参数 $string 原文或密文
-	 * @参数 $operation ENCODE 或 DECODE
+	 * 加密/解密資料
+	 * @引數 $string 原文或密文
+	 * @引數 $operation ENCODE 或 DECODE
 	**/
 	private function _authcode($string, $operation = 'DECODE')
 	{
-		$ckey_length = 4;   // 随机密钥长度 取值 0-32;
+		$ckey_length = 4;   // 隨機金鑰長度 取值 0-32;
 		$key = $this->encode_key;
 		$key = md5($key);
 		$keya = md5(substr($key, 0, 16));

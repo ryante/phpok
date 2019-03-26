@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/model/temp.php
-	Note	: 临时存储器（适用于自动数据保存）
+	Note	: 臨時儲存器（適用於自動資料儲存）
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>

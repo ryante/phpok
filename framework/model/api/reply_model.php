@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/api/reply_model.php
-	备注： 评论相关
+	檔案： {phpok}/model/api/reply_model.php
+	備註： 評論相關
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年08月14日 20时44分
+	時間： 2015年08月14日 20時44分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class reply_model extends reply_model_base

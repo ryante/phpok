@@ -1,20 +1,20 @@
 <?php
 /**
- * 订单信息及管理
+ * 訂單資訊及管理
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年08月13日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年08月13日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class order_model_base extends phpok_model
 {
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -22,11 +22,11 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得订单列表
-	 * @参数 $condition 查询条件，仅限主表查询
-	 * @参数 $offset 起始位置，从第一个开始查为0
-	 * @参数 $psize 查询数量，默认是20页
-	 * @返回 false/结果集数组
+	 * 取得訂單列表
+	 * @引數 $condition 查詢條件，僅限主表查詢
+	 * @引數 $offset 起始位置，從第一個開始查為0
+	 * @引數 $psize 查詢數量，預設是20頁
+	 * @返回 false/結果集陣列
 	**/
 	public function get_list($condition='',$offset=0,$psize=20)
 	{
@@ -51,9 +51,9 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 查询订单数量
-	 * @参数 $condition 查询条件，仅限主表中使用
-	 * @返回 具体订单数量
+	 * 查詢訂單數量
+	 * @引數 $condition 查詢條件，僅限主表中使用
+	 * @返回 具體訂單數量
 	**/
 	public function get_count($condition="")
 	{
@@ -65,7 +65,7 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得订单的最大ID号，再此基础上+1
+	 * 取得訂單的最大ID號，再此基礎上+1
 	**/
 	public function maxid()
 	{
@@ -76,10 +76,10 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存订单信息
-	 * @参数 $data 数组
-	 * @参数 $id 为0或空表示添加新订单
-	 * @返回 true/false/订单ID号
+	 * 儲存訂單資訊
+	 * @引數 $data 陣列
+	 * @引數 $id 為0或空表示新增新訂單
+	 * @返回 true/false/訂單ID號
 	**/
 	public function save($data,$id=0)
 	{
@@ -97,9 +97,9 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 存储商品信息
-	 * @参数 $data 产品信息，数组
-	 * @参数 $id order_product表中的主键ID，为0为空表示新增
+	 * 儲存商品資訊
+	 * @引數 $data 產品資訊，陣列
+	 * @引數 $id order_product表中的主鍵ID，為0為空表示新增
 	**/
 	public function save_product($data,$id=0)
 	{
@@ -117,9 +117,9 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存收件人地址
-	 * @参数 $data 地址信息，数组
-	 * @参数 $id order_address表中的主键ID，为0为空表示新增
+	 * 儲存收件人地址
+	 * @引數 $data 地址資訊，陣列
+	 * @引數 $id order_address表中的主鍵ID，為0為空表示新增
 	**/
 	public function save_address($data,$id=0)
 	{
@@ -134,8 +134,8 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存发票信息
-	 * @参数 $data 订单中的发票信息
+	 * 儲存發票資訊
+	 * @引數 $data 訂單中的發票資訊
 	**/
 	public function save_invoice($data)
 	{
@@ -143,10 +143,10 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 通过订单号取得单个订单信息
-	 * @参数 $sn 订单编号
-	 * @参数 $user 会员ID
-	 * @返回 数组
+	 * 通過訂單號取得單個訂單資訊
+	 * @引數 $sn 訂單編號
+	 * @引數 $user 會員ID
+	 * @返回 陣列
 	**/
 	public function get_one_from_sn($sn,$user='')
 	{
@@ -154,11 +154,11 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得订单信息
-	 * @参数 $id 订单ID号或订单SN号
-	 * @参数 $type 默认是id，支持sn和id
-	 * @参数 $user 会员ID
-	 * @返回 数组
+	 * 取得訂單資訊
+	 * @引數 $id 訂單ID號或訂單SN號
+	 * @引數 $type 預設是id，支援sn和id
+	 * @引數 $user 會員ID
+	 * @返回 陣列
 	**/
 	public function get_one($id,$type='id',$user='')
 	{
@@ -183,8 +183,8 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得订单中的地址信息
-	 * @参数 $id 订单号ID
+	 * 取得訂單中的地址資訊
+	 * @引數 $id 訂單號ID
 	**/
 	public function address($id)
 	{
@@ -196,11 +196,11 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得会员最后一次订单的地址
-	 * @参数 $user_id 会员ID
-	 * @参数 $is_virtual 是否使用虚拟服务里的地址，true不读地址，
-	 * @返回 地址信息或false
-	 * @更新时间 2016年09月08日
+	 * 取得會員最後一次訂單的地址
+	 * @引數 $user_id 會員ID
+	 * @引數 $is_virtual 是否使用虛擬服務裡的地址，true不讀地址，
+	 * @返回 地址資訊或false
+	 * @更新時間 2016年09月08日
 	**/
 	public function last_address($user_id,$is_virtual=false)
 	{
@@ -222,9 +222,9 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得订单下的产品信息
-	 * @参数 $id 订单ID号
-	 * @返回 数组
+	 * 取得訂單下的產品資訊
+	 * @引數 $id 訂單ID號
+	 * @返回 陣列
 	**/
 	public function product_list($id)
 	{
@@ -246,8 +246,8 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得订单中的发票信息
-	 * @参数 $id 订单ID
+	 * 取得訂單中的發票資訊
+	 * @引數 $id 訂單ID
 	**/
 	public function invoice($id)
 	{
@@ -256,8 +256,8 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除订单产品
-	 * @参数 $id order_product中的主键ID，不是产品ID，也不是订单ID
+	 * 刪除訂單產品
+	 * @引數 $id order_product中的主鍵ID，不是產品ID，也不是訂單ID
 	**/
 	public function product_delete($id)
 	{
@@ -273,8 +273,8 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得产品信息，仅限订单表order_product中
-	 * @参数 $id order_product中的主键ID，不是产品ID，也不是订单ID
+	 * 取得產品資訊，僅限訂單表order_product中
+	 * @引數 $id order_product中的主鍵ID，不是產品ID，也不是訂單ID
 	**/
 	public function product_one($id)
 	{
@@ -293,12 +293,12 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新订单状态
-	 * @参数 $id 订单ID
-	 * @参数 $status 订单状态
-	 * @参数 $note 订单状态日志说明
+	 * 更新訂單狀態
+	 * @引數 $id 訂單ID
+	 * @引數 $status 訂單狀態
+	 * @引數 $note 訂單狀態日誌說明
 	 * @返回 true
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function update_order_status($id,$status='',$note='')
 	{
@@ -310,19 +310,19 @@ class order_model_base extends phpok_model
 		$this->model('task')->add_once('order',$param);
 		$rs = $this->get_one($id);
 		if(!$note){
-			$note = P_Lang('订单（{sn}）状态变更为：{status}',array('sn'=>$rs['sn'],'status'=>$status_info['title']));
+			$note = P_Lang('訂單（{sn}）狀態變更為：{status}',array('sn'=>$rs['sn'],'status'=>$status_info['title']));
 		}
-		$who = $this->session->val('user_name') ? $this->session->val('user_name') : P_Lang('游客');
+		$who = $this->session->val('user_name') ? $this->session->val('user_name') : P_Lang('遊客');
 		$log = array('order_id'=>$id,'addtime'=>$this->time,'who'=>$who,'note'=>$note);
 		$this->log_save($log);
 		return true;
 	}
 
 	/**
-	 * 订单日志
-	 * @参数 $data 一维数组
-	 * @返回 true 或 false 或 插件的日志ID
-	 * @更新时间 2016年08月16日
+	 * 訂單日誌
+	 * @引數 $data 一維陣列
+	 * @返回 true 或 false 或 外掛的日誌ID
+	 * @更新時間 2016年08月16日
 	**/
 	public function log_save($data)
 	{
@@ -348,9 +348,9 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存订单中的支付方式，对应表order_payment
-	 * @参数 $data 数组
-	 * @参数 $id 主键ID
+	 * 儲存訂單中的支付方式，對應表order_payment
+	 * @引數 $data 陣列
+	 * @引數 $id 主鍵ID
 	**/
 	public function save_payment($data,$id=0)
 	{
@@ -368,9 +368,9 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得订单中的支付方式信息
-	 * @参数 $order_id 订单ID
-	 * @参数 $payment_id 支付方式ID，此项用于订单中有多条支付方式
+	 * 取得訂單中的支付方式資訊
+	 * @引數 $order_id 訂單ID
+	 * @引數 $payment_id 支付方式ID，此項用於訂單中有多條支付方式
 	**/
 	public function order_payment($order_id,$payment_id=0)
 	{
@@ -395,9 +395,9 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得订单中的未完工的支付方式信息
-	 * @参数 $order_id 订单ID
-	 * @参数 $payment_id 支付方式ID，此项用于订单中有多条支付方式
+	 * 取得訂單中的未完工的支付方式資訊
+	 * @引數 $order_id 訂單ID
+	 * @引數 $payment_id 支付方式ID，此項用於訂單中有多條支付方式
 	**/
 	public function order_payment_notend($order_id,$payment_id=0)
 	{
@@ -428,10 +428,10 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 订单全部支付记录
-	 * @参数 $id 订单ID
-	 * @返回 false 或 多组数组
-	 * @更新时间 2016年10月03日
+	 * 訂單全部支付記錄
+	 * @引數 $id 訂單ID
+	 * @返回 false 或 多組陣列
+	 * @更新時間 2016年10月03日
 	**/
 	public function payment_all($id)
 	{
@@ -446,7 +446,7 @@ class order_model_base extends phpok_model
 				$value['ext'] = $tmp;
 				if($tmp['wealth'] && $tmp['wealth_val']){
 					$w = $this->model('wealth')->get_one($tmp['wealth']);
-					$value['ext'] = P_Lang('使用财富（{title}）{price}{unit}支付',array('title'=>$w['title'],'price'=>$tmp['wealth_val'],'unit'=>$w['unit']));
+					$value['ext'] = P_Lang('使用財富（{title}）{price}{unit}支付',array('title'=>$w['title'],'price'=>$tmp['wealth_val'],'unit'=>$w['unit']));
 				}
 				$rslist[$key] = $value;
 			}
@@ -455,10 +455,10 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 检查订单是否是完成
-	 * @参数 $order_id，订单ID号，如果订单未结束
+	 * 檢查訂單是否是完成
+	 * @引數 $order_id，訂單ID號，如果訂單未結束
 	 * @返回 true 完成 或 false 未完成
-	 * @更新时间 2016年08月13日
+	 * @更新時間 2016年08月13日
 	**/
 	public function check_payment_is_end($order_id)
 	{
@@ -478,10 +478,10 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 订单已支付金额
-	 * @参数 $order_id 订单ID
-	 * @返回 订单金额
-	 * @更新时间 2016年08月13日
+	 * 訂單已支付金額
+	 * @引數 $order_id 訂單ID
+	 * @返回 訂單金額
+	 * @更新時間 2016年08月13日
 	**/
 	public function paid_price($order_id)
 	{
@@ -508,10 +508,10 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 未支付的订单金额
-	 * @参数 $order_id 订单ID
-	 * @返回 订单金额
-	 * @更新时间 2016年10月03日
+	 * 未支付的訂單金額
+	 * @引數 $order_id 訂單ID
+	 * @返回 訂單金額
+	 * @更新時間 2016年10月03日
 	**/
 	public function unpaid_price($order_id)
 	{
@@ -524,8 +524,8 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除支付信息
-	 * @参数 $id order_payment里的主键ID
+	 * 刪除支付資訊
+	 * @引數 $id order_payment裡的主鍵ID
 	**/
 	public function order_payment_delete($id)
 	{
@@ -534,8 +534,8 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 订单价格信息 order_price中使用
-	 * @参数 $order_id 订单ID
+	 * 訂單價格資訊 order_price中使用
+	 * @引數 $order_id 訂單ID
 	**/
 	public function order_price($order_id)
 	{
@@ -552,7 +552,7 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 订单状态列表
+	 * 訂單狀態列表
 	**/
 	public function status_list()
 	{
@@ -568,10 +568,10 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得指定会员下的余额及积分
-	 * @参数 $user_id 会员ID
-	 * @返回 false 或 余额多维数组列表
-	 * @更新时间 2016年11月26日
+	 * 取得指定會員下的餘額及積分
+	 * @引數 $user_id 會員ID
+	 * @返回 false 或 餘額多維陣列列表
+	 * @更新時間 2016年11月26日
 	**/
 	public function balance($user_id)
 	{
@@ -613,7 +613,7 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取订单编号
+	 * 獲取訂單編號
 	**/
 	public function create_sn()
 	{
@@ -664,7 +664,7 @@ class order_model_base extends phpok_model
 				$maxid++;
 				$sn .= str_pad($maxid,5,'0',STR_PAD_LEFT);
 			}
-			//包含会员信息
+			//包含會員資訊
 			if($value == 'user'){
 				$sn .= $this->session->val('user_id') ? 'U'.str_pad($this->session->val('user_id'),5,'0',STR_PAD_LEFT) : 'G';
 			}
@@ -676,8 +676,8 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存订单各种状态下的价格，使用表order_price
-	 * @参数 $data 数组
+	 * 儲存訂單各種狀態下的價格，使用表order_price
+	 * @引數 $data 陣列
 	**/
 	public function save_order_price($data)
 	{
@@ -685,9 +685,9 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 积分抵扣费用
-	 * @参数 $order_id 订单ID
-	 * @参数 $price 价格
+	 * 積分抵扣費用
+	 * @引數 $order_id 訂單ID
+	 * @引數 $price 價格
 	**/
 	public function integral_discount($order_id,$price=0)
 	{
@@ -707,10 +707,10 @@ class order_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得订单里的财富基数
-	 * @参数 $id 订单ID，整数
-	 * @返回 false/数字
-	 * @更新时间 2016年11月28日
+	 * 取得訂單裡的財富基數
+	 * @引數 $id 訂單ID，整數
+	 * @返回 false/數字
+	 * @更新時間 2016年11月28日
 	**/
 	public function integral($id)
 	{

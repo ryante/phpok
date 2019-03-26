@@ -1,13 +1,13 @@
 <?php
 /**
- * 项目管理
+ * 專案管理
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年07月19日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年07月19日
 **/
 
 
@@ -15,12 +15,12 @@ if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class newproject_control extends phpok_control
 {
 	/**
-	 * 权限
+	 * 許可權
 	**/
 	private $popedom;
 
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -30,12 +30,12 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 项目列表，展示全部项目，包括启用，未启用，隐藏的，普通管理员要求有查看权限（project:list）
+	 * 專案列表，展示全部專案，包括啟用，未啟用，隱藏的，普通管理員要求有檢視許可權（project:list）
 	**/
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$rslist = $this->model('project')->get_all_project($this->session->val('admin_site_id'));
 		$this->assign("rslist",$rslist);
@@ -43,13 +43,13 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 添加或编辑项目基础配置信息，普通管理员要有配置权限（project:set）
-	 * @参数 id 项目ID，数值，ID为空表示添加项目，不为0表示编辑这个ID下的项目
+	 * 新增或編輯專案基礎配置資訊，普通管理員要有配置許可權（project:set）
+	 * @引數 id 專案ID，數值，ID為空表示新增專案，不為0表示編輯這個ID下的專案
 	**/
 	public function set_f()
 	{
 		if(!$this->popedom["set"]){
-			error(P_Lang('您没有权限执行此操作'),'','error');
+			error(P_Lang('您沒有許可權執行此操作'),'','error');
 		}
 		$id = $this->get("id","int");
 		$idstring = "";
@@ -143,13 +143,13 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 项目属性扩展，即扩展项目自身字段配置，要操作此项要求普通管理员有配置权限（project:set）
-	 * @参数 id，项目ID，不能为空或0
+	 * 專案屬性擴充套件，即擴充套件專案自身欄位配置，要操作此項要求普通管理員有配置許可權（project:set）
+	 * @引數 id，專案ID，不能為空或0
 	**/
 	public function content_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -179,15 +179,15 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 取得模块的扩展字段
-	 * @参数 id 模块ID
-	 * @返回 Json数据
-	 * @更新时间 2016年07月21日
+	 * 取得模組的擴充套件欄位
+	 * @引數 id 模組ID
+	 * @返回 Json資料
+	 * @更新時間 2016年07月21日
 	**/
 	public function mfields_f()
 	{
 		if(!$this->popedom['set']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
@@ -209,56 +209,56 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 保存项目信息
-	 * @参数 id 项目ID，为0或空时表示添加
-	 * @参数 title 项目名称
-	 * @参数 module 模块ID，为0表示不绑定模块
-	 * @参数 cate 分类ID，为0表示不绑定分类，此项仅限module不为0时有效
-	 * @参数 cate_multiple 是否支持多分类，仅限绑定分类后才有效
-	 * @参数 tpl_index 自定义封面模板
-	 * @参数 tpl_list 自定义列表模板
-	 * @参数 tpl_content 自定义内容模板
-	 * @参数 taxis 项目排序，值范围是0-255，越小越往前靠
-	 * @参数 parent_id 父级项目ID，为0表示当前为父级项目
-	 * @参数 nick_title 项目别名，此项主要是给管理员使用，前台无效
-	 * @参数 alias_title 主题别名
-	 * @参数 alias_note 主题备注
-	 * @参数 psize 每个项目显示多少主题，此项影响前台布局，仅在module不为0时有效
-	 * @参数 ico 项目图标，仅限后台使用
-	 * @参数 orderby 项目主题排序，仅在module不为0时有效
-	 * @参数 lock 是否锁定，对应数据表的 status，选中表示锁定，未选中表示开放
-	 * @参数 hidden 是否隐藏，对应数据表的hidden，选中表示隐藏，未选中表示显示
-	 * @参数 seo_title 项目SEO标题，此项为空将会调用全局的SEO标题
-	 * @参数 seo_keywords 项目SEO关键字，此项为空将会调用全局的SEO关键字
-	 * @参数 seo_desc 项目SEO描述，此项为空将会调用全局的SEO描述
-	 * @参数 subtopics 是否启用子主题，即该主题存在简单的父子关系，主要常用于导航
-	 * @参数 is_search 是否支持搜索，禁用后前台将无法搜索该项目下的主题信息，仅限module不为0时有效
-	 * @参数 is_tag 是否启用自定义标签，启用于允许用户针对主题设置标签
-	 * @参数 is_biz 是否启用电商，启用后需要配置相应的货币，运费等功能
-	 * @参数 currency_id 货币ID
-	 * @参数 admin_note 管理员备注，仅限后台使用
-	 * @参数 post_status 是否启用发布功能，启用后您需要配置相应的发布模板及发布权限
-	 * @参数 comment_status 是否启用评论，启用后需要配置前台权限
-	 * @参数 post_tpl 发布模板，未定义将使用 标识_post 来替代，如果找不到，将会报错
-	 * @参数 etpl_admin 发布通知管理员的邮件模板
-	 * @参数 etpl_user 发布通知会员的邮件模板
-	 * @参数 etpl_comment_admin 评论通知管理员
-	 * @参数 etpl_comment_user 评论通知会员
-	 * @参数 is_attr 是否启用主题属性，主题属性配置在 _data/xml/attr.xml 里
-	 * @参数 is_userid 主题是否绑定会员
-	 * @参数 is_tpl_content 是否允许主题单独绑定模板
-	 * @参数 is_seo 是否启用主题自定义SEO，未启用将使用 分类SEO > 项目SEO > 全局SEO
-	 * @参数 is_identifier 是否启用自定义标识
-	 * @参数 tag 项目标签，这里设置后，在添加主题如果启用标签而未配置标签，将会偿试从这里获取
-	 * @参数 biz_attr 是否启用电商产品属性功能，启用后，电商商品支持自定义属性以实现价格浮动
-	 * @参数 freight 运费模板，为0表示不使用运费
-	 * @参数 _popedom 管理员权限
-	 * @参数 read,post,reply,post1,reply1 前台权限，分别表示：查看，发布，评论，发布免审核，评论免审核
+	 * 儲存專案資訊
+	 * @引數 id 專案ID，為0或空時表示新增
+	 * @引數 title 專案名稱
+	 * @引數 module 模組ID，為0表示不繫結模組
+	 * @引數 cate 分類ID，為0表示不繫結分類，此項僅限module不為0時有效
+	 * @引數 cate_multiple 是否支援多分類，僅限繫結分類後才有效
+	 * @引數 tpl_index 自定義封面模板
+	 * @引數 tpl_list 自定義列表模板
+	 * @引數 tpl_content 自定義內容模板
+	 * @引數 taxis 專案排序，值範圍是0-255，越小越往前靠
+	 * @引數 parent_id 父級專案ID，為0表示當前為父級專案
+	 * @引數 nick_title 專案別名，此項主要是給管理員使用，前臺無效
+	 * @引數 alias_title 主題別名
+	 * @引數 alias_note 主題備註
+	 * @引數 psize 每個專案顯示多少主題，此項影響前臺佈局，僅在module不為0時有效
+	 * @引數 ico 專案圖示，僅限後臺使用
+	 * @引數 orderby 專案主題排序，僅在module不為0時有效
+	 * @引數 lock 是否鎖定，對應資料表的 status，選中表示鎖定，未選中表示開放
+	 * @引數 hidden 是否隱藏，對應資料表的hidden，選中表示隱藏，未選中表示顯示
+	 * @引數 seo_title 專案SEO標題，此項為空將會呼叫全域性的SEO標題
+	 * @引數 seo_keywords 專案SEO關鍵字，此項為空將會呼叫全域性的SEO關鍵字
+	 * @引數 seo_desc 專案SEO描述，此項為空將會呼叫全域性的SEO描述
+	 * @引數 subtopics 是否啟用子主題，即該主題存在簡單的父子關係，主要常用於導航
+	 * @引數 is_search 是否支援搜尋，禁用後前臺將無法搜尋該專案下的主題資訊，僅限module不為0時有效
+	 * @引數 is_tag 是否啟用自定義標籤，啟用於允許使用者針對主題設定標籤
+	 * @引數 is_biz 是否啟用電商，啟用後需要配置相應的貨幣，運費等功能
+	 * @引數 currency_id 貨幣ID
+	 * @引數 admin_note 管理員備註，僅限後臺使用
+	 * @引數 post_status 是否啟用釋出功能，啟用後您需要配置相應的釋出模板及釋出許可權
+	 * @引數 comment_status 是否啟用評論，啟用後需要配置前臺許可權
+	 * @引數 post_tpl 釋出模板，未定義將使用 標識_post 來替代，如果找不到，將會報錯
+	 * @引數 etpl_admin 釋出通知管理員的郵件模板
+	 * @引數 etpl_user 釋出通知會員的郵件模板
+	 * @引數 etpl_comment_admin 評論通知管理員
+	 * @引數 etpl_comment_user 評論通知會員
+	 * @引數 is_attr 是否啟用主題屬性，主題屬性配置在 _data/xml/attr.xml 裡
+	 * @引數 is_userid 主題是否繫結會員
+	 * @引數 is_tpl_content 是否允許主題單獨繫結模板
+	 * @引數 is_seo 是否啟用主題自定義SEO，未啟用將使用 分類SEO > 專案SEO > 全域性SEO
+	 * @引數 is_identifier 是否啟用自定義標識
+	 * @引數 tag 專案標籤，這裡設定後，在新增主題如果啟用標籤而未配置標籤，將會償試從這裡獲取
+	 * @引數 biz_attr 是否啟用電商產品屬性功能，啟用後，電商商品支援自定義屬性以實現價格浮動
+	 * @引數 freight 運費模板，為0表示不使用運費
+	 * @引數 _popedom 管理員許可權
+	 * @引數 read,post,reply,post1,reply1 前臺許可權，分別表示：檢視，釋出，評論，釋出免稽核，評論免稽核
 	**/
 	public function save_f()
 	{
 		if(!$this->popedom['set']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		$title = $this->get("title");
@@ -275,7 +275,7 @@ class newproject_control extends phpok_control
 		$tpl_content = $this->get("tpl_content");
 		$taxis = $this->get("taxis","int");
 		if(!$title){
-			$this->error(P_Lang('名称不能为空'));
+			$this->error(P_Lang('名稱不能為空'));
 		}
 		$check_rs = $this->check_identifier($identifier,$id,$this->session->val('admin_site_id'));
 		if($check_rs != "ok"){
@@ -344,7 +344,7 @@ class newproject_control extends phpok_control
 		if($id){
 			$action = $this->model('project')->save($array,$id);
 			if(!$action){
-				$this->error(P_Lang('编辑失败'));
+				$this->error(P_Lang('編輯失敗'));
 			}
 			$rs = $this->model('project')->get_one($id);
 			$popedom = $this->get("_popedom","int");
@@ -377,7 +377,7 @@ class newproject_control extends phpok_control
 		}else{
 			$id = $this->model('project')->save($array);
 			if(!$id){
-				$this->error(P_Lang('添加失败'));
+				$this->error(P_Lang('新增失敗'));
 			}
 			$popedom = $this->get("_popedom","int");
 			if($popedom && is_array($popedom)){
@@ -403,8 +403,8 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 更新项目Tag标签
-	 * @参数 $id，项目ID
+	 * 更新專案Tag標籤
+	 * @引數 $id，專案ID
 	 * @返回 true
 	**/
 	private function _save_tag($id)
@@ -415,8 +415,8 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 更新前台会员及游客权限，更新每个项目对应的前台会员或游客的权限
-	 * @参数 $id，项目ID
+	 * 更新前臺會員及遊客許可權，更新每個專案對應的前臺會員或遊客的許可權
+	 * @引數 $id，專案ID
 	 * @返回 true或false
 	**/
 	private function _save_user_group($id)
@@ -458,14 +458,14 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 项目扩展字段保存
-	 * @参数 id，项目ID，此项不能为空
-	 * @参数 title，项目名称
+	 * 專案擴充套件欄位儲存
+	 * @引數 id，專案ID，此項不能為空
+	 * @引數 title，專案名稱
 	**/
 	public function content_save_f()
 	{
 		if(!$this->popedom['set']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
@@ -473,7 +473,7 @@ class newproject_control extends phpok_control
 		}
 		$title = $this->get("title");
 		if(!$title){
-			$this->error(P_Lang('名称不能为空'));
+			$this->error(P_Lang('名稱不能為空'));
 		}
 		$array = array("title"=>$title);
 		$this->model('project')->save($array,$id);
@@ -482,54 +482,54 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 检测标识串是否被使用了
-	 * @参数 $sign 检测的标识
-	 * @参数 $id 忽略的项目ID，用于编辑时跳过自身
-	 * @参数 $site_id 站点ID
-	 * @返回 ok是表示检测通过，其他字符表示检测不通过
+	 * 檢測標識串是否被使用了
+	 * @引數 $sign 檢測的標識
+	 * @引數 $id 忽略的專案ID，用於編輯時跳過自身
+	 * @引數 $site_id 站點ID
+	 * @返回 ok是表示檢測通過，其他字元表示檢測不通過
 	**/
 	private function check_identifier($sign,$id=0,$site_id=0)
 	{
 		if(!$sign){
-			return P_Lang('标识串不能为空');
+			return P_Lang('標識串不能為空');
 		}
 		$sign = strtolower($sign);
-		//字符串是否符合条件
+		//字串是否符合條件
 		if(!preg_match("/[a-z][a-z0-9\_\-\.]+/",$sign)){
-			return P_Lang("标识不符合系统要求，限字母、数字及下划线（中划线）且必须是字母开头");
+			return P_Lang("標識不符合系統要求，限字母、數字及下劃線（中劃線）且必須是字母開頭");
 		}
 		if(!$site_id){
 			$site_id = $this->session->val('admin_site_id');
 		}
 		$rs = $this->model('id')->check_id($sign,$site_id,$id);
 		if($rs){
-			return P_Lang('标识符已被使用');
+			return P_Lang('識別符號已被使用');
 		}
 		return 'ok';
 	}
 
 	/**
-	 * 删除项目操作，要求普通管理员有配置权限（project:set）
-	 * @参数 id 项目ID
+	 * 刪除專案操作，要求普通管理員有配置許可權（project:set）
+	 * @引數 id 專案ID
 	 * @返回 json字串
 	**/
 	public function delete_f()
 	{
 		if(!$this->popedom['set']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
 			$this->json(P_Lang('未指定ID'));
 		}
-		//判断是否有子项目
+		//判斷是否有子專案
 		$list = $this->model('project')->get_son($id);
 		if($list){
-			$this->json(P_Lang('已存在子项目，请移除子项目'));
+			$this->json(P_Lang('已存在子專案，請移除子專案'));
 		}
 		$rs = $this->model('project')->get_one($id,false);
 		if(!$rs){
-			$this->json(P_Lang('项目信息不存在'));
+			$this->json(P_Lang('專案資訊不存在'));
 		}
 		$this->model('project')->delete_project($id);
 		$this->model('tag')->stat_delete('p'.$id,"title_id");
@@ -537,14 +537,14 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 更新项目状态，要求普通管理员有配置权限（project:set）
-	 * @参数 id 项目ID
+	 * 更新專案狀態，要求普通管理員有配置許可權（project:set）
+	 * @引數 id 專案ID
 	 * @返回 json字串
 	**/
 	public function status_f()
 	{
 		if(!$this->popedom['set']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id');
 		if(!$id){
@@ -563,15 +563,15 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 项目排序
-	 * @参数 id 项目ID
+	 * 專案排序
+	 * @引數 id 專案ID
 	 * @返回 json字串
 	**/
 	public function sort_f()
 	{
 		$sort = $this->get('sort');
 		if(!$sort || !is_array($sort)){
-			$this->json(P_Lang('更新排序失败'));
+			$this->json(P_Lang('更新排序失敗'));
 		}
 		foreach($sort AS $key=>$value){
 			$key = intval($key);
@@ -582,7 +582,7 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 取得全部分类下的根分类
+	 * 取得全部分類下的根分類
 	**/
 	public function rootcate_f()
 	{
@@ -591,23 +591,23 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 项目复制操作
-	 * @参数 id 要复制的项目ID
+	 * 專案複製操作
+	 * @引數 id 要複製的專案ID
 	**/
 	public function copy_f()
 	{
 		if(!$this->popedom['set']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id');
 		if(!$id){
-			$this->json(P_Lang('未指定项目ID'));
+			$this->json(P_Lang('未指定專案ID'));
 		}
 		$rs = $this->model('project')->get_one($id,false);
 		if(!$rs){
-			$this->json(P_Lang('项目不存在'));
+			$this->json(P_Lang('專案不存在'));
 		}
-		//自定义标识串
+		//自定義標識串
 		$identifier = $rs['identifier'].$_SESSION['admin_id'].$this->time;
 		$array = array();
 		$array['site_id'] = $_SESSION["admin_site_id"];
@@ -654,9 +654,9 @@ class newproject_control extends phpok_control
 		$gid = $c_rs["id"];
 		$nid = $this->model('project')->save($array);
 		if(!$nid){
-			$this->json(P_Lang('复制项目失败'));
+			$this->json(P_Lang('複製專案失敗'));
 		}
-		//配置后台权限
+		//配置後臺許可權
 		$popedom_list = $this->model('popedom')->get_all("pid=0 AND gid='".$gid."'",false,false);
 		if($popedom_list){
 			foreach($popedom_list as $key=>$value){
@@ -665,7 +665,7 @@ class newproject_control extends phpok_control
 				$this->model('popedom')->save($tmp_array);
 			}
 		}
-		//存储前台权限
+		//儲存前臺許可權
 		$grouplist = $this->model('usergroup')->get_all("status=1");
 		if($grouplist){
 			$tmp_popedom = array('read','post','reply','post1','reply1');
@@ -689,18 +689,18 @@ class newproject_control extends phpok_control
 	}
 
 	/**
-	 * 项目导出
-	 * @参数 id，项目ID
+	 * 專案匯出
+	 * @引數 id，專案ID
 	**/
 	public function export_f()
 	{
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定项目ID'),$this->url('project'),'error');
+			$this->error(P_Lang('未指定專案ID'),$this->url('project'),'error');
 		}
 		$rs = $this->model('project')->get_one($id,false);
 		if(!$rs){
-			$this->error(P_Lang('项目不存在'),$this->url('project'),'error');
+			$this->error(P_Lang('專案不存在'),$this->url('project'),'error');
 		}
 		unset($rs['id'],$rs['parent_id'],$rs['site_id']);
 		foreach($rs as $key=>$value){
@@ -726,7 +726,7 @@ class newproject_control extends phpok_control
 			$rs['_module'] = $module;
 			unset($rs['module']);
 		}
-		//扩展字段
+		//擴充套件欄位
 		$extlist = $this->model('ext')->ext_all('project-'.$id,false);
 		if($extlist){
 			$tmplist = array();
@@ -745,13 +745,13 @@ class newproject_control extends phpok_control
 		$zipfile = $this->dir_cache.$this->time.'.zip';
 		$this->lib('phpzip')->zip($tmpfile,$zipfile);
 		$this->lib('file')->rm($tmpfile);
-		//下载zipfile
+		//下載zipfile
 		$this->lib('file')->download($zipfile,$rs['title']);
 	}
 
 	/**
-	 * 项目导入
-	 * @变量 zipfile 指定的ZIP文件地址
+	 * 專案匯入
+	 * @變數 zipfile 指定的ZIP檔案地址
 	**/
 	public function import_f()
 	{
@@ -762,18 +762,18 @@ class newproject_control extends phpok_control
 			$this->view('project_import');
 		}
 		if(strpos($zipfile,'..') !== false){
-			$this->error(P_Lang('不支持带..上级路径'));
+			$this->error(P_Lang('不支援帶..上級路徑'));
 		}
 		if(!file_exists($this->dir_root.$zipfile)){
-			$this->error(P_Lang('ZIP文件不存在'));
+			$this->error(P_Lang('ZIP檔案不存在'));
 		}
 		$this->lib('phpzip')->unzip($this->dir_root.$zipfile,$this->dir_cache);
 		if(!file_exists($this->dir_cache.'project.xml')){
-			$this->error(P_Lang('导入项目失败，请检查解压缩是否成功'));
+			$this->error(P_Lang('匯入專案失敗，請檢查解壓縮是否成功'));
 		}
 		$rs = $info = $this->lib('xml')->read($this->dir_cache.'project.xml',true);
 		if(!$rs){
-			$this->error(P_Lang('XML内容解析异常'));
+			$this->error(P_Lang('XML內容解析異常'));
 		}
 		$tmp = $rs;
 		if(isset($tmp['_module'])){
@@ -787,7 +787,7 @@ class newproject_control extends phpok_control
 		
 		$insert_id = $this->model('project')->save($tmp);
 		if(!$insert_id){
-			$this->error(P_Lang('项目导入失败，保存项目基本信息错误'));
+			$this->error(P_Lang('專案匯入失敗，儲存專案基本資訊錯誤'));
 		}
 		
 		if($rs['_ext']){
@@ -807,14 +807,14 @@ class newproject_control extends phpok_control
 			$mid = $this->model('module')->save($tmp2);
 			if(!$mid){
 				$this->model('project')->delete_project($insert_id);
-				$this->error(P_Lang('项目导入失败：模块创建失败'));
+				$this->error(P_Lang('專案匯入失敗：模組建立失敗'));
 			}
 			$this->model('module')->create_tbl($mid);
 			$tbl_exists = $this->model('module')->chk_tbl_exists($mid,$tmp2['mtype']);
 			if(!$tbl_exists){
 				$this->model('module')->delete($mid);
 				$this->model('project')->delete_project($insert_id);
-				$this->error(P_Lang('创建模块表失败'));
+				$this->error(P_Lang('建立模組表失敗'));
 			}
 			if(isset($rs['_module']['_fields']) && $rs['_module']['_fields']){
 				foreach($rs['_module']['_fields'] as $key=>$value){
@@ -826,7 +826,7 @@ class newproject_control extends phpok_control
 					$this->model('module')->create_fields($value['id']);
 				}
 			}
-			//更新项目和模块之间的关系
+			//更新專案和模組之間的關係
 			$array = array('module'=>$mid);
 			$this->model('project')->update($array,$insert_id);
 		}
@@ -838,7 +838,7 @@ class newproject_control extends phpok_control
 	public function hidden_f()
 	{
 		if(!$this->popedom['set']){
-			$this->error(P_Lang('您没有权限执行状态操作'));
+			$this->error(P_Lang('您沒有許可權執行狀態操作'));
 		}
 		$id = $this->get('id');
 		$hidden = $this->get('hidden','int');

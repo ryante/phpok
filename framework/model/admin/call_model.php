@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/call_model.php
-	备注： 调用中心后台管理中涉及到的函数
+	檔案： {phpok}/model/admin/call_model.php
+	備註： 呼叫中心後臺管理中涉及到的函式
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年02月12日 15时17分
+	時間： 2015年02月12日 15時17分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class call_model extends call_model_base

@@ -1,13 +1,13 @@
 <?php
 /**
- * 对$_SERVER进行封装操作
+ * 對$_SERVER進行封裝操作
  * @package phpok\libs
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年09月28日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年09月28日
 **/
 
 if(!defined("PHPOK_SET")){
@@ -22,9 +22,9 @@ class server_lib
 	}
 
 	/**
-	 * 取得域名，通过$_SERVER['SERVER_NAME'] 或 $_SERVER['HTTP_HOST'] 取得，并进行安全过滤检测
-	 * @参数 $name 支持 server_name 和 http_host
-	 * @返回 false 或是 正确的域名
+	 * 取得域名，通過$_SERVER['SERVER_NAME'] 或 $_SERVER['HTTP_HOST'] 取得，並進行安全過濾檢測
+	 * @引數 $name 支援 server_name 和 http_host
+	 * @返回 false 或是 正確的域名
 	**/
 	public function domain($name='server_name')
 	{
@@ -36,7 +36,7 @@ class server_lib
 			return false;
 		}
 		$domain = $_SERVER[strtoupper($name)];
-		//检测domain是否符合要求
+		//檢測domain是否符合要求
 		if(!preg_match('/^[0-9a-zA-Z][\w\-\.]*[0-9a-zA-Z]$/isU',$domain)){
 			return false;
 		}
@@ -44,7 +44,7 @@ class server_lib
 	}
 
 	/**
-	 * 取得IP，仅限服务端IP，客户端IP不能通过此方法取
+	 * 取得IP，僅限服務端IP，客戶端IP不能通過此方法取
 	**/
 	public function ip()
 	{
@@ -52,7 +52,7 @@ class server_lib
 	}
 
 	/**
-	 * 取得服务器版本和虚拟主机名的字符串。
+	 * 取得伺服器版本和虛擬主機名的字串。
 	**/
 	public function signature()
 	{
@@ -60,7 +60,7 @@ class server_lib
 	}
 
 	/**
-	 * 取得$_SERVER['PHP_SELF']，当前执行脚本的文件名，与 document root 有关
+	 * 取得$_SERVER['PHP_SELF']，當前執行指令碼的檔名，與 document root 有關
 	**/
 	public function me()
 	{
@@ -68,7 +68,7 @@ class server_lib
 	}
 
 	/**
-	 * 取得包含由客户端提供的，包括在真实脚本名称之后并且在查询语句（query string）之前的路径信息
+	 * 取得包含由客戶端提供的，包括在真實指令碼名稱之後並且在查詢語句（query string）之前的路徑資訊
 	**/
 	public function path_info()
 	{
@@ -76,7 +76,7 @@ class server_lib
 	}
 
 	/**
-	 * 取得用来指定要访问的页面
+	 * 取得用來指定要訪問的頁面
 	**/
 	public function uri()
 	{
@@ -89,7 +89,7 @@ class server_lib
 	}
 
 	/**
-	 * 取得网址中?后面的参数
+	 * 取得網址中?後面的引數
 	**/
 	public function query($system=false)
 	{
@@ -113,7 +113,7 @@ class server_lib
 	}
 
 	/**
-	 * 判断是否走https
+	 * 判斷是否走https
 	**/
 	public function https()
 	{
@@ -130,7 +130,7 @@ class server_lib
 	}
 
 	/**
-	 * 取得当前WEB端口
+	 * 取得當前WEB埠
 	**/
 	public function port()
 	{
@@ -144,7 +144,7 @@ class server_lib
 	}
 
 	/**
-	 * 检测是否走ajax
+	 * 檢測是否走ajax
 	**/
 	public function ajax()
 	{
@@ -176,7 +176,7 @@ class server_lib
 	}
 
 	/**
-	 * 取得当前脚本文件名，为空或获取失败返回index.php
+	 * 取得當前指令碼檔名，為空或獲取失敗返回index.php
 	**/
 	public function phpfile()
 	{

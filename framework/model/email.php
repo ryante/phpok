@@ -1,13 +1,13 @@
 <?php
 /**
- * 邮件内容管理器
+ * 郵件內容管理器
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年04月22日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年04月22日
 **/
 
 class email_model_base extends phpok_model
@@ -44,7 +44,7 @@ class email_model_base extends phpok_model
 		return $this->db->get_all($sql);
 	}
 
-	//取得总数量
+	//取得總數量
 	public function get_count($condition="")
 	{
 		$sql = "SELECT count(id) FROM ".$this->db->prefix."email ";
@@ -55,9 +55,9 @@ class email_model_base extends phpok_model
 	}
 
 	/**
-	 * 存储邮件内容信息
-	 * @参数 $data 数组，要写入的数据
-	 * @参数 $id 大于0时表示更新
+	 * 儲存郵件內容資訊
+	 * @引數 $data 陣列，要寫入的資料
+	 * @引數 $id 大於0時表示更新
 	**/
 	public function save($data,$id=0)
 	{
@@ -71,8 +71,8 @@ class email_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除邮件内容
-	 * @参数 $id 要删除的邮件ID，多个ID用英文逗号隔开
+	 * 刪除郵件內容
+	 * @引數 $id 要刪除的郵件ID，多個ID用英文逗號隔開
 	**/
 	public function del($id=0)
 	{
@@ -84,10 +84,10 @@ class email_model_base extends phpok_model
 	}
 
 	/**
-	 * 检测标识是否存在
-	 * @参数 $identifier 标识
-	 * @参数 $site_id 站点ID
-	 * @参数 $id 不检查指定的ID
+	 * 檢測標識是否存在
+	 * @引數 $identifier 標識
+	 * @引數 $site_id 站點ID
+	 * @引數 $id 不檢查指定的ID
 	**/
 	public function get_identifier($identifier,$site_id=0,$id=0)
 	{
@@ -103,9 +103,9 @@ class email_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得模板内容
-	 * @参数 $code 标识ID
-	 * @参数 $site_id 站点ID
+	 * 取得模板內容
+	 * @引數 $code 標識ID
+	 * @引數 $site_id 站點ID
 	**/
 	public function tpl($code,$site_id=0)
 	{

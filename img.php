@@ -1,26 +1,26 @@
 <?php
 /**
- * 图片信息，用于展示各种规格的图片
+ * 圖片資訊，用於展示各種規格的圖片
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2019年1月20日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2019年1月20日
 **/
 
 /**
- * 定义应用的根目录，如果程序出程，请将ROOT改为：define("ROOT","./");
+ * 定義應用的根目錄，如果程式出程，請將ROOT改為：define("ROOT","./");
 **/
 define("ROOT",str_replace("\\","/",dirname(__FILE__))."/");
 
 /**
- * 定义缓存目录
+ * 定義快取目錄
 **/
 define('CACHE',ROOT.'_cache/');
 
 /**
- * 定义框架目录
+ * 定義框架目錄
 **/
 define("FRAMEWORK",ROOT."framework/");
 

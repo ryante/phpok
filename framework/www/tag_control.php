@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/www/tag_control.php
-	Note	: Tag标签读取
+	Note	: Tag標籤讀取
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -35,7 +35,7 @@ class tag_control extends phpok_control
 		if($rs['url']){
 			$this->_location($rs['url']);
 		}
-		//读取列表
+		//讀取列表
 		$total = $this->model('tag')->get_total($rs['id']);
 		$pageid = $this->get($this->config['pageid'],'int');
 		if(!$pageid) $pageid = 1;

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/api/usergroup_model.php
-	备注： API接口下的会员Model处理
+	檔案： {phpok}/model/api/usergroup_model.php
+	備註： API介面下的會員Model處理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年10月24日 11时11分
+	時間： 2014年10月24日 11時11分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class usergroup_model extends usergroup_model_base
@@ -15,7 +15,7 @@ class usergroup_model extends usergroup_model_base
 		parent::__construct();
 	}
 
-	//通过会员取得会员组信息
+	//通過會員取得會員組資訊
 	function group_rs($uid=0)
 	{
 		$gid = $this->group_id($uid);
@@ -32,7 +32,7 @@ class usergroup_model extends usergroup_model_base
 		return $this->db->get_one($sql);
 	}
 
-	//读取单个会员组信息
+	//讀取單個會員組資訊
 	function one($id)
 	{
 		$rslist = $this->all();

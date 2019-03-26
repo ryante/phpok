@@ -3,15 +3,15 @@
  * Token加密解密
  * @package phpok\libs
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年09月28日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年09月28日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -32,8 +32,8 @@ class token_lib
 	}
 
 	/**
-	 * 自定义密钥
-	 * @参数 $keyid 密钥内容
+	 * 自定義金鑰
+	 * @引數 $keyid 金鑰內容
 	**/
 	public function keyid($keyid='')
 	{
@@ -55,8 +55,8 @@ class token_lib
 	}
 
 	/**
-	 * 设置超时
-	 * @参数 $time 超时时间，单位是秒
+	 * 設定超時
+	 * @引數 $time 超時時間，單位是秒
 	**/
 	public function expiry($time=0)
 	{
@@ -67,8 +67,8 @@ class token_lib
 	}
 
 	/**
-	 * 加密数据
-	 * @参数 $string 要加密的数据，数组或字符
+	 * 加密資料
+	 * @引數 $string 要加密的資料，陣列或字元
 	**/
 	public function encode($string)
 	{
@@ -87,7 +87,7 @@ class token_lib
 
 	/**
 	 * 解密
-	 * @参数 $string 要解密的字串
+	 * @引數 $string 要解密的字串
 	**/
 	public function decode($string)
 	{
@@ -114,11 +114,11 @@ class token_lib
 		$result = '';
 		$box = range(0, 255);
 		$rndkey = array();
-		// 产生密匙簿
+		// 產生密匙簿
 		for($i = 0; $i <= 255; $i++){
 			$rndkey[$i] = ord($cryptkey[$i % $key_length]);
 		}
-		// 用固定的算法，打乱密匙簿，增加随机性，好像很复杂，实际上并不会增加密文的强度
+		// 用固定的演算法，打亂密匙簿，增加隨機性，好像很複雜，實際上並不會增加密文的強度
 		for($j = $i = 0; $i < 256; $i++){
 			$j = ($j + $box[$i] + $rndkey[$i]) % 256;
 			$tmp = $box[$i];

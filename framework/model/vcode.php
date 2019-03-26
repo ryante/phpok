@@ -1,16 +1,16 @@
 <?php
 /**
- * 验证码处理
+ * 驗證碼處理
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @许可 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2018年10月27日
+ * @許可 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2018年10月27日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -40,7 +40,7 @@ class vcode_model_base extends phpok_model
 	}
 
 	/**
-	 * 设置验证码的类型
+	 * 設定驗證碼的型別
 	**/
 	public function type($val='')
 	{
@@ -51,10 +51,10 @@ class vcode_model_base extends phpok_model
 	}
 
 	/**
-	 * 创建验证码
-	 * @参数 $type 验证码的类型
-	 * @参数 $length 验证码的长度
-	 * @参数 
+	 * 建立驗證碼
+	 * @引數 $type 驗證碼的型別
+	 * @引數 $length 驗證碼的長度
+	 * @引數 
 	**/
 	public function create($type='',$length=4)
 	{
@@ -68,7 +68,7 @@ class vcode_model_base extends phpok_model
 		$data = $this->session->val('verification_code');
 		if($data && is_array($data) && $data['type'] == $this->type){
 			if( ($data['time'] + 60) > $this->time){
-				$this->error_info(P_Lang('禁止频繁发送验证码，请于一分钟后请求'));
+				$this->error_info(P_Lang('禁止頻繁傳送驗證碼，請於一分鐘後請求'));
 				return false;
 			}
 		}
@@ -80,43 +80,43 @@ class vcode_model_base extends phpok_model
 	}
 
 	/**
-	 * 检验验证码
-	 * @参数 $code 验证码值
-	 * @返回 布尔值 true 或 false 
+	 * 檢驗驗證碼
+	 * @引數 $code 驗證碼值
+	 * @返回 布林值 true 或 false 
 	**/
 	public function check($code='')
 	{
 		$this->error_reset();
 		if(!$code){
-			$this->error_info(P_Lang('验证码不能为空'));
+			$this->error_info(P_Lang('驗證碼不能為空'));
 			return false;
 		}
 		$data = $this->session->val('verification_code');
 		if(!$data || !is_array($data)){
-			$this->error_info(P_Lang('服务器没有找到匹配数据'));
+			$this->error_info(P_Lang('伺服器沒有找到匹配資料'));
 			return false;
 		}
 		if($data['code'] != $code){
-			$this->error_info(P_Lang('验证码不匹配'));
-			//更新验证码错误次数
+			$this->error_info(P_Lang('驗證碼不匹配'));
+			//更新驗證碼錯誤次數
 			$data['count'] = $data['count'] + 1;
 			$this->session->assign('verification_code',$data);
 			return false;
 		}
 		if($data['count'] >= 5){
-			$this->error_info(P_Lang('验证码错误次数超过5次，请重新获取验证码'));
+			$this->error_info(P_Lang('驗證碼錯誤次數超過5次，請重新獲取驗證碼'));
 			return false;
 		}
 		$longtime = $this->type == 'sms' ? 300 : 1800;
 		if(($data['time'] + $longtime) < $this->time){
-			$this->error_info(P_Lang('验证码已过期，请重新获取验证码'));
+			$this->error_info(P_Lang('驗證碼已過期，請重新獲取驗證碼'));
 			return false;
 		}
 		return true;
 	}
 
 	/**
-	 * 销毁验证码
+	 * 銷燬驗證碼
 	**/
 	public function delete()
 	{
@@ -126,10 +126,10 @@ class vcode_model_base extends phpok_model
 	}
 
 	/**
-	 * 验证码格式
-	 * @参数 $length 长度
-	 * @参数 $type 类型，支持all字母+数字，number存数字
-	 * @返回 字符串 
+	 * 驗證碼格式
+	 * @引數 $length 長度
+	 * @引數 $type 型別，支援all字母+數字，number存數字
+	 * @返回 字串 
 	**/
 	private function code($length=6,$type="all")
 	{

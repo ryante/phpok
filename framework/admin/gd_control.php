@@ -3,11 +3,11 @@
  * GD方案管理
  * @package phpok\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年10月04日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年10月04日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -27,7 +27,7 @@ class gd_control extends phpok_control
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$rslist = $this->model('gd')->get_all();
 		$this->assign("rslist",$rslist);
@@ -35,14 +35,14 @@ class gd_control extends phpok_control
 	}
 
 	/**
-	 * 编辑页面
+	 * 編輯頁面
 	**/
 	public function set_f()
 	{
 		$id = $this->get("id","int");
 		if($id){
 			if(!$this->popedom["modify"]){
-				$this->error(P_Lang('您没有权限执行此操作'),$this->url('gd'));
+				$this->error(P_Lang('您沒有許可權執行此操作'),$this->url('gd'));
 			}
 			$rs = $this->model('gd')->get_one($id);
 			if($rs["mark_picture"] && !file_exists($rs["mark_picture"])){
@@ -52,14 +52,14 @@ class gd_control extends phpok_control
 			$this->assign("rs",$rs);
 		} else {
 			if(!$this->popedom["add"]){
-				error(P_Lang('您没有权限执行此操作'),$this->url('gd'),'error');
+				error(P_Lang('您沒有許可權執行此操作'),$this->url('gd'),'error');
 			}
 		}
 		$this->view("gd_set");
 	}
 
 	/**
-	 * 保存数据
+	 * 儲存資料
 	**/
 	public function save_f()
 	{
@@ -67,24 +67,24 @@ class gd_control extends phpok_control
 		$array = array();
 		if(!$id){
 			if(!$this->popedom['add']){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 			$identifier = $this->get("identifier");
 			if(!$identifier){
-				$this->error(P_Lang('标识不能为空'));
+				$this->error(P_Lang('標識不能為空'));
 			}
 			$identifier = strtolower($identifier);
 			if(!preg_match("/[a-z][a-z0-9\_\-]+/",$identifier)){
-				$this->error(P_Lang('标识不符合系统要求，限字母、数字及下划线且必须是字母开头'));
+				$this->error(P_Lang('標識不符合系統要求，限字母、數字及下劃線且必須是字母開頭'));
 			}
 			$chk = $this->model('gd')->get_one($identifier,'identifier');
 			if($chk){
-				$this->error(P_Lang('标识已经存在'));
+				$this->error(P_Lang('標識已經存在'));
 			}
 			$array["identifier"] = $identifier;
 		}else{
 			if(!$this->popedom['modify']){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 		}
 		$array["width"] = $this->get("width","int");
@@ -100,12 +100,12 @@ class gd_control extends phpok_control
 	}
 
 	/**
-	 * 删除图片方案
+	 * 刪除圖片方案
 	**/
 	public function delete_f()
 	{
 		if(!$this->popedom['delete']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
@@ -116,12 +116,12 @@ class gd_control extends phpok_control
 	}
 
 	/**
-	 * 设置编辑器使用的图片规格
+	 * 設定編輯器使用的圖片規格
 	**/
 	public function editor_f()
 	{
 		if(!$this->popedom['modify']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		$this->model('gd')->update_editor($id);

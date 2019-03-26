@@ -1,13 +1,13 @@
 <?php
 /**
- * 选项组管理
+ * 選項組管理
  * @package phpok\model\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年08月03日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年08月03日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -19,8 +19,8 @@ class opt_model extends opt_model_base
 	}
 
 	/**
-	 * 选项组删除
-	 * @参数 $id 组ID
+	 * 選項組刪除
+	 * @引數 $id 組ID
 	**/
 	public function group_del($id)
 	{
@@ -35,9 +35,9 @@ class opt_model extends opt_model_base
 	}
 
 	/**
-	 * 保存选项组
-	 * @参数 $data 数组
-	 * @参数 $id 组ID，为0或空时，表示添加
+	 * 儲存選項組
+	 * @引數 $data 陣列
+	 * @引數 $id 組ID，為0或空時，表示新增
 	**/
 	public function group_save($data,$id=0)
 	{
@@ -49,9 +49,9 @@ class opt_model extends opt_model_base
 	}
 
 	/**
-	 * 保存选项内容
-	 * @参数 $data 数组
-	 * @参数 $id 选项ID
+	 * 儲存選項內容
+	 * @引數 $data 陣列
+	 * @引數 $id 選項ID
 	**/
 	public function opt_save($data,$id=0)
 	{
@@ -63,8 +63,8 @@ class opt_model extends opt_model_base
 	}
 
 	/**
-	 * 删除选项
-	 * @参数 $id 选项ID
+	 * 刪除選項
+	 * @引數 $id 選項ID
 	**/
 	public function opt_del($id)
 	{

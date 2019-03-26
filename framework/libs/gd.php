@@ -1,75 +1,75 @@
 <?php
 /**
- * 缩略/水印图生成
+ * 縮略/水印圖生成
  * @package phpok
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年10月17日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年10月17日
 **/
 
 class gd_lib
 {
 	/**
-	 * 要处理的图片地址，支持网站根目录相对地址和绝对地址
+	 * 要處理的圖片地址，支援網站根目錄相對地址和絕對地址
 	**/
 	private $filename;
 
 	/**
-	 * 是否启用GD
+	 * 是否啟用GD
 	**/
 	private $isgd = true;
 
 	/**
-	 * JPG图片质量，仅限JPG格式有效
+	 * JPG圖片質量，僅限JPG格式有效
 	**/
 	private $quality = 80;
 
 	/**
-	 * 图片宽度，为0表示自适应
+	 * 圖片寬度，為0表示自適應
 	**/
 	private $width = 0;
 
 	/**
-	 * 图片高度，为0表示自适应
+	 * 圖片高度，為0表示自適應
 	**/
 	private $height = 0;
 
 	/**
-	 * 边框的颜色
+	 * 邊框的顏色
 	**/
 	private $border = "";
 
 	/**
-	 * 背景色，不要带#号，仅支持16进制
+	 * 背景色，不要帶#號，僅支援16進位制
 	**/
 	private $bgcolor = "";
 
 	/**
-	 * 版权图片，如果使用图片版权，请在这里设置
+	 * 版權圖片，如果使用圖片版權，請在這裡設定
 	**/
 	private $mark = "";
 
 	/**
-	 * 版权放置的位置，默认是bottom-right，支持：top-left/top-middle/top-right/middle-left/middle-middle/middle-right/bottom-left/bottom-middle/bottom-right
+	 * 版權放置的位置，預設是bottom-right，支援：top-left/top-middle/top-right/middle-left/middle-middle/middle-right/bottom-left/bottom-middle/bottom-right
 	**/
 	private $position = "bottom-right";
 
 	/**
-	 * 透明度，适用于水印透明度
+	 * 透明度，適用於水印透明度
 	**/
 	private $transparence = 80;
-	#[可用于整个图片要调用变量]
+	#[可用於整個圖片要呼叫變數]
 
 	/**
-	 * 文件路径
+	 * 檔案路徑
 	**/
 	private $filepath = "";
 
 	/**
-	 * 图片数据
+	 * 圖片資料
 	**/
 	private $imginfo;
 
@@ -79,7 +79,7 @@ class gd_lib
 	private $iscut = 0;
 
 	/**
-	 * 如果水印图文件已经存在，是否覆盖
+	 * 如果水印圖檔案已經存在，是否覆蓋
 	**/
 	public $isrecover = true;
 
@@ -92,9 +92,9 @@ class gd_lib
 	}
 
 	/**
-	 * 参数设置
-	 * @参数 $var 变量名
-	 * @参数 $val 变量值
+	 * 引數設定
+	 * @引數 $var 變數名
+	 * @引數 $val 變數值
 	**/
 	public function Set($var,$val="")
 	{
@@ -108,9 +108,9 @@ class gd_lib
 	}
 
 	/**
-	 * 文件名，含路径，支持网站根目录相对路径及绝对路径
-	 * @参数 $file
-	 * @返回 字符串
+	 * 檔名，含路徑，支援網站根目錄相對路徑及絕對路徑
+	 * @引數 $file
+	 * @返回 字串
 	**/
 	public function filename($file='')
 	{
@@ -121,10 +121,10 @@ class gd_lib
 	}
 
 	/**
-	 * 检查或配置gd支持
-	 * @参数 $isgd 是否支持gd 为0或false表示不支持，其他支持 
+	 * 檢查或配置gd支援
+	 * @引數 $isgd 是否支援gd 為0或false表示不支援，其他支援 
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function isgd($isgd=true)
 	{
@@ -140,8 +140,8 @@ class gd_lib
 	}
 
 	/**
-	 * 设置补白操作
-	 * @参数 $bgcolor 16位颜色代码值，不支持#
+	 * 設定補白操作
+	 * @引數 $bgcolor 16位顏色程式碼值，不支援#
 	**/
 	public function Filler($bgcolor="FFFFFF")
 	{
@@ -159,10 +159,10 @@ class gd_lib
 	}
 
 	/**
-	 * 设置版权
-	 * @参数 $mark 版权图片
-	 * @参数 $position 版权位置
-	 * @参数 $transparence 透明度
+	 * 設定版權
+	 * @引數 $mark 版權圖片
+	 * @引數 $position 版權位置
+	 * @引數 $transparence 透明度
 	**/
 	public function CopyRight($mark="",$position="bottom-right",$transparence=80)
 	{
@@ -174,9 +174,9 @@ class gd_lib
 
 	#[]
 	/**
-	 * 设置新图片的宽度和高度值
-	 * @参数 $width 图片宽度，为0表示自适应
-	 * @参数 $height 图片高度，为0表示自适应
+	 * 設定新圖片的寬度和高度值
+	 * @引數 $width 圖片寬度，為0表示自適應
+	 * @引數 $height 圖片高度，為0表示自適應
 	 * @返回 true/false
 	**/
 	public function SetWH($width=0,$height=0)
@@ -203,8 +203,8 @@ class gd_lib
 
 	#[]
 	/**
-	 * 设置是否使用裁剪法来生成缩略图
-	 * @参数 $iscut 为0或false表示使用缩放法，其他值表示使用裁剪法
+	 * 設定是否使用裁剪法來生成縮圖
+	 * @引數 $iscut 為0或false表示使用縮放法，其他值表示使用裁剪法
 	 * @返回 true/false
 	**/
 	public function SetCut($iscut=0)
@@ -214,8 +214,8 @@ class gd_lib
 	}
 
 	/**
-	 * 判断是否写入版权
-	 * @参数 $iscopyright 为0或false表示不写入版权，其他值表示写入版权
+	 * 判斷是否寫入版權
+	 * @引數 $iscopyright 為0或false表示不寫入版權，其他值表示寫入版權
 	 * @返回 true/false
 	**/
 	public function iscopyright($iscopyright=true)
@@ -225,10 +225,10 @@ class gd_lib
 	}
 
 	/**
-	 * 判断是否覆盖新图片
-	 * @参数 $isrecover 为0或false表示不复盖原图，其他表示覆盖
+	 * 判斷是否覆蓋新圖片
+	 * @引數 $isrecover 為0或false表示不復蓋原圖，其他表示覆蓋
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function isrecover($isrecover=true)
 	{
@@ -237,11 +237,11 @@ class gd_lib
 	}
 
 	/**
-	 * 根据提供图片生成新图片
-	 * @参数 $source 源图必须含有路径
-	 * @参数 $newpic 新图名称
-	 * @参数 $folder 新图片自定义的地址，留空使用源图的地址
-	 * @更新时间 2019年1月20日
+	 * 根據提供圖片生成新圖片
+	 * @引數 $source 源圖必須含有路徑
+	 * @引數 $newpic 新圖名稱
+	 * @引數 $folder 新圖片自定義的地址，留空使用源圖的地址
+	 * @更新時間 2019年1月20日
 	**/
 	public function Create($source="",$newpic="",$folder='')
 	{
@@ -255,7 +255,7 @@ class gd_lib
 		if(!in_array($img_info_source["ext"],array("jpg","gif","png"))){
 			return false;
 		}
-		$this->filepath = substr($source,0,-(strlen(basename($source))));# 文件目录
+		$this->filepath = substr($source,0,-(strlen(basename($source))));# 檔案目錄
 		if($folder){
 			$this->filepath = $folder;
 		}
@@ -281,10 +281,10 @@ class gd_lib
 	}
 
 	/**
-	 * 获取图片的相关数据
-	 * @参数 $picture 图片地址
+	 * 獲取圖片的相關資料
+	 * @引數 $picture 圖片地址
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function GetImgInfo($picture="")
 	{
@@ -301,8 +301,8 @@ class gd_lib
 	}
 
 	/**
-	 * 判断设置的位置是否正确
-	 * @参数 $position 位置
+	 * 判斷設定的位置是否正確
+	 * @引數 $position 位置
 	**/
 	private function _check_position($position = '')
 	{
@@ -321,9 +321,9 @@ class gd_lib
 	}
 
 	/**
-	 * 判断或创建一个新的图片名称
-	 * @参数 $name 图片名称，仅限字母，数字，下划线及中划线，其他名称暂时不支持，并且字母统一小写
-	 * @参数 $length 名称长度
+	 * 判斷或建立一個新的圖片名稱
+	 * @引數 $name 圖片名稱，僅限字母，數字，下劃線及中劃線，其他名稱暫時不支援，並且字母統一小寫
+	 * @引數 $length 名稱長度
 	**/
 	private function _cc_picname($name="",$length=10)
 	{
@@ -355,7 +355,7 @@ class gd_lib
 	}
 
 	/**
-	 * 根据已提供的信息计算出新图的相关参数
+	 * 根據已提供的資訊計算出新圖的相關引數
 	**/
 	private function _get_newpicWH()
 	{
@@ -387,10 +387,10 @@ class gd_lib
 	}
 
 	/**
-	 * 将十六进制转成RGB格式
-	 * @参数 
+	 * 將十六進位制轉成RGB格式
+	 * @引數 
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	private function _to_rgb($color="")
 	{
@@ -408,12 +408,12 @@ class gd_lib
 	}
 
 	/**
-	 * 创建一张图片
-	 * @参数 $source 原图资源
-	 * @参数 $newpic 新图名称
-	 * @参数 $width 图片宽度
-	 * @参数 $height 图片高度
-	 * @参数 $getPicWH 原图宽高
+	 * 建立一張圖片
+	 * @引數 $source 原圖資源
+	 * @引數 $newpic 新圖名稱
+	 * @引數 $width 圖片寬度
+	 * @引數 $height 圖片高度
+	 * @引數 $getPicWH 原圖寬高
 	**/
 	private function _create_img($source,$newpic,$width,$height,$getpicWH)
 	{
@@ -465,8 +465,8 @@ class gd_lib
 	}
 
 	/**
-	 * 获取图片数据流信息
-	 * @参数 $pic 图片信息
+	 * 獲取圖片資料流資訊
+	 * @引數 $pic 圖片資訊
 	**/
 	private function _get_imgfrom($pic)
 	{
@@ -486,10 +486,10 @@ class gd_lib
 	}
 
 	/**
-	 * 写入图片
-	 * @参数 $temp_image 图片资源
-	 * @参数 $newfile 图片保存路径
-	 * @参数 $info_type 图片类型
+	 * 寫入圖片
+	 * @引數 $temp_image 圖片資源
+	 * @引數 $newfile 圖片儲存路徑
+	 * @引數 $info_type 圖片型別
 	**/
 	private function _write_imgto($temp_image,$newfile,$info_type)
 	{
@@ -509,12 +509,12 @@ class gd_lib
 	}
 
 	/**
-	 * 设置图片的位置
-	 * @参数 $npicInfo 图片信息
-	 * @参数 $width 宽度
-	 * @参数 $height 高度
+	 * 設定圖片的位置
+	 * @引數 $npicInfo 圖片資訊
+	 * @引數 $width 寬度
+	 * @引數 $height 高度
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	private function _set_position($npicInfo,$width,$height)
 	{
@@ -573,7 +573,7 @@ class gd_lib
 	}
 
 	/**
-	 * 使用裁剪法根据已提供的信息计算出新图的相关参数
+	 * 使用裁剪法根據已提供的資訊計算出新圖的相關引數
 	**/
 	private function _cutimg()
 	{
@@ -609,9 +609,9 @@ class gd_lib
 	}
 
 	/**
-	 * 后台使用到的缩略图
-	 * @参数 $filename 文件名
-	 * @参数 $id 文件ID，也是缩略图文件名
+	 * 後臺使用到的縮圖
+	 * @引數 $filename 檔名
+	 * @引數 $id 檔案ID，也是縮圖檔名
 	**/
 	public function thumb($filename,$id,$width=200,$height=200)
 	{
@@ -634,10 +634,10 @@ class gd_lib
 	}
 
 	/**
-	 * 根据实际情况生成各种规格图片
-	 * @参数 $filename 文件名
-	 * @参数 $fileid 文件ID
-	 * @参数 $rs GD配置信息
+	 * 根據實際情況生成各種規格圖片
+	 * @引數 $filename 檔名
+	 * @引數 $fileid 檔案ID
+	 * @引數 $rs GD配置資訊
 	**/
 	public function gd($filename,$fileid,$rs)
 	{

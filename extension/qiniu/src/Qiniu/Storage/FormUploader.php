@@ -8,17 +8,17 @@ final class FormUploader
 {
 
     /**
-     * 上传二进制流到七牛, 内部使用
+     * 上傳二進位制流到七牛, 內部使用
      *
-     * @param $upToken    上传凭证
-     * @param $key        上传文件名
-     * @param $data       上传二进制流
-     * @param $config     上传配置
-     * @param $params     自定义变量，规格参考
+     * @param $upToken    上傳憑證
+     * @param $key        上傳檔名
+     * @param $data       上傳二進位制流
+     * @param $config     上傳配置
+     * @param $params     自定義變數，規格參考
      *                    http://developer.qiniu.com/docs/v6/api/overview/up/response/vars.html#xvar
-     * @param $mime       上传数据的mimeType
+     * @param $mime       上傳資料的mimeType
      *
-     * @return array    包含已上传文件的信息，类似：
+     * @return array    包含已上傳檔案的資訊，類似：
      *                                              [
      *                                                  "hash" => "<Hash string>",
      *                                                  "key" => "<Key string>"
@@ -65,17 +65,17 @@ final class FormUploader
     }
 
     /**
-     * 上传文件到七牛，内部使用
+     * 上傳檔案到七牛，內部使用
      *
-     * @param $upToken    上传凭证
-     * @param $key        上传文件名
-     * @param $filePath   上传文件的路径
-     * @param $config     上传配置
-     * @param $params     自定义变量，规格参考
+     * @param $upToken    上傳憑證
+     * @param $key        上傳檔名
+     * @param $filePath   上傳檔案的路徑
+     * @param $config     上傳配置
+     * @param $params     自定義變數，規格參考
      *                    http://developer.qiniu.com/docs/v6/api/overview/up/response/vars.html#xvar
-     * @param $mime       上传数据的mimeType
+     * @param $mime       上傳資料的mimeType
      *
-     * @return array    包含已上传文件的信息，类似：
+     * @return array    包含已上傳檔案的資訊，類似：
      *                                              [
      *                                                  "hash" => "<Hash string>",
      *                                                  "key" => "<Key string>"

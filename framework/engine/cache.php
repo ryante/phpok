@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/engine/cache.php
-	备注： 缓存基类
+	檔案： {phpok}/engine/cache.php
+	備註： 快取基類
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年11月16日 16时03分
+	時間： 2015年11月16日 16時03分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class cache
@@ -137,7 +137,7 @@ class cache
 		return unserialize($content);
 	}
 
-	//根据参数生成id
+	//根據引數生成id
 	public function id($var='')
 	{
 		if(!$this->status){
@@ -178,7 +178,7 @@ class cache
 		return $this->time_use;
 	}
 
-	//根据索引删除
+	//根據索引刪除
 	public function delete_index($id)
 	{
 		foreach($this->key_list as $key=>$value){
@@ -222,7 +222,7 @@ class cache
 
 	public function error($error='')
 	{
-		echo "执行错误【".$error."】";
+		echo "執行錯誤【".$error."】";
 		exit;
 	}
 
@@ -248,7 +248,7 @@ class cache
 	}
 
 
-	//缓存运行计时器
+	//快取執行計時器
 	protected function _time()
 	{
 		$time = microtime(true);
@@ -260,7 +260,7 @@ class cache
 		}
 	}
 
-	//计数器
+	//計數器
 	protected function _count($val=1)
 	{
 		$this->count += $val;

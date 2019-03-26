@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/admin/rescate_control.php
-	备注： 资源归档管理
+	檔案： {phpok}/admin/rescate_control.php
+	備註： 資源歸檔管理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年04月24日 23时05分
+	時間： 2015年04月24日 23時05分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class rescate_control extends phpok_control
@@ -21,7 +21,7 @@ class rescate_control extends phpok_control
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$rslist = $this->model('rescate')->get_all();
 		$this->assign('rslist',$rslist);
@@ -33,12 +33,12 @@ class rescate_control extends phpok_control
 		$id = $this->get('id','int');
 		if(!$id){
 			if(!$this->popedom["add"]){
-				$this->error(P_Lang('您没有权限执行此操作'),$this->url('rescate'));
+				$this->error(P_Lang('您沒有許可權執行此操作'),$this->url('rescate'));
 			}
 			$rs = array();
 		}else{
 			if(!$this->popedom["modify"]){
-				$this->error(P_Lang('您没有权限执行此操作'),$this->url('rescate'));
+				$this->error(P_Lang('您沒有許可權執行此操作'),$this->url('rescate'));
 			}
 			$rs = $this->model('rescate')->get_one($id);
 			$this->assign('id',$id);
@@ -47,7 +47,7 @@ class rescate_control extends phpok_control
 		$this->assign('rs',$rs);
 		$gdlist = $this->model('gd')->get_all();
 		$this->assign('gdlist',$gdlist);
-		//读取接口列表
+		//讀取介面列表
 		$osslist = $this->model('gateway')->all('object-storage');
 		$this->assign('osslist',$osslist);
 		$this->view('rescate_set');
@@ -58,26 +58,26 @@ class rescate_control extends phpok_control
 		$id = $this->get('id','int');
 		if(!$id){
 			if(!$this->popedom['add']){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 		}else{
 			if(!$this->popedom['modify']){
-				$this->error(P_Lang('您没有权限执行此操作'));
+				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 		}
 		$title = $this->get('title');
 		if(!$title){
-			$this->error(P_Lang('附件分类名称不能为空'));
+			$this->error(P_Lang('附件分類名稱不能為空'));
 		}
 		$root = $this->get('root');
 		if(!$root){
-			$this->error(P_Lang('附件存储目录不能为空'));
+			$this->error(P_Lang('附件儲存目錄不能為空'));
 		}
 		if($root == '/'){
-			$this->error(P_Lang('不支持使用/作为根目录'));
+			$this->error(P_Lang('不支援使用/作為根目錄'));
 		}
 		if(!preg_match("/[a-z0-9\_\/\-]+/",$root)){
-			$this->error(P_Lang('文件夹不符合系统要求，只支持：小写字母、数字、下划线、中划线及斜杠'));
+			$this->error(P_Lang('資料夾不符合系統要求，只支援：小寫字母、數字、下劃線、中劃線及斜槓'));
 		}
 		if(substr($root,0,1) == "/"){
 			$root = substr($root,1);
@@ -87,7 +87,7 @@ class rescate_control extends phpok_control
 		}
 		$filetypes = $this->get('filetypes');
 		if(!$filetypes){
-			$this->error(P_Lang('附件类型不能为空'));
+			$this->error(P_Lang('附件型別不能為空'));
 		}
 		$list_filetypes = explode(",",$filetypes);
 		foreach($list_filetypes as $key=>$value){
@@ -97,13 +97,13 @@ class rescate_control extends phpok_control
 				continue;
 			}
 			if(!preg_match("/[a-z0-9\_\.]+/",$value)){
-				$this->json(P_Lang('附件类型设置不正确，仅限字母，数字及英文点符号'));
+				$this->json(P_Lang('附件型別設定不正確，僅限字母，數字及英文點符號'));
 			}
 		}
 		$filetypes = implode(",",$list_filetypes);
 		$typeinfo = $this->get('typeinfo');
 		if(!$typeinfo){
-			$this->error(P_Lang('附件类型说明不能为空'));
+			$this->error(P_Lang('附件型別說明不能為空'));
 		}
 		$filemax = $this->get('filemax','int');
 		if(!$filemax){
@@ -128,16 +128,16 @@ class rescate_control extends phpok_control
 	}
 
 	/**
-	 * 快速创建分类
-	 * @参数 
+	 * 快速建立分類
+	 * @引數 
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function qcreate_f()
 	{
 		$title = $this->get('title');
 		if(!$title){
-			$this->error(P_Lang('附件分类名称不能为空'));
+			$this->error(P_Lang('附件分類名稱不能為空'));
 		}
 		$name = $this->get('name');
 		if(!$name){
@@ -160,7 +160,7 @@ class rescate_control extends phpok_control
 	public function delete_f()
 	{
 		if(!$this->popedom['delete']){
-			$this->json(P_Lang('您没有权限执行此操作'));
+			$this->json(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
@@ -168,7 +168,7 @@ class rescate_control extends phpok_control
 		}
 		$rs = $this->model('rescate')->get_one($id);
 		if($rs['is_default']){
-			$this->json(P_Lang('默认附件分类不支持删除'));
+			$this->json(P_Lang('預設附件分類不支援刪除'));
 		}
 		$rs = $this->model('rescate')->delete($id);
 		$this->json(true);

@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="utf-8"?>
 <root>
-	<title>SMTP邮件</title>
-	<note>所有支持SMTP邮件发送的都可以使用</note>
+	<title>SMTP郵件</title>
+	<note>所有支援SMTP郵件傳送的都可以使用</note>
 	<code>
 		<server>
-			<title>SMTP服务器</title>
+			<title>SMTP伺服器</title>
 			<note>如smtp.126.com</note>
 			<type>text</type>
 			<required>true</required>
 		</server>
 		<port>
-			<title>端口号</title>
-			<note>为空使用25作为默认端口号</note>
+			<title>埠號</title>
+			<note>為空使用25作為預設埠號</note>
 			<type>text</type>
 		</port>
 		<account>
-			<title>帐号</title>
-			<note>填写邮件服务器发送涉及到的账号</note>
+			<title>帳號</title>
+			<note>填寫郵件伺服器傳送涉及到的賬號</note>
 			<type>text</type>
 			<required>true</required>
 		</account>
 		<password>
-			<title>密码</title>
-			<note>邮件服务帐号登录密码</note>
+			<title>密碼</title>
+			<note>郵件服務帳號登入密碼</note>
 			<type>password</type>
 			<required>true</required>
 		</password>
 		<charset>
-			<title>邮件内容编码</title>
-			<note>国外邮件建议使用UTF-8，国内邮件建议使用GBK</note>
+			<title>郵件內容編碼</title>
+			<note>國外郵件建議使用UTF-8，國內郵件建議使用GBK</note>
 			<type>radio</type>
 			<option>
 				<gbk>GBK</gbk>
@@ -41,25 +41,25 @@
 			<note>一般不需要使用</note>
 			<type>radio</type>
 			<option>
-				<yes>启用</yes>
+				<yes>啟用</yes>
 				<no>不使用</no>
 			</option>
 			<default>no</default>
 		</ssl>
 		<fullname>
-			<title>发件人姓名</title>
-			<note>设置发件人的姓名</note>
+			<title>發件人姓名</title>
+			<note>設定發件人的姓名</note>
 			<type>text</type>
 		</fullname>
 		<email>
-			<title>发件人邮箱</title>
-			<note>填写发件人的邮箱（要求登录的账号和密码能匹配）</note>
+			<title>發件人郵箱</title>
+			<note>填寫發件人的郵箱（要求登入的賬號和密碼能匹配）</note>
 			<type>text</type>
 		</email>
 	</code>
 	<manage>
 		<send>
-			<title>发邮件</title>
+			<title>發郵件</title>
 			<exec>sendemail</exec>
 			<type>page</type>
 		</send>

@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/model/www/order_model.php
-	Note	: 订单信息及管理
+	Note	: 訂單資訊及管理
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -15,7 +15,7 @@ class order_model extends order_model_base
 		parent::__construct();
 	}
 
-	//取得订单列表
+	//取得訂單列表
 	function get_list($condition='',$offset=0,$psize=20)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."order ";
@@ -59,7 +59,7 @@ class order_model extends order_model_base
 		return $this->db->count($sql);
 	}
 
-	//取得订单的最大ID号，再此基础上+1
+	//取得訂單的最大ID號，再此基礎上+1
 	function maxid()
 	{
 		$sql = "SELECT MAX(id) id FROM ".$this->db->prefix."order";
@@ -82,7 +82,7 @@ class order_model extends order_model_base
 		return $this->db->get_all($sql,'type_id');
 	}
 
-	//删除订单操作
+	//刪除訂單操作
 	function delete($id)
 	{
 		$sql = "DELETE FROM ".$this->db->prefix."order WHERE id=".intval($id);
@@ -104,10 +104,10 @@ class order_model extends order_model_base
 			return false;
 		}
 		$oid = $rs['order_id'];
-		//删除产品
+		//刪除產品
 		$sql = "DELETE FROM ".$this->db->prefix."order_product WHERE id='".$id."'";
 		$this->db->query($sql);
-		//更新订单金额
+		//更新訂單金額
 		$sql = "SELECT SUM(price) FROM ".$this->db->prefix."order_product WHERE order_id='".$oid."'";
 		$total = $this->db->count($sql);
 		$sql = "UPDATE ".$this->db->prefix."order SET price='".$total."',pay_price='".$total."' WHERE id='".$oid."'";

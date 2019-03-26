@@ -1,13 +1,13 @@
 <?php
 /**
- * 主题内容管理
+ * 主題內容管理
  * @package phpok\model\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年08月22日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年08月22日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -117,7 +117,7 @@ class list_model extends list_model_base
 		return $this->db->get_one($sql);
 	}
 
-	//复制一个主题
+	//複製一個主題
 	public function copy_id($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."list WHERE id='".$id."'";
@@ -140,7 +140,7 @@ class list_model extends list_model_base
 				$this->save_ext($ext_rs,$m_id);
 			}
 		}
-		//绑定扩展分类
+		//繫結擴充套件分類
 		$sql = "SELECT * FROM ".$this->db->prefix."list_cate WHERE id='".$id."'";
 		$catelist = $this->db->get_all($sql);
 		if($catelist){
@@ -149,14 +149,14 @@ class list_model extends list_model_base
 				$this->db->insert_array($tmp,'list_cate','replace');
 			}
 		}
-		//绑定价格
+		//綁定價格
 		$sql = "SELECT * FROM ".$this->db->prefix."list_biz WHERE id='".$id."'";
 		$tmp = $this->db->get_one($sql);
 		if($tmp){
 			$tmp['id'] = $insert_id;
 			$this->db->insert_array($tmp,'list_biz','replace');
 		}
-		//绑定属性
+		//繫結屬性
 		$sql = "SELECT * FROM ".$this->db->prefix."list_attr WHERE tid='".$id."'";
 		$tmplist = $this->db->get_all($sql);
 		if($tmplist){
@@ -254,12 +254,12 @@ class list_model extends list_model_base
 	}
 
 	/**
-	 * 独立表列表数据
-	 * @参数 $mid 模块ID
-	 * @参数 $condition 查询条件
-	 * @参数 $offset 起始位置
-	 * @参数 $psize 查询数量
-	 * @参数 $orderby 排序
+	 * 獨立表列表資料
+	 * @引數 $mid 模組ID
+	 * @引數 $condition 查詢條件
+	 * @引數 $offset 起始位置
+	 * @引數 $psize 查詢數量
+	 * @引數 $orderby 排序
 	**/
 	public function single_list($mid,$condition='',$offset=0,$psize=30,$orderby='',$field='*')
 	{
@@ -294,13 +294,13 @@ class list_model extends list_model_base
 
 
 	/**
-	 * 获取主题列表
-	 * @参数 $mid，模块ID，数值
-	 * @参数 $condition，查询条件
-	 * @参数 $offset，查询起始位置，默认是0
-	 * @参数 $psize，查询条数，默认是0，表示不限制
-	 * @参数 $orderby，排序
-	 * @返回 数组，查询结果集，扩展字段内容已经格式化
+	 * 獲取主題列表
+	 * @引數 $mid，模組ID，數值
+	 * @引數 $condition，查詢條件
+	 * @引數 $offset，查詢起始位置，預設是0
+	 * @引數 $psize，查詢條數，預設是0，表示不限制
+	 * @引數 $orderby，排序
+	 * @返回 陣列，查詢結果集，擴充套件欄位內容已經格式化
 	**/
 	public function get_list($mid,$condition="",$offset=0,$psize=0,$orderby="")
 	{

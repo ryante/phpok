@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： payment/alipay/notice.php
-	备注： 支付通知页
+	檔案： payment/alipay/notice.php
+	備註： 支付通知頁
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年5月3日
+	時間： 2014年5月3日
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class alipay_notice
@@ -23,11 +23,11 @@ class alipay_notice
 		include_once($this->paydir."lib/alipay_notify.class.php");
 	}
 
-	//获取订单信息
+	//獲取訂單資訊
 	public function submit()
 	{
 		global $app;
-		//如果异步通知已通验证，同步通知就不需要再次验收
+		//如果非同步通知已通驗證，同步通知就不需要再次驗收
 		if($this->order['status']){
 			return true;
 		}
@@ -40,7 +40,7 @@ class alipay_notice
 		$alipayNotify = new AlipayNotify($alipay_config);
 		$verify_result = $alipayNotify->verify($_GET);
 		if(!$verify_result){
-			$app->error(P_Lang('订单验证不通过，请联系管理员确认'),$app->url);
+			$app->error(P_Lang('訂單驗證不通過，請聯絡管理員確認'),$app->url);
 		}
 		$pay_date = $app->get('notify_time');
 		if($pay_date){
@@ -55,7 +55,7 @@ class alipay_notice
 		if(!$trade_status || !in_array($trade_status,$tmp)){
 			return false;
 		}
-		//更新扩展数据
+		//更新擴充套件資料
 		$alipay = $this->order['ext'] ? unserialize($this->order['ext']) : array();
 		//$alipay = array();
 		$alipay['log_id'] = $this->order['id'];
@@ -75,10 +75,10 @@ class alipay_notice
 		$alipay['extra_common_param'] = $app->get('extra_common_param');
 		$alipay['subject'] = $app->get('subject');
 
-		//更新支付记录
+		//更新支付記錄
 		$array = array('status'=>1,'ext'=>serialize($alipay));
 		$app->db->update_array($array,'payment_log',array('id'=>$this->order['id']));
-		//如果当前支付操作是订单
+		//如果當前支付操作是訂單
 		if($this->order['type'] == 'order'){
 			$order = $app->model('order')->get_one_from_sn($this->order['sn']);
 			if($order){
@@ -86,9 +86,9 @@ class alipay_notice
 				if($payinfo){
 					$payment_data = array('dateline'=>$app->time,'ext'=>serialize($alipay));
 					$app->model('order')->save_payment($payment_data,$payinfo['id']);
-					//更新订单日志
+					//更新訂單日誌
 					$app->model('order')->update_order_status($order['id'],'paid');
-					$note = P_Lang('订单支付完成，编号：{sn}',array('sn'=>$order['sn']));
+					$note = P_Lang('訂單支付完成，編號：{sn}',array('sn'=>$order['sn']));
 					$log = array('order_id'=>$order['id'],'addtime'=>$app->time,'who'=>$app->user['user'],'note'=>$note);
 					$app->model('order')->log_save($log);
 				}

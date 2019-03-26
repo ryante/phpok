@@ -1,20 +1,20 @@
 <?php
 /**
- * 系统菜单管理器
+ * 系統選單管理器
  * @package phpok\model\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年07月31日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年07月31日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class sysmenu_model extends sysmenu_model_base
 {
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -22,8 +22,8 @@ class sysmenu_model extends sysmenu_model_base
 	}
 
 	/**
-	 * 删除核心菜单，同时删除相应的权限配置
-	 * @参数 $id 菜单ID
+	 * 刪除核心選單，同時刪除相應的許可權配置
+	 * @引數 $id 選單ID
 	 * @返回 true
 	**/
 	public function delete($id)
@@ -36,9 +36,9 @@ class sysmenu_model extends sysmenu_model_base
 	}
 
 	/**
-	 * 保存核心菜单数据
-	 * @参数 $data 一维数组，要保存的数据
-	 * @参数 $id 当ID为0或空时，表示添加，反之表示更新
+	 * 儲存核心選單資料
+	 * @引數 $data 一維陣列，要儲存的資料
+	 * @引數 $id 當ID為0或空時，表示新增，反之表示更新
 	**/
 	public function save($data,$id=0)
 	{
@@ -50,9 +50,9 @@ class sysmenu_model extends sysmenu_model_base
 	}
 
 	/**
-	 * 更新核心菜单的状态
-	 * @参数 $id 主键ID
-	 * @参数 $status 要变更的值
+	 * 更新核心選單的狀態
+	 * @引數 $id 主鍵ID
+	 * @引數 $status 要變更的值
 	**/
 	public function update_status($id,$status=0)
 	{
@@ -61,10 +61,10 @@ class sysmenu_model extends sysmenu_model_base
 	}
 
 	/**
-	 * 更新核心菜单的排序
-	 * @参数 $id 主键ID
-	 * @参数 $taxis 排序的值
-	 * @更新时间 
+	 * 更新核心選單的排序
+	 * @引數 $id 主鍵ID
+	 * @引數 $taxis 排序的值
+	 * @更新時間 
 	**/
 	public function update_taxis($id,$taxis=255)
 	{

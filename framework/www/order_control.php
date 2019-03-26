@@ -1,24 +1,24 @@
 <?php
 /**
- * 订单信息管理
+ * 訂單資訊管理
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年08月01日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年08月01日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class order_control extends phpok_control
 {
 	/**
-	 * 购物车ID，该ID将贯穿整个购物过程
+	 * 購物車ID，該ID將貫穿整個購物過程
 	**/
 	private $cart_id = 0;
 
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -27,14 +27,14 @@ class order_control extends phpok_control
 	}
 
 	/**
-	 * 取得订单列表
-	 * @参数 pageid 页码ID
+	 * 取得訂單列表
+	 * @引數 pageid 頁碼ID
 	**/
 	public function index_f()
 	{
 		$backurl = $this->url('order');
 		if(!$this->session->val('user_id')){
-			$this->error(P_Lang('您还未登录，请先登录'),$this->url('login','','_back='.rawurlencode($backurl)));
+			$this->error(P_Lang('您還未登入，請先登入'),$this->url('login','','_back='.rawurlencode($backurl)));
 		}
 		$psize = $this->config['psize'] ? $this->config['psize'] : 20;
 		$pageid = $this->get($this->config['pageid'],'int');
@@ -83,11 +83,11 @@ class order_control extends phpok_control
 	}
 
 	/**
-	 * 查看订单信息
-	 * @参数 back 返回上一级，未指定时，会员返回HTTP_REFERER或订单列表，游客返回HTTP_REFERER或首页
-	 * @参数 id 订单ID号，仅限已登录会员使用
-	 * @参数 sn 订单编号，如果订单ID为空时，使用SN来查询
-	 * @参数 passwd 订单密码，仅限游客查阅时需要使用
+	 * 檢視訂單資訊
+	 * @引數 back 返回上一級，未指定時，會員返回HTTP_REFERER或訂單列表，遊客返回HTTP_REFERER或首頁
+	 * @引數 id 訂單ID號，僅限已登入會員使用
+	 * @引數 sn 訂單編號，如果訂單ID為空時，使用SN來查詢
+	 * @引數 passwd 訂單密碼，僅限遊客查閱時需要使用
 	**/
 	public function info_f()
 	{
@@ -119,10 +119,10 @@ class order_control extends phpok_control
 		$this->assign('address',$address);
 		$rslist = $this->model('order')->product_list($rs['id']);
 		$this->assign('rslist',$rslist);
-		//获取发票信息
+		//獲取發票資訊
 		$invoice = $this->model('order')->invoice($rs['id']);
 		$this->assign('invoice',$invoice);
-		//获取价格
+		//獲取價格
 		$price_tpl_list = $this->model('site')->price_status_all();
 		$order_price = $this->model('order')->order_price($rs['id']);
 		if($price_tpl_list && $order_price){
@@ -152,10 +152,10 @@ class order_control extends phpok_control
 	}
 
 	/**
-	 * 订单支付页
-	 * @参数 
+	 * 訂單支付頁
+	 * @引數 
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function payment_f()
 	{
@@ -172,7 +172,7 @@ class order_control extends phpok_control
 		unset($order);
 		if($this->model('order')->check_payment_is_end($rs['id'])){
 			$url = $this->session->val('user_id') ? $this->url('order','info','id='.$rs['id']) : $this->url('order','info','sn='.$rs['sn'].'&passwd='.$rs['passwd']);
-			$this->success(P_Lang('您的订单 {sn} 已经支付完成，无需再支付',array('sn'=>$rs['sn'])),$url);
+			$this->success(P_Lang('您的訂單 {sn} 已經支付完成，無需再支付',array('sn'=>$rs['sn'])),$url);
 		}
 		$mobile = $this->is_mobile ? 1 : 0;
 		$paylist = $this->model('payment')->get_all($this->site['id'],1,$mobile);
@@ -191,10 +191,10 @@ class order_control extends phpok_control
 	}
 
 	/**
-	 * 获取订单信息，无论成功或是失败均返回数据或布尔值
-	 * @参数 id 订单ID号
-	 * @参数 sn 订单编号
-	 * @参数 passwd 订单密码
+	 * 獲取訂單資訊，無論成功或是失敗均返回資料或布林值
+	 * @引數 id 訂單ID號
+	 * @引數 sn 訂單編號
+	 * @引數 passwd 訂單密碼
 	**/
 	private function _order()
 	{
@@ -204,40 +204,40 @@ class order_control extends phpok_control
 			if(!$id){
 				$sn = $this->get('sn');
 				if(!$sn){
-					return array('status'=>false,'error'=>P_Lang('未指定订单ID或订单号'));
+					return array('status'=>false,'error'=>P_Lang('未指定訂單ID或訂單號'));
 				}
 				$rs = $this->model('order')->get_one_from_sn($sn);
 			}else{
 				$rs = $this->model('order')->get_one($id);
 			}
 			if(!$rs){
-				return array('status'=>false,'error'=>P_Lang('订单信息不存在'));
+				return array('status'=>false,'error'=>P_Lang('訂單資訊不存在'));
 			}
 			if($rs['user_id'] != $userid){
 				$passwd = $this->get('passwd');
 				if(!$passwd || ($passwd && $passwd != $rs['passwd'])){
-					return array('status'=>false,'error'=>P_Lang('您没有权限查看此订单'));
+					return array('status'=>false,'error'=>P_Lang('您沒有許可權檢視此訂單'));
 				}
 			}
 		}else{
 			$sn = $this->get('sn');
 			$passwd = $this->get('passwd');
 			if(!$sn || !$passwd){
-				return array('status'=>false,'error'=>P_Lang('参数不完整'));
+				return array('status'=>false,'error'=>P_Lang('引數不完整'));
 			}
 			$rs = $this->model('order')->get_one_from_sn($sn);
 			if(!$rs){
-				return array('status'=>false,'error'=>P_Lang('订单信息不存在'));
+				return array('status'=>false,'error'=>P_Lang('訂單資訊不存在'));
 			}
 			if($passwd != $rs['passwd']){
-				return array('status'=>false,'error'=>P_Lang('您没有权限查看此订单'));
+				return array('status'=>false,'error'=>P_Lang('您沒有許可權檢視此訂單'));
 			}
 		}
 		return array('status'=>true,'info'=>$rs);
 	}
 
 	/**
-	 * 余额支付，无余额不使用
+	 * 餘額支付，無餘額不使用
 	**/
 	private function balance()
 	{
@@ -258,19 +258,19 @@ class order_control extends phpok_control
 	}
 
 	/**
-	 * 订单评论
-	 * @参数 $id 订单ID
-	 * @更新时间 
+	 * 訂單評論
+	 * @引數 $id 訂單ID
+	 * @更新時間 
 	**/
 	public function comment_f()
 	{
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('订单ID不能为空'),$this->url('order'));
+			$this->error(P_Lang('訂單ID不能為空'),$this->url('order'));
 		}
 		$userid = $this->session->val('user_id');
 		if(!$userid){
-			$this->error(P_Lang('非会员账号不能执行此操作'),$this->url('login','index','_back='.rawurlencode($this->url('order','comment','id='.$id))));
+			$this->error(P_Lang('非會員賬號不能執行此操作'),$this->url('login','index','_back='.rawurlencode($this->url('order','comment','id='.$id))));
 		}
 		$backurl = $this->lib('server')->referer();
 		if(!$backurl){
@@ -278,17 +278,17 @@ class order_control extends phpok_control
 		}
 		$rs = $this->model('order')->get_one($id);
 		if($rs['user_id'] != $userid){
-			$this->error(P_Lang('您没有权限评论此订单信息'),$backurl);
+			$this->error(P_Lang('您沒有許可權評論此訂單資訊'),$backurl);
 		}
 		if(!$rs['endtime']){
-			$this->error(P_Lang('订单未结束，暂不支持评论'),$backurl);
+			$this->error(P_Lang('訂單未結束，暫不支援評論'),$backurl);
 		}
 		if($rs['status'] == 'cancel'){
-			$this->error(P_Lang('订单已取消，不支持评论'),$backurl);
+			$this->error(P_Lang('訂單已取消，不支援評論'),$backurl);
 		}
 		$plist = $this->model('order')->product_list($id);
 		if(!$plist){
-			$this->error(P_Lang('订单中无法找到相关产品信息'),$backurl);
+			$this->error(P_Lang('訂單中無法找到相關產品資訊'),$backurl);
 		}
 		$rslist = false;
 		foreach($plist as $key=>$value){
@@ -306,7 +306,7 @@ class order_control extends phpok_control
 			$rslist[] = $value;
 		}
 		if(!$rslist){
-			$this->error(P_Lang('订单中没有找到可以关联的产品信息，所以不支持评论'),$backurl);
+			$this->error(P_Lang('訂單中沒有找到可以關聯的產品資訊，所以不支援評論'),$backurl);
 		}
 		$this->assign('rslist',$rslist);
 		$this->assign('rs',$rs);
@@ -318,38 +318,38 @@ class order_control extends phpok_control
 	}
 
 	/**
-	 * 获取物流信息
-	 * @参数 $id 订单ID号
-	 * @参数 $sn 订单SN码
-	 * @参数 $passwd 订单密码
-	 * @参数 $sort 值为ASC或DESC
+	 * 獲取物流資訊
+	 * @引數 $id 訂單ID號
+	 * @引數 $sn 訂單SN碼
+	 * @引數 $passwd 訂單密碼
+	 * @引數 $sort 值為ASC或DESC
 	**/
 	public function logistics_f()
 	{
 		$id = $this->get('id','int');
 		if($id){
 			if(!$this->session->val('user_id')){
-				$this->error(P_Lang('非会员不能执行此操作'));
+				$this->error(P_Lang('非會員不能執行此操作'));
 			}
 			$rs = $this->model('order')->get_one($id);
 			if(!$rs){
-				$this->error(P_Lang('订单不存在'));
+				$this->error(P_Lang('訂單不存在'));
 			}
 			if($rs['user_id'] != $this->session->val('user_id')){
-				$this->error(P_Lang('您没有权限操作此订单'));
+				$this->error(P_Lang('您沒有許可權操作此訂單'));
 			}
 		}else{
 			$sn = $this->get('sn');
 			$passwd = $this->get('passwd');
 			if(!$sn || !$passwd){
-				$this->error(P_Lang('参数不完整，不能执行此操作'));
+				$this->error(P_Lang('引數不完整，不能執行此操作'));
 			}
 			$rs = $this->model('order')->get_one($sn,'sn');
 			if(!$rs){
-				$this->error(P_Lang('订单不存在'));
+				$this->error(P_Lang('訂單不存在'));
 			}
 			if($rs['passwd'] != $passwd){
-				$this->error(P_Lang('订单密码不正确'));
+				$this->error(P_Lang('訂單密碼不正確'));
 			}
 		}
 		if($this->session->val('user_id')){
@@ -359,16 +359,16 @@ class order_control extends phpok_control
 		}
 		
 		if(!$rs['status']){
-			$this->error(P_Lang('订单状态异常，请联系客服'),$error_url);
+			$this->error(P_Lang('訂單狀態異常，請聯絡客服'),$error_url);
 		}
 		$array = array('create','unpaid');
 		if(in_array($rs['status'],$array)){
-			$this->error(P_Lang('仅限已支付的订单才能查看物流'),$error_url);
+			$this->error(P_Lang('僅限已支付的訂單才能檢視物流'),$error_url);
 		}
 		$is_virtual = true;
 		$plist = $this->model('order')->product_list($rs['id']);
 		if(!$plist){
-			$this->error(P_Lang('这是一张空白订单，没有产品，无法获得物流信息'),$error_url);
+			$this->error(P_Lang('這是一張空白訂單，沒有產品，無法獲得物流資訊'),$error_url);
 		}
 		foreach($plist as $key=>$value){
 			if(!$value['is_virtual']){
@@ -377,13 +377,13 @@ class order_control extends phpok_control
 			}
 		}
 		if($is_virtual){
-			$this->error(P_Lang('服务类订单没有物流信息'),$error_url);
+			$this->error(P_Lang('服務類訂單沒有物流資訊'),$error_url);
 		}
 		$express_list = $this->model('order')->express_all($rs['id']);
 		if(!$express_list){
-			$this->error(P_Lang('订单还未录入物流信息'),$error_url);
+			$this->error(P_Lang('訂單還未錄入物流資訊'),$error_url);
 		}
-		//更新远程链接
+		//更新遠端連結
 		$rslist = array();
 		foreach($express_list as $key=>$value){
 			$value['express_info'] = $this->model('express')->get_one($value['express_id']);
@@ -397,7 +397,7 @@ class order_control extends phpok_control
 		}
 		$loglist = $this->model('order')->log_list($rs['id']);
 		if(!$loglist){
-			$this->error(P_Lang('订单中找不到相关物流信息，请联系客服'),$error_url);
+			$this->error(P_Lang('訂單中找不到相關物流資訊，請聯絡客服'),$error_url);
 		}
 		foreach($loglist as $key=>$value){
 			if(!$value['order_express_id']){

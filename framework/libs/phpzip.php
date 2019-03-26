@@ -1,13 +1,13 @@
 <?php
 /**
- * ZIP类，支持压缩及解压
+ * ZIP類，支援壓縮及解壓
  * @package phpok\libs
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年12月16日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年12月16日
 **/
 
 
@@ -124,9 +124,9 @@ class phpzip_lib
 	}
 
 	/**
-	 * 制作压缩包
-	 * @参数 $dir，支持单个文件，目录及数组
-	 * @参数 $saveName，保存的ZIP文件名
+	 * 製作壓縮包
+	 * @引數 $dir，支援單個檔案，目錄及陣列
+	 * @引數 $saveName，儲存的ZIP檔名
 	**/
 	public function zip($dir, $saveName)
 	{
@@ -152,7 +152,7 @@ class phpzip_lib
 		}
 		if(class_exists('ZipArchive')){
 			$obj = new ZipArchive();
-			$obj->open($saveName,ZipArchive::OVERWRITE|ZipArchive::CREATE);//创建一个空的zip文件
+			$obj->open($saveName,ZipArchive::OVERWRITE|ZipArchive::CREATE);//建立一個空的zip檔案
 			foreach($filelist as $file){
 				if(!file_exists($file) || !is_file($file)){
 					continue;
@@ -200,7 +200,7 @@ class phpzip_lib
 		 
 		$data = unpack('vdisk/vdisk_start/vdisk_entries/ventries/Vsize/Voffset/vcomment_size', fread($zip, 18));
 
-		$centd['comment']      = ($data['comment_size'] != 0) ? fread($zip, $data['comment_size']) : '';  // 注释
+		$centd['comment']      = ($data['comment_size'] != 0) ? fread($zip, $data['comment_size']) : '';  // 註釋
 		$centd['entries']      = $data['entries'];
 		$centd['disk_entries'] = $data['disk_entries'];
 		$centd['offset']       = $data['offset'];
@@ -384,11 +384,11 @@ class phpzip_lib
 	}
 
 	/**
-	 * 解压缩，支持解压的类有：ZipArchive > zip_open > 自写PHP
-	 * @参数 $file，要解压的ZIP文件，完整的路径
-	 * @参数 $to，要解压到的目标文件，如果为空，将解压到当前文件夹
+	 * 解壓縮，支援解壓的類有：ZipArchive > zip_open > 自寫PHP
+	 * @引數 $file，要解壓的ZIP檔案，完整的路徑
+	 * @引數 $to，要解壓到的目標檔案，如果為空，將解壓到當前資料夾
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function unzip($file,$to='')
 	{
@@ -434,16 +434,16 @@ class phpzip_lib
 			$header          = $this->ReadCentralFileHeaders($zip);
 			$header['index'] = $i;
 			$info = array(
-				'filename'        => $header['filename'],                   // 文件名
-				'stored_filename' => $header['stored_filename'],            // 压缩后文件名
+				'filename'        => $header['filename'],                   // 檔名
+				'stored_filename' => $header['stored_filename'],            // 壓縮後文件名
 				'size'            => $header['size'],                       // 大小
-				'compressed_size' => $header['compressed_size'],            // 压缩后大小
+				'compressed_size' => $header['compressed_size'],            // 壓縮後大小
 				'crc'             => strtoupper(dechex($header['crc'])),    // CRC32
-				'mtime'           => date("Y-m-d H:i:s",$header['mtime']),  // 文件修改时间
-				'comment'         => $header['comment'],                    // 注释
-				'folder'          => ($header['external'] == 0x41FF0010 || $header['external'] == 16) ? 1 : 0,  // 是否为文件夹
-				'index'           => $header['index'],                      // 文件索引
-				'status'          => $header['status']                      // 状态
+				'mtime'           => date("Y-m-d H:i:s",$header['mtime']),  // 檔案修改時間
+				'comment'         => $header['comment'],                    // 註釋
+				'folder'          => ($header['external'] == 0x41FF0010 || $header['external'] == 16) ? 1 : 0,  // 是否為資料夾
+				'index'           => $header['index'],                      // 檔案索引
+				'status'          => $header['status']                      // 狀態
 			);
 			$ret[] = $info;
 			unset($header);

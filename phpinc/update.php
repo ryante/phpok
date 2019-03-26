@@ -1,12 +1,12 @@
 <?php
 /**
- * 升级 ext 表到 fields 
+ * 升級 ext 表到 fields 
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年05月18日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年05月18日
 **/
 
 $sql = "SELECT max(id) FROM ".$this->db->prefix."fields";
@@ -23,7 +23,7 @@ $sql = "SELECT * FROM ".$this->db->prefix."ext ORDER BY id ASC";
 $rslist = $this->db->get_all($sql);
 if($rslist){
 	foreach($rslist as $key=>$value){
-		//检查是否已经存在
+		//檢查是否已經存在
 		$sql = "SELECT id FROM ".$this->db->prefix."fields WHERE identifier='".$value['identifier']."' AND ftype='".$value['module']."'";
 		$chk = $this->db->get_one($sql);
 		if($chk){

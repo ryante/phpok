@@ -1,17 +1,17 @@
 <?php
 /**
- * 官网封装的curl
+ * 官網封裝的curl
  * @package phpok\libs
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年07月12日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年07月12日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -19,40 +19,40 @@ if(!defined("PHPOK_SET")){
 
 class curl_lib
 {
-	private $is_gzip = true; // 是否启用 GZIP 压缩传输
-	private $is_post = false; // 是否启用 POST，默认为 GET
-	private $is_proxy = false; // 是否启用代理
-	private $is_ssl = false; // 是否验证 SSL
-	private $proxy_service = ''; // 代理服务器
-	private $proxy_port = ''; // 代理端口
-	private $proxy_user = ''; // 代理账号
-	private $proxy_pass = ''; // 代理密码
+	private $is_gzip = true; // 是否啟用 GZIP 壓縮傳輸
+	private $is_post = false; // 是否啟用 POST，預設為 GET
+	private $is_proxy = false; // 是否啟用代理
+	private $is_ssl = false; // 是否驗證 SSL
+	private $proxy_service = ''; // 代理伺服器
+	private $proxy_port = ''; // 代理埠
+	private $proxy_user = ''; // 代理賬號
+	private $proxy_pass = ''; // 代理密碼
 	private $proxy_type = 'http'; // 代理方式
-	private $post_data = array(); // POST 表单数据，数组
-	private $http_body = ''; // 返回的内容信息
-	private $http_header = ''; // 返回的头部信息
-	private $http_code = 200; // 返回的状态
+	private $post_data = array(); // POST 表單資料，陣列
+	private $http_body = ''; // 返回的內容資訊
+	private $http_header = ''; // 返回的頭部資訊
+	private $http_code = 200; // 返回的狀態
 	private $host_ip = 0;
-	private $headers = array(); // 发送的头部信息
-	private $timeout = 30; // 超时时间，单位秒
-	private $connect_timeout = 10; // 连接超时时间，单位秒
-	private $ssl_ca_info = ''; // SSL 的 CA 证书
-	private $ssl_cert_pem = ''; // SSL 的 PEM 证书
+	private $headers = array(); // 傳送的頭部資訊
+	private $timeout = 30; // 超時時間，單位秒
+	private $connect_timeout = 10; // 連線超時時間，單位秒
+	private $ssl_ca_info = ''; // SSL 的 CA 證書
+	private $ssl_cert_pem = ''; // SSL 的 PEM 證書
 	private $ssl_cert_type = 'PEM';
-	private $ssl_pass = ''; // SSL 的证书密码
-	private $ssl_key = ''; // SSL 私钥
-	private $ssl_key_pass = ''; // SSL 私钥密码
-	private $ssl_key_type = 'PEM'; // SSL 私钥类型
-	private $user = ''; //网址对应的用户
-	private $pass = ''; //访问网址对应的密码
-	private $referer = ''; // 自定义来源
-	private $user_agent = ''; // 自定义
-	private $cookie = array(); // COOKIE 信息，数组
+	private $ssl_pass = ''; // SSL 的證書密碼
+	private $ssl_key = ''; // SSL 私鑰
+	private $ssl_key_pass = ''; // SSL 私鑰密碼
+	private $ssl_key_type = 'PEM'; // SSL 私鑰型別
+	private $user = ''; //網址對應的使用者
+	private $pass = ''; //訪問網址對應的密碼
+	private $referer = ''; // 自定義來源
+	private $user_agent = ''; // 自定義
+	private $cookie = array(); // COOKIE 資訊，陣列
 	private $cookie_file = '';
 	private $error = false;
 
 	/**
-	 * 超时设置
+	 * 超時設定
 	**/
 	public function timeout($val='')
 	{
@@ -83,8 +83,8 @@ class curl_lib
 	}
 
 	/**
-	 * Cookie 保存到一个文件
-	 * @参数 $file 为字符串且目录可写时，为指定文件，为布尔值时表示删除cookie_file
+	 * Cookie 儲存到一個檔案
+	 * @引數 $file 為字串且目錄可寫時，為指定檔案，為布林值時表示刪除cookie_file
 	**/
 	public function cookie_file($file='')
 	{
@@ -98,7 +98,7 @@ class curl_lib
 	}
 
 	/**
-	 * 清除 Cookie File 文件
+	 * 清除 Cookie File 檔案
 	**/
 	public function cookie_file_clear()
 	{
@@ -106,7 +106,7 @@ class curl_lib
 	}
 
 	/**
-	 * 连接响应超时设置
+	 * 連線響應超時設定
 	**/
 	public function connect_timeout($val='')
 	{
@@ -117,8 +117,8 @@ class curl_lib
 	}
 
 	/**
-	 * 设置是否启用 GZIP 压缩
-	 * @参数 $state 布尔值 true 或 false 或 1 或 0
+	 * 設定是否啟用 GZIP 壓縮
+	 * @引數 $state 布林值 true 或 false 或 1 或 0
 	**/
 	public function is_gzip($state = '')
 	{
@@ -129,8 +129,8 @@ class curl_lib
 	}
 
 	/**
-	 * 设置是否启用 POST 发送信息
-	 * @参数 $state 布尔值 true 或 false 或 1 或 0
+	 * 設定是否啟用 POST 傳送資訊
+	 * @引數 $state 布林值 true 或 false 或 1 或 0
 	**/
 	public function is_post($state = '')
 	{
@@ -141,8 +141,8 @@ class curl_lib
 	}
 
 	/**
-	 * 设置是否启用 POST 发送信息
-	 * @参数 $state 布尔值 true 或 false 或 1 或 0
+	 * 設定是否啟用 POST 傳送資訊
+	 * @引數 $state 布林值 true 或 false 或 1 或 0
 	**/
 	public function is_proxy($state = '')
 	{
@@ -154,8 +154,8 @@ class curl_lib
 
 
 	/**
-	 * 设置是否支持 is_ssl 验证
-	 * @参数 $state 布尔值 true 或 false 或 1 或 0
+	 * 設定是否支援 is_ssl 驗證
+	 * @引數 $state 布林值 true 或 false 或 1 或 0
 	**/
 	public function is_ssl($state = '')
 	{
@@ -166,7 +166,7 @@ class curl_lib
 	}
 
 	/**
-	 * CA 证书
+	 * CA 證書
 	**/
 	public function ssl_ca_info($val='')
 	{
@@ -177,7 +177,7 @@ class curl_lib
 	}
 
 	/**
-	 * SSL 的 PEM 证书
+	 * SSL 的 PEM 證書
 	**/
 	public function ssl_cert_pem($val='')
 	{
@@ -188,7 +188,7 @@ class curl_lib
 	}
 
 	/**
-	 * SSL 的 PEM 证书类型
+	 * SSL 的 PEM 證書型別
 	**/
 	public function ssl_cert_type($val='')
 	{
@@ -199,7 +199,7 @@ class curl_lib
 	}
 
 	/**
-	 * 证书密码
+	 * 證書密碼
 	**/
 	public function ssl_pass($val='')
 	{
@@ -210,7 +210,7 @@ class curl_lib
 	}
 
 	/**
-	 * SSL 的 私钥信息
+	 * SSL 的 私鑰資訊
 	**/
 	public function ssl_key($val='')
 	{
@@ -221,7 +221,7 @@ class curl_lib
 	}
 
 	/**
-	 * SSL 的 私钥密码
+	 * SSL 的 私鑰密碼
 	**/
 	public function ssl_key_pass($val='')
 	{
@@ -232,7 +232,7 @@ class curl_lib
 	}
 
 	/**
-	 * SSL 的 私钥类型
+	 * SSL 的 私鑰型別
 	**/
 	public function ssl_key_type($val='')
 	{
@@ -243,7 +243,7 @@ class curl_lib
 	}
 
 	/**
-	 * HTTP 验证用户
+	 * HTTP 驗證使用者
 	**/
 	public function user($val='')
 	{
@@ -295,12 +295,12 @@ class curl_lib
 	}
 
 	/**
-	 * 设置代理参数
-	 * @参数 $service 代理服务器
-	 * @参数 $port 代理端口
-	 * @参数 $user 代理用户
-	 * @参数 $pass 代理密码
-	 * @参数 $type 代理模式，默认为 http，支持 http，socks4 socks5 socks4a socks5_hostname
+	 * 設定代理引數
+	 * @引數 $service 代理伺服器
+	 * @引數 $port 代理埠
+	 * @引數 $user 代理使用者
+	 * @引數 $pass 代理密碼
+	 * @引數 $type 代理模式，預設為 http，支援 http，socks4 socks5 socks4a socks5_hostname
 	**/
 	public function set_proxy($service='',$port='',$user='',$pass='',$type='')
 	{
@@ -321,9 +321,9 @@ class curl_lib
 	}
 
 	/**
-	 * 取得或设置代理参数
-	 * @参数 $id 仅支持 service，port，user，pass 四个参数
-	 * @参数 $value 值
+	 * 取得或設定代理引數
+	 * @引數 $id 僅支援 service，port，user，pass 四個引數
+	 * @引數 $value 值
 	**/
 	public function proxy($id,$value='')
 	{
@@ -355,9 +355,9 @@ class curl_lib
 	}
 
 	/**
-	 * 设置HTTP响应头部参数
-	 * @参数 $key 变量名
-	 * @参数 $value 变量值
+	 * 設定HTTP響應頭部引數
+	 * @引數 $key 變數名
+	 * @引數 $value 變數值
 	**/
 	public function set_header($key,$value)
 	{
@@ -365,7 +365,7 @@ class curl_lib
 	}
 
 	/**
-	 * set_header 的别名
+	 * set_header 的別名
 	**/
 	public function set_head($key,$value)
 	{
@@ -378,9 +378,9 @@ class curl_lib
 	}
 
 	/**
-	 * 设置IP，当主机无法获取gethostbyname
-	 * @参数 $ip IP地址
-	 * @返回 当前的IP或是您指定的IP
+	 * 設定IP，當主機無法獲取gethostbyname
+	 * @引數 $ip IP地址
+	 * @返回 當前的IP或是您指定的IP
 	**/
 	public function host_ip($ip='')
 	{
@@ -412,9 +412,9 @@ class curl_lib
 		}else{
 			curl_setopt($curl, CURLOPT_HTTPGET,true);
 		}
-		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT,$this->connect_timeout);//等待时间，超时退出
+		curl_setopt($curl, CURLOPT_CONNECTTIMEOUT,$this->connect_timeout);//等待時間，超時退出
 		if($this->is_gzip){
-			curl_setopt($curl,CURLOPT_ENCODING ,'gzip');//GZIP压缩
+			curl_setopt($curl,CURLOPT_ENCODING ,'gzip');//GZIP壓縮
 		}
 		if($this->referer){
 			curl_setopt($curl, CURLOPT_REFERER,$this->referer);
@@ -444,7 +444,7 @@ class curl_lib
 			curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 		}
 
-		//绑定IP后执行
+		//繫結IP後執行
 		if($this->host_ip){
 			$info = parse_url($url);
 			$string = $info['scheme'].'://'.$info['host'];
@@ -564,15 +564,15 @@ class curl_lib
 			$this->exec($url);
 		}
 		if($this->http_code != 200){
-			$info = $this->error('错误，HTTP 返回代码'.$this->http_code,'json');
+			$info = $this->error('錯誤，HTTP 返回程式碼'.$this->http_code,'json');
 			return json_decode($info,true);
 		}
 		if(!$this->http_body){
-			$info = $this->error('内容为空','json');
+			$info = $this->error('內容為空','json');
 			return json_decode($info,true);
 		}
 		if(substr($this->http_body,0,1) != '{'){
-			$info = $this->error('非 JSON 数据','json');
+			$info = $this->error('非 JSON 資料','json');
 			return json_decode($info,true);
 		}
 		return json_decode($this->http_body,true);
@@ -599,10 +599,10 @@ class curl_lib
 			$this->exec($url);
 		}
 		if($this->http_code != 200){
-			return $this->error('错误，HTTP 返回代码'.$this->http_code,'xml');
+			return $this->error('錯誤，HTTP 返回程式碼'.$this->http_code,'xml');
 		}
 		if(!$this->http_body){
-			return $this->error('内容为空','xml');
+			return $this->error('內容為空','xml');
 		}
 		return $this->http_body;
 	}

@@ -1,16 +1,16 @@
 <?php
 /**
- * 表单选项管理器
+ * 表單選項管理器
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年01月20日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年01月20日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -18,12 +18,12 @@ if(!defined("PHPOK_SET")){
 
 class form_lib
 {
-	//表单对象
+	//表單物件
 	public $cls;
 	public $appid = 'www';
 	public $dir_form;
 
-	//构造函数
+	//建構函式
 	public function __construct()
 	{
 		$this->dir_form = $GLOBALS['app']->dir_phpok.'form/';
@@ -37,8 +37,8 @@ class form_lib
 	}
 
 	/**
-	 * 获取对象
-	 * @参数 $name 表单名称
+	 * 獲取物件
+	 * @引數 $name 表單名稱
 	**/
 	public function cls($name)
 	{
@@ -63,8 +63,8 @@ class form_lib
 	}
 
 	/**
-	 * 表单配置信息
-	 * @参数 $id 表单类型名
+	 * 表單配置資訊
+	 * @引數 $id 表單型別名
 	**/
 	public function config($id)
 	{
@@ -81,12 +81,12 @@ class form_lib
 			$obj->config();
 			exit;
 		}
-		exit(P_Lang('文件异常'));
+		exit(P_Lang('檔案異常'));
 	}
 
 	/**
-	 * 格式化表单信息
-	 * @参数 $rs 要格式化的内容
+	 * 格式化表單資訊
+	 * @引數 $rs 要格式化的內容
 	**/
 	public function format($rs)
 	{
@@ -109,10 +109,10 @@ class form_lib
 	}
 
 	/**
-	 * 获取内容信息
-	 * @参数 $rs 数组，字段属性
+	 * 獲取內容資訊
+	 * @引數 $rs 陣列，欄位屬性
 	 * @返回 
-	 * @更新时间 
+	 * @更新時間 
 	**/
 	public function get($rs)
 	{
@@ -131,9 +131,9 @@ class form_lib
 	}
 
 	/**
-	 * 输出内容信息
-	 * @参数 $rs 内容
-	 * @参数 $value 值
+	 * 輸出內容資訊
+	 * @引數 $rs 內容
+	 * @引數 $value 值
 	**/
 	public function show($rs,$value='')
 	{
@@ -159,48 +159,48 @@ class form_lib
 	}
 
 
-	//弹出窗口，用于创建字段
+	//彈出視窗，用於建立欄位
 	function open_form_setting($saveurl)
 	{
 		if(!$saveurl) return false;
 		$GLOBALS['app']->assign('saveUrl',$saveurl);
-		//读取格式化类型
+		//讀取格式化型別
 		$field_list = $GLOBALS['app']->model('form')->field_all();
 		$form_list = $GLOBALS['app']->model('form')->form_all();
 		$format_list = $GLOBALS['app']->model('form')->format_all();
 		$GLOBALS['app']->assign('fields',$field_list);
 		$GLOBALS['app']->assign('formats',$format_list);
 		$GLOBALS['app']->assign('forms',$form_list);
-		//创建字段
+		//建立欄位
 		$GLOBALS['app']->view("field_create");
 	}
 
-	//格式化值，对应的表单内容
+	//格式化值，對應的表單內容
 	function info($val,$rs)
 	{
 		if($val == '' || !$rs || !is_array($rs)) return $val;
-		//如果只是普通的文本框
+		//如果只是普通的文字框
 		if($rs['form_type'] == 'text' || $rs['form_type'] == 'password')
 		{
 			return $val;
 		}
-		//如果是代码编辑器 或是 文本区
+		//如果是程式碼編輯器 或是 文字區
 		if($rs['form_type'] == 'code_editor' || $rs['form_type'] == 'textarea')
 		{
 			return $val;
 		}
-		//如果是编辑器
+		//如果是編輯器
 		if($rs['form_type'] == 'editor')
 		{
 			return $GLOBALS['app']->lib('ubb')->to_html($val);
 		}
-		//如果是单选框
+		//如果是單選框
 		if($rs['form_type'] == 'radio')
 		{
 			if(!$rs["option_list"]) $rs['option_list'] = 'default:0';
 			$opt_list = explode(":",$rs["option_list"]);
 			$rslist = opt_rslist($opt_list[0],$opt_list[1],$rs['ext_select']);
-			//如果内容为空，则返回空信息
+			//如果內容為空，則返回空資訊
 			if(!$rslist) return false;
 			foreach($rslist AS $key=>$value)
 			{
@@ -211,8 +211,8 @@ class form_lib
 	}
 
 	/**
-	 * 按需装载CSS和JS文件
-	 * @参数 $rs 要加载的对象
+	 * 按需裝載CSS和JS檔案
+	 * @引數 $rs 要載入的物件
 	**/
 	public function cssjs($rs='')
 	{

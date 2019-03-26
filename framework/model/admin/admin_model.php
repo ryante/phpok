@@ -1,13 +1,13 @@
 <?php
 /**
- * 管理员操作
+ * 管理員操作
  * @package phpok\model\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年05月07日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年05月07日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -18,7 +18,7 @@ class admin_model extends admin_model_base
 		parent::__construct();
 	}
 
-	//所有非系统管理员
+	//所有非系統管理員
 	public function all_manager()
 	{
 		$sql = "SELECT id,account,fullname FROM ".$this->db->prefix."adm WHERE status=1 AND if_system=0";
@@ -26,7 +26,7 @@ class admin_model extends admin_model_base
 	}
 
 	/**
-	 * SESSION锁定检测
+	 * SESSION鎖定檢測
 	**/
 	public function session_lock_check()
 	{
@@ -35,7 +35,7 @@ class admin_model extends admin_model_base
 	}
 
 	/**
-	 * SESSION锁定，仅限登录页有效
+	 * SESSION鎖定，僅限登入頁有效
 	**/
 	public function session_lock()
 	{
@@ -45,7 +45,7 @@ class admin_model extends admin_model_base
 	}
 
 	/**
-	 * IP锁定检测
+	 * IP鎖定檢測
 	**/
 	public function ip_lock_check()
 	{
@@ -54,7 +54,7 @@ class admin_model extends admin_model_base
 	}
 
 	/**
-	 * IP锁定，仅限登录页有效
+	 * IP鎖定，僅限登入頁有效
 	**/
 	public function ip_lock()
 	{
@@ -64,8 +64,8 @@ class admin_model extends admin_model_base
 	}
 
 	/**
-	 * 管理员账号登录限制
-	 * @参数 $name 管理员账号
+	 * 管理員賬號登入限制
+	 * @引數 $name 管理員賬號
 	**/
 	public function account_lock_check($name)
 	{
@@ -74,8 +74,8 @@ class admin_model extends admin_model_base
 	}
 
 	/**
-	 * 管理员账号锁定
-	 * @参数 $name 管理员账号
+	 * 管理員賬號鎖定
+	 * @引數 $name 管理員賬號
 	**/
 	public function account_lock($name)
 	{

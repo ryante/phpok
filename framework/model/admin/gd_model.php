@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/gd_model.php
-	备注： GD保存，删除等操作，仅限后台
+	檔案： {phpok}/model/admin/gd_model.php
+	備註： GD儲存，刪除等操作，僅限後臺
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年04月25日 22时24分
+	時間： 2015年04月25日 22時24分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class gd_model extends gd_model_base

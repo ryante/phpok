@@ -1,12 +1,12 @@
 <?php
 /**
- * 全局栏目配置
+ * 全域性欄目配置
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年10月25日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年10月25日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -23,7 +23,7 @@ class all_control extends phpok_control
 	public function index_f()
 	{
 		if(!$this->popedom["list"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$rslist = $this->model('site')->all_list($_SESSION["admin_site_id"]);
 		$this->assign("rslist",$rslist);
@@ -35,13 +35,13 @@ class all_control extends phpok_control
 	public function setting_f()
 	{
 		if(!$this->popedom["site"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$rs = $this->model('site')->get_one($_SESSION["admin_site_id"]);
-		# 读取风格列表
+		# 讀取風格列表
 		$tpl_list = $this->model('tpl')->get_all();
 		$this->assign("tpl_list",$tpl_list);
-		// 获取网站语言包列表
+		// 獲取網站語言包列表
 		$multiple_language = isset($this->config['multiple_language']) ? $this->config['multiple_language'] : false;
 		if($multiple_language){
 			$langlist = $this->model('lang')->get_list();
@@ -49,27 +49,27 @@ class all_control extends phpok_control
 		}
 		$this->assign('multiple_language',$multiple_language);
 
-		//项目列表
+		//專案列表
 		$project_list = $this->model('project')->project_all($_SESSION['admin_site_id'],'id','status=1 AND hidden=1 AND module>0');
 		$this->assign("project_list",$project_list);
 
-		//读取网站货币
+		//讀取網站貨幣
 		$currency_list = $this->model('currency')->get_list();
 		$this->assign("currency_list",$currency_list);
 
-		//读取支付方式
+		//讀取支付方式
 		$payment = $this->model('payment')->get_all();
 		$this->assign("payment",$payment);
 
-		//邮件模板列表
+		//郵件模板列表
 		$emailtpl = $this->model('email')->simple_list($this->session->val('admin_site_id'));
 		$this->assign("emailtpl",$emailtpl);
 
-		//运费列表
+		//運費列表
 		$freight = $this->model('freight')->get_all();
 		$this->assign('freight',$freight);
 
-		//检测是否有启用邮件通知
+		//檢測是否有啟用郵件通知
 		$gateway_email = $this->model('gateway')->get_default('email');
 		if($rs['login_type'] && $rs['login_type'] == 'email' && !$gateway_email){
 			$rs['login_type'] = 0;
@@ -107,15 +107,15 @@ class all_control extends phpok_control
 	public function tpl_setting_f()
 	{
 		if(!$this->popedom["site"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定站点ID'));
+			$this->error(P_Lang('未指定站點ID'));
 		}
 		$rs = $this->model('site')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('站点信息不存在'));
+			$this->error(P_Lang('站點資訊不存在'));
 		}
 		$this->assign('site_rs',$rs);
 		$tplid = $this->get('tplid','int');
@@ -129,7 +129,7 @@ class all_control extends phpok_control
 		$this->assign('tplext',$ext);
 		$filelist = $this->model('tpl')->all_files();
 		$this->assign('filelist',$filelist);
-		//读取项目模块
+		//讀取專案模組
 		$tpls = $this->model('site')->tpl_setting();
 		$this->assign('tpls',$tpls);
 		$this->assign('id',$id);
@@ -140,11 +140,11 @@ class all_control extends phpok_control
 	public function tpl_resetting_f()
 	{
 		if(!$this->popedom["site"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定站点ID'));
+			$this->error(P_Lang('未指定站點ID'));
 		}
 		$this->model('site')->tpl_reset();
 		$this->success();
@@ -153,7 +153,7 @@ class all_control extends phpok_control
 	public function tpl_setting_save_f()
 	{
 		if(!$this->popedom["site"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$list = $this->model('site')->tpl_default();
 		if(!$list){
@@ -175,17 +175,17 @@ class all_control extends phpok_control
 	}
 
 	/**
-	 * 存储全局配置
+	 * 儲存全域性配置
 	**/
 	public function save_f()
 	{
 		if(!$this->popedom["site"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$error_url = $this->url("all","setting");
 		$title = $this->get("title");
 		if(!$title){
-			$this->error(P_Lang('网站标题不能为空'),$error_url);
+			$this->error(P_Lang('網站標題不能為空'),$error_url);
 		}
 		$dir = $this->get("dir");
 		if(!$dir){
@@ -205,7 +205,7 @@ class all_control extends phpok_control
 		$meta = $this->get("meta","html_js");
 		$site_rs = $this->model('site')->get_one($this->session->val('admin_site_id'));
 		if(!$site_rs){
-			$this->error(P_Lang('网站信息不存在'),$error_url);
+			$this->error(P_Lang('網站資訊不存在'),$error_url);
 		}
 		$domain_id = $site_rs["domain_id"];
 		$array = array();
@@ -223,7 +223,7 @@ class all_control extends phpok_control
 		$array["register_close"] = $this->get("register_close");
 		$array["login_status"] = $this->get("login_status","int");
 		$array["login_close"] = $this->get("login_close");
-		//登录模式2016年11月22日
+		//登入模式2016年11月22日
 		$array['login_type'] = $this->get('login_type');
 		$array['login_type_email'] = $this->get('login_type_email');
 		$array['login_type_sms'] = $this->get('login_type_sms');
@@ -247,7 +247,7 @@ class all_control extends phpok_control
 		//2018年10月25日
 		$array['favicon'] = $this->get('favicon');
 		$this->model('site')->save($array,$this->session->val('admin_site_id'));
-		$this->success(P_Lang('网站信息更新完成'),$this->url("all","setting"));
+		$this->success(P_Lang('網站資訊更新完成'),$this->url("all","setting"));
 	}
 
 	public function domain_check_f()
@@ -256,27 +256,27 @@ class all_control extends phpok_control
 		$isadd = $this->get("isadd","int");
 		$id = $this->get("id","int");
 		if(!$domain){
-			$this->json(P_Lang('域名不能为空'));
+			$this->json(P_Lang('域名不能為空'));
 		}
 		if(substr($domain,0,7) == "https://" || substr($domain,0,8) == "https://"){
-			$this->json(P_Lang('域名填写不规范，不能含有http://或https://'));
+			$this->json(P_Lang('域名填寫不規範，不能含有http://或https://'));
 		}
 		if($domain && $domain != str_replace("/","",$domain)){
-			$this->json(P_Lang('域名不符合规范，不能有 / 符号'));
+			$this->json(P_Lang('域名不符合規範，不能有 / 符號'));
 		}
 		$domain_rs = $this->model('site')->domain_check($domain);
 		if($domain_rs){
 			if($isadd){
-				$this->json(P_Lang('域名已经被使用'));
+				$this->json(P_Lang('域名已經被使用'));
 			}
 			if($id){
 				if($domain_rs["id"] != $id){
-					$this->json(P_Lang('域名已经存在'));
+					$this->json(P_Lang('域名已經存在'));
 				}
 			}else{
 				$rs = $this->model('site')->get_one($_SESSION["admin_site_id"]);
 				if($domain_rs["id"] != $rs["domain_id"]){
-					$this->json(P_Lang('域名已经被使用'));
+					$this->json(P_Lang('域名已經被使用'));
 				}
 			}
 		}
@@ -286,7 +286,7 @@ class all_control extends phpok_control
 	public function domain_f()
 	{
 		if(!$this->popedom["domain"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$rs = $this->model('site')->get_one($_SESSION["admin_site_id"]);
 		$this->assign("rs",$rs);
@@ -296,12 +296,12 @@ class all_control extends phpok_control
 	}
 
 	/**
-	 * 验证码权限配置
+	 * 驗證碼許可權配置
 	**/
 	public function vcode_f()
 	{
 		if(!$this->popedom['site']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$vcodelist = $this->model('site')->vcode_all();
 		$condition = "module>0 AND (post_status=1 || comment_status=1)";
@@ -309,9 +309,9 @@ class all_control extends phpok_control
 		if($plist){
 			foreach($plist as $key=>$value){
 				$tmpid = 'p-'.$value['id'];
-				$tmp = array('add'=>array('title'=>P_Lang('添加'),'status'=>1));
+				$tmp = array('add'=>array('title'=>P_Lang('新增'),'status'=>1));
 				$tmp['edit'] = array('title'=>P_Lang('修改'),'status'=>1);
-				$tmp['comment'] = array('title'=>P_Lang('评论'),'status'=>1);
+				$tmp['comment'] = array('title'=>P_Lang('評論'),'status'=>1);
 				if($vcodelist[$tmpid] && $vcodelist[$tmpid]['list']){
 					if(isset($vcodelist[$tmpid]['list']['add'])){
 						$tmp['add']['status'] = $vcodelist[$tmpid]['list']['add']['status'];
@@ -349,16 +349,16 @@ class all_control extends phpok_control
 	public function vcode_save_f()
 	{
 		if(!$this->popedom['site']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
-		//读取系统的验证码
+		//讀取系統的驗證碼
 		$tmp = array();
 		$tmp['system'] = array();
-		$tmp['system']['title'] = P_Lang('系统设置');
+		$tmp['system']['title'] = P_Lang('系統設定');
 		$tmp['system']['list'] = array();
-		$tmp['system']['list']['login'] = array('title'=>P_Lang('登录'),'status'=>$this->get('system-login','checkbox'));
-		$tmp['system']['list']['register'] = array('title'=>P_Lang('注册'),'status'=>$this->get('system-register','checkbox'));
-		$tmp['system']['list']['getpass'] = array('title'=>P_Lang('忘记密码'),'status'=>$this->get('system-getpass','checkbox'));
+		$tmp['system']['list']['login'] = array('title'=>P_Lang('登入'),'status'=>$this->get('system-login','checkbox'));
+		$tmp['system']['list']['register'] = array('title'=>P_Lang('註冊'),'status'=>$this->get('system-register','checkbox'));
+		$tmp['system']['list']['getpass'] = array('title'=>P_Lang('忘記密碼'),'status'=>$this->get('system-getpass','checkbox'));
 		$condition = "module>0 AND (post_status=1 || comment_status=1)";
 		$plist = $this->model('project')->project_all($this->session->val('admin_site_id'),'id',$condition);
 		if($plist){
@@ -375,16 +375,16 @@ class all_control extends phpok_control
 	}
 
 	/**
-	 * 保存域名信息
+	 * 儲存域名資訊
 	**/
 	public function domain_save_f()
 	{
 		if(!$this->popedom['domain']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$domain = $this->get("domain");
 		if(!$domain){
-			$this->error(P_Lang('域名不能为空'));
+			$this->error(P_Lang('域名不能為空'));
 		}
 		$domain = strtolower($domain);
 		if(substr($domain,0,7) == "http://"){
@@ -394,22 +394,22 @@ class all_control extends phpok_control
 			$domain = substr($domain,8);
 		}
 		if(!$domain){
-			$this->error(P_Lang('域名不符合规范'));
+			$this->error(P_Lang('域名不符合規範'));
 		}
 		if($domain && $domain != str_replace("/","",$domain)){
-			$this->error(P_Lang('域名不符合规范'));
+			$this->error(P_Lang('域名不符合規範'));
 		}
 		$id = $this->get("id","int");
 		$rs = $this->model('site')->get_one($this->session->val('admin_site_id'));
 		$domain_rs = $this->model('site')->domain_check($domain);
 		if($id){
 			if($domain_rs && $domain_rs["id"] != $id){
-				$this->error(P_Lang('域名已存在，请检查'));
+				$this->error(P_Lang('域名已存在，請檢查'));
 			}
 			$this->model('site')->domain_update($domain,$id);
 		}else{
 			if($domain_rs){
-				$this->error(P_Lang('域名已存在，请检查'));
+				$this->error(P_Lang('域名已存在，請檢查'));
 			}
 			$this->model('site')->domain_add($domain,$_SESSION["admin_site_id"]);
 		}
@@ -417,12 +417,12 @@ class all_control extends phpok_control
 	}
 
 	/**
-	 * 设置默认域名
+	 * 設定預設域名
 	**/
 	public function domain_default_f()
 	{
 		if(!$this->popedom['domain']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -430,14 +430,14 @@ class all_control extends phpok_control
 		}
 		$domain_rs = $this->model('site')->domain_one($id);
 		if(!$domain_rs){
-			$this->error(P_Lang('域名信息不存在'));
+			$this->error(P_Lang('域名資訊不存在'));
 		}
 		if($domain_rs["site_id"] != $_SESSION["admin_site_id"]){
-			$this->error(P_Lang('域名配置与网站不一致，请联系管理员'));
+			$this->error(P_Lang('域名配置與網站不一致，請聯絡管理員'));
 		}
 		$rs = $this->model('site')->get_one($_SESSION["admin_site_id"]);
 		if($domain_rs["id"] == $rs["domain_id"]){
-			$this->error(P_Lang('此域名已经是主域名了，不用再设置'));
+			$this->error(P_Lang('此域名已經是主域名了，不用再設定'));
 		}
 		$array = array();
 		$array["domain_id"] = $id;
@@ -446,12 +446,12 @@ class all_control extends phpok_control
 	}
 
 	/**
-	 * 域名删除
+	 * 域名刪除
 	**/
 	public function domain_delete_f()
 	{
 		if(!$this->popedom['domain']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -459,22 +459,22 @@ class all_control extends phpok_control
 		}
 		$domain_rs = $this->model('site')->domain_one($id);
 		if(!$domain_rs){
-			$this->error(P_Lang('域名信息不存在'));
+			$this->error(P_Lang('域名資訊不存在'));
 		}
 		if($domain_rs["site_id"] != $this->session->val('admin_site_id')){
-			$this->error(P_Lang('域名配置与网站不一致，请联系管理员'));
+			$this->error(P_Lang('域名配置與網站不一致，請聯絡管理員'));
 		}
 		$this->model('site')->domain_delete($id);
 		$this->success();
 	}
 
 	/**
-	 * 设置或取消手机模板域名
+	 * 設定或取消手機模板域名
 	**/
 	public function domain_mobile_f()
 	{
 		if(!$this->popedom['domain']){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -488,7 +488,7 @@ class all_control extends phpok_control
 	public function gset_f()
 	{
 		if(!$this->popedom["gset"]){
-			error(P_Lang('您没有权限执行此操作'),'','error');
+			error(P_Lang('您沒有許可權執行此操作'),'','error');
 		}
 		$id = $this->get("id","int");
 		$rs = array();
@@ -509,7 +509,7 @@ class all_control extends phpok_control
 	function gset_save_f()
 	{
 		if(!$this->popedom["gset"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		$title = $this->get("title");
@@ -537,18 +537,18 @@ class all_control extends phpok_control
 	private function all_check($identifier,$id=0)
 	{
 		if(!$identifier){
-			return "标识串不能为空";
+			return "標識串不能為空";
 		}
 		$identifier = strtolower($identifier);
 		if(!preg_match("/[a-z][a-z0-9\_\-]+/",$identifier)){
-			return "标识不符合系统要求，限字母、数字及下划线（中划线）且必须是字母开头";
+			return "標識不符合系統要求，限字母、數字及下劃線（中劃線）且必須是字母開頭";
 		}
 		if($identifier == "phpok" || $identifier == "config"){
-			return "系统标识串：config 和 phpok 不允许用户自定义使用";
+			return "系統標識串：config 和 phpok 不允許使用者自定義使用";
 		}
 		$check = $this->model('site')->all_check($identifier,$_SESSION["admin_site_id"],$id);
 		if($check){
-			return "标识串已经被使用了";
+			return "標識串已經被使用了";
 		}
 		return "ok";
 	}
@@ -568,7 +568,7 @@ class all_control extends phpok_control
 	public function set_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
@@ -577,7 +577,7 @@ class all_control extends phpok_control
 		$this->assign("id",$id);
 		$rs = $this->model('site')->all_one($id);
 		if(!$rs){
-			$this->error(P_Lang('全局配置不存在'));
+			$this->error(P_Lang('全域性配置不存在'));
 		}
 		$this->assign("rs",$rs);
 		$ext_module = "all-".$id;
@@ -603,7 +603,7 @@ class all_control extends phpok_control
 	public function ext_save_f()
 	{
 		if(!$this->popedom["set"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -611,17 +611,17 @@ class all_control extends phpok_control
 		}
 		$rs = $this->model('site')->all_one($id);
 		if(!$rs){
-			$this->error(P_Lang('全局配置不存在'));
+			$this->error(P_Lang('全域性配置不存在'));
 		}
 		ext_save("all-".$id);
 		$this->model('temp')->clean("all-".$id,$this->session->val('admin_id'));
-		$this->success(P_Lang('扩展全局内容设置成功'),$this->url("all"));
+		$this->success(P_Lang('擴充套件全域性內容設定成功'),$this->url("all"));
 	}
 
 	public function ext_gdelete_f()
 	{
 		if(!$this->popedom["gset"]){
-			$this->error(P_Lang('您没有权限执行此操作'));
+			$this->error(P_Lang('您沒有許可權執行此操作'));
 		}
 		$id = $this->get("id","int");
 		if(!$id){
@@ -629,7 +629,7 @@ class all_control extends phpok_control
 		}
 		$rs = $this->model('site')->all_one($id);
 		if($rs["is_system"]){
-			$this->error(P_Lang('系统模块不允许删除'));
+			$this->error(P_Lang('系統模組不允許刪除'));
 		}
 		$this->model('site')->ext_delete($id);
 		$this->success();

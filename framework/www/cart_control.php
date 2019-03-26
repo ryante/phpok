@@ -1,25 +1,25 @@
 <?php
 /**
- * 购物车
+ * 購物車
  * @package phpok\www
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2016年08月17日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2016年08月17日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class cart_control extends phpok_control
 {
 	/**
-	 * 购物车ID，该ID将贯穿整个购物过程
+	 * 購物車ID，該ID將貫穿整個購物過程
 	**/
 	private $cart_id = 0;
 	
 	/**
-	 * 构造函数
+	 * 建構函式
 	**/
 	public function __construct()
 	{
@@ -28,11 +28,11 @@ class cart_control extends phpok_control
 	}
 
 	/**
-	 * 购物车内容，留空读取cart_tip模板信息提示
+	 * 購物車內容，留空讀取cart_tip模板資訊提示
 	**/
 	public function index_f()
 	{
-		//取得购物车产品列表
+		//取得購物車產品列表
 		$rslist = $this->model('cart')->get_all($this->cart_id);
 		if(!$rslist){
 			$this->model('site')->site_id($this->site['id']);
@@ -61,9 +61,9 @@ class cart_control extends phpok_control
 	}
 
 	/**
-	 * 购物车产品加入成功后，跳转的页面
-	 * @参数 $id 加入成功后返回的 qinggan_cart_product 表里的主键ID
-	 * @参数 $product_id 产品，即 qinggan_list 表中的ID，在购物车里，统一叫产品ID
+	 * 購物車產品加入成功後，跳轉的頁面
+	 * @引數 $id 加入成功後返回的 qinggan_cart_product 表裡的主鍵ID
+	 * @引數 $product_id 產品，即 qinggan_list 表中的ID，在購物車裡，統一叫產品ID
 	**/
 	public function success_f()
 	{
@@ -79,13 +79,13 @@ class cart_control extends phpok_control
 	}
 
 	/**
-	 * 购物车结算页，生成订单并进行支付
+	 * 購物車結算頁，生成訂單並進行支付
 	**/
 	public function checkout_f()
 	{
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定要结算的产品ID'),$this->url('cart'));
+			$this->error(P_Lang('未指定要結算的產品ID'),$this->url('cart'));
 		}
 		if($id && !is_array($id)){
 			$id = explode(",",$id);
@@ -95,11 +95,11 @@ class cart_control extends phpok_control
 				unset($id[$key]);
 			}
 		}
-		//定义要结算的产品ID
+		//定義要結算的產品ID
 		$this->assign('id',implode(",",$id));
 		$rslist = $this->model('cart')->get_all($this->cart_id,$id);
 		if(!$rslist){
-			$this->error(P_Lang('您的购物车里没有任何产品'),$this->url);
+			$this->error(P_Lang('您的購物車裡沒有任何產品'),$this->url);
 		}
 		if($this->session->val('user_id')){
 			$user_rs = $this->model('user')->get_one($this->session->val('user_id'));
@@ -111,7 +111,7 @@ class cart_control extends phpok_control
 		}
 		$this->assign('product_price',price_format($totalprice,$this->site['currency_id']));
 		$this->assign("rslist",$rslist);
-		//检测购物车是否需要使用地址
+		//檢測購物車是否需要使用地址
 		$is_virtual = true;
 		foreach($rslist as $key=>$value){
 			if(!$value['is_virtual']){
@@ -194,7 +194,7 @@ class cart_control extends phpok_control
 	}
 
 	/**
-	 * 会员购买商品最后填写的地址
+	 * 會員購買商品最後填寫的地址
 	**/
 	private function _address()
 	{
@@ -224,10 +224,10 @@ class cart_control extends phpok_control
 	}
 
 	/**
-	 * 计算运费
-	 * @参数 $rslist 购物车里的产品列表
-	 * @参数 $address 数组，地址
-	 * @返回 false 或 运费，未格式化
+	 * 計算運費
+	 * @引數 $rslist 購物車裡的產品列表
+	 * @引數 $address 陣列，地址
+	 * @返回 false 或 運費，未格式化
 	**/
 	private function _freight($rslist='',$address='')
 	{
@@ -264,7 +264,7 @@ class cart_control extends phpok_control
 		$is_virtual = true;
 		$rslist = $this->model('cart')->get_all($this->cart_id);
 		if(!$rslist){
-			$this->error(P_Lang('购物车是空的'));
+			$this->error(P_Lang('購物車是空的'));
 		}
 		$province = $this->get('province');
 		$city = $this->get('city');
@@ -310,11 +310,11 @@ class cart_control extends phpok_control
 		$this->success($data);
 	}
 
-	//计算运费
+	//計算運費
 	public function freight_f()
 	{
 		if(!$_SESSION['cart']){
-			$this->json(P_Lang('您的购物车里没有任何产品'));
+			$this->json(P_Lang('您的購物車裡沒有任何產品'));
 		}
 		unset($_SESSION['cart']['freight_price']);
 		$price_zero = price_format('0.00',$this->site['currency_id']);
@@ -323,7 +323,7 @@ class cart_control extends phpok_control
 		}
 		$rslist = $this->model('cart')->get_all($this->cart_id);
 		if(!$rslist){
-			$this->json(P_Lang('您的购物车里没有任何产品'));
+			$this->json(P_Lang('您的購物車裡沒有任何產品'));
 		}
 		$weight = $volume = $pid = $total = 0;
 		foreach($rslist as $key=>$value){
@@ -343,7 +343,7 @@ class cart_control extends phpok_control
 				}
 			}
 		}
-		//读取项目信息
+		//讀取專案資訊
 		$project = $this->model('project')->get_one($pid,false);
 		if(!$project || !$project['freight']){
 			$this->json($price_zero,true);

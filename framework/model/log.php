@@ -1,13 +1,13 @@
 <?php
 /**
- * 日志相关
+ * 日誌相關
  * @package phpok\model
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @许可 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年05月05日
+ * @許可 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年05月05日
 **/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class log_model_base extends phpok_model
@@ -18,21 +18,21 @@ class log_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存日志
-	 * @参数 $note 日志说明
-	 * @参数 $mask 是否手动标记，为true时表示手动标志
+	 * 儲存日誌
+	 * @引數 $note 日誌說明
+	 * @引數 $mask 是否手動標記，為true時表示手動標誌
 	**/
 	public function save($note='',$mask=false)
 	{
 		if(!$note){
 			$tmpfile = $this->app_id.'/'.$this->ctrl.'_control.php';
-			$note = P_Lang('执行文件{ctrl}方法：{func}',array('ctrl'=>$tmpfile,'func'=>$this->func.'_f'));
+			$note = P_Lang('執行檔案{ctrl}方法：{func}',array('ctrl'=>$tmpfile,'func'=>$this->func.'_f'));
 		}
 		if(is_string($note) && strpos($note,'<') !== false){
 			$note = htmlentities($note);
 			$note = phpok_cut($note,255,'…');
 		}
-		//传过来的日志说明为数组或对像都是手动标志
+		//傳過來的日誌說明為陣列或對像都是手動標誌
 		if(is_array($note) || is_object($note)){
 			$note = '<pre>'.print_r($note,true).'</pre>';
 			$mask = true;
@@ -64,7 +64,7 @@ class log_model_base extends phpok_model
 		$data['referer'] = $this->format($referer);
 		$data['session_id'] = $this->session->sessid();
 		
-		//1分钟内同样的错误不再重复写入
+		//1分鐘內同樣的錯誤不再重複寫入
 		$time = $this->time - 60;
 		$sql = "SELECT id FROM ".$this->db->prefix."log WHERE note='".$note."' AND app_id='".$this->app_id."' AND ctrl='".$data['ctrl']."'";
 		$sql.= " AND func='".$data['func']."' AND dateline>=".$time." LIMIT 1";
@@ -73,7 +73,7 @@ class log_model_base extends phpok_model
 			return false;
 		}
 
-		//登录页防止刷库，仅允许10秒写入一条数据
+		//登入頁防止刷庫，僅允許10秒寫入一條資料
 		if($data['ctrl'] == 'login'){
 			$time = $this->time - 10;
 			$sql = "SELECT id FROM ".$this->db->prefix."log WHERE app_id='".$this->app_id."' AND ctrl='login' AND dateline>=".$time." LIMIT 1";
@@ -86,10 +86,10 @@ class log_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得日志列表
-	 * @参数 $condition 查询条件
-	 * @参数 $offset 开始位置，首位从0计起
-	 * @参数 $psize 每次读取数量
+	 * 取得日誌列表
+	 * @引數 $condition 查詢條件
+	 * @引數 $offset 開始位置，首位從0計起
+	 * @引數 $psize 每次讀取數量
 	**/
 	public function get_list($condition='',$offset=0,$psize=30)
 	{
@@ -104,8 +104,8 @@ class log_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得日志数量
-	 * @参数 $condition 查询条件
+	 * 取得日誌數量
+	 * @引數 $condition 查詢條件
 	**/
 	public function get_count($condition='')
 	{

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/project_model.php
-	备注： 项目管理
+	檔案： {phpok}/model/admin/project_model.php
+	備註： 專案管理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年02月05日 23时22分
+	時間： 2015年02月05日 23時22分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class project_model extends project_model_base
@@ -15,7 +15,7 @@ class project_model extends project_model_base
 		parent::__construct();
 	}
 
-	//存储核心菜单
+	//儲存核心選單
 	public function save($data,$id=0)
 	{
 		if(!$data || !is_array($data)) return false;
@@ -42,7 +42,7 @@ class project_model extends project_model_base
 		return $this->db->update_array($data,"project",array("id"=>$id));
 	}
 
-	//设置状态
+	//設定狀態
 	public function status($id,$status=0)
 	{
 		$sql = "UPDATE ".$this->db->prefix."project SET status='".$status."' WHERE id='".$id."'";
@@ -50,9 +50,9 @@ class project_model extends project_model_base
 	}
 
 	/**
-	 * 设置隐藏或显示
-	 * @参数 $id 项目ID
-	 * @参数 $hidden 1表示隐藏，0表示显示
+	 * 設定隱藏或顯示
+	 * @引數 $id 專案ID
+	 * @引數 $hidden 1表示隱藏，0表示顯示
 	**/
 	public function set_hidden($id,$hidden=0)
 	{
@@ -67,7 +67,7 @@ class project_model extends project_model_base
 		return $this->db->query($sql);
 	}
 
-	//删除项目操作
+	//刪除專案操作
 	public function delete_project($id)
 	{
 		if(!$id || !intval($id)){
@@ -105,7 +105,7 @@ class project_model extends project_model_base
 			}
 		}
 
-		//删除项目扩展
+		//刪除專案擴充套件
 		$sql = "SELECT id FROM ".$this->db->prefix."fields WHERE ftype='project-".$id."'";
 		$extlist = $this->db->get_all($sql);
 		if($extlist){
@@ -116,7 +116,7 @@ class project_model extends project_model_base
 		}
 		$sql = "DELETE FROM ".$this->db->prefix."project WHERE id='".$id."'";
 		$this->db->query($sql);
-		//删除后台权限配置
+		//刪除後臺許可權配置
 		$sql = "SELECT id FROM ".$this->db->prefix."popedom WHERE pid='".$id."'";
 		$tmplist = $this->db->get_all($sql);
 		if($tmplist){

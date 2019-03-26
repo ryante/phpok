@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/libs/swfupload.php
-	Note	: SWFupload附件上传
+	Note	: SWFupload附件上傳
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -12,20 +12,20 @@ class swfupload_lib
 {
 	var $btn = "";
 	var $html = "";
-	var $show_cancel = false; //显示取消上传按钮
+	var $show_cancel = false; //顯示取消上傳按鈕
 	var $swfupload_url;
 	var $sess_id = "PHPSESSION";
 	var $sess_value = "";
-	# 上传文件的类型
+	# 上傳檔案的型別
 	var $file_type = "*.*";
-	var $file_desc = "文件";
+	var $file_desc = "檔案";
 
 	function __construct()
 	{
 		//
 	}
 
-	# 加载JS
+	# 載入JS
 	function load_js()
 	{
 		$this->html.= '<script type="text/javascript" src="js/swfupload/swfupload.js"></script>';
@@ -34,13 +34,13 @@ class swfupload_lib
 		$this->html.= '<script type="text/javascript" src="js/swfupload/handlers.js"></script>';
 	}
 
-	# 显示取消按钮
+	# 顯示取消按鈕
 	function show_cancel()
 	{
 		$this->show_cancel = true;
 	}
 
-	# 指定上传服务端网址
+	# 指定上傳服務端網址
 	function swfupload_url($url)
 	{
 		$this->swfupload_url = $ur;
@@ -53,18 +53,18 @@ class swfupload_lib
 		$this->sess_value = $session_value;
 	}
 
-	# 指定上传文件类型
-	function set_type($types="*.*",$type_desc="文件")
+	# 指定上傳檔案型別
+	function set_type($types="*.*",$type_desc="檔案")
 	{
 		$this->file_type = $types;
 		$this->file_desc = $type_desc;
 	}
 
-	# id 目标存储ID
-	# js 上传成功后执行的JS
+	# id 目標儲存ID
+	# js 上傳成功後執行的JS
 	function button($id,$js="")
 	{
-		# 如果缺少上传程序，返回空
+		# 如果缺少上傳程式，返回空
 		if(!$this->swfupload_url) return false;
 		$html  = "";
 		$html .= '<table><tr>';
@@ -72,11 +72,11 @@ class swfupload_lib
 		if($this->show_cancel)
 		{
 			$html .= '<td>';
-			$html .= '<input id="'.$id.'_btnCancel" type="button" class="btn" value="取消上传" ';
+			$html .= '<input id="'.$id.'_btnCancel" type="button" class="btn" value="取消上傳" ';
 			$html .= ' onclick="'.$id.'_swfu.cancelQueue();" disabled /></td>';
 		}
 		$html .= '</tr>';
-		# 显示上传进程
+		# 顯示上傳程序
 		$html .= '<tr><td colspan="2"><div id="'.$id.'_progress"></div></td></tr>';
 		$html .= '</table>';
 		$html .= "\n";

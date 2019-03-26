@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/model/ext.php
-	Note	: 扩展字段管理器
+	Note	: 擴充套件欄位管理器
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -15,7 +15,7 @@ class ext_model_base extends phpok_model
 		parent::model();
 	}
 
-	# 检查字段是否有被使用
+	# 檢查欄位是否有被使用
 	function check_identifier($identifier,$module)
 	{
 		if(!$identifier || !$module) return false;
@@ -24,9 +24,9 @@ class ext_model_base extends phpok_model
 	}
 
 	/**
-	 * 读取模块下的字段内容
-	 * @参数 $module 模块名称
-	 * @参数 $show_content 是否读取内容，默认true
+	 * 讀取模組下的欄位內容
+	 * @引數 $module 模組名稱
+	 * @引數 $show_content 是否讀取內容，預設true
 	**/
 	public function ext_all($module,$show_content=true)
 	{
@@ -55,9 +55,9 @@ class ext_model_base extends phpok_model
 
 	
 
-	# 取得数据库下的字段
-	# tbl 指定数据表名，多个数据表用英文逗号隔开
-	# prefix 表名是否带有前缀，默认不带
+	# 取得資料庫下的欄位
+	# tbl 指定資料表名，多個數據表用英文逗號隔開
+	# prefix 表名是否帶有字首，預設不帶
 	function fields($tbl,$prefix=false)
 	{
 		if(!$tbl) return false;
@@ -79,7 +79,7 @@ class ext_model_base extends phpok_model
 		return array_unique($idlist);
 	}
 
-	# 取得单个字段的配置
+	# 取得單個欄位的配置
 	public function get_one($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."fields WHERE id='".$id."'";
@@ -87,7 +87,7 @@ class ext_model_base extends phpok_model
 	}
 
 
-	//取得所有扩展选项信息
+	//取得所有擴充套件選項資訊
 	function get_all($id,$mult = false)
 	{
 		$sql = "SELECT ext.id,ext.identifier,ext.form_type,extc.content,ext.ext,ext.ftype FROM ".$this->db->prefix."fields ext ";

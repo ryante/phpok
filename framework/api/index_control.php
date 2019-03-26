@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/api/index_control.php
-	Note	: API接口默认接入
+	Note	: API介面預設接入
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -18,7 +18,7 @@ class index_control extends phpok_control
 	public function index_f()
 	{
 		if(!$this->site['api_code']){
-			$this->error(P_Lang("系统未启用接口功能"));
+			$this->error(P_Lang("系統未啟用介面功能"));
 		}
 		$data = array('ctrl_id'=>$this->config['ctrl_id']);
 		$data['func_id'] = $this->config['func_id'];
@@ -49,7 +49,7 @@ class index_control extends phpok_control
 	{
 		$this->config('is_ajax',true);
 		if(!$this->site['api_code']){
-			$this->error(P_Lang("系统未启用接口功能"));
+			$this->error(P_Lang("系統未啟用介面功能"));
 		}
 		unset($this->site['api_code']);
 		$id = $this->get('id');
@@ -70,22 +70,22 @@ class index_control extends phpok_control
 	{
 		$this->config('is_ajax',true);
 		if(!$this->site['api_code']){
-			$this->error(P_Lang("系统未配置接口功能"));
+			$this->error(P_Lang("系統未配置介面功能"));
 		}
 		$id = $this->get('id','system');
 		if(!$id){
-			$this->error(P_Lang('未指定数据调用标识'));
+			$this->error(P_Lang('未指定資料呼叫標識'));
 		}
 		$this->model('call')->site_id($this->site['id']);
 		$rs = $this->model('call')->get_one($id,'identifier');
 		if(!$rs || !$rs['status']){
-			$this->error(P_Lang('标识不存在或未启用'));
+			$this->error(P_Lang('標識不存在或未啟用'));
 		}
 		if(!$rs['is_api']){
-			$this->error(P_Lang('未启用远程接入'));
+			$this->error(P_Lang('未啟用遠端接入'));
 		}
 		if($rs['type_id'] == 'sql' && !$this->config['api_remote_sql']){
-			$this->error(P_Lang('系统未开放远程调用SQL操作，需要在配置文件启用api_remote_sql值设为true'));
+			$this->error(P_Lang('系統未開放遠端呼叫SQL操作，需要在配置檔案啟用api_remote_sql值設為true'));
 		}
 		$param = array();
 		$pid = $this->get('pid','int');
@@ -100,7 +100,7 @@ class index_control extends phpok_control
 				}
 			}
 		}
-		//判断是否有参数分类
+		//判斷是否有引數分類
 		$cateid = $this->get('cateid','int');
 		if($cateid){
 			$param['cateid'] = $cateid;
@@ -113,13 +113,13 @@ class index_control extends phpok_control
 				}
 			}
 		}
-		//判断是否有指定sqlinfo
+		//判斷是否有指定sqlinfo
 		$sqlinfo = $this->get('sql');
 		if($sqlinfo){
 			$sqlinfo = str_replace(array('&#39;','&quot;','&apos;','&#34;'),array("'",'"',"'",'"'),$sqlinfo);
 			$param['sqlinfo'] = $sqlinfo;
 		}
-		//判断是否要指定会员ID
+		//判斷是否要指定會員ID
 		$uid = $this->get('uid','int');
 		if($uid){
 			$param['user_id'] = $uid;
@@ -150,20 +150,20 @@ class index_control extends phpok_control
 	public function phpok_f()
 	{
 		if(!$this->site['api_code']){
-			$this->json(P_Lang("系统未启用接口功能"));
+			$this->json(P_Lang("系統未啟用介面功能"));
 		}
 		$token = $this->get("token");
 		if(!$token){
-			$this->json(P_Lang("接口数据异常"));
+			$this->json(P_Lang("介面資料異常"));
 		}
 		$this->lib('token')->keyid($this->site['api_code']);
 		$info = $this->lib('token')->decode($token);
 		if(!$info){
-			$this->json(P_Lang('信息为空'));
+			$this->json(P_Lang('資訊為空'));
 		}
 		$id = $info['id'];
 		if(!$id){
-			$this->json(P_Lang('未指定数据调用中心ID'));
+			$this->json(P_Lang('未指定資料呼叫中心ID'));
 		}
 		$param = $info['param'];
 		if($param){
@@ -190,7 +190,7 @@ class index_control extends phpok_control
 		}
 		$list = $this->call->phpok($id,$param);
 		if(!$list){
-			$this->json(P_Lang("没有获取到数据"));
+			$this->json(P_Lang("沒有獲取到資料"));
 		}
 		$tpl = $this->get("tpl");
 		if($tpl && $this->tpl->check_exists($tpl)){
@@ -205,7 +205,7 @@ class index_control extends phpok_control
 	{
 		$data = $this->get('data');
 		if(!$data){
-			$this->error(P_Lang('未指定生成的二维码数据'));
+			$this->error(P_Lang('未指定生成的二維碼資料'));
 		}
 		$this->lib('qrcode')->png($data);
 	}

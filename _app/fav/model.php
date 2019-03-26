@@ -1,12 +1,12 @@
 <?php
 /**
- * 收藏夹
+ * 收藏夾
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年06月04日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年06月04日
 **/
 namespace phpok\app\model\fav;
 
@@ -18,8 +18,8 @@ class model extends \phpok_model
 	}
 
 	/**
-	 * 获取数量
-	 * @参数 $condition 查询条件
+	 * 獲取數量
+	 * @引數 $condition 查詢條件
 	**/
 	public function get_count($condition='')
 	{
@@ -32,10 +32,10 @@ class model extends \phpok_model
 	}
 
 	/**
-	 * 获取列表
-	 * @参数 $condition 查询条件
-	 * @参数 $offset 开始标识
-	 * @参数 $psize 每次查询数
+	 * 獲取列表
+	 * @引數 $condition 查詢條件
+	 * @引數 $offset 開始標識
+	 * @引數 $psize 每次查詢數
 	**/
 	public function get_all($condition='',$offset=0,$psize=30)
 	{
@@ -52,8 +52,8 @@ class model extends \phpok_model
 	}
 
 	/**
-	 * 删除收藏夹标记
-	 * @参数 $id 收藏夹ID
+	 * 刪除收藏夾標記
+	 * @引數 $id 收藏夾ID
 	**/
 	public function del($id)
 	{
@@ -62,8 +62,8 @@ class model extends \phpok_model
 	}
 
 	/**
-	 * 取得主题被收藏数
-	 * @参数 $id 主题ID
+	 * 取得主題被收藏數
+	 * @引數 $id 主題ID
 	**/
 	public function title_fav_count($id)
 	{
@@ -72,10 +72,10 @@ class model extends \phpok_model
 	}
 
 	/**
-	 * 检查主题是否已被会员收藏
-	 * @参数 $id 主题ID
-	 * @参数 $uid 会员ID
-	 * @参数 $field 字段，默认使用 lid
+	 * 檢查主題是否已被會員收藏
+	 * @引數 $id 主題ID
+	 * @引數 $uid 會員ID
+	 * @引數 $field 欄位，預設使用 lid
 	**/
 	public function chk($id,$uid=0,$field='lid')
 	{
@@ -84,9 +84,9 @@ class model extends \phpok_model
 	}
 
 	/**
-	 * 保存收藏
-	 * @参数 $data 一维数组
-	 * @参数 $id 有ID时表示更新，无ID时表示添加
+	 * 儲存收藏
+	 * @引數 $data 一維陣列
+	 * @引數 $id 有ID時表示更新，無ID時表示新增
 	**/
 	public function save($data,$id=0)
 	{
@@ -100,8 +100,8 @@ class model extends \phpok_model
 	}
 
 	/**
-	 * 删除收藏操作
-	 * @参数 $id 收藏夹主表 qinggan_nav 的主键ID
+	 * 刪除收藏操作
+	 * @引數 $id 收藏夾主表 qinggan_nav 的主鍵ID
 	**/
 	public function delete($id)
 	{
@@ -110,8 +110,8 @@ class model extends \phpok_model
 	}
 
 	/**
-	 * 取得一条收藏信息
-	 * @参数 $id 收藏夹主表 qinggan_nav 的主键ID
+	 * 取得一條收藏資訊
+	 * @引數 $id 收藏夾主表 qinggan_nav 的主鍵ID
 	**/
 	public function get_one($id)
 	{

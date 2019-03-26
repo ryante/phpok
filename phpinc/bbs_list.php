@@ -1,26 +1,26 @@
 <?php
 /*****************************************************************************************
-	文件： php/bbs_list.php
-	备注： 格式化论坛主题
+	檔案： php/bbs_list.php
+	備註： 格式化論壇主題
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年10月4日
+	時間： 2014年10月4日
 *****************************************************************************************/
 /**
- * 格式化论坛主题
+ * 格式化論壇主題
  * @package phpok\phpinc
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年06月21日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年06月21日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
-//常用项目参数
-//多少小时内发的贴子或回复，显示为最新主题
+//常用專案引數
+//多少小時內發的貼子或回覆，顯示為最新主題
 $hour = 6;
 if($rslist){
 	foreach($rslist as $key=>$value){

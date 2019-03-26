@@ -1,16 +1,16 @@
 <?php
 /*****************************************************************************************
-	文件： payment/alipay/submit.php
-	备注： 支付接口提交页
+	檔案： payment/alipay/submit.php
+	備註： 支付介面提交頁
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年5月2日
+	時間： 2014年5月2日
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class alipay_submit
 {
-	//支付接口初始化
+	//支付介面初始化
 	public $param;
 	public $order;
 	public $paydir;
@@ -34,7 +34,7 @@ class alipay_submit
 		$this->order = $order;
 	}
 
-	//创建订单
+	//建立訂單
 	function submit()
 	{
 		global $app;
@@ -96,13 +96,13 @@ class alipay_submit
 			$parameter['exter_invoke_ip'] = phpok_ip();
 		}
 
-		//合作身份者id，以2088开头的16位纯数字
+		//合作身份者id，以2088開頭的16位純數字
 		$alipay_config = array('partner'=>$this->param['param']['pid'],'key'=>$this->param['param']['key']);
 		$alipay_config['sign_type'] ='MD5';
 		$alipay_config['input_charset']= 'utf-8';
 		$alipay_config['cacert']    = $this->paydir.'cacert.pem';
 		$alipay_config['transport']    = 'http';
-		//建立请求
+		//建立請求
 		$alipaySubmit = new AlipaySubmit($alipay_config);
 		$params = $alipaySubmit->buildRequestPara($parameter);
 		$app->tpl->assign('alipay_config',$alipay_config);

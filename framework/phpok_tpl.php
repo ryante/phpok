@@ -1,17 +1,17 @@
 <?php
 /**
- * PHPOK模板引挈，简单实用
+ * PHPOK模板引挈，簡單實用
  * @package phpok\framework
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年06月21日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年06月21日
 **/
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -41,8 +41,8 @@ class phpok_template
 	}
 
 	/**
-	 * 配置全局参数
-	 * @参数 $config 数组
+	 * 配置全域性引數
+	 * @引數 $config 陣列
 	**/
 	public function config($config=array())
 	{
@@ -88,9 +88,9 @@ class phpok_template
 	}
 
 	/**
-	 * 附加变量
-	 * @参数 $var 变量名，字符串
-	 * @参数 $val 变量值
+	 * 附加變數
+	 * @引數 $var 變數名，字串
+	 * @引數 $val 變數值
 	**/
 	public function assign($var,$val="")
 	{
@@ -111,8 +111,8 @@ class phpok_template
 	}
 
 	/**
-	 * 读取变量名内容
-	 * @参数 $var 变量名
+	 * 讀取變數名內容
+	 * @引數 $var 變數名
 	**/
 	public function val($var)
 	{
@@ -120,8 +120,8 @@ class phpok_template
 	}
 
 	/**
-	 * 注销变量
-	 * @参数 $var 要注销的变量名，留空注销全部变量
+	 * 登出變數
+	 * @引數 $var 要登出的變數名，留空登出全部變數
 	**/
 	public function unassign($var='')
 	{
@@ -142,8 +142,8 @@ class phpok_template
 	}
 
 	/**
-	 * 变更路径
-	 * @参数 $val 要变更的路径的字串，例如：css,images
+	 * 變更路徑
+	 * @引數 $val 要變更的路徑的字串，例如：css,images
 	**/
 	public function path_change($val="")
 	{
@@ -151,15 +151,15 @@ class phpok_template
 	}
 
 	/**
-	 * 输出编译后的模板信息
-	 * @参数 $tpl是指模板文件，支持子目录
-	 * @参数 $type 类型，可选值为：file 指相对路径，不带后缀，file-ext 指相对路径，带后缀，content 或 msg 指纯模板内容，abs-file 指带后缀的绝对路径
-	 * @参数 $path_format 是否格式化
+	 * 輸出編譯後的模板資訊
+	 * @引數 $tpl是指模板檔案，支援子目錄
+	 * @引數 $type 型別，可選值為：file 指相對路徑，不帶字尾，file-ext 指相對路徑，帶字尾，content 或 msg 指純模板內容，abs-file 指帶字尾的絕對路徑
+	 * @引數 $path_format 是否格式化
 	**/
 	public function output($tpl,$type="file",$path_format=true)
 	{
 		if(!$tpl){
-			$this->error(P_Lang('模板信息为空'));
+			$this->error(P_Lang('模板資訊為空'));
 		}
 		if(strpos($tpl,':') !== false && $type == 'file'){
 			$tmp = explode(":",$tpl);
@@ -173,7 +173,7 @@ class phpok_template
 		}
 		$comp_id = $this->comp_id($tpl,$type);
 		if(!$comp_id){
-			$this->error(P_Lang('没有指定模板源'));
+			$this->error(P_Lang('沒有指定模板源'));
 		}
 		$this->compiling($comp_id,$tpl,$type,$path_format);
 		$this->assign("session",$_SESSION);
@@ -200,10 +200,10 @@ class phpok_template
 	}
 
 	/**
-	 * 取得内容，不直接输出，参数output
-	 * @参数 $tpl是指模板文件，支持子目录
-	 * @参数 $type 类型，可选值为：file 指相对路径，不带后缀，file-ext 指相对路径，带后缀，content 或 msg 指纯模板内容，abs-file 指带后缀的绝对路径
-	 * @参数 $path_format 是否格式化
+	 * 取得內容，不直接輸出，引數output
+	 * @引數 $tpl是指模板檔案，支援子目錄
+	 * @引數 $type 型別，可選值為：file 指相對路徑，不帶字尾，file-ext 指相對路徑，帶字尾，content 或 msg 指純模板內容，abs-file 指帶字尾的絕對路徑
+	 * @引數 $path_format 是否格式化
 	**/
 	public function fetch($tpl,$type="file",$path_format=true)
 	{
@@ -215,7 +215,7 @@ class phpok_template
 	}
 
 	/**
-	 * 取得编译后的文件ID
+	 * 取得編譯後的檔案ID
 	**/
 	public function comp_id($tpl,$type="file")
 	{
@@ -237,10 +237,10 @@ class phpok_template
 
 
 	/**
-	 * 输出 HTML 信息并中止后续运行
-	 * @参数 $tpl是指模板文件，支持子目录
-	 * @参数 $type 类型，可选值为：file 指相对路径，不带后缀，file-ext 指相对路径，带后缀，content 或 msg 指纯模板内容，abs-file 指带后缀的绝对路径
-	 * @参数 $path_format 是否格式化
+	 * 輸出 HTML 資訊並中止後續執行
+	 * @引數 $tpl是指模板檔案，支援子目錄
+	 * @引數 $type 型別，可選值為：file 指相對路徑，不帶字尾，file-ext 指相對路徑，帶字尾，content 或 msg 指純模板內容，abs-file 指帶字尾的絕對路徑
+	 * @引數 $path_format 是否格式化
 	**/
 	public function display($tpl,$type="file",$path_format=true)
 	{
@@ -249,11 +249,11 @@ class phpok_template
 	}
 
 	/**
-	 * 编译模板内容，通过正则替换自己需要的
-	 * @参数 $compiling_id，生成的编译文件ID
-	 * @参数 $tpl，模板源文件
-	 * @参数 $type，模板类型
-	 * @参数 $path_format 是否格式化
+	 * 編譯模板內容，通過正則替換自己需要的
+	 * @引數 $compiling_id，生成的編譯檔案ID
+	 * @引數 $tpl，模板原始檔
+	 * @引數 $type，模板型別
+	 * @引數 $path_format 是否格式化
 	**/
 	private function compiling($compiling_id,$tpl,$type="file",$path_format=true)
 	{
@@ -267,7 +267,7 @@ class phpok_template
 		if(in_array($type,array('file','file-ext','abs-file'))){
 			$tplfile = $this->_getfile($tpl,$type);
 			if(!$tplfile && $this->refresh_auto){
-				$this->error(P_Lang('模板文件[tplfile]不存在',array('tplfile'=>$tpl)));
+				$this->error(P_Lang('模板檔案[tplfile]不存在',array('tplfile'=>$tpl)));
 			}
 			if(!$is_refresh){
 				$time = filemtime($this->dir_cache.$compiling_id);
@@ -286,7 +286,7 @@ class phpok_template
 			$html_content = $tpl;
 		}
 		if(!$html_content){
-			$this->error(P_Lang('不支持空内容是模板，请检查'));
+			$this->error(P_Lang('不支援空內容是模板，請檢查'));
 		}
 		$php_content = $this->html_to_php($html_content,$path_format);
 		$newarray = array('<?php echo $app->plugin_html_ap("phpokhead");?></head>','<?php echo $app->plugin_html_ap("phpokbody");?></body>');
@@ -345,8 +345,8 @@ class phpok_template
 	}
 
 	/**
-	 * 前端HTML里Debug调用
-	 * @参数 $info 数组，要调试的参数
+	 * 前端HTML裡Debug呼叫
+	 * @引數 $info 陣列，要除錯的引數
 	**/
 	public function html_debug($info)
 	{
@@ -360,8 +360,8 @@ class phpok_template
 	}
 
 	/**
-	 * 语言包变量替换
-	 * @参数 $info 要替换的语言包字串
+	 * 語言包變數替換
+	 * @引數 $info 要替換的語言包字串
 	**/
 	private function lang_replace($info)
 	{
@@ -400,13 +400,13 @@ class phpok_template
 	}
 
 	/**
-	 * 正则替换，html 转 php
-	 * @参数 $content 要转换的内容
-	 * @参数 $path_format 路径变更
+	 * 正則替換，html 轉 php
+	 * @引數 $content 要轉換的內容
+	 * @引數 $path_format 路徑變更
 	**/
 	private function html_to_php($content,$path_format=true)
 	{
-		//第一步，整理模板中的路径问题
+		//第一步，整理模板中的路徑問題
 		if($this->path_change && $path_format){
 			$tmp_path_list = explode(",",$this->path_change);
 			$tmp_path_list = array_unique($tmp_path_list);
@@ -418,7 +418,7 @@ class phpok_template
 				$content = str_replace($value."/",$this->dir_tpl.$value."/",$content);
 			}
 		}
-		//正则替换内容问题
+		//正則替換內容問題
 		$content = preg_replace_callback('/<!--\s+head\s+(.+)\s+-->/isU',array($this,'head_php'),$content);
 		$content = preg_replace_callback('/<!--\s+plugin\s*(.*)\s+-->/isU',array($this,'plugin_php'),$content);
 		$content = preg_replace('/(\{|<!--)\s*(\/if|end|\/foreach|\/for|\/while|\/loop)\s*(\}|-->)/isU','<?php } ?>',$content);
@@ -426,32 +426,32 @@ class phpok_template
 		$content = preg_replace('/<!--\s*php\s*-->/isU','<?php',$content);
 		$content = preg_replace('/<!--\s*\/\s*php\s*-->/isU','?>',$content);
 		$content = preg_replace_callback('/\{debug\s+\$(.+)\}/isU',array($this,'html_debug'),$content);
-		//语言包替换
+		//語言包替換
 		$content = preg_replace_callback('/\{lang\s*(.+)\}/isU',array($this,'lang_replace'),$content);
-		//内置标签替换
+		//內建標籤替換
 		$content = preg_replace_callback('/(\{|<!--\s*)(arclist|arc|subcate|catelist|cate|project|sublist|parent|plist|fields|user|userlist)[:]*([\w\$]*)\s+(.+)(\}|\s*-->)/isU',array($this,'data_php'),$content);
 		$content = preg_replace_callback('/(\{|<!--\s*)\/(arclist|arc|catelist|cateinfo|subcate|project|sublist)[:]*([a-zA-Z\_0-9\$]*)(\}|\s*-->)/isU',array($this,'undata_php'),$content);
 		$content = preg_replace_callback('/(\{|<!--\s*)unset\s*(:|\(|=)\s*([^\)]+)[\)]*(\}|\}|\s*-->)/isU',array($this,'undata_php'),$content);
-		//循环语法
+		//迴圈語法
 		$content = preg_replace_callback('/(\{|<!--\s*)\$([a-zA-Z0-9_\$\[\]\'\\\"\.\-]{1,60})\s+AS\s+(.+)(\}|\s*-->)/isU',array($this,'_foreach_php_ex_doller'),$content);
 		$content = preg_replace_callback('/(\{|<!--\s*)foreach\s*\(\s*(.+)\s+AS\s+(.+)\s*\)\s*(\}|\s*-->)/isU',array($this,'_foreach_php_in_doller'),$content);
 		$content = preg_replace_callback('/(\{|<!--\s*)loop\s+(.+)(\}|\s*-->)/isU',array($this,'_loop_php'),$content);
 		$content = preg_replace_callback('/(\{|<!--\s*)(while|for)\s*\(\s*(.+)\s*\)\s*(\}|\s*-->)/isU',array($this,'_for_while_php'),$content);
 		$content = preg_replace_callback('/(\{|<!--\s*)(while|for)\s+(.+)(\}|\s*-->)/isU',array($this,'_for_while_php'),$content);
-		//条件判断
+		//條件判斷
 		$content = preg_replace_callback('/(\{|<!--\s*)(if|else\s*if)\s*\(\s*(.+)\s*\)\s*(\}|\s*-->)/isU',array($this,'_if_php'),$content);
 		$content = preg_replace_callback('/(\{|<!--\s*)(if|else\s*if)\s+(.+)(\}|\s*-->)/isU',array($this,'_if_php'),$content);
-		//文件包含
+		//檔案包含
 		$content = preg_replace_callback('/(\{|<!--\s*)include\s+(.+)(\}|\s*-->)/isU',array($this,'_include_php'),$content);
 		$content = preg_replace_callback('/(\{|<!--\s*)inc\s*(:|=)\s*(.+)(\}|\s*-->)/isU',array($this,'_inc_php'),$content);
-		//单行PHP代码
+		//單行PHP程式碼
 		$content = preg_replace_callback('/(\{|<!--)\s*(run|php)\s*(:|\s+)\s*(.+)\s*(\}|-->)/isU',array($this,'_php_runing'),$content);
-		//PHPOK4的网址写法
+		//PHPOK4的網址寫法
 		$content = preg_replace_callback('/\{url\s+(.+)\/\}/isU',array($this,'_url_php'),$content);
 		$content = preg_replace_callback('/\{ajaxurl\s+(.+)\/\}/isU',array($this,'_ajaxurl_php'),$content);
-		//PHPOK4外调函数的写法
+		//PHPOK4外調函式的寫法
 		$content = preg_replace_callback('/\{func\s+(.+)\}/isU',array($this,'_func_php'),$content);
-		//基本变量输出
+		//基本變數輸出
 		$content = preg_replace_callback('/\{\$([a-zA-Z\_].*)\s*\}/isU',array($this,'_echo_php'),$content);
 		$content = preg_replace_callback('/\{\s*(:|=|echo\s+)\s*(.+)\}/isU',array($this,'_echo_phpok3'),$content);
 		$content = preg_replace('/\{#(.*)#\}/isU','\\1',$content);
@@ -519,8 +519,8 @@ class phpok_template
 	}
 
 	/**
-	 * 更换头部信息
-	 * @参数 $string 要格式化的字符串
+	 * 更換頭部資訊
+	 * @引數 $string 要格式化的字串
 	**/
 	public function head_php($string)
 	{
@@ -551,8 +551,8 @@ class phpok_template
 	}
 
 	/**
-	 * PHP 代码运行
-	 * @参数 $string 要运行的 php 代码
+	 * PHP 程式碼執行
+	 * @引數 $string 要執行的 php 程式碼
 	**/
 	private function php_runing($string)
 	{
@@ -566,8 +566,8 @@ class phpok_template
 	}
 
 	/**
-	 * 插件瞄点，暂时不管参数
-	 * @参数 $string 插件变量点
+	 * 外掛瞄點，暫時不管引數
+	 * @引數 $string 外掛變數點
 	**/
 	private function plugin_php($string)
 	{
@@ -592,7 +592,7 @@ class phpok_template
 		if($c)
 		{
 			$c = preg_replace("/(\x20{2,})/"," ",$c);
-			//处理引号里的空格
+			//處理引號裡的空格
 			$c = preg_replace("/[\"|']([a-zA-Z\_\-\.,]*)(\s+)([a-zA-Z\_\-\.,]*)[\"|']/isU",'\\1:_:_:-phpok-:_:_:\\3',$c);
 			$c = str_replace(" ","&",$c);
 			$c = $this->str_format($c);
@@ -616,8 +616,8 @@ class phpok_template
 	}
 
 	/**
-	 * 注销 PHP 信息
-	 * @参数 $b 要注销变量的数组
+	 * 登出 PHP 資訊
+	 * @引數 $b 要登出變數的陣列
 	**/
 	private function undata_php($b="")
 	{
@@ -628,14 +628,14 @@ class phpok_template
 		if(substr($b,0,1) != '$'){
 			$b = '$'.$b;
 		}
-		$b = preg_replace("/(\x20{2,})/"," ",$b);# 去除多余空格，只保留一个空格
+		$b = preg_replace("/(\x20{2,})/"," ",$b);# 去除多餘空格，只保留一個空格
 		$b = $this->str_format($b);
 		$b = str_replace(" ",",",$b);
 		return '<?php unset('.$b.');?>';
 	}
 
 	/**
-	 * 包含 PHP 文件
+	 * 包含 PHP 檔案
 	**/
 	private function include_php($string)
 	{
@@ -684,7 +684,7 @@ class phpok_template
 	}
 
 	/**
-	 * 处理网址
+	 * 處理網址
 	**/
 	private function url_php($string)
 	{
@@ -692,7 +692,7 @@ class phpok_template
 			return false;
 		}
 		$string = trim($string);
-		$string = preg_replace("/(\x20{2,})/"," ",$string);# 去除多余空格，只保留一个空格
+		$string = preg_replace("/(\x20{2,})/"," ",$string);# 去除多餘空格，只保留一個空格
 		$string = str_replace(" ","&",$string);
 		parse_str($string,$list);
 		if(!$list || count($list)<1){
@@ -716,7 +716,7 @@ class phpok_template
 		}
 		global $app;
 		$string = trim($string);
-		$string = preg_replace("/(\x20{2,})/"," ",$string);# 去除多余空格，只保留一个空格
+		$string = preg_replace("/(\x20{2,})/"," ",$string);# 去除多餘空格，只保留一個空格
 		parse_str($string,$list);
 		if(!$list || count($list)<1){
 			return false;
@@ -735,9 +735,9 @@ class phpok_template
 	}
 
 	/**
-	 * 格式化函数参数
-	 * @参数 $string
-	 * @返回 带有PHP标识的字符串
+	 * 格式化函式引數
+	 * @引數 $string
+	 * @返回 帶有PHP標識的字串
 	**/
 	private function func_php($string)
 	{
@@ -747,7 +747,7 @@ class phpok_template
 		$string = stripslashes(trim($string));
 		$string = $this->str_format($string);
 		$string = preg_replace_callback("/[\"|']{1}(.+)[\"|']{1}/isU",array($this,'url_encode'),$string);
-		$string = preg_replace("/(\x20{2,})/"," ",$string);# 去除多余空格，只保留一个空格
+		$string = preg_replace("/(\x20{2,})/"," ",$string);# 去除多餘空格，只保留一個空格
 		$list = explode(" ",$string);
 		$func = $list[0];
 		if(!$func || !function_exists($func)){
@@ -782,8 +782,8 @@ class phpok_template
 	}
 
 	/**
-	 * PHP 输出
-	 * @参数 $string 要输出的代码
+	 * PHP 輸出
+	 * @引數 $string 要輸出的程式碼
 	**/
 	private function echo_php($string)
 	{
@@ -797,9 +797,9 @@ class phpok_template
 	}
 
 	/**
-	 * While/For循环
-	 * @参数 $left 参数 for 或 while
-	 * @参数 $string 要循环的数据
+	 * While/For迴圈
+	 * @引數 $left 引數 for 或 while
+	 * @引數 $string 要迴圈的資料
 	**/
 	private function for_while_php($left,$string)
 	{
@@ -824,9 +824,9 @@ class phpok_template
 	}
 
 	/**
-	 * Foreach 简单循环
-	 * @参数 $from 数据来源
-	 * @参数 $value 要格式化的数据
+	 * Foreach 簡單迴圈
+	 * @引數 $from 資料來源
+	 * @引數 $value 要格式化的資料
 	**/
 	private function foreach_php($from,$value)
 	{
@@ -846,7 +846,7 @@ class phpok_template
 	}
 
 	/**
-	 * IF 条件操作
+	 * IF 條件操作
 	**/
 	private function if_php($left_string,$string)
 	{
@@ -855,7 +855,7 @@ class phpok_template
 		}
 		$string = trim($string);
 		$string = stripslashes($string);
-		# 通过正则替换文本中的.为[]
+		# 通過正則替換文字中的.為[]
 		$string = $this->str_format($string,false,false);
 		if(strtolower(substr($left_string,0,4)) == "else"){
 			$left_string = '}'.$left_string;
@@ -876,7 +876,7 @@ class phpok_template
 	}
 
 	/**
-	 * 循环数据
+	 * 迴圈資料
 	**/
 	private function loop_php($string)
 	{
@@ -924,10 +924,10 @@ class phpok_template
 	}
 
 	/**
-	 * 格式化文本，去除首尾引号，将.数组变成[]模式
-	 * @参数 $string，要格式化的文本
-	 * @参数 $auto_dollar，前面是否主动添加 $ 符号，默认为否
-	 * @参数 $del_mark，是否删除引号
+	 * 格式化文字，去除首尾引號，將.陣列變成[]模式
+	 * @引數 $string，要格式化的文字
+	 * @引數 $auto_dollar，前面是否主動新增 $ 符號，預設為否
+	 * @引數 $del_mark，是否刪除引號
 	**/
 	private function str_format($string,$auto_dollar=false,$del_mark=true)
 	{
@@ -964,9 +964,9 @@ class phpok_template
 	}
 
 	/**
-	 * 将字串中的点变成数组，最多支持5级
-	 * @参数 $string 字符串
-	 * @返回 字符串（有带中括号）
+	 * 將字串中的點變成陣列，最多支援5級
+	 * @引數 $string 字串
+	 * @返回 字串（有帶中括號）
 	**/
 	private function points_to_array($string)
 	{
@@ -998,9 +998,9 @@ class phpok_template
 	}
 
 	/**
-	 * 字符串格式化为数组
-	 * @参数 $string 要格式化的字串
-	 * @参数 $need_dollar 
+	 * 字串格式化為陣列
+	 * @引數 $string 要格式化的字串
+	 * @引數 $need_dollar 
 	**/
 	private function str_to_list($string,$need_dollar="")
 	{
@@ -1010,8 +1010,8 @@ class phpok_template
 		$string = stripslashes(trim($string));
 		$string = $this->str_format($string);
 		$string = preg_replace_callback("/[\"|']{1}(.+)[\"|']{1}/isU",array($this,'url_encode'),$string);
-		$string = preg_replace("/(\x20{2,})/"," ",$string);# 去除多余空格，只保留一个空格
-		$list = explode(" ",$string); # 格式化为数组
+		$string = preg_replace("/(\x20{2,})/"," ",$string);# 去除多餘空格，只保留一個空格
+		$list = explode(" ",$string); # 格式化為陣列
 		$rs = array();
 		if($need_dollar && !is_array($need_dollar)){
 			$need_dollar = explode(",",$need_dollar);
@@ -1037,15 +1037,15 @@ class phpok_template
 	}
 
 	/**
-	 * 模板引挈中的报错
+	 * 模板引挈中的報錯
 	**/
 	public function error($msg,$title='')
 	{
 		if(!$msg){
-			$msg = "异常请检查";
+			$msg = "異常請檢查";
 		}
 		if(!$title){
-			$title = '模板错误';
+			$title = '模板錯誤';
 		}
 		$html = '<!DOCTYPE html>'."\n";
 		$html.= '<html>'."\n";
@@ -1061,7 +1061,7 @@ class phpok_template
 	}
 
 	/**
-	 * 取得当前模板框架的后缀
+	 * 取得當前模板框架的字尾
 	**/
 	public function ext()
 	{
@@ -1092,10 +1092,10 @@ class phpok_template
 	}
 
 	/**
-	 * 检测文件是否存在
-	 * @参数 $tplname 模板名
-	 * @参数 $isext 是否包含后缀
-	 * @参数 $ifabs 是否绝对路径
+	 * 檢測檔案是否存在
+	 * @引數 $tplname 模板名
+	 * @引數 $isext 是否包含字尾
+	 * @引數 $ifabs 是否絕對路徑
 	**/
 	public function check_exists($tplname,$isext=false,$ifabs=false)
 	{
@@ -1130,8 +1130,8 @@ class phpok_template
 	}
 
 	/**
-	 * 检测模板文件是否存在，自动检测带后缀，不带后缀，相对路径，绝对路径等
-	 * @参数 $tplfile 模板名
+	 * 檢測模板檔案是否存在，自動檢測帶字尾，不帶字尾，相對路徑，絕對路徑等
+	 * @引數 $tplfile 模板名
 	**/
 	public function check($tplfile)
 	{

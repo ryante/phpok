@@ -1,12 +1,12 @@
 <?php
 /**
- * 读取内容列表，涉及到的主要表有 list及list_数字ID
+ * 讀取內容列表，涉及到的主要表有 list及list_數字ID
  * @package phpok\model\list
  * @author qinggan <admin@phpok.com>
- * @copyright 2015-2016 深圳市锟铻科技有限公司
+ * @copyright 2015-2016 深圳市錕鋙科技有限公司
  * @homepage http://www.phpok.com
  * @version 4.x
- * @license http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @license http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @update 2016年06月26日
 **/
 
@@ -17,7 +17,7 @@ class list_model_base extends phpok_model
 	protected $is_user = false;
 	protected $multiple_cate = false;
 	/**
-	 * 构造函数，继承父Model
+	 * 建構函式，繼承父Model
 	**/
 	public function __construct()
 	{
@@ -25,8 +25,8 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 是否启用电商
-	 * @参数 $is_biz true 或 false
+	 * 是否啟用電商
+	 * @引數 $is_biz true 或 false
 	**/
 	public function is_biz($is_biz='')
 	{
@@ -37,8 +37,8 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 是否有绑定会员
-	 * @参数 $is_user true 或 false
+	 * 是否有繫結會員
+	 * @引數 $is_user true 或 false
 	**/
 	public function is_user($is_user='')
 	{
@@ -49,8 +49,8 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 是否有多级分类
-	 * @参数 $is_user true 或 false
+	 * 是否有多級分類
+	 * @引數 $is_user true 或 false
 	**/
 	public function multiple_cate($multiple_cate='')
 	{
@@ -61,11 +61,11 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取扩展模块使用的扩展字段
-	 * @参数 $mid，模块ID，数值
-	 * @参数 $prefix，表别名，默认是ext
-	 * @返回 字符串，类似：ext.field1,ext.field2
-	 * @更新时间 2016年06月26日
+	 * 獲取擴充套件模組使用的擴充套件欄位
+	 * @引數 $mid，模組ID，數值
+	 * @引數 $prefix，表別名，預設是ext
+	 * @返回 字串，類似：ext.field1,ext.field2
+	 * @更新時間 2016年06月26日
 	**/
 	public function ext_fields($mid,$prefix="ext",$condition='')
 	{
@@ -88,13 +88,13 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取主题列表
-	 * @参数 $mid，模块ID，数值
-	 * @参数 $condition，查询条件
-	 * @参数 $offset，查询起始位置，默认是0
-	 * @参数 $psize，查询条数，默认是0，表示不限制
-	 * @参数 $orderby，排序
-	 * @返回 数组，查询结果集，扩展字段内容已经格式化
+	 * 獲取主題列表
+	 * @引數 $mid，模組ID，數值
+	 * @引數 $condition，查詢條件
+	 * @引數 $offset，查詢起始位置，預設是0
+	 * @引數 $psize，查詢條數，預設是0，表示不限制
+	 * @引數 $orderby，排序
+	 * @返回 陣列，查詢結果集，擴充套件欄位內容已經格式化
 	**/
 	public function get_list($mid,$condition="",$offset=0,$psize=0,$orderby="")
 	{
@@ -162,9 +162,9 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得总数
-	 * @参数 $mid 模块ID
-	 * @参数 $condition 查询条件
+	 * 取得總數
+	 * @引數 $mid 模組ID
+	 * @引數 $condition 查詢條件
 	**/
 	public function get_total($mid,$condition="")
 	{
@@ -192,9 +192,9 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取独立表数据
-	 * @参数 $id 主题ID
-	 * @参数 $mid 模块ID
+	 * 獲取獨立表資料
+	 * @引數 $id 主題ID
+	 * @引數 $mid 模組ID
 	**/
 	public function single_one($id,$mid=0)
 	{
@@ -204,9 +204,9 @@ class list_model_base extends phpok_model
 
 
 	/**
-	 * 独立表数据保存
-	 * @参数 $data 要保存的数据，如果存在 $data[id]，表示更新
-	 * @参数 $mid 模块ID
+	 * 獨立表資料儲存
+	 * @引數 $data 要儲存的資料，如果存在 $data[id]，表示更新
+	 * @引數 $mid 模組ID
 	**/
 	public function single_save($data,$mid=0)
 	{
@@ -223,12 +223,12 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 独立表列表数据
-	 * @参数 $mid 模块ID
-	 * @参数 $condition 查询条件
-	 * @参数 $offset 起始位置
-	 * @参数 $psize 查询数量
-	 * @参数 $orderby 排序
+	 * 獨立表列表資料
+	 * @引數 $mid 模組ID
+	 * @引數 $condition 查詢條件
+	 * @引數 $offset 起始位置
+	 * @引數 $psize 查詢數量
+	 * @引數 $orderby 排序
 	**/
 	public function single_list($mid,$condition='',$offset=0,$psize=30,$orderby='',$field='*')
 	{
@@ -247,9 +247,9 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 查询独立表数量
-	 * @参数 $mid 模块ID
-	 * @参数 $condition 查询条件
+	 * 查詢獨立表數量
+	 * @引數 $mid 模組ID
+	 * @引數 $condition 查詢條件
 	**/
 	public function single_count($mid,$condition='')
 	{
@@ -262,9 +262,9 @@ class list_model_base extends phpok_model
 
 
 	/**
-	 * 删除独立项目下的主题信息
-	 * @参数 $id 主题ID
-	 * @参数 $mid 模块ID
+	 * 刪除獨立專案下的主題資訊
+	 * @引數 $id 主題ID
+	 * @引數 $mid 模組ID
 	**/
 	public function single_delete($id,$mid=0)
 	{
@@ -276,9 +276,9 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得当前一个主题的信息
-	 * @参数 $id 主题ID
-	 * @参数 $format 是否格式化
+	 * 取得當前一個主題的資訊
+	 * @引數 $id 主題ID
+	 * @引數 $format 是否格式化
 	**/
 	public function get_one($id,$format=true)
 	{
@@ -367,9 +367,9 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存扩展表信息
-	 * @参数 $data 数组，一维
-	 * @参数 $mid 模块ID
+	 * 儲存擴充套件表資訊
+	 * @引數 $data 陣列，一維
+	 * @引數 $mid 模組ID
 	**/
 	public function save_ext($data,$mid)
 	{
@@ -389,10 +389,10 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 更新扩展表信息
-	 * @参数 $data 数组，一维数组 
-	 * @参数 $mid 模块ID
-	 * @参数 $id 主题ID
+	 * 更新擴充套件表資訊
+	 * @引數 $data 陣列，一維陣列 
+	 * @引數 $mid 模組ID
+	 * @引數 $id 主題ID
 	**/
 	public function update_ext($data,$mid,$id)
 	{
@@ -403,9 +403,9 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 存储扩展分类
-	 * @参数 $id 主题ID
-	 * @参数 $catelist 要保存的扩展分类ID，支持数组，字串，整数
+	 * 儲存擴充套件分類
+	 * @引數 $id 主題ID
+	 * @引數 $catelist 要儲存的擴充套件分類ID，支援陣列，字串，整數
 	**/
 	public function save_ext_cate($id,$catelist)
 	{
@@ -429,8 +429,8 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除主题绑定的分类
-	 * @参数 $id 要删除的主题
+	 * 刪除主題繫結的分類
+	 * @引數 $id 要刪除的主題
 	**/
 	public function list_cate_clear($id)
 	{
@@ -444,10 +444,10 @@ class list_model_base extends phpok_model
 
 
 	/**
-	 * 批量删除
-	 * @参数 $condition 查询条件
-	 * @参数 $mid 模块ID
-	 * @参数 
+	 * 批量刪除
+	 * @引數 $condition 查詢條件
+	 * @引數 $mid 模組ID
+	 * @引數 
 	**/
 	public function pl_delete($condition='',$mid=0)
 	{
@@ -458,10 +458,10 @@ class list_model_base extends phpok_model
 		}
 		$id_list = array_keys($rslist);
 		$ids = implode(",",$id_list);
-		//删除全部回复
+		//刪除全部回覆
 		$sql = "DELETE FROM ".$this->db->prefix."reply WHERE tid IN(".$ids.")";
 		$this->db->query($sql);
-		//删除关键字记录
+		//刪除關鍵字記錄
 		$sql = "DELETE FROM ".$this->db->prefix."tag_stat WHERE title_id IN(".$ids.")";
 		$this->db->query($sql);
 		//
@@ -481,11 +481,11 @@ class list_model_base extends phpok_model
 
 	
 	/**
-	 * 检测主表及扩展表中的唯一内容记录
-	 * @参数 $field 字段标识
-	 * @参数 $val 字段内容
-	 * @参数 $pid 项目ID
-	 * @参数 $mid 模块ID
+	 * 檢測主表及擴充套件表中的唯一內容記錄
+	 * @引數 $field 欄位標識
+	 * @引數 $val 欄位內容
+	 * @引數 $pid 專案ID
+	 * @引數 $mid 模組ID
 	**/
 	public function only_record($field,$val,$pid=0,$mid=0)
 	{
@@ -505,11 +505,11 @@ class list_model_base extends phpok_model
 
 
 	/**
-	 * 检测主表中的唯一性
-	 * @参数 $field 字段标识
-	 * @参数 $val 字段内容
-	 * @参数 $pid 项目ID
-	 * @参数 $mid 模块ID
+	 * 檢測主表中的唯一性
+	 * @引數 $field 欄位標識
+	 * @引數 $val 欄位內容
+	 * @引數 $pid 專案ID
+	 * @引數 $mid 模組ID
 	**/
 	public function main_only_check($field,$val,$pid=0,$mid=0)
 	{
@@ -532,18 +532,18 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 扩展表唯一性检查
-	 * @参数 $field 字段标识
-	 * @参数 $val 字段内容
-	 * @参数 $pid 项目ID
-	 * @参数 $mid 模块ID
+	 * 擴充套件表唯一性檢查
+	 * @引數 $field 欄位標識
+	 * @引數 $val 欄位內容
+	 * @引數 $pid 專案ID
+	 * @引數 $mid 模組ID
 	**/
 	public function ext_only_check($field,$val,$pid=0,$mid=0)
 	{
 		if(!$field || !$val || !$mid){
 			return true;
 		}
-		//检查表字段
+		//檢查表字段
 		$flist = $this->db->list_fields('list_'.$mid);
 		if(!$flist){
 			return false;
@@ -587,10 +587,10 @@ class list_model_base extends phpok_model
 	
 
 	/**
-	 * 取得下一个主题ID
-	 * @参数 $id 当前主题ID
-	 * @返回 数字或false
-	 * @更新时间 
+	 * 取得下一個主題ID
+	 * @引數 $id 當前主題ID
+	 * @返回 數字或false
+	 * @更新時間 
 	**/
 	public function get_next($id)
 	{
@@ -630,10 +630,10 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得上一主题ID
-	 * @参数 $id 当前主题ID 或主题内容
-	 * @返回 数字或false
-	 * @更新时间 2017年02月24日
+	 * 取得上一主題ID
+	 * @引數 $id 當前主題ID 或主題內容
+	 * @返回 數字或false
+	 * @更新時間 2017年02月24日
 	**/
 	public function get_prev($id)
 	{
@@ -706,7 +706,7 @@ class list_model_base extends phpok_model
 	{
 		$xmlfile = $this->dir_data."xml/attr.xml";
 		if(!file_exists($xmlfile)){
-			$array = array("h"=>"头条","c"=>"推荐","a"=>"特荐");
+			$array = array("h"=>"頭條","c"=>"推薦","a"=>"特薦");
 			return $array;
 		}
 		return $this->lib('xml')->read($xmlfile);
@@ -799,9 +799,9 @@ class list_model_base extends phpok_model
 		if(!$rslist){
 			return false;
 		}
-		//ulist，会员信息
-		//clist，分类信息
-		//elist，扩展主题信息
+		//ulist，會員資訊
+		//clist，分類資訊
+		//elist，擴充套件主題資訊
 		$user_id_list = $idlist = $ulist = $elist = array();
 		foreach($rslist as $key=>$value){
 			$idlist[] = $value['id'];
@@ -811,7 +811,7 @@ class list_model_base extends phpok_model
 			}
 			$elist[] = 'list-'.$value['id'];
 		}
-		//读取会员信息
+		//讀取會員資訊
 		if($project['is_userid']){
 			$user_ids = implode(",",array_unique($ulist));
 			if($user_ids){
@@ -826,7 +826,7 @@ class list_model_base extends phpok_model
 				}
 			}
 		}
-		//读取主题分类信息
+		//讀取主題分類資訊
 		if($project['cate']){
 			$title_ids = implode(",",array_unique($idlist));
 			$sql = "SELECT lc.id,lc.cate_id,c.title,c.identifier FROM ".$this->db->prefix."list_cate lc ";
@@ -851,7 +851,7 @@ class list_model_base extends phpok_model
 			}
 		}
 
-		//读取主题的扩展
+		//讀取主題的擴充套件
 		$elist = array_unique($elist);
 		$tmplist = $this->model('ext')->get_all($elist,true);
 		if($tmplist){
@@ -889,25 +889,25 @@ class list_model_base extends phpok_model
 			$rs = $this->db->get_one($sql);
 			$mid = $rs['module_id'];
 		}
-		//删除扩展主题信息
+		//刪除擴充套件主題資訊
 		if($mid){
-			//删除附件
+			//刪除附件
 			$this->delete_res($id,$mid);
 			$sql = "DELETE FROM ".$this->db->prefix."list_".$mid." WHERE id='".$id."'";
 			$this->db->query($sql);
 		}
 		$sql = "DELETE FROM ".$this->db->prefix."list WHERE id='".$id."'";
 		$this->db->query($sql);
-		//删除相关的回复信息
+		//刪除相關的回覆資訊
 		$sql = "DELETE FROM ".$this->db->prefix."reply WHERE tid='".$id."'";
 		$this->db->query($sql);
-		//删除Tag相关
+		//刪除Tag相關
 		$sql = "DELETE FROM ".$this->db->prefix."tag_stat WHERE title_id='".$id."'";
 		$this->db->query($sql);
-		//删除扩展分类
+		//刪除擴充套件分類
 		$sql = "DELETE FROM ".$this->db->prefix."list_cate WHERE id='".$id."'";
 		$this->db->query($sql);
-		//删除主题自身的扩展字段
+		//刪除主題自身的擴充套件欄位
 		$sql = "SELECT id FROM ".$this->db->prefix."fields WHERE ftype='list-".$id."'";
 		$tmplist = $this->db->get_all($sql);
 		if($tmplist){
@@ -922,9 +922,9 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 删除模块下的附件信息
-	 * @参数 $id 主题ID
-	 * @参数 $mid 模块ID，为0时，尝试从主题中获取
+	 * 刪除模組下的附件資訊
+	 * @引數 $id 主題ID
+	 * @引數 $mid 模組ID，為0時，嘗試從主題中獲取
 	**/
 	public function delete_res($id,$mid=0)
 	{
@@ -995,10 +995,10 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得主题的财富基数
-	 * @参数 $id 主题ID，数组或字串或数字
-	 * @返回 false/数字
-	 * @更新时间 2016年11月28日
+	 * 取得主題的財富基數
+	 * @引數 $id 主題ID，陣列或字串或數字
+	 * @返回 false/數字
+	 * @更新時間 2016年11月28日
 	**/
 	public function integral($id='')
 	{
@@ -1029,8 +1029,8 @@ class list_model_base extends phpok_model
 	}
 
 	/**
-	 * 保存电商数据
-	 * @参数 $data 数组，里面含有字段：id,unit,price,is_virtual,currency_id,weight,volume
+	 * 儲存電商資料
+	 * @引數 $data 陣列，裡面含有欄位：id,unit,price,is_virtual,currency_id,weight,volume
 	**/
 	public function biz_save($data)
 	{

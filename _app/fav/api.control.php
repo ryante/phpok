@@ -1,17 +1,17 @@
 <?php
 /**
- * 收藏夹相关功能接口
+ * 收藏夾相關功能介面
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年06月04日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年06月04日
 **/
 namespace phpok\app\control\fav;
 
 /**
- * 安全限制，防止直接访问
+ * 安全限制，防止直接訪問
 **/
 if(!defined("PHPOK_SET")){
 	exit("<h1>Access Denied</h1>");
@@ -26,24 +26,24 @@ class api_control extends \phpok_control
 
 	/**
 	 * 加入收藏
-	 * @参数 id 主题ID
+	 * @引數 id 主題ID
 	**/
 	public function add_f()
 	{
 		if(!$this->session->val('user_id')){
-			$this->error(P_Lang('您还未登录，不能执行此操作'));
+			$this->error(P_Lang('您還未登入，不能執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定要收藏的主题ID'));
+			$this->error(P_Lang('未指定要收藏的主題ID'));
 		}
 		$chk = $this->model('fav')->chk($id,$this->session->val('user_id'));
 		if($chk){
-			$this->error(P_Lang('主题已经收藏过，不能重复收藏'));
+			$this->error(P_Lang('主題已經收藏過，不能重複收藏'));
 		}
 		$rs = $this->call->phpok('_arc','title_id='.$id);
 		if(!$rs){
-			$this->error(P_Lang('内容不存在'));
+			$this->error(P_Lang('內容不存在'));
 		}
 		$data = array('user_id'=>$this->session->val('user_id'));
 		$type = ($this->config['fav'] && $this->config['fav']['thumb_id']) ? $this->config['fav']['thumb_id'] : 'thumb';
@@ -66,14 +66,14 @@ class api_control extends \phpok_control
 	}
 
 	/**
-	 * 删除收藏的主题
-	 * @参数 id 收藏表中 qinggan_fav 里的主键ID，注意噢，不是主题ID
-	 * @参数 lid 主题ID
+	 * 刪除收藏的主題
+	 * @引數 id 收藏表中 qinggan_fav 裡的主鍵ID，注意噢，不是主題ID
+	 * @引數 lid 主題ID
 	**/
 	public function delete_f()
 	{
 		if(!$this->session->val('user_id')){
-			$this->error(P_Lang('您还未登录，不能执行此操作'));
+			$this->error(P_Lang('您還未登入，不能執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
@@ -83,33 +83,33 @@ class api_control extends \phpok_control
 			}
 			$chk = $this->model('fav')->chk($lid,$this->session->val('user_id'));
 			if(!$chk){
-				$this->error(P_Lang('没有找到要删除的记录'));
+				$this->error(P_Lang('沒有找到要刪除的記錄'));
 			}
 			$id = $chk['id'];
 		}
 		$rs = $this->model('fav')->get_one($id);
 		if(!$rs){
-			$this->error(P_Lang('数据不存在'));
+			$this->error(P_Lang('資料不存在'));
 		}
 		if($rs['user_id'] != $this->session->val('user_id')){
-			$this->error(P_Lang('您没有权限删除'));
+			$this->error(P_Lang('您沒有許可權刪除'));
 		}
 		$this->model('fav')->delete($id);
 		$this->success();
 	}
 
 	/**
-	 * 检测主题是否已存在
-	 * @参数 $id 主题ID
+	 * 檢測主題是否已存在
+	 * @引數 $id 主題ID
 	**/
 	public function check_f()
 	{
 		if(!$this->session->val('user_id')){
-			$this->error(P_Lang('您还未登录，不能执行此操作'));
+			$this->error(P_Lang('您還未登入，不能執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定主题ID'));
+			$this->error(P_Lang('未指定主題ID'));
 		}
 		$rs = $this->model('fav')->chk($id,$_SESSION['user_id']);
 		if($rs){
@@ -119,19 +119,19 @@ class api_control extends \phpok_control
 	}
 
 	/**
-	 * 读取收藏列表
-	 * @参数 $pageid 页码ID
-	 * @参数 $psize 每页数量
+	 * 讀取收藏列表
+	 * @引數 $pageid 頁碼ID
+	 * @引數 $psize 每頁數量
 	**/
 	public function index_f()
 	{
 		if(!$this->session->val('user_id')){
-			$this->error(P_Lang('您还未登录，不能执行此操作'));
+			$this->error(P_Lang('您還未登入，不能執行此操作'));
 		}
 		$condition = "f.user_id='".$this->session->val('user_id')."'";
 		$total = $this->model('fav')->get_count($condition);
 		if(!$total){
-			$this->error(P_Lang('您的收藏夹还是空的噢'));
+			$this->error(P_Lang('您的收藏夾還是空的噢'));
 		}
 		$pageid = $this->get($this->config['pageid'],'int');
 		if(!$pageid){
@@ -148,17 +148,17 @@ class api_control extends \phpok_control
 	}
 
 	/**
-	 * 执行动作，未添加收藏时进行添加操作，已添加执行取消操作
-	 * @参数 $id 主题ID
+	 * 執行動作，未新增收藏時進行新增操作，已新增執行取消操作
+	 * @引數 $id 主題ID
 	**/
 	public function act_f()
 	{
 		if(!$this->session->val('user_id')){
-			$this->error(P_Lang('您还未登录，不能执行此操作'));
+			$this->error(P_Lang('您還未登入，不能執行此操作'));
 		}
 		$id = $this->get('id','int');
 		if(!$id){
-			$this->error(P_Lang('未指定主题ID'));
+			$this->error(P_Lang('未指定主題ID'));
 		}
 		$chk = $this->model('fav')->chk($id,$this->session->val('user_id'));
 		if($chk){
@@ -167,7 +167,7 @@ class api_control extends \phpok_control
 		}
 		$rs = $this->call->phpok('_arc','title_id='.$id);
 		if(!$rs){
-			$this->error(P_Lang('内容不存在'));
+			$this->error(P_Lang('內容不存在'));
 		}
 		$data = array('user_id'=>$this->session->val('user_id'));
 		$type = ($this->config['fav'] && $this->config['fav']['thumb_id']) ? $this->config['fav']['thumb_id'] : 'thumb';

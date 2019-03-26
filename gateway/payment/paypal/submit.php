@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： payment/submit.php
-	备注： Paypal支付提交页
+	檔案： payment/submit.php
+	備註： Paypal支付提交頁
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年03月24日 09时56分
+	時間： 2015年03月24日 09時56分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class paypal_submit
@@ -23,7 +23,7 @@ class paypal_submit
 		include_once($this->paydir."lib/paypal.php");
 	}
 
-	//执行提交按钮
+	//執行提交按鈕
 	public function submit()
 	{
         $notify_url = $this->baseurl."gateway/payment/paypal/notify_url.php";
@@ -38,7 +38,7 @@ class paypal_submit
 		$paypal->set_value("action_url",$this->param['param']["action"]);
 		$paypal->set_value("return_url",$return_url);//成功返回
 		$paypal->set_value("cancel_return",$cancel_url);//取消退出
-		$paypal->set_value("notify_url",$notify_url);//订单成功后发送给网站的信息
+		$paypal->set_value("notify_url",$notify_url);//訂單成功後傳送給網站的資訊
 		$htmlbutton = $paypal->create_button();
 		echo '<!DOCTYPE html>'."\n";
 		echo '<html>'."\n";
@@ -46,7 +46,7 @@ class paypal_submit
 		echo '<meta charset="utf-8" />'."\n\t";
 		echo '<title>付款中</title>'."\n";
 		echo '</head>'."\n<body>\n";
-		echo '<div class="div"><p>正在跳转至Paypal，请稍候...</p><input type="button" value="提交" onclick="go_paypal()"/></div>'."\n";
+		echo '<div class="div"><p>正在跳轉至Paypal，請稍候...</p><input type="button" value="提交" onclick="go_paypal()"/></div>'."\n";
 		echo '<div style="display:none">'.$htmlbutton."</div>\n";
 		echo '<script type="text/javascript">'."\n";
 		echo 'function go_paypal(){'."\n";

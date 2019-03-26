@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/form/checkbox_form.php
-	备注： 复选框常用项
+	檔案： {phpok}/form/checkbox_form.php
+	備註： 複選框常用項
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年03月12日 21时47分
+	時間： 2015年03月12日 21時47分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class checkbox_form extends _init_auto
@@ -66,7 +66,7 @@ class checkbox_form extends _init_auto
 				}
 			}
 		}
-		//返回HTML内容
+		//返回HTML內容
 		$html = '<ul class="ext_checkbox clearfix">';
 		foreach($rslist AS $key=>$value){
 			$html .= '<li><label>';
@@ -188,7 +188,7 @@ class checkbox_form extends _init_auto
 
 	private function opt_rslist($type='default',$group_id=0,$info='')
 	{
-		//当类型为默认时
+		//當型別為預設時
 		if($type == 'default' && $info){
 			$list = explode("\n",$info);
 			$rslist = "";
@@ -204,16 +204,16 @@ class checkbox_form extends _init_auto
 			return $rslist;
 		}
 
-		//表单选项
+		//表單選項
 		if($type == "opt"){
 			return $this->model('opt')->opt_all("group_id=".$group_id);
 		}
 		
-		//读子项目信息
+		//讀子專案資訊
 		if($type == 'project'){
 			return $this->model('form')->project_sublist($group_id);
 		}
-		//读主题列表信息
+		//讀主題列表資訊
 		if($type == 'title')
 		{
 			$tmplist = $this->model("list")->title_list($group_id);
@@ -225,7 +225,7 @@ class checkbox_form extends _init_auto
 			}
 			return $rslist;
 		}
-		//读子分类信息
+		//讀子分類資訊
 		if($type == 'cate')
 		{
 			$tmplist = $this->model('cate')->catelist_sonlist($group_id,false,0);

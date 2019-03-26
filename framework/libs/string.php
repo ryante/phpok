@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/libs/string.php
-	备注： 字符串处理
+	檔案： {phpok}/libs/string.php
+	備註： 字串處理
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年01月16日 19时20分
+	時間： 2015年01月16日 19時20分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class string_lib
@@ -21,11 +21,11 @@ class string_lib
 	}
 
 	
-	//字符串分割
-	//string，传入的字符串内容
-	//length，截取长度
-	//dot，补截（如省略号等）
-	//html，是否保留HTML样式
+	//字串分割
+	//string，傳入的字串內容
+	//length，擷取長度
+	//dot，補截（如省略號等）
+	//html，是否保留HTML樣式
 	public function cut($string,$length=0,$dot='',$html=false)
 	{
 		if(!$length || !trim($string)){
@@ -42,7 +42,7 @@ class string_lib
 		if(!$html){
 			return $info;
 		}
-		//组成HTML样式
+		//組成HTML樣式
 		$starts = $ends = $starts_str = false;
 		preg_match_all('/<\w+[^>]*>/isU',$str,$starts,PREG_OFFSET_CAPTURE);
 		preg_match_all('/<\/\w+>/isU',$str,$ends,PREG_OFFSET_CAPTURE);
@@ -88,7 +88,7 @@ class string_lib
 		return $info;
 	}
 
-	//把字符串转成数组，支持汉字，只能是utf-8格式的，返回数组
+	//把字串轉成陣列，支援漢字，只能是utf-8格式的，返回陣列
 	public function to_array($str)
 	{
 		$result = array();
@@ -119,7 +119,7 @@ class string_lib
 		return $result;
 	}
 
-	//将HTML安全格式化
+	//將HTML安全格式化
 	public function safe_html($content,$clear_url='')
 	{
 		$content = $this->xss_clean($content);
@@ -140,7 +140,7 @@ class string_lib
 		return str_replace(array("src='".$url,'src="'.$url,"src=".$url),array("src='",'src="',"src="),$content);
 	}
 
-	//判断字符是否是utf8
+	//判斷字元是否是utf8
 	public function is_utf8($string)
 	{
 		if(function_exists('mb_detect_encoding'))
@@ -151,7 +151,7 @@ class string_lib
 		return preg_match("/^([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){1}/",$word) == true || preg_match("/([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){1}$/",$word) == true || preg_match("/([".chr(228)."-".chr(233)."]{1}[".chr(128)."-".chr(191)."]{1}[".chr(128)."-".chr(191)."]{1}){2,}/",$string) == true ? true : false;
 	}
 
-	//转换成utf8
+	//轉換成utf8
 	public function charset($msg,$from_charset="GBK",$to_charset="UTF-8")
 	{
 		if(!$msg) return false;
@@ -170,7 +170,7 @@ class string_lib
 		return $msg;
 	}
 
-	//将非UTF-8字符转成UTF-8
+	//將非UTF-8字元轉成UTF-8
 	public function to_utf8($msg)
 	{
 		if(!$this->is_utf8($msg))
@@ -235,7 +235,7 @@ class string_lib
 		return $returnstr; 
 	}
 
-	//旧版字符串截取
+	//舊版字串擷取
 	private function _cut($string,$length=0,$dot='')
 	{
 		$wordscut = "";

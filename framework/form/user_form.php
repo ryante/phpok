@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/form/user_form.php
-	备注： 会员选项
+	檔案： {phpok}/form/user_form.php
+	備註： 會員選項
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年03月13日 13时06分
+	時間： 2015年03月13日 13時06分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class user_form extends _init_auto

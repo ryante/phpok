@@ -31,13 +31,13 @@ class id_model_base extends phpok_model
 		return false;
 	}
 
-	//检测标识ID是否被使用了
-	//identifier：字符串
-	//site_id，站点ID，整数
+	//檢測標識ID是否被使用了
+	//identifier：字串
+	//site_id，站點ID，整數
 	function check_id($identifier,$site_id=0,$id=0)
 	{
 		$site_id = $site_id ? '0,'.$site_id : '0';
-		//在项目中检测
+		//在專案中檢測
 		$sql = "SELECT id FROM ".$this->db->prefix."project WHERE LOWER(identifier)='".strtolower($identifier)."' ";
 		$sql.= "AND site_id IN(".$site_id.") ";
 		if($id){
@@ -47,14 +47,14 @@ class id_model_base extends phpok_model
 		if($check_rs){
 			return true;
 		}
-		//在分类中检测
+		//在分類中檢測
 		$sql = "SELECT id FROM ".$this->db->prefix."cate WHERE LOWER(identifier)='".strtolower($identifier)."' AND site_id IN(".$site_id.")";
 		if($id) $sql .= " AND id !=".intval($id);
 		$check_rs = $this->db->get_one($sql);
 		if($check_rs){
 			return true;
 		}
-		//在内容里检测
+		//在內容裡檢測
 		$sql = "SELECT id FROM ".$this->db->prefix."list WHERE LOWER(identifier)='".strtolower($identifier)."' AND site_id IN(".$site_id.")";
 		if($id) $sql .= " AND id !=".intval($id);
 		$check_rs = $this->db->get_one($sql);
@@ -75,10 +75,10 @@ class id_model_base extends phpok_model
 	}
 
 	/**
-	 * 获取ID属性信息，优先级：项目>分类>主题
-	 * @参数 $identifier 标识串
-	 * @参数 $site_id 站点ID
-	 * @参数 $status 为true时表示只检索状态为1的数据
+	 * 獲取ID屬性資訊，優先順序：專案>分類>主題
+	 * @引數 $identifier 標識串
+	 * @引數 $site_id 站點ID
+	 * @引數 $status 為true時表示只檢索狀態為1的資料
 	**/
 	public function id($identifier,$site_id=0,$status=false)
 	{

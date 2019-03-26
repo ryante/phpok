@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： payment/paypal/notice.php
-	备注： 支付通知页
+	檔案： payment/paypal/notice.php
+	備註： 支付通知頁
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年03月24日 12时45分
+	時間： 2015年03月24日 12時45分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class paypal_notice
@@ -66,9 +66,9 @@ class paypal_notice
 				if($payinfo){
 					$payment_data = array('dateline'=>$app->time,'ext'=>serialize($p_array));
 					$app->model('order')->save_payment($payment_data,$payinfo['id']);
-					//更新订单日志
+					//更新訂單日誌
 					$app->model('order')->update_order_status($order['id'],'paid');
-					$note = P_Lang('订单支付完成，编号：{sn}',array('sn'=>$order['sn']));
+					$note = P_Lang('訂單支付完成，編號：{sn}',array('sn'=>$order['sn']));
 					$log = array('order_id'=>$order['id'],'addtime'=>$app->time,'who'=>$app->user['user'],'note'=>$note);
 					$app->model('order')->log_save($log);
 				}

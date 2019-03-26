@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/api/popedom_model.php
-	备注： API接口读取权限
+	檔案： {phpok}/model/api/popedom_model.php
+	備註： API介面讀取許可權
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2014年10月24日 11时09分
+	時間： 2014年10月24日 11時09分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class popedom_model extends popedom_model_base
@@ -15,13 +15,13 @@ class popedom_model extends popedom_model_base
 		parent::__construct();
 	}
 
-	//设置站点ID
+	//設定站點ID
 	public function siteid($siteid)
 	{
 		$this->site_id = $siteid;
 	}
 
-	//取得权限返回值1或0
+	//取得許可權返回值1或0
 	public function val($pid,$groupid,$type='post1')
 	{
 		$popedom = $this->_popedom_list($groupid);

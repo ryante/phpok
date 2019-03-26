@@ -1,12 +1,12 @@
 <?php
 
 /**
- * 短信消息
+ * 簡訊訊息
  * @param templateId 模板ID
- * @param msgType 0表示短信, 1表示彩信, 默认值为0
- * @param phone 收信人手机号,多个手机号用逗号,分隔, 号码最多不能超过100
- * @param vars 替换变量的json串
- * @param 签名, 合法性验证
+ * @param msgType 0表示簡訊, 1表示彩信, 預設值為0
+ * @param phone 收信人手機號,多個手機號用逗號,分隔, 號碼最多不能超過100
+ * @param vars 替換變數的json串
+ * @param 簽名, 合法性驗證
  * @author xjm
  *
  */
@@ -85,16 +85,16 @@ class SmsMsg implements JsonSerializable {
 }
 
 /**
- * 语音消息
+ * 語音訊息
  *
  * @param
- *        	phone 收信人手机号
+ *        	phone 收信人手機號
  * @param
- *        	code 验证码
+ *        	code 驗證碼
  * @param
- *        	signature 签名, 合法性验证
+ *        	signature 簽名, 合法性驗證
  * @param
- *        	timestamp 时间戳
+ *        	timestamp 時間戳
  * @author xjm
  *        
  */
@@ -145,12 +145,12 @@ class MsgType {
 	const MMS = 1;
 	
 	/**
-	 * 2国际短信
+	 * 2國際簡訊
 	 */
 	const INTERNAT_SMS = 2;
 	
 	/**
-	 * 3语音
+	 * 3語音
 	 */
 	const VOICE = 3;
 }

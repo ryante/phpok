@@ -1,12 +1,12 @@
 <?php
 /**
- * CSS样式集合器，用于合并多个CSS
+ * CSS樣式集合器，用於合併多個CSS
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年01月20日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年01月20日
 **/
 
 error_reporting(E_ALL ^ E_NOTICE);
@@ -18,10 +18,10 @@ if(!$type || ($type && !in_array($type,array('default','admin','open')))){
 	$type = 'default';
 }
 
-//后台首页涉及到的样式文件
+//後臺首頁涉及到的樣式檔案
 $file = array();
 
-//后台首页
+//後臺首頁
 if($type == 'admin'){
 	$file[] = 'artdialog.css';
 	$file[] = 'icomoon.css';
@@ -29,18 +29,18 @@ if($type == 'admin'){
 	$file[] = 'admin.css';
 }
 
-//后台弹窗口
+//後臺彈視窗
 if($type == 'open'){
 	$file[] = 'icomoon.css';
 	$file[] = 'open.css';
 	$file[] = 'artdialog.css';
 	$file[] = 'form.css';
 	$file[] = 'smartmenu.css';
-	//使用 selectpage 下拉菜单
+	//使用 selectpage 下拉選單
 	$file[] = 'selectpage.css';
 }
 
-//后台桌面窗口
+//後臺桌面視窗
 if($type == 'default'){
 	$file[] = 'admin-index.css';
 	$file[] = 'window.css';

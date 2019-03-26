@@ -1,13 +1,13 @@
 <?php
 /**
- * 模块管理
+ * 模組管理
  * @package phpok\model\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年10月04日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年10月04日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -33,8 +33,8 @@ class module_model extends module_model_base
 	}
 
 	/**
-	 * 创建模块系统表
-	 * @参数 $id 模块ID
+	 * 建立模組系統表
+	 * @引數 $id 模組ID
 	**/
 	public function create_tbl($id)
 	{
@@ -46,29 +46,29 @@ class module_model extends module_model_base
 		$pri_id = 'id';
 		$note = $rs['title'];
 		$this->db->create_table_main($tblname,$pri_id,$note);
-		//创建 site_id 字段
+		//建立 site_id 欄位
 		$data = array('id'=>'site_id','type'=>'MEDIUMINT','unsigned'=>true,'notnull'=>true,'default'=>'0');
-		$data['comment'] = '网站ID';
+		$data['comment'] = '網站ID';
 		$this->db->update_table_fields($tblname,$data);
 		$data = array('id'=>'project_id','type'=>'MEDIUMINT','unsigned'=>true,'notnull'=>true,'default'=>'0');
-		$data['comment'] = '项目ID';
+		$data['comment'] = '專案ID';
 		$this->db->update_table_fields($tblname,$data);
 		if($rs['mtype']){
-			//创建 site_id 对应的索引
+			//建立 site_id 對應的索引
 			$this->db->update_table_index($tblname,'site_id_index',array('site_id','project_id'));
 		}else{
 			$data = array('id'=>'cate_id','type'=>'MEDIUMINT','unsigned'=>true,'notnull'=>true,'default'=>'0');
-			$data['comment'] = '主分类ID';
+			$data['comment'] = '主分類ID';
 			$this->db->update_table_fields($tblname,$data);
-			//创建 site_id 对应的索引
+			//建立 site_id 對應的索引
 			$this->db->update_table_index($tblname,'site_id_index',array('site_id','project_id','cate_id'));
 		}
 		return true;
 	}
 
 	/**
-	 * 更新字段
-	 * @参数 $id module_fields 表中的字段ID
+	 * 更新欄位
+	 * @引數 $id module_fields 表中的欄位ID
 	**/
 	public function update_fields($id)
 	{
@@ -76,9 +76,9 @@ class module_model extends module_model_base
 	}
 
 	/**
-	 * 创建字段
-	 * @参数 $id module_fields 表中的字段ID
-	 * @参数 $rs module_fields 数组
+	 * 建立欄位
+	 * @引數 $id module_fields 表中的欄位ID
+	 * @引數 $rs module_fields 陣列
 	**/
 	public function create_fields($id,$rs='')
 	{
@@ -118,8 +118,8 @@ class module_model extends module_model_base
 	}
 
 	/**
-	 * 删除字段
-	 * @参数 $id 要删除的字段ID，数值
+	 * 刪除欄位
+	 * @引數 $id 要刪除的欄位ID，數值
 	**/
 	public function field_delete($id)
 	{
@@ -138,8 +138,8 @@ class module_model extends module_model_base
 	}
 
 	/**
-	 * 删除模块操作
-	 * @参数 $id 模块ID
+	 * 刪除模組操作
+	 * @引數 $id 模組ID
 	**/
 	public function delete($id)
 	{
@@ -155,27 +155,27 @@ class module_model extends module_model_base
 			$rslist = $this->db->get_all($sql);
 			if($rslist){
 				foreach($rslist as $key=>$value){
-					//删除主题绑定的分类
+					//刪除主題繫結的分類
 					$sql = "DELETE FROM ".$this->db->prefix."list_cate WHERE id='".$value['id']."'";
 					$this->db->query($sql);
-					//删除主题电商相关
+					//刪除主題電商相關
 					$sql = "DELETE FROM ".$this->db->prefix."list_biz WHERE id='".$value['id']."'";
 					$this->db->query($sql);
-					//删除主题相关属性
+					//刪除主題相關屬性
 					$sql = "DELETE FROM ".$this->db->prefix."list_attr WHERE tid='".$value['id']."'";
 					$this->db->query($sql);
 				}
 				$sql = "DELETE FROM ".$this->db->prefix."list WHERE module_id='".$id."'";
 				$this->db->query($sql);
 			}
-			//更新项目信息
+			//更新專案資訊
 			$sql = "UPDATE ".$this->db->prefix."project SET module='0' WHERE module='".$id."'";
 			$this->db->query($sql);
 		}
-		//删除扩展字段
+		//刪除擴充套件欄位
 		$sql = "DELETE FROM ".$this->db->prefix."fields WHERE ftype='".$id."'";
 		$this->db->query($sql);
-		//删除记录
+		//刪除記錄
 		$sql = "DELETE FROM ".$this->db->prefix."module WHERE id='".$id."'";
 		$this->db->query($sql);
 		return true;
@@ -189,8 +189,8 @@ class module_model extends module_model_base
 
 	/**
 	 * 更新排序
-	 * @参数 $id 模块ID
-	 * @参数 $taxis 排序值
+	 * @引數 $id 模組ID
+	 * @引數 $taxis 排序值
 	**/
 	public function update_taxis($id,$taxis=255)
 	{
@@ -199,9 +199,9 @@ class module_model extends module_model_base
 	}
 
 	/**
-	 * 存储模块下的字段表
-	 * @参数 $data 数组
-	 * @参数 $id 大于0表示更新，小于等于0或为空表示添加
+	 * 儲存模組下的欄位表
+	 * @引數 $data 陣列
+	 * @引數 $id 大於0表示更新，小於等於0或為空表示新增
 	**/
 	public function fields_save($data,$id=0)
 	{
@@ -221,9 +221,9 @@ class module_model extends module_model_base
 	}
 
 	/**
-	 * 存储模块表
-	 * @参数 $data 模块信息，数组
-	 * @参数 $id 大于0表示更新，小于等于0或为空表示添加
+	 * 儲存模組表
+	 * @引數 $data 模組資訊，陣列
+	 * @引數 $id 大於0表示更新，小於等於0或為空表示新增
 	**/
 	public function save($data,$id=0)
 	{

@@ -1,11 +1,11 @@
 <?php
 /*****************************************************************************************
-	文件： {phpok}/model/admin/express_model.php
-	备注： 物流后台相关操作
+	檔案： {phpok}/model/admin/express_model.php
+	備註： 物流後臺相關操作
 	版本： 4.x
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	时间： 2015年09月07日 13时52分
+	時間： 2015年09月07日 13時52分
 *****************************************************************************************/
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class express_model extends express_model_base
@@ -15,10 +15,10 @@ class express_model extends express_model_base
 		parent::__construct();
 	}
 
-	//获取本站系统中存储的所有支付引挈
+	//獲取本站系統中儲存的所有支付引挈
 	public function code_all()
 	{
-		//读取目录下的
+		//讀取目錄下的
 		$handle = opendir($this->dir_root.'gateway/express');
 		$list = array();
 		while(false !== ($myfile = readdir($handle))){

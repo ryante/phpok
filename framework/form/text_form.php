@@ -1,12 +1,12 @@
 <?php
 /**
- * 文本框表单配置器
+ * 文字框表單配置器
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年01月18日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年01月18日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -18,7 +18,7 @@ class text_form extends _init_auto
 	}
 
 	/**
-	 * 此项限制后台使用
+	 * 此項限制後臺使用
 	**/
 	public function phpok_config()
 	{
@@ -26,9 +26,9 @@ class text_form extends _init_auto
 	}
 
 	/**
-	 * 格式化内容
-	 * @参数 $rs 数组，字段属性（对应module_fields里的一条记录属性信息）
-	 * @参数 $appid 入口，默认是admin
+	 * 格式化內容
+	 * @引數 $rs 陣列，欄位屬性（對應module_fields裡的一條記錄屬性資訊）
+	 * @引數 $appid 入口，預設是admin
 	**/
 	public function phpok_format($rs,$appid='admin')
 	{
@@ -40,9 +40,9 @@ class text_form extends _init_auto
 	}
 
 	/**
-	 * 获取数据
-	 * @参数 $rs 数组，字段属性（对应module_fields里的一条记录属性信息）
-	 * @参数 $appid 入口，默认是admin
+	 * 獲取資料
+	 * @引數 $rs 陣列，欄位屬性（對應module_fields裡的一條記錄屬性資訊）
+	 * @引數 $appid 入口，預設是admin
 	**/
 	public function phpok_get($rs,$appid='admin')
 	{
@@ -61,9 +61,9 @@ class text_form extends _init_auto
 	}
 
 	/**
-	 * 输出显示的内容
-	 * @参数 $rs 数组，字段属性（对应module_fields里的一条记录属性信息）
-	 * @参数 $appid 入口，默认是admin
+	 * 輸出顯示的內容
+	 * @引數 $rs 陣列，欄位屬性（對應module_fields裡的一條記錄屬性資訊）
+	 * @引數 $appid 入口，預設是admin
 	**/
 	public function phpok_show($rs,$appid='admin')
 	{
@@ -97,7 +97,7 @@ class text_form extends _init_auto
 		if($rs['form_btn'] && in_array($rs['form_btn'],array('date','datetime','time','year','month'))){
 			$this->addjs('js/laydate/laydate.js');
 			$_laydate = true;
-			$tmp = array('date'=>P_Lang('日期'),'datetime'=>P_Lang('日期时间'),'time'=>P_Lang('时间'),'year'=>P_Lang('年份'),'month'=>P_Lang('年月'));
+			$tmp = array('date'=>P_Lang('日期'),'datetime'=>P_Lang('日期時間'),'time'=>P_Lang('時間'),'year'=>P_Lang('年份'),'month'=>P_Lang('年月'));
 			$this->assign('_laydate_button',$tmp[$rs['form_btn']]);
 		}
 		if($rs['form_style']){
@@ -149,7 +149,7 @@ class text_form extends _init_auto
 		if($rs['form_btn'] && in_array($rs['form_btn'],array('date','datetime','time','year','month'))){
 			$this->addjs('js/laydate/laydate.js');
 			$_laydate = true;
-			$tmp = array('date'=>P_Lang('日期'),'datetime'=>P_Lang('日期时间'),'time'=>P_Lang('时间'),'year'=>P_Lang('年份'),'month'=>P_Lang('年月'));
+			$tmp = array('date'=>P_Lang('日期'),'datetime'=>P_Lang('日期時間'),'time'=>P_Lang('時間'),'year'=>P_Lang('年份'),'month'=>P_Lang('年月'));
 			$this->assign('_laydate_button',$tmp[$rs['form_btn']]);
 		}
 		if($rs['form_style']){

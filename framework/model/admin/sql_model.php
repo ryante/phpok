@@ -1,13 +1,13 @@
 <?php
 /**
- * 数据库管理相关
+ * 資料庫管理相關
  * @package phpok\model\admin
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年10月04日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年10月04日
 **/
 
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
@@ -18,7 +18,7 @@ class sql_model extends sql_model_base
 		parent::__construct();
 	}
 
-	//读取全部表信息
+	//讀取全部表資訊
 	public function tbl_all()
 	{
 		//$this->db->cache_clear();
@@ -26,7 +26,7 @@ class sql_model extends sql_model_base
 		return $this->db->get_all($sql);
 	}
 
-	//优化数据表
+	//優化資料表
 	public function optimize($table)
 	{
 		$sql = "OPTIMIZE TABLE ".$table;
@@ -71,19 +71,19 @@ class sql_model extends sql_model_base
 		return $rs['Rows'];
 	}
 
-	//转化
+	//轉化
 	public function escape($string)
 	{
 		return $this->db->escape_string($string);
 	}
 
-	//执行SQL
+	//執行SQL
 	public function query($sql)
 	{
 		return $this->db->query($sql);
 	}
 
-	//检测管理员是否存在，不存在或存在异常就更新
+	//檢測管理員是否存在，不存在或存在異常就更新
 	public function update_adm($data,$id=0)
 	{
 		if($id){
