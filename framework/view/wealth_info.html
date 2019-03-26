@@ -1,7 +1,7 @@
 <!-- include tpl=head -->
 <div class="tips">
-	{lang当前位置：}<a href="{url ctrl=wealth/}">{lang财富方案}</a>
-	&raquo; <span class="red">{$rs.title}</span>{lang明细}
+	{lang當前位置：}<a href="{url ctrl=wealth/}">{lang財富方案}</a>
+	&raquo; <span class="red">{$rs.title}</span>{lang明細}
 	<div class="clear"></div>
 </div>
 <script type="text/javascript">
@@ -9,35 +9,35 @@ function show_log(uid)
 {
 	var url = '{url ctrl=wealth func=log wid=$rs.id/}&uid='+uid;
 	$.dialog.open(url,{
-		'title':'{$rs.title}日志',
+		'title':'{$rs.title}日誌',
 		'lock':true,
 		'width':'500px',
 		'height':'400px',
 		'ok':function(){
 			return true;
 		},
-		'okVal':'关闭'
+		'okVal':'關閉'
 	});
 }
 function action_wealth(uid,type)
 {
-	var title = type == '+' ? '{lang赚送会员}{$rs.title}' : '{lang扣除会员}{$rs.title}';
-	var lft = type == '+' ? '{lang赚送}' : '{lang扣除}';
+	var title = type == '+' ? '{lang賺送會員}{$rs.title}' : '{lang扣除會員}{$rs.title}';
+	var lft = type == '+' ? '{lang賺送}' : '{lang扣除}';
 	$.dialog({
 		'title':title,
 		'lock':true,
-		'content':lft+'：<input type="text" style="width:70px" id="a_val" /> {$rs.unit}<br /><br />{lang说明}：<input type="text" id="a_note" value="" style="width:300px" />',
+		'content':lft+'：<input type="text" style="width:70px" id="a_val" /> {$rs.unit}<br /><br />{lang說明}：<input type="text" id="a_note" value="" style="width:300px" />',
 		'ok':function(){
 			var url = get_url('wealth','val','wid={$rs.id}&uid='+uid);
 			var note = $("#a_note").val();
 			if(!note){
-				$.dialog.alert('{lang请填写相关说明}');
+				$.dialog.alert('{lang請填寫相關說明}');
 				return false;
 			}
 			url += "&note="+$.str.encode(note);
 			var val = $("#a_val").val();
 			if(!val || (val && parseInt(val)<=0)){
-				$.dialog.alert('{lang请填写数值，数值必须大于0}');
+				$.dialog.alert('{lang請填寫數值，數值必須大於0}');
 				return false;
 			}
 			url += "&val="+val;
@@ -62,9 +62,9 @@ function action_wealth(uid,type)
 </script>
 <table width="100%" cellpadding="0" cellspacing="0" class="list">
 <tr>
-	<th class="lft" width="150">会员账号</th>
+	<th class="lft" width="150">會員賬號</th>
 	<th class="lft" width="100">{$rs.title}</th>
-	<th width="150">最后记录时间</th>
+	<th width="150">最後記錄時間</th>
 	<th>&nbsp;</th>
 </tr>
 <!-- loop from=$rslist key=$key value=$value -->
@@ -74,8 +74,8 @@ function action_wealth(uid,type)
 	<td class="center">{func date "Y-m-d H:i" $value.lasttime}</td>
 	<td>
 		<div class="button-group">
-			<input type="button" value="{lang日志}" onclick="show_log('{$value.uid}')" class="layui-btn" />
-			<input type="button" value="{lang赚送}" onclick="action_wealth('{$value.uid}','+')" class="layui-btn" />
+			<input type="button" value="{lang日誌}" onclick="show_log('{$value.uid}')" class="layui-btn" />
+			<input type="button" value="{lang賺送}" onclick="action_wealth('{$value.uid}','+')" class="layui-btn" />
 			<input type="button" value="{lang扣除}" onclick="action_wealth('{$value.uid}','-')" class="layui-btn" />
 		</div>
 	</td>

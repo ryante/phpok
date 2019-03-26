@@ -14,7 +14,7 @@
 			<note><![CDATA[適合使用於資料量小，比較固定的選項，如性別，是否等]]></note>
 		</radio>
 		<checkbox>
-			<title><![CDATA[複選框]]></title>
+			<title><![CDATA[核取方塊]]></title>
 			<note><![CDATA[適用於資料量小，但要有多種選擇，如興趣愛好等]]></note>
 		</checkbox>
 		<select>

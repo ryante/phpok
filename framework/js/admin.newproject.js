@@ -1,7 +1,7 @@
 /**
- * 項目管理相關JS
+ * 專案管理相關JS
  * @作者 qinggan <admin@phpok.com>
- * @版權 深圳市錕铻科技有限公司
+ * @版權 深圳市錕鋙科技有限公司
  * @網站 http://www.phpok.com
  * @版本 4.x
  * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
@@ -11,7 +11,7 @@
     $.admin_project = {
 
         /**
-         * 項目編輯保存
+         * 專案編輯儲存
          **/
         save:function(id)
         {
@@ -26,7 +26,7 @@
                 'dataType':'json',
                 'success':function(rs){
                     if(rs.status){
-                        var tip = $("#id").val() ? p_lang('文庫信息編輯成功') : p_lang('文庫信息創建成功');
+                        var tip = $("#id").val() ? p_lang('文庫資訊編輯成功') : p_lang('文庫資訊建立成功');
                         $.dialog.tips(tip,function(){
                             $.admin.reload(get_url('newproject'));
                             $.admin.close();
@@ -41,7 +41,7 @@
         },
 
         /**
-         * 模塊選擇時執行觸發
+         * 模組選擇時執行觸發
          **/
         module_change:function(obj)
         {
@@ -52,7 +52,7 @@
                 return true;
             }
             $("#tmp_orderby_btn,#tmp_orderby_btn2").html('');
-            //清除字段
+            //清除欄位
             //$("#tmp_fields_btn").html('');
             var c = '';
             var f = '';
@@ -79,7 +79,7 @@
                 }
                 if(f && f != ''){
                     f += '<input type="button" value="'+p_lang('全部')+'" class="layui-btn layui-btn-sm layui-btn-normal" onclick="$.admin_project.fields_add(\'*\')" />';
-                    f += '<input type="button" value="'+p_lang('不讀擴展')+'" class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.admin_project.fields_add(\'id\')" />';
+                    f += '<input type="button" value="'+p_lang('不讀擴充套件')+'" class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.admin_project.fields_add(\'id\')" />';
                     $("#tmp_fields_btn").html(f).show();
                 }
                 if(mtype == 1){
@@ -113,7 +113,7 @@
         },
         del:function(id)
         {
-            var tip = p_lang('確定要刪除此項目嗎？刪除會將相關內容壹起刪除 #{id}','<span class="red">'+id);
+            var tip = p_lang('確定要刪除此專案嗎？刪除會將相關內容壹起刪除 #{id}','<span class="red">'+id);
             $.dialog.confirm(tip,function(){
                 var url = get_url('newproject','delete','id='+id);
                 var tips = $.dialog.tips(p_lang('正在執行刪除請求…'));
@@ -121,7 +121,7 @@
                     tips.close();
                     if(data.status){
                         $("#project_"+id).remove();
-                        $.dialog.tips(p_lang('模塊刪除成功'));
+                        $.dialog.tips(p_lang('模組刪除成功'));
                         return true;
                     }
                     $.dialog.alert(data.info);
@@ -133,7 +133,7 @@
         {
             var id = $.checkbox.join();
             if(!id){
-                $.dialog.alert(p_lang('未選擇要復制的項目'));
+                $.dialog.alert(p_lang('未選擇要復制的專案'));
                 return false;
             }
             var list = id.split(',');
@@ -141,11 +141,11 @@
                 $.dialog.alert(p_lang('復制操作只能選擇壹個'));
                 return false;
             }
-            $.dialog.confirm(p_lang('確定要復制此項目 #{id}','<span class="red">'+id+'</id>'),function(){
+            $.dialog.confirm(p_lang('確定要復制此專案 #{id}','<span class="red">'+id+'</id>'),function(){
                 var url = get_url('newproject','copy','id='+id);
                 $.phpok.json(url,function(data){
                     if(data.status){
-                        $.dialog.tips(p_lang('項目復制成功'),function(){
+                        $.dialog.tips(p_lang('專案復製成功'),function(){
                             $.phpok.reload();
                         })
                         return true;
@@ -159,15 +159,15 @@
         {
             var id = $.checkbox.join();
             if(!id){
-                $.dialog.alert(p_lang('未選擇要自定義擴展字段的項目'));
+                $.dialog.alert(p_lang('未選擇要自定義擴充套件欄位的專案'));
                 return false;
             }
             var list = id.split(',');
             if(list.length > 1 ){
-                $.dialog.alert(p_lang('自定義擴展字段操作只能選擇壹個'));
+                $.dialog.alert(p_lang('自定義擴充套件欄位操作只能選擇壹個'));
                 return false;
             }
-            $.win(p_lang('擴展字段')+"_"+$("#id_"+id).attr("data-title"),get_url('newproject','content','id='+id));
+            $.win(p_lang('擴充套件欄位')+"_"+$("#id_"+id).attr("data-title"),get_url('newproject','content','id='+id));
             return true;
         },
         extinfo_save:function(id)
@@ -183,7 +183,7 @@
                 'dataType':'json',
                 'success':function(rs){
                     if(rs.status){
-                        $.dialog.tips(p_lang('數據保存成功'),function(){
+                        $.dialog.tips(p_lang('資料儲存成功'),function(){
                             $.admin.reload(get_url('newproject'));
                             $.admin.close();
                         }).lock();
@@ -199,12 +199,12 @@
         {
             var id = $.checkbox.join();
             if(!id){
-                $.dialog.alert(p_lang('未選擇要自定義擴展字段的項目'));
+                $.dialog.alert(p_lang('未選擇要自定義擴充套件欄位的專案'));
                 return false;
             }
             var list = id.split(',');
             if(list.length > 1 ){
-                $.dialog.alert(p_lang('自定義擴展字段操作只能選擇壹個'));
+                $.dialog.alert(p_lang('自定義擴充套件欄位操作只能選擇壹個'));
                 return false;
             }
             $.phpok.go(get_url('newproject','export','id='+id));
@@ -214,20 +214,20 @@
         {
             var url = get_url('newproject','import');
             $.dialog.open(url,{
-                'title':p_lang('項目導入'),
+                'title':p_lang('專案匯入'),
                 'lock':true,
                 'width':'500px',
                 'height':'150px',
                 'ok':function(){
                     var iframe = this.iframe.contentWindow;
                     if (!iframe.document.body) {
-                        alert(p_lang('iframe還沒加載完畢呢'));
+                        alert(p_lang('iframe還沒載入完畢呢'));
                         return false;
                     };
                     iframe.save();
                     return false;
                 },
-                'okVal':p_lang('導入項目'),
+                'okVal':p_lang('匯入專案'),
                 'cancelVal':p_lang('取消'),
                 'cancel':true
             });
@@ -236,11 +236,11 @@
         {
             var id = $.checkbox.join();
             if(!id){
-                var tip = hidden == 1 ? p_lang('未選擇要隱藏的項目') : p_lang('未選擇要顯示的項目');
+                var tip = hidden == 1 ? p_lang('未選擇要隱藏的專案') : p_lang('未選擇要顯示的專案');
                 $.dialog.alert(tip);
                 return false;
             }
-            var tip = hidden == 1 ? p_lang('指定項目已經設為隱藏') : p_lang('指定項目已經設為顯示');
+            var tip = hidden == 1 ? p_lang('指定專案已經設為隱藏') : p_lang('指定專案已經設為顯示');
             var url = get_url('newproject','hidden','id='+$.str.encode(id)+"&hidden="+hidden);
             $.phpok.json(url,function(data){
                 if(data.status){
@@ -257,11 +257,11 @@
         {
             var id = $.checkbox.join();
             if(!id){
-                var tip = status == 1 ? p_lang('未選擇要啟用的項目') : p_lang('未選擇要禁用的項目');
+                var tip = status == 1 ? p_lang('未選擇要啟用的專案') : p_lang('未選擇要禁用的專案');
                 $.dialog.alert(tip);
                 return false;
             }
-            var tip = status == 1 ? p_lang('指定項目已經設為啟用') : p_lang('指定項目已經設為禁用');
+            var tip = status == 1 ? p_lang('指定專案已經設為啟用') : p_lang('指定專案已經設為禁用');
             var url = get_url('newproject','status','id='+$.str.encode(id)+"&status="+status);
             $.phpok.json(url,function(data){
                 if(data.status){
@@ -294,7 +294,7 @@
             $.phpok.json(url,function(data){
                 if(data.status){
                     $("div[name=taxis][data="+id+"]").text(val);
-                    $.dialog.tips(p_lang('排序編輯成功，您可以手動刷新看新的排序效果'));
+                    $.dialog.tips(p_lang('排序編輯成功，您可以手動重新整理看新的排序效果'));
                     return true;
                 }
                 $.dialog.alert(data.info);
@@ -304,7 +304,7 @@
         ext_help:function()
         {
             top.$.dialog({
-                'title':p_lang('擴展項幫助說明'),
+                'title':p_lang('擴充套件項幫助說明'),
                 'content':document.getElementById('ext_help'),
                 'lock':true,
                 'width':'700px',
@@ -315,14 +315,14 @@
         icolist:function()
         {
             $.dialog.open(get_url('newproject','icolist'),{
-                'title':p_lang('選擇圖標'),
+                'title':p_lang('選擇圖示'),
                 'lock':true,
                 'width':'700px',
                 'height':'60%',
                 'ok':function(){
                     var iframe = this.iframe.contentWindow;
                     if (!iframe.document.body) {
-                        alert('iframe還沒加載完畢呢');
+                        alert('iframe還沒載入完畢呢');
                         return false;
                     };
                     iframe.save();

@@ -25,7 +25,7 @@ function sendsms()
 		'url':get_url('gateway','extmanage','update=1&type=ajax&id='+alisms_id+'&manageid=send'),
 		'success':function(rs){
 			if(rs.status){
-				$.dialog.alert('短信发送成功',function(){$.phpok.reload()},'succeed');
+				$.dialog.alert('簡訊傳送成功',function(){$.phpok.reload()},'succeed');
 			}else{
 				$("#submit2").attr('disabled',false);
 				$.dialog.alert(rs.info);
@@ -38,8 +38,8 @@ function sendsms()
 <form method="post" id="sendsmssubmit" onsubmit="return sendsms()">
 <div class="table">
 	<div class="title">
-		手机号：
-		<span class="note">提交接收人的手机号，仅支持一个手机号</span></span>
+		手機號：
+		<span class="note">提交接收人的手機號，僅支援一個手機號</span></span>
 	</div>
 	<div class="content">
 		<input type="text" name="mobile" class="long" />
@@ -47,11 +47,11 @@ function sendsms()
 </div>
 <div class="table">
 	<div class="title">
-		短信模板：<span class="note">请选择要发送的短信模板，模板标签必须是您在阿里云上设置好的</span>
+		簡訊模板：<span class="note">請選擇要傳送的簡訊模板，模板標籤必須是您在阿里雲上設定好的</span>
 	</div>
 	<div class="content">
 		<select name="tplcode" onchange="update_tplcode(this.value)">
-			<option value="">请选择…</option>
+			<option value="">請選擇…</option>
 			<!-- loop from=$smslist key=$key value=$value id=$tmpid -->
 			<option value="{$value.id}">模板：{$value.title}<!-- if $value.note -->/{$value.note}<!-- /if --></option>
 			<!-- /loop -->
@@ -60,8 +60,8 @@ function sendsms()
 </div>
 <div class="table">
 	<div class="title">
-		变量设置：
-		<span class="note">请根据实际情况设置模板变量对应的内容</span></span>
+		變數設定：
+		<span class="note">請根據實際情況設定模板變數對應的內容</span></span>
 	</div>
 	<div class="content">
 		<textarea name="content" id="content" class="long" style="height:180px;"></textarea>
@@ -71,7 +71,7 @@ function sendsms()
 <div class="table">
 	<div class="content">
 		<br />
-		<input type="submit" value="发短信" class="submit2" id="submit2" />
+		<input type="submit" value="發簡訊" class="submit2" id="submit2" />
 	</div>
 </div>
 </form>

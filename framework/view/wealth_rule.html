@@ -1,17 +1,17 @@
 <!-- include tpl=head -->
 <div class="tips">
-	{lang当前位置：}<a href="{url ctrl=wealth/}">{lang财富方案}</a>
-	&raquo; <b class="red">{$rs.title}</b>{lang收支规则}
+	{lang當前位置：}<a href="{url ctrl=wealth/}">{lang財富方案}</a>
+	&raquo; <b class="red">{$rs.title}</b>{lang收支規則}
 	<div class="clear"></div>
 </div>
 <script type="text/javascript">
 function delete_it(id)
 {
-	$.dialog.confirm('{lang确定要删除当前规则吗？}',function(){
+	$.dialog.confirm('{lang確定要刪除當前規則嗎？}',function(){
 		var url = get_url('wealth','delete_rule','id='+id);
 		var rs = $.phpok.json(url);
 		if(rs.status == 'ok'){
-			$.dialog.alert('{lang删除成功}',function(){
+			$.dialog.alert('{lang刪除成功}',function(){
 				$.phpok.reload();
 			},'succeed');
 		}else{
@@ -29,7 +29,7 @@ function update_it(id)
 		'dataType':'json',
 		'success':function(rs){
 			if(rs.status){
-				$.dialog.alert('{lang规则编辑成功}',function(){
+				$.dialog.alert('{lang規則編輯成功}',function(){
 					$.phpok.reload();
 				},'succeed');
 			}else{
@@ -48,7 +48,7 @@ $(document).ready(function(){
 			'dataType':'json',
 			'success':function(rs){
 				if(rs.status){
-					$.dialog.alert('{lang规则创建成功}',function(){
+					$.dialog.alert('{lang規則建立成功}',function(){
 						$.phpok.reload();
 					},'succeed');
 				}else{
@@ -63,20 +63,20 @@ $(document).ready(function(){
 </script>
 <div class="help">
 	<ol>
-		<li>值：此框支持填写负数，正数，负数表示扣除，当{$rs.title}为0时，不能再执行扣除操作</li>
-		<li>登录获取财富同一天仅限第一次有效</li>
-		<li>仅在订单中支持变量price支持数学计算，如-(price/10+10)</li>
-		<li>对象：所有财富在未指定规则时，都计算到用户，除非您指定了介绍人（也就是推荐人）</li>
-		<li>目前用户级别请到：<span class="red">data/xml/user_agent.xml</span> 修改</li>
-		<li>主题支持变量integral，支持数学计算，如-(integral/10+10)，此参数也支持在订单中使用（仅限订单中有关联的产品）</li>
+		<li>值：此框支援填寫負數，正數，負數表示扣除，當{$rs.title}為0時，不能再執行扣除操作</li>
+		<li>登入獲取財富同一天僅限第一次有效</li>
+		<li>僅在訂單中支援變數price支援數學計算，如-(price/10+10)</li>
+		<li>物件：所有財富在未指定規則時，都計算到使用者，除非您指定了介紹人（也就是推薦人）</li>
+		<li>目前使用者級別請到：<span class="red">data/xml/user_agent.xml</span> 修改</li>
+		<li>主題支援變數integral，支援數學計算，如-(integral/10+10)，此引數也支援在訂單中使用（僅限訂單中有關聯的產品）</li>
 	</ol>
 </div>
 <table width="100%" cellpadding="0" cellspacing="0" class="list">
 <tr>
 	<th width="75">ID</th>
-	<th width="220">{lang执行动作}</th>
+	<th width="220">{lang執行動作}</th>
 	<th width="220">{lang值}</th>
-	<th width="220">{lang对象}</th>
+	<th width="220">{lang物件}</th>
 	<th width="75">{lang排序}</th>
 	<th class="lft">{lang操作}</th>
 </tr>
@@ -102,8 +102,8 @@ $(document).ready(function(){
 	<td class="center"><input type="text" name="taxis" id="taxis_{$value.id}" value="{$value.taxis}" class="short center" /></td>
 	<td>
 		<div class="button-group">
-			<input type="submit" value="{lang编辑}" class="layui-btn" />
-			<input type="button" value="{lang删除}" onclick="delete_it('{$value.id}')" class="layui-btn" />
+			<input type="submit" value="{lang編輯}" class="layui-btn" />
+			<input type="button" value="{lang刪除}" onclick="delete_it('{$value.id}')" class="layui-btn" />
 		</div>
 	</td>
 </tr>
@@ -111,10 +111,10 @@ $(document).ready(function(){
 <!-- /loop -->
 <form method="post" id="add_rule">
 <tr>
-	<td class="center">添加</td>
+	<td class="center">新增</td>
 	<td class="center">
 		<select name="action">
-			<option value="">{lang动作…}</option>
+			<option value="">{lang動作…}</option>
 			<!-- loop from=$alist key=$key value=$value id=$tmpid -->
 			<option value="{$key}">{$value}</option>
 			<!-- /loop -->
@@ -129,7 +129,7 @@ $(document).ready(function(){
 		</select>
 	</td>
 	<td class="center"><input type="text" name="taxis" value="255" class="short center" /></td>
-	<td><input type="submit" value="{lang添加}" class="layui-btn" /></td>
+	<td><input type="submit" value="{lang新增}" class="layui-btn" /></td>
 </tr>
 </form>
 </table>

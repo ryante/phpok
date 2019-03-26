@@ -2505,7 +2505,7 @@ class phpok_plugin extends _init_auto
 	/**
 	 * 返回外掛資訊
 	 * @引數 $id 外掛ID，為空時嘗試讀取當前外掛ID
-	 * @返回 陣列 id外掛ID，title名稱，author作者，version版本，note說明，param外掛擴充套件儲存的資料，這個是一個數組，path外掛路徑
+	 * @返回 陣列 id外掛ID，title名稱，author作者，version版本，note說明，param外掛擴充套件儲存的資料，這個是一個陣列，path外掛路徑
 	 * @更新時間 
 	**/
 	final public function _info($id='')

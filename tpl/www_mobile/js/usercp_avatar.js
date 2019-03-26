@@ -1,10 +1,10 @@
 /**
- * 会员头像修改
+ * 會員頭像修改
  * @作者 qinggan <admin@phpok.com>
- * @版权 2008-2018 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 2008-2018 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2018年10月26日
 **/
 
@@ -77,32 +77,32 @@ function loadImg(b64) {
 			cropImage = new ImageClip({
 				container: '.img-clip',
 				img,
-				// 0代表按下才显示，1恒显示，-1不显示
+				// 0代表按下才顯示，1恆顯示，-1不顯示
 				sizeTipsStyle: 0,
-				// 为1一般是屏幕像素x2这个宽高
-				// 最终的大小为：屏幕像素*屏幕像素比（手机中一般为2）*compressScaleRatio
+				// 為1一般是螢幕畫素x2這個寬高
+				// 最終的大小為：螢幕畫素*螢幕畫素比（手機中一般為2）*compressScaleRatio
 				compressScaleRatio: 1.1,
-				// iphone中是否继续放大：x*iphoneFixedRatio
-				// 最好compressScaleRatio*iphoneFixedRatio不要超过2
+				// iphone中是否繼續放大：x*iphoneFixedRatio
+				// 最好compressScaleRatio*iphoneFixedRatio不要超過2
 				iphoneFixedRatio: 1.8,
-				// 减去顶部间距，底部bar,以及显示间距
+				// 減去頂部間距，底部bar,以及顯示間距
 				maxCssHeight: window.innerHeight - 100 - 50 - 20,
-				// 放大镜捕获的图像半径
+				// 放大鏡捕獲的影象半徑
 				captureRadius: 30,
-				// 是否采用原图像素（不会压缩）
+				// 是否採用原影象素（不會壓縮）
 				isUseOriginSize: false,
-				// 增加最大宽度，增加后最大不会超过这个宽度
+				// 增加最大寬度，增加後最大不會超過這個寬度
 				maxWidth: 500,
-				// 是否固定框高，优先级最大，设置后其余所有系数都无用直接使用这个固定的宽，高度自适应
+				// 是否固定框高，優先順序最大，設定後其餘所有係數都無用直接使用這個固定的寬，高度自適應
 				forceWidth: 0,
-				// 同上，但是一般不建议设置，因为很可能会改变宽高比导致拉升，特殊场景下使用
+				// 同上，但是一般不建議設定，因為很可能會改變寬高比導致拉昇，特殊場景下使用
 				forceHeight: 0,
-				// 压缩质量
+				// 壓縮質量
 				quality: 0.92,
 				mime: 'image/jpeg',
 			});
 
-			// 6代表图片需要顺时针修复（默认逆时针处理了，所以需要顺过来修复）
+			// 6代表圖片需要順時針修復（預設逆時針處理了，所以需要順過來修復）
 			switch (orientation) {
 				case 6:
 					cropImage.rotate(true);
@@ -123,8 +123,8 @@ function resizeShowImg(b64) {
 }
 
 function showImgOnload() {
-	// 必须用一个新的图片加载，否则如果只用showImg的话永远都是第1张
-	// margin的话由于有样式，所以自动控制了
+	// 必須用一個新的圖片載入，否則如果只用showImg的話永遠都是第1張
+	// margin的話由於有樣式，所以自動控制了
 	var width = this.width;
 	var height = this.height;
 	var wPerH = width / height;
@@ -171,11 +171,11 @@ function initListeners() {
 	document.querySelector('#btn-save').addEventListener('click', function() {
 		var obj = {};
 		obj.data = imgData;
-		var tipobj = $.dialog.tips('正在上传中，请稍候…',100).lock();
+		var tipobj = $.dialog.tips('正在上傳中，請稍候…',100).lock();
 		$.phpok.json(api_url("usercp","avatar","type=base64"),function(rs){
 			tipobj.close();
 			if(rs.status){
-				$.dialog.alert('头像更新成功',function(){
+				$.dialog.alert('頭像更新成功',function(){
 					$.phpok.go(get_url('usercp'));
 				},'success');
 				return true;
@@ -190,7 +190,7 @@ function initListeners() {
 
 	document.querySelector('#btn-maxrect').addEventListener('click', function() {
 		if (!cropImage) {
-			$.dialog.alert('请选择图片');
+			$.dialog.alert('請選擇圖片');
 			return;
 		}
 		cropImage.resetClipRect();
@@ -198,7 +198,7 @@ function initListeners() {
 
 	document.querySelector('#btn-rotate-anticlockwise').addEventListener('click', function() {
 		if (!cropImage) {
-			$.dialog.alert('请选择图片');
+			$.dialog.alert('請選擇圖片');
 			return;
 		}
 		cropImage.rotate(false);
@@ -206,7 +206,7 @@ function initListeners() {
 
 	document.querySelector('#btn-rotate-clockwise').addEventListener('click', function() {
 		if (!cropImage) {
-			$.dialog.alert('请选择图片');
+			$.dialog.alert('請選擇圖片');
 			return;
 		}
 		cropImage.rotate(true);
@@ -214,10 +214,10 @@ function initListeners() {
 
 	document.querySelector('#btn-verify').addEventListener('click', function() {
 		if (!cropImage) {
-			$.dialog.alert('请选择图片');
+			$.dialog.alert('請選擇圖片');
 			return;
 		}
-		$.dialog.confirm('是否裁剪图片并处理？',function(){
+		$.dialog.confirm('是否裁剪圖片並處理？',function(){
 			cropImage.clip(false);
 			imgData = cropImage.getClipImgData();
 			recognizeImg(function() {
@@ -238,7 +238,7 @@ function showImgDataLen(imgData) {
 	} else if (len > 1024) {
 		sizeStr = (Math.round(len / 1024)).toString() + 'KB';
 	}
-	$.dialog.alert('处理后文件大小：'+sizeStr);
+	$.dialog.alert('處理後文件大小：'+sizeStr);
 }
 
 function changeContent(isShowContent) {
@@ -258,12 +258,12 @@ function changeContent(isShowContent) {
 function b64ToBlob(urlData) {
 	var arr = urlData.split(',');
 	var mime = arr[0].match(/:(.*?);/)[1] || 'image/png';
-	// 去掉url的头，并转化为byte
+	// 去掉url的頭，並轉化為byte
 	var bytes = window.atob(arr[1]);
 
-	// 处理异常,将ascii码小于0的转换为大于0
+	// 處理異常,將ascii碼小於0的轉換為大於0
 	var ab = new ArrayBuffer(bytes.length);
-	// 生成视图（直接针对内存）：8位无符号整数，长度1个字节
+	// 生成檢視（直接針對記憶體）：8位無符號整數，長度1個位元組
 	var ia = new Uint8Array(ab);
 	for (var i = 0; i < bytes.length; i++) {
 		ia[i] = bytes.charCodeAt(i);
@@ -281,7 +281,7 @@ function downloadFile(content) {
 }
 
 function recognizeImg(success, error) {
-	// 里面正常有：裁边，摆正，梯形矫正，锐化等算法操作
+	// 裡面正常有：裁邊，擺正，梯形矯正，銳化等演算法操作
 	success();
 }
 

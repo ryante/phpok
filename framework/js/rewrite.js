@@ -1,8 +1,8 @@
 /**************************************************************************************************
-	文件： {phpok}/js/rewrite.js
-	说明： 伪静态页网址
+	檔案： {phpok}/js/rewrite.js
+	說明： 偽靜態頁網址
 	版本： 4.0
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
 	日期： 2016年02月14日
 ***************************************************************************************************/
@@ -36,7 +36,7 @@ function update2(val,id)
 			}
 		}
 		if(!is_add){
-			$.dialog.alert('数据已经使用，不能重复');
+			$.dialog.alert('資料已經使用，不能重複');
 			return false;
 		}
 		val = info + "|"+val;
@@ -59,7 +59,7 @@ function update_func(val)
 	$.phpok.json(url,function(rs){
 		if(rs.status == 'ok'){
 			var lst = rs.content;
-			html = '<option value="">请选择…</option>';
+			html = '<option value="">請選擇…</option>';
 			for(var i in lst){
 				html += '<option value="'+i+'">'+lst[i]+'</option>';
 			}

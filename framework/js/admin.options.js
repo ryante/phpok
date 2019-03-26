@@ -1,11 +1,11 @@
 /**
- * 商品属性
+ * 商品屬性
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年10月14日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年10月14日
 **/
 ;(function($){
 	$.admin_options = {
@@ -14,7 +14,7 @@
 			var url = get_url('options','save');
 			var title = $("#title_0").val();
 			if(!title){
-				$.dialog.alert(p_lang('名称不能为空'));
+				$.dialog.alert(p_lang('名稱不能為空'));
 				return false
 			}
 			url += "&title="+$.str.encode(title);
@@ -24,7 +24,7 @@
 			}
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.tips(p_lang('添加成功'),function(){
+					$.dialog.tips(p_lang('新增成功'),function(){
 						$.phpok.reload();
 					}).lock();
 					return true;
@@ -38,7 +38,7 @@
 			var url = get_url('options','save','id='+id);
 			var title = $("#title_"+id).val();
 			if(!title){
-				$.dialog.alert(p_lang('名称不能为空'));
+				$.dialog.alert(p_lang('名稱不能為空'));
 				return false
 			}
 			url += "&title="+$.str.encode(title);
@@ -48,7 +48,7 @@
 			}
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.tips(p_lang('编辑成功'));
+					$.dialog.tips(p_lang('編輯成功'));
 					return true;
 				}
 				$.dialog.alert(rs.info);
@@ -58,11 +58,11 @@
 		del:function(id)
 		{
 			var t = $("#title_"+id).val();
-			var tip = p_lang('确定要删除产品属性 {title} 吗？删除后，产品已使用此属性相关信息也会删除','<span class="red">'+t+'</span>');
+			var tip = p_lang('確定要刪除產品屬性 {title} 嗎？刪除後，產品已使用此屬性相關資訊也會刪除','<span class="red">'+t+'</span>');
 			$.dialog.confirm(tip,function(){
 				$.phpok.json(get_url('options','delete','id='+id),function(data){
 					if(data.status){
-						$.dialog.tips(p_lang('删除成功'),function(){
+						$.dialog.tips(p_lang('刪除成功'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;
@@ -77,7 +77,7 @@
 			var url = get_url('options','save_values','aid='+aid);
 			var title = $("#title_0").val();
 			if(!title){
-				$.dialog.alert(p_lang('名称不能为空'));
+				$.dialog.alert(p_lang('名稱不能為空'));
 				return false
 			}
 			url += "&title="+$.str.encode(title);
@@ -95,7 +95,7 @@
 			}
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.tips(p_lang('添加成功'),function(){
+					$.dialog.tips(p_lang('新增成功'),function(){
 						$.phpok.reload();
 					}).lock();
 					return true;					
@@ -109,7 +109,7 @@
 			var url = get_url('options','save_values','id='+id);
 			var title = $("#title_"+id).val();
 			if(!title){
-				$.dialog.alert(p_lang('名称不能为空'));
+				$.dialog.alert(p_lang('名稱不能為空'));
 				return false
 			}
 			url += "&title="+$.str.encode(title);
@@ -127,7 +127,7 @@
 			}
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.tips(p_lang('编辑成功'));
+					$.dialog.tips(p_lang('編輯成功'));
 					return true;
 				}
 				$.dialog.alert(rs.info);
@@ -137,11 +137,11 @@
 		info_del:function(id)
 		{
 			var t = $("#title_"+id).val();
-			var tip = p_lang('确定要删除产品属性 {title} 吗？删除后，产品已使用此属性相关信息也会删除','<span class="red">'+t+'</span>');
+			var tip = p_lang('確定要刪除產品屬性 {title} 嗎？刪除後，產品已使用此屬性相關資訊也會刪除','<span class="red">'+t+'</span>');
 			$.dialog.confirm(tip,function(){
 				$.phpok.json(get_url('options','delete_values','id='+id),function(rs){
 					if(rs.status){
-						$.dialog.tips(p_lang('删除成功'),function(){
+						$.dialog.tips(p_lang('刪除成功'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;

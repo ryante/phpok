@@ -23,7 +23,7 @@ $(document).ready(function(){
 	obj_{$_rs.identifier} = new $.www_upload({
 		'id':'{$_rs.identifier}',
 		'server':'{url ctrl=upload func=save cateid=$_rs.cate_id/}',
-		'pick':{'id':'#{$_rs.identifier}_picker','multiple':{$_rs.is_multiple ? 'true' : 'false'},'innerHTML':'{lang选择本地文件}'},
+		'pick':{'id':'#{$_rs.identifier}_picker','multiple':{$_rs.is_multiple ? 'true' : 'false'},'innerHTML':'{lang選擇本地檔案}'},
 		'resize':false,
 		'multiple':"{$_rs.is_multiple ? 'true' : 'false'}",
 		"formData":{'{func session_name}':'{func session_id}'},

@@ -1,28 +1,28 @@
 /***********************************************************
 	Filename: phpok/js/fields.js
-	Note	: 字段管理中涉及的JS
+	Note	: 欄位管理中涉及的JS
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
 	Update  : 2012-11-26 17:07
 ***********************************************************/
-// 验证标识串
+// 驗證標識串
 function check_identifier(is_alert)
 {
 	var c = $("#identifier").val();
 	if(!c)
 	{
-		$("#identifier_note").addClass("error").html("标识串不能为空！");
-		if(is_alert) alert("标识串不能为空！");
+		$("#identifier_note").addClass("error").html("標識串不能為空！");
+		if(is_alert) alert("標識串不能為空！");
 		return false;
 	}
-	//验证标识串是否符合要求
+	//驗證標識串是否符合要求
 	if(!$.str.identifier(c))
 	{
-		alert("标识串不符合系统要求，要求仅支持：字母、数字或下划线且首字必须为字母");
+		alert("標識串不符合系統要求，要求僅支援：字母、數字或下劃線且首字必須為字母");
 		return false;
 	}
-	//通过服务端验证数据是否存在
+	//通過服務端驗證資料是否存在
 	var url = get_url("ajax","exit","filename=field_identifier") + "&identifier="+c;
 	var rs = json_ajax(url);
 	if(rs.status != "ok")
@@ -35,25 +35,25 @@ function check_identifier(is_alert)
 	return true;
 }
 
-// 验证标题
+// 驗證標題
 function check_title(is_alert)
 {
 	var c = $("#title").val();
 	if(!c)
 	{
-		$("#title_note").addClass("error").html("名称不能为空！");
-		if(is_alert) alert("名称不能为空！");
+		$("#title_note").addClass("error").html("名稱不能為空！");
+		if(is_alert) alert("名稱不能為空！");
 		return false;
 	}
 	$("#title_note").removeClass("error").html("");
 	return true;
 }
 
-/* 样式属性操作 */
+/* 樣式屬性操作 */
 function set_style(act)
 {
 	var value = $("#form_style").val();
-	//去除空格信息
+	//去除空格資訊
 	if(value && value != "undefined")
 	{
 		value = value.replace(/ /g,"");
@@ -85,7 +85,7 @@ function set_style(act)
 		}
 		else
 		{
-			apprise('设置宽度', {'input':true,'textOk':'提交','textCancel':'取消'},function(r){
+			apprise('設定寬度', {'input':true,'textOk':'提交','textCancel':'取消'},function(r){
 				if(r && r != false)
 				{
 					var t_value = r.replace("px","");
@@ -107,7 +107,7 @@ function set_style(act)
 		}
 		else
 		{
-			apprise('设置高度', {'input':true,'textOk':'提交','textCancel':'取消'},function(r){
+			apprise('設定高度', {'input':true,'textOk':'提交','textCancel':'取消'},function(r){
 				if(r && r != false)
 				{
 					var t_value = r.replace("px","");
@@ -125,7 +125,7 @@ function load_style()
 	var value = $("#form_style").val();
 	if(value && value != "undefined")
 	{
-		//判断是否有高度属性
+		//判斷是否有高度屬性
 		var regexp = new RegExp("height:");
 		if(regexp.test(value))
 		{
@@ -135,7 +135,7 @@ function load_style()
 		{
 			$("#css_edit_height").removeClass("btn_selected").addClass("btn");
 		}
-		//判断是否有宽度属性
+		//判斷是否有寬度屬性
 		var regexp = new RegExp("width:");
 		if(regexp.test(value))
 		{
@@ -145,7 +145,7 @@ function load_style()
 		{
 			$("#css_edit_width").removeClass("btn_selected").addClass("btn");
 		}
-		//判断是否有加粗
+		//判斷是否有加粗
 		var regexp = new RegExp("font-weight:");
 		if(regexp.test(value))
 		{
@@ -169,7 +169,7 @@ function show_form_opt(val)
 	$("#form_opt_html").hide();
 	$("#form_btn_html").hide();
 	$("#form_edit_html").hide();
-	//要显示的值
+	//要顯示的值
 	var list = new Array("radio","checkbox","select","select_multiple","related_multiple","related_single");
 	var is_list = false;
 	for(var i=0;i<list.length;i++)
@@ -193,36 +193,36 @@ function show_form_opt(val)
 	}
 }
 
-// 检查添加的字段属性
+// 檢查新增的欄位屬性
 function field_add_check(tbl_prefix,id)
 {
-	//判断名称是否为空
+	//判斷名稱是否為空
 	var chk_title = check_title(true);
 	if(!chk_title) return false;
 
 	if(!id || id == "undefined")
 	{
-		// 检测标识串
+		// 檢測標識串
 		var chk_identifier = check_identifier(true);
 		if(!chk_identifier) return false;
 	}
 
-	//检测存储类型
+	//檢測儲存型別
 	var field_type = $("#field_type").val();
 	var tbl = $("#field_tbl").val();
 	if(field_type == "longtext" && (tbl == "ext" || tbl == "blob"))
 	{
-		alert("目标数据表存储与设置的字段类型不一致！超长文本请存储到："+tbl_prefix+"list_content 或 自定义创建 表中！");
+		alert("目標資料表儲存與設定的欄位型別不一致！超長文字請儲存到："+tbl_prefix+"list_content 或 自定義建立 表中！");
 		return false;
 	}
 	else if(field_type == "longblob" && (tbl == "ext" || tbl == "content"))
 	{
-		alert("目标数据表存储与设置的字段类型不一致！二进制信息请存储到："+tbl_prefix+"list_blob 或 自定义创建 表中！");
+		alert("目標資料表儲存與設定的欄位型別不一致！二進位制資訊請儲存到："+tbl_prefix+"list_blob 或 自定義建立 表中！");
 		return false;
 	}
 	else if(field_type != "longblob" && tbl == "blob")
 	{
-		alert("选择有错误，二进制信息不能存储到表："+tbl_prefix+"list_blob 中！");
+		alert("選擇有錯誤，二進位制資訊不能儲存到表："+tbl_prefix+"list_blob 中！");
 		return false;
 	}
 
@@ -236,10 +236,10 @@ function update_taxis()
 	var id_string = $.input.checkbox_join();
 	if(!id_string || id_string == "undefined")
 	{
-		alert("没有指定要更新的排序ID！");
+		alert("沒有指定要更新的排序ID！");
 		return false;
 	}
-	//取得排序值信息
+	//取得排序值資訊
 	var id_list = id_string.split(",");
 	var id_leng = id_list.length;
 	for(var i=0;i<id_leng;i++)
@@ -263,7 +263,7 @@ function update_taxis()
 
 function field_del(id,title)
 {
-	var qc = confirm("确定要删除字段："+title+" ？ 删除后，已投入使用的字段不受此影响！");
+	var qc = confirm("確定要刪除欄位："+title+" ？ 刪除後，已投入使用的欄位不受此影響！");
 	if(qc == "0")
 	{
 		return false;

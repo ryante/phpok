@@ -14,8 +14,8 @@
 	<li><input type="text" id="{$_rs.identifier}" class="layui-input inp inp_{$_rs.identifier}" name="{$_rs.identifier}"{if $_rs.form_style} style="{$_rs.form_style}"{/if} value="{$_rs.content}" /></li>
 	<li style="margin-top:3px;">
 		<div class="layui-btn-group">
-			<input type="button" value="{lang选择文件}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_file_select('{$_rs.identifier}')" />
-			<input type="button" value="{lang下载}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_file_download('{$_rs.identifier}')" />
+			<input type="button" value="{lang選擇檔案}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_file_select('{$_rs.identifier}')" />
+			<input type="button" value="{lang下載}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_file_download('{$_rs.identifier}')" />
 			<input type="button" value="{lang清除}" class="layui-btn layui-btn-sm layui-btn-warm" onclick="$.phpokform.clear('{$_rs.identifier}');" />
 		</div>
 	</li>
@@ -25,8 +25,8 @@
 	<li><input type="text" id="{$_rs.identifier}" class="layui-input inp inp_{$_rs.identifier}" name="{$_rs.identifier}"{if $_rs.form_style} style="{$_rs.form_style}"{/if} value="{$_rs.content}" /></li>
 	<li style="margin-top:3px;">
 		<div class="layui-btn-group">
-			<input type="button" value="{lang选择图片}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_image_select('{$_rs.identifier}')" />
-			<input type="button" value="{lang预览}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_image_preview('{$_rs.identifier}')" />
+			<input type="button" value="{lang選擇圖片}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_image_select('{$_rs.identifier}')" />
+			<input type="button" value="{lang預覽}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_image_preview('{$_rs.identifier}')" />
 			<input type="button" value="{lang清除}" class="layui-btn layui-btn-sm layui-btn-warm" onclick="$.phpokform.clear('{$_rs.identifier}');" />
 		</div>
 	</li>
@@ -36,8 +36,8 @@
 	<li><input type="text" id="{$_rs.identifier}" class="layui-input inp inp_{$_rs.identifier}" name="{$_rs.identifier}"{if $_rs.form_style} style="{$_rs.form_style}"{/if} value="{$_rs.content}" /></li>
 	<li style="margin-top:3px;">
 		<div class="layui-btn-group">
-			<input type="button" value="{lang选择视频}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_video_select('{$_rs.identifier}')" />
-			<input type="button" value="{lang预览}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_video_preview('{$_rs.identifier}')" />
+			<input type="button" value="{lang選擇視訊}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_video_select('{$_rs.identifier}')" />
+			<input type="button" value="{lang預覽}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_video_preview('{$_rs.identifier}')" />
 			<input type="button" value="{lang清除}" class="layui-btn layui-btn-sm layui-btn-warm" onclick="$.phpokform.clear('{$_rs.identifier}');" />
 		</div>
 	</li>
@@ -47,19 +47,19 @@
 	<li><input type="text" id="{$_rs.identifier}" class="layui-input inp inp_{$_rs.identifier}" name="{$_rs.identifier}"{if $_rs.form_style} style="{$_rs.form_style}"{/if} value="{$_rs.content}" /></li>
 	<li style="margin-top:3px;">
 		<div class="layui-btn-group">
-			<input type="button" value="{lang首页}" class="layui-btn layui-btn-sm" onclick="$('#{$_rs.identifier}').val('index.php')" />
-			<input type="button" value="{lang网址库}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_url_select('{$_rs.identifier}')" />
-			<input type="button" value="{lang访问}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_url_open('{$_rs.identifier}')" />
+			<input type="button" value="{lang首頁}" class="layui-btn layui-btn-sm" onclick="$('#{$_rs.identifier}').val('index.php')" />
+			<input type="button" value="{lang網址庫}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_url_select('{$_rs.identifier}')" />
+			<input type="button" value="{lang訪問}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_url_open('{$_rs.identifier}')" />
 			<input type="button" value="{lang清除}" class="layui-btn layui-btn-sm layui-btn-warm" onclick="$.phpokform.clear('{$_rs.identifier}');" />
 		</div>
 	</li>
 </ul>
 <!-- elseif $_rs.form_btn == "user" -->
 <ul class="layout">
-	<li><input type="text" id="{$_rs.identifier}" class="layui-input inp inp_{$_rs.identifier}" name="{$_rs.identifier}"{if $_rs.form_style} style="{$_rs.form_style}"{/if} readonly value="{$_rs.content}" onclick="$.dialog.alert('{lang会员禁止手动输入}')" /></li>
+	<li><input type="text" id="{$_rs.identifier}" class="layui-input inp inp_{$_rs.identifier}" name="{$_rs.identifier}"{if $_rs.form_style} style="{$_rs.form_style}"{/if} readonly value="{$_rs.content}" onclick="$.dialog.alert('{lang會員禁止手動輸入}')" /></li>
 	<li style="margin-top:3px;">
 		<div class="layui-btn-group">
-			<input type="button" value="{lang会员库}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_user_select('{$_rs.identifier}')" />
+			<input type="button" value="{lang會員庫}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_user_select('{$_rs.identifier}')" />
 			<input type="button" value="{lang清除}" class="layui-btn layui-btn-sm layui-btn-warm" onclick="$.phpokform.clear('{$_rs.identifier}');" />
 		</div>
 	</li>
@@ -70,7 +70,7 @@
 	<li><input type="button" value=" " id="preview_color_{$_rs.identifier}" style="width:30px;height:30px;border:0;margin:0;padding:0;display:block;" /></li>
 	<li style="margin-top:3px;">
 		<div class="layui-btn-group">
-			<input type="button" value="{lang颜色选择}" class="layui-btn layui-btn-sm jscolor {valueElement:'{$_rs.identifier}', styleElement:'preview_color_{$_rs.identifier}',required:false{if $_rs.ext_include_3},hash:true{/if}}" />
+			<input type="button" value="{lang顏色選擇}" class="layui-btn layui-btn-sm jscolor {valueElement:'{$_rs.identifier}', styleElement:'preview_color_{$_rs.identifier}',required:false{if $_rs.ext_include_3},hash:true{/if}}" />
 			<input type="button" value="{lang清除}" class="layui-btn layui-btn-sm layui-btn-warm" onclick="$.phpokform.clear('{$_rs.identifier}')" />
 		</div>
 	</li>

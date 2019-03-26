@@ -12,20 +12,20 @@ function add_pro(id)
 		<form method="post" class="layui-form" action="{$formurl}">
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang搜索}
+				{lang搜尋}
 			</label>
 			<div class="layui-input-inline default-auto">
-				<input type="text" id="keywords" name="keywords" value="{$keywords}" placeholder="{lang请输入产品关键字}" class="layui-input" />
+				<input type="text" id="keywords" name="keywords" value="{$keywords}" placeholder="{lang請輸入產品關鍵字}" class="layui-input" />
 			</div>
-			<div class="layui-input-inline auto"><input type="submit" value="搜索" class="layui-btn" /></div>
+			<div class="layui-input-inline auto"><input type="submit" value="搜尋" class="layui-btn" /></div>
 		</div>
 		</form>
 		<table class="layui-table">
 			<thead>
 			<tr>
-				<th>{lang名称}</th>
-				<th>{lang价格}</th>
-				<th>{lang添加时间}</th>
+				<th>{lang名稱}</th>
+				<th>{lang價格}</th>
+				<th>{lang新增時間}</th>
 				<th>{lang操作}</th>
 			</tr>
 			</thead>
@@ -34,7 +34,7 @@ function add_pro(id)
 				<td>{$value.title}</td>
 				<td>{func price_format $value.price $value.currency_id $currency_id}</td>
 				<td>{func date "Y-m-d H:i" $value.dateline}</td>
-				<td><input type="button" class="layui-btn layui-btn-sm" value="{lang添加}" onclick="add_pro({$value.id})" /></td>
+				<td><input type="button" class="layui-btn layui-btn-sm" value="{lang新增}" onclick="add_pro({$value.id})" /></td>
 			</tr>
 			<!-- /loop -->
 		</table>

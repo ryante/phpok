@@ -31,7 +31,7 @@ curl_setopt($ch, CURLOPT_POSTFIELDS, $postdata);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_setopt($ch, CURLOPT_REFERER, "http://www.zjs.com.cn/"); //構造來路
-// 3. 執行並獲取HTML文件內容
+// 3. 執行並獲取HTML檔案內容
 $output = curl_exec($ch);
 if(!$output){
 	return array('content'=>P_Lang('遠端獲取資料失敗'));

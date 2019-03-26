@@ -1,11 +1,11 @@
 <div class="list" style="margin:0;">
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr>
-	<th class="lft">&nbsp;字段名</th>
-	<th class="lft">&nbsp;名称</th>
+	<th class="lft">&nbsp;欄位名</th>
+	<th class="lft">&nbsp;名稱</th>
 	<th>&nbsp;</th>
-	<th class="lft">&nbsp;字段名</th>
-	<th class="lft">&nbsp;名称</th>
+	<th class="lft">&nbsp;欄位名</th>
+	<th class="lft">&nbsp;名稱</th>
 	<th>&nbsp;</th>
 </tr>
 
@@ -13,7 +13,7 @@
 	<!-- loop from=$rslist key=$key value=$value id=fields_list_id -->
 	<td>{$value.identifier}</td>
 	<td>{$value.title}</td>
-	<td><input type="button" value="添加" title="添加字段：{$value.identifier}" onclick="ext_add2('{$value.id}','{$module}')" class="button" /></td>
+	<td><input type="button" value="新增" title="新增欄位：{$value.identifier}" onclick="ext_add2('{$value.id}','{$module}')" class="button" /></td>
 	<!-- if $fields_list_id.num%2 == '' --></tr><tr><!-- /if -->
 	<!-- /loop -->
 </tr>

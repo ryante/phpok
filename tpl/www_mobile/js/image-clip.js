@@ -28,9 +28,9 @@ function extend(target) {
 }
 
 /**
- * 选择这段代码用到的太多了，因此抽取封装出来
+ * 選擇這段程式碼用到的太多了，因此抽取封裝出來
  * @param {Object} element dom元素或者selector
- * @return {HTMLElement} 返回选择的Dom对象，无果没有符合要求的，则返回null
+ * @return {HTMLElement} 返回選擇的Dom物件，無果沒有符合要求的，則返回null
  */
 function selector(element) {
     var target = element;
@@ -43,23 +43,23 @@ function selector(element) {
 }
 
 /**
- * 获取DOM的可视区高度，兼容PC上的body高度获取
- * 因为在通过body获取时，在PC上会有CSS1Compat形式，所以需要兼容
- * @param {HTMLElement} dom 需要获取可视区高度的dom,对body对象有特殊的兼容方案
- * @return {Number} 返回最终的高度
+ * 獲取DOM的可視區高度，相容PC上的body高度獲取
+ * 因為在通過body獲取時，在PC上會有CSS1Compat形式，所以需要相容
+ * @param {HTMLElement} dom 需要獲取可視區高度的dom,對body物件有特殊的相容方案
+ * @return {Number} 返回最終的高度
  */
 
 
 /**
- * 设置一个Util对象下的命名空间
- * @param {Object} parent 需要绑定到哪一个对象上
- * @param {String} namespace 需要绑定的命名空间名
- * @param {Object} target 需要绑定的目标对象
- * @return {Object} 返回最终的对象
+ * 設定一個Util物件下的名稱空間
+ * @param {Object} parent 需要繫結到哪一個物件上
+ * @param {String} namespace 需要繫結的名稱空間名
+ * @param {Object} target 需要繫結的目標物件
+ * @return {Object} 返回最終的物件
  */
 
 /**
- * 加入系统判断功能
+ * 加入系統判斷功能
  */
 function osMixin(hybrid) {
     var hybridJs = hybrid;
@@ -110,7 +110,7 @@ function osMixin(hybrid) {
             this.os.dd = true;
         }
 
-        // 如果ejs和钉钉以及quick都不是，则默认为h5
+        // 如果ejs和釘釘以及quick都不是，則預設為h5
         if (!ejs && !dd && !quick) {
             this.os.h5 = true;
         }
@@ -124,45 +124,45 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /**
- * ios手机竖拍时会旋转，需要外部引入exif去主动旋转
+ * ios手機豎拍時會旋轉，需要外部引入exif去主動旋轉
  */
 
 var defaultetting = {
     container: '#imgclip',
-    // 必须是一个image对象
+    // 必須是一個image物件
     img: null,
-    // 是否开启平滑
+    // 是否開啟平滑
     isSmooth: true,
-    // 放大镜捕获的图像半径
+    // 放大鏡捕獲的影象半徑
     captureRadius: 30,
-    // 移动矩形框时的最小间距
+    // 移動矩形框時的最小間距
     minMoveDiff: 1,
-    // 压缩质量
+    // 壓縮質量
     quality: 0.92,
     mime: 'image/jpeg',
-    // 限制canvas显示的最大高度（不是实际高度，是css显示的最大高度）
-    // 单位是像素，不传的话不限制
+    // 限制canvas顯示的最大高度（不是實際高度，是css顯示的最大高度）
+    // 單位是畫素，不傳的話不限制
     maxCssHeight: 0,
-    // 大小提示框的风格，0-点击时显示，1-恒显示，-1-永不显示
+    // 大小提示框的風格，0-點選時顯示，1-恆顯示，-1-永不顯示
     sizeTipsStyle: 0,
-    // 压缩时的放大系数，默认为1，如果增大，代表图像的尺寸会变大(最大不会超过原图)
+    // 壓縮時的放大係數，預設為1，如果增大，代表影象的尺寸會變大(最大不會超過原圖)
     compressScaleRatio: 1,
-    // ios的iPhone下主动放大一定系数以解决分辨率过小的模糊问题
+    // ios的iPhone下主動放大一定係數以解決解析度過小的模糊問題
     iphoneFixedRatio: 2,
-    // 是否采用原图像素（不会压缩）
+    // 是否採用原影象素（不會壓縮）
     isUseOriginSize: false,
-    // 增加最大宽度，增加后最大不会超过这个宽度
+    // 增加最大寬度，增加後最大不會超過這個寬度
     maxWidth: 0,
-    // 使用强制的宽度，如果使用，其它宽高比系数都会失效，默认整图使用这个宽度
+    // 使用強制的寬度，如果使用，其它寬高比係數都會失效，預設整圖使用這個寬度
     forceWidth: 0,
-    // 同上，但是一般不建议设置，因为很可能会改变宽高比导致拉升，特殊场景下使用
+    // 同上，但是一般不建議設定，因為很可能會改變寬高比導致拉昇，特殊場景下使用
     forceHeight: 0
 };
 
 var ImgClip$1 = function () {
     /**
-     * 构造函数
-     * @param {Object} options 配置信息
+     * 建構函式
+     * @param {Object} options 配置資訊
      * @constructor
      */
     function ImgClip(options) {
@@ -183,16 +183,16 @@ var ImgClip$1 = function () {
     }
 
     /**
-     * 获取devicePixelRatio(像素比)
-     * canvas绘制时乘以缩放系数，防止裁剪不清晰
-     * （譬如320的手机上可能裁剪出来的就是640-系数是2）
+     * 獲取devicePixelRatio(畫素比)
+     * canvas繪製時乘以縮放係數，防止裁剪不清晰
+     * （譬如320的手機上可能裁剪出來的就是640-係數是2）
      */
 
 
     _createClass(ImgClip, [{
         key: 'getPixelRatio',
         value: function getPixelRatio(context) {
-            // 注意，backingStorePixelRatio属性已弃用
+            // 注意，backingStorePixelRatio屬性已棄用
             var backingStore = context.backingStorePixelRatio || context.webkitBackingStorePixelRatio || context.mozBackingStorePixelRatio || context.msBackingStorePixelRatio || context.oBackingStorePixelRatio || context.backingStorePixelRatio || 1;
 
             var ratio = (window.devicePixelRatio || 1) / backingStore;
@@ -230,9 +230,9 @@ var ImgClip$1 = function () {
             this.canvasFull.className = 'clip-canvas-full';
             this.smoothCtx(this.ctxFull);
 
-            // 实际的像素比，绘制时基于这个比例绘制
+            // 實際的畫素比，繪製時基於這個比例繪製
             this.RATIO_PIXEL = this.getPixelRatio(this.ctxFull);
-            // 获取图片的宽高比
+            // 獲取圖片的寬高比
             var wPerH = this.img.width / this.img.height;
             var oldWidth = this.container.offsetWidth || window.innerWidth;
 
@@ -279,7 +279,7 @@ var ImgClip$1 = function () {
             this.container.appendChild(this.clipRect);
             this.domChildren.push(this.clipRect);
 
-            // 添加tips
+            // 新增tips
             var clipTips = document.createElement('span');
 
             clipTips.className = 'clip-tips';
@@ -292,7 +292,7 @@ var ImgClip$1 = function () {
             }
 
             this.clipRectHorns = [];
-            // 添加8个角
+            // 新增8個角
             for (var i = 0; i < 8; i += 1) {
                 var spanHorn = document.createElement('span');
 
@@ -345,7 +345,7 @@ var ImgClip$1 = function () {
                 _this.clipEventState.evnt = e;
             };
             var getCurXY = function getCurXY(mouseX, mouseY) {
-                // 父容器的top和left也要减去
+                // 父容器的top和left也要減去
                 var curY = mouseY - _this.canvasFull.offsetTop - _this.container.offsetTop;
                 var curX = mouseX - _this.canvasFull.offsetLeft - _this.container.offsetLeft;
 
@@ -372,7 +372,7 @@ var ImgClip$1 = function () {
                 e.stopPropagation();
                 var clipEventState = _this.clipEventState;
                 var target = clipEventState.evnt.target;
-                // 区分pageX与clientX
+                // 區分pageX與clientX
                 var mouseY = e.touches ? e.touches[0].pageY : e.pageY;
                 var mouseX = e.touches ? e.touches[0].pageX : e.pageX;
                 var curCooidinate = getCurXY(mouseX, mouseY);
@@ -424,7 +424,7 @@ var ImgClip$1 = function () {
                     left = curX - width;
                     top = clipEventState.top;
                 }
-                // 一定要补上leftmargin
+                // 一定要補上leftmargin
                 _this.clipRect.style.left = left + _this.marginLeft + 'px';
                 _this.clipRect.style.top = top + 'px';
                 _this.clipRect.style.width = width + 'px';
@@ -508,7 +508,7 @@ var ImgClip$1 = function () {
                     left = _this2.canvasFull.offsetWidth - rectDom.offsetWidth + _this2.marginLeft;
                 }
 
-                // 这里无须再补上marginLeft
+                // 這裡無須再補上marginLeft
                 _this2.clipRect.style.left = left + 'px';
                 _this2.clipRect.style.top = top + 'px';
                 _this2.draw();
@@ -561,7 +561,7 @@ var ImgClip$1 = function () {
     }, {
         key: 'draw',
         value: function draw() {
-            // 放大镜
+            // 放大鏡
             this.drawMag();
             var realImgSize = this.getRealFinalImgSize(this.clipRect.offsetWidth * this.RATIO_PIXEL, this.clipRect.offsetHeight * this.RATIO_PIXEL);
             var curWidth = realImgSize.width;
@@ -596,7 +596,7 @@ var ImgClip$1 = function () {
         key: 'getClipRectParams',
         value: function getClipRectParams() {
             var offsetTop = this.clipRect.offsetTop;
-            // 减去margin才是真实的
+            // 減去margin才是真實的
             var offsetLeft = this.clipRect.offsetLeft - this.marginLeft;
             var offsetWidth = this.clipRect.offsetWidth;
             var offsetHeight = this.clipRect.offsetHeight;
@@ -640,7 +640,7 @@ var ImgClip$1 = function () {
     }, {
         key: 'getRealCoordinate',
         value: function getRealCoordinate(mouseX, mouseY) {
-            // 获取真实坐标系（旋转缩放后的）
+            // 獲取真實座標系（旋轉縮放後的）
             var x = mouseX;
             var y = mouseY;
 
@@ -666,7 +666,7 @@ var ImgClip$1 = function () {
     }, {
         key: 'drawImage',
         value: function drawImage() {
-            // 宽高在旋转不同的情况下是颠倒的
+            // 寬高在旋轉不同的情況下是顛倒的
             if (this.rotateStep & 1) {
                 this.ctxFull.drawImage(this.img, 0, 0, this.img.width, this.img.height, 0, 0, this.canvasFull.height, this.canvasFull.width);
             } else {
@@ -707,27 +707,27 @@ var ImgClip$1 = function () {
             var drawY = 0;
 
             if (this.os.ios) {
-                // 兼容ios的Safari不能绘制srcX,srcY为负的情况
+                // 相容ios的Safari不能繪製srcX,srcY為負的情況
                 if (srcY < 0) {
-                    // 注意先后顺序
+                    // 注意先後順序
                     drawY = this.canvasMag.height / 2 * Math.abs(srcY / captureRadius);
                     srcY = 0;
                 }
                 if (srcX < 0) {
-                    // 注意先后顺序
+                    // 注意先後順序
                     drawX = this.canvasMag.width / 2 * Math.abs(srcX / captureRadius);
                     srcX = 0;
                 }
             }
 
-            // 生成新的图片,内部坐标会使用原图片的尺寸
+            // 生成新的圖片,內部座標會使用原圖片的尺寸
             this.ctxMag.drawImage(this.img, srcX / this.scale, srcY / this.scale, sWidth / this.scale, sHeight / this.scale, drawX, drawY, this.canvasMag.width, this.canvasMag.height);
 
             var centerX = this.canvasMag.width / 2;
             var centerY = this.canvasMag.height / 2;
             var radius = 5 * this.RATIO_PIXEL;
 
-            // 绘制十字校准
+            // 繪製十字校準
             this.ctxMag.beginPath();
             this.ctxMag.moveTo(centerX - radius, centerY);
             this.ctxMag.lineTo(centerX + radius, centerY);
@@ -749,8 +749,8 @@ var ImgClip$1 = function () {
             this.container.appendChild(this.canvasMag);
             this.domChildren.push(this.canvasMag);
 
-            // 需要初始化一个高度，否则如果旋转时会造不对
-            // 捕获直径*像素比
+            // 需要初始化一個高度，否則如果旋轉時會造不對
+            // 捕獲直徑*畫素比
             this.canvasMag.width = this.options.captureRadius * 2 * this.RATIO_PIXEL;
             this.canvasMag.height = this.options.captureRadius * 2 * this.RATIO_PIXEL;
         }
@@ -787,23 +787,23 @@ var ImgClip$1 = function () {
 
             if (this.rotateStep & 1) {
                 if (this.options.isUseOriginSize || this.canvasFull.width > this.img.height) {
-                    // 最大不会超过原图的尺寸
+                    // 最大不會超過原圖的尺寸
                     width = this.img.width * curWidth / this.canvasFull.height;
                     height = this.img.height * curHeight / this.canvasFull.width;
                 }
                 if (maxWidth && this.canvasFull.height > maxWidth && maxWidth < this.img.height) {
-                    // 使用最大宽，前提是原始大小也大于最大宽
+                    // 使用最大寬，前提是原始大小也大於最大寬
                     width = maxWidth * curWidth / this.canvasFull.height;
                     height = maxWidth / wPerH * curHeight / this.canvasFull.width;
                 }
                 if (forceWidth) {
-                    // 使用固定宽
+                    // 使用固定寬
                     width = forceWidth * curWidth / this.canvasFull.height;
                     height = (forceHeight || forceWidth / wPerH) * curHeight / this.canvasFull.width;
                 }
             } else {
                 if (this.options.isUseOriginSize || this.canvasFull.width > this.img.width) {
-                    // 最大不会超过原图的尺寸
+                    // 最大不會超過原圖的尺寸
                     width = this.img.width * curWidth / this.canvasFull.width;
                     height = this.img.height * curHeight / this.canvasFull.height;
                 }
@@ -812,7 +812,7 @@ var ImgClip$1 = function () {
                     height = maxWidth / wPerH * curHeight / this.canvasFull.height;
                 }
                 if (forceWidth) {
-                    // 使用固定宽
+                    // 使用固定寬
                     width = forceWidth * curWidth / this.canvasFull.width;
                     height = (forceHeight || forceWidth / wPerH) * curHeight / this.canvasFull.height;
                 }
@@ -840,15 +840,15 @@ var ImgClip$1 = function () {
             var curWidth = realImgSize.width;
             var curHeight = realImgSize.height;
 
-            // 注意，这个变量可能不存在，会影响判断的，所以要确保它存在
+            // 注意，這個變數可能不存在，會影響判斷的，所以要確保它存在
             this.rotateStep = this.rotateStep || 0;
 
-            // 计算弧度
+            // 計算弧度
             var degree = this.rotateStep * 90 * Math.PI / 180;
 
-            // 内部的转换矩阵也需要旋转（只不过不需要展示而已-譬如平移操作就无必要）
-            // 注意，重置canvas大小后，以前的rotate也会无效-
-            // 否则如果不重置，直接rotate是会在以前的基础上
+            // 內部的轉換矩陣也需要旋轉（只不過不需要展示而已-譬如平移操作就無必要）
+            // 注意，重置canvas大小後，以前的rotate也會無效-
+            // 否則如果不重置，直接rotate是會在以前的基礎上
             if (this.rotateStep === 0) {
                 this.canvasTransfer.width = curWidth;
                 this.canvasTransfer.height = curHeight;
@@ -869,8 +869,8 @@ var ImgClip$1 = function () {
                 this.ctxTransfer.translate(-this.canvasTransfer.height, 0);
             }
 
-            // 生成新的图片,内部坐标会使用原图片的尺寸
-            // 宽高在旋转不同的情况下是颠倒的
+            // 生成新的圖片,內部座標會使用原圖片的尺寸
+            // 寬高在旋轉不同的情況下是顛倒的
             if (this.rotateStep & 1) {
                 this.ctxTransfer.drawImage(this.img, srcX / this.scale, srcY / this.scale, sWidth / this.scale, sHeight / this.scale, 0, 0, this.canvasTransfer.height, this.canvasTransfer.width);
             } else {
@@ -896,7 +896,7 @@ var ImgClip$1 = function () {
     }, {
         key: 'rotate',
         value: function rotate(isClockWise) {
-            // 最小和最大旋转方向
+            // 最小和最大旋轉方向
             var MIN_STEP = 0;
             var MAX_STEP = 3;
             var width = this.oldWidth;
@@ -910,14 +910,14 @@ var ImgClip$1 = function () {
                 this.rotateStep = MAX_STEP;
             }
 
-            // 计算弧度
+            // 計算弧度
             var degree = this.rotateStep * 90 * Math.PI / 180;
 
-            // 重置canvas,重新计算旋转
+            // 重置canvas,重新計算旋轉
             this.canvasMag.width = this.canvasMag.width;
             this.canvasMag.height = this.canvasMag.height;
 
-            // 同时旋转mag canvas
+            // 同時旋轉mag canvas
             if (this.rotateStep === 0) {
                 this.resizeCanvas(width, height);
             } else if (this.rotateStep === 1) {

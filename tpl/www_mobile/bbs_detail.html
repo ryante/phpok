@@ -4,19 +4,19 @@
 	<ul class="am-comments-list">
 		<!-- if $pageid == 1 -->
 		<li class="am-comment">
-			<a href="{url ctrl=user id=$rs.user.id/}" title="查看{$rs.user.user}的主页"><img class="am-comment-avatar" alt="{$rs.user.nickname ? $rs.user.nickname : $rs.user.user}" src="{$rs.user.avatar ? $rs.user.avatar : 'images/avatar.gif'}" /></a>
+			<a href="{url ctrl=user id=$rs.user.id/}" title="檢視{$rs.user.user}的主頁"><img class="am-comment-avatar" alt="{$rs.user.nickname ? $rs.user.nickname : $rs.user.user}" src="{$rs.user.avatar ? $rs.user.avatar : 'images/avatar.gif'}" /></a>
 			<div class="am-comment-main">
 				<div class="am-comment-hd">
 					
 					<div class="am-comment-meta">
 						{$rs.title}
-						<a href="{url ctrl=user id=$rs.user.id/}" class="am-comment-author">{$rs.user.nickname ? $rs.user.nickname : $rs.user.user}</a>于 <time></time> 发布主题：<b></b>
+						<a href="{url ctrl=user id=$rs.user.id/}" class="am-comment-author">{$rs.user.nickname ? $rs.user.nickname : $rs.user.user}</a>於 <time></time> 釋出主題：<b></b>
 					</div>
 				</div>
 				<div class="am-comment-bd">
 					{$rs.content}
 					<small class="am-fr gray">{func time_format $rs.dateline}</small>
-					<small class="am-fl gray">楼主</small>
+					<small class="am-fl gray">樓主</small>
 				</div>
 			</div>
 		</li>
@@ -29,7 +29,7 @@
 			<div class="am-comment-main">
 				<div class="am-comment-hd">
 					<div class="am-comment-meta">
-						<a href="{url ctrl=user id=$value.uid.id/}" target="_blank" class="am-comment-author">{$value.uid.user}</a> 于 <time>{func time_format $value.addtime}</time> 回复
+						<a href="{url ctrl=user id=$value.uid.id/}" target="_blank" class="am-comment-author">{$value.uid.user}</a> 於 <time>{func time_format $value.addtime}</time> 回覆
 					</div>
 				</div>
 				<div class="am-comment-bd">
@@ -44,7 +44,7 @@
 			<div class="am-comment-main">
 				<div class="am-comment-hd">
 					<div class="am-comment-meta">
-						管理员回复于<time>{func time_format $value.adm_time}</time>
+						管理員回覆於<time>{func time_format $value.adm_time}</time>
 					</div>
 				</div>
 				<div class="am-comment-bd">
@@ -62,7 +62,7 @@
 			<div class="am-comment-main">
 				<div class="am-comment-hd">
 					<div class="am-comment-meta">
-						提交新回复<!-- if $comment.total -->，当前已有 {$comment.total} 条回复<!-- /if -->
+						提交新回覆<!-- if $comment.total -->，當前已有 {$comment.total} 條回覆<!-- /if -->
 					</div>
 				</div>
 				<div class="am-comment-bd">
@@ -72,12 +72,12 @@
 						<div class="am-form-group">{func form_edit comment $comment.content editor width=100%&height=150&btns[image]=1}</div>
 						<!-- else -->
 						<div class="am-form-group">
-							<textarea rows="5" name="comment" id="comment" placeholder="填写评论信息" style="resize: none;"></textarea>
+							<textarea rows="5" name="comment" id="comment" placeholder="填寫評論資訊" style="resize: none;"></textarea>
 						</div>
 						<!-- /if -->
 						<!-- if $is_vcode -->
 						<div class="am-g am-form-group am-g-collapse">
-							<div class="am-u-sm-2"><input class="vcode"  type="text" name="_chkcode" id="_chkcode" placeholder="请填写验证码" /></div>
+							<div class="am-u-sm-2"><input class="vcode"  type="text" name="_chkcode" id="_chkcode" placeholder="請填寫驗證碼" /></div>
 							<div class="am-u-sm-4" style="padding-left:10px;padding-top:5px;"><img src="" border="0" align="absmiddle" id="vcode" class="hand" /></div>
 							<div class="am-u-sm-6"></div>
 						</div>
@@ -103,11 +103,11 @@
 			<div class="am-comment-main">
 				<div class="am-comment-hd">
 					<div class="am-comment-meta">
-						提交新回复<!-- if $comment.total -->，当前已有 {$comment.total} 条回复<!-- /if -->
+						提交新回覆<!-- if $comment.total -->，當前已有 {$comment.total} 條回覆<!-- /if -->
 					</div>
 				</div>
 				<div class="am-comment-bd">
-					<div style="padding:20px;text-align:center">请先 <a href="{url ctrl=login _back=$rs.url/}" title="会员登录">登录</a> 或 <a href="{url ctrl=register _back=$rs.url/}" title="新会员注册">注册</a></div>
+					<div style="padding:20px;text-align:center">請先 <a href="{url ctrl=login _back=$rs.url/}" title="會員登入">登入</a> 或 <a href="{url ctrl=register _back=$rs.url/}" title="新會員註冊">註冊</a></div>
 				</div>
 			</div>
 		</li>

@@ -1,4 +1,4 @@
-<!-- include tpl=head title=微信公众号支付 -->
+<!-- include tpl=head title=微信公眾號支付 -->
 <input type="hidden" name="logid" id="logid" value="{$order.id}" />
 <input type="hidden" name="sn" id="sn" value="{$rs.sn}" />
 <script type="text/javascript" src="//res.wx.qq.com/open/{#js#}/jweixin-1.0.0.js"></script>
@@ -20,19 +20,19 @@ function callpay()
 {
 	wx.config({
         debug: false,
-        appId: '{$wxconfig.appId}', // 必填，公众号的唯一标识
-        timestamp:'{$wxconfig.timeStamp}' , // 必填，生成签名的时间戳
-        nonceStr: '{$wxconfig.nonceStr}', // 必填，生成签名的随机串
-        signature: '{$wxconfig.sign}',// 必填，签名，见附录1
-        jsApiList: ['chooseWXPay'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        appId: '{$wxconfig.appId}', // 必填，公眾號的唯一標識
+        timestamp:'{$wxconfig.timeStamp}' , // 必填，生成簽名的時間戳
+        nonceStr: '{$wxconfig.nonceStr}', // 必填，生成簽名的隨機串
+        signature: '{$wxconfig.sign}',// 必填，簽名，見附錄1
+        jsApiList: ['chooseWXPay'] // 必填，需要使用的JS介面列表，所有JS介面列表見附錄2
     });
     wx.ready(function(){
         wx.chooseWXPay({
-            timestamp: '{$wxconfig.timeStamp}', // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-            nonceStr: '{$wxconfig.nonceStr}', // 支付签名随机串，不长于 32 位
-            package: '{$wxconfig.package}', // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-            signType: 'MD5', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-            paySign: '{$wxconfig.paySign}', // 支付签名
+            timestamp: '{$wxconfig.timeStamp}', // 支付簽名時間戳，注意微信jssdk中的所有使用timestamp欄位均為小寫。但最新版的支付後臺生成簽名使用的timeStamp欄位名需大寫其中的S字元
+            nonceStr: '{$wxconfig.nonceStr}', // 支付簽名隨機串，不長於 32 位
+            package: '{$wxconfig.package}', // 統一支付介面返回的prepay_id引數值，提交格式如：prepay_id=***）
+            signType: 'MD5', // 簽名方式，預設為'SHA1'，使用新版支付需傳入'MD5'
+            paySign: '{$wxconfig.paySign}', // 支付簽名
             success: function (res) {
 	            var url = api_url('payment','query','sn='+$("#sn").val());
 	            $.phpok.json(url,function(data){
@@ -52,7 +52,7 @@ $(document).ready(function(){
 	callpay();
 });
 
-//禁止后退
+//禁止後退
 window.history.forward(1);   
 history.pushState(null, null, document.URL);
 window.addEventListener('popstate', function () {

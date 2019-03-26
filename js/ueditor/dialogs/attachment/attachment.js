@@ -2,7 +2,7 @@
  * User: Jinqn
  * Date: 14-04-08
  * Time: 下午16:34
- * 上传图片对话框逻辑代码,包括tab: 远程图片/上传图片/在线图片/搜索图片
+ * 上傳圖片對話方塊邏輯程式碼,包括tab: 遠端圖片/上傳圖片/線上圖片/搜尋圖片
  */
 
 (function () {
@@ -15,7 +15,7 @@
         initButtons();
     };
 
-    /* 初始化tab标签 */
+    /* 初始化tab標籤 */
     function initTabs() {
         var tabs = $G('tabhead').children;
         for (var i = 0; i < tabs.length; i++) {
@@ -69,7 +69,7 @@
                     list = uploadFile.getInsertList();
                     var count = uploadFile.getQueueCount();
                     if (count) {
-                        $('.info', '#queueList').html('<span style="color:red;">' + '还有2个未上传文件'.replace(/[\d]/, count) + '</span>');
+                        $('.info', '#queueList').html('<span style="color:red;">' + '還有2個未上傳檔案'.replace(/[\d]/, count) + '</span>');
                         return false;
                     }
                     break;
@@ -83,7 +83,7 @@
     }
 
 
-    /* 上传附件 */
+    /* 上傳附件 */
     function UploadFile(target) {
         this.$wrap = target.constructor == String ? $('#' + target) : $(target);
         this.init();
@@ -102,34 +102,34 @@
             var _this = this,
                 $ = jQuery,    // just in case. Make sure it's not an other libaray.
                 $wrap = _this.$wrap,
-            // 图片容器
+            // 圖片容器
                 $queue = $wrap.find('.filelist'),
-            // 状态栏，包括进度和控制按钮
+            // 狀態列，包括進度和控制按鈕
                 $statusBar = $wrap.find('.statusBar'),
-            // 文件总体选择信息。
+            // 檔案總體選擇資訊。
                 $info = $statusBar.find('.info'),
-            // 上传按钮
+            // 上傳按鈕
                 $upload = $wrap.find('.uploadBtn'),
-            // 上传按钮
+            // 上傳按鈕
                 $filePickerBtn = $wrap.find('.filePickerBtn'),
-            // 上传按钮
+            // 上傳按鈕
                 $filePickerBlock = $wrap.find('.filePickerBlock'),
-            // 没选择文件之前的内容。
+            // 沒選擇檔案之前的內容。
                 $placeHolder = $wrap.find('.placeholder'),
-            // 总体进度条
+            // 總體進度條
                 $progress = $statusBar.find('.progress').hide(),
-            // 添加的文件数量
+            // 新增的檔案數量
                 fileCount = 0,
-            // 添加的文件总大小
+            // 新增的檔案總大小
                 fileSize = 0,
-            // 优化retina, 在retina下这个值是2
+            // 優化retina, 在retina下這個值是2
                 ratio = window.devicePixelRatio || 1,
-            // 缩略图大小
+            // 縮圖大小
                 thumbnailWidth = 113 * ratio,
                 thumbnailHeight = 113 * ratio,
             // 可能有pedding, ready, uploading, confirm, done.
                 state = '',
-            // 所有文件的进度信息，key为file id
+            // 所有檔案的進度資訊，key為file id
                 percentages = {},
                 supportTransition = (function () {
                     var s = document.createElement('p').style,
@@ -141,7 +141,7 @@
                     s = null;
                     return r;
                 })(),
-            // WebUploader实例
+            // WebUploader例項
                 uploader,
                 actionUrl = editor.getActionUrl(editor.getOpt('fileActionName')),
                 fileMaxSize = editor.getOpt('fileMaxSize'),
@@ -177,7 +177,7 @@
 
             setState('pedding');
 
-            // 当有文件添加进来时执行，负责view的创建
+            // 當有檔案新增進來時執行，負責view的建立
             function addFile(file) {
                 var $li = $('<li id="' + file.id + '">' +
                         '<p class="title">' + file.name + '</p>' +
@@ -241,7 +241,7 @@
                     percentages[ file.id ] = [ file.size, 0 ];
                     file.rotation = 0;
 
-                    /* 检查文件格式 */
+                    /* 檢查檔案格式 */
                     if (!file.ext || acceptExtensions.indexOf(file.ext.toLowerCase()) == -1) {
                         showError('not_allow_type');
                         uploader.removeFile(file);
@@ -312,7 +312,7 @@
                 $li.insertBefore($filePickerBlock);
             }
 
-            // 负责view的销毁
+            // 負責view的銷燬
             function removeFile(file) {
                 var $li = $('#' + file.id);
                 delete percentages[ file.id ];
@@ -349,7 +349,7 @@
 
                     switch (val) {
 
-                        /* 未选择文件 */
+                        /* 未選擇檔案 */
                         case 'pedding':
                             $queue.addClass('element-invisible');
                             $statusBar.addClass('element-invisible');
@@ -358,7 +358,7 @@
                             uploader.refresh();
                             break;
 
-                        /* 可以开始上传 */
+                        /* 可以開始上傳 */
                         case 'ready':
                             $placeHolder.addClass('element-invisible');
                             $queue.removeClass('element-invisible');
@@ -368,13 +368,13 @@
                             uploader.refresh();
                             break;
 
-                        /* 上传中 */
+                        /* 上傳中 */
                         case 'uploading':
                             $progress.show(); $info.hide();
                             $upload.text(lang.uploadPause);
                             break;
 
-                        /* 暂停上传 */
+                        /* 暫停上傳 */
                         case 'paused':
                             $progress.show(); $info.hide();
                             $upload.text(lang.uploadContinue);
@@ -471,7 +471,7 @@
                         setState('confirm', files);
                         break;
                     case 'startUpload':
-                        /* 添加额外的GET参数 */
+                        /* 新增額外的GET引數 */
                         var params = utils.serializeParam(editor.queryCommandValue('serverparam')) || '',
                             url = utils.formatUrl(actionUrl + (actionUrl.indexOf('?') == -1 ? '?':'&') + 'encode=utf-8&' + params);
                         uploader.option('server', url);
@@ -484,7 +484,7 @@
             });
 
             uploader.on('uploadBeforeSend', function (file, data, header) {
-                //这里可以通过data对象添加POST参数
+                //這裡可以通過data物件新增POST引數
                 header['X_Requested_With'] = 'XMLHttpRequest';
             });
 
@@ -565,7 +565,7 @@
     };
 
 
-    /* 在线附件 */
+    /* 線上附件 */
     function OnlineFile(target) {
         this.container = utils.isString(target) ? document.getElementById(target) : target;
         this.init();
@@ -588,18 +588,18 @@
             this.list.appendChild(this.clearFloat);
             this.container.appendChild(this.list);
         },
-        /* 初始化滚动事件,滚动到地步自动拉取数据 */
+        /* 初始化滾動事件,滾動到地步自動拉取資料 */
         initEvents: function () {
             var _this = this;
 
-            /* 滚动拉取图片 */
+            /* 滾動拉取圖片 */
             domUtils.on($G('fileList'), 'scroll', function(e){
                 var panel = this;
                 if (panel.scrollHeight - (panel.offsetHeight + panel.scrollTop) < 10) {
                     _this.getFileData();
                 }
             });
-            /* 选中图片 */
+            /* 選中圖片 */
             domUtils.on(this.list, 'click', function (e) {
                 var target = e.target || e.srcElement,
                     li = target.parentNode;
@@ -613,19 +613,19 @@
                 }
             });
         },
-        /* 初始化第一次的数据 */
+        /* 初始化第一次的資料 */
         initData: function () {
 
-            /* 拉取数据需要使用的值 */
+            /* 拉取資料需要使用的值 */
             this.state = 0;
             this.listSize = editor.getOpt('fileManagerListSize');
             this.listIndex = 0;
             this.listEnd = false;
 
-            /* 第一次拉取数据 */
+            /* 第一次拉取資料 */
             this.getFileData();
         },
-        /* 向后台拉取图片列表数据 */
+        /* 向後臺拉取圖片列表資料 */
         getFileData: function () {
             var _this = this;
 
@@ -665,7 +665,7 @@
                 });
             }
         },
-        /* 添加图片到列表界面上 */
+        /* 新增圖片到列表介面上 */
         pushData: function (list) {
             var i, item, img, filetype, preview, icon, _this = this,
                 urlPrefix = editor.getOpt('fileManagerUrlPrefix');
@@ -710,7 +710,7 @@
                 }
             }
         },
-        /* 改变图片大小 */
+        /* 改變圖片大小 */
         scale: function (img, w, h, type) {
             var ow = img.width,
                 oh = img.height;

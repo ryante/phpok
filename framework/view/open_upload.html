@@ -33,7 +33,7 @@ function check_search()
 	var cate_id = $("#top_cate_id").val();
 	var keywords = $("#keywords").val();
 	if(!cate_id && !keywords){
-		$.dialog.alert('请选择要搜索的项');
+		$.dialog.alert('請選擇要搜尋的項');
 		return false;
 	}
 	return true;
@@ -88,9 +88,9 @@ function add_select(id){
 	<form method="post" action="{$pageurl}" onsubmit="return check_search()">
 	<table>
 	<tr>
-		<td>搜索：</td>
+		<td>搜尋：</td>
 		<td><select name="cate_id" id="top_cate_id">
-			<option value="">全部分类…</option>
+			<option value="">全部分類…</option>
 			<!-- loop from=$catelist key=$key value=$value id=$tmpid -->
 			<option value="{$value.id}"{if $value.id == $cate_id} selected{/if}>{$value.title}</option>
 			<!-- /loop -->
@@ -101,8 +101,8 @@ function add_select(id){
 			<!-- /loop -->
 		</select></td>
 		<td><input type="text" name="keywords" id="keywords" value="{$keywords}" class="keywords" /></td>
-		<td><input type="submit" value=" {lang搜索} " /></td>
-		<td><input type="button" value=" {lang刷新} " onclick="$.phpok.reload()" /></td>
+		<td><input type="submit" value=" {lang搜尋} " /></td>
+		<td><input type="button" value=" {lang重新整理} " onclick="$.phpok.reload()" /></td>
 	</tr>
 	</table>
 	</form>
@@ -119,9 +119,9 @@ function add_select(id){
 				<!-- /if -->
 			</div>
 			<div class="note">
-				<div class="info">名称：{$value.title}</div>
-				<div class="info">添加：{func date "Y-m-d H:i:s" $value.addtime}</div>
-				<div class="info">属性：{$value.attr ? $value.attr.width.' x '.$value.attr.height : '-'}</div>
+				<div class="info">名稱：{$value.title}</div>
+				<div class="info">新增：{func date "Y-m-d H:i:s" $value.addtime}</div>
+				<div class="info">屬性：{$value.attr ? $value.attr.width.' x '.$value.attr.height : '-'}</div>
 			</div>
 			<div class="clear"></div>
 		</div>
@@ -165,7 +165,7 @@ function cate_change()
 {
 	val = $("#upload_cate_id").val();
 	if(!val){
-		$.dialog.alert('请选择要存储的目标分类');
+		$.dialog.alert('請選擇要儲存的目標分類');
 		return false;
 	}
 	var data = $("#upload_cate_id option[value="+val+"]").attr('data');
@@ -187,7 +187,7 @@ function cate_change()
 		}
 	});
 	obj_upload.uploader.on('uploadFinished',function(){
-		$.dialog.alert('附件上传成功',function(){
+		$.dialog.alert('附件上傳成功',function(){
 			$.phpok.reload();
 		});
 	});
@@ -201,8 +201,8 @@ function cancel()
 <div id="upload_open" style="border-top:1px solid #000;background:#efefef;position: fixed;bottom:0;height:120px;z-index:1999;width:100%;margin-left:-3px;margin-right:-3px;">
 	<div class="table">
 		<div class="title">
-			{lang上传附件：}
-			<span class="note">{lang上传前请注意选择附件分类}</span>
+			{lang上傳附件：}
+			<span class="note">{lang上傳前請注意選擇附件分類}</span>
 		</div>
 		<div class="content">
 			<table>
@@ -211,7 +211,7 @@ function cancel()
 					<select id="upload_cate_id" onchange="cate_change()" style="width:400px;background-color:#fff;">
 						<!-- loop from=$catelist key=$key value=$value -->
 						<option value="{$value.id}"{if $value.id == $cate_id} selected{/if} data="{$value.filetypes}" catename="{$value.title}">
-						{$value.title}<!-- if $value.typeinfos --> / {lang支持上传格式：}{$value.typeinfos}<!-- /if --></option>
+						{$value.title}<!-- if $value.typeinfos --> / {lang支援上傳格式：}{$value.typeinfos}<!-- /if --></option>
 						<!-- /loop -->
 					</select>
 				</td>

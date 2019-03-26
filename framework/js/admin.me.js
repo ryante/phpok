@@ -1,11 +1,11 @@
 /**
- * 管理员信息修改
+ * 管理員資訊修改
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年08月07日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年08月07日
 **/
 
 ;(function($){
@@ -14,21 +14,21 @@
 		{
 			var oldpass = $("#oldpass").val();
 			if(!oldpass){
-				$.dialog.alert(p_lang('旧密码不能为空'));
+				$.dialog.alert(p_lang('舊密碼不能為空'));
 				return false;
 			}
 			var newpass = $("#newpass").val();
 			var chkpass = $("#chkpass").val();
 			if(!newpass){
-				$.dialog.alert(p_lang('新密码不能为空'));
+				$.dialog.alert(p_lang('新密碼不能為空'));
 				return false;
 			}
 			if(newpass != chkpass){
-				$.dialog.alert(p_lang('两次输入的密码不一致'));
+				$.dialog.alert(p_lang('兩次輸入的密碼不一致'));
 				return false;
 			}
 			if(oldpass == newpass){
-				$.dialog.alert(p_lang('新旧密码是一样的，不能执行此操作'));
+				$.dialog.alert(p_lang('新舊密碼是一樣的，不能執行此操作'));
 				return false;
 			}
 			if(typeof(CKEDITOR) != "undefined"){
@@ -42,7 +42,7 @@
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						$.dialog.tips(p_lang('密码修改成功，下次登录请使用新密码'));
+						$.dialog.tips(p_lang('密碼修改成功，下次登入請使用新密碼'));
 						window.setTimeout(function(){
 							$.dialog.close();
 						}, 1000);
@@ -62,7 +62,7 @@
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						$.dialog.tips(p_lang('管理员信息操作成功'));
+						$.dialog.tips(p_lang('管理員資訊操作成功'));
 						window.setTimeout(function(){
 							$.dialog.close();
 						}, 1000);

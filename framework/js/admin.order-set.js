@@ -1,11 +1,11 @@
 /**
- * 编辑订单
+ * 編輯訂單
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年09月29日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年09月29日
 **/
 ;(function($){
 	$.admin_order_set = {
@@ -17,13 +17,13 @@
 			}else{
 				var currency_id = $("#currency_id").val();
 				if(!currency_id){
-					$.dialog.alert(p_lang('请选择货币类型'));
+					$.dialog.alert(p_lang('請選擇貨幣型別'));
 					return false;
 				}
 				url += "&currency_id="+currency_id;
 			}
 			$.dialog.open(url,{
-				'title':p_lang('产品添加'),
+				'title':p_lang('產品新增'),
 				'lock':true,
 				'width':'760px',
 				'height':'500px',
@@ -31,7 +31,7 @@
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
@@ -47,13 +47,13 @@
 			}else{
 				var currency_id = $("#currency_id").val();
 				if(!currency_id){
-					$.dialog.alert(p_lang('请选择货币类型'));
+					$.dialog.alert(p_lang('請選擇貨幣型別'));
 					return false;
 				}
 				url += "&currency_id="+currency_id;
 			}
 			$.dialog.open(url,{
-				'title':p_lang('编辑产品'),
+				'title':p_lang('編輯產品'),
 				'lock':true,
 				'width':'760px',
 				'height':'500px',
@@ -61,7 +61,7 @@
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
@@ -72,11 +72,11 @@
 		del:function(id)
 		{
 			var self = this;
-			$.dialog.confirm(p_lang('确定要删除该产品吗？'),function(){
+			$.dialog.confirm(p_lang('確定要刪除該產品嗎？'),function(){
 				var url = get_url('order','product_delete','id='+id);
 				$.phpok.json(url,function(data){
 					if(data.status){
-						$.dialog.tips(p_lang('删除操作成功，请稍候…'));
+						$.dialog.tips(p_lang('刪除操作成功，請稍候…'));
 						self.product_reload();
 						return true;
 					}
@@ -95,7 +95,7 @@
 				var currency_id = $("#currency_id").val();
 				url += "&currency_id="+currency_id;
 			}
-			var act = $.dialog.tips(p_lang('正在计算价格，请稍候…'),10).lock();
+			var act = $.dialog.tips(p_lang('正在計算價格，請稍候…'),10).lock();
 			$.phpok.json(url,function(rs){
 				act.close();
 				if(rs.status){
@@ -138,7 +138,7 @@
 					url += "&currency_id="+currency_id;
 				}
 			}
-			var tip = $.dialog.tips("正在加载产品信息，请稍候…",30).lock();
+			var tip = $.dialog.tips("正在載入產品資訊，請稍候…",30).lock();
 			$.phpok.json(url,function(data){
 				tip.close();
 				if(data.status){

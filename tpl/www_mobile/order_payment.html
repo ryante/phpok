@@ -1,28 +1,28 @@
-<!-- include tpl=head title=订单付款 -->
+<!-- include tpl=head title=訂單付款 -->
 <div class="main">
 	<div class="am-panel-group">
 		<form method="post" class="am-form" action="{if $session.user_id}{url ctrl=payment func=create id=$rs.id/}{else}{url ctrl=payment func=create sn=$rs.sn passwd=$rs.passwd/}{/if}">
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">订单信息</div>
+			<div class="am-panel-hd">訂單資訊</div>
 			<ul class="am-list am-list-static">
-				<li>订单编号：{$rs.sn}</li>
-				<li>订单金额：{func price_format $rs.price $rs.currency_id}</li>
+				<li>訂單編號：{$rs.sn}</li>
+				<li>訂單金額：{func price_format $rs.price $rs.currency_id}</li>
 				<!-- if $price_paid -->
 				<li>已付款：<span class="am-text-primary">{func price_format $price_paid $rs.currency_id}</span></li>
 				<!-- /if -->
 				<!-- if $price_unpaid -->
-				<li>还需付款：<span class="am-text-danger">{func price_format $price_unpaid $rs.currency_id}</span></li>
+				<li>還需付款：<span class="am-text-danger">{func price_format $price_unpaid $rs.currency_id}</span></li>
 				<!-- /if -->
 			</ul>
 		</div>
 		<!-- if $integral -->
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">积分抵扣，仅支持100的整数倍，不支持小数</div>
+			<div class="am-panel-hd">積分抵扣，僅支援100的整數倍，不支援小數</div>
 			<ul class="am-list am-list-static">
 				<!-- loop from=$integral key=$key value=$value -->
 			    <li>
 				    <div class="am-g">
-					    <div class="am-u-sm-12" style="margin-top:9px;">您当前的 <span class="am-text-danger">{$value.title}</span> 有 <span class="am-text-danger">{$value.val}</span>{$value.unit}，最多可抵现金<span class="red">{func price_format $value.price}</span></div>
+					    <div class="am-u-sm-12" style="margin-top:9px;">您當前的 <span class="am-text-danger">{$value.title}</span> 有 <span class="am-text-danger">{$value.val}</span>{$value.unit}，最多可抵現金<span class="red">{func price_format $value.price}</span></div>
 					    <div class="am-u-sm-12">
 						    <table>
 						    	<tr>
@@ -50,7 +50,7 @@
 						<li{if !$tmpid.index} class="am-active"{/if}><a href="javascript:void(0);">{$value.title}</a></li>
 						<!-- /loop -->
 						<!-- if $balance -->
-						<li{if !$paylist} class="am-active"{/if}><a href="javascript:void(0);">余额支付</a></li>
+						<li{if !$paylist} class="am-active"{/if}><a href="javascript:void(0);">餘額支付</a></li>
 						<!-- /if -->
 					</ul>
 					<div class="am-tabs-bd">
@@ -66,9 +66,9 @@
 						<div class="am-tab-panel am-fade">
 							<!-- loop from=$balance key=$key value=$value -->
 							<div class="am-radio">
-								<label><input name="payment" type="radio" value="{$value.identifier}" data-price="{$price_val}" data-balance="{$value.price}" />您当前的{$value.title}有<span class="red">{$value.val}</span>{$value.unit}
+								<label><input name="payment" type="radio" value="{$value.identifier}" data-price="{$price_val}" data-balance="{$value.price}" />您當前的{$value.title}有<span class="red">{$value.val}</span>{$value.unit}
 								<!-- if $price_val > $value.price -->
-								，您的余额不够，请 <a href="{url ctrl=payment id=$value.id/}" target="_blank"><b>在线充值</b></a>
+								，您的餘額不夠，請 <a href="{url ctrl=payment id=$value.id/}" target="_blank"><b>線上充值</b></a>
 								<!-- /if -->
 								</label>
 							</div>
@@ -82,11 +82,11 @@
 		<div style="margin-top:10px;">
 			<div class="am-g">
 				<div class="am-u-sm-4">
-					<a href="{url ctrl=order func=info sn=$rs.sn passwd=$rs.passwd/}" class="am-btn am-btn-default">返回订单</a>
+					<a href="{url ctrl=order func=info sn=$rs.sn passwd=$rs.passwd/}" class="am-btn am-btn-default">返回訂單</a>
 					
 				</div>
 				<div class="am-u-sm-4">
-					<input type="submit" value="确认付款" class="am-btn am-btn-primary am-fr" />
+					<input type="submit" value="確認付款" class="am-btn am-btn-primary am-fr" />
 				</div>
 			</div>
 			

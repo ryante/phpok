@@ -2,10 +2,10 @@
 <script type="text/javascript" src="{echo add_js('cate.js')}"></script>
 <div class="layui-card">
 	<div class="layui-card-header ">
-		{lang分类列表}
+		{lang分類列表}
 		<div class="fr">
-			<button class="layui-btn layui-btn-sm" onclick="$.win('{lang添加根分类}','{url ctrl=cate func=set/}')">
-				<i class="layui-icon">&#xe608;</i> {lang添加根分类}
+			<button class="layui-btn layui-btn-sm" onclick="$.win('{lang新增根分類}','{url ctrl=cate func=set/}')">
+				<i class="layui-icon">&#xe608;</i> {lang新增根分類}
 			</button>
 		</div>
 	</div>
@@ -15,7 +15,7 @@
 			<tr>
 				<th width="40">ID</th>
 				<th width="20"></th>
-				<th>{lang分类名称}</th>
+				<th>{lang分類名稱}</th>
 				<th width="80">{lang排序}</th>
 				<th width="210">{lang操作}</th>
 			</tr>
@@ -44,13 +44,13 @@
 				<td>
 					<div class="layui-btn-group">
 						<!-- if $popedom.add -->
-						<input type="button" value="{lang添加子分类}" onclick="$.win('{lang添加分类}','{url ctrl=cate func=set parent_id=$value.id/}')" class="layui-btn layui-btn-sm" />
+						<input type="button" value="{lang新增子分類}" onclick="$.win('{lang新增分類}','{url ctrl=cate func=set parent_id=$value.id/}')" class="layui-btn layui-btn-sm" />
 						<!-- /if -->
 						<!-- if $popedom.modify -->
-						<input type="button" value="{lang修改}" onclick="$.win('{lang修改分类}_#{$value.id}','{url ctrl=cate func=set id=$value.id/}')" class="layui-btn layui-btn-sm" />
+						<input type="button" value="{lang修改}" onclick="$.win('{lang修改分類}_#{$value.id}','{url ctrl=cate func=set id=$value.id/}')" class="layui-btn layui-btn-sm" />
 						<!-- /if -->
 						<!-- if $popedom.delete -->
-						<input type="button" value="{lang删除}" onclick="$.admin_cate.del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
+						<input type="button" value="{lang刪除}" onclick="$.admin_cate.del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 						<!-- /if -->
 					</div>
 

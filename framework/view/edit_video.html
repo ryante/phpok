@@ -4,9 +4,9 @@
 <script type="text/javascript">
 function save_video(filename,ext,fileid)
 {
-	//清空全部样式
+	//清空全部樣式
 	$(".list tr").removeClass('on');
-	//增加被选中的样式
+	//增加被選中的樣式
 	$("#video_"+fileid).addClass("on");
 	$("#video_file").val(filename);
 	$("#video_ext").val(ext);
@@ -19,10 +19,10 @@ dialog.onok = function(){
 	var file = $("#video_file").val();
 	if(!id || !ext || !file)
 	{
-		$.dialog.alert("影音文件有异常，请检查");
+		$.dialog.alert("影音檔案有異常，請檢查");
 		return false;
 	}
-	//网络上常见的视频格式
+	//網路上常見的視訊格式
 	if(ext == "flv" || ext == "mp4")
 	{
 		var htm = '<p style="text-align:center"><embed type="application/x-shockwave-flash" class="edui-faked-video" pluginspage="http://www.macromedia.com/go/getflashplayer" src="'+webroot+'js/vcastr.swf?xml={vcastr}{channel}{item}{source}'+webroot+file+'{/source}{duration}{/duration}{title}{/title}{/item}{/channel}{config}{isAutoPlay}false{/isAutoPlay}{isLoadBegin}false{/isLoadBegin}{/config}{plugIns}{beginEndImagePlugIn}{url}'+webroot+'js/image.swf{/url}{source}{/source}{type}beginend{/type}{scaletype}exactFil{/scaletype}{/beginEndImagePlugIn}{/plugIns}{/vcastr}" width="400" height="300" wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true"/></p>';
@@ -47,9 +47,9 @@ dialog.onok = function(){
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<form method="post" action="{echo admin_url('uedit','video')}">
-	<td>&nbsp; 关键字：</td>
+	<td>&nbsp; 關鍵字：</td>
 	<td><input type="text" id="keywords" name="keywords" value="{$keywords}" /></td>
-	<td>&nbsp; 分类：</td>
+	<td>&nbsp; 分類：</td>
 	<td><select id="cate_id" name="cate_id">
 			<option value="0">不限</option>
 			<!-- $catelist AS $key=>$value -->
@@ -58,7 +58,7 @@ dialog.onok = function(){
 		</select>
 	</td>
 	<td>&nbsp;</td>
-	<td><input type="submit" value="搜索" class="search" /></td>
+	<td><input type="submit" value="搜尋" class="search" /></td>
 	</form>
 </tr>
 </table>
@@ -70,7 +70,7 @@ dialog.onok = function(){
 <table width="100%" cellpadding="0" cellspacing="0" class="list">
 <tr>
 	<th width="30px" height="30px">&nbsp;</th>
-	<th class="lft">影音文件名称</th>
+	<th class="lft">影音檔名稱</th>
 	<th class="w90 lft" style="padding-left:5px;">大小</th>
 </tr>
 
@@ -88,7 +88,7 @@ dialog.onok = function(){
 </div>
 <div class="table"><!-- inc:pagelist --></div>
 
-<!-- php:$top_tips = '上传影音文件' -->
+<!-- php:$top_tips = '上傳影音檔案' -->
 <!-- include tpl=edit_swfupload top_tips=$top_tips -->
 
 <!-- inc:foot_open -->

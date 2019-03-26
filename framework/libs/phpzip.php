@@ -435,7 +435,7 @@ class phpzip_lib
 			$header['index'] = $i;
 			$info = array(
 				'filename'        => $header['filename'],                   // 檔名
-				'stored_filename' => $header['stored_filename'],            // 壓縮後文件名
+				'stored_filename' => $header['stored_filename'],            // 壓縮後檔名
 				'size'            => $header['size'],                       // 大小
 				'compressed_size' => $header['compressed_size'],            // 壓縮後大小
 				'crc'             => strtoupper(dechex($header['crc'])),    // CRC32

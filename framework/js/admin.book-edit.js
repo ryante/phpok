@@ -1,10 +1,10 @@
 /**
- * 内容管理
+ * 內容管理
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2018年01月16日
 **/
 var autosave_handle;
@@ -13,7 +13,7 @@ var autosave_handle;
 	$.admin_list_edit = {
 
 		/**
-		 * 自动保存
+		 * 自動儲存
 		**/
 		autosave:function()
 		{
@@ -24,8 +24,8 @@ var autosave_handle;
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						$.dialog.tips('数据已临时保存').position('50%','1px');
-						// 每隔 5 分钟自动保存一次数据
+						$.dialog.tips('資料已臨時儲存').position('50%','1px');
+						// 每隔 5 分鐘自動儲存一次資料
 						autosave_handle = window.setTimeout(function(){
 							$.admin_list_edit.autosave();
 						}, 300000);
@@ -36,7 +36,7 @@ var autosave_handle;
 		},
 
 		/**
-		 * 保存数据
+		 * 儲存資料
 		**/
 		save:function()
 		{
@@ -55,7 +55,7 @@ var autosave_handle;
 				'type':'post',
 				'dataType':'json',
 				'beforeSubmit':function(){
-					loading_action = $.dialog.tips('<img src="images/loading.gif" border="0" align="absmiddle" /> '+p_lang('正在保存数据，请稍候…')).time(30).lock();
+					loading_action = $.dialog.tips('<img src="images/loading.gif" border="0" align="absmiddle" /> '+p_lang('正在儲存資料，請稍候…')).time(30).lock();
 				},
 				'success':function(rs){
 					if(loading_action){
@@ -69,7 +69,7 @@ var autosave_handle;
 							url += "&keywords[cateid]="+cateid;
 						}
 						if(id){
-							$.dialog.alert(p_lang('内容信息修改成功'),function(){
+							$.dialog.alert(p_lang('內容資訊修改成功'),function(){
 								$.phpok.message('pendding');
                                 $.admin.reload(jumpUrl);
 								$.admin.close(url);
@@ -78,19 +78,19 @@ var autosave_handle;
 						}
 						$.dialog.through({
 							'icon':'succeed',
-							'content':p_lang('内容添加操作成功，请选择继续添加或返回列表'),
+							'content':p_lang('內容新增操作成功，請選擇繼續新增或返回列表'),
 							'ok':function(){
 								$.phpok.message('pendding');
 								// $.admin.reload(jumpUrl);
                                 $.phpok.reload();
 							},
-							'okVal':p_lang('继续添加'),
+							'okVal':p_lang('繼續新增'),
 							'cancel':function(){
 								$.phpok.message('pendding');
 								$.admin.reload(jumpUrl);
 								$.admin.close(url);
 							},
-							'cancelVal':p_lang('关闭窗口'),
+							'cancelVal':p_lang('關閉視窗'),
 							'lock':true
 						});
 						return true;
@@ -104,14 +104,14 @@ var autosave_handle;
 		},
 
 		/**
-		 * 添加属性
+		 * 新增屬性
 		**/
 		attr_create:function()
 		{
 			var self = this;
-			$.dialog.prompt(p_lang('请添加属性名称，注意，添加前请先检查之前的属性是否存在'),function(name){
+			$.dialog.prompt(p_lang('請新增屬性名稱，注意，新增前請先檢查之前的屬性是否存在'),function(name){
 				if(!name){
-					$.dialog.alert(p_lang('名称不能为空'));
+					$.dialog.alert(p_lang('名稱不能為空'));
 				}
 				var url = get_url('options','save','title='+$.str.encode(name));
 				$.phpok.json(url,function(data){
@@ -127,7 +127,7 @@ var autosave_handle;
 		},
 
 		/**
-		 * 选择添加属性
+		 * 選擇新增屬性
 		**/
 		attr_add:function(val)
 		{
@@ -137,7 +137,7 @@ var autosave_handle;
 			var old = $("#_biz_attr").val();
 			if(old){
 				if(old == val){
-					$.dialog.alert(p_lang('属性已经使用，不能重复'));
+					$.dialog.alert(p_lang('屬性已經使用，不能重複'));
 					return false;
 				}
 				var list = old.split(",");
@@ -149,16 +149,16 @@ var autosave_handle;
 					}
 				}
 				if(is_used){
-					$.dialog.alert(p_lang('属性已经使用，不能重复'));
+					$.dialog.alert(p_lang('屬性已經使用，不能重複'));
 					return false;
 				}
 				var ncontent = old+","+val;
-				//写入新值
+				//寫入新值
 				$("#_biz_attr").val(ncontent);
-				//创建HTML
+				//建立HTML
 				var html = '<li id="_biz_attr_'+val+'"><li>';
 				$("#biz_attr_options").append(html);
-				//异步加载HTML
+				//非同步載入HTML
 			}else{
 				$("#_biz_attr").val(val);
 				var html = '<li id="_biz_attr_'+val+'"><li>';
@@ -168,8 +168,8 @@ var autosave_handle;
 		},
 
 		/**
-		 * 删除属性
-		 * @参数 id
+		 * 刪除屬性
+		 * @引數 id
 		**/
 		attr_remove:function(val)
 		{
@@ -196,13 +196,13 @@ var autosave_handle;
 			}
 			var ncontent = nlist.join(",");
 			$("#_biz_attr").val(ncontent);
-			//删除HTML
+			//刪除HTML
 			var html = '<li id="_biz_attr_'+val+'"><li>';
 			$("#_biz_attr_"+val).remove();
 		},
 
 		/**
-		 * 异步加载属性
+		 * 非同步載入屬性
 		**/
 		attr_load:function()
 		{
@@ -221,12 +221,12 @@ var autosave_handle;
 		},
 
 		/**
-		 * 读取属性及内容信息
-		 * @参数 id 属性ID
+		 * 讀取屬性及內容資訊
+		 * @引數 id 屬性ID
 		**/
 		attr_info_product:function(id)
 		{
-			//执行属性添加
+			//執行屬性新增
 			var url = get_url('book','attr','aid='+id);
 			var tid = $("#id").val();
 			if(tid){
@@ -244,7 +244,7 @@ var autosave_handle;
 		},
 
 		/**
-		 * 选择全部属性
+		 * 選擇全部屬性
 		**/
 		attrlist_load:function()
 		{
@@ -255,7 +255,7 @@ var autosave_handle;
 					$("#biz_attr_id").html(html);
 					return false;
 				}
-				var html = '<option value="">'+p_lang('请选择一个属性…')+'</option>';
+				var html = '<option value="">'+p_lang('請選擇一個屬性…')+'</option>';
 				for(var i in data.content){
 					html += '<option value="'+data.content[i].id+'">'+data.content[i].title+'</option>';
 				}
@@ -273,9 +273,9 @@ var autosave_handle;
 		},
 
 		/**
-		 * 属性快速添加
-		 * @参数 id 属性ID
-		 * @参数 val 要写入的值
+		 * 屬性快速新增
+		 * @引數 id 屬性ID
+		 * @引數 val 要寫入的值
 		**/
 		attr_option_quickadd:function(id,val)
 		{
@@ -288,10 +288,10 @@ var autosave_handle;
 		},
 
 		/**
-		 * 输出HTML
-		 * @参数 id 属性ID
-		 * @参数 val 参数ID
-		 * @参数 text 显示名称
+		 * 輸出HTML
+		 * @引數 id 屬性ID
+		 * @引數 val 引數ID
+		 * @引數 text 顯示名稱
 		**/
 		attr_option_html:function(id,val,text)
 		{
@@ -303,7 +303,7 @@ var autosave_handle;
 			html += '<td class="center"><input type="text" name="_attr_volume_'+id+'['+val+']" value="0" class="layui-input" /></td>';
 			html += '<td class="center"><input type="text" name="_attr_price_'+id+'['+val+']" value="" class="layui-input" /></td>';
 			html += '<td class="center"><input type="text" name="_attr_taxis_'+id+'['+val+']" value="'+taxis+'" class="layui-input" /></td>'
-			html += '<td class="center"><input type="button" value="'+p_lang('删除')+'" onclick="$.admin_list_edit.attr_option_delete(\''+id+'\',\''+val+'\')" class="layui-btn layui-btn-sm" /></td>';
+			html += '<td class="center"><input type="button" value="'+p_lang('刪除')+'" onclick="$.admin_list_edit.attr_option_delete(\''+id+'\',\''+val+'\')" class="layui-btn layui-btn-sm" /></td>';
 			html += '</tr>';
 			if($("tr[name=attr_"+id+"]").length > 0){
 				$("tr[name=attr_"+id+"]").last().after(html);
@@ -314,15 +314,15 @@ var autosave_handle;
 		},
 
 		/**
-		 * 手动添加值信息
-		 * @参数 id 属性ID
+		 * 手動新增值資訊
+		 * @引數 id 屬性ID
 		**/
 		attr_option_add:function(id)
 		{
 			var self = this;
-			$.dialog.prompt(p_lang('请创建一个新值'),function(name){
+			$.dialog.prompt(p_lang('請建立一個新值'),function(name){
 				if(!name){
-					$.dialog.alert(p_lang('新值不能为空'));
+					$.dialog.alert(p_lang('新值不能為空'));
 					return false;
 				}
 				var url = get_url('options','save_values','aid='+id+'&title='+$.str.encode(name));
@@ -340,7 +340,7 @@ var autosave_handle;
 
 })(jQuery);
 $(document).keypress(function(e){
-	//按钮CTRL+回车键执行保存
+	//按鈕CTRL+回車鍵執行儲存
 	if(e.ctrlKey && e.which == 13 || e.which == 10) {
 		$('.phpok_submit_click').click();
 	}
@@ -349,7 +349,7 @@ $(document).keypress(function(e){
 $(document).ready(function(){
 
 
-	//仅在添加主题时执行自动保存操作
+	//僅在新增主題時執行自動儲存操作
 	/*var id = $("#id").val();
 	if(!id || id == '0' || id == 'undefined'){
 		autosave_handle = window.setTimeout(function(){
@@ -358,7 +358,7 @@ $(document).ready(function(){
 	}*/
 
 
-	//加载产品属性
+	//載入產品屬性
 	if($("#_biz_attr").length > 0){
 		$.admin_list_edit.attr_load();
 	}

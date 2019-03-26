@@ -6,7 +6,7 @@
 	<meta http-equiv="Expires" content="wed, 26 feb 1997 08:21:57 gmt" />
 	<meta http-equiv="Pragma" content="no-cache" />
 	<meta http-equiv="Cache-Control" content="no-cache" />
-	<title><!-- if $config.title -->{$config.title}_<!-- /if -->{lang后台管理}</title>
+	<title><!-- if $config.title -->{$config.title}_<!-- /if -->{lang後臺管理}</title>
 	<meta name="renderer" content="webkit" />
 	<!-- if $config.favicon -->
 	<link rel="shortcut icon" href="{$config.favicon}" />
@@ -27,22 +27,22 @@
 	<div id="LAY_app">
 		<div class="layui-layout layui-layout-admin">
 			<div class="layui-header">
-				<!-- 头部区域 -->
+				<!-- 頭部區域 -->
 				<ul class="layui-nav layui-layout-left">
 					<li class="layui-nav-item layadmin-flexible" lay-unselect>
-						<a href="javascript:;" layadmin-event="flexible" title="{lang侧边伸缩}"> <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
+						<a href="javascript:;" layadmin-event="flexible" title="{lang側邊伸縮}"> <i class="layui-icon layui-icon-shrink-right" id="LAY_app_flexible"></i>
 						</a>
 					</li>
 					<li class="layui-nav-item" lay-unselect>
-						<a href="javascript:;" layadmin-event="refresh" title="{lang刷新}"><i class="layui-icon layui-icon-refresh-3"></i> {lang刷新}</a>
+						<a href="javascript:;" layadmin-event="refresh" title="{lang重新整理}"><i class="layui-icon layui-icon-refresh-3"></i> {lang重新整理}</a>
 					</li>
 					<li class="layui-nav-item" lay-unselect>
-						<a href="javascript:$.admin_index.clear();void(0);" title="{lang清空缓存}"><i class="layui-icon layui-icon-fonts-clear"></i> {lang清空缓存}</a>
+						<a href="javascript:$.admin_index.clear();void(0);" title="{lang清空快取}"><i class="layui-icon layui-icon-fonts-clear"></i> {lang清空快取}</a>
 					</li>
 				</ul>
 				<ul class="layui-nav layui-layout-right" lay-filter="layadmin-layout-right">
 					<li class="layui-nav-item layui-hide-xs" lay-unselect>
-						<a href="{$sys.www_file}?siteId={$session.admin_site_id}" target="_blank" title="{lang前台访问}"> <i class="layui-icon layui-icon-website"></i> {lang访问网站}</a>
+						<a href="{$sys.www_file}?siteId={$session.admin_site_id}" target="_blank" title="{lang前臺訪問}"> <i class="layui-icon layui-icon-website"></i> {lang訪問網站}</a>
 					</li>
 					<li class="layui-nav-item layui-hide-xs" lay-unselect>
 						<a href="javascript:;" layadmin-event="fullscreen"> <i class="layui-icon layui-icon-screen-full"></i> {lang全屏}</a>
@@ -59,7 +59,7 @@
 					<!-- /loop -->
 					<!-- if $session.admin_rs.if_system && $session.adm_develop -->
 					<li style="display: none" class="layui-nav-item layui-hide-xs" lay-unselect>
-						<a href="javascript:$.admin_index.site();void(0);" title="{lang添加新站点}"><i class="layui-icon layui-icon-add-1"></i> {lang添加站点}</a>
+						<a href="javascript:$.admin_index.site();void(0);" title="{lang新增新站點}"><i class="layui-icon layui-icon-add-1"></i> {lang新增站點}</a>
 					</li>
 					<!-- /if -->
 					<!-- if $sys.multiple_language && $langlist -->
@@ -75,13 +75,13 @@
 					<li class="layui-nav-item" lay-unselect>
 						<a href="javascript:;"> <cite>{$session.admin_account}</cite></a>
 						<dl class="layui-nav-child">
-							<dd><a href="javascript:$.admin_index.me();void(0);">基本资料</a></dd>
-							<dd><a href="javascript:$.admin_index.pass();void(0);">修改密码</a></dd>
+							<dd><a href="javascript:$.admin_index.me();void(0);">基本資料</a></dd>
+							<dd><a href="javascript:$.admin_index.pass();void(0);">修改密碼</a></dd>
 							<!-- if !$sys.develop && $session.admin_rs.if_system -->
 								<!-- if $session.adm_develop -->
-								<dd><a href="javascript:$.admin_index.develop(0);void(0);">应用模式</a></dd>
+								<dd><a href="javascript:$.admin_index.develop(0);void(0);">應用模式</a></dd>
 								<!-- else -->
-								<dd><a href="javascript:$.admin_index.develop(1);void(0);">开发模式</a></dd>
+								<dd><a href="javascript:$.admin_index.develop(1);void(0);">開發模式</a></dd>
 								<!-- /if -->
 							<!-- /if -->
 							<dd><a href="javascript:$.admin_index.logout();void(0);">退出</a></dd>
@@ -94,7 +94,7 @@
 					</li>
 				</ul>
 			</div>
-			<!-- 侧边菜单 -->
+			<!-- 側邊選單 -->
 			<div class="layui-side layui-side-menu">
 				<div class="layui-side-scroll">
 					<div class="layui-logo" lay-href="{url ctrl=index func=homepage/}">
@@ -104,14 +104,14 @@
 						<li data-name="home" class="layui-nav-item layui-this">
 			              <a href="javascript:;" lay-href="{url ctrl=index func=homepage/}">
 			                <i class="layui-icon layui-icon-home"></i>
-			                <cite>{lang后台首页}</cite>
+			                <cite>{lang後臺首頁}</cite>
 			              </a>
 			            </li>
 			            <!-- if $list_rslist && !$session.adm_develop -->
 			            <li data-name="list" class="layui-nav-item">
-			              <a href="javascript:;" lay-tips="{lang内容管理}" lay-direction="2">
+			              <a href="javascript:;" lay-tips="{lang內容管理}" lay-direction="2">
 			                <i class="layui-icon layui-icon-app"></i>
-			                <cite>{lang内容管理}</cite>
+			                <cite>{lang內容管理}</cite>
 			              </a>
 			              <dl class="layui-nav-child">
 								<!-- loop from=$list_rslist key=$key value=$value id=$idx -->
@@ -122,22 +122,22 @@
 			            <!-- /if -->
 			            <!-- if $all_info && !$session.adm_develop -->
 			            <li data-name="all" class="layui-nav-item">
-			              <a href="javascript:;" lay-tips="{lang全局管理}" lay-direction="2">
+			              <a href="javascript:;" lay-tips="{lang全域性管理}" lay-direction="2">
 			                <i class="layui-icon layui-icon-util"></i>
-			                <cite>{lang全局管理}</cite>
+			                <cite>{lang全域性管理}</cite>
 			              </a>
 			              <dl class="layui-nav-child">
 								<!-- if $all_popedom.site -->
-								<dd data-name="config_site"> <a lay-href="{url ctrl=all func=setting/}">{lang网站信息}</a></dd>
+								<dd data-name="config_site"> <a lay-href="{url ctrl=all func=setting/}">{lang網站資訊}</a></dd>
 								<!-- /if -->
 								<!-- if $show_vcode_setting -->
-								<dd data-name="config_vcode"> <a lay-href="{url ctrl=all func=vcode/}">{lang验证码配置}</a></dd>
+								<dd data-name="config_vcode"> <a lay-href="{url ctrl=all func=vcode/}">{lang驗證碼配置}</a></dd>
 								<!-- /if -->
 								<!-- if $all_popedom.domain -->
-								<dd data-name="config_domain"> <a lay-href="{url ctrl=all func=domain/}">{lang网站域名}</a></dd>
+								<dd data-name="config_domain"> <a lay-href="{url ctrl=all func=domain/}">{lang網站域名}</a></dd>
 								<!-- /if -->
 								<!-- if $site_popedom.order && $config.biz_status -->
-								<dd data-name="config_order_status"> <a lay-href="{url ctrl=site func=order_status/}">{lang订单常规配置}</a></dd>
+								<dd data-name="config_order_status"> <a lay-href="{url ctrl=site func=order_status/}">{lang訂單常規配置}</a></dd>
 								<!-- /if -->
 								<!-- loop from=$plugin_alist key=$key value=$value id=$tmpid -->
 								<dd data-name="plugin_{$value.id}"> <a lay-href="{$value.url}">{$value.title}</a></dd>
@@ -152,15 +152,15 @@
 			            <!-- /if -->
 			            <!-- if $session.adm_develop -->
 			            <li data-name="list" class="layui-nav-item">
-			              <a href="javascript:;" lay-href="{url ctrl=list/}" lay-text="{lang内容管理}">
+			              <a href="javascript:;" lay-href="{url ctrl=list/}" lay-text="{lang內容管理}">
 			                <i class="layui-icon layui-icon-app"></i>
-			                <cite>{lang内容管理}</cite>
+			                <cite>{lang內容管理}</cite>
 			              </a>
 			            </li>
 			            <li data-name="all" class="layui-nav-item">
-			              <a href="javascript:;" lay-tips="{lang全局管理}" lay-href="{url ctrl=all/}" lay-direction="2">
+			              <a href="javascript:;" lay-tips="{lang全域性管理}" lay-href="{url ctrl=all/}" lay-direction="2">
 			                <i class="layui-icon layui-icon-util"></i>
-			                <cite>{lang全局管理}</cite>
+			                <cite>{lang全域性管理}</cite>
 			              </a>
 			            </li>
 			            <!-- /if -->
@@ -187,7 +187,7 @@
 					</ul>
 				</div>
 			</div>
-			<!-- 页面标签 -->
+			<!-- 頁面標籤 -->
 			<div class="layadmin-pagetabs" id="LAY_app_tabs">
 				<div class="layui-icon layadmin-tabs-control layui-icon-prev" layadmin-event="leftPage"></div>
 				<div class="layui-icon layadmin-tabs-control layui-icon-next" layadmin-event="rightPage"></div>
@@ -196,11 +196,11 @@
 						<li class="layui-nav-item" lay-unselect>
 							<a href="javascript:;"></a>
 							<dl class="layui-nav-child layui-anim-fadein">
-								<dd layadmin-event="closeThisTabs"><a href="javascript:;">{lang关闭当前标签页}</a>
+								<dd layadmin-event="closeThisTabs"><a href="javascript:;">{lang關閉當前標籤頁}</a>
 								</dd>
-								<dd layadmin-event="closeOtherTabs"><a href="javascript:;">{lang关闭其它标签页}</a>
+								<dd layadmin-event="closeOtherTabs"><a href="javascript:;">{lang關閉其它標籤頁}</a>
 								</dd>
-								<dd layadmin-event="closeAllTabs"><a href="javascript:;">{lang关闭全部标签页}</a>
+								<dd layadmin-event="closeAllTabs"><a href="javascript:;">{lang關閉全部標籤頁}</a>
 								</dd>
 							</dl>
 						</li>
@@ -213,13 +213,13 @@
 					</ul>
 				</div>
 			</div>
-			<!-- 主体内容 -->
+			<!-- 主體內容 -->
 			<div class="layui-body" id="LAY_app_body">
 				<div class="layadmin-tabsbody-item layui-show">
 					<iframe src="{url ctrl=index func=homepage/}" frameborder="0" class="layadmin-iframe"></iframe>
 				</div>
 			</div>
-			<!-- 辅助元素，一般用于移动设备下遮罩 -->
+			<!-- 輔助元素，一般用於移動裝置下遮罩 -->
 			<div class="layadmin-body-shade" layadmin-event="shade"></div>
 		</div>
 	</div>

@@ -11,7 +11,7 @@ function submit_search()
 	var k = $("#keywords").val();
 	if(!k)
 	{
-		$.dialog.alert("关键字不能为空");
+		$.dialog.alert("關鍵字不能為空");
 		return false;
 	}
 	var url = "{url ctrl=open func=user2 id=$id/}&keywords="+$.str.encode(k);
@@ -21,7 +21,7 @@ function submit_search()
 </script>
 <div class="tips">
 	<form method="post" action="{url ctrl=open func=user2 id=$id/}" onsubmit="return submit_search()">
-	查找会员：（请输入关键字）
+	查詢會員：（請輸入關鍵字）
 	<input type="text" id="keywords" name="keywords" value="{$keywords}" />
 	<input type="submit" value="提交" class="submit" />
 	</form>
@@ -30,13 +30,13 @@ function submit_search()
 <table width="100%" cellpadding="0" cellspacing="0" class="list">
 <tr>
 	<th width="50px">ID</th>
-	<th class="lft">账号</th>
+	<th class="lft">賬號</th>
 	<th width="65px">操作</th>
 	<th width="50px">ID</th>
-	<th class="lft">账号</th>
+	<th class="lft">賬號</th>
 	<th width="65px">操作</th>
 	<th width="50px">ID</th>
-	<th class="lft">账号</th>
+	<th class="lft">賬號</th>
 	<th width="65px">操作</th>
 </tr>
 <tr>

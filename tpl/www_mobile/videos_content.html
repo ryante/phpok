@@ -4,10 +4,10 @@
 		<div class="am-article-hd">
 			<h1 class="am-article-title">{$rs.title}</h1>
 			<p class="am-article-meta">
-				发布日期：<span>{func time_format $rs.dateline}</span><br />
-				浏览次数：<span id="lblVisits">{$rs.hits}</span>
+				釋出日期：<span>{func time_format $rs.dateline}</span><br />
+				瀏覽次數：<span id="lblVisits">{$rs.hits}</span>
 				<!-- if $rs.tag -->
-				<br />关键字：
+				<br />關鍵字：
 					<!-- loop from=$rs.tag key=$key value=$value -->
 					<a href="{$value.url}" title="{$value.alt}" target="{$value.target}" style="color:#999;">{$value.title}</a>
 					<!-- /loop -->
@@ -18,7 +18,7 @@
 			<!-- if $rs.note --><p class="am-article-lead">{func nl2br $rs.note}</p><!-- /if -->
 			<!-- if $rs.mp4 -->
 				<div style="width:100%;min-height:135px;" id="my_video">
-					<video type="video/mp4" src="{$rs.mp4.filename}" controls="controls" style="width:100%;height:100%;">不支持这个格式</video>
+					<video type="video/mp4" src="{$rs.mp4.filename}" controls="controls" style="width:100%;height:100%;">不支援這個格式</video>
 				</div>
 				<script type="text/javascript">
 				$(document).ready(function(){

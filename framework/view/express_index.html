@@ -11,12 +11,12 @@ function add_it()
 {
 	var url = get_url('express','set');
 	$.dialog({
-		'title':"请选择快递接口引挈",
+		'title':"請選擇快遞介面引挈",
 		'content':document.getElementById("express_select_info"),
 		'ok':function(){
 			var code = $("#code").val();
 			if(!code){
-				alert('请选择要创建的快递引挈');
+				alert('請選擇要建立的快遞引挈');
 				return false;
 			}
 			url += "&code="+code;
@@ -33,7 +33,7 @@ function edit_it(id)
 function delete_it(id)
 {
 	var text = $("#title_"+id).text();
-	$.dialog.confirm('确定要删除物流快递：<span class="red">'+text+'</span> 吗？',function(){
+	$.dialog.confirm('確定要刪除物流快遞：<span class="red">'+text+'</span> 嗎？',function(){
 		var url = get_url('express','delete','id='+id);
 		var rs = $.phpok.json(url);
 		if(rs.status == 'ok'){
@@ -54,7 +54,7 @@ function delete_it(id)
 
 		<div class="layui-btn-group test-table-operate-btn" style="margin-bottom: 10px;">
 			<button class="layui-btn" onclick="add_it();">
-				<i class="layui-icon">&#xe608;</i> {lang添加物流}
+				<i class="layui-icon">&#xe608;</i> {lang新增物流}
 			</button>
 		</div>
 
@@ -63,9 +63,9 @@ function delete_it(id)
 			<tr>
 				<th>ID</th>
 				<th>物流</th>
-				<th>公司名称</th>
-				<th>官方网站</th>
-				<th>接口</th>
+				<th>公司名稱</th>
+				<th>官方網站</th>
+				<th>介面</th>
 				<th>&nbsp;</th>
 			</tr>
 			</thead>
@@ -79,8 +79,8 @@ function delete_it(id)
 				<td>{$codelist[$value.code][title]}</td>
 				<td>
 					<div class="layui-btn-group">
-						<input type="button" value="{lang编辑}" onclick="edit_it('{$value.id}')" class="layui-btn layui-btn-sm" />
-						<input type="button" value="{lang删除}" onclick="delete_it('{$value.id}')" class="layui-btn layui-btn-sm" />
+						<input type="button" value="{lang編輯}" onclick="edit_it('{$value.id}')" class="layui-btn layui-btn-sm" />
+						<input type="button" value="{lang刪除}" onclick="delete_it('{$value.id}')" class="layui-btn layui-btn-sm" />
 					</div>
 				</td>
 			</tr>

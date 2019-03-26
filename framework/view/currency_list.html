@@ -3,13 +3,13 @@
 </script>
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang货币及汇率管理}
+		{lang貨幣及匯率管理}
 		<div class="layui-btn-group fr">
 			<button class="layui-btn layui-btn-sm" onclick="$.phpok.go('{url ctrl=currency func=set /}');">
-				<i class="layui-icon">&#xe608;</i> {lang添加货币}
+				<i class="layui-icon">&#xe608;</i> {lang新增貨幣}
 			</button>
 			<button class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.admin.close()">
-				<i class="layui-icon">&#x1006;</i> {lang关闭}
+				<i class="layui-icon">&#x1006;</i> {lang關閉}
 			</button>
 		</div>
 	</div>
@@ -17,12 +17,12 @@
 		<table class="layui-table">
 		<thead>
 		<tr>
-			<th>{lang货币代号}</th>
-			<th>{lang数字代码}</th>
-			<th>{lang状态}</th>
-			<th>{lang名称}</th>
-			<th>{lang汇率}</th>
-			<th>{lang显示效果}</th>
+			<th>{lang貨幣代號}</th>
+			<th>{lang數字程式碼}</th>
+			<th>{lang狀態}</th>
+			<th>{lang名稱}</th>
+			<th>{lang匯率}</th>
+			<th>{lang顯示效果}</th>
 			<th>{lang排序}</th>
 			<th><div>{lang操作}</div></th>
 		</tr>
@@ -38,11 +38,11 @@
 			<td><label for="id_{$value.id}">{$value.title}</label></td>
 			<td>{$value.val}</td>
 			<td>{$value.symbol_left}{func rand 10 99}.{func rand 10 99}{$value.symbol_right}</td>
-			<td><div class="gray i hand center" title="{lang点击调整排序}" name="taxis" data="{$value.id}">{$value.taxis}</div></td>
+			<td><div class="gray i hand center" title="{lang點選調整排序}" name="taxis" data="{$value.id}">{$value.taxis}</div></td>
 			<td>
 				<div class="layui-btn-group">
-					<!-- if $popedom.modify --><input type="button" value="{lang编辑}" onclick="$.phpok.go('{url ctrl=currency func=set id=$value.id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
-					<!-- if $popedom.delete --><input type="button" value="{lang删除}" onclick="currency_del('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" /><!-- /if -->
+					<!-- if $popedom.modify --><input type="button" value="{lang編輯}" onclick="$.phpok.go('{url ctrl=currency func=set id=$value.id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
+					<!-- if $popedom.delete --><input type="button" value="{lang刪除}" onclick="currency_del('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" /><!-- /if -->
 				</div>
 			</td>
 		</tr>

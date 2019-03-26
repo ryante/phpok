@@ -1,12 +1,12 @@
 /***********************************************************
 	Filename: {phpok}js/global.www.js
-	Note	: 前台公共JS加载
+	Note	: 前臺公共JS載入
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
 	Update  : 2013年9月12日
 ***********************************************************/
-//前台通用弹出窗口
+//前臺通用彈出視窗
 function phpok_open(id,title)
 {
 	if(id == "login" || id == "register")
@@ -17,7 +17,7 @@ function phpok_open(id,title)
 	{
 		var url = id;
 	}
-	if(!title || title == "undefined") title = '弹出窗';
+	if(!title || title == "undefined") title = '彈出窗';
 	$.dialog.open(url,{
 		 "title":title
 		,"resize":true
@@ -28,9 +28,9 @@ function phpok_open(id,title)
 	});
 }
 
-//前台常用JS函数封装
+//前臺常用JS函式封裝
 ;(function($){
-//定义验证码
+//定義驗證碼
 $.fn.phpok_vcode = function(ext){
 	var url = api_url('vcode');
 	if(ext && ext != 'undefined')
@@ -46,7 +46,7 @@ $.phpok_www = {
 			$.dialog.alert(lang.commentNotId);
 			return false;
 		}
-		//直接通过JS判断是否恶意灌水
+		//直接通過JS判斷是否惡意灌水
 		var spam = $("#"+id+"_spam").val();
 		if(!spam)
 		{
@@ -62,7 +62,7 @@ $.phpok_www = {
 		var url = api_url('comment','save','id='+tid);
 		url += "&content="+$.str.encode(content);
 		url += "&_spam="+spam;
-		//提交评论
+		//提交評論
 		var rs = json_ajax(url);
 		if(rs.status == 'ok')
 		{

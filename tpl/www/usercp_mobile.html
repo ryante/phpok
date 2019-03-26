@@ -1,4 +1,4 @@
-<!-- php:$title = "修改手机号 - 会员中心" --><!-- include tpl=head title=$title -->
+<!-- php:$title = "修改手機號 - 會員中心" --><!-- include tpl=head title=$title -->
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#userinfo_mobile").submit(function(){
@@ -8,7 +8,7 @@ $(document).ready(function(){
 			'url':api_url('usercp','mobile'),
 			'success':function(rs){
 				if(rs.status){
-					$.dialog.alert("您的手机更新成功",function(){
+					$.dialog.alert("您的手機更新成功",function(){
 						$.phpok.reload();
 					},'succeed');
 					return true;
@@ -30,30 +30,30 @@ function update_send_sms_loading()
 {
 	maxtime--;
 	if(maxtime < 1){
-		$("#sms_send_status").val('发送验证码');
+		$("#sms_send_status").val('傳送驗證碼');
 		sms_send_lock = false;
 		maxtime = 60;
 		window.clearInterval(win_time_out);
 		return true;
 	}
-	var tips = "验证码已发送("+maxtime+")";
+	var tips = "驗證碼已傳送("+maxtime+")";
 	$("#sms_send_status").val(tips);
 }
 
 function send_sms()
 {
 	if(sms_send_lock){
-		$.dialog.alert('验证码已发送，请一分钟后再执行');
+		$.dialog.alert('驗證碼已傳送，請一分鐘後再執行');
 		return false;
 	}
 	var url = api_url('vcode','sms');
 	var mobile = $("#mobile").val();
 	if(!mobile){
-		$.dialog.alert('手机号不能为空');
+		$.dialog.alert('手機號不能為空');
 		return false;
 	}
 	url += "&mobile="+mobile;
-	$.dialog.tips("正在执行中，请稍候…");
+	$.dialog.tips("正在執行中，請稍候…");
 	update_send_sms_loading();
 	$.phpok.json(url,function(rs){
 		if(rs.status){
@@ -63,7 +63,7 @@ function send_sms()
 			return true;
 		}
 		$.dialog.alert(rs.info);
-		$("#sms_send_status").val('发送验证码');
+		$("#sms_send_status").val('傳送驗證碼');
 	});
 }
 </script>
@@ -74,27 +74,27 @@ function send_sms()
 	<div class="left"><!-- include tpl=block/usercp_nav --></div>
 	<div class="right am-panel-group">
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">手机号修改</div>
+			<div class="am-panel-hd">手機號修改</div>
 			<div class="am-panel-bd">
 				<form class="am-form am-form-horizontal" id="userinfo_mobile" method="post">
 				<div class="am-form-group">
-					<label for="pass" class="am-u-sm-2 am-form-label">会员密码</label>
+					<label for="pass" class="am-u-sm-2 am-form-label">會員密碼</label>
 					<div class="am-u-sm-10"><input type="password" name="pass" id="pass" /></div>
 				</div>
 				<!-- if $rs.mobile -->
 				<div class="am-form-group">
-					<label for="oldmobile" class="am-u-sm-2 am-form-label">原手机</label>
+					<label for="oldmobile" class="am-u-sm-2 am-form-label">原手機</label>
 					<div class="am-u-sm-10"><input type="text" name="oldmobile" id="oldmobile" value="{$rs.mobile}" class="input" disabled /></div>
 				</div>
 				<!-- /if -->
 				<div class="am-form-group">
-					<label for="mobile" class="am-u-sm-2 am-form-label">名称</label>
+					<label for="mobile" class="am-u-sm-2 am-form-label">名稱</label>
 					<div class="am-u-sm-{$sendsms ? 8 : 10}">
 						<input type="text" name="mobile" id="mobile" value="" class="input" />
 					</div>
 					<!-- if $sendsms -->
 					<div class="am-u-sm-2">
-						<input type="button" value="发送验证码" onclick="send_sms()" class="am-btn am-btn-default" id="sms_send_status" />
+						<input type="button" value="傳送驗證碼" onclick="send_sms()" class="am-btn am-btn-default" id="sms_send_status" />
 					</div>
 					<!-- /if -->
 				</div>
@@ -102,7 +102,7 @@ function send_sms()
 				
 				
 				<div class="am-form-group">
-					<label for="chkcode" class="am-u-sm-2 am-form-label"> 验证码</label>
+					<label for="chkcode" class="am-u-sm-2 am-form-label"> 驗證碼</label>
 					<div class="am-u-sm-10"><input type="text" name="chkcode" id="chkcode" /></div>
 				</div>
 				<!-- /if -->
@@ -114,12 +114,12 @@ function send_sms()
 			</div>
 		</div>
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">友情说明</div>
+			<div class="am-panel-hd">友情說明</div>
 			<div class="am-panel-bd">
 				<ul>
-					<li>手机号修改需要您提供会员密码认证</li>
-					<li>请确填写的手机号是11位有效数字，暂不接受其他类型的手机号</li>
-					<li>我们推荐您使用插件来实现手机号变更验证</li>
+					<li>手機號修改需要您提供會員密碼認證</li>
+					<li>請確填寫的手機號是11位有效數字，暫不接受其他型別的手機號</li>
+					<li>我們推薦您使用外掛來實現手機號變更驗證</li>
 				</ul>
 			</div>
 		</div>

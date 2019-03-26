@@ -30,11 +30,11 @@ function save()
 <input type="hidden" name="id" value="{$id}" />
 <div class="table">
 	<div class="title">
-		{lang执行方法：}<span class="note">{lang请选择要执行的参数}</span>
+		{lang執行方法：}<span class="note">{lang請選擇要執行的引數}</span>
 	</div>
 	<div class="content">
 		<select name="efunc" onchange="$.admin_plugin.einfo(this.value)">
-			<option value=''>{lang请选择执行方法}</option>
+			<option value=''>{lang請選擇執行方法}</option>
 			<!-- loop from=$elist key=$k value=$v id=$idxx -->
 			<option value="{$k}"{if $k == $rs.efunc} selected{/if} data-title="{$v.title}">{$v.title}<!-- if $v.id != $v.title --> / {$v.id}<!-- /if --></option>
 			<!-- /loop -->
@@ -43,7 +43,7 @@ function save()
 </div>
 <div class="table">
 	<div class="title">
-		{lang名称：}<span class="note">{lang请针对快捷菜单设置一个名称}</span>
+		{lang名稱：}<span class="note">{lang請針對快捷選單設定一個名稱}</span>
 	</div>
 	<div class="content">
 		<input type="text" name="title" value="{$rs.title}" class="default" />
@@ -59,7 +59,7 @@ function save()
 </div>
 <div class="table">
 	<div class="title">
-		{lang显示位置：}<span class="note">{lang请选择要摆放的位置}</span>
+		{lang顯示位置：}<span class="note">{lang請選擇要擺放的位置}</span>
 	</div>
 	<div class="content">
 		<ul class="layout">
@@ -71,7 +71,7 @@ function save()
 </div>
 <div class="table" id="iconlist"{if !$rs.type || $rs.type == 'none'} style="display:none;"{/if}>
 	<div class="title">
-		{lang图标选择：}<span class="note">{lang请选择一个图标或图片}</span>
+		{lang圖示選擇：}<span class="note">{lang請選擇一個圖示或圖片}</span>
 	</div>
 	<div class="content" id="iconlist_html">
 		<ul class="layout">

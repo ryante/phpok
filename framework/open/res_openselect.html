@@ -6,7 +6,7 @@
 	<title><!-- if $cate_rs -->{$cate_rs.title}管理器<!-- else -->附件管理器<!-- /if --></title>
 	<meta name="author" content="phpok.com" />
 	<style type="text/css">
-	html{font-size:14px;font-family:"Microsoft Yahei","宋体","Arial","Tahoma";margin:0;padding:0;background:#FFFFFF;}
+	html{font-size:14px;font-family:"Microsoft Yahei","宋體","Arial","Tahoma";margin:0;padding:0;background:#FFFFFF;}
 	body{margin:3px;padding:0;overflow-y:scroll;_margin:0; _height:100%;}
 	a{color:#000;text-decoration: none;}
 	ul.filelist{list-style:none;padding:0;margin:0}
@@ -39,7 +39,7 @@
 	function check_search()
 	{
 		if(!$("#keywords").val()){
-			$.dialog.alert('请输入要搜索的关键字');
+			$.dialog.alert('請輸入要搜尋的關鍵字');
 			return false;
 		}
 		return true;
@@ -134,11 +134,11 @@
 	<form method="post" action="{$formurl}" onsubmit="return check_search()">
 	<table>
 	<tr>
-		<td>搜索：</td>
+		<td>搜尋：</td>
 		<td><input type="text" name="keywords" id="keywords" value="{$keywords}" class="keywords" /></td>
-		<td><input type="submit" value=" {lang搜索} " /></td>
-		<td><input type="button" value=" {lang取消搜索} " onclick="$.phpok.go('{$formurl}')" /></td>
-		<td><input type="button" value=" {lang刷新} " onclick="$.phpok.reload()" /></td>
+		<td><input type="submit" value=" {lang搜尋} " /></td>
+		<td><input type="button" value=" {lang取消搜尋} " onclick="$.phpok.go('{$formurl}')" /></td>
+		<td><input type="button" value=" {lang重新整理} " onclick="$.phpok.reload()" /></td>
 	</tr>
 	</table>
 	</form>
@@ -152,9 +152,9 @@
 			<img src="{$value.ico}" class="img" />
 		</div>
 		<div class="note">
-			<div class="info">名称：{$value.title}</div>
-			<div class="info">添加：{func date "Y-m-d H:i" $value.addtime}</div>
-			<div class="info">属性：{$value.attr ? $value.attr.width.' x '.$value.attr.height : '-'}</div>
+			<div class="info">名稱：{$value.title}</div>
+			<div class="info">新增：{func date "Y-m-d H:i" $value.addtime}</div>
+			<div class="info">屬性：{$value.attr ? $value.attr.width.' x '.$value.attr.height : '-'}</div>
 		</div>
 		<div class="clear"></div>
 		</div>

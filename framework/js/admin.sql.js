@@ -1,17 +1,17 @@
 /**
- * SQL操作类
+ * SQL操作類
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年10月04日
 **/
 ;(function($){
 	$.admin_sql = {
 
 		/**
-		 * 选择只有碎片的表
+		 * 選擇只有碎片的表
 		**/
 		select_free:function()
 		{
@@ -21,19 +21,19 @@
 		},
 
 		/**
-		 * 优化数据表
+		 * 優化資料表
 		**/
 		optimize:function()
 		{
 			var id = $.input.checkbox_join();
 			if(!id){
-				$.dialog.alert(p_lang('请选择数据表'));
+				$.dialog.alert(p_lang('請選擇資料表'));
 				return false;
 			}
 			var url = get_url('sql','optimize','id='+$.str.encode(id));
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.alert(p_lang('数据优化成功'),function(){
+					$.dialog.alert(p_lang('資料優化成功'),function(){
 						$.phpok.reload();
 					},'succeed');
 					return true;
@@ -44,19 +44,19 @@
 		},
 
 		/**
-		 * 修复数据表
+		 * 修復資料表
 		**/
 		repair:function()
 		{
 			var id = $.input.checkbox_join();
 			if(!id){
-				$.dialog.alert(p_lang('请选择数据表'));
+				$.dialog.alert(p_lang('請選擇資料表'));
 				return false;
 			}
 			var url = get_url('sql','repair','id='+$.str.encode(id));
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.alert(p_lang('数据表修复成功'),function(){
+					$.dialog.alert(p_lang('資料表修復成功'),function(){
 						$.phpok.reload();
 					},'succeed');
 					return true;
@@ -67,11 +67,11 @@
 		},
 
 		/**
-		 * 备份数据表
+		 * 備份資料表
 		**/
 		backup:function()
 		{
-			$.dialog.confirm(p_lang('确定要执行备份操作吗？未选定表将备份全部！'),function(){
+			$.dialog.confirm(p_lang('確定要執行備份操作嗎？未選定表將備份全部！'),function(){
 				var id = $.input.checkbox_join();
 				if(!id){
 					id = 'all';
@@ -82,35 +82,35 @@
 		},
 
 		/**
-		 * 恢复指定的备份文件
+		 * 恢復指定的備份檔案
 		**/
 		recover:function(id)
 		{
-			$.dialog.confirm(p_lang('确定要恢复到这个备份'),function(){
+			$.dialog.confirm(p_lang('確定要恢復到這個備份'),function(){
 				var url = get_url('sql','recover','id='+id);
 				$.phpok.go(url);
 			});
 		},
 
 		/**
-		 * 删除指定的备份文件
+		 * 刪除指定的備份檔案
 		**/
 		del:function(id)
 		{
-			$.dialog.confirm(p_lang('确定要删除这个备份吗？删除后就不能恢复了'),function(){
+			$.dialog.confirm(p_lang('確定要刪除這個備份嗎？刪除後就不能恢復了'),function(){
 				var url = get_url('sql','delete','id='+id);
 				$.phpok.go(url);
 			});
 		},
 
 		/**
-		 * 查看表明细信息
+		 * 查看錶明細資訊
 		**/
 		show:function(tbl)
 		{
 			var url = get_url('sql','show','table='+$.str.encode(tbl));
 			$.dialog.open(url,{
-				'title':p_lang('查看表 {tbl} 明细',tbl),
+				'title':p_lang('查看錶 {tbl} 明細',tbl),
 				'lock':true,
 				'width':'500px',
 				'height':'500px',
@@ -119,15 +119,15 @@
 		},
 
 		/**
-		 * 删除表操作
+		 * 刪除表操作
 		**/
 		tbl_delete:function(tbl)
 		{
-			$.dialog.confirm(p_lang('确定要删除表 {tbl} 信息吗？',tbl),function(){
+			$.dialog.confirm(p_lang('確定要刪除表 {tbl} 資訊嗎？',tbl),function(){
 				var url = get_url('sql','table_delete','tbl='+$.str.encode(tbl));
 				$.phpok.json(url,function(rs){
 					if(rs.status){
-						$.dialog.alert(p_lang('删除成功'),function(){
+						$.dialog.alert(p_lang('刪除成功'),function(){
 							$.phpok.reload();
 						},'succeed');
 						return false;
@@ -140,5 +140,5 @@
 	}
 })(jQuery);
 $(document).ready(function(){
-	top.$.desktop.title(p_lang('数据库管理'));
+	top.$.desktop.title(p_lang('資料庫管理'));
 });

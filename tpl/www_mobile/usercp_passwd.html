@@ -1,4 +1,4 @@
-<!-- include tpl=head title=密码修改 -->
+<!-- include tpl=head title=密碼修改 -->
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#userinfo_password").submit(function(){
@@ -8,7 +8,7 @@ $(document).ready(function(){
 			'url':api_url('usercp','passwd'),
 			'success':function(rs){
 				if(rs.status){
-					$.dialog.tips("您的密码更新成功",function(){
+					$.dialog.tips("您的密碼更新成功",function(){
 						$.phpok.go(get_url('usercp'))
 					}).lock();
 					return true;
@@ -24,21 +24,21 @@ $(document).ready(function(){
 <div class="main">
 	<div class="right am-panel-group">
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">密码修改</div>
+			<div class="am-panel-hd">密碼修改</div>
 			<div class="am-panel-bd">
 				<form method="post" id="userinfo_password" class="am-form am-form-horizontal">
 				<!-- if $rs.pass -->
 				<div class="am-form-group">
-					<label for="oldpass" class="am-u-sm-12 am-form-label">旧密码</label>
+					<label for="oldpass" class="am-u-sm-12 am-form-label">舊密碼</label>
 					<div class="am-u-sm-12"><input type="password" name="oldpass" id="oldpass" /></div>
 				</div>
 				<!-- /if -->
 				<div class="am-form-group">
-					<label for="newpass" class="am-u-sm-12 am-form-label"> 新密码</label>
+					<label for="newpass" class="am-u-sm-12 am-form-label"> 新密碼</label>
 					<div class="am-u-sm-12"><input type="password" name="newpass" id="newpass" /></div>
 				</div>
 				<div class="am-form-group">
-					<label for="chkpass" class="am-u-sm-12 am-form-label">确认新密码</label>
+					<label for="chkpass" class="am-u-sm-12 am-form-label">確認新密碼</label>
 					<div class="am-u-sm-12"><input type="password" name="chkpass" id="chkpass" /></div>
 				</div>
 				<div class="am-form-group">
@@ -48,9 +48,9 @@ $(document).ready(function(){
 			</div>
 		</div>
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">友情说明</div>
+			<div class="am-panel-hd">友情說明</div>
 			<div class="am-panel-bd">
-				密码长度不能小于6位数，为保证您数据的安全，密码建议您使用：字母+数字+大小写混合
+				密碼長度不能小於6位數，為保證您資料的安全，密碼建議您使用：字母+數字+大小寫混合
 			</div>
 		</div>
 	</div>

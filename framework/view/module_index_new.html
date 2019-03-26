@@ -1,9 +1,9 @@
 <!-- include tpl=head_lay -->
 <div class="layui-card">
 	<div class="layui-card-header ">
-		{lang模塊管理}
+		{lang模組管理}
 		<div class="layui-btn-group fr">
-			<input type="button" value="{lang添加模塊}" onclick="$.admin_module.create()" class="layui-btn layui-btn-sm" />
+			<input type="button" value="{lang新增模組}" onclick="$.admin_module.create()" class="layui-btn layui-btn-sm" />
 		</div>
 	</div>
 	<div class="layui-card-body">
@@ -24,14 +24,14 @@
 				<td><label for="tid_{$value.id}">{$value.title}<!-- if $value.note --><span
 						class="gray i">（{$value.note}）</span><!-- /if --></label></td>
 				<td>
-					<div class="gray hand" title="{lang點擊調整排序}" name="taxis" data="{$value.id}" onclick="$.admin_module.taxis('{$value.id}','{$value.taxis}')">{$value.taxis}</div>
+					<div class="gray hand" title="{lang點選調整排序}" name="taxis" data="{$value.id}" onclick="$.admin_module.taxis('{$value.id}','{$value.taxis}')">{$value.taxis}</div>
 				</td>
 				<td class="center">
 					<!-- if $popedom.set -->
 					<div class="layui-btn-group">
 						<input type="button" value="{lang編輯}" onclick="$.admin_module.edit('{$value.id}')" class="layui-btn  layui-btn-sm"/>
 						<input type="button" value="{lang刪除}" onclick="$.admin_module.del('{$value.id}','{$value.title}')" class="layui-btn  layui-btn-sm"/>
-						<input type="button" value="{lang字段管理}" onclick="$.win('{lang字段管理}_{$value.title}_#{$value.id}','{url ctrl=newmodule func=fields id=$value.id/}');" class="layui-btn layui-btn-sm"/>
+						<input type="button" value="{lang欄位管理}" onclick="$.win('{lang欄位管理}_{$value.title}_#{$value.id}','{url ctrl=newmodule func=fields id=$value.id/}');" class="layui-btn layui-btn-sm"/>
 					</div>
 					<!-- /if -->
 				</td>

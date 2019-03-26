@@ -5,7 +5,7 @@
 		<div class="layui-form-item">
 			<div class="layui-inline">
 				<select name="type" lay-filter="type">
-					<option value="">{lang统计类型…}</option>
+					<option value="">{lang統計型別…}</option>
 					<!-- loop from=$plist key=$key value=$value id=$tmpid -->
 					<option value="{$key}"{if $type == $key} selected{/if}>{$value}</option>
 					<!-- /loop -->
@@ -13,7 +13,7 @@
 			</div>
 			<div class="layui-inline {if !$xlist}hide{/if}" data-id="line-x">
 				<select name="x">
-					<option value="">{lang请选择…}</option>
+					<option value="">{lang請選擇…}</option>
 					<!-- loop from=$xlist key=$key value=$value id=$tmpid -->
 					<option value="{$key}"{if $x == $key} selected{/if}>{$value}</option>
 					<!-- /loop -->
@@ -28,32 +28,32 @@
 			</div>
 			<div class="layui-inline {if !$zlist}hide{/if}" data-id="line-z">
 				<select name="data_mode">
-					<option value="">{lang计算方式…}</option>
-					<option value="count"{if $data_mode == 'count'} selected{/if}>{lang数量计算（Count）}</option>
-					<option value="sum"{if $data_mode == 'sum'} selected{/if}>{lang和计算（SUM）}</option>
+					<option value="">{lang計算方式…}</option>
+					<option value="count"{if $data_mode == 'count'} selected{/if}>{lang數量計算（Count）}</option>
+					<option value="sum"{if $data_mode == 'sum'} selected{/if}>{lang和計算（SUM）}</option>
 				</select>
 			</div>
 			<div class="layui-inline">
 				<div class="layui-input-inline" style="width:140px">
-					<input type="text" name="startdate" id="startdate" class="layui-input" value="{$startdate}" placeholder="{lang开始时间}" />
+					<input type="text" name="startdate" id="startdate" class="layui-input" value="{$startdate}" placeholder="{lang開始時間}" />
 				</div>
 				<div class="layui-form-mid">~</div>
 				<div class="layui-input-inline" style="width:140px">
-					<input type="text" name="stopdate" id="stopdate" class="layui-input" value="{$stopdate}" placeholder="{lang结束时间}" />
+					<input type="text" name="stopdate" id="stopdate" class="layui-input" value="{$stopdate}" placeholder="{lang結束時間}" />
 				</div>
 			</div>
 			<div class="layui-inline">
 				<div class="layui-input-inline">
 					<select name="chart">
-						<option value="">{lang图表模式…}</option>
-						<option value="line"{if $chart == 'line'} selected{/if}>{lang折线图}</option>
-						<option value="bar"{if $chart == 'bar'} selected{/if}>{lang柱状图}</option>
+						<option value="">{lang圖表模式…}</option>
+						<option value="line"{if $chart == 'line'} selected{/if}>{lang折線圖}</option>
+						<option value="bar"{if $chart == 'bar'} selected{/if}>{lang柱狀圖}</option>
 					</select>
 				</div>
 			</div>
 			<div class="layui-inline">
 				<button type="submit" class="layui-btn layui-btn-sm" >
-					{lang开始统计}
+					{lang開始統計}
 				</button>
 			</div>
 		</div>

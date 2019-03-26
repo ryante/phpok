@@ -14,7 +14,7 @@ function save()
 		'dataType':'json',
 		'success':function(rs){
 			if(rs.status){
-				var tip = ($("#id").val() > 0) ? '{lang组信息修改成功}' : '{lang组信息添加成功}';
+				var tip = ($("#id").val() > 0) ? '{lang組資訊修改成功}' : '{lang組資訊新增成功}';
 				$.dialog.alert(tip,function(){
 					opener.$.phpok.reload();
 				},'succeed');
@@ -30,7 +30,7 @@ function save()
 <input type="hidden" name="id" id="id" value="{$id}" />
 <div class="table">
 	<div class="title">
-		{lang名称：}<span class="note">{lang请填写选项组名称}</span>
+		{lang名稱：}<span class="note">{lang請填寫選項組名稱}</span>
 	</div>
 	<div class="content">
 		<input type="text" name="title" id="title" value="{$rs.title}" class="default" />
@@ -38,7 +38,7 @@ function save()
 </div>
 <div class="table">
 	<div class="title">
-		分割符：<span class="note">仅限组有联动数组时有效，留空时使用英文竖线表示，一经设置请不要轻易改动，否则会解析错误</span>
+		分割符：<span class="note">僅限組有聯動陣列時有效，留空時使用英文豎線表示，一經設定請不要輕易改動，否則會解析錯誤</span>
 	</div>
 	<div class="content">
 		<input type="text" name="link_symbol" id="link_symbol" value="{$rs.link_symbol}" class="short" />

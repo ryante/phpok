@@ -14,7 +14,7 @@ function save()
 		'dataType':'json',
 		'success':function(rs){
 			if(rs.status == 'ok'){
-				$.dialog.alert('附件信息修改成功',function(){
+				$.dialog.alert('附件資訊修改成功',function(){
 					$.dialog.close();
 				},'succeed');
 			}
@@ -30,16 +30,16 @@ function save()
 <form method="post" id="editopen" onsubmit="return false;">
 <div class="table">
 	<div class="title">
-		附件名称：
-		<span class="note">设置附件的名称，以方便管理</span>
+		附件名稱：
+		<span class="note">設定附件的名稱，以方便管理</span>
 	</div>
 	<div class="content"><input type="text" id="title" name="title" class="default" value="{$rs.title}" /></div>
 </div>
 
 <div class="table">
 	<div class="title">
-		附件说明：
-		<span class="note">如需对此附件进行说明，可在这里编写，请不要超过5000字</span>
+		附件說明：
+		<span class="note">如需對此附件進行說明，可在這裡編寫，請不要超過5000字</span>
 	</div>
 	<div class="content">{$note}</div>
 </div>

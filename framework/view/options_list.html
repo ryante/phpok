@@ -6,8 +6,8 @@
 			<thead>
 			<tr>
 				<th>ID</th>
-				<th>名称</th>
-				<th width="480px">图片</th>
+				<th>名稱</th>
+				<th width="480px">圖片</th>
 				<th>值</th>
 				<th width="70">排序</th>
 				<th width="100">操作</th>
@@ -25,8 +25,8 @@
 						</div>
 						<div class="layui-input-inline" style="width: 160px;">
 							<div class="layui-btn-group">
-								<input type="button" class="layui-btn layui-btn-sm" value="{lang选择图片}" onclick="$.phpokform.text_button_image_select('pic_{$value.id}')" />
-								<input type="button" value="{lang预览}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_image_preview('pic_{$value.id}')" />
+								<input type="button" class="layui-btn layui-btn-sm" value="{lang選擇圖片}" onclick="$.phpokform.text_button_image_select('pic_{$value.id}')" />
+								<input type="button" value="{lang預覽}" class="layui-btn layui-btn-sm" onclick="$.phpokform.text_button_image_preview('pic_{$value.id}')" />
 								<input type="button" value="{lang清除}" class="layui-btn layui-btn-sm layui-btn-danger" onclick="$('#pic_{$value.id}').val('')" />
 							</div>
 						</div>
@@ -36,14 +36,14 @@
 				<td><input type="text" id="taxis_{$value.id}" value="{$value.taxis}"  class="layui-input" /></td>
 				<td>
 					<div class="layui-btn-group">
-						<input type="button" value="{lang编辑}" onclick="$.admin_options.info_update('{$value.id}')" class="layui-btn layui-btn-sm" />
-						<input type="button" value="{lang删除}" onclick="$.admin_options.info_del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
+						<input type="button" value="{lang編輯}" onclick="$.admin_options.info_update('{$value.id}')" class="layui-btn layui-btn-sm" />
+						<input type="button" value="{lang刪除}" onclick="$.admin_options.info_del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 					</div>
 				</td>
 			</tr>
 			<!-- /loop -->
 			<tr>
-				<td>{lang添加}</td>
+				<td>{lang新增}</td>
 				<td><input type="text" id="title_0"  class="layui-input"/></td>
 				<td>
 					<div class="layui-inline">
@@ -52,8 +52,8 @@
 						</div>
 						<div class="layui-input-inline" style="width: 160px;">
 							<div class="layui-btn-group">
-								<input type="button" class="layui-btn layui-btn-sm" value="{lang选择图片}" onclick="select_pic('pic_0')" />
-								<input type="button" value="{lang预览}" class="layui-btn layui-btn-sm" onclick="show_big('pic_0')" />
+								<input type="button" class="layui-btn layui-btn-sm" value="{lang選擇圖片}" onclick="select_pic('pic_0')" />
+								<input type="button" value="{lang預覽}" class="layui-btn layui-btn-sm" onclick="show_big('pic_0')" />
 								<input type="button" value="{lang清除}" class="layui-btn layui-btn-sm layui-btn-warm" onclick="$('#pic_0').val('')" />
 							</div>
 						</div>
@@ -61,7 +61,7 @@
 				</td>
 				<td><input type="text" id="val_0" value=""  class="layui-input" /></td>
 				<td><input type="text" id="taxis_0" value="{$taxis}"  class="layui-input" /></td>
-				<td><input type="button" value="{lang添加}" onclick="$.admin_options.info_add({$rs.id})" class="layui-btn layui-btn-sm" /></td>
+				<td><input type="button" value="{lang新增}" onclick="$.admin_options.info_add({$rs.id})" class="layui-btn layui-btn-sm" /></td>
 			</tr>
 			</tbody>
 		</table>

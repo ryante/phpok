@@ -12,21 +12,21 @@
             }, sendAuthCode: function (e) {
                 e = a.extend({seconds: 60, elemPhone: "#LAY_phone", elemVercode: "#LAY_vercode"}, e);
                 var i, t = e.seconds, n = a(e.elem), l = function (a) {
-                    t--, t < 0 ? (n.removeClass(f).html("获取验证码"), t = e.seconds, clearInterval(i)) : n.addClass(f).html(t + "秒后重获"), a || (i = setInterval(function () {
+                    t--, t < 0 ? (n.removeClass(f).html("獲取驗證碼"), t = e.seconds, clearInterval(i)) : n.addClass(f).html(t + "秒後重獲"), a || (i = setInterval(function () {
                         l(!0)
                     }, 1e3))
                 };
                 e.elemPhone = a(e.elemPhone), e.elemVercode = a(e.elemVercode), n.on("click", function () {
                     var i = e.elemPhone, n = i.val();
                     if (t === e.seconds && !a(this).hasClass(f)) {
-                        if (!/^1\d{10}$/.test(n)) return i.focus(), layer.msg("请输入正确的手机号");
+                        if (!/^1\d{10}$/.test(n)) return i.focus(), layer.msg("請輸入正確的手機號");
                         if ("object" == typeof e.ajax) {
                             var s = e.ajax.success;
                             delete e.ajax.success
                         }
                         P.req(a.extend(!0, {
                             url: "/auth/code", type: "get", data: {phone: n}, success: function (a) {
-                                layer.msg("验证码已发送至你的手机，请注意查收", {
+                                layer.msg("驗證碼已傳送至你的手機，請注意查收", {
                                     icon: 1,
                                     shade: 0
                                 }), e.elemVercode.focus(), l(), s && s(a)
@@ -100,7 +100,7 @@
             }, serach: function (e) {
                 e.off("keypress").on("keypress", function (a) {
                     if (this.value.replace(/\s/g, "") && 13 === a.keyCode) {
-                        var i = e.attr("lay-action"), t = e.attr("lay-text") || "搜索";
+                        var i = e.attr("lay-action"), t = e.attr("lay-text") || "搜尋";
                         i += this.value, t = t + ' <span style="color: #FF5722;">' + P.escape(this.value) + "</span>", layui.index.openTabsPage(i, t), F.serach.keys || (F.serach.keys = {}), F.serach.keys[P.tabsPage.index] = this.value, this.value === F.serach.keys[P.tabsPage.index] && F.refresh(e), this.value = ""
                     }
                 })
@@ -115,17 +115,17 @@
             }, note: function (e) {
                 var a = P.screen() < 2, i = layui.data(n.tableName).note;
                 F.note.index = P.popup({
-                    title: "便签",
+                    title: "便籤",
                     shade: 0,
                     offset: ["41px", a ? null : e.offset().left - 250 + "px"],
                     anim: -1,
                     id: "LAY_adminNote",
                     skin: "layadmin-note layui-anim layui-anim-upbit",
-                    content: '<textarea placeholder="内容"></textarea>',
+                    content: '<textarea placeholder="內容"></textarea>',
                     resize: !1,
                     success: function (e, a) {
                         var t = e.find("textarea"),
-                            l = void 0 === i ? "便签中的内容会存储在本地，这样即便你关掉了浏览器，在下次打开时，依然会读取到上一次的记录。是个非常小巧实用的本地备忘录" : i;
+                            l = void 0 === i ? "便籤中的內容會儲存在本地，這樣即便你關掉了瀏覽器，在下次開啟時，依然會讀取到上一次的記錄。是個非常小巧實用的本地備忘錄" : i;
                         t.val(l).focus().on("keyup", function () {
                             layui.data(n.tableName, {key: "note", value: this.value})
                         })
@@ -211,7 +211,7 @@
         };
     !function () {
         var e = layui.data(n.tableName);
-        e.theme ? P.theme(e.theme) : n.theme && P.initTheme(n.theme.initColorIndex), "pageTabs" in layui.setter || (layui.setter.pageTabs = !0), n.pageTabs || (a("#LAY_app_tabs").addClass(c), u.addClass("layadmin-tabspage-none")), s.ie && s.ie < 10 && l.error("IE" + s.ie + "下访问可能不佳，推荐使用：Chrome / Firefox / Edge 等高级浏览器", {
+        e.theme ? P.theme(e.theme) : n.theme && P.initTheme(n.theme.initColorIndex), "pageTabs" in layui.setter || (layui.setter.pageTabs = !0), n.pageTabs || (a("#LAY_app_tabs").addClass(c), u.addClass("layadmin-tabspage-none")), s.ie && s.ie < 10 && l.error("IE" + s.ie + "下訪問可能不佳，推薦使用：Chrome / Firefox / Edge 等高階瀏覽器", {
             offset: "auto",
             id: "LAY_errorIE"
         })

@@ -295,7 +295,7 @@ class form_model_base extends phpok_model
 			}
 			return false;
 		}
-		//單選框 下拉 複選框 檢索
+		//單選框 下拉 核取方塊 檢索
 		$txtlist = array('radio','checkbox','select');
 		if(in_array($rs['form_type'],$txtlist)){
 			$jz_search = false;

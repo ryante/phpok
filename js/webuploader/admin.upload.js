@@ -1,10 +1,10 @@
 /**
- * 后台附件类型上传操作类，仅限后台操作
+ * 後臺附件型別上傳操作類，僅限後臺操作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年03月22日
 **/
 ;(function($){
@@ -24,11 +24,11 @@
 			'chunkSize':102400,
 			'threads':3,
 			'auto':false,
-			'accept':{'title':p_lang('图片(*.jpg, *.gif, *.png)'),'extensions':'jpg,png,gif'}
+			'accept':{'title':p_lang('圖片(*.jpg, *.gif, *.png)'),'extensions':'jpg,png,gif'}
 		};
 		this.opts = $.extend({},defaults,options);
 		if(!this.opts.pick.innerHTML){
-			this.opts.pick.innerHTML = p_lang('选择本地文件');
+			this.opts.pick.innerHTML = p_lang('選擇本地檔案');
 		}
 		this.id = "#"+this.opts.id;
 		uploader = WebUploader.create(this.opts);
@@ -37,7 +37,7 @@
 		uploader.on('beforeFileQueued',function(file){
 			var extlist = (self.opts.accept.extensions).split(",");
 			if($.inArray((file.ext).toLowerCase(),extlist) < 0){
-				$.dialog.alert(p_lang('附件类型不支持{filext}格式',' <span class="red">'+file.ext+'</span> '));
+				$.dialog.alert(p_lang('附件型別不支援{filext}格式',' <span class="red">'+file.ext+'</span> '));
 				return false;
 			}
 		});
@@ -46,7 +46,7 @@
 		}
 		uploader.on('fileQueued',function(file){
 			$(self.id+"_progress").append('<div id="phpok-upfile-' + file.id + '" class="phpok-upfile-list">' +
-				'<div class="title">' + file.name + ' <span class="status">'+p_lang('等待上传…')+'</span></div>' +
+				'<div class="title">' + file.name + ' <span class="status">'+p_lang('等待上傳…')+'</span></div>' +
 				'<div class="progress"><span>&nbsp;</span></div>' +
 				'<div class="cancel" id="phpok-upfile-cancel-'+file.id+'"></div>' +
 			'</div>' );
@@ -54,14 +54,14 @@
 				uploader.removeFile(file,true);
 				$("#phpok-upfile-"+file.id).remove();
 			});
-			//执行自定义的方法
+			//執行自定義的方法
 			if(self.opts.file_queued && self.opts.file_queued != 'undefined'){
 				(self.opts.file_queued)(file);
 				return true;
 			}
 		});
 		uploader.on('uploadStart',function(file){
-			//执行自定义的方法
+			//執行自定義的方法
 			if(self.opts.upload_start && self.opts.upload_start != 'undefined'){
 				(self.opts.upload_start)(file);
 				return true;
@@ -72,7 +72,7 @@
 			$percent = $li.find('.progress span');
 			var width = $li.find('.progress').width();
 			$percent.css( 'width', parseInt(width * percent, 10) + 'px' );
-			$li.find('span.status').html(p_lang('正在上传…'));
+			$li.find('span.status').html(p_lang('正在上傳…'));
 			self.upload_state = 'running';
 		});
 		uploader.on('uploadBeforeSend',function(block,data,headers){
@@ -80,33 +80,33 @@
 			if($(self.id+"_cateid").val()){
 				data.cateid = $(self.id+"_cateid").val();
 			}
-			//执行自定义的方法
+			//執行自定義的方法
 			if(self.opts.before_send && self.opts.before_send != 'undefined'){
 				(self.opts.before_send)(block,data,headers);
 				return true;
 			}
 		});
 		uploader.on('uploadAccept',function(block,ret){
-	        //执行自定义的方法
+	        //執行自定義的方法
 			if(self.opts.upload_accept && self.opts.upload_accept != 'undefined'){
 				(self.opts.upload_accept)(block,ret);
 				return true;
 			}
 		});
 		uploader.on('uploadSuccess',function(file,data){
-			//执行自定义的方法
+			//執行自定義的方法
 			if(self.opts.success && self.opts.success != 'undefined'){
 				(self.opts.success)(file,data);
 				return true;
 			}
-			//上传成功后，清除表单项
+			//上傳成功後，清除表單項
 			$("input[type=file]").val('');
 			if(!data.status && data._raw){
 				var lst = data._raw.split('{"status"');
 				var info = lst[0];
 				var html = lst[1];
 				if(info.indexOf('$HTTP_RAW_POST_DATA') > -1){
-					$.dialog.tips('建议更新您的PHP.INI环境，设置：always_populate_raw_post_data = -1');
+					$.dialog.tips('建議更新您的PHP.INI環境，設定：always_populate_raw_post_data = -1');
 					data = $.parseJSON('{"status"'+html);
 				}else{
 					$.dialog.alert(data._raw);
@@ -114,10 +114,10 @@
 				}
 			}
 			if(data.status != 'ok'){
-				$.dialog.alert(p_lang('上传错误')+' <span style="color:red">'+data.content+'</span>');
+				$.dialog.alert(p_lang('上傳錯誤')+' <span style="color:red">'+data.content+'</span>');
 				return false;
 			}
-			$('#phpok-upfile-'+file.id).find('span.status').html(p_lang('上传成功'));
+			$('#phpok-upfile-'+file.id).find('span.status').html(p_lang('上傳成功'));
 			var tmp = $.phpok.data('upload-'+self.opts.id);
 			if(self.opts.multiple == 'true'){
 				var val = $(self.id).val();
@@ -144,7 +144,7 @@
 			$.phpokform.upload_showhtml(self.opts.id,multiple);
 		});
 		uploader.on('uploadError',function(file,reason){
-			$('#phpok-upfile-'+file.id).find('span.status').html(p_lang('上传错误：')+'<span style="color:red">'+reason+'</span> ');
+			$('#phpok-upfile-'+file.id).find('span.status').html(p_lang('上傳錯誤：')+'<span style="color:red">'+reason+'</span> ');
 		});
 		uploader.on('uploadFinished',function(){
 			self.upload_state = 'ready';
@@ -153,26 +153,26 @@
 				return true;
 			}
 		});
-		//上传完成，无论失败与否，3秒后删除
+		//上傳完成，無論失敗與否，3秒後刪除
 		uploader.on('uploadComplete',function(file){
 			$("#phpok-upfile-"+file.id).fadeOut();
 		});
 		uploader.on('error',function(handle){
 			var tip = '';
 			if(handle == 'Q_EXCEED_NUM_LIMIT'){
-				tip = p_lang('要添加的文件数量超出系统限制');
+				tip = p_lang('要新增的檔案數量超出系統限制');
 			}
 			if(handle == 'Q_EXCEED_SIZE_LIMIT'){
-				tip = p_lang('要添加的文件总大小超出系统限制');
+				tip = p_lang('要新增的檔案總大小超出系統限制');
 			}
 			if(handle == 'Q_TYPE_DENIED'){
-				tip = p_lang('文件类型不符合要求');
+				tip = p_lang('檔案型別不符合要求');
 			}
 			if(handle == 'F_DUPLICATE'){
-				tip = p_lang('文件重复');
+				tip = p_lang('檔案重複');
 			}
 			if(handle =='F_EXCEED_SIZE'){
-				tip = p_lang('上传文件超过系统限制');
+				tip = p_lang('上傳檔案超過系統限制');
 			}
 			if(!tip){
 				tip = handle;
@@ -182,12 +182,12 @@
 		});
 		$(this.id+"_submit").click(function(){
 			if($(this).hasClass('disabled')){
-				$.dialog.alert(p_lang('正在上传中，已锁定'));
+				$.dialog.alert(p_lang('正在上傳中，已鎖定'));
 				return false;
 			}
 			var f = $(self.id+"_progress .phpok-upfile-list").length;
 			if(f<1){
-				$.dialog.alert(p_lang('请选择要上传的文件'));
+				$.dialog.alert(p_lang('請選擇要上傳的檔案'));
 				return false;
 			}
 			if(self.upload_state == 'ready' || self.upload_state == 'paused'){

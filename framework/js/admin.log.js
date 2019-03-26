@@ -1,10 +1,10 @@
 /**
- * 后台日志涉及到的操作
+ * 後臺日誌涉及到的操作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年05月07日
 **/
 ;(function($){
@@ -18,7 +18,7 @@
 		},
 		del:function(id)
 		{
-			$.dialog.confirm(p_lang('确定要删除这条日志吗？'),function(){
+			$.dialog.confirm(p_lang('確定要刪除這條日誌嗎？'),function(){
 				var url = get_url('log','delete','id='+id);
 				$.phpok.json(url,function(rs){
 					if(rs.status){
@@ -31,7 +31,7 @@
 		},
 		delete30:function()
 		{
-			$.dialog.confirm(p_lang('确定要删除30天之前日志吗？'),function(){
+			$.dialog.confirm(p_lang('確定要刪除30天之前日誌嗎？'),function(){
 				var url = get_url('log','delete','date=30');
 				$.phpok.json(url,function(rs){
 					if(rs.status){
@@ -46,10 +46,10 @@
 		{
 			var ids = $.checkbox.join();
 			if(!ids){
-				$.dialog.alert(p_lang('未选择要删除的日志'));
+				$.dialog.alert(p_lang('未選擇要刪除的日誌'));
 				return false;
 			}
-			$.dialog.confirm(p_lang('确定要删除选中的日志吗？'),function(){
+			$.dialog.confirm(p_lang('確定要刪除選中的日誌嗎？'),function(){
 				var url = get_url('log','delete','ids='+$.str.encode(ids));
 				$.phpok.json(url,function(rs){
 					if(rs.status){

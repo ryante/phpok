@@ -4,9 +4,9 @@
 		{lang文庫}
 		<!-- if $popedom.set -->
 		<div class="layui-btn-group fr">
-			<input type="button" value="{lang添加文庫}" onclick="$.win('{lang添加文庫}','{url ctrl=newproject func=set/}')" class="layui-btn layui-btn-sm" />
+			<input type="button" value="{lang新增文庫}" onclick="$.win('{lang新增文庫}','{url ctrl=newproject func=set/}')" class="layui-btn layui-btn-sm" />
 			<!-- if $session.adm_develop -->
-			<input type="button" onclick="$.admin_project.import_xml()" value="{lang文庫導入}" class="layui-btn layui-btn-sm" />
+			<input type="button" onclick="$.admin_project.import_xml()" value="{lang文庫匯入}" class="layui-btn layui-btn-sm" />
 			<!-- /if -->
 		</div>
 		<!-- /if -->
@@ -21,7 +21,7 @@
 				<th width="70px" class="center">ID</th>
 				<th width="30px">&nbsp;</th>
 				<th>{lang文庫名稱}</th>
-				<th>图片</th>
+				<th>圖片</th>
 				<th width="65" class="center">{lang排序}</th>
 				<!-- if $popedom.set -->
 				<th width="260px">&nbsp;</th>
@@ -41,17 +41,17 @@
 
 				<td>{if $value.pic}<a href="{$value.pic}" target="_blank"><img src="{$value.pic}" width="28px" height="28px" border="0" class="hand" style="border:1px solid #dedede;padding:1px;" /></a>{/if}</td>
 
-				<td><div class="gray i hand center" title="{lang點擊調整排序}" name="taxis" data="{$value.id}">{$value.taxis}</div></td>
+				<td><div class="gray i hand center" title="{lang點選調整排序}" name="taxis" data="{$value.id}">{$value.taxis}</div></td>
 				<!-- if $popedom.set -->
 				<td>
 					<div class="layui-btn-group">
 						<input type="button" value="{lang編輯}" onclick="$.win('{lang編輯}_#{$value.id}','{url ctrl=newproject func=set id=$value.id/}')" class="layui-btn layui-btn-sm" />
 						<input type="button" value="{lang刪除}" onclick="$.admin_project.del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 						<!-- if !$value.parent_id -->
-						<input type="button" value="{lang添加子項}" class="layui-btn layui-btn-sm" onclick="$.win('{lang添加子項}_#{$value.id}','{url ctrl=newproject func=set pid=$value.id/}')" />
+						<input type="button" value="{lang新增子項}" class="layui-btn layui-btn-sm" onclick="$.win('{lang新增子項}_#{$value.id}','{url ctrl=newproject func=set pid=$value.id/}')" />
 						<!-- /if -->
 						<!-- if $value.module -->
-						<input type="button" value="{lang字段管理}" onclick="$.win('{lang字段管理}_{$value.title}_#{$value.module}','{url ctrl=newmodule func=fields id=$value.module/}');" class="layui-btn layui-btn-sm"/>
+						<input type="button" value="{lang欄位管理}" onclick="$.win('{lang欄位管理}_{$value.title}_#{$value.module}','{url ctrl=newmodule func=fields id=$value.module/}');" class="layui-btn layui-btn-sm"/>
 						<!-- /if -->
 
 					</div>
@@ -81,9 +81,9 @@
 			<!-- if $session.adm_develop -->
 			<li>
 				<div class="layui-btn-group">
-					<input type="button" value="{lang擴展字段}" onclick="$.admin_project.extinfo()" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang擴充套件欄位}" onclick="$.admin_project.extinfo()" class="layui-btn layui-btn-sm" />
 					<input type="button" value="{lang復制}" onclick="$.admin_project.copy()" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang導出}" onclick="$.admin_project.export()" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang匯出}" onclick="$.admin_project.export()" class="layui-btn layui-btn-sm" />
 				</div>
 			</li>
 			<!-- /if -->

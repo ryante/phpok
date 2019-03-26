@@ -5,17 +5,17 @@
 <input type="hidden" name="pid" id="pid" value="{$pid}" />
 <input type="hidden" name="parent_id" id="parent_id" value="{$parent_id}" />
 <div class="layui-card">
-	<div class="layui-card-header">{lang主要信息}</div>
+	<div class="layui-card-header">{lang主要資訊}</div>
 	<div class="layui-card-body">
 		<div class="layui-form-item">
-			<label class="layui-form-label"><!-- if $p_rs.alias_title -->{$p_rs.alias_title}<!-- else -->{lang主题}<!-- /if --></label>
+			<label class="layui-form-label"><!-- if $p_rs.alias_title -->{$p_rs.alias_title}<!-- else -->{lang主題}<!-- /if --></label>
 			<div class="layui-input-block">
-				<input type="text" name="title" id="title" value="{$rs.title}" class="layui-input" placeholder="{lang不能超过80个汉字}<!-- if $p_rs.alias_note -->，{$p_rs.alias_note}<!-- /if -->" />
+				<input type="text" name="title" id="title" value="{$rs.title}" class="layui-input" placeholder="{lang不能超過80個漢字}<!-- if $p_rs.alias_note -->，{$p_rs.alias_note}<!-- /if -->" />
 			</div>
 		</div>		
 		<!-- if $attrlist && $p_rs.is_attr -->
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang属性}</label>
+			<label class="layui-form-label">{lang屬性}</label>
 			<div class="layui-input-block">
 				<!-- loop from=$attrlist key=$key value=$value -->
 				<input type="checkbox" name="attr[]" lay-skin="primary" id="_attr_{$key}" title="{$value.val}" value="{$key}"{if $value.status} checked{/if} />
@@ -25,34 +25,34 @@
 		<!-- /if -->
 		<!-- if $p_rs.is_identifier == 2 -->
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang自定义标识}</label>
+			<label class="layui-form-label">{lang自定義標識}</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="identifier" name="identifier" value="{$rs.identifier}" class="layui-input" />
 			</div>
 			<div class="layui-input-inline auto" id="HTML-POINT-PHPOK-IDENTIFIER">
-				<input type="button" value="{lang随机码}" onclick="$.admin.rand()" class="layui-btn layui-btn-sm" />
+				<input type="button" value="{lang隨機碼}" onclick="$.admin.rand()" class="layui-btn layui-btn-sm" />
 			</div>
-			<div class="layui-input-inline auto gray">{lang仅支持字母、数字、下划线或中划线且必须是字母开头}</div>
+			<div class="layui-input-inline auto gray">{lang僅支援字母、數字、下劃線或中劃線且必須是字母開頭}</div>
 		</div>
 		<!-- /if -->
 		
 		<!-- if $p_rs.cate -->
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang主分类}</label>
+			<label class="layui-form-label">{lang主分類}</label>
 			<div class="layui-input-inline default-auto">
 				<select name="cate_id" id="cate_id">
-					<option value="">{lang请选择…}</option>
+					<option value="">{lang請選擇…}</option>
 					<!-- loop from=$catelist key=$key value=$value id=$tmpid -->
 					<option value="{$value.id}"{if $value.id == $rs.cate_id} selected{/if}>{$value._space}{$value.title}</option>
 					<!-- /loop -->
 				</select>
 			</div>
-			<div class="layui-input-inline auto gray">{lang主分类不能为空}</div>
+			<div class="layui-input-inline auto gray">{lang主分類不能為空}</div>
 		</div>
 		<!-- /if -->
 		<!-- if $p_rs.cate && $p_rs.cate_multiple -->
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang扩展分类}</label>
+			<label class="layui-form-label">{lang擴充套件分類}</label>
 			<div class="layui-input-block">
 				<select name="ext_cate_id[]" class="w99" lay-ignore multiple="multiple">
 				<!-- loop from=$catelist key=$key value=$value id=$tmpid -->
@@ -60,7 +60,7 @@
 				<!-- /loop -->
 				</select>
 			</div>
-			<div class="layui-input-block mtop">{lang按钮CTRL进行多选}</div>
+			<div class="layui-input-block mtop">{lang按鈕CTRL進行多選}</div>
 		</div>
 		<!-- /if -->
 		<!-- loop from=$extlist key=$key value=$value id=$tmpid -->
@@ -76,9 +76,9 @@
 				<!-- if $popedom.ext && $value.is_edit && $session.adm_develop -->
 				<div class="layui-btn-group">
 					<!-- if $ext_module != 'add-list' -->
-					<input type="button" value="{lang编辑}" class="layui-btn layui-btn-xs" onclick="ext_edit('{$value.identifier}','{$ext_module}')" />
+					<input type="button" value="{lang編輯}" class="layui-btn layui-btn-xs" onclick="ext_edit('{$value.identifier}','{$ext_module}')" />
 					<!-- /if -->
-					<input type="button" value="{lang删除}" class="layui-btn layui-btn-xs layui-btn-danger" onclick="ext_delete('{$value.identifier}','{$ext_module}','{$value.title}')" />
+					<input type="button" value="{lang刪除}" class="layui-btn layui-btn-xs layui-btn-danger" onclick="ext_delete('{$value.identifier}','{$ext_module}','{$value.title}')" />
 				</div>
 				<!-- /if -->
 			</div>
@@ -86,7 +86,7 @@
 		<!-- /loop -->
 		<!-- if $p_rs.is_tag == 2 -->
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang标签}</label>
+			<label class="layui-form-label">{lang標籤}</label>
 			<div class="layui-input-block">
 				<input type="text" name="tag" id="tag" value="{$rs.tag}" class="layui-input" />
 			</div>
@@ -97,49 +97,49 @@
 					<input type="button" value="{$value.title}" onclick="$.phpok_list.tag_append(this.value,'{$tag_config.separator}')" class="layui-btn layui-btn-sm" />
 					<!-- /loop -->
 					<!-- /if -->
-					<input type="button" value="{lang更多选择}" onclick="$.phpok_list.tag()" class="layui-btn layui-btn-sm layui-btn-warm" />
+					<input type="button" value="{lang更多選擇}" onclick="$.phpok_list.tag()" class="layui-btn layui-btn-sm layui-btn-warm" />
 					<input type="button" value="{lang清空}" onclick="$('input[name=tag]').val('')" class="layui-btn layui-btn-sm layui-btn-danger" />
 				</div>
 			</div>
-			<div class="layui-input-block mtop">{lang多个标签用 [title] 分开，最多不能超过10个|title:$tag_config.separator}</div>
+			<div class="layui-input-block mtop">{lang多個標籤用 [title] 分開，最多不能超過10個|title:$tag_config.separator}</div>
 		</div>
 		<!-- /if -->
 		<!-- if $p_rs.is_userid == 2 -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang会员}
+				{lang會員}
 			</label>
 			<div class="layui-input-inline auto">
 				{func form_edit user_id $rs.user_id user}
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang绑定会员功能，允许会员对主题进行修改或删除，需要开放发布权限}</div>
+			<div class="layui-input-inline auto gray lh38">{lang繫結會員功能，允許會員對主題進行修改或刪除，需要開放釋出許可權}</div>
 		</div>
 		<!-- /if -->
 		<!-- if $p_rs.is_tpl_content == 2 -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang内容模板}
+				{lang內容模板}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="tpl" name="tpl" class="layui-input" value="{$rs.tpl}" />
 			</div>
 			<div class="layui-input-inline auto gray">
 				<div class="layui-btn-group">
-					<input type="button" value="{lang选择}" onclick="phpok_tpl_open('tpl')" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang選擇}" onclick="phpok_tpl_open('tpl')" class="layui-btn layui-btn-sm" />
 					<input type="button" value="{lang清空}" onclick="$('#tpl').val('');" class="layui-btn layui-btn-sm" />
 				</div>
 			</div>
 			<div class="layui-input-inline auto gray lh38">
-				{lang为空将使用} <span class="red">{$p_rs.tpl_content ? $p_rs.tpl_content : $p_rs.identifier.'_content'}</span>
+				{lang為空將使用} <span class="red">{$p_rs.tpl_content ? $p_rs.tpl_content : $p_rs.identifier.'_content'}</span>
 			</div>
 		</div>
 		<!-- /if -->
 		<!-- if $popedom.ext && $session.adm_develop -->
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang扩展字段}</label>
+			<label class="layui-form-label">{lang擴充套件欄位}</label>
 			<div class="layui-input-inline default">
 				<select id="_tmp_select_add">
-					<option value="">{lang请选择要添加的扩展字段…}</option>
+					<option value="">{lang請選擇要新增的擴充套件欄位…}</option>
 					<!-- loop from=$extfields key=$key value=$value -->
 					<option value="{$value.identifier}">{$value.title} - {$value.identifier}</option>
 					<!-- /loop -->
@@ -147,8 +147,8 @@
 			</div>
 			<div class="layui-input-inline auto">
 				<div class="layui-btn-group">
-					<input type="button" value="{lang快速添加}" onclick="$.admin_list.update_select_add('{$ext_module}')"  class="layui-btn" />
-					<input type="button" value="{lang创建新的扩展字段}" onclick="ext_add('{$ext_module}')" class="layui-btn" />
+					<input type="button" value="{lang快速新增}" onclick="$.admin_list.update_select_add('{$ext_module}')"  class="layui-btn" />
+					<input type="button" value="{lang建立新的擴充套件欄位}" onclick="ext_add('{$ext_module}')" class="layui-btn" />
 				</div>
 			</div>
 		</div>
@@ -157,21 +157,21 @@
 </div>
 <!-- if $p_rs.is_biz -->
 <div class="layui-card">
-	<div class="layui-card-header">{lang电子商务}</div>
+	<div class="layui-card-header">{lang電子商務}</div>
 	<div class="layui-card-body">
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang产品类型}
+				{lang產品型別}
 			</label>
 			<div class="layui-input-inline auto">
-				<input type="radio" title="{lang实物}" name="is_virtual" value="0"{if !$rs.is_virtual} checked{/if} />
-				<input type="radio" title="{lang服务}" name="is_virtual" value="1"{if $rs.is_virtual} checked{/if} />
+				<input type="radio" title="{lang實物}" name="is_virtual" value="0"{if !$rs.is_virtual} checked{/if} />
+				<input type="radio" title="{lang服務}" name="is_virtual" value="1"{if $rs.is_virtual} checked{/if} />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang实物产品加入购物车后需要填写收件地址，服务不需要}</div>
+			<div class="layui-input-inline auto gray lh38">{lang實物產品加入購物車後需要填寫收件地址，服務不需要}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang销售价格}
+				{lang銷售價格}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<ul class="layout">
@@ -179,18 +179,18 @@
 					<li>
 						<select name="currency_id" id="currency_id">
 							<!-- loop from=$currency_list key=$key value=$value -->
-							<option value="{$value.id}"{if $rs.currency_id == $value.id} selected{/if} code="{$value.code}" rate="{$value.val}" sleft="{$value.symbol_left}" sright="{$value.symbol_right}">{$value.title}_{lang汇率} {$value.val}</option>
+							<option value="{$value.id}"{if $rs.currency_id == $value.id} selected{/if} code="{$value.code}" rate="{$value.val}" sleft="{$value.symbol_left}" sright="{$value.symbol_right}">{$value.title}_{lang匯率} {$value.val}</option>
 							<!-- /loop -->
 						</select>
 					</li>
 				</ul>
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang设置产品的价格及货币类型}</div>
+			<div class="layui-input-inline auto gray lh38">{lang設定產品的價格及貨幣型別}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				<i class="layui-icon layui-tips" lay-tips="{lang填写产品的计量单位，以方便结算}">&#xe702;</i>
-				{lang计量单位}
+				<i class="layui-icon layui-tips" lay-tips="{lang填寫產品的計量單位，以方便結算}">&#xe702;</i>
+				{lang計量單位}
 			</label>
 			<div class="layui-input-inline">
 				<input type="text" id="unit" class="layui-input" name="unit" value="{$rs.unit}" />
@@ -213,26 +213,26 @@
 			<div class="layui-input-inline auto">
 				<input type="text" id="weight" class="layui-input" name="weight" value="{$rs.weight}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">Kg {lang可用于计算基于重量的运费，单位是千克，请注意换算}</div>
+			<div class="layui-input-inline auto gray lh38">Kg {lang可用於計算基於重量的運費，單位是千克，請注意換算}</div>
 		</div>
 		<!-- /if -->
 		<!-- if $freight && $freight.type == 'volume' -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang体积}
+				{lang體積}
 			</label>
 			<div class="layui-input-inline auto">
 				<input type="text" id="volume" name="volume" class="layui-input" value="{$rs.volume}" /> 
 			</div>
-			<div class="layui-input-inline auto gray lh38">M<sup>3</sup> {lang设置产品体积，用于计算基于体积的运费，单位是立方米，请注意换算}</div>
+			<div class="layui-input-inline auto gray lh38">M<sup>3</sup> {lang設定產品體積，用於計算基於體積的運費，單位是立方米，請注意換算}</div>
 		</div>
 		<!-- /if -->
 		<!-- if $p_rs.biz_attr -->
 		<div class="layui-form-item">
 			<label class="layui-form-label title" style="margin-top:3px;">
-				{lang产品属性}
+				{lang產品屬性}
 			</label>
-			<div class="layui-input-block">{lang负号表示价格下调，加号或无符号表示价格上调，如+10或10，表示加10，-10表示减10}</div>
+			<div class="layui-input-block">{lang負號表示價格下調，加號或無符號表示價格上調，如+10或10，表示加10，-10表示減10}</div>
 			<div class="layui-input-block">
 				<input type="hidden" name="_biz_attr" id="_biz_attr" value="{$_attr}" />
 				<div>
@@ -240,14 +240,14 @@
 					<tr>
 						<td>
 							<select id="biz_attr_id" lay-ignore onchange="$.admin_list_edit.attr_add(this.value)">
-								<option value="">{lang请选择一个属性操作内容…}</option>
+								<option value="">{lang請選擇一個屬性操作內容…}</option>
 								<!-- loop from=$biz_attrlist key=$key value=$value id=$tmpid -->
 								<option value="{$value.id}">{$value.title}</option>
 								<!-- /loop -->
 							</select>
 						</td>
 						<td>&nbsp;</td>
-						<td><input type="button" value="{lang添加新属性}" onclick="$.admin_list_edit.attr_create()" class="layui-btn layui-btn-sm" /></td>
+						<td><input type="button" value="{lang新增新屬性}" onclick="$.admin_list_edit.attr_create()" class="layui-btn layui-btn-sm" /></td>
 					</tr>
 					</table>
 				</div>
@@ -263,29 +263,29 @@
 <!-- if $p_rs.is_seo -->
 <div class="layui-card">
 	<div class="layui-card-header hand" onclick="$.admin.card(this)">
-		{langSEO优化}
+		{langSEO優化}
 		<i class="layui-icon{if $p_rs.is_seo == 1} layui-icon-right{else} layui-icon-down{/if}"></i>
 	</div>
 	<div class="layui-card-body{if $p_rs.is_seo == 1} hide{/if}">
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{langSEO标题}
+				{langSEO標題}
 			</label>
 			<div class="layui-input-block">
 				<input type="text" id="seo_title" name="seo_title" class="layui-input" value="{$rs.seo_title}" />
 			</div>
 			<div class="layui-input-block mtop">
-				{lang设置此标题后，网站Title将会替代默认定义的，不能超过50个汉字}
+				{lang設定此標題後，網站Title將會替代預設定義的，不能超過50個漢字}
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{langSEO关键字}
+				{langSEO關鍵字}
 			</label>
 			<div class="layui-input-block">
 				<input type="text" id="seo_keywords" name="seo_keywords" class="layui-input" value="{$rs.seo_keywords}" />
 			</div>
-			<div class="layui-input-block mtop">{lang多个关键字用英文逗号隔开，为空将使用默认}</div>
+			<div class="layui-input-block mtop">{lang多個關鍵字用英文逗號隔開，為空將使用預設}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
@@ -294,7 +294,7 @@
 			<div class="layui-input-block">
 				<textarea name="seo_desc" id="seo_desc" class="layui-textarea">{$rs.seo_desc}</textarea>
 			</div>
-			<div class="layui-input-block mtop">{lang简单描述该主题信息，用于搜索引挈，不支持HTML，不能超过80个汉字}</div>
+			<div class="layui-input-block mtop">{lang簡單描述該主題資訊，用於搜尋引挈，不支援HTML，不能超過80個漢字}</div>
 		</div>
 	</div>
 </div>
@@ -302,36 +302,36 @@
 
 <div class="layui-card">
 	<div class="layui-card-header hand" onclick="$.admin.card(this)">
-		{lang扩展信息}
+		{lang擴充套件資訊}
 		<i class="layui-icon layui-icon-right"></i>
 	</div>
 	<div class="layui-card-body hide">
 		<!-- if $p_rs.is_identifier == 1 -->
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang自定义标识}</label>
+			<label class="layui-form-label">{lang自定義標識}</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="identifier" name="identifier" value="{$rs.identifier}" class="layui-input" />
 			</div>
 			<div class="layui-input-inline auto" id="HTML-POINT-PHPOK-IDENTIFIER">
-				<input type="button" value="{lang随机码}" onclick="$.admin.rand()" class="layui-btn layui-btn-sm" />
+				<input type="button" value="{lang隨機碼}" onclick="$.admin.rand()" class="layui-btn layui-btn-sm" />
 			</div>
-			<div class="layui-input-inline auto gray">{lang仅支持字母、数字、下划线或中划线且必须是字母开头}</div>
+			<div class="layui-input-inline auto gray">{lang僅支援字母、數字、下劃線或中劃線且必須是字母開頭}</div>
 		</div>
 		<!-- /if -->
 		<!-- if $p_rs.is_userid == 1 -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang会员}
+				{lang會員}
 			</label>
 			<div class="layui-input-inline auto">
 				{func form_edit user_id $rs.user_id user}
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang绑定会员功能，允许会员对主题进行修改或删除，需要开放发布权限}</div>
+			<div class="layui-input-inline auto gray lh38">{lang繫結會員功能，允許會員對主題進行修改或刪除，需要開放釋出許可權}</div>
 		</div>
 		<!-- /if -->
 		<!-- if $p_rs.is_tag == 1 -->
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang标签}</label>
+			<label class="layui-form-label">{lang標籤}</label>
 			<div class="layui-input-block">
 				<input type="text" name="tag" id="tag" value="{$rs.tag}" class="layui-input" />
 			</div>
@@ -342,84 +342,84 @@
 					<input type="button" value="{$value.title}" onclick="$.phpok_list.tag_append(this.value,'{$tag_config.separator}')" class="layui-btn layui-btn-sm" />
 					<!-- /loop -->
 					<!-- /if -->
-					<input type="button" value="{lang更多选择}" onclick="$.phpok_list.tag()" class="layui-btn layui-btn-sm layui-btn-warm" />
+					<input type="button" value="{lang更多選擇}" onclick="$.phpok_list.tag()" class="layui-btn layui-btn-sm layui-btn-warm" />
 					<input type="button" value="{lang清空}" onclick="$('input[name=tag]').val('')" class="layui-btn layui-btn-sm layui-btn-danger" />
 				</div>
 			</div>
-			<div class="layui-input-block mtop">{lang多个标签用 [title] 分开，最多不能超过10个|title:$tag_config.separator}</div>
+			<div class="layui-input-block mtop">{lang多個標籤用 [title] 分開，最多不能超過10個|title:$tag_config.separator}</div>
 		</div>
 		<!-- /if -->
 		<!-- if $p_rs.is_tpl_content == 1 -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang内容模板}
+				{lang內容模板}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="tpl" name="tpl" class="layui-input" value="{$rs.tpl}" />
 			</div>
 			<div class="layui-input-inline auto gray">
 				<div class="layui-btn-group">
-					<input type="button" value="{lang选择}" onclick="phpok_tpl_open('tpl')" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang選擇}" onclick="phpok_tpl_open('tpl')" class="layui-btn layui-btn-sm" />
 					<input type="button" value="{lang清空}" onclick="$('#tpl').val('');" class="layui-btn layui-btn-sm" />
 				</div>
 			</div>
 			<div class="layui-input-inline auto gray lh38">
-				{lang为空将使用} <span class="red">{$p_rs.tpl_content ? $p_rs.tpl_content : $p_rs.identifier.'_content'}</span>
+				{lang為空將使用} <span class="red">{$p_rs.tpl_content ? $p_rs.tpl_content : $p_rs.identifier.'_content'}</span>
 			</div>
 		</div>
 		<!-- /if -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang状态}
+				{lang狀態}
 			</label>
 			<div class="layui-input-inline auto">
-				<input type="radio" title="{lang未审核}" name="status" id="status_0" value="0"{if $id && !$rs[status]} checked{/if} />
-				<input type="radio" name="status" title="{lang已审核}" id="status_1" value="1"{if !$id || $rs[status]} checked{/if} />
+				<input type="radio" title="{lang未稽核}" name="status" id="status_0" value="0"{if $id && !$rs[status]} checked{/if} />
+				<input type="radio" name="status" title="{lang已稽核}" id="status_1" value="1"{if !$id || $rs[status]} checked{/if} />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang未审核主题前台不可用，不可访问}</div>
+			<div class="layui-input-inline auto gray lh38">{lang未稽核主題前臺不可用，不可訪問}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang是否隐藏}
+				{lang是否隱藏}
 			</label>
 			<div class="layui-input-inline auto">
-				<input type="radio" title="{lang显示}" name="hidden" id="hidden_0" value="0"{if !$rs[hidden]} checked{/if} />
-				<input type="radio" title="{lang隐藏}" name="hidden" id="hidden_1" value="1"{if $rs.hidden} checked{/if} />
+				<input type="radio" title="{lang顯示}" name="hidden" id="hidden_0" value="0"{if !$rs[hidden]} checked{/if} />
+				<input type="radio" title="{lang隱藏}" name="hidden" id="hidden_1" value="1"{if $rs.hidden} checked{/if} />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang隐藏的主题在列表中不可见，但可以手工输网址访问}</div>
+			<div class="layui-input-inline auto gray lh38">{lang隱藏的主題在列表中不可見，但可以手工輸網址訪問}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang发布时间}
+				{lang釋出時間}
 			</label>
 			<div class="layui-input-inline auto">
 				<input type="text" id="dateline" name="dateline" class="layui-input" value="{if $rs.dateline}{func date 'Y-m-d H:i:s' $rs.dateline}{/if}" />
 			</div>
 			<div class="layui-input-inline auto">
 				<div class="layui-btn-group">
-					<input type="button" value="{lang时间选择器}" onclick="$.phpokform.laydate_button('dateline','datetime')" class="layui-btn layui-btn-sm" id="btn_dateline_datetime" />
+					<input type="button" value="{lang時間選擇器}" onclick="$.phpokform.laydate_button('dateline','datetime')" class="layui-btn layui-btn-sm" id="btn_dateline_datetime" />
 					<input type="button" value="{lang清空}" onclick="$.phpokform.clear('dateline')" class="layui-btn layui-btn-sm" />
 				</div>
 			</div>
-			<div class="layui-input-inline auto gray lh30">{lang自定义发布时间，留空使用系统时间}</div>
+			<div class="layui-input-inline auto gray lh30">{lang自定義釋出時間，留空使用系統時間}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang阅读次数}
+				{lang閱讀次數}
 			</label>
 			<div class="layui-input-inline auto">
 				<input type="text" id="hits" name="hits" class="layui-input" value="{$rs.hits}" />
 			</div>
-			<div class="layui-input-inline auto gray lh30">{lang正常情况请不要设置，以保证数据的准确，仅支持整数}</div>
+			<div class="layui-input-inline auto gray lh30">{lang正常情況請不要設定，以保證資料的準確，僅支援整數}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang财富基数}
+				{lang財富基數}
 			</label>
 			<div class="layui-input-inline auto">
 				<input type="text" id="integral" class="layui-input" name="integral" value="{$rs.integral}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang只支持整数，用于计算会员虚拟财富增减}</div>
+			<div class="layui-input-inline auto gray lh38">{lang只支援整數，用於計算會員虛擬財富增減}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
@@ -428,14 +428,14 @@
 			<div class="layui-input-inline auto">
 				<input type="text" id="sort" name="sort" class="layui-input" value="{$rs.sort}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang排序值只支持数字，不清楚请留空}</div>
+			<div class="layui-input-inline auto gray lh38">{lang排序值只支援數字，不清楚請留空}</div>
 		</div>
 	</div>
 </div>
 <div class="submit-info">
 	<div class="layui-container center">
 		<input type="submit" value="{lang提交}" class="layui-btn layui-btn-lg layui-btn-danger" />
-		<input type="button" value="{lang取消关闭}" class="layui-btn layui-btn-lg layui-btn-primary" onclick="$.admin.close()" />
+		<input type="button" value="{lang取消關閉}" class="layui-btn layui-btn-lg layui-btn-primary" onclick="$.admin.close()" />
 	</div>
 </div>
 <div class="submit-info-clear"></div>

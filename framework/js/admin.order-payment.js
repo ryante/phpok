@@ -1,11 +1,11 @@
 /**
- * 支付页
+ * 支付頁
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年10月06日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年10月06日
 **/
 ;(function($){
 	$.admin_order_payment = {
@@ -30,7 +30,7 @@
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						$.dialog.tips(p_lang('付款添加成功'),function(){
+						$.dialog.tips(p_lang('付款新增成功'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;
@@ -44,10 +44,10 @@
 		del:function(id,order_id)
 		{
 			var url = get_url('order','payment_delete','id='+id+"&order_id="+order_id);
-			$.dialog.confirm(p_lang('确定要删除这条支付吗？'),function(){
+			$.dialog.confirm(p_lang('確定要刪除這條支付嗎？'),function(){
 				$.phpok.json(url,function(rs){
 					if(rs.status){
-						$.dialog.tips(p_lang('付款信息删除成功'),function(){
+						$.dialog.tips(p_lang('付款資訊刪除成功'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;

@@ -1,10 +1,10 @@
 /**
- * 表单选项相关JS
+ * 表單選項相關JS
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年08月02日
 **/
 ;(function($){
@@ -18,20 +18,20 @@
 		{
 			var url = get_url('opt','group_set','id='+id);
 			$.dialog.open(url,{
-				'title':'编辑选项组信息',
+				'title':'編輯選項組資訊',
 				'lock':true,
 				'width':'500px',
 				'height':'300px',
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
-				'okVal':'修改保存',
+				'okVal':'修改儲存',
 				'cancel':true
 			});
 		},
@@ -39,30 +39,30 @@
 		{
 			var url = get_url('opt','group_set');
 			$.dialog.open(url,{
-				'title':'添加组信息',
+				'title':'新增組資訊',
 				'lock':true,
 				'width':'400px',
 				'height':'300px',
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
-				'okVal':'提交保存',
+				'okVal':'提交儲存',
 				'cancel':true
 			});
 		},
 		group_delete:function(id,title)
 		{
-			$.dialog.confirm(p_lang('确定要删除选项组{title}，删除后相应的数据也会删除，请慎用',' <span class="red">'+title+'</span> '),function(){
+			$.dialog.confirm(p_lang('確定要刪除選項組{title}，刪除後相應的資料也會刪除，請慎用',' <span class="red">'+title+'</span> '),function(){
 				var url = get_url('opt','group_del','id='+id);
 				$.phpok.ajax(url,function(data){
 					if(data == 'ok'){
-						$.dialog.alert(p_lang('删除成功'),function(){
+						$.dialog.alert(p_lang('刪除成功'),function(){
 							$.phpok.reload();
 						},'succeed');
 						return true;
@@ -74,14 +74,14 @@
 		},
 		opt_delete:function(id,title)
 		{
-			$.dialog.confirm(p_lang('确定要删除{title}吗？<br>此操作将同时删除子项内容！且不能恢复，请慎用！',' <span class="red">'+title+'</span> '),function(){
+			$.dialog.confirm(p_lang('確定要刪除{title}嗎？<br>此操作將同時刪除子項內容！且不能恢復，請慎用！',' <span class="red">'+title+'</span> '),function(){
 				var url = get_url('opt','del','id='+id);
 				$.phpok.ajax(url,function(info){
 					if(info == 'ok'){
 						$.phpok.reload();
 					}else{
 						if(!info){
-							info = p_lang('删除失败');
+							info = p_lang('刪除失敗');
 						}
 						$.dialog.alert(info);
 						return false;
@@ -114,29 +114,29 @@
 				url += "&pid="+pid;
 			}
 			$.dialog.open(url,{
-				'title':p_lang('数据导入'),
+				'title':p_lang('資料匯入'),
 				'width':'500px',
 				'height':'400px',
 				'lock':true,
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert(p_lang('iframe还没加载完毕呢'));
+						alert(p_lang('iframe還沒載入完畢呢'));
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
-				'okVal':p_lang('数据导入'),
+				'okVal':p_lang('資料匯入'),
 				'cancel':true
 			})
 		}
 	}
 	var config = {
-		'title':'信息',
+		'title':'資訊',
 		'width':'500px',
 		'id':'html-edit-content',
-		'okVal':'添加',
+		'okVal':'新增',
 		'cancelVal':'取消',
 		'taxis':10,
 		'group_id':0,
@@ -175,18 +175,18 @@
 					var url = get_url('opt','edit','id='+id);
 					var title = $("input[name=title]").val();
 					if(!title){
-						$.dialog.alert('显示信息不能为空');
+						$.dialog.alert('顯示資訊不能為空');
 						return false;
 					}
 					url += "&title="+$.str.encode(title);
 					var val = $("input[name=val]").val();
 					if(!val){
-						$.dialog.alert('值不能为空');
+						$.dialog.alert('值不能為空');
 						return false;
 					}
 					url += "&val="+$.str.encode(val);
 					url += "&taxis="+$.str.encode($("input[name=taxis]").val());
-					var obj = $.dialog.tips('正在保存数据，请稍候…');
+					var obj = $.dialog.tips('正在儲存資料，請稍候…');
 					$.phpok.ajax(url,function(info){
 						obj.close();
 						if(info == 'ok'){
@@ -225,18 +225,18 @@
 					var url = get_url('opt','add','group_id='+config.group_id+"&pid="+config.pid);
 					var title = $("input[name=title]").val();
 					if(!title){
-						$.dialog.alert('显示信息不能为空');
+						$.dialog.alert('顯示資訊不能為空');
 						return false;
 					}
 					url += "&title="+$.str.encode(title);
 					var val = $("input[name=val]").val();
 					if(!val){
-						$.dialog.alert('值不能为空');
+						$.dialog.alert('值不能為空');
 						return false;
 					}
 					url += "&val="+$.str.encode(val);
 					url += "&taxis="+$.str.encode($("input[name=taxis]").val());
-					var obj = $.dialog.tips('正在保存数据，请稍候…');
+					var obj = $.dialog.tips('正在儲存資料，請稍候…');
 					$.phpok.ajax(url,function(info){
 						obj.close();
 						if(info == 'ok'){

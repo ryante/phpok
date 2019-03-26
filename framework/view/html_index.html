@@ -1,4 +1,4 @@
-<!-- include tpl=head title=静态页生成 -->
+<!-- include tpl=head title=靜態頁生成 -->
 <style type="text/css">
 .bline{border-bottom:1px solid #ccc;margin-bottom:3px;padding:3px auto;}
 </style>
@@ -20,16 +20,16 @@ function create_html(id)
 		id = id_array.join(",");
 		id_array = null;
 	}
-	//通知对象
+	//通知物件
 	var $notice = $("#create_status");
-	$notice.append('<div class="bline">检测要生成的静态页信息并更新相关缓存信息…</div>');
+	$notice.append('<div class="bline">檢測要生成的靜態頁資訊並更新相關快取資訊…</div>');
 	if(!id || id == 'undefined')
 	{
-		$notice.append('<div class="red">未指定要生成静态页的项目！</div>');
+		$notice.append('<div class="red">未指定要生成靜態頁的專案！</div>');
 		return false;
 	}
 	var list = id.split(',');
-	//更新网址
+	//更新網址
 	var url = get_url('html','count','ids='+$.str.encode(id));
 	for(var i in list)
 	{
@@ -52,7 +52,7 @@ function create_html(id)
 			}
 			else
 			{
-				$notice.append('<div class="bline">已更新缓存，检测到有：<span class="red b">'+rs.content+'</span> 个静态页要生成，请耐心等候…')
+				$notice.append('<div class="bline">已更新快取，檢測到有：<span class="red b">'+rs.content+'</span> 個靜態頁要生成，請耐心等候…')
 				_create_html(0);
 			}
 		}
@@ -67,7 +67,7 @@ function _create_html(startid)
 		'dataType':'json',
 		'cache':false,
 		'success':function(rs){
-			//当更新数据超过50条时，执行清零操作
+			//當更新資料超過50條時，執行清零操作
 			if($notice.find('.bline').length>50)
 			{
 				$notice.html('');
@@ -75,7 +75,7 @@ function _create_html(startid)
 			if(rs.status != 'ok')
 			{
 				$notice.append('<div class="red">'+rs.content+'</div>');
-				$notice.append('<div>更新停止，请检查！</div>');
+				$notice.append('<div>更新停止，請檢查！</div>');
 				$notice.scrollTop($notice.height());
 				return false;
 			}
@@ -101,31 +101,31 @@ function _create_html(startid)
 }
 </script>
 <div class="tips clearfix">
-	系统已引入静态页功能，目前仅支持生成静态页有的：网站首页，项目列表页，详细页等几乎不带交互式功能的页面
+	系統已引入靜態頁功能，目前僅支援生成靜態頁有的：網站首頁，專案列表頁，詳細頁等幾乎不帶互動式功能的頁面
 </div>
 <div class="list">
 <table width="100%" cellpadding="0" cellspacing="0">
 <tr>
 	<th class="w33">&nbsp;</th>
 	<th class="id">ID</th>
-	<th class="lft">项目名称</th>
-	<th class="lft">标识串</th>
-	<th class="lft">类型</th>
+	<th class="lft">專案名稱</th>
+	<th class="lft">標識串</th>
+	<th class="lft">型別</th>
 	<th class="w99">操作</th>
 </tr>
 <tr>
-	<td class="center" id="title_index" data="网站首页"><input type="checkbox" value="index" name="ids" id="id_index" checked /></td>
+	<td class="center" id="title_index" data="網站首頁"><input type="checkbox" value="index" name="ids" id="id_index" checked /></td>
 	<td class="center gray">&nbsp;</td>
-	<td><label for="id_index">网站首页</label></td>
-	<td><span class="gray">系统首页</span></td>
+	<td><label for="id_index">網站首頁</label></td>
+	<td><span class="gray">系統首頁</span></td>
 	<td>-</td>
-	<td class="center"><input type="button" value="更新首页" class="button" onclick="create_html('index')" /></td>
+	<td class="center"><input type="button" value="更新首頁" class="button" onclick="create_html('index')" /></td>
 </tr>
 <!-- loop from=$rslist key=$key value=$value -->
 <tr>
 	<td class="center" id="title_{$value.id}" data="{$value.title}"><input type="checkbox" value="{$value.id}" name="ids" id="id_{$value.id}" checked /></td>
 	<td class="center gray">{$value.id}</td>
-	<td><label for="id_{$value.id}">{$value.space}{$value.title}<!-- if $value.nick_title --><span class="gray i"> ({$value.nick_title})</span><!-- /if --><!-- if $value.hidden --><span class="red i">（隐藏）</span><!-- /if --></label></td>
+	<td><label for="id_{$value.id}">{$value.space}{$value.title}<!-- if $value.nick_title --><span class="gray i"> ({$value.nick_title})</span><!-- /if --><!-- if $value.hidden --><span class="red i">（隱藏）</span><!-- /if --></label></td>
 	<td>{$value.identifier}</td>
 	<td id="types_{$value.id}">
 		<ul class="layout">
@@ -144,12 +144,12 @@ function _create_html(startid)
 </div>
 <div class="table">
 	<div class="content">
-		<input type="button" value="批量更新选中项" class="submit" onclick="create_html()" />
+		<input type="button" value="批量更新選中項" class="submit" onclick="create_html()" />
 		<div style="border:1px solid #cccccc;padding:5px;margin:10px 10px 5px 3px;">
 		<table width="100%" cellpadding="0" cellspacing="0">
 		<tr>
 			<td valign="top" width="80" style="border-right:1px solid #ccc;">
-				<div>更新进度：</div>
+				<div>更新進度：</div>
 				<div><input type="button" value="清空" onclick="$('#create_status').html('');" /></div>
 			</td>
 			<td><div id="create_status" style="padding-left:10px;line-height:26px;height:300px;overflow-y:scroll;"></div></td>

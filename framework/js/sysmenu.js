@@ -6,7 +6,7 @@
 	Author  : qinggan <qinggan@188.com>
 	Update  : 2012-12-05 22:43
 ***********************************************************/
-//设置状态
+//設定狀態
 function set_status(id)
 {
 	var url = get_url("system","status") + '&id='+id;
@@ -26,7 +26,7 @@ function set_status(id)
 	}
 }
 
-//更新内容状态
+//更新內容狀態
 function appfile_set(val)
 {
 	if(val == "list")
@@ -42,7 +42,7 @@ function appfile_set(val)
 
 function delete_sysmenu(id,title)
 {
-	$.dialog.confirm("确定要删除导航：<span class='red'>"+title+"</span>，删除后是不能恢复的！",function(){
+	$.dialog.confirm("確定要刪除導航：<span class='red'>"+title+"</span>，刪除後是不能恢復的！",function(){
 		var url = get_url('system','delete','id='+id);
 		var rs = json_ajax(url);
 		if(rs.status != 'ok')

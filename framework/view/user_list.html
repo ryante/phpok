@@ -1,12 +1,12 @@
 <!-- include tpl=head_lay -->
 <script type="text/javascript" src="{func add_js user.js}"></script>
 <div class="layui-card"{if !$group_id && !$keywords} style="display:none"{/if} id="search_html">
-	<div class="layui-card-header">{lang搜索}</div>
+	<div class="layui-card-header">{lang搜尋}</div>
 	<div class="layui-card-body">
 		<form method="post" action="{url ctrl=user/}" class="layui-form">
 		<div class="layui-form-item">
 			<div class="layui-inline">
-				<label class="layui-form-label">{lang会员组}</label>
+				<label class="layui-form-label">{lang會員組}</label>
 				<div class="layui-input-inline">
 					<select name="group_id">
 						<option value="">{lang全部}</option>
@@ -26,8 +26,8 @@
 			<!-- /loop -->
 			<div class="layui-inline">
 				<div class="layui-input-inline">
-					<input type="submit" value="{lang搜索}" class="layui-btn layui-btn-normal" />
-					<input type="button" value="{lang取消搜索}" onclick="$.phpok.go('{url ctrl=user/}')" class="layui-btn" />
+					<input type="submit" value="{lang搜尋}" class="layui-btn layui-btn-normal" />
+					<input type="button" value="{lang取消搜尋}" onclick="$.phpok.go('{url ctrl=user/}')" class="layui-btn" />
 				</div>
 			</div>
 		</div>
@@ -41,16 +41,16 @@
 		<div class="layui-btn-group fr" id="user_card_top">
 			<button class="layui-btn layui-btn-sm" onclick="$.admin.hide_show('search_html')">
 				<i class="layui-icon">&#xe615;</i>
-				搜索
+				搜尋
 			</button>
-			<button class="layui-btn layui-btn-sm" onclick="$.win('{lang添加会员}','{url ctrl=user func=set/}')">
+			<button class="layui-btn layui-btn-sm" onclick="$.win('{lang新增會員}','{url ctrl=user func=set/}')">
 				<i class="layui-icon">&#xe654;</i>
-				{lang添加会员}
+				{lang新增會員}
 			</button>
 			<!-- if $session.admin_rs.if_system -->
 			<button class="layui-btn layui-btn-sm" onclick="$.admin_user.show_setting()">
 				<i class="layui-icon">&#xe620;</i>
-				{lang显示字段设置}
+				{lang顯示欄位設定}
 			</button>
 			<!-- /if -->
 		</div>
@@ -68,7 +68,7 @@
 			<!-- loop from=$wlist key=$key value=$value id=$tmpid -->
 			<th class="lft" style="min-width:100px;">{$value.title}</th>
 			<!-- /loop -->
-			<th width="120px">{lang注册时间}</th>
+			<th width="120px">{lang註冊時間}</th>
 			<th style="min-width:104px;"></th>
 		</tr>
 		</thead>
@@ -98,19 +98,19 @@
 			<td class="lft">
 				<div>{$value.wealth[$k] ? $value.wealth[$k] : 0} {$v.unit}</div>
 				<div class="layui-btn-group">
-					<input type="button" value="{lang调整}" onclick="action_wealth('{$v.title}','{$v.id}','{$value.id}','{$v.unit}')" class="layui-btn layui-btn-xs" />
-					<input type="button" value="{lang日志}" onclick="show_wealth_log('{$v.title}','{$v.id}','{$value.id}')" class="layui-btn layui-btn-xs" />
+					<input type="button" value="{lang調整}" onclick="action_wealth('{$v.title}','{$v.id}','{$value.id}','{$v.unit}')" class="layui-btn layui-btn-xs" />
+					<input type="button" value="{lang日誌}" onclick="show_wealth_log('{$v.title}','{$v.id}','{$value.id}')" class="layui-btn layui-btn-xs" />
 				</div>
 			</td>
 			<!-- /loop -->
 			<td>{func date 'Y-m-d H:i' $value.regtime}</td>
 			<td>
 				<div class="layui-btn-group">
-					<input type="button" value="{lang编辑}" onclick="$.win('{lang编辑会员}_#{$value.id}','{url ctrl=user func=set id=$value.id/}')" class="layui-btn layui-btn-xs" />
+					<input type="button" value="{lang編輯}" onclick="$.win('{lang編輯會員}_#{$value.id}','{url ctrl=user func=set id=$value.id/}')" class="layui-btn layui-btn-xs" />
 					<!-- if $config.biz_status -->
 					<input type="button" value="{lang地址}" onclick="$.admin_user.address({$value.id})" class="layui-btn layui-btn-xs" />
 					<!-- /if -->
-					<input type="button" value="{lang删除}" onclick="del({$value.id},'{$value.user}')" class="layui-btn layui-btn-xs layui-btn-danger" />
+					<input type="button" value="{lang刪除}" onclick="del({$value.id},'{$value.user}')" class="layui-btn layui-btn-xs layui-btn-danger" />
 				</div>
 			</td>
 		</tr>

@@ -1,11 +1,11 @@
 /**
- * 管理员的增删查改
+ * 管理員的增刪查改
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年09月02日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年09月02日
 **/
 ;(function($){
 	$.admin_admin = {
@@ -13,10 +13,10 @@
 		{
 			if(id && id != 'undefined'){
 				var url = get_url('admin','set','id='+id);
-				var title = p_lang('编辑管理员') + " #"+id;
+				var title = p_lang('編輯管理員') + " #"+id;
 			}else{
 				var url = get_url('admin','set');
-				var title = p_lang('添加管理员');
+				var title = p_lang('新增管理員');
 			}
 			top.$.win(title,url);
 		},
@@ -29,14 +29,14 @@
 						rs.info = '0';
 					}
 					if(rs.info == '1'){
-	                	$("#status_"+id).val(p_lang('启用')).removeClass('layui-btn-danger');
+	                	$("#status_"+id).val(p_lang('啟用')).removeClass('layui-btn-danger');
 					}else{
 	                	$("#status_"+id).val(p_lang('停用')).addClass('layui-btn-danger');
 					}
 					return true;
 				}
 				if(!rs.info){
-					rs.info = p_lang('设置管理员状态错误');
+					rs.info = p_lang('設定管理員狀態錯誤');
 				}
 				layer.alert(rs.info);
 				return true;
@@ -44,12 +44,12 @@
 		},
 		del:function(id,title)
 		{
-			var tip = p_lang('确定要删除管理员 {title} 吗？',"<span class='red'>"+title+"</span>");
+			var tip = p_lang('確定要刪除管理員 {title} 嗎？',"<span class='red'>"+title+"</span>");
 			layer.confirm(tip,function(index){
 				var url = get_url("admin","delete","id="+id);
 				$.phpok.json(url,function(data){
 					if(data.status){
-						layer.msg(p_lang('管理员删除成功'));
+						layer.msg(p_lang('管理員刪除成功'));
 						$("#admin_tr_"+id).remove();
 						layer.close(index);
 						return true;
@@ -81,7 +81,7 @@
 		    	'success':function(rs){
 		    		if(rs.status){
 			    		var id = $("#id").val();
-			    		var tipinfo = (id && id != 'undefined') ? p_lang('编辑成功') : p_lang('管理员添加成功');
+			    		var tipinfo = (id && id != 'undefined') ? p_lang('編輯成功') : p_lang('管理員新增成功');
 			    		$.admin.reload(get_url('admin'));
 			    		layer.msg(tipinfo,{time:1000},function(){
 				    		top.layui.admin.events.closeThisTabs();

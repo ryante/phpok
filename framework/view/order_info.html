@@ -3,15 +3,15 @@
 	<div class="layui-card-body">
 		<table class="layui-table">
 		<tr>
-			<td width="20%" align="right" height="25">订单编号：</td>
+			<td width="20%" align="right" height="25">訂單編號：</td>
 			<td width="30%">{$rs.sn}</td>
-			<td width="20%" align="right">下单时间：</td>
+			<td width="20%" align="right">下單時間：</td>
 			<td>{func time_format $rs.addtime}</td>
 		</tr>
 		<tr>
-			<td align="right" height="25">总金额：</td>
+			<td align="right" height="25">總金額：</td>
 			<td class="red">{func price_format $rs.price $rs.currency_id $rs.currency_id}</td>
-			<td align="right">订单状态：</td>
+			<td align="right">訂單狀態：</td>
 			<td class="darkblue">{$rs.status_title}</td>
 		</tr>
 		<tr>
@@ -21,9 +21,9 @@
 			<td class="red">{func price_format $unpaid_price $rs.currency_id $rs.currency_id}</td>
 		</tr>
 		<tr>
-			<td align="right" height="25">{lang邮箱：}</td>
+			<td align="right" height="25">{lang郵箱：}</td>
 			<td class="darkblue"><span>{$rs.email}</span></td>
-			<td align="right">{lang手机：}</td>
+			<td align="right">{lang手機：}</td>
 			<td class="darkblue"><span>{$rs.mobile}</span></td>
 		</tr>
 		<!-- if $rs.ext -->
@@ -39,17 +39,17 @@
 		<!-- /if -->
 		<!-- if $user -->
 		<tr>
-			<td class="darkblue" style="line-height:25px;text-align:right;">会员：</td>
+			<td class="darkblue" style="line-height:25px;text-align:right;">會員：</td>
 			<td class="darkblue" colspan="3" style="line-height:25px;">{$user.user}
-				<!-- if $user.mobile -->{lang，}{lang手机号：}{$user.mobile}<!-- /if -->
-				<!-- if $user.email -->{lang，}{lang邮箱：}{$user.email}<!-- /if -->
-				，注册时间：{func time_format $user.regtime}
+				<!-- if $user.mobile -->{lang，}{lang手機號：}{$user.mobile}<!-- /if -->
+				<!-- if $user.email -->{lang，}{lang郵箱：}{$user.email}<!-- /if -->
+				，註冊時間：{func time_format $user.regtime}
 			</td>
 		</tr>
 		<!-- /if -->
 		<!-- if $rs.note -->
 		<tr>
-			<td style="line-height:25px;text-align:right">备注：</td>
+			<td style="line-height:25px;text-align:right">備註：</td>
 			<td colspan="3">{$rs.note}</td>
 		</tr>
 		<!-- /if -->
@@ -57,10 +57,10 @@
 		<table class="layui-table">
 		<thead>
 		<tr>
-			<th width="120">{lang产品图片}</th>
-			<th>{lang产品名称}</th>
-			<th>{lang产品价格}</th>
-			<th>{lang数量}</th>
+			<th width="120">{lang產品圖片}</th>
+			<th>{lang產品名稱}</th>
+			<th>{lang產品價格}</th>
+			<th>{lang數量}</th>
 		</tr>
 		</thead>
 		<!-- loop from=$rslist key=$key value=$value -->
@@ -72,8 +72,8 @@
 				<div class="gray">{$v.title}：{$v.content}</div>
 				<!-- /loop -->
 				<!-- if $value.weight --><div class="gray">{lang重量：}{$value.weight}Kg</div><!-- /if -->
-				<!-- if $value.volume --><div class="gray">{lang体积：}{$value.volume}M<sup>3</sup></div><!-- /if -->
-				<!-- if $value.note --><div class="gray">{lang备注：}{$value.note}</div><!-- /if -->
+				<!-- if $value.volume --><div class="gray">{lang體積：}{$value.volume}M<sup>3</sup></div><!-- /if -->
+				<!-- if $value.note --><div class="gray">{lang備註：}{$value.note}</div><!-- /if -->
 			</td>
 			<td>{func price_format $value.price $rs.currency_id $rs.currency_id}</td>
 			<td>{$value.qty} {$value.unit}</td>
@@ -85,8 +85,8 @@
 		<thead>
 		<tr>
 			<th class="lft">支付方法</th>
-			<th class="lft">金额</th>
-			<th>时间</th>
+			<th class="lft">金額</th>
+			<th>時間</th>
 			<th>其他</th>
 		</tr>
 		</thead>
@@ -96,7 +96,7 @@
 			<td>{func price_format $value.price $rs.currency_id $rs.currency_id}</td>
 			<td class="center">
 				<!-- if $value.startdate --><div>始：{func time_format $value.startdate}</div><!-- /if -->
-				<!-- if $value.dateline --><div>结：{func time_format $value.dateline}</div><!-- /if -->
+				<!-- if $value.dateline --><div>結：{func time_format $value.dateline}</div><!-- /if -->
 			</td>
 			<td>
 				<!-- if is_array($value.ext) -->
@@ -115,8 +115,8 @@
 		<table class="layui-table">
 		<thead>
 		<tr>
-			<th>日志时间</th>
-			<th class="lft">日志内容</th>
+			<th>日誌時間</th>
+			<th class="lft">日誌內容</th>
 			<th>操作人</th>
 		</tr>
 		</thead>
@@ -132,8 +132,8 @@
 		<div>
 			<input id="order_url" class="layui-input" value="{$sys.url}{$sys.www_file}?{$sys.ctrl_id}=order&{$sys.func_id}=info&sn={$rs.sn}&passwd={$rs.passwd}" />
 			<div class="layui-btn-group" style="margin-top:10px;">
-				<input type="button" value="{lang复制}" data-clipboard-text="{$sys.url}{$sys.www_file}?{$sys.ctrl_id}=order&{$sys.func_id}=info&sn={$rs.sn}&passwd={$rs.passwd}" class="layui-btn phpok-copy" />
-				<input type="button" value="{lang访问}" onclick="window.open($('#order_url').val())" class="layui-btn" />
+				<input type="button" value="{lang複製}" data-clipboard-text="{$sys.url}{$sys.www_file}?{$sys.ctrl_id}=order&{$sys.func_id}=info&sn={$rs.sn}&passwd={$rs.passwd}" class="layui-btn phpok-copy" />
+				<input type="button" value="{lang訪問}" onclick="window.open($('#order_url').val())" class="layui-btn" />
 			</div>
 		</div>
 	</div>

@@ -9,7 +9,7 @@ function cate_change()
 {
 	val = $("#cate_id").val();
 	if(!val){
-		$.dialog.alert('请选择要存储的目标分类');
+		$.dialog.alert('請選擇要儲存的目標分類');
 		return false;
 	}
 	var data = $("#cate_id option[value="+val+"]").attr('data');
@@ -32,7 +32,7 @@ function cate_change()
 		}
 	});
 	obj_upload.uploader.on('uploadFinished',function(){
-		$.dialog.alert('附件上传成功',function(){
+		$.dialog.alert('附件上傳成功',function(){
 			obj.$.phpok.reload();
 		});
 	});
@@ -46,7 +46,7 @@ function save()
 	}
 	var f = $("#upload_progress .phpok-upfile-list").length;
 	if(f<1){
-		$.dialog.alert('请选择要上传的文件');
+		$.dialog.alert('請選擇要上傳的檔案');
 		return false;
 	}
 	obj_upload.uploader.upload();
@@ -61,21 +61,21 @@ function cancel()
 	<div class="layui-card-body layui-form">
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang附件分类}
+				{lang附件分類}
 			</label>
 			<div class="layui-input-block">
 				<select id="cate_id" lay-ignore name="cate_id" onchange="cate_change()">
 					<!-- loop from=$catelist key=$key value=$value -->
 					<option value="{$value.id}"{if $value.is_default} selected{/if} data="{$value.filetypes}" catename="{$value.title}">
-					{$value.title}<!-- if $value.typeinfos --> / {lang支持上传格式：}{$value.typeinfos}<!-- /if --></option>
+					{$value.title}<!-- if $value.typeinfos --> / {lang支援上傳格式：}{$value.typeinfos}<!-- /if --></option>
 					<!-- /loop -->
 				</select>
 			</div>
-			<div class="layui-input-block mtop">{lang请选择要上传的附件分类}</div>
+			<div class="layui-input-block mtop">{lang請選擇要上傳的附件分類}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang选择文件}
+				{lang選擇檔案}
 			</label>
 			<div class="layui-input-block">
 				<div id="upload_picker"></div>

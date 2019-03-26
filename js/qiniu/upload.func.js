@@ -1,11 +1,11 @@
 /**
- * 七牛上传组件中涉及到的JS
+ * 七牛上傳元件中涉及到的JS
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2019年1月19日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2019年1月19日
 **/
 ;(function($){
 	$.phpok_qiniu_gateway = {
@@ -63,7 +63,7 @@
 			var url = api_url('gateway','index','id='+this.opts.gateway_id+"&file=success");
 			$.phpok.json(url,function(rs){
 				if(!rs.status){
-					//登记失败，删除远程
+					//登記失敗，刪除遠端
 					$.dialog.alert(rs.info);
 					return false;
 				}

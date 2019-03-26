@@ -7,10 +7,10 @@
 		<tr>
 			<th>ID</th>
 			<th width="20"></th>
-			<th>{lang星数}</th>
-			<th>{lang内容}</th>
-			<th>{lang图片}</th>
-			<th>{lang时间}</th>
+			<th>{lang星數}</th>
+			<th>{lang內容}</th>
+			<th>{lang圖片}</th>
+			<th>{lang時間}</th>
 			<th width="160"></th>
 		</tr>
 		</thead>
@@ -38,22 +38,22 @@
 			<td>{func date 'Y-m-d H:i:s' $value.addtime}</td>
 			<td>
 				<div class="layui-btn-group">
-					<input type="button" value="{lang新回复}" onclick="$.admin_reply.adm({$value.id})" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang新回覆}" onclick="$.admin_reply.adm({$value.id})" class="layui-btn layui-btn-sm" />
 					<input type="button" value="{lang修改}" onclick="$.admin_reply.edit({$value.id})" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang删除}" onclick="$.admin_reply.del({$value.id})" class="layui-btn layui-btn-sm layui-btn-danger" />
+					<input type="button" value="{lang刪除}" onclick="$.admin_reply.del({$value.id})" class="layui-btn layui-btn-sm layui-btn-danger" />
 				</div>
 			</td>
 		</tr>
 		<!-- loop from=$value.adm_reply key=$k value=$v id=$idxx -->
 		<tr data-id="replylist_{$value.id}" id="adm_reply_{$v.id}">
 			<td colspan="6">
-				<span class="red">{lang管理员回复} - {$idxx.num}</span>
-				<small class="gray">{lang回复时间} {func date 'Y-m-d H:i:s' $value.addtime}</small>
+				<span class="red">{lang管理員回覆} - {$idxx.num}</span>
+				<small class="gray">{lang回覆時間} {func date 'Y-m-d H:i:s' $value.addtime}</small>
 				{$v.content}
 			</td>
 			<td>
 				<!-- if ($popedom.delete && $v.admin_id == $session.admin_id) || $session.admin_rs.if_system -->
-				<input type="button" value="{lang删除}" onclick="$.admin_reply.del({$v.id},'reply')" class="layui-btn layui-btn-sm layui-btn-danger" />
+				<input type="button" value="{lang刪除}" onclick="$.admin_reply.del({$v.id},'reply')" class="layui-btn layui-btn-sm layui-btn-danger" />
 				<!-- /if -->
 			</td>
 		</tr>

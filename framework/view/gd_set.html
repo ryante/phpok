@@ -8,18 +8,18 @@
 	<div class="layui-card-body">
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang标识}
+				{lang標識}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="identifier" name="identifier" class="layui-input{if $id} layui-btn-disabled{/if}" value="{$rs.identifier}"{if $id} disabled{/if} />
 			</div>
 			<!-- if !$id -->
-			<div class="layui-input-inline auto gray lh38">{lang标识必须是唯一的，添加后不能修改}</div>
+			<div class="layui-input-inline auto gray lh38">{lang標識必須是唯一的，新增後不能修改}</div>
 			<!-- /if -->
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang图片宽高}
+				{lang圖片寬高}
 			</label>
 			
 			<div class="layui-input-inline" style="width:80px">
@@ -29,7 +29,7 @@
 			<div class="layui-input-inline" style="width:80px">
 				<input type="text" id="height" name="height" class="layui-input" value="{$rs.height}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang设置宽度及高度，仅支持数字，不限请设为0}</div>
+			<div class="layui-input-inline auto gray lh38">{lang設定寬度及高度，僅支援數字，不限請設為0}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
@@ -40,12 +40,12 @@
 			</div>
 			<div class="layui-input-inline auto">
 				<div class="layui-btn-group">
-					<input type="button" value="{lang选择}" onclick="phpok_pic('mark_picture')" class="layui-btn" />
-					<input type="button" value="{lang预览}" onclick="phpok_pic_view('mark_picture')" class="layui-btn" />
+					<input type="button" value="{lang選擇}" onclick="phpok_pic('mark_picture')" class="layui-btn" />
+					<input type="button" value="{lang預覽}" onclick="phpok_pic_view('mark_picture')" class="layui-btn" />
 					<input type="button" value="{lang清空}" onclick="$('#mark_picture').val('');" class="layui-btn layui-btn-warm" />
 				</div>
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang设置水印图片，这里推荐使用PNG透明水印}</div>
+			<div class="layui-input-inline auto gray lh38">{lang設定水印圖片，這裡推薦使用PNG透明水印}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
@@ -60,7 +60,7 @@
 				</tr>
 				<tr>
 					<td><input type="radio" name="mark_position" id="mark_position_4" value="middle-left"{if $rs.mark_position == "middle-left"} checked{/if} title="{lang左中}" /></td>
-					<td><input type="radio" name="mark_position" id="mark_position_5" value="middle-middle"{if $rs.mark_position == "middle-middle"} checked{/if} title="{lang中间}" /></td>
+					<td><input type="radio" name="mark_position" id="mark_position_5" value="middle-middle"{if $rs.mark_position == "middle-middle"} checked{/if} title="{lang中間}" /></td>
 					<td><input type="radio" name="mark_position" id="mark_position_6" value="middle-right"{if $rs.mark_position == "middle-right"} checked{/if} title="{lang右中}" /></td>
 				</tr>
 				<tr>
@@ -90,39 +90,39 @@
 					<option value="100"{if $rs.trans == "100"} selected{/if}>{lang不透明}</option>
 				</select>
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang仅JPG水印有效，建议设为60}</div>
+			<div class="layui-input-inline auto gray lh38">{lang僅JPG水印有效，建議設為60}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang图片质量}
+				{lang圖片質量}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<select id="quality" name="quality">
-					<option value="60"{if $rs.quality == "60"} selected{/if}>{lang较小文件}</option>
-					<option value="80"{if $rs.quality == "80" || !$rs.quality} selected{/if}>{lang高质量}</option>
+					<option value="60"{if $rs.quality == "60"} selected{/if}>{lang較小檔案}</option>
+					<option value="80"{if $rs.quality == "80" || !$rs.quality} selected{/if}>{lang高質量}</option>
 					<option value="100"{if $rs.quality == "100"} selected{/if}>{lang百分百精度}</option>
 				</select>
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang仅JPG图片有效，建议设为高质量，兼顾大小及精度}</div>
+			<div class="layui-input-inline auto gray lh38">{lang僅JPG圖片有效，建議設為高質量，兼顧大小及精度}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang缩图方式}
+				{lang縮圖方式}
 			</label>
 			<div class="layui-input-inline default-auto">
-				<input type="radio" name="cut_type" title="{lang缩放法}" value="0"{if !$rs.cut_type} checked{/if} />
+				<input type="radio" name="cut_type" title="{lang縮放法}" value="0"{if !$rs.cut_type} checked{/if} />
 				<input type="radio" name="cut_type" title="{lang裁剪法}" value="1"{if $rs.cut_type} checked{/if} />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang建议大图用缩放法，小图用裁剪法}</div>
+			<div class="layui-input-inline auto gray lh38">{lang建議大圖用縮放法，小圖用裁剪法}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang背景颜色}
+				{lang背景顏色}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="bgcolor" name="bgcolor" value="{$rs.bgcolor}" class="layui-input color {pickerClosable:true}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang即填充色，默认为白色}</div>
+			<div class="layui-input-inline auto gray lh38">{lang即填充色，預設為白色}</div>
 		</div>		
 	</div>
 </div>
@@ -130,7 +130,7 @@
 <div class="submit-info">
 	<div class="layui-container center">
 		<input type="submit" value="{lang提交}" class="layui-btn layui-btn-lg layui-btn-danger" />
-		<input type="button" value="{lang取消关闭}" class="layui-btn layui-btn-lg layui-btn-primary" onclick="$.admin.close()" />
+		<input type="button" value="{lang取消關閉}" class="layui-btn layui-btn-lg layui-btn-primary" onclick="$.admin.close()" />
 	</div>
 </div>
 

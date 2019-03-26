@@ -5,7 +5,7 @@
 		<!-- if $id --><input type="hidden" name="id" id="id" value="{$id}" /><!-- /if -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang会员头像}
+				{lang會員頭像}
 			</label>
 			<div class="layui-input-block">
 				{func form_edit avatar $rs.avatar text form_btn=image&width=500}
@@ -13,24 +13,24 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang会员账号}
+				{lang會員賬號}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="user" name="user" class="layui-input" value="{$rs.user}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang请填写会员账号，必须保证唯一，建议使用邮箱作为账号}</div>
+			<div class="layui-input-inline auto gray lh38">{lang請填寫會員賬號，必須保證唯一，建議使用郵箱作為賬號}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang会员密码}
+				{lang會員密碼}
 			</label>
 			<div class="layui-input-inline">
 				<input type="text" id="pass" name="pass" class="layui-input" value="" />
 			</div>
 			<div class="layui-input-inline auto">
-				<input type="button" value="{lang随机生成}" onclick="$('#pass').val($.phpok.rand(10,'fixed'))" class="layui-btn" />
+				<input type="button" value="{lang隨機生成}" onclick="$('#pass').val($.phpok.rand(10,'fixed'))" class="layui-btn" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang设置会员的密码，此项不能为空}</div>
+			<div class="layui-input-inline auto gray lh38">{lang設定會員的密碼，此項不能為空}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
@@ -42,46 +42,46 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang手机}
+				{lang手機}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="mobile" name="mobile" class="layui-input" value="{$rs.mobile}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang如有手机号，请填写}</div>
+			<div class="layui-input-inline auto gray lh38">{lang如有手機號，請填寫}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang会员组}
+				{lang會員組}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<select id="group_id" name="group_id"  lay-filter="usergroup">
-				<option value="0">{lang请选择会员组…}</option>
+				<option value="0">{lang請選擇會員組…}</option>
 				<!-- loop from=$grouplist key=$key value=$value -->
 				<option value="{$value.id}"{if $value.id == $group_id} selected{/if} data-fields="{$value.fields}">{$value.title}</option>
 				<!-- /loop -->
 				</select>
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang请选择会员所属主要身份}</div>
+			<div class="layui-input-inline auto gray lh38">{lang請選擇會員所屬主要身份}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang状态}
+				{lang狀態}
 			</label>
 			<div class="layui-input-inline auto">
-				<input type="radio" name="status" id="status_0" value="0"{if !$rs.status} checked{/if} title="{lang未审核}" />
+				<input type="radio" name="status" id="status_0" value="0"{if !$rs.status} checked{/if} title="{lang未稽核}" />
 				<input type="radio" name="status" id="status_1" value="1"{if $rs.status == 1} checked{/if} title="{lang正常}" />
-				<input type="radio" name="status" id="status_2" value="2"{if $rs.status == 2} checked{/if} title="{lang锁定}" />
+				<input type="radio" name="status" id="status_2" value="2"{if $rs.status == 2} checked{/if} title="{lang鎖定}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang设置会员状态，未审核及锁定会员不能登录}</div>
+			<div class="layui-input-inline auto gray lh38">{lang設定會員狀態，未稽核及鎖定會員不能登入}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang注册时间}
+				{lang註冊時間}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="regtime" name="regtime" class="layui-input"{if $rs.regtime} value="{func date 'Y-m-d H:i:s' $rs.regtime}"{/if} />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang人工设置会员的注册时间，默认使用当前时间}</div>
+			<div class="layui-input-inline auto gray lh38">{lang人工設定會員的註冊時間，預設使用當前時間}</div>
 		</div>
 		<!-- loop from=$extlist key=$key value=$value id=extlist_id -->
 		<div class="layui-form-item" id="userext_{$value.identifier}" name="userext_html">

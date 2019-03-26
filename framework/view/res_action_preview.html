@@ -2,36 +2,36 @@
 <script type="text/javascript" src="js/clipboard.min.js"></script>
 <div class="res_preview">
 	<ul>
-		<li><i>上传时间：</i>{func time_format $rs.addtime}</li>
-		<li><i>附件名称：</i>{$rs.title}</li>
-		<li><i>存储目录：</i>{$rs.folder}</li>
-		<li><i>文件名：</i>{$rs.name}</li>
+		<li><i>上傳時間：</i>{func time_format $rs.addtime}</li>
+		<li><i>附件名稱：</i>{$rs.title}</li>
+		<li><i>儲存目錄：</i>{$rs.folder}</li>
+		<li><i>檔名：</i>{$rs.name}</li>
 		<!-- if $rs.attr && $rs.attr.width && $rs.attr.height -->
-		<li><i>宽高</i>{$rs.attr.width} * {$rs.attr.height}</li>
+		<li><i>寬高</i>{$rs.attr.width} * {$rs.attr.height}</li>
 		<!-- /if -->
-		<li><i>操作</i><input type="button" value="下载此文件" onclick="$.phpok.go('{url ctrl=res func=download id=$rs.id/}')" class="layui-btn" /></li>
+		<li><i>操作</i><input type="button" value="下載此檔案" onclick="$.phpok.go('{url ctrl=res func=download id=$rs.id/}')" class="layui-btn" /></li>
 		<!-- if $type == "picture" -->
 		<li>
-			<i>{lang原图}</i>
+			<i>{lang原圖}</i>
 			<div class="button-group">
-				<input type="button" value="{lang复制相对地址}" data-clipboard-text="{$rs.filename}" class="layui-btn phpok-copy" />
-				<!-- if $file_is_local --><input type="button" value="{lang复制完整地址}" data-clipboard-text="{$sys.url}{$rs.filename}" class="layui-btn phpok-copy" /><!-- /if -->
+				<input type="button" value="{lang複製相對地址}" data-clipboard-text="{$rs.filename}" class="layui-btn phpok-copy" />
+				<!-- if $file_is_local --><input type="button" value="{lang複製完整地址}" data-clipboard-text="{$sys.url}{$rs.filename}" class="layui-btn phpok-copy" /><!-- /if -->
 			</div>
 		</li>
 		<li class="picture"><img src="{$rs.filename}"/></li>
 		<!-- loop from=$rs.gd key=$key value=$value id=$tmpid -->
 		<li>
-			<i>{lang生成图} <span class="red">{$key}</span></i>
+			<i>{lang生成圖} <span class="red">{$key}</span></i>
 			<div class="button-group">
-				<input type="button" value="{lang复制相对地址}" data-clipboard-text="{$value}" class="layui-btn phpok-copy" />
-				<!-- if $file_is_local --><input type="button" value="{lang复制完整地址}" data-clipboard-text="{$sys.url}{$value}" class="layui-btn phpok-copy" /><!-- /if -->
+				<input type="button" value="{lang複製相對地址}" data-clipboard-text="{$value}" class="layui-btn phpok-copy" />
+				<!-- if $file_is_local --><input type="button" value="{lang複製完整地址}" data-clipboard-text="{$sys.url}{$value}" class="layui-btn phpok-copy" /><!-- /if -->
 			</div>
 
 		</li>
 		<li class="picture"><img src="{$value}"/></li>
 		<!-- /loop -->
 		<!-- elseif $type == "video" -->
-		<li class="video"><video src="{$rs.filename}" controls="controls" style="width:100%;height:300px;">您的浏览器不支持 video 标签。</video></li>
+		<li class="video"><video src="{$rs.filename}" controls="controls" style="width:100%;height:300px;">您的瀏覽器不支援 video 標籤。</video></li>
 		<!-- /if -->
 	</ul>
 </div>
@@ -40,12 +40,12 @@ $(document).ready(function(){
 	var clipboard = new Clipboard('.phpok-copy');
 
 	clipboard.on('success', function(e) {
-		$.dialog.tips('{lang网址复制成功}');
+		$.dialog.tips('{lang網址複製成功}');
 		e.clearSelection();
 	});
 
 	clipboard.on('error', function(e) {
-		$.dialog.alert('{lang网址复制失败}');
+		$.dialog.alert('{lang網址複製失敗}');
 	});
 });
 </script>

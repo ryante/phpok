@@ -1,4 +1,4 @@
-<!-- php:$title = "修改个人资料" --><!-- include tpl=head title=$title -->
+<!-- php:$title = "修改個人資料" --><!-- include tpl=head title=$title -->
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#userinfo_submit").submit(function(){
@@ -8,7 +8,7 @@ $(document).ready(function(){
 			dataType:'json',
 			success: function(rs){
 				if(rs.status == 'ok'){
-					$.dialog.tips("您的信息更新成功").lock();
+					$.dialog.tips("您的資訊更新成功").lock();
 					return true;
 				}
 				$.dialog.alert(rs.content);

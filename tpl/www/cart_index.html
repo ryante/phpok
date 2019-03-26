@@ -1,10 +1,10 @@
-<!-- include tpl=head title=购物车 -->
+<!-- include tpl=head title=購物車 -->
 <script type="text/javascript">
 function cart_checkout()
 {
 	var id = $.checkbox.join();
 	if(!id){
-		$.dialog.alert('未指定要结算的产品');
+		$.dialog.alert('未指定要結算的產品');
 		return false;
 	}
 	return true;
@@ -16,10 +16,10 @@ function cart_checkout()
 	<table class="am-table am-table-bordered am-table-centered">
 		<thead>
 			<tr>
-				<th colspan="2">图片</th>
-				<th class="am-text-left">名称</th>
-				<th width="80px">数量</th>
-				<th>售价</th>
+				<th colspan="2">圖片</th>
+				<th class="am-text-left">名稱</th>
+				<th width="80px">數量</th>
+				<th>售價</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -42,7 +42,7 @@ function cart_checkout()
 					<!-- loop from=$value._attrlist key=$k value=$v id=$tmpid -->
 					<div>{$v.title}：{$v.content}</div>
 					<!-- /loop -->
-					<div>单价：{func price_format $value.price $value.currency_id}</div>
+					<div>單價：{func price_format $value.price $value.currency_id}</div>
 				</td>
 				<td>
 					<div><input type="number" class="qty" min="1" name="qty_{$value.id}" id="qty_{$value.id}" value="{$value.qty}" onchange="$.cart.update('{$value.id}')" /></div>
@@ -51,7 +51,7 @@ function cart_checkout()
 			</tr>
 			<!-- /loop -->
 			<tr>
-				<td colspan="5" class="am-text-right">当前选中的产品价格是：<span class="am-text-danger" id="total_price">{$price}</span></td>
+				<td colspan="5" class="am-text-right">當前選中的產品價格是：<span class="am-text-danger" id="total_price">{$price}</span></td>
 				
 			</tr>
 		</tbody>
@@ -59,15 +59,15 @@ function cart_checkout()
 	<div class="am-g">
 		<div class="am-u-sm-6">
 			<div class="am-btn-group">
-				<input type="button" value="全选" onclick="$.checkbox.all();$.cart.price()" class="am-btn am-btn-default am-btn-xs" />
-				<input type="button" value="全不选" onclick="$.checkbox.none();$.cart.price()" class="am-btn am-btn-default am-btn-xs" />
-				<input type="button" value="反选" onclick="$.checkbox.anti();$.cart.price()" class="am-btn am-btn-default am-btn-xs" />
+				<input type="button" value="全選" onclick="$.checkbox.all();$.cart.price()" class="am-btn am-btn-default am-btn-xs" />
+				<input type="button" value="全不選" onclick="$.checkbox.none();$.cart.price()" class="am-btn am-btn-default am-btn-xs" />
+				<input type="button" value="反選" onclick="$.checkbox.anti();$.cart.price()" class="am-btn am-btn-default am-btn-xs" />
 			</div>
-			<input type="button" value="批量删除" onclick="$.cart.del()" class="am-btn am-btn-danger am-btn-xs" />
+			<input type="button" value="批量刪除" onclick="$.cart.del()" class="am-btn am-btn-danger am-btn-xs" />
 		</div>
 		<div class="am-u-sm-6 am-text-middle">
 			<button type="submit" class="am-btn am-btn-primary am-btn-lg am-fr">
-				去结算
+				去結算
 				<span class="am-icon-angle-double-right"></span>
 			</button>
 		</div>

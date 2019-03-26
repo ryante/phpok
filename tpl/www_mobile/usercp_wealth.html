@@ -1,9 +1,9 @@
-<!-- include tpl=head title=我的财富 -->
+<!-- include tpl=head title=我的財富 -->
 <div class="am-modal am-modal-prompt" tabindex="-1" id="my-prompt">
 	<div class="am-modal-dialog">
 		<div class="am-modal-hd">充值</div>
 		<div class="am-modal-bd">
-			请输入要充值的金额<br />仅支持整数，最小充值1元
+			請輸入要充值的金額<br />僅支援整數，最小充值1元
 			<input type="text" class="am-modal-prompt-input">
 		</div>
 		<div class="am-modal-footer">
@@ -25,7 +25,7 @@ function payit(id,title)
 		relatedTarget: this,
 		onConfirm: function(e) {
 			if(e.data < 1){
-				$.dialog.alert('充值金额不能少于1元');
+				$.dialog.alert('充值金額不能少於1元');
 				return false;
 			}
 			var url = get_url('payment','index','id='+id+"&price="+$.str.encode(e.data));
@@ -43,12 +43,12 @@ function payit(id,title)
 			
 		</div>
 		<div class="am-panel-bd">
-			<div>您当前有 <span class="red"><!-- if $value.val -->{$value.val}<!-- else -->0<!-- /if --></span> {$value.unit}</div>
+			<div>您當前有 <span class="red"><!-- if $value.val -->{$value.val}<!-- else -->0<!-- /if --></span> {$value.unit}</div>
 			<!-- if $value.ifpay -->
-			<div class="gray">充值比例：1元人民币 = {$value.pay_ratio} {$value.unit}</div>
+			<div class="gray">充值比例：1元人民幣 = {$value.pay_ratio} {$value.unit}</div>
 			<!-- /if -->
 			<!-- if $value.ifcash && !$value.ifpay -->
-			<div class="gray">抵现比例：100{$value.unit} = {$value.cash_ratio}元人民币，可用于抵扣购物金额</div>
+			<div class="gray">抵現比例：100{$value.unit} = {$value.cash_ratio}元人民幣，可用於抵扣購物金額</div>
 			<!-- /if -->
 			<!-- if $value.ifpay --><div><input type="button" value="充值" class="am-btn am-btn-primary am-btn-sm" onclick="payit('{$value.id}','{$value.title}')" /></div><!-- /if -->
 		</div>

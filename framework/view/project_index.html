@@ -1,12 +1,12 @@
 <!-- include tpl=head_lay -->
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang项目}
+		{lang專案}
 		<!-- if $popedom.set -->
 		<div class="layui-btn-group fr">
-			<input type="button" value="{lang添加项目}" onclick="$.win('{lang添加项目}','{url ctrl=project func=set/}')" class="layui-btn layui-btn-sm" />
+			<input type="button" value="{lang新增專案}" onclick="$.win('{lang新增專案}','{url ctrl=project func=set/}')" class="layui-btn layui-btn-sm" />
 			<!-- if $session.adm_develop -->
-			<input type="button" onclick="$.admin_project.import_xml()" value="{lang项目导入}" class="layui-btn layui-btn-sm" />
+			<input type="button" onclick="$.admin_project.import_xml()" value="{lang專案匯入}" class="layui-btn layui-btn-sm" />
 			<!-- /if -->
 		</div>
 		<!-- /if -->
@@ -20,9 +20,9 @@
 			<!-- /if -->
 			<th width="70px" class="center">ID</th>
 			<th width="30px">&nbsp;</th>
-			<th>{lang项目名称}</th>
-			<th>{lang标识串}</th>
-			<th>{lang模块}</th>
+			<th>{lang專案名稱}</th>
+			<th>{lang標識串}</th>
+			<th>{lang模組}</th>
 			<th width="65" class="center">{lang排序}</th>
 			<!-- if $popedom.set -->
 			<th width="220px">&nbsp;</th>
@@ -36,17 +36,17 @@
 			<!-- /if -->
 			<td class="center gray" height="24px">{$value.id}</td>
 			<td class="center"><span class="status{$value.status}" id="status_{$value.id}" {if $popedom.set}onclick="$.admin_project.set_status({$value.id})"{else} style="cursor:default"{/if} value="{$value.status}"></span></td>
-			<td><label for="id_{$value.id}">{$value.space}{$value.title}<!-- if $value.nick_title --><span class="gray i"> ({$value.nick_title})</span><!-- /if --><!-- if $value.hidden --><span class="red i">{lang（隐藏）}</span><!-- /if --></label></td>
+			<td><label for="id_{$value.id}">{$value.space}{$value.title}<!-- if $value.nick_title --><span class="gray i"> ({$value.nick_title})</span><!-- /if --><!-- if $value.hidden --><span class="red i">{lang（隱藏）}</span><!-- /if --></label></td>
 			<td>{$value.identifier}</td>
 			<td>{$value.project_module_title ? $value.project_module_title : '-'}</td>
-			<td><div class="gray i hand center" title="{lang点击调整排序}" name="taxis" data="{$value.id}">{$value.taxis}</div></td>
+			<td><div class="gray i hand center" title="{lang點選調整排序}" name="taxis" data="{$value.id}">{$value.taxis}</div></td>
 			<!-- if $popedom.set -->
 			<td>
 				<div class="layui-btn-group">
-					<input type="button" value="{lang编辑}" onclick="$.win('{lang编辑}_#{$value.id}','{url ctrl=project func=set id=$value.id/}')" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang删除}" onclick="$.admin_project.del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
+					<input type="button" value="{lang編輯}" onclick="$.win('{lang編輯}_#{$value.id}','{url ctrl=project func=set id=$value.id/}')" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang刪除}" onclick="$.admin_project.del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 					<!-- if !$value.parent_id -->
-					<input type="button" value="{lang添加子项}" class="layui-btn layui-btn-sm" onclick="$.win('{lang添加子项}_#{$value.id}','{url ctrl=project func=set pid=$value.id/}')" />
+					<input type="button" value="{lang新增子項}" class="layui-btn layui-btn-sm" onclick="$.win('{lang新增子項}_#{$value.id}','{url ctrl=project func=set pid=$value.id/}')" />
 					<!-- /if -->
 				</div>
 			</td>
@@ -58,26 +58,26 @@
 		<ul class="layout">
 			<li>
 				<div class="layui-btn-group">
-					<input type="button" value="{lang全选}" class="layui-btn layui-btn-sm" onclick="$.input.checkbox_all()" />
-					<input type="button" value="{lang全不选}" class="layui-btn layui-btn-sm" onclick="$.input.checkbox_none()" />
-					<input type="button" value="{lang反选}" class="layui-btn layui-btn-sm" onclick="$.input.checkbox_anti()" />
+					<input type="button" value="{lang全選}" class="layui-btn layui-btn-sm" onclick="$.input.checkbox_all()" />
+					<input type="button" value="{lang全不選}" class="layui-btn layui-btn-sm" onclick="$.input.checkbox_none()" />
+					<input type="button" value="{lang反選}" class="layui-btn layui-btn-sm" onclick="$.input.checkbox_anti()" />
 				</div>
 			</li>
 			<li>
 				<div class="layui-btn-group">
 					<input type="button" value="{lang禁用}" onclick="$.admin_project.set_lock(0)" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang启用}" onclick="$.admin_project.set_lock(1)" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang显示}" onclick="$.admin_project.set_hidden(0)" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang隐藏}" onclick="$.admin_project.set_hidden(1)" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang啟用}" onclick="$.admin_project.set_lock(1)" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang顯示}" onclick="$.admin_project.set_hidden(0)" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang隱藏}" onclick="$.admin_project.set_hidden(1)" class="layui-btn layui-btn-sm" />
 				</div>
 			</li>
 			
 			<!-- if $session.adm_develop -->
 			<li>
 				<div class="layui-btn-group">
-					<input type="button" value="{lang扩展字段}" onclick="$.admin_project.extinfo()" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang复制}" onclick="$.admin_project.copy()" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang导出}" onclick="$.admin_project.export()" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang擴充套件欄位}" onclick="$.admin_project.extinfo()" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang複製}" onclick="$.admin_project.copy()" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang匯出}" onclick="$.admin_project.export()" class="layui-btn layui-btn-sm" />
 				</div>
 			</li>
 			<!-- /if -->

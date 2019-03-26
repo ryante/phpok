@@ -1,17 +1,17 @@
 /**
- * 购物车中涉及到的JS操作，此处使用jQuery封装
+ * 購物車中涉及到的JS操作，此處使用jQuery封裝
  * @作者 qinggan <admin@phpok.com>
- * @版权 2015-2016 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 2015-2016 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2016年09月01日
 **/
 
 ;(function($){
 	$.cart = {
-		//添加到购物车中
-		//id为产品ID
+		//新增到購物車中
+		//id為產品ID
 		add: function(id,qty){
 			var self = this;
 			var url = this._addurl(id,qty);
@@ -20,7 +20,7 @@
 			}
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.tips(p_lang('成功加入购物车'));
+					$.dialog.tips(p_lang('成功加入購物車'));
 					self.total();
 					return true;
 				}
@@ -30,11 +30,11 @@
 			return false;
 		},
 		/**
-		 * 自定义产品加入购物车
-		 * @参数 title 产品名称
-		 * @参数 price 价格 
-		 * @参数 qty 数量
-		 * @参数 thumb 缩略图
+		 * 自定義產品加入購物車
+		 * @引數 title 產品名稱
+		 * @引數 price 價格 
+		 * @引數 qty 數量
+		 * @引數 thumb 縮圖
 		**/
 		add2: function(title,price,qty,thumb){
 			var url = this._addurl2(title,price,qty,thumb);
@@ -44,7 +44,7 @@
 			var self = this;
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.tips(p_lang('成功加入购物车'));
+					$.dialog.tips(p_lang('成功加入購物車'));
 					self.total();
 					return true;
 				}
@@ -54,11 +54,11 @@
 			return false;
 		},
 		/**
-		 * 自定义产品立即订购
-		 * @参数 title 产品名称
-		 * @参数 price 价格 
-		 * @参数 qty 数量
-		 * @参数 thumb 缩略图
+		 * 自定義產品立即訂購
+		 * @引數 title 產品名稱
+		 * @引數 price 價格 
+		 * @引數 qty 數量
+		 * @引數 thumb 縮圖
 		**/
 		onebuy2: function(title,price,qty,thumb){
 			var url = this._addurl2(title,price,qty,thumb);
@@ -76,9 +76,9 @@
 			return false;
 		},
 		/**
-		 * 系统产品立即订购
-		 * @参数 id 产品ID
-		 * @参数 qty 数量
+		 * 系統產品立即訂購
+		 * @引數 id 產品ID
+		 * @引數 qty 數量
 		**/
 		onebuy: function(id,qty){
 			var url = this._addurl(id,qty);
@@ -97,11 +97,11 @@
 		},
 		_addurl2: function(title,price,qty,thumb){
 			if(!title || title == 'undefined'){
-				$.dialog.alert(p_lang('名称不能为空'));
+				$.dialog.alert(p_lang('名稱不能為空'));
 				return false;
 			}
 			if(!price || price == 'undefined'){
-				$.dialog.alert(p_lang('价格不能为空'));
+				$.dialog.alert(p_lang('價格不能為空'));
 				return false;
 			}
 			if(!qty || qty == 'undefined'){
@@ -122,7 +122,7 @@
 			if(qty && qty != 'undefined'){
 				url += "&qty="+qty;
 			}
-			//判断属性
+			//判斷屬性
 			if($("input[name=attr]").length>0){
 				var attr = '';
 				var showalert = false;
@@ -137,19 +137,19 @@
 					attr += val;
 				});
 				if(!attr || showalert){
-					$.dialog.alert(p_lang('请选择商品属性'));
+					$.dialog.alert(p_lang('請選擇商品屬性'));
 					return false;
 				}
 				url += "&ext="+attr;
 			}
 			return url;
 		},
-		//取得选中的产品价格
+		//取得選中的產品價格
 		price:function()
 		{
 			var ids = $.checkbox.join();
 			if(!ids){
-				$.dialog.alert(p_lang('请选择要进入结算的产品'),function(){
+				$.dialog.alert(p_lang('請選擇要進入結算的產品'),function(){
 					$("#total_price").text('--.--');
 				});
 				return true;
@@ -165,13 +165,13 @@
 				return false;
 			});
 		},
-		//更新产品数量
-		//id为购物车自动生成的ID号（不是产品ID号，请注意）
+		//更新產品數量
+		//id為購物車自動生成的ID號（不是產品ID號，請注意）
 		update: function(id,showtip)
 		{
 			var qty = $("#qty_"+id).val();
 			if(!qty || parseInt(qty) < 1){
-				$.dialog.alert("购物车产品数量不能为空");
+				$.dialog.alert("購物車產品數量不能為空");
 				return false;
 			}
 			var url = api_url('cart','qty')+"&id="+id+"&qty="+qty;
@@ -185,14 +185,14 @@
 				if(rs.status){
 					$.phpok.reload();
 				}else{
-					if(!rs.info) rs.info = '更新失败';
+					if(!rs.info) rs.info = '更新失敗';
 					$.dialog.alert(rs.info);
 					return false;
 				}
 			});
 		},
-		//计算购物车数量
-		//这里使用异步Ajax处理
+		//計算購物車數量
+		//這裡使用非同步Ajax處理
 		total:function(func){
 			$.phpok.json(api_url('cart','total'),function(rs){
 				if(rs.status){
@@ -208,9 +208,9 @@
 			});
 			return false;
 		},
-		//产品增加操作
-		//id为购物车里的ID，不是产品ID
-		//qty，是要增加的数值，
+		//產品增加操作
+		//id為購物車裡的ID，不是產品ID
+		//qty，是要增加的數值，
 		plus:function(id,num){
 			var qty = $("#qty_"+id).val();
 			if(!qty){
@@ -229,7 +229,7 @@
 				qty = 1;
 			}
 			if(qty<2){
-				$.dialog.alert('产品数量不能少于1');
+				$.dialog.alert('產品數量不能少於1');
 				return false;
 			}
 			if(!num || num == 'undefined'){
@@ -239,13 +239,13 @@
 			$("#qty_"+id).val(qty);
 			this.update(id);
 		},
-		//删除产品信息
-		//id为购物车自动生成的ID号（不是产品ID号，请注意）
+		//刪除產品資訊
+		//id為購物車自動生成的ID號（不是產品ID號，請注意）
 		del: function(id){
 			if(!id || id == 'undefined'){
 				var id = $.checkbox.join();
 				if(!id){
-					$.dialog.alert(p_lang('请选择要删除的产品'));
+					$.dialog.alert(p_lang('請選擇要刪除的產品'));
 					return false;
 				}
 				var tmplist = id.split(',');
@@ -256,10 +256,10 @@
 						title.push(t);
 					}
 				}
-				var tip = p_lang('确定要删除产品<br><span style="color:red">{title}</span><br>删除后不能恢复',title.join("<br/>"));
+				var tip = p_lang('確定要刪除產品<br><span style="color:red">{title}</span><br>刪除後不能恢復',title.join("<br/>"));
 			}else{
 				title = $("#title_"+id).text();
-				var tip = p_lang('确定要删除产品<br><span style="color:red">{title}</span><br>删除后不能恢复',title);
+				var tip = p_lang('確定要刪除產品<br><span style="color:red">{title}</span><br>刪除後不能恢復',title);
 			}
 			$.dialog.confirm(tip,function(){
 				var url = api_url('cart','delete','id='+$.str.encode(id));
@@ -269,7 +269,7 @@
 						return true;
 					}
 					if(!data.info){
-						data.info = p_lang('删除失败');
+						data.info = p_lang('刪除失敗');
 					}
 					$.dialog.alert(data.info);
 					return false;

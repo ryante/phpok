@@ -6,14 +6,14 @@
 		<ul class="layout">
 			<li>
 				<select name="express_id" id="express_id">
-					<option value="">{lang请选择物流公司}</option>
+					<option value="">{lang請選擇物流公司}</option>
 					<!-- loop from=$expresslist key=$key value=$value id=$tmpid -->
 					<option value="{$value.id}">{$value.title}</option>
 					<!-- /loop -->
 				</select>
 			</li>
-			<li><input type="text" name="code" id="code" class="layui-input" placeholder='{lang快递单号}' /></li>
-			<li><input type="submit" value="{lang添加}" class="layui-btn" /></li>
+			<li><input type="text" name="code" id="code" class="layui-input" placeholder='{lang快遞單號}' /></li>
+			<li><input type="submit" value="{lang新增}" class="layui-btn" /></li>
 		</ul>
 		</form>
 	</div>
@@ -21,10 +21,10 @@
 		<table class="layui-table">
 		<thead>
 		<tr>
-			<th>{lang单号}</th>
-			<th>{lang信息}</th>
-			<th>{lang公司名称}</th>
-			<th>{lang时间}</th>
+			<th>{lang單號}</th>
+			<th>{lang資訊}</th>
+			<th>{lang公司名稱}</th>
+			<th>{lang時間}</th>
 			<th>&nbsp;</th>
 		</tr>
 		</thead>
@@ -36,9 +36,9 @@
 			<td>{func date "Y-m-d H:i" $value.addtime}</td>
 			<td>
 				<!-- if !$value.is_end -->
-				<div><input type="button" value="{lang远程更新数据}" onclick="$.admin_order_express.remote('{$value.id}')" class="layui-btn layui-btn-sm" /></div>
+				<div><input type="button" value="{lang遠端更新資料}" onclick="$.admin_order_express.remote('{$value.id}')" class="layui-btn layui-btn-sm" /></div>
 				<!-- /if -->
-				<div class="mtop"><input type="button" value="{lang删除记录}" onclick="$.admin_order_express.del('{$value.id}')" class="layui-btn layui-btn-sm" /></div>
+				<div class="mtop"><input type="button" value="{lang刪除記錄}" onclick="$.admin_order_express.del('{$value.id}')" class="layui-btn layui-btn-sm" /></div>
 			</td>
 		</tr>
 		<!-- loop from=$value.invoicelist key=$k value=$v -->

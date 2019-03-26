@@ -1,10 +1,10 @@
 /**
- * 内容管理
+ * 內容管理
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年04月21日
 **/
 ;(function($){
@@ -13,14 +13,14 @@
 		{
 			var url = get_url('list','set','id='+id);
 			$.dialog.open(url,{
-				'title':p_lang('编辑项目') +" #"+id,
+				'title':p_lang('編輯專案') +" #"+id,
 				'lock':true,
 				'width':'780px',
 				'height':'60%',
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
@@ -33,12 +33,12 @@
 		{
 			var url = get_url('tag','open');
 			$.dialog.open(url,{
-				'title':p_lang('标签选择 '),
+				'title':p_lang('標籤選擇 '),
 				'lock':true,
 				'width':'600px',
 				'height':'500px',
 				'cancel':true,
-				'cancel':p_lang('关闭')
+				'cancel':p_lang('關閉')
 			})
 		},
 		tag_append:function(val,cut_identifier)
@@ -54,7 +54,7 @@
 			var lst = old.split(cut_identifier);
 			var total = lst.length;
 			if(total>=10){
-				$.dialog.alert(p_lang('超出系统限制，请删除一些不常用的标签'));
+				$.dialog.alert(p_lang('超出系統限制，請刪除一些不常用的標籤'));
 				return false;
 			}
 			var status = true;
@@ -64,7 +64,7 @@
 				}
 			}
 			if(!status){
-				$.dialog.alert(p_lang('标签已经存在，不支持重复添加'));
+				$.dialog.alert(p_lang('標籤已經存在，不支援重複新增'));
 				return false;
 			}
 			$("input[name=tag]").val(old+""+cut_identifier+""+val);
@@ -99,7 +99,7 @@
 				'type':'post',
 				'dataType':'json',
 				'beforeSubmit':function(){
-					loading_action = $.dialog.tips(p_lang('正在保存数据，请稍候…')).time(30).lock();
+					loading_action = $.dialog.tips(p_lang('正在儲存資料，請稍候…')).time(30).lock();
 				},
 				'success':function(rs){
 					if(loading_action){
@@ -113,7 +113,7 @@
 					var url = get_url('list','action','id='+pid);
 					var id = $("#id").val();
 					if(id){
-						$.dialog.alert(p_lang('内容信息修改成功'),function(){
+						$.dialog.alert(p_lang('內容資訊修改成功'),function(){
 							$.admin.reload(url);
 							$.admin.close(url);
 						},'succeed');
@@ -121,12 +121,12 @@
 					}
 					$.dialog.through({
 						'icon':'succeed',
-						'content':p_lang('内容添加操作成功，请选择继续添加或返回列表'),
+						'content':p_lang('內容新增操作成功，請選擇繼續新增或返回列表'),
 						'ok':function(){
 							$.admin.reload(url);
 							$.phpok.reload();
 						},
-						'okVal':p_lang('继续添加'),
+						'okVal':p_lang('繼續新增'),
 						'cancel':function(){
 							$.admin.reload(url);
 							$.admin.close(url);
@@ -140,13 +140,13 @@
 		},
 
 		/**
-		 * 删除主题
-		 * @参数 pid 项目ID
-		 * @参数 tid 主题ID
+		 * 刪除主題
+		 * @引數 pid 專案ID
+		 * @引數 tid 主題ID
 		**/
 		single_delete:function(pid,tid)
 		{
-			$.dialog.confirm(p_lang('确定要删除ID #{tid} 的信息吗？<br/>删除后数据是不能恢复的',tid),function(){
+			$.dialog.confirm(p_lang('確定要刪除ID #{tid} 的資訊嗎？<br/>刪除後資料是不能恢復的',tid),function(){
 				var url = get_url('list','single_delete','pid='+pid+"&id="+tid);
 				$.phpok.json(url,function(data){
 					if(data.status){
@@ -160,13 +160,13 @@
 		},
 
 		/**
-		 * 评论维护
-		 * @参数 id 主题ID
+		 * 評論維護
+		 * @引數 id 主題ID
 		**/
 		reply_it:function(id)
 		{
 			$.dialog.open(get_url('list','comment','id='+id),{
-				'title':p_lang('评论#{id}',id),
+				'title':p_lang('評論#{id}',id),
 				'lock':true,
 				'width':'80%',
 				'height':'80%',
@@ -175,7 +175,7 @@
 		},
 
 		/**
-		 * 生成随机码
+		 * 生成隨機碼
 		**/
 		rand_identifier:function()
 		{
@@ -185,13 +185,13 @@
 		},
 
 		/**
-		 * 快速添加扩展字段
+		 * 快速新增擴充套件欄位
 		**/
 		update_select_add:function(module)
 		{
 			var val = $("#_tmp_select_add").val();
 			if(!val){
-				$.dialog.alert(p_lang('请选择要添加的扩展'));
+				$.dialog.alert(p_lang('請選擇要新增的擴充套件'));
 				return false;
 			}
 			ext_add2(val,module);
@@ -201,14 +201,14 @@
 		{
 			var url = get_url('form','preview','id='+id+"&pid="+pid);
 			$.dialog.open(url,{
-				'title':p_lang('预览'),
+				'title':p_lang('預覽'),
 				'lock':true,
 				'width':'750px',
 				'height':'650px',
 				'ok':true
 			});
 		},
-		//取用或禁用状态
+		//取用或禁用狀態
 		status:function(id)
 		{
 			var url = get_url("list","content_status","id="+id);
@@ -263,7 +263,7 @@ function preview_attr(id)
 {
 	var url = get_url("res_action","preview") + "&id="+id;
 	$.dialog.open(url,{
-		title: p_lang('预览'),
+		title: p_lang('預覽'),
 		lock : true,
 		width: "700px",
 		height: "70%",

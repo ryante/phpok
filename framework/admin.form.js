@@ -1,10 +1,10 @@
 /**
- * 后台自定义表单中涉及到的JS触发
+ * 後臺自定義表單中涉及到的JS觸發
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2018年01月18日
 **/
 ;(function($){
@@ -63,7 +63,7 @@
 						html += "</ul>";
 						$("#fields_show").html(html);
 						$("#fields_show_html,#true_delete_html").show();
-						//使用数据
+						//使用資料
 						var elist = data.info.used;
 						var html = '<ul class="layout">';
 						for(var i in elist){
@@ -97,11 +97,11 @@
 		},
 
 		/**
-		 * 表单选择器，对表单内容进行格式化操作
-		 * @参数 val 选择的表单类型
-		 * @参数 id 要写入的HTML字段
-		 * @参数 eid 已存在值
-		 * @参数 etype 值的来源
+		 * 表單選擇器，對錶單內容進行格式化操作
+		 * @引數 val 選擇的表單型別
+		 * @引數 id 要寫入的HTML欄位
+		 * @引數 eid 已存在值
+		 * @引數 etype 值的來源
 		**/
 		option:function(val,id,eid,etype)
 		{

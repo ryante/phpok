@@ -1,12 +1,12 @@
 /***********************************************************
 	Filename: {phpok}/js/user.js
-	Note	: 会员管理中涉及到的JS
+	Note	: 會員管理中涉及到的JS
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
 	Update  : 2013年5月2日
 ***********************************************************/
-//检查添加操作
+//檢查新增操作
 function check_add()
 {
 	var url = get_url("user","chk");
@@ -16,7 +16,7 @@ function check_add()
 	}
 	var user = $("#user").val();
 	if(!user || user == "undefined"){
-		$.dialog.alert("会员账号不能为空");
+		$.dialog.alert("會員賬號不能為空");
 		return false;
 	}
 	url += "&user="+$.str.encode(user);
@@ -42,14 +42,14 @@ function del(id)
 		$.dialog.alert("操作非法");
 		return false;
 	}
-	$.dialog.confirm(p_lang('确定要删除会员号ID为 {id} 的会员信息吗？<br>删除后数据将被清空且不能恢复','<span class="red">#'+id+'</span>'),function(){
+	$.dialog.confirm(p_lang('確定要刪除會員號ID為 {id} 的會員資訊嗎？<br>刪除後資料將被清空且不能恢復','<span class="red">#'+id+'</span>'),function(){
 		var url = get_url('user','ajax_del','id='+id);
 		$.phpok.ajax(url,function(data){
 			if(data == 'ok'){
 				$.phpok.reload();
 			}else{
 				if(!data){
-					data = p_lang('删除会员操作异常');
+					data = p_lang('刪除會員操作異常');
 					$.dialog.alert(data);
 				}
 			}
@@ -58,7 +58,7 @@ function del(id)
 	});
 }
 
-//更改权限状态
+//更改許可權狀態
 function set_status(id)
 {
 	if(!id)
@@ -69,7 +69,7 @@ function set_status(id)
 	var t = $("#status_"+id).attr("value");
 	if(t == 2)
 	{
-		$.dialog.alert("此会员已被锁定，请点编辑后进行解除锁定");
+		$.dialog.alert("此會員已被鎖定，請點編輯後進行解除鎖定");
 		return false;
 	}
 	var url = get_url("user","ajax_status") + "&id="+id;
@@ -94,7 +94,7 @@ function action_wealth_select(val)
 		$("#a_html").html('增加');
 		$("#a_type").val("+");
 	}else{
-		$("#a_html").html('减少');
+		$("#a_html").html('減少');
 		$("#a_type").val("-");
 	}
 }
@@ -102,20 +102,20 @@ function action_wealth(title,wid,uid,unit)
 {
 	var url = get_url('wealth','action_user','wid='+wid+"&uid="+uid);
 	$.dialog.open(url,{
-		'title':p_lang('会员{title}操作',{'title':title}),
+		'title':p_lang('會員{title}操作',{'title':title}),
 		'lock':true,
 		'width':'500px',
 		'height':'200px',
 		'ok':function(){
 			var iframe = this.iframe.contentWindow;
 			if (!iframe.document.body) {
-				alert('iframe还没加载完毕呢');
+				alert('iframe還沒載入完畢呢');
 				return false;
 			};
 			iframe.save();
 			return false;
 		},
-		'okVal':'提交保存',
+		'okVal':'提交儲存',
 		'cancel':true
 	})
 }
@@ -125,14 +125,14 @@ function show_wealth_log(title,wid,uid)
 {
 	var url = get_url('wealth','log','wid='+wid+"&uid="+uid);
 	$.dialog.open(url,{
-		'title':title+p_lang('日志'),
+		'title':title+p_lang('日誌'),
 		'lock':true,
 		'width':'500px',
 		'height':'400px',
 		'ok':function(){
 			return true;
 		},
-		'okVal':'关闭'
+		'okVal':'關閉'
 	});
 }
 

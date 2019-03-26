@@ -1,16 +1,16 @@
-<div class="tips">&nbsp; {$top_tips ? $top_tips : '上传附件'}，支持格式有：{$file_type}，上传不能超过：<span class="red">{echo get_cfg_var("upload_max_filesize")}</span>，一次只能上传一个</div>
+<div class="tips">&nbsp; {$top_tips ? $top_tips : '上傳附件'}，支援格式有：{$file_type}，上傳不能超過：<span class="red">{echo get_cfg_var("upload_max_filesize")}</span>，一次只能上傳一個</div>
 <script type="text/javascript">
-//单个文件上传成功后触发的函数
+//單個檔案上傳成功後觸發的函式
 function swfupload_success(file,serverData)
 {
-	//客户端关闭显示
+	//客戶端關閉顯示
 	var progress = new FileProgress(file, this.customSettings.progressTarget);
 	progress.setComplete();
-	progress.setStatus("上传完成！");
+	progress.setStatus("上傳完成！");
 	progress.toggleCancel(false);
 }
 
-//上传完成后操作
+//上傳完成後操作
 function swfupload_complete(file)
 {
 	if (this.getStats().files_queued === 0)
@@ -20,7 +20,7 @@ function swfupload_complete(file)
 	}
 }
 
-//文件选择完毕后动作
+//檔案選擇完畢後動作
 function swfupload_file_dialog_complete(numFilesSelected, numFilesQueued)
 {
 	if (numFilesSelected > 0)
@@ -29,13 +29,13 @@ function swfupload_file_dialog_complete(numFilesSelected, numFilesQueued)
 	}
 }
 
-//统计总进度
+//統計總進度
 function swfupload_queue_complete(numFilesUploaded)
 {
 	return true;
 }
 
-//开始上传
+//開始上傳
 function swfupload_submit()
 {
 	var cate_id = $("#attr_cate_id").val();
@@ -65,9 +65,9 @@ function swfupload_submit()
 					<td>&nbsp;</td>
 					<td><div style="padding-top:3px;"><div id="spanButtonPlaceHolder"></div></div></td>
 					<td>&nbsp;</td>
-					<td><input id="btnSubmit" type="button" class="submit" value="开始上传" onclick="swfupload_submit();" /></td>
+					<td><input id="btnSubmit" type="button" class="submit" value="開始上傳" onclick="swfupload_submit();" /></td>
 					<td>&nbsp;</td>
-					<td><input id="btnCancel" type="button" class="btn" value="取消上传" onclick="swfu.cancelQueue();" disabled="disabled" /></td>
+					<td><input id="btnCancel" type="button" class="btn" value="取消上傳" onclick="swfu.cancelQueue();" disabled="disabled" /></td>
 				</tr>
 				</table>
 			</td>
@@ -85,7 +85,7 @@ $(document).ready(function(){
 		"post_params"					: {},
 		"file_size_limit"				: "{echo get_cfg_var('upload_max_filesize')}B",	
 		"file_types"					: "{$file_type ? $file_type : '*.*'}",	
-		"file_types_description"		: "{$file_type_desc ? $file_type_desc : '文件'}",
+		"file_types_description"		: "{$file_type_desc ? $file_type_desc : '檔案'}",
 		"file_upload_limit"				: "0",	
 		"file_queue_limit"				: "0",	
 		"button_window_mode"			: "transparent",

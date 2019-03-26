@@ -1,11 +1,11 @@
 /**
- * 收藏夹相关JS动作
+ * 收藏夾相關JS動作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年06月04日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年06月04日
 **/
 ;(function($){
 	$.phpok_app_fav = {
@@ -34,7 +34,7 @@
 		},
 		del:function(id)
 		{
-			$.dialog.confirm(p_lang('确定要删除这条收藏记录吗？'),function(){
+			$.dialog.confirm(p_lang('確定要刪除這條收藏記錄嗎？'),function(){
 				var url = api_url('fav','delete','id='+id);
 				$.phpok.json(url,function(data){
 					if(data.status){

@@ -16,12 +16,12 @@ function save()
 	var rs = $.phpok.json(url);
 	if(rs.status == 'ok'){
 		if(!icon){
-			obj.$("#icon_status_{$id}").val('{lang隐藏}').attr("data-icon",'');
+			obj.$("#icon_status_{$id}").val('{lang隱藏}').attr("data-icon",'');
 			obj.$("#icon_{$id}").removeClass().hide();
 			$.dialog.close();
 			return true;
 		}
-		obj.$("#icon_status_{$id}").val('{lang显示}').attr("data-icon",icon);
+		obj.$("#icon_status_{$id}").val('{lang顯示}').attr("data-icon",icon);
 		obj.$("#icon_{$id}").removeClass().addClass('hand').addClass('icon-'+icon).show();
 		$.dialog.close();
 		return true;
@@ -32,8 +32,8 @@ function save()
 </script>
 <div class="table">
 	<div class="title">
-		快捷图标：
-		<span class="note">启用快捷图标后，将在桌面显示相应的快捷链接</span>
+		快捷圖示：
+		<span class="note">啟用快捷圖示後，將在桌面顯示相應的快捷連結</span>
 	</div>
 	<div class="content">
 		<ul class="layout">
@@ -41,7 +41,7 @@ function save()
 				<table>
 				<tr>
 					<td><input type="radio" name="icon" value=""{if !$rs.icon} checked{/if}/></td>
-					<td>空/隐藏/不使用</td>
+					<td>空/隱藏/不使用</td>
 				</tr>
 				</table>
 			</label></li>

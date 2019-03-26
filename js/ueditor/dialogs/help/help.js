@@ -6,18 +6,18 @@
  * To change this template use File | Settings | File Templates.
  */
 /**
- * tab点击处理事件
+ * tab點選處理事件
  * @param tabHeads
  * @param tabBodys
  * @param obj
  */
 function clickHandler( tabHeads,tabBodys,obj ) {
-    //head样式更改
+    //head樣式更改
     for ( var k = 0, len = tabHeads.length; k < len; k++ ) {
         tabHeads[k].className = "";
     }
     obj.className = "focus";
-    //body显隐
+    //body顯隱
     var tabSrc = obj.getAttribute( "tabSrc" );
     for ( var j = 0, length = tabBodys.length; j < length; j++ ) {
         var body = tabBodys[j],
@@ -35,8 +35,8 @@ function clickHandler( tabHeads,tabBodys,obj ) {
 }
 
 /**
- * TAB切换
- * @param tabParentId  tab的父节点ID或者对象本身
+ * TAB切換
+ * @param tabParentId  tab的父節點ID或者物件本身
  */
 function switchTab( tabParentId ) {
     var tabElements = $G( tabParentId ).children,

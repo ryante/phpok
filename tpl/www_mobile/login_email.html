@@ -1,4 +1,4 @@
-<!-- include tpl=header menutitle=网站首页 title=会员登录 -->
+<!-- include tpl=header menutitle=網站首頁 title=會員登入 -->
 <script type="text/javascript">
 var maxtime = 300;
 var email_send_lock = false;
@@ -7,13 +7,13 @@ function update_send_email_loading()
 {
 	maxtime--;
 	if(maxtime < 1){
-		$("#email_send_status").val('发送邮件验证码');
+		$("#email_send_status").val('傳送郵件驗證碼');
 		email_send_lock = false;
 		maxtime = 300;
 		window.clearInterval(win_time_out);
 		return true;
 	}
-	var tips = "验证码已发送("+maxtime+")";
+	var tips = "驗證碼已傳送("+maxtime+")";
 	$("#email_send_status").val(tips);
 }
 
@@ -21,12 +21,12 @@ function check_input()
 {
 	var email = $("input[name=email]").val();
 	if(!email){
-		$.dialog.alert('邮箱不能为空','','error');
+		$.dialog.alert('郵箱不能為空','','error');
 		return false;
 	}
 	var code = $("input[name=_chkcode]").val();
 	if(!code){
-		$.dialog.alert('验证码不能为空','','error');
+		$.dialog.alert('驗證碼不能為空','','error');
 		return false;
 	}
 	var url = api_url('login','email','email='+email+"&_chkcode="+code);
@@ -48,17 +48,17 @@ function check_input()
 function send_email()
 {
 	if(email_send_lock){
-		$.dialog.alert('验证码已发送，请五分钟后再执行');
+		$.dialog.alert('驗證碼已傳送，請五分鐘後再執行');
 		return false;
 	}
 	var url = api_url('vcode','email');
 	var email = $("#email").val();
 	if(!email){
-		$.dialog.alert('邮箱不能为空');
+		$.dialog.alert('郵箱不能為空');
 		return false;
 	}
 	url += "&email="+$.str.encode(email);
-	$.dialog.tips("请稍候…");
+	$.dialog.tips("請稍候…");
 	update_send_email_loading();
 	$.phpok.json(url,function(rs){
 		if(rs.status){
@@ -69,7 +69,7 @@ function send_email()
 			return true;
 		}
 		$.dialog.alert(rs.info);
-		$("#email_send_status").val('发送邮件验证码');
+		$("#email_send_status").val('傳送郵件驗證碼');
 		return false;
 	})
 }
@@ -78,26 +78,26 @@ function send_email()
 	<form class="am-form" onsubmit="return check_input()" method="post">
 		<input type="hidden" name="_back" id="_back" value="{$_back}" />
 		<fieldset>
-			<legend>邮件验证登录</legend>
+			<legend>郵件驗證登入</legend>
 			<div class="am-form-group">
-				<label for="mobile">邮箱 Email</label>
+				<label for="mobile">郵箱 Email</label>
 				<div class="am-g am-g-collapse">
-					<div class="am-u-sm-6"><input type="text" id="email" name="email" placeholder="请输入邮箱" /></div>
+					<div class="am-u-sm-6"><input type="text" id="email" name="email" placeholder="請輸入郵箱" /></div>
 					<div class="am-u-sm-1"></div>
-					<div class="am-u-sm-5"><input type="button" value="发送邮件验证码" onclick="send_email()" class="am-btn am-btn-default" id="email_send_status" /></div>
+					<div class="am-u-sm-5"><input type="button" value="傳送郵件驗證碼" onclick="send_email()" class="am-btn am-btn-default" id="email_send_status" /></div>
 				</div>
 			</div>
 			<div class="am-form-group">
-				<label for="_chkcode">邮件验证码</label>
-				<input type="text" name="_chkcode" id="_chkcode" placeholder="请输入邮箱收到的验证码" />
+				<label for="_chkcode">郵件驗證碼</label>
+				<input type="text" name="_chkcode" id="_chkcode" placeholder="請輸入郵箱收到的驗證碼" />
 			</div>
 			<div class="am-form-group">
-				<button type="submit" class="am-btn am-btn-primary" id="login_submit">登录</button>
+				<button type="submit" class="am-btn am-btn-primary" id="login_submit">登入</button>
 			</div>
 			<div class="am-form-group">
-				<a href="{$sys.url}" class="am-btn am-btn-default am-btn-xs">返回首页</a>
-				<a href="{url ctrl=login/}" class="am-btn am-btn-default am-btn-xs"><i class="am-icon-user"></i> 账号密码登录</a>
-				<!-- if $login_sms --><a href="{url ctrl=login func=sms/}" class="am-btn am-btn-default am-btn-xs"><i class="am-icon-mobile"></i> 短信登录</a><!-- /if -->
+				<a href="{$sys.url}" class="am-btn am-btn-default am-btn-xs">返回首頁</a>
+				<a href="{url ctrl=login/}" class="am-btn am-btn-default am-btn-xs"><i class="am-icon-user"></i> 賬號密碼登入</a>
+				<!-- if $login_sms --><a href="{url ctrl=login func=sms/}" class="am-btn am-btn-default am-btn-xs"><i class="am-icon-mobile"></i> 簡訊登入</a><!-- /if -->
 			</div>
 		</fieldset>
 	</form>

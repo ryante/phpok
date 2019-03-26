@@ -149,7 +149,7 @@ class list_model extends list_model_base
 				$this->db->insert_array($tmp,'list_cate','replace');
 			}
 		}
-		//綁定價格
+		//繫結價格
 		$sql = "SELECT * FROM ".$this->db->prefix."list_biz WHERE id='".$id."'";
 		$tmp = $this->db->get_one($sql);
 		if($tmp){

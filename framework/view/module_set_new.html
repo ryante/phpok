@@ -3,8 +3,8 @@
 <!-- if $id --><input type="hidden" id="id" name="id" value="{$id}" /><!-- /if -->
 <div class="table">
 	<div class="title">
-		{lang名称：}
-		<span class="note">{lang设置一个名称，该名称将在应用中读取，不受站点影响}</span></span>
+		{lang名稱：}
+		<span class="note">{lang設定一個名稱，該名稱將在應用中讀取，不受站點影響}</span></span>
 	</div>
 	<div class="content">
 		<table cellpadding="0" cellspacing="0">
@@ -18,15 +18,15 @@
 
 <div class="table">
 	<div class="title">
-		{lang备注：}
-		<span class="note">{lang仅限后台管理使用，用于查看该模块主要做什么}</span></span>
+		{lang備註：}
+		<span class="note">{lang僅限後臺管理使用，用於檢視該模組主要做什麼}</span></span>
 	</div>
 	<div class="content"><input type="text" id="note" name="note" class="long" value="{$rs.note}" /></div>
 </div>
 <!-- if !$id -->
 <div class="table">
 	<div class="title">
-		{lang独立运行：}<span class="note">{lang启用独立运行后，需要设置相应的标识，且不支持项目关联，功能比较简单}</span>
+		{lang獨立執行：}<span class="note">{lang啟用獨立執行後，需要設定相應的標識，且不支援專案關聯，功能比較簡單}</span>
 	</div>
 	<div class="content">
 		<ul class="layout">
@@ -38,15 +38,15 @@
 <!-- else -->
 <div class="table" style="display: none">
 	<div class="title">
-		{lang后台字段布局：}
-		<span class="note">{lang在这里设置要显示的字段属性}</span>
+		{lang後臺欄位佈局：}
+		<span class="note">{lang在這裡設定要顯示的欄位屬性}</span>
 	</div>
 	<div class="content">
 		<ul class="layout">
 			<!-- if !$rs.mtype -->
-			<li><label><input type="checkbox" name="layout[]" value="hits"{if in_array("hits",$layout)} checked{/if} />{lang查看次数}</label></li>
-			<li><label><input type="checkbox" name="layout[]" value="dateline"{if in_array("dateline",$layout)} checked{/if} />{lang发布时间}</label></li>
-			<li><label><input type="checkbox" name="layout[]" value="user_id"{if in_array("user_id",$layout)} checked{/if} />{lang会员账号}</label></li>
+			<li><label><input type="checkbox" name="layout[]" value="hits"{if in_array("hits",$layout)} checked{/if} />{lang檢視次數}</label></li>
+			<li><label><input type="checkbox" name="layout[]" value="dateline"{if in_array("dateline",$layout)} checked{/if} />{lang釋出時間}</label></li>
+			<li><label><input type="checkbox" name="layout[]" value="user_id"{if in_array("user_id",$layout)} checked{/if} />{lang會員賬號}</label></li>
 			<li><label><input type="checkbox" name="layout[]" value="sort"{if in_array("sort",$layout)} checked{/if} />{lang排序}</label></li>
 			<!-- /if -->
 			<!-- loop from=$used_list key=$key value=$value -->
@@ -59,7 +59,7 @@
 <div class="table">
 	<div class="title">
 		{lang排序：}
-		<span class="note">{lang值越小越往前靠，最小值为0，最大值为255}</span>
+		<span class="note">{lang值越小越往前靠，最小值為0，最大值為255}</span>
 	</div>
 	<div class="content"><input type="text" id="taxis" name="taxis" class="short" value="{$rs.taxis}" /></div>
 </div>

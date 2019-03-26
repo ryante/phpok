@@ -28,33 +28,33 @@ function save()
 <form method="post" id="setsubmit" onsubmit="return false;">
 <div class="table">
 	<div class="title">
-		发票类型
-		<span class="note">仅支持普通发票</span>
+		發票型別
+		<span class="note">僅支援普通發票</span>
 	</div>
 	<div class="content">
 		<ul class="layout">
-			<li><label><input type="radio" name="type" value="普通发票"{if $rs.type == '普通发票' || !$rs.type} checked{/if} />普通发票</label></li>
+			<li><label><input type="radio" name="type" value="普通發票"{if $rs.type == '普通發票' || !$rs.type} checked{/if} />普通發票</label></li>
 		</ul>
 		<div class="clear"></div>
 	</div>
 </div>
 <div class="table">
 	<div class="title">
-		发票抬头：
-		<span class="note">个人发票请填写个人即可，企业发票就填写公司名称</span>
+		發票抬頭：
+		<span class="note">個人發票請填寫個人即可，企業發票就填寫公司名稱</span>
 	</div>
-	<div class="content"><input type="text" id="title" name="title" class="default" value="{$rs.title}" placeholder="为空使用“个人发票”" /></div>
+	<div class="content"><input type="text" id="title" name="title" class="default" value="{$rs.title}" placeholder="為空使用“個人發票”" /></div>
 </div>
 <div class="table">
 	<div class="title">
-		发票内容
-		<span class="note">请设置发票内容，留空使用<span class="red">“明细”</span></span>
+		發票內容
+		<span class="note">請設定發票內容，留空使用<span class="red">“明細”</span></span>
 	</div>
-	<div class="content"><input type="text" id="content" name="content" class="default" value="{$rs.content}" placeholder="为空使用“明细”" /></div>
+	<div class="content"><input type="text" id="content" name="content" class="default" value="{$rs.content}" placeholder="為空使用“明細”" /></div>
 </div>
 <div class="table">
 	<div class="title">
-		备注
+		備註
 		<span class="note"></span>
 	</div>
 	<div class="content"><textarea name="note" id="note" class="default" style="height:110px;min-height:110px;max-height:150px;min-width:350px;max-width:350px;">{$rs.note}</textarea></div>

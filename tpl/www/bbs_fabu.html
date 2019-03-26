@@ -1,4 +1,4 @@
-<!-- php:$title = ($cate_rs && $cate_rs.id != $page_rs.cate) ? '发布主题 - '.$cate_rs.title.' - '.$page_rs.title : '发布主题 - '.$page_rs.title -->
+<!-- php:$title = ($cate_rs && $cate_rs.id != $page_rs.cate) ? '釋出主題 - '.$cate_rs.title.' - '.$page_rs.title : '釋出主題 - '.$page_rs.title -->
 <!-- include tpl=head title=$title menutitle=$page_rs.title -->
 <!-- include file=bbs_post -->
 <script type="text/javascript">
@@ -7,18 +7,18 @@ $(document).ready(function(){
 	$("#post_submit").submit(function(){
 		var title = $("#title").val();
 		if(!title){
-			$.dialog.alert('新贴主题不能为空');
+			$.dialog.alert('新貼主題不能為空');
 			return false;
 		}
 		var cate_id = $("#cate_id").val();
 		if(!cate_id){
-			$.dialog.alert('没有指定分类');
+			$.dialog.alert('沒有指定分類');
 			return false;
 		}
 		if(is_vcode == 'true'){
 			var chkcode = $("#_chkcode").val();
 			if(!chkcode){
-				$.dialog.alert('验证码不能为空',function(){
+				$.dialog.alert('驗證碼不能為空',function(){
 					$("#_vcode").phpok_vcode();
 				});
 				return false;
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		}
 		var content = UE.getEditor('content').getContentTxt();
 		if(!content){
-			$.dialog.alert('内容不能为空');
+			$.dialog.alert('內容不能為空');
 			return false;
 		}
 		$(this).ajaxSubmit({
@@ -35,7 +35,7 @@ $(document).ready(function(){
 			'dataType':'json',
 			'success':function(rs){
 				if(rs.status == 'ok'){
-					$.dialog.alert('您的信息已发布，感谢您的提交',function(){
+					$.dialog.alert('您的資訊已釋出，感謝您的提交',function(){
 						$.phpok.go("{$_back}");
 					});
 				}else{
@@ -55,7 +55,7 @@ $(document).ready(function(){
 	
 	<!-- include tpl=block/breadcrumb leader=$leader -->
 	<div class="am-panel am-panel-default">
-		<div class="am-panel-hd">发新贴</div>
+		<div class="am-panel-hd">發新貼</div>
 		<div class="am-panel-bd">
 			<form method="post" id="post_submit" class="am-form">
 			<input type="hidden" name="id" id="id" value="{$page_rs.identifier}" />
@@ -63,15 +63,15 @@ $(document).ready(function(){
 			<input type="hidden" name="cate_id" id="cate_id" value="{$cate_rs.id}" />
 			<!-- /if -->
 			<div class="am-g am-form-group">
-				<label class="am-u-sm-2" for="title">主题名称</label>
+				<label class="am-u-sm-2" for="title">主題名稱</label>
 				<div class="am-u-sm-10"><input type="text" name="title" id="title" /></div>
 			</div>
 			<!-- if $catelist && !$cate_rs -->
 			<div class="am-g am-form-group">
-				<label class="am-u-sm-2" for="title">分类</label>
+				<label class="am-u-sm-2" for="title">分類</label>
 				<div class="am-u-sm-10">
 					<select name="cate_id" id="cate_id">
-						<option value="">请选择分类……</option>
+						<option value="">請選擇分類……</option>
 						<!-- loop from=$catelist key=$key value=$value id=$tmpid -->
 						<option value="{$value.id}"{if $cate_rs.id == $value.id} selected{/if}>{$value._space}{$value.title}</option>
 						<!-- /loop -->
@@ -88,13 +88,13 @@ $(document).ready(function(){
 			<!-- /loop -->
 			<!-- if $is_vcode -->
 			<div class="am-g am-form-group">
-				<label class="am-u-sm-2" for="_chkcode">验证码：</label>
+				<label class="am-u-sm-2" for="_chkcode">驗證碼：</label>
 				<div class="am-u-sm-4"><input type="text" name="_chkcode" id="_chkcode" class="vcode" /></div>
 				<div class="am-u-sm-6"><img src="" border="0" align="absmiddle" id="update_vcode" class="hand"></div>
 				<script type="text/javascript">
 				$(document).ready(function(){
 					$("#update_vcode").phpok_vcode();
-					//更新点击时操作
+					//更新點選時操作
 					$("#update_vcode").click(function(){
 						$(this).phpok_vcode();
 					});

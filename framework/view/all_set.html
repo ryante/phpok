@@ -3,11 +3,11 @@
 <input type="hidden" id="id" name="id" value="{$id}" />
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang内容}_{lang标识} <span class="darkblue">{$rs.identifier}</span>
+		{lang內容}_{lang標識} <span class="darkblue">{$rs.identifier}</span>
 		<!-- if $popedom.gset && $session.adm_develop -->
 		<div class="layui-btn-group fr">
-			<input type="button" value="{lang维护设置}" onclick="$.admin_all.group({$id})" class="layui-btn layui-btn-sm" />
-			<input type="button" value="{lang删除}" onclick="$.admin_all.group_delete({$id})" class="layui-btn layui-btn-sm layui-btn-danger" />
+			<input type="button" value="{lang維護設定}" onclick="$.admin_all.group({$id})" class="layui-btn layui-btn-sm" />
+			<input type="button" value="{lang刪除}" onclick="$.admin_all.group_delete({$id})" class="layui-btn layui-btn-sm layui-btn-danger" />
 		</div>
 		<!-- /if -->
 	</div>
@@ -19,8 +19,8 @@
 				<div class="darkblue"><small>{$value.identifier}</small></div>
 				<!-- if $popedom.ext && $session.adm_develop -->
 				<div class="layui-btn-group ext_edit">
-					<input type="button" value="{lang编辑}" class="layui-btn layui-btn-xs" onclick="ext_edit('{$value.identifier}','{$ext_module}')" />
-					<input type="button" value="{lang删除}" class="layui-btn layui-btn-xs layui-btn-normal" onclick="ext_delete('{$value.identifier}','{$ext_module}','{$value.title}')" />
+					<input type="button" value="{lang編輯}" class="layui-btn layui-btn-xs" onclick="ext_edit('{$value.identifier}','{$ext_module}')" />
+					<input type="button" value="{lang刪除}" class="layui-btn layui-btn-xs layui-btn-normal" onclick="ext_delete('{$value.identifier}','{$ext_module}','{$value.title}')" />
 				</div>
 				<!-- /if -->
 			</label>
@@ -31,7 +31,7 @@
 		<!-- if $popedom.ext && $session.adm_develop -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang扩展}
+				{lang擴充套件}
 			</label>
 			<div class="layui-input-inline long" id="_quick_insert" data-id="{$ext_module}"></div>
 		</div>
@@ -43,7 +43,7 @@
 <div class="submit-info">
 	<div class="layui-container center">
 		<input type="submit" value="{lang提交}" class="layui-btn layui-btn-lg layui-btn-danger" />
-		<input type="button" value="{lang取消关闭}" class="layui-btn layui-btn-lg layui-btn-primary" onclick="$.admin.close()" />
+		<input type="button" value="{lang取消關閉}" class="layui-btn layui-btn-lg layui-btn-primary" onclick="$.admin.close()" />
 	</div>
 </div>
 

@@ -1,8 +1,8 @@
 <!-- include tpl=head -->
 <div class="tips">
-	{lang当前位置：}{lang财富方案}
-	<div class="action"><a href="{url ctrl=wealth func=set/}">{lang添加方案}</a></div>
-	<div class="action"><a href="{url ctrl=wealth func=notcheck/}">{lang未审核财富}</a></div>
+	{lang當前位置：}{lang財富方案}
+	<div class="action"><a href="{url ctrl=wealth func=set/}">{lang新增方案}</a></div>
+	<div class="action"><a href="{url ctrl=wealth func=notcheck/}">{lang未稽核財富}</a></div>
 	<div class="clear"></div>
 </div>
 <script type="text/javascript">
@@ -22,11 +22,11 @@ function set_status(id)
 }
 function delete_it(id)
 {
-	$.dialog.confirm('{lang确定要删除当前财富方案吗？}<br />{lang删除后此方案的财富将}<span class="red"><b>{lang清空，且不能恢复，请慎重考虑}</b></span>',function(){
+	$.dialog.confirm('{lang確定要刪除當前財富方案嗎？}<br />{lang刪除後此方案的財富將}<span class="red"><b>{lang清空，且不能恢復，請慎重考慮}</b></span>',function(){
 		var url = get_url('wealth','delete','id='+id);
 		var rs = $.phpok.json(url);
 		if(rs.status == 'ok'){
-			$.dialog.alert('{lang方案删除成功}',function(){
+			$.dialog.alert('{lang方案刪除成功}',function(){
 				$.phpok.reload();
 			},'succeed');
 		}else{
@@ -40,11 +40,11 @@ function delete_it(id)
 <tr>
 	<th>ID</th>
 	<th>&nbsp;</th>
-	<th>{lang名称}</th>
-	<th>{lang标识}</th>
-	<th>{lang计量单位}</th>
-	<th class="lft">{lang在线支付}</th>
-	<th class="lft">{lang抵现}</th>
+	<th>{lang名稱}</th>
+	<th>{lang標識}</th>
+	<th>{lang計量單位}</th>
+	<th class="lft">{lang線上支付}</th>
+	<th class="lft">{lang抵現}</th>
 	<th width="330">&nbsp;</th>
 </tr>
 <!-- loop from=$rslist key=$key value=$value -->
@@ -54,14 +54,14 @@ function delete_it(id)
 	<td class="center">{$value.title}</td>
 	<td class="center">{$value.identifier}</td>
 	<td class="center">{$value.unit}</td>
-	<td><!-- if $value.ifpay -->支持 <span class="gray i">（购买：1元={$value.pay_ratio}{$value.unit}）</span><!-- else -->不支持<!-- /if --></td>
-	<td><!-- if $value.ifcash -->支持 <span class="gray i">（兑换：100{$value.unit}={$value.cash_ratio}元）</span><!-- else -->不支持<!-- /if --></td>
+	<td><!-- if $value.ifpay -->支援 <span class="gray i">（購買：1元={$value.pay_ratio}{$value.unit}）</span><!-- else -->不支援<!-- /if --></td>
+	<td><!-- if $value.ifcash -->支援 <span class="gray i">（兌換：100{$value.unit}={$value.cash_ratio}元）</span><!-- else -->不支援<!-- /if --></td>
 	<td class="center">
 		<div class="button-group">
-			<input type="button" value="{lang编辑}" onclick="$.phpok.go('{url ctrl=wealth func=set id=$value.id/}')" class="layui-btn" />
-			<input type="button" value="{lang执行规则}" onclick="$.phpok.go('{url ctrl=wealth func=rule id=$value.id/}')" class="layui-btn" />
-			<input type="button" value="{lang财富列表}" onclick="$.phpok.go('{url ctrl=wealth func=info id=$value.id/}')" class="layui-btn" />
-			<input type="button" value="{lang删除}" onclick="delete_it('{$value.id}')" class="layui-btn" />
+			<input type="button" value="{lang編輯}" onclick="$.phpok.go('{url ctrl=wealth func=set id=$value.id/}')" class="layui-btn" />
+			<input type="button" value="{lang執行規則}" onclick="$.phpok.go('{url ctrl=wealth func=rule id=$value.id/}')" class="layui-btn" />
+			<input type="button" value="{lang財富列表}" onclick="$.phpok.go('{url ctrl=wealth func=info id=$value.id/}')" class="layui-btn" />
+			<input type="button" value="{lang刪除}" onclick="delete_it('{$value.id}')" class="layui-btn" />
 		</div>
 	</td>
 </tr>

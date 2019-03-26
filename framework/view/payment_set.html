@@ -6,91 +6,91 @@
 <input type="hidden" name="code" id="code" value="{$code}" />
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang当前使用的支付方式} <span class="red">{$extlist.title}</span>
+		{lang當前使用的支付方式} <span class="red">{$extlist.title}</span>
 	</div>
 	<div class="layui-card-body">
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang支付名称}
+				{lang支付名稱}
 			</label>
 			<div class="layui-input-block">
 				<input type="text" id="title" name="title" class="layui-input" value="{$rs.title}" />
 			</div>
-			<div class="layui-input-block mtop">{lang设置一个支付名称，该名称在前台会显示出来}</div>
+			<div class="layui-input-block mtop">{lang設定一個支付名稱，該名稱在前臺會顯示出來}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang所属组}
+				{lang所屬組}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<select name="gid" id="gid">
 					<!-- loop from=$grouplist key=$key value=$value -->
-					<option value="{$value.id}"{if $gid == $value.id} selected{/if}>{$value.title}{if $value.is_wap} - 手机端{/if}</option>
+					<option value="{$value.id}"{if $gid == $value.id} selected{/if}>{$value.title}{if $value.is_wap} - 手機端{/if}</option>
 					<!-- /loop -->
 				</select>
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang设置支付所属组，此项不能为空}</div>
+			<div class="layui-input-inline auto gray lh38">{lang設定支付所屬組，此項不能為空}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang状态}
+				{lang狀態}
 			</label>
 			<div class="layui-input-inline auto">
-				<input type="radio" name="status" value="1"{if $rs.status} checked{/if} title="{lang启用}" />
+				<input type="radio" name="status" value="1"{if $rs.status} checked{/if} title="{lang啟用}" />
 				<input type="radio" name="status" value="0"{if !$rs.status} checked{/if} title="{lang禁用}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang只有启用此项，前台支付才能生效}</div>
+			<div class="layui-input-inline auto gray lh38">{lang只有啟用此項，前臺支付才能生效}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang手机端使用}
+				{lang手機端使用}
 			</label>
 			<div class="layui-input-inline auto">
-				<input type="radio" name="wap" value="1"{if $rs.wap} checked{/if} title="{lang启用}" />
+				<input type="radio" name="wap" value="1"{if $rs.wap} checked{/if} title="{lang啟用}" />
 				<input type="radio" name="wap" value="0"{if !$rs.wap} checked{/if} title="{lang禁用}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang启用后将允许在手机端使用该支付接口}</div>
+			<div class="layui-input-inline auto gray lh38">{lang啟用後將允許在手機端使用該支付介面}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang货币类型}
+				{lang貨幣型別}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<select name="currency">
-					<option value="CNY">{lang默认}</option>
+					<option value="CNY">{lang預設}</option>
 					<!-- loop from=$currency_list key=$key value=$value -->
-					<option value="{$value.code}"{if $rs.currency == $value.code} selected{/if}>{$value.title}_{lang汇率}_{$value.val}</option>
+					<option value="{$value.code}"{if $rs.currency == $value.code} selected{/if}>{$value.title}_{lang匯率}_{$value.val}</option>
 					<!-- /loop -->
 				</select>
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang仅支持单选，不清楚请选择：人民币}</div>
+			<div class="layui-input-inline auto gray lh38">{lang僅支援單選，不清楚請選擇：人民幣}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang图片一}
+				{lang圖片一}
 			</label>
 			<div class="layui-input-inline default-auto">
 				{func form_edit logo1 $rs.logo1 text form_btn=image&width=500}
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang设置该支付接口的小图，建议使用正方形小图}</div>
+			<div class="layui-input-inline auto gray lh38">{lang設定該支付介面的小圖，建議使用正方形小圖}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang图片二}
+				{lang圖片二}
 			</label>
 			<div class="layui-input-inline default-auto">
 				{func form_edit logo2 $rs.logo2 text form_btn=image&width=500}
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang设置该支付图片，建议使用长方形，如160x50之类的}</div>
+			<div class="layui-input-inline auto gray lh38">{lang設定該支付圖片，建議使用長方形，如160x50之類的}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang图片三}
+				{lang圖片三}
 			</label>
 			<div class="layui-input-inline default-auto">
 				{func form_edit logo3 $rs.logo3 text form_btn=image&width=500}
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang这个图片一般是大图，适用于一些需要大图的场合}</div>
+			<div class="layui-input-inline auto gray lh38">{lang這個圖片一般是大圖，適用於一些需要大圖的場合}</div>
 		</div>
 		<!-- loop from=$extlist.code key=$key value=$value -->
 		<!-- php:$valinfo = ($rs['param'] && $rs['param'][$key]) ? $rs['param'][$key] : $value.default -->
@@ -105,7 +105,7 @@
 					<!-- /loop -->
 				<!-- elseif $value.type == 'select' -->
 				<select name="{$code}_{$key}" id="{$code}_{$key}">
-					<option value="">{lang请选择…}</option>
+					<option value="">{lang請選擇…}</option>
 					<!-- loop from=$value.option key=$k value=$v -->
 					<option value="{$k}"{if $valinfo == $k} selected{/if}>{$v}</option>
 					<!-- /loop -->
@@ -126,7 +126,7 @@
 					<!-- else -->
 					<input type="text" id="{$code}_{$key}" name="{$code}_{$key}" class="layui-input" value="{$valinfo}" />
 						<!-- if $value.typebtn == 'tpl' -->
-						<input type="button" value="{lang选择}" onclick="phpok_tpl_open('{$code}_{$key}')" class="btn" />
+						<input type="button" value="{lang選擇}" onclick="phpok_tpl_open('{$code}_{$key}')" class="btn" />
 						<input type="button" value="{lang清空}" onclick="$('#{$code}_{$key}').val('');" class="btn" />
 						<!-- /if -->
 					<!-- /if -->
@@ -142,11 +142,11 @@
 			<div class="layui-input-inline">
 				<input type="text" id="taxis" name="taxis" class="layui-input" value="{$id ? $rs.taxis : 255}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang值范围在0-255，越小越往前靠，默认为255}</div>
+			<div class="layui-input-inline auto gray lh38">{lang值範圍在0-255，越小越往前靠，預設為255}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				<i class="layui-icon layui-tips" lay-tips="{lang说明性信息，如此支付方案的限额，注意事项}">&#xe702;</i>
+				<i class="layui-icon layui-tips" lay-tips="{lang說明性資訊，如此支付方案的限額，注意事項}">&#xe702;</i>
 				{lang摘要}
 			</label>
 			<div class="layui-input-block">

@@ -1,24 +1,24 @@
 <!-- include tpl=head_lay -->
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang风格方案管理}
+		{lang風格方案管理}
 		<div class="fr">
-		<button class="layui-btn layui-btn-sm" onclick="$.win('{lang添加规则}','{url ctrl=tpl func=set/}')">
-			<i class="layui-icon">&#xe608;</i> {lang添加风格}
+		<button class="layui-btn layui-btn-sm" onclick="$.win('{lang新增規則}','{url ctrl=tpl func=set/}')">
+			<i class="layui-icon">&#xe608;</i> {lang新增風格}
 		</button>
 		</div>
 	</div>
 	<div class="layui-card-body">
 		<blockquote class="layui-elem-quote">
-			{lang风格管理支持多站点运行，手机版请在此风格文件夹名称上输入_mobile}
+			{lang風格管理支援多站點執行，手機版請在此風格資料夾名稱上輸入_mobile}
 		</blockquote>
 		<table class="layui-table">
 		<thead>
 		<tr>
 			<th>ID</th>
-			<th>{lang名称}</th>
-			<th>{lang目录}</th>
-			<th>{lang文件夹改写}</th>
+			<th>{lang名稱}</th>
+			<th>{lang目錄}</th>
+			<th>{lang資料夾改寫}</th>
 			<th width="190">{lang操作}</th>
 		</tr>
 		</thead>
@@ -32,13 +32,13 @@
 			<td>
 				<div class="layui-btn-group">
 					<!-- if $popedom.filelist -->
-					<input type="button" value="{lang文件管理}" onclick="$.admin_tpl.tpl_filelist({$value.id})" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang檔案管理}" onclick="$.admin_tpl.tpl_filelist({$value.id})" class="layui-btn layui-btn-sm" />
 					<!-- /if -->
 					<!-- if $popedom.set -->
-					<input type="button" value="{lang编辑}" onclick="$.admin_tpl.tpl_set({$value.id})" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang編輯}" onclick="$.admin_tpl.tpl_set({$value.id})" class="layui-btn layui-btn-sm" />
 					<!-- /if -->
 					<!-- if $popedom.delete -->
-					<input type="button" value="{lang删除}" onclick="$.admin_tpl.tpl_delete({$value.id},'{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" />
+					<input type="button" value="{lang刪除}" onclick="$.admin_tpl.tpl_delete({$value.id},'{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 					<!-- /if -->
 				</div>
 			</td>

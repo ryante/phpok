@@ -1,10 +1,10 @@
 <!-- include tpl=head_lay -->
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang会员组列表}
+		{lang會員組列表}
 		<div class="fr">
 			<button class="layui-btn layui-btn-sm" onclick="$.admin_usergroup.add()">
-				<i class="layui-icon">&#xe608;</i> {lang添加会员组}
+				<i class="layui-icon">&#xe608;</i> {lang新增會員組}
 			</button>
 		</div>
 	</div>
@@ -12,10 +12,10 @@
 		<table class="layui-table">
 		<thead>
 		<tr>
-			<th class="center">组ID</th>
+			<th class="center">組ID</th>
 			<th width="20px"></th>
-			<th>{lang组名称}</th>
-			<th>{lang审核机制}</th>
+			<th>{lang組名稱}</th>
+			<th>{lang稽核機制}</th>
 			<th class="center">{lang排序}</th>
 			<th{lang>操作}</th>
 		</tr>
@@ -27,38 +27,38 @@
 			<td>
 				{$value.title}
 				<!-- if $value.is_open -->
-				/ <span class="darkblue i">{lang开放选择}</span>
+				/ <span class="darkblue i">{lang開放選擇}</span>
 				<!-- /if -->
 				<!-- if $value.is_default -->
-				/ <span class="red">{lang默认会员组}</span>
+				/ <span class="red">{lang預設會員組}</span>
 				<!-- /if -->
 				<!-- if $value.is_guest -->
-				/ <span class="red">{lang游客组}</span>
+				/ <span class="red">{lang遊客組}</span>
 				<!-- /if -->
 			</td>
 			<td>
 				<!-- if $value.register_status == 'email' -->
-				{lang邮件验证}
+				{lang郵件驗證}
 				<!-- elseif $value.register_status == 'code' -->
-				{lang邀请码验证}
+				{lang邀請碼驗證}
 				<!-- elseif $value.register_status -->
-				{lang自动审核}
+				{lang自動稽核}
 				<!-- else -->
-				{lang人工审核}
+				{lang人工稽核}
 				<!-- /if -->
 			</td>
 			<td align="center">{$value.taxis}</td>
 			<td>
 				<div class="layui-btn-group">
 					<!-- if $popedom.modify -->
-					<input type="button" value="{lang编辑}" class="layui-btn layui-btn-sm" onclick="$.admin_usergroup.modify('{:$value[id]}')" />
+					<input type="button" value="{lang編輯}" class="layui-btn layui-btn-sm" onclick="$.admin_usergroup.modify('{:$value[id]}')" />
 					<!-- /if -->
 					<!-- if !$value.is_default && !$value.is_guest && $session.admin_rs.if_system -->
-					<input type="button" value="{lang设默认组}" onclick="$.admin_usergroup.set_default('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang设游客组}" onclick="$.admin_usergroup.guest('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang設預設組}" onclick="$.admin_usergroup.set_default('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang設遊客組}" onclick="$.admin_usergroup.guest('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm" />
 					<!-- /if -->
 					<!-- if $popedom.delete -->
-					<input type="button" value="{lang删除}" class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.admin_usergroup.del('{:$value[id]}')" />
+					<input type="button" value="{lang刪除}" class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.admin_usergroup.del('{:$value[id]}')" />
 					<!-- /if -->
 				</div>
 			</td>

@@ -1,18 +1,18 @@
 <!-- include tpl=head_lay -->
 <div class="layui-card">
 	<div class="layui-card-header">
-		<input type="button" value="{lang添加会员字段}" onclick="$.admin_user.field_add()" class="layui-btn layui-btn-sm" />
+		<input type="button" value="{lang新增會員欄位}" onclick="$.admin_user.field_add()" class="layui-btn layui-btn-sm" />
 	</div>
 	<div class="layui-card-body">
 		<!-- if $used_list -->
 		<table class="layui-table">
 		<thead>
 		<tr>
-			<th>{lang字段名}</th>
-			<th>{lang名称}</th>
-			<th>{lang字段类型}</th>
-			<th>{lang表单类型}</th>
-			<th>{lang备注}</th>
+			<th>{lang欄位名}</th>
+			<th>{lang名稱}</th>
+			<th>{lang欄位型別}</th>
+			<th>{lang表單型別}</th>
+			<th>{lang備註}</th>
 			<th>{lang排序}</th>
 			<!-- if $popedom.set --><th style="text-align:center;width:120px;">{lang操作}</th><!-- /if -->
 		</tr>
@@ -28,8 +28,8 @@
 			<!-- if $popedom.set -->
 			<td align="center">
 				<div class="layui-btn-group">
-					<input type="button" value="{lang编辑}" onclick="$.admin_user.field_edit('{$value.id}')" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang删除}" onclick="$.admin_user.field_delete('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" />
+					<input type="button" value="{lang編輯}" onclick="$.admin_user.field_edit('{$value.id}')" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang刪除}" onclick="$.admin_user.field_delete('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 				</div>
 			</td>
 			<!-- /if -->
@@ -42,7 +42,7 @@
 <!-- if $fields_list -->
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang常见字段快速添加}
+		{lang常見欄位快速新增}
 	</div>
 	<div class="layui-card-body">
 		<ul class="layout fields_quick_add">
@@ -53,7 +53,7 @@
 					<div class="gray i">{$value.identifier}</div>
 				</div>
 				<div class="right">
-					<input type="button" value="{lang添加}" onclick="$.admin_user.field_quick_add('{$value.identifier}')" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang新增}" onclick="$.admin_user.field_quick_add('{$value.identifier}')" class="layui-btn layui-btn-sm" />
 				</div>
 				<div class="clear"></div>
 			</li>

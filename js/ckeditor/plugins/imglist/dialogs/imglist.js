@@ -1,11 +1,11 @@
 /**
- * 图库JS
+ * 相簿JS
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年10月12日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年10月12日
 **/
 CKEDITOR.dialog.add('imglist', function(editor){
     var escape = function(value){
@@ -23,12 +23,12 @@ CKEDITOR.dialog.add('imglist', function(editor){
             title: 'cb',
             elements: [{
                 type: 'text',
-                label: '请输入日期控件名称',
+                label: '請輸入日期控制元件名稱',
                 id: 'lang',
                 required: true,
             },{
                 type:'html',
-                html:'<span>说明：日历控件选择的日期、时间将回填到该输入框中。</span>'
+                html:'<span>說明：日曆控制元件選擇的日期、時間將回填到該輸入框中。</span>'
             }]
         }],
         onOk: function(){

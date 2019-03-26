@@ -6,32 +6,32 @@
 			<li>
 				<select name="payment_id" lay-filter="payment">
 				<option value="">{lang支付方式…}</option>
-				<option value="other">{lang自定义支付名称}</option>
+				<option value="other">{lang自定義支付名稱}</option>
 				<!-- loop from=$paylist key=$key value=$value id=$tmpid -->
-				<optgroup label="{$value.title}{if $value.wap}_{lang手机端}{/if}">
+				<optgroup label="{$value.title}{if $value.wap}_{lang手機端}{/if}">
 					<!-- loop from=$value.rslist key=$k value=$v id=$idxx -->
-					<option value="{$v.id}"{if $paytype == $v.id} selected{/if}>{$v.title}<!-- if $v.wap -->_{lang手机端}<!-- /if --></option>
+					<option value="{$v.id}"{if $paytype == $v.id} selected{/if}>{$v.title}<!-- if $v.wap -->_{lang手機端}<!-- /if --></option>
 					<!-- /loop -->
 				</optgroup>
 				<!-- /loop -->
 				</select>
 			</li>
-			<li class="hide"><input type="text" name="title" value="" placeholder='{lang支付名称}' class="layui-input" /></li>
+			<li class="hide"><input type="text" name="title" value="" placeholder='{lang支付名稱}' class="layui-input" /></li>
 			<li>
 				<div class="layui-form-item">
 					<label class="layui-form-label">
 						{$currency.title} {$currency.symbol_left}
 					</label>
 					<div class="layui-input-inline">
-						<input type="text" name="price" id="price" value="{$unpaid_price}" placeholder='{lang支付金额}' class="layui-input" />
+						<input type="text" name="price" id="price" value="{$unpaid_price}" placeholder='{lang支付金額}' class="layui-input" />
 					</div>
 					<div class="layui-input-inline auto gray lh38">{$currency.symbol_right}</div>
 				</div>
 				
 			</li>
-			<li><input type="text" name="dateline" id="dateline" placeholder='{lang支付时间}' class="layui-input" readonly /></li>
-			<li><input type="text" name="note" placeholder="{lang备注}" class="layui-input" /></li>
-			<li><input type="submit" value="{lang添加}" class="layui-btn" /></li>
+			<li><input type="text" name="dateline" id="dateline" placeholder='{lang支付時間}' class="layui-input" readonly /></li>
+			<li><input type="text" name="note" placeholder="{lang備註}" class="layui-input" /></li>
+			<li><input type="submit" value="{lang新增}" class="layui-btn" /></li>
 		</ul>
 		</form>
 	</div>
@@ -41,8 +41,8 @@
 			<tr>
 				<th>ID</th>
 				<th>{lang支付方式}</th>
-				<th>{lang支付金额}</th>
-				<th>{lang支付时间}</th>
+				<th>{lang支付金額}</th>
+				<th>{lang支付時間}</th>
 				<th>{lang其他}</th>
 				<th>&nbsp;</th>
 			</tr>
@@ -62,7 +62,7 @@
 					{$value.ext}
 					<!-- /if -->
 				</td>
-				<td><input type="button" value="{lang删除}" class="layui-btn layui-btn-danger" onclick="$.admin_order_payment.del('{$value.id}','{$rs.id}')" /></td>
+				<td><input type="button" value="{lang刪除}" class="layui-btn layui-btn-danger" onclick="$.admin_order_payment.del('{$value.id}','{$rs.id}')" /></td>
 			</tr>
 			<!-- /loop -->
 		</table>	

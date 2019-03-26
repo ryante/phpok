@@ -10,10 +10,10 @@
 	<table class="am-table am-table-bordered am-table-striped am-table-hover" style="margin-bottom:0;">
 		<thead>
 			<tr>
-				<th>论坛主题</th>
-				<th class="am-text-center">发帖人</th>
-				<th class="am-text-center">点击数</th>
-				<th class="am-text-center">时间</th>
+				<th>論壇主題</th>
+				<th class="am-text-center">發帖人</th>
+				<th class="am-text-center">點選數</th>
+				<th class="am-text-center">時間</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -27,16 +27,16 @@
 			<!-- /loop -->
 			<!-- if !$rslist -->
 			<tr>
-				<td colspan="4"><div style="padding:30px;text-align: center;">暂无主题</div></td>
+				<td colspan="4"><div style="padding:30px;text-align: center;">暫無主題</div></td>
 			<!-- /if -->
 		</tbody>
 	</table>
 	<div class="am-g am-g-collapse">
 		<div class="am-u-sm-3" style="margin-top:1.5rem;">
 			<!-- if $session.user_id -->
-			<a class="am-btn am-btn-primary" href="{url ctrl=post id=$page_rs.identifier cateid=$cate_rs.id/}">发布新主题</a>
+			<a class="am-btn am-btn-primary" href="{url ctrl=post id=$page_rs.identifier cateid=$cate_rs.id/}">釋出新主題</a>
 			<!-- else -->
-			<a class="am-btn am-btn-danger"  href="{url ctrl=login _back=$cate_rs.url/}" class="red">仅限会员才有发布权限，请先登录或注册</a>
+			<a class="am-btn am-btn-danger"  href="{url ctrl=login _back=$cate_rs.url/}" class="red">僅限會員才有釋出許可權，請先登入或註冊</a>
 			<!-- /if -->
 		</div>
 		<div class="am-u-sm-9"><!-- include tpl=block/pagelist --></div>

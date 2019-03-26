@@ -8,7 +8,7 @@
         initColorSelector();
     };
 
-    /* 初始化tab标签 */
+    /* 初始化tab標籤 */
     function initTabs(){
         var tabs = $G('tabHeads').children;
         for (var i = 0; i < tabs.length; i++) {
@@ -31,7 +31,7 @@
         }
     }
 
-    /* 初始化颜色设置 */
+    /* 初始化顏色設定 */
     function initColorSelector () {
         var obj = editor.queryCommandValue('background');
         if (obj) {
@@ -73,12 +73,12 @@
         initColorPicker();
     }
 
-    /* 初始化颜色选择器 */
+    /* 初始化顏色選擇器 */
     function initColorPicker() {
         var me = editor,
             cp = $G("colorPicker");
 
-        /* 生成颜色选择器ui对象 */
+        /* 生成顏色選擇器ui物件 */
         var popup = new UE.ui.Popup({
             content: new UE.ui.ColorPicker({
                 noColorText: me.getLang("clearColor"),
@@ -99,7 +99,7 @@
             }
         });
 
-        /* 设置颜色选择器 */
+        /* 設定顏色選擇器 */
         domUtils.on(cp, "click", function () {
             popup.showAnchor(this);
         });
@@ -112,12 +112,12 @@
         });
     }
 
-    /* 初始化在线图片列表 */
+    /* 初始化線上圖片列表 */
     function initImagePanel() {
         onlineImage = onlineImage || new OnlineImage('imageList');
     }
 
-    /* 更新背景色设置面板 */
+    /* 更新背景色設定面板 */
     function updateFormState (radio, color, url, align, x, y) {
         var nocolorRadio = $G('nocolorRadio'),
             coloredRadio = $G('coloredRadio');
@@ -154,7 +154,7 @@
         $G('custom').style.display = coloredRadio.checked && $G('url').value && $G('repeatType').value == 'self' ? '':'none';
     }
 
-    /* 更新背景颜色 */
+    /* 更新背景顏色 */
     function updateBackground () {
         if ($G('coloredRadio').checked) {
             var color = domUtils.getStyle($G("colorPicker"), "background-color"),
@@ -180,7 +180,7 @@
     }
 
 
-    /* 在线图片 */
+    /* 線上圖片 */
     function OnlineImage(target) {
         this.container = utils.isString(target) ? document.getElementById(target) : target;
         this.init();
@@ -203,18 +203,18 @@
             this.list.appendChild(this.clearFloat);
             this.container.appendChild(this.list);
         },
-        /* 初始化滚动事件,滚动到地步自动拉取数据 */
+        /* 初始化滾動事件,滾動到地步自動拉取資料 */
         initEvents: function () {
             var _this = this;
 
-            /* 滚动拉取图片 */
+            /* 滾動拉取圖片 */
             domUtils.on($G('imageList'), 'scroll', function(e){
                 var panel = this;
                 if (panel.scrollHeight - (panel.offsetHeight + panel.scrollTop) < 10) {
                     _this.getImageData();
                 }
             });
-            /* 选中图片 */
+            /* 選中圖片 */
             domUtils.on(this.container, 'click', function (e) {
                 var target = e.target || e.srcElement,
                     li = target.parentNode,
@@ -234,24 +234,24 @@
                 }
             });
         },
-        /* 初始化第一次的数据 */
+        /* 初始化第一次的資料 */
         initData: function () {
 
-            /* 拉取数据需要使用的值 */
+            /* 拉取資料需要使用的值 */
             this.state = 0;
             this.listSize = editor.getOpt('imageManagerListSize');
             this.listIndex = 0;
             this.listEnd = false;
 
-            /* 第一次拉取数据 */
+            /* 第一次拉取資料 */
             this.getImageData();
         },
-        /* 重置界面 */
+        /* 重置介面 */
         reset: function() {
             this.initContainer();
             this.initData();
         },
-        /* 向后台拉取图片列表数据 */
+        /* 向後臺拉取圖片列表資料 */
         getImageData: function () {
             var _this = this;
 
@@ -294,7 +294,7 @@
                 });
             }
         },
-        /* 添加图片到列表界面上 */
+        /* 新增圖片到列表介面上 */
         pushData: function (list) {
             var i, item, img, icon, _this = this,
                 urlPrefix = editor.getOpt('imageManagerUrlPrefix');
@@ -320,7 +320,7 @@
                 }
             }
         },
-        /* 改变图片大小 */
+        /* 改變圖片大小 */
         scale: function (img, w, h, type) {
             var ow = img.width,
                 oh = img.height;

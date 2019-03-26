@@ -1,10 +1,10 @@
 /**
- * PHPOK程序中常用到的JS，封装在此
+ * PHPOK程式中常用到的JS，封裝在此
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 GNU Lesser General Public License (LGPL)
+ * @授權 GNU Lesser General Public License (LGPL)
  * @日期 2017年04月18日
 **/
 
@@ -12,7 +12,7 @@
 	$.phpok = {
 
 		/**
-		 * 刷新当前页面，使用方法：$.phpok.refresh();
+		 * 重新整理當前頁面，使用方法：$.phpok.refresh();
 		**/
 		refresh: function()
 		{
@@ -20,7 +20,7 @@
 		},
 
 		/**
-		 * 刷新页面别名，使用方法：$.phpok.reload();
+		 * 重新整理頁面別名，使用方法：$.phpok.reload();
 		**/
 		reload:function()
 		{
@@ -28,9 +28,9 @@
 		},
 
 		/**
-		 * 跳转到目标网址
-		 * @参数 url 要跳转到的网址
-		 * @参数 nocache 是否禁止缓存，设置且为true时，程序会在网址后面补增_noCache参数
+		 * 跳轉到目標網址
+		 * @引數 url 要跳轉到的網址
+		 * @引數 nocache 是否禁止快取，設定且為true時，程式會在網址後面補增_noCache引數
 		**/
 		go: function(url,nocache)
 		{
@@ -44,9 +44,9 @@
 		},
 
 		/**
-		 * 弹出窗口
-		 * @参数 url 要弹出窗口的网址
-		 * @参数 nocache 是否禁止缓存，设置且为true时，程序会在网址后面补增_noCache参数
+		 * 彈出視窗
+		 * @引數 url 要彈出視窗的網址
+		 * @引數 nocache 是否禁止快取，設定且為true時，程式會在網址後面補增_noCache引數
 		**/
 		open:function(url,nocache)
 		{
@@ -60,9 +60,9 @@
 		},
 
 		/**
-		 * 读取Ajax的内容，读出来的内容为html
-		 * @参数 url 目标网址
-		 * @参数 obj 执行方法，为空或未设置，则返回HTML代码，此时为同步请求
+		 * 讀取Ajax的內容，讀出來的內容為html
+		 * @引數 url 目標網址
+		 * @引數 obj 執行方法，為空或未設定，則返回HTML程式碼，此時為同步請求
 		**/
 		ajax:function(url,obj,postData)
 		{
@@ -90,9 +90,9 @@
 		},
 
 		/**
-		 * 读取 Ajax 内容，返回JSON数据
-		 * @参数 url 目标网址
-		 * @参数 obj 执行方法，为空或未设置，则返回JSON对象，此时为同步请求
+		 * 讀取 Ajax 內容，返回JSON資料
+		 * @引數 url 目標網址
+		 * @引數 obj 執行方法，為空或未設定，則返回JSON物件，此時為同步請求
 		**/
 		json:function(url,obj,postData)
 		{
@@ -133,8 +133,8 @@
 		},
 
 		/**
-		 * 格式化网址，增加_noCache尾巴，以保证不从缓存中读取数据
-		 * @参数 url 要格式化的网址
+		 * 格式化網址，增加_noCache尾巴，以保證不從快取中讀取資料
+		 * @引數 url 要格式化的網址
 		**/
 		nocache: function(url)
 		{
@@ -167,9 +167,9 @@
 		},
 
 		/**
-		 * 生成随机数
-		 * @参数 len 长度，留空使用长度10
-		 * @参数 type 类型，支持 letter,num,fixed,all，其中 fixed 表示字母数字混合，all 表示字母，数字，及特殊符号，letter 表示字母，num 表示数字
+		 * 生成隨機數
+		 * @引數 len 長度，留空使用長度10
+		 * @引數 type 型別，支援 letter,num,fixed,all，其中 fixed 表示字母數字混合，all 表示字母，數字，及特殊符號，letter 表示字母，num 表示數字
 		**/
 		rand:function(len,type)
 		{
@@ -190,8 +190,8 @@
 			return val;
 		},
 		/**
-		 * 向顶层发送消息
-		 * @参数 info 要发送的文本消息，注意，仅限文本
+		 * 向頂層傳送訊息
+		 * @引數 info 要傳送的文字訊息，注意，僅限文字
 		**/
 		message:function(info,url)
 		{
@@ -237,13 +237,13 @@
 	};
 
 	/**
-	 * JSON字串与对象转换操作
+	 * JSON字串與物件轉換操作
 	**/
 	$.json = {
 
 		/**
-		 * 字符串转对象
-		 * @参数 str 要转化的字符串
+		 * 字串轉物件
+		 * @引數 str 要轉化的字串
 		**/
 		decode:function(str)
 		{
@@ -254,8 +254,8 @@
 		},
 
 		/**
-		 * 对象转成字符串
-		 * @参数 obj 要转化的对象
+		 * 物件轉成字串
+		 * @引數 obj 要轉化的物件
 		**/
 		encode:function(obj)
 		{
@@ -285,8 +285,8 @@
 		},
 
 		/**
-		 * 全选
-		 * @参数 id 要操作的ID
+		 * 全選
+		 * @引數 id 要操作的ID
 		**/
 		all:function(id)
 		{
@@ -298,7 +298,7 @@
 
 		/**
 		 * 返先
-		 * @参数 id 要操作的ID
+		 * @引數 id 要操作的ID
 		**/
 		none:function(id)
 		{
@@ -309,9 +309,9 @@
 		},
 
 		/**
-		 * 更多选择，默认只选5个（count默认值为5） $.checkbox.more(id,5);
-		 * @参数 id 要操作的ID
-		 * @参数 count 每次次最多选几个
+		 * 更多選擇，預設只選5個（count預設值為5） $.checkbox.more(id,5);
+		 * @引數 id 要操作的ID
+		 * @引數 count 每次次最多選幾個
 		**/
 		more: function(id,count){
 			var obj = this._obj(id);
@@ -330,8 +330,8 @@
 		},
 
 		/**
-		 * 反选，调用方法：$.checkbox.anti(id);
-		 * @参数 id 要操作的ID
+		 * 反選，呼叫方法：$.checkbox.anti(id);
+		 * @引數 id 要操作的ID
 		**/
 		anti:function(id)
 		{
@@ -347,10 +347,10 @@
 		},
 
 		/**
-		 * 合并复选框值信息
-		 * @参数 id 要操作的ID
-		 * @参数 type 要支持合关的字符
-		 * @参数 str 要连接的字符，为空或未设置使用英文逗号隔开
+		 * 合併複選框值資訊
+		 * @引數 id 要操作的ID
+		 * @引數 type 要支援合關的字元
+		 * @引數 str 要連線的字元，為空或未設定使用英文逗號隔開
 		**/
 		join:function(id,type,str)
 		{
@@ -378,14 +378,14 @@
 	}
 
 	/**
-	 * 字符串相关操作
+	 * 字串相關操作
 	**/
 	$.str = {
 
 		/**
-		 * 字符串合并，用英文逗号隔开
-		 * @参数 str1 要合并的字符串1
-		 * @参数 str2 要合并的字符串2
+		 * 字串合併，用英文逗號隔開
+		 * @引數 str1 要合併的字串1
+		 * @引數 str2 要合併的字串2
 		**/
 		join: function(str1,str2){
 			var string = '';
@@ -412,19 +412,19 @@
 		},
 
 		/**
-		 * 字符串标识符检测
-		 * @参数 str 要检测的字符串
+		 * 字串識別符號檢測
+		 * @引數 str 要檢測的字串
 		 * @返回 true 或 false
 		**/
 		identifier: function(str){
-			//验证标识串，PHPOK系统中，大量使用标识串，将此检测合并进来
+			//驗證標識串，PHPOK系統中，大量使用標識串，將此檢測合併進來
 			var chk = /^[A-Za-z]+[a-zA-Z0-9_\-]*$/;
 			return chk.test(str);
 		},
 
 		/**
-		 * 网址常规编码
-		 * @参数 str 要编码的字符串
+		 * 網址常規編碼
+		 * @引數 str 要編碼的字串
 		**/
 		encode: function(str){
 			return encodeURIComponent(str);
@@ -432,16 +432,16 @@
 	};
 
 	/**
-	 * 由PHPOK编写的基于jQuery的Cookie操作
-	 * 读取cookie信息 $.cookie.get("变量名");
-	 * 设置cookie信息
-	 * 删除Cookie信息 $.cookie.del("变量名");
+	 * 由PHPOK編寫的基於jQuery的Cookie操作
+	 * 讀取cookie資訊 $.cookie.get("變數名");
+	 * 設定cookie資訊
+	 * 刪除Cookie資訊 $.cookie.del("變數名");
 	**/
 	$.cookie = {
 
 		/**
-		 * 取得 Cookie 信息 $.cookie.get('变量名')
-		 * @参数 name 要获取的 cookie 变量中的标识
+		 * 取得 Cookie 資訊 $.cookie.get('變數名')
+		 * @引數 name 要獲取的 cookie 變數中的標識
 		**/
 		get: function(name)
 		{
@@ -464,12 +464,12 @@
 		},
 
 		/**
-		 * 设置 Cookie 信息 $.cookie.set("变量名","值","过期时间");
-		 * @参数 cookieName 变量名
-		 * @参数 cookieValue 变量内容
-		 * @参数 DayValue 过期时间，默认是1天，单位是天
+		 * 設定 Cookie 資訊 $.cookie.set("變數名","值","過期時間");
+		 * @引數 cookieName 變數名
+		 * @引數 cookieValue 變數內容
+		 * @引數 DayValue 過期時間，預設是1天，單位是天
 		 * @返回
-		 * @更新时间
+		 * @更新時間
 		**/
 		set: function(cookieName,cookieValue,DayValue)
 		{
@@ -485,8 +485,8 @@
 		},
 
 		/**
-		 * 删除 Cookie 操作
-		 * @参数 cookieName 变量名
+		 * 刪除 Cookie 操作
+		 * @引數 cookieName 變數名
 		**/
 		del: function(cookieName){
 			var expire = "";
@@ -513,7 +513,7 @@ function identifier(str)
 
 
 /**
- * 旧版 Input 操作类
+ * 舊版 Input 操作類
 **/
 ;(function($){
 
@@ -524,25 +524,25 @@ function identifier(str)
 			return $.checkbox.all(id);
 		},
 
-		//全不选，调用方法：$.input.checkbox_none(id);
+		//全不選，呼叫方法：$.input.checkbox_none(id);
 		checkbox_none: function(id)
 		{
 			return $.checkbox.none(id);
 		},
 
-		//每次选5个（total默认值为5） $.input.checkbox_not_all(id,5);
+		//每次選5個（total預設值為5） $.input.checkbox_not_all(id,5);
 		checkbox_not_all: function(id,total)
 		{
 			return $.checkbox.more(id,total);
 		},
 
-		//反选，调用方法：$.input.checkbox_anti(id);
+		//反選，呼叫方法：$.input.checkbox_anti(id);
 		checkbox_anti: function(id)
 		{
 			return $.checkbox.anti(id);
 		},
 
-		//合并复选框值信息，以英文逗号隔开
+		//合併複選框值資訊，以英文逗號隔開
 		checkbox_join: function(id,type)
 		{
 			return $.checkbox.join(id,type);

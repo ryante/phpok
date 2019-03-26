@@ -155,7 +155,7 @@ class AppClient
      * expireAt: int64 型別，鑑權的有效時間，傳入以秒為單位的64位Unix
        絕對時間，token 將在該時間後失效。
      * permission: 該使用者的房間管理許可權，"admin" 或 "user"，預設為 "user" 。
-       當權限角色為 "admin" 時，擁有將其他使用者移除出房間等特權.
+       當許可權角色為 "admin" 時，擁有將其他使用者移除出房間等特權.
      */
     public function appToken($appId, $roomName, $userId, $expireAt, $permission)
     {

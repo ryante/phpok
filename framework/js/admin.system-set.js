@@ -1,14 +1,14 @@
 /**
- * 系统菜单操作
+ * 系統選單操作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年11月15日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年11月15日
 **/
 
-//添加一行
+//新增一行
 function add_trtd()
 {
 	var count = $("#popedom tr").length;
@@ -17,7 +17,7 @@ function add_trtd()
 	html += '<td align="center"><input type="text" name="popedom_title_add[]" class="layui-input" /></td>';
 	html += '<td align="center"><input type="text" name="popedom_identifier_add[]" class="layui-input" /></td>';
 	html += '<td align="center"><input type="text" name="popedom_taxis_add[]" class="layui-input" /></td>';
-	html += '<td align="center"><input type="button" value="删除" class="layui-btn layui-btn-xs layui-btn-danger"  onclick="del_trtd(\''+n_id+'\')" /></td>';
+	html += '<td align="center"><input type="button" value="刪除" class="layui-btn layui-btn-xs layui-btn-danger"  onclick="del_trtd(\''+n_id+'\')" /></td>';
 	html += '</tr>';
 	$("#popedom").append(html);
 }
@@ -29,7 +29,7 @@ function del_trtd(id)
 
 function popedom_del(id)
 {
-	//删除权限
+	//刪除許可權
 	var url = get_url("system","delete_popedom")+"&id="+id;
 	var rs = json_ajax(url);
 	if(rs.status == "ok")
@@ -39,7 +39,7 @@ function popedom_del(id)
 	}
 	else
 	{
-		if(!rs.content) rs.content = "删除失败";
+		if(!rs.content) rs.content = "刪除失敗";
 		$.dialog.alert(rs.content);
 		return false;
 	}

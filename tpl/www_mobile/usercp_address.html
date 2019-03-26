@@ -1,17 +1,17 @@
-<!-- include tpl=head title=收货地址 -->
+<!-- include tpl=head title=收貨地址 -->
 <div class="am-margin-xs">
 	<!-- loop from=$rslist key=$key value=$value -->
 	<div class="am-panel am-panel-default">
 		<div class="am-panel-hd">#{$value.id} {$value.fullname}</div>
 		<div class="am-panel-bd">
 			<div>地址：{$value.province}<!-- if $value.province != $value.city -->{$value.city}<!-- /if -->{$value.county}-{$value.address}</div>
-			<!-- if $value.mobile --><div>手机：{$value.mobile}</div><!-- /if -->
-			<!-- if $value.tel --><div>电话：{$value.tel}</div><!-- /if -->
+			<!-- if $value.mobile --><div>手機：{$value.mobile}</div><!-- /if -->
+			<!-- if $value.tel --><div>電話：{$value.tel}</div><!-- /if -->
 			<div class="am-btn-group">
-				<button type="button" onclick="$.address.edit('{$value.id}')" class="am-btn am-btn-default am-btn-xs">编辑</button>
-				<button type="button" onclick="$.address.del('{$value.id}')" class="am-btn am-btn-danger am-btn-xs">删除</button>
+				<button type="button" onclick="$.address.edit('{$value.id}')" class="am-btn am-btn-default am-btn-xs">編輯</button>
+				<button type="button" onclick="$.address.del('{$value.id}')" class="am-btn am-btn-danger am-btn-xs">刪除</button>
 				<!-- if !$value.is_default -->
-				<button type="button" onclick="$.address.set_default('{$value.id}')" class="am-btn am-btn-primary am-btn-xs">设为默认</button>
+				<button type="button" onclick="$.address.set_default('{$value.id}')" class="am-btn am-btn-primary am-btn-xs">設為預設</button>
 				<!-- /if -->
 			</div>
 		</div>
@@ -20,7 +20,7 @@
 	
 	
 	<!-- if $total < 30 -->
-	<button type="button" onclick="$.address.add()" class="am-btn am-btn-block am-btn-primary">添加地址</button>
+	<button type="button" onclick="$.address.add()" class="am-btn am-btn-block am-btn-primary">新增地址</button>
 	<!-- /if -->
 </div>
 

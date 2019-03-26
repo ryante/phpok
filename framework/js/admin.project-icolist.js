@@ -1,11 +1,11 @@
 /**
- * 图标上传动作
+ * 圖示上傳動作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2019年1月13日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2019年1月13日
 **/
 var obj_upload = {};
 $(document).ready(function(){
@@ -16,7 +16,7 @@ $(document).ready(function(){
 		'resize':false,
 		"server": get_url('upload','img'),
 		"filetypes" : "jpg,gif,png,jpeg",
-		'accept' : {'title':p_lang('图片'),'extensions':'jpg,gif,png,jpeg','mimeTypes': 'image/*'},
+		'accept' : {'title':p_lang('圖片'),'extensions':'jpg,gif,png,jpeg','mimeTypes': 'image/*'},
 		"formData" :{session_name:session_id,'folder':'res/ico/'},
 		'fileVal':'upfile',
 		'sendAsBinary':true,
@@ -41,7 +41,7 @@ function save()
 	var opener = $.dialog.opener;
 	var info = $("input[name=ico]:checked").val();
 	if(!info){
-		$.dialog.alert('请选择图标');
+		$.dialog.alert('請選擇圖示');
 		return false;
 	}
 	opener.$("#ico").val(info);

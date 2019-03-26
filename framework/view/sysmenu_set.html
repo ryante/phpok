@@ -1,21 +1,21 @@
-<!-- include tpl=head_lay title=核心设置 -->
+<!-- include tpl=head_lay title=核心設定 -->
 <div class="layui-card">
 	<div class="layui-card-body">
 		<form method="post" id="ext_post" action="{echo admin_url('system','save')}" class="layui-form">
 		<input type="hidden" id="id" name="id" value="{$id}" />
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang名称}
+				{lang名稱}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="title" name="title" class="layui-input" value="{$rs.title}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang设置应用的名称，该名称将在后台左侧/头部显示}</div>
+			<div class="layui-input-inline auto gray lh38">{lang設定應用的名稱，該名稱將在後臺左側/頭部顯示}</div>
 		</div>
 		<!-- if $parent_list -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang上级项目}
+				{lang上級專案}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<select name="parent_id">
@@ -24,19 +24,19 @@
 				     <!-- /loop -->
 			    </select>
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang设置上级项目}</div>
+			<div class="layui-input-inline auto gray lh38">{lang設定上級專案}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang快捷图标}
+				{lang快捷圖示}
 			</label>
 			<div class="layui-input-inline auto">
 				<input type="hidden" name="icon" id="icon"  value="{$rs.icon}" />
 				<dl class="dropdown">
-					<dt><span><!-- if $rs.icon --><i class="icon-{$rs.icon}" style="font-size:16px;"></i> {$rs.icon}<!-- else -->不使用图标<!-- /if --></span></dt>
+					<dt><span><!-- if $rs.icon --><i class="icon-{$rs.icon}" style="font-size:16px;"></i> {$rs.icon}<!-- else -->不使用圖示<!-- /if --></span></dt>
 					<dd>
 					<ul>
-						<li>不使用图标<span class="value"></span></li>
+						<li>不使用圖示<span class="value"></span></li>
 						<!-- loop from=$iconlist key=$key value=$value id=$tmpid -->
 						<li><i class="icon-{$value}" style="font-size:16px;"></i> {$value}<span class="value">{$value}</span></li>
 						<!-- /loop -->
@@ -44,14 +44,14 @@
 					</dd>
 				</dl>
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang启用快捷图标后，将在桌面显示相应的快捷链接}</div>
+			<div class="layui-input-inline auto gray lh38">{lang啟用快捷圖示後，將在桌面顯示相應的快捷連結}</div>
 		</div>
 		<!-- /if -->
 
 		<!-- if $pid && $dirlist -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang控制层}
+				{lang控制層}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<select name="appfile" id="appfile" lay-verify="required" >
@@ -60,25 +60,25 @@
 					<!-- /loop -->
 				</select>
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang请不要随意修改，不熟请设为}<span class="red">list_control.php</span></div>
+			<div class="layui-input-inline auto gray lh38">{lang請不要隨意修改，不熟請設為}<span class="red">list_control.php</span></div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang执行方法}
+				{lang執行方法}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="func" name="func" class="layui-input" value="{$rs.func}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang请选择要执行的方法动作，不熟悉请留空}</div>
+			<div class="layui-input-inline auto gray lh38">{lang請選擇要執行的方法動作，不熟悉請留空}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang扩展参数}
+				{lang擴充套件引數}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="ext" name="ext" class="layui-input" value="{$rs.ext}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang不清楚的请留空}</div>
+			<div class="layui-input-inline auto gray lh38">{lang不清楚的請留空}</div>
 		</div>
 		<!-- /if -->
 		<div class="layui-form-item">
@@ -88,21 +88,21 @@
 			<div class="layui-input-inline short-auto">
 				<input type="text" id="taxis" name="taxis" class="layui-input" value="{$rs.taxis}" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang自定义排序，值越小越往前靠，最大不超过255}</div>
+			<div class="layui-input-inline auto gray lh38">{lang自定義排序，值越小越往前靠，最大不超過255}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				<i class="layui-icon layui-tips" lay-tips="{lang此项用于二次扩展开发时使用，对各个功能的权限分配，不熟悉请阅读官网帮助}">&#xe702;</i>
-				{lang配置权限}
+				<i class="layui-icon layui-tips" lay-tips="{lang此項用於二次擴充套件開發時使用，對各個功能的許可權分配，不熟悉請閱讀官網幫助}">&#xe702;</i>
+				{lang配置許可權}
 			</label>
 			<div class="layui-input-inline long-auto">
 				<table id="popedom" class="layui-table">
 				<thead>	
 				<tr>
-					<th>{lang名称}</th>
-					<th>{lang标识}</td>
+					<th>{lang名稱}</th>
+					<th>{lang標識}</td>
 					<th>{lang排序}</td>
-					<th><input type="button" value="{lang添加}" class="layui-btn layui-btn-xs" onclick="add_trtd()" /></th>
+					<th><input type="button" value="{lang新增}" class="layui-btn layui-btn-xs" onclick="add_trtd()" /></th>
 				</tr>
 				</thead>
 				<!-- loop from=$popedom_list key=$key value=$value -->
@@ -110,7 +110,7 @@
 					<td align="center"><input type="text" name="popedom_title_{$value.id}" value="{$value.title}" class="layui-input" /></td>
 					<td align="center"><input type="text" name="popedom_identifier_{$value.id}" value="{$value.identifier}" class="layui-input" /></td>
 					<td align="center"><input type="text" name="popedom_taxis_{$value.id}" value="{$value.taxis}" class="layui-input" /></td>
-					<td align="center"><input type="button" value="{lang删除}" class="layui-btn layui-btn-xs layui-btn-danger" onclick="popedom_del('{$value.id}')" /></td>
+					<td align="center"><input type="button" value="{lang刪除}" class="layui-btn layui-btn-xs layui-btn-danger" onclick="popedom_del('{$value.id}')" /></td>
 				</tr>
 				<!-- /loop -->
 				</table>

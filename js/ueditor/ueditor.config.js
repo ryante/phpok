@@ -1,38 +1,38 @@
 /**
- * ueditor完整配置项
- * 可以在这里配置整个编辑器的特性
+ * ueditor完整配置項
+ * 可以在這裡配置整個編輯器的特性
  */
 /**************************提示********************************
- * 所有被注释的配置项均为UEditor默认值。
- * 修改默认配置请首先确保已经完全明确该参数的真实用途。
- * 主要有两种修改方案，一种是取消此处注释，然后修改成对应参数；另一种是在实例化编辑器时传入对应参数。
- * 当升级编辑器时，可直接使用旧版配置文件替换新版配置文件,不用担心旧版配置文件中因缺少新功能所需的参数而导致脚本报错。
+ * 所有被註釋的配置項均為UEditor預設值。
+ * 修改預設配置請首先確保已經完全明確該引數的真實用途。
+ * 主要有兩種修改方案，一種是取消此處註釋，然後修改成對應引數；另一種是在例項化編輯器時傳入對應引數。
+ * 當升級編輯器時，可直接使用舊版配置檔案替換新版配置檔案,不用擔心舊版配置檔案中因缺少新功能所需的引數而導致指令碼報錯。
  **************************提示********************************/
 
 (function () {
 
     /**
-     * 编辑器资源文件根路径。它所表示的含义是：以编辑器实例化页面为当前路径，指向编辑器资源文件（即dialog等文件夹）的路径。
-     * 鉴于很多同学在使用编辑器的时候出现的种种路径问题，此处强烈建议大家使用"相对于网站根目录的相对路径"进行配置。
-     * "相对于网站根目录的相对路径"也就是以斜杠开头的形如"/myProject/ueditor/"这样的路径。
-     * 如果站点中有多个不在同一层级的页面需要实例化编辑器，且引用了同一UEditor的时候，此处的URL可能不适用于每个页面的编辑器。
-     * 因此，UEditor提供了针对不同页面的编辑器可单独配置的根路径，具体来说，在需要实例化编辑器的页面最顶部写上如下代码即可。当然，需要令此处的URL等于对应的配置。
+     * 編輯器資原始檔根路徑。它所表示的含義是：以編輯器例項化頁面為當前路徑，指向編輯器資原始檔（即dialog等資料夾）的路徑。
+     * 鑑於很多同學在使用編輯器的時候出現的種種路徑問題，此處強烈建議大家使用"相對於網站根目錄的相對路徑"進行配置。
+     * "相對於網站根目錄的相對路徑"也就是以斜槓開頭的形如"/myProject/ueditor/"這樣的路徑。
+     * 如果站點中有多個不在同一層級的頁面需要例項化編輯器，且引用了同一UEditor的時候，此處的URL可能不適用於每個頁面的編輯器。
+     * 因此，UEditor提供了針對不同頁面的編輯器可單獨配置的根路徑，具體來說，在需要例項化編輯器的頁面最頂部寫上如下程式碼即可。當然，需要令此處的URL等於對應的配置。
      * window.UEDITOR_HOME_URL = "/xxxx/xxxx/";
      */
     var URL = window.UEDITOR_HOME_URL || getUEBasePath();
 
     /**
-     * 配置项主体。注意，此处所有涉及到路径的配置别遗漏URL变量。
+     * 配置項主體。注意，此處所有涉及到路徑的配置別遺漏URL變數。
      */
     window.UEDITOR_CONFIG = {
 
-        //为编辑器实例添加一个路径，这个不能被注释
+        //為編輯器例項新增一個路徑，這個不能被註釋
         UEDITOR_HOME_URL: URL
 
-        // 服务器统一请求接口路径
+        // 伺服器統一請求介面路徑
         , serverUrl: URL + "../../api.php?c=ueditor"
 
-        //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
+        //工具欄上的所有的功能按鈕和下拉框，可以在new編輯器的例項時選擇自己需要的從新定義
         , toolbars: [[
             'fullscreen', 'source', '|','insertpbefore','insertpafter', '|', 'undo', 'redo', '|',
             'bold', 'italic', 'underline', 'fontborder', 'strikethrough', 'superscript', 'subscript', 'removeformat', 'formatmatch', 'blockquote', 'pasteplain', '|', 'forecolor', 'backcolor', 'insertorderedlist', 'insertunorderedlist', 'selectall', 'cleardoc', '|',
@@ -47,74 +47,74 @@
             'inserttable', 'deletetable', 'insertparagraphbeforetable', 'insertrow', 'deleterow', 'insertcol', 'deletecol', 'mergecells', 'mergeright', 'mergedown', 'splittocells', 'splittorows', 'splittocols', '|',
             'print', 'preview', 'drafts', 'help'
         ]]
-        //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
+        //當滑鼠放在工具欄上時顯示的tooltip提示,留空支援自動多語言配置，否則以配置值為準
         //,labelMap:{
         //    'insertpbefore':'', 'undo':''
         ///}
 
-        //语言配置项,默认是zh-cn。有需要的话也可以使用如下这样的方式来自动多语言切换，当然，前提条件是lang文件夹下存在对应的语言文件：
-        //lang值也可以通过自动获取 (navigator.language||navigator.browserLanguage ||navigator.userLanguage).toLowerCase()
+        //語言配置項,預設是zh-cn。有需要的話也可以使用如下這樣的方式來自動多語言切換，當然，前提條件是lang資料夾下存在對應的語言檔案：
+        //lang值也可以通過自動獲取 (navigator.language||navigator.browserLanguage ||navigator.userLanguage).toLowerCase()
         //,lang:"zh-cn"
         //,langPath:URL +"lang/"
 
-        //主题配置项,默认是default。有需要的话也可以使用如下这样的方式来自动多主题切换，当然，前提条件是themes文件夹下存在对应的主题文件：
-        //现有如下皮肤:default
+        //主題配置項,預設是default。有需要的話也可以使用如下這樣的方式來自動多主題切換，當然，前提條件是themes資料夾下存在對應的主題檔案：
+        //現有如下面板:default
         //,theme:'default'
         //,themePath:URL +"themes/"
 
-        //,zIndex : 900     //编辑器层级的基数,默认是900
+        //,zIndex : 900     //編輯器層級的基數,預設是900
 
-        //针对getAllHtml方法，会在对应的head标签中增加该编码设置。
+        //針對getAllHtml方法，會在對應的head標籤中增加該編碼設定。
         //,charset:"utf-8"
 
-        //若实例化编辑器的页面手动修改的domain，此处需要设置为true
+        //若例項化編輯器的頁面手動修改的domain，此處需要設定為true
         //,customDomain:false
 
-        //常用配置项目
-        //,isShow : true    //默认显示编辑器
+        //常用配置專案
+        //,isShow : true    //預設顯示編輯器
 
-        //,textarea:'editorValue' // 提交表单时，服务器获取编辑器提交内容的所用的参数，多实例时可以给容器name属性，会将name给定的值最为每个实例的键值，不用每次实例化的时候都设置这个值
+        //,textarea:'editorValue' // 提交表單時，伺服器獲取編輯器提交內容的所用的引數，多例項時可以給容器name屬性，會將name給定的值最為每個例項的鍵值，不用每次例項化的時候都設定這個值
 
-        //,initialContent:'欢迎使用ueditor!'    //初始化编辑器的内容,也可以通过textarea/script给值，看官网例子
+        //,initialContent:'歡迎使用ueditor!'    //初始化編輯器的內容,也可以通過textarea/script給值，看官網例子
 
-        //,autoClearinitialContent:true //是否自动清除编辑器初始内容，注意：如果focus属性设置为true,这个也为真，那么编辑器一上来就会触发导致初始化的内容看不到了
+        //,autoClearinitialContent:true //是否自動清除編輯器初始內容，注意：如果focus屬性設定為true,這個也為真，那麼編輯器一上來就會觸發導致初始化的內容看不到了
 
-        //,focus:false //初始化时，是否让编辑器获得焦点true或false
+        //,focus:false //初始化時，是否讓編輯器獲得焦點true或false
 
-        //如果自定义，最好给p标签如下的行高，要不输入中文时，会有跳动感
-        //,initialStyle:'p{line-height:1em}'//编辑器层级的基数,可以用来改变字体等
+        //如果自定義，最好給p標籤如下的行高，要不輸入中文時，會有跳動感
+        //,initialStyle:'p{line-height:1em}'//編輯器層級的基數,可以用來改變字型等
 
-        //,iframeCssUrl: URL + '/themes/iframe.css' //给编辑区域的iframe引入一个css文件
+        //,iframeCssUrl: URL + '/themes/iframe.css' //給編輯區域的iframe引入一個css檔案
 
         //indentValue
-        //首行缩进距离,默认是2em
+        //首行縮排距離,預設是2em
         //,indentValue:'2em'
 
-        //,initialFrameWidth:1000  //初始化编辑器宽度,默认1000
-        //,initialFrameHeight:320  //初始化编辑器高度,默认320
+        //,initialFrameWidth:1000  //初始化編輯器寬度,預設1000
+        //,initialFrameHeight:320  //初始化編輯器高度,預設320
 
-        //,readonly : false //编辑器初始化结束后,编辑区域是否是只读的，默认是false
+        //,readonly : false //編輯器初始化結束後,編輯區域是否是隻讀的，預設是false
 
-        //,autoClearEmptyNode : true //getContent时，是否删除空的inlineElement节点（包括嵌套的情况）
+        //,autoClearEmptyNode : true //getContent時，是否刪除空的inlineElement節點（包括巢狀的情況）
 
-        //,fullscreen : false //是否开启初始化时即全屏，默认关闭
+        //,fullscreen : false //是否開啟初始化時即全屏，預設關閉
 
-        //,imagePopup:true      //图片操作的浮层开关，默认打开
+        //,imagePopup:true      //圖片操作的浮層開關，預設開啟
 
-        //,autoSyncData:true //自动同步编辑器要提交的数据
+        //,autoSyncData:true //自動同步編輯器要提交的資料
 
-        //粘贴只保留标签，去除标签所有属性
+        //貼上只保留標籤，去除標籤所有屬性
         //,retainOnlyLabelPasted: false
 
-        //,pasteplain:false  //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
-        //纯文本粘贴模式下的过滤规则
+        //,pasteplain:false  //是否預設為純文字貼上。false為不使用純文字貼上，true為使用純文字貼上
+        //純文字貼上模式下的過濾規則
         //'filterTxtRules' : function(){
         //    function transP(node){
         //        node.tagName = 'p';
         //        node.setStyle();
         //    }
         //    return {
-        //        //直接删除及其字节点内容
+        //        //直接刪除及其位元組點內容
         //        '-' : 'script style object iframe embed input select',
         //        'p': {$:{}},
         //        'br':{$:{}},
@@ -125,7 +125,7 @@
         //        'tr':transP,
         //        'h1':transP,'h2':transP,'h3':transP,'h4':transP,'h5':transP,'h6':transP,
         //        'td':function(node){
-        //            //没有内容的td直接删掉
+        //            //沒有內容的td直接刪掉
         //            var txt = !!node.innerText();
         //            if(txt){
         //                node.parentNode.insertAfter(UE.uNode.createText(' &nbsp; &nbsp;'),node);
@@ -135,12 +135,12 @@
         //    }
         //}()
 
-        //,allHtmlEnabled:false //提交到后台的数据是否包含整个html字符串
+        //,allHtmlEnabled:false //提交到後臺的資料是否包含整個html字串
 
         //insertorderedlist
-        //有序列表的下拉配置,值留空时支持多语言自动识别，若配置值，则以此值为准
+        //有序列表的下拉配置,值留空時支援多語言自動識別，若配置值，則以此值為準
         //,'insertorderedlist':{
-        //     //系统自带
+        //     //系統自帶
         //     'decimal' : '' ,         //'1,2,3...'
         //     'lower-alpha' : '' ,    // 'a,b,c...'
         //     'lower-roman' : '' ,    //'i,ii,iii...'
@@ -149,28 +149,28 @@
         //}
 
         //insertunorderedlist
-        //无序列表的下拉配置，值留空时支持多语言自动识别，若配置值，则以此值为准
-        //,insertunorderedlist : { //自定的样式
-        //    'dash' :'— 破折号', //-破折号
-        //    'dot':' 。 小圆圈', //系统自带
-        //    'circle' : '',  // '○ 小圆圈'
-        //    'disc' : '',    // '● 小圆点'
-        //    'square' : ''   //'■ 小方块'
+        //無序列表的下拉配置，值留空時支援多語言自動識別，若配置值，則以此值為準
+        //,insertunorderedlist : { //自定的樣式
+        //    'dash' :'— 破折號', //-破折號
+        //    'dot':' 。 小圓圈', //系統自帶
+        //    'circle' : '',  // '○ 小圓圈'
+        //    'disc' : '',    // '● 小圓點'
+        //    'square' : ''   //'■ 小方塊'
         //}
-        //,listDefaultPaddingLeft : '30'//默认的左边缩进的基数倍
-        //,listiconpath : 'http://bs.baidu.com/listicon/'//自定义标号的路径
-        //,maxListLevel : 3 //限制可以tab的级数, 设置-1为不限制
+        //,listDefaultPaddingLeft : '30'//預設的左邊縮排的基數倍
+        //,listiconpath : 'http://bs.baidu.com/listicon/'//自定義標號的路徑
+        //,maxListLevel : 3 //限制可以tab的級數, 設定-1為不限制
 
-        //,autoTransWordToList:false  //禁止word中粘贴进来的列表自动变成列表标签
+        //,autoTransWordToList:false  //禁止word中貼上進來的列表自動變成列表標籤
 
         //fontfamily
-        //字体设置 label留空支持多语言自动切换，若配置，则以配置值为准
+        //字型設定 label留空支援多語言自動切換，若配置，則以配置值為準
         ,'fontfamily':[
-			{ label:'微软雅黑',name:'microsoftyahei',val:'微软雅黑,Microsoft YaHei'},
-			{ label:'宋体',name:'songti',val:'宋体,SimSun'},
-			{ label:'楷体',name:'kaiti',val:'楷体,楷体_GB2312, SimKai'},
-			{ label:'黑体',name:'heiti',val:'黑体, SimHei'},
-			{ label:'隶书',name:'lishu',val:'隶书, SimLi'},
+			{ label:'微軟雅黑',name:'microsoftyahei',val:'微軟雅黑,Microsoft YaHei'},
+			{ label:'宋體',name:'songti',val:'宋體,SimSun'},
+			{ label:'楷體',name:'kaiti',val:'楷體,楷體_GB2312, SimKai'},
+			{ label:'黑體',name:'heiti',val:'黑體, SimHei'},
+			{ label:'隸書',name:'lishu',val:'隸書, SimLi'},
 			{ label:'Arial',name:'arial',val:'arial, helvetica,sans-serif'},
 			{ label:'Arial Black',name:'arialBlack',val:'arial black,avant garde'},
 			{ label:'Comic Sans Ms',name:'comicSansMs',val:'comic sans ms'},
@@ -179,34 +179,34 @@
 		]
 
         //fontsize
-        //字号
+        //字號
         // ,'fontsize':[10, 11, 12, 14, 16, 18, 20, 24, 36, 40]
 
         //paragraph
-        //段落格式 值留空时支持多语言自动识别，若配置，则以配置值为准
+        //段落格式 值留空時支援多語言自動識別，若配置，則以配置值為準
         //,'paragraph':{'p':'', 'h1':'', 'h2':'', 'h3':'', 'h4':'', 'h5':'', 'h6':''}
 
         //rowspacingtop
-        //段间距 值和显示的名字相同
+        //段間距 值和顯示的名字相同
         //,'rowspacingtop':['5', '10', '15', '20', '25']
 
         //rowspacingBottom
-        //段间距 值和显示的名字相同
+        //段間距 值和顯示的名字相同
         //,'rowspacingbottom':['5', '10', '15', '20', '25']
 
         //lineheight
-        //行内间距 值和显示的名字相同
+        //行內間距 值和顯示的名字相同
         //,'lineheight':['1', '1.5','1.75','2', '3', '4', '5']
 
         //customstyle
-        //自定义样式，不支持国际化，此处配置值即可最后显示值
-        //block的元素是依据设置段落的逻辑设置的，inline的元素依据BIU的逻辑设置
-        //尽量使用一些常用的标签
-        //参数说明
-        //tag 使用的标签名字
-        //label 显示的名字也是用来标识不同类型的标识符，注意这个值每个要不同，
-        //style 添加的样式
-        //每一个对象就是一个自定义的样式
+        //自定義樣式，不支援國際化，此處配置值即可最後顯示值
+        //block的元素是依據設定段落的邏輯設定的，inline的元素依據BIU的邏輯設定
+        //儘量使用一些常用的標籤
+        //引數說明
+        //tag 使用的標籤名字
+        //label 顯示的名字也是用來標識不同型別的識別符號，注意這個值每個要不同，
+        //style 新增的樣式
+        //每一個物件就是一個自定義的樣式
         //,'customstyle':[
         //    {tag:'h1', name:'tc', label:'', style:'border-bottom:#ccc 2px solid;padding:0 4px 0 0;text-align:center;margin:0 0 20px 0;'},
         //    {tag:'h1', name:'tl',label:'', style:'border-bottom:#ccc 2px solid;padding:0 4px 0 0;margin:0 0 10px 0;'},
@@ -216,58 +216,58 @@
 
 
         //elementPathEnabled
-        //是否启用元素路径，默认是显示
+        //是否啟用元素路徑，預設是顯示
         //,elementPathEnabled : true
 
         //wordCount
-        //,wordCount:true          //是否开启字数统计
-        //,maximumWords:10000       //允许的最大字符数
-        //字数统计提示，{#count}代表当前字数，{#leave}代表还可以输入多少字符数,留空支持多语言自动切换，否则按此配置显示
-        //,wordCountMsg:''   //当前已输入 {#count} 个字符，您还可以输入{#leave} 个字符
-        //超出字数限制提示  留空支持多语言自动切换，否则按此配置显示
-        //,wordOverFlowMsg:''    //<span style="color:red;">你输入的字符个数已经超出最大允许值，服务器可能会拒绝保存！</span>
+        //,wordCount:true          //是否開啟字數統計
+        //,maximumWords:10000       //允許的最大字元數
+        //字數統計提示，{#count}代表當前字數，{#leave}代表還可以輸入多少字元數,留空支援多語言自動切換，否則按此配置顯示
+        //,wordCountMsg:''   //當前已輸入 {#count} 個字元，您還可以輸入{#leave} 個字元
+        //超出字數限制提示  留空支援多語言自動切換，否則按此配置顯示
+        //,wordOverFlowMsg:''    //<span style="color:red;">你輸入的字元個數已經超出最大允許值，伺服器可能會拒絕儲存！</span>
 
         //tab
-        //点击tab键时移动的距离,tabSize倍数，tabNode什么字符做为单位
+        //點選tab鍵時移動的距離,tabSize倍數，tabNode什麼字元做為單位
         //,tabSize:4
         //,tabNode:'&nbsp;'
 
         //removeFormat
-        //清除格式时可以删除的标签和属性
-        //removeForamtTags标签
+        //清除格式時可以刪除的標籤和屬性
+        //removeForamtTags標籤
         //,removeFormatTags:'b,big,code,del,dfn,em,font,i,ins,kbd,q,samp,small,span,strike,strong,sub,sup,tt,u,var'
-        //removeFormatAttributes属性
+        //removeFormatAttributes屬性
         //,removeFormatAttributes:'class,style,lang,width,height,align,hspace,valign'
 
         //undo
-        //可以最多回退的次数,默认20
+        //可以最多回退的次數,預設20
         //,maxUndoCount:20
-        //当输入的字符数超过该值时，保存一次现场
+        //當輸入的字元數超過該值時，儲存一次現場
         //,maxInputCount:1
 
         //autoHeightEnabled
-        // 是否自动长高,默认true
+        // 是否自動長高,預設true
         //,autoHeightEnabled:true
 
         //scaleEnabled
-        //是否可以拉伸长高,默认true(当开启时，自动长高失效)
+        //是否可以拉伸長高,預設true(當開啟時，自動長高失效)
         //,scaleEnabled:false
-        //,minFrameWidth:800    //编辑器拖动时最小宽度,默认800
-        //,minFrameHeight:220  //编辑器拖动时最小高度,默认220
+        //,minFrameWidth:800    //編輯器拖動時最小寬度,預設800
+        //,minFrameHeight:220  //編輯器拖動時最小高度,預設220
 
         //autoFloatEnabled
-        //是否保持toolbar的位置不动,默认true
+        //是否保持toolbar的位置不動,預設true
         //,autoFloatEnabled:true
-        //浮动时工具栏距离浏览器顶部的高度，用于某些具有固定头部的页面
+        //浮動時工具欄距離瀏覽器頂部的高度，用於某些具有固定頭部的頁面
         //,topOffset:30
-        //编辑器底部距离工具栏高度(如果参数大于等于编辑器高度，则设置无效)
+        //編輯器底部距離工具欄高度(如果引數大於等於編輯器高度，則設定無效)
         //,toolbarTopOffset:400
 
-        //设置远程图片是否抓取到本地保存
-        //,catchRemoteImageEnable: true //设置是否抓取远程图片
+        //設定遠端圖片是否抓取到本地儲存
+        //,catchRemoteImageEnable: true //設定是否抓取遠端圖片
 
         //pageBreakTag
-        //分页标识符,默认是_ueditor_page_break_tag_
+        //分頁識別符號,預設是_ueditor_page_break_tag_
         //,pageBreakTag:'_ueditor_page_break_tag_'
 
         //tableDragable
@@ -276,30 +276,30 @@
 
 
 
-        //编辑器初始化完成后是否进入源码模式，默认为否。
+        //編輯器初始化完成後是否進入原始碼模式，預設為否。
         //,sourceEditorFirst:false
 
         //iframeUrlMap
-        //dialog内容的路径 ～会被替换成URL,垓属性一旦打开，将覆盖所有的dialog的默认路径
+        //dialog內容的路徑 ～會被替換成URL,垓屬性一旦開啟，將覆蓋所有的dialog的預設路徑
         //,iframeUrlMap:{
         //    'anchor':'~/dialogs/anchor/anchor.html',
         //}
 
-        //allowLinkProtocol 允许的链接地址，有这些前缀的链接地址不会自动添加http
+        //allowLinkProtocol 允許的連結地址，有這些字首的連結地址不會自動新增http
         //, allowLinkProtocols: ['http:', 'https:', '#', '/', 'ftp:', 'mailto:', 'tel:', 'git:', 'svn:']
 
-        //默认过滤规则相关配置项目
-        //,disabledTableInTable:true  //禁止表格嵌套
-        //,allowDivTransToP:true      //允许进入编辑器的div标签自动变成p标签
-        //,rgb2Hex:true               //默认产出的数据中的color自动从rgb格式变成16进制格式
+        //預設過濾規則相關配置專案
+        //,disabledTableInTable:true  //禁止表格巢狀
+        //,allowDivTransToP:true      //允許進入編輯器的div標籤自動變成p標籤
+        //,rgb2Hex:true               //預設產出的資料中的color自動從rgb格式變成16進位制格式
 
-		// xss 过滤是否开启,inserthtml等操作
+		// xss 過濾是否開啟,inserthtml等操作
 		,xssFilterRules: true
-		//input xss过滤
+		//input xss過濾
 		,inputXssFilter: true
-		//output xss过滤
+		//output xss過濾
 		,outputXssFilter: true
-		// xss过滤白名单 名单来源: https://raw.githubusercontent.com/leizongmin/js-xss/master/lib/default.js
+		// xss過濾白名單 名單來源: https://raw.githubusercontent.com/leizongmin/js-xss/master/lib/default.js
 		,whitList: {
 			a:      ['target', 'href', 'title', 'class', 'style','name','id'],
 			abbr:   ['title', 'class', 'style'],

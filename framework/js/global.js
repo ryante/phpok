@@ -1,14 +1,14 @@
 /**
- * 表单通用JS，涉及到自定义表单中所有的JS文件，请注意，此文件需要加载在 jQuery 之后，且不建议直接读取
+ * 表單通用JS，涉及到自定義表單中所有的JS檔案，請注意，此檔案需要載入在 jQuery 之後，且不建議直接讀取
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年03月22日
 **/
 
-//异步加载js
+//非同步載入js
 function load_js(url)
 {
 	if(!url || url == "undefined") return false;
@@ -34,24 +34,24 @@ function load_js(url)
 	$("head").append(html);
 }
 
-// 同步加载Ajax，返回字符串
+// 同步載入Ajax，返回字串
 function get_ajax(turl)
 {
 	return $.phpok.ajax(turl);
 }
 
-// 同步加载Ajax，返回JSON数组
+// 同步載入Ajax，返回JSON陣列
 function json_ajax(turl)
 {
 	return $.phpok.json(turl);
 }
 
 /**
- * JS语法中涉及到的语言包替换
- * @参数 str 要替换的语言包，支持使用{}包起来的变量
- * @参数 info 支持字符串，对数数据，要替换的变量，为空表示没有变量信息
- * @返回 替换后的数据
- * @更新时间 
+ * JS語法中涉及到的語言包替換
+ * @引數 str 要替換的語言包，支援使用{}包起來的變數
+ * @引數 info 支援字串，對數資料，要替換的變數，為空表示沒有變數資訊
+ * @返回 替換後的資料
+ * @更新時間 
 **/
 function p_lang(str,info)
 {
@@ -83,7 +83,7 @@ function p_lang(str,info)
 	return str;
 }
 
-// 异步加载Ajax，执行函数
+// 非同步載入Ajax，執行函式
 function ajax_async(turl,func,type)
 {
 	if(!turl || turl == "undefined")
@@ -114,14 +114,14 @@ function ajax_async(turl,func,type)
 	});
 }
 
-// 跳转页面
+// 跳轉頁面
 function direct(url)
 {
 	if(!url || url == "undefined") url = window.location.href;
 	$.phpok.go(url);
 }
 
-//自动刷新
+//自動重新整理
 function auto_refresh(rs)
 {
 	$.phpok.reload();
@@ -132,7 +132,7 @@ function autosave_callback(rs)
 	return true;
 }
 
-/* 计算字符数长度，中文等同于三个字符，英文为一个字符 */
+/* 計算字元數長度，中文等同於三個字元，英文為一個字元 */
 function strlen(str)
 {
 	var len = str.length;
@@ -181,7 +181,7 @@ function tips(content,time,id)
 	}
 }
 
-/* 计算数组或对像中的个数 */
+/* 計算陣列或對像中的個數 */
 function count(id)
 {
 	var t = typeof id;

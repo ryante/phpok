@@ -1,7 +1,7 @@
 <div class="layui-row layui-col-space10">
 	<div class="layui-col-md6">
 		<select id="_tmp_select_add" style="padding:3px">
-			<option value="">请选择扩展字段…</option>
+			<option value="">請選擇擴充套件欄位…</option>
 			<!-- loop from=$rslist key=$key value=$value -->
 			<option value="{$value.identifier}">{$value.title} - {$value.identifier}</option>
 			<!-- /loop -->
@@ -9,8 +9,8 @@
 	</div>
 	<div class="layui-col-md6">
 		<div class="layui-btn-group">
-			<input type="button" value="{lang添加}" onclick="_update_select_add()" class="layui-btn" />
-			<input type="button" value="{lang标准创建扩展字段}" onclick="ext_add('{$module}')" class="layui-btn" />
+			<input type="button" value="{lang新增}" onclick="_update_select_add()" class="layui-btn" />
+			<input type="button" value="{lang標準建立擴充套件欄位}" onclick="ext_add('{$module}')" class="layui-btn" />
 		</div>
 	</div>
 </div>
@@ -19,7 +19,7 @@ function _update_select_add()
 {
 	var val = $("#_tmp_select_add").val();
 	if(!val){
-		$.dialog.alert('请选择要添加的扩展');
+		$.dialog.alert('請選擇要新增的擴充套件');
 		return false;
 	}
 	ext_add2(val,'{$module}');

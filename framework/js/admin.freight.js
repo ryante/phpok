@@ -1,11 +1,11 @@
 /**
- * 运费
+ * 運費
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年11月27日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年11月27日
 **/
 ;(function($){
 	$.admin_freight = {
@@ -14,7 +14,7 @@
 			var url = get_url('freight','save','id='+id);
 			var title = $("#title_"+id).val();
 			if(!title){
-				$.dialog.alert(p_lang('名称不能为空'));
+				$.dialog.alert(p_lang('名稱不能為空'));
 				return false
 			}
 			url += "&title="+$.str.encode(title);
@@ -32,7 +32,7 @@
 			}
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.tips(p_lang('运费模板修改成功')).lock();
+					$.dialog.tips(p_lang('運費模板修改成功')).lock();
 					return true;
 				}
 				$.dialog.alert(rs.info);
@@ -44,7 +44,7 @@
 			var url = get_url('freight','save');
 			var title = $("#title_0").val();
 			if(!title){
-				$.dialog.alert('名称不能为空');
+				$.dialog.alert('名稱不能為空');
 				return false
 			}
 			url += "&title="+$.str.encode(title);
@@ -62,7 +62,7 @@
 			}
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.tips(p_lang('运费模板修改成功'),function(){
+					$.dialog.tips(p_lang('運費模板修改成功'),function(){
 						$.phpok.reload();
 					}).lock();
 					return true;
@@ -74,11 +74,11 @@
 		del:function(id)
 		{
 			var t = $("#title_"+id).val();
-			var tip = p_lang('确定要删除该区域：{title} 吗？删除后，已使用此模板相关信息也会删除','<span class="red">'+t+'</span>');
+			var tip = p_lang('確定要刪除該區域：{title} 嗎？刪除後，已使用此模板相關資訊也會刪除','<span class="red">'+t+'</span>');
 			$.dialog.confirm(tip,function(){
 				$.phpok.json(get_url('freight','delete','id='+id),function(rs){
 					if(rs.status){
-						$.dialog.alert(p_lang('删除成功'),function(){
+						$.dialog.alert(p_lang('刪除成功'),function(){
 							$.phpok.reload();
 						},'succeed');
 						return true;
@@ -91,20 +91,20 @@
 		price:function(id)
 		{
 			$.dialog.open(get_url('freight','price','fid='+id),{
-				'title':p_lang('运费价格')+" #"+id,
+				'title':p_lang('運費價格')+" #"+id,
 				'width':'90%',
 				'height':'80%',
 				'lock':true,
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
-				'okVal':p_lang('保存运费信息'),
+				'okVal':p_lang('儲存運費資訊'),
 				'cancel':true,
 				'cancelVal':p_lang('取消')
 			});
@@ -113,20 +113,20 @@
 		{
 			var url = get_url('freight','zone_setting','fid='+fid);
 			$.dialog.open(url,{
-				'title':p_lang('添加新区域'),
+				'title':p_lang('新增新區域'),
 				'lock':true,
 				'width':'700px',
 				'height':'500px',
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
-				'okVal':p_lang('保存添加'),
+				'okVal':p_lang('儲存新增'),
 				'cancel':true,
 				'cancelVal':p_lang('取消')
 			});
@@ -135,30 +135,30 @@
 		{
 			var url = get_url('freight','zone_setting','id='+id);
 			$.dialog.open(url,{
-				'title':p_lang('编辑区域')+"_#"+id,
+				'title':p_lang('編輯區域')+"_#"+id,
 				'lock':true,
 				'width':'700px',
 				'height':'500px',
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
-				'okVal':p_lang('保存修改'),
+				'okVal':p_lang('儲存修改'),
 				'cancel':true,
 				'cancelVal':p_lang('取消')
 			});
 		},
 		zone_del:function(id)
 		{
-			$.dialog.confirm(p_lang('确定要删除这块区域配置吗'),function(){
+			$.dialog.confirm(p_lang('確定要刪除這塊區域配置嗎'),function(){
 				$.phpok.json(get_url('freight','zone_delete','id='+id),function(rs){
 					if(rs.status){
-						$.dialog.tips(p_lang('删除成功'),function(){
+						$.dialog.tips(p_lang('刪除成功'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;
@@ -173,7 +173,7 @@
 			var url = get_url('freight','zone_sort','id='+id+"&val="+val);
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.tips(p_lang('排序变更成功'),function(){
+					$.dialog.tips(p_lang('排序變更成功'),function(){
 						$.phpok.reload();
 					}).lock();
 					return true;

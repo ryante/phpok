@@ -10,31 +10,31 @@ function save()
 	var opener = $.dialog.opener;
 	var num = $("input[name=val]").val();
 	if(!num || (num && parseFloat(num)<=0)){
-		$.dialog.alert('未指定数值');
+		$.dialog.alert('未指定數值');
 		return false;
 	}
 	var from_uid = $("select[name=from_uid]").val();
 	if(from_uid == 'vouch'){
 		var vouch = $("select[name=vouch]").val();
 		if(!vouch){
-			$.dialog.alert('请选择推荐人');
+			$.dialog.alert('請選擇推薦人');
 			return false;
 		}
 	}
 	if(from_uid == 'other'){
 		var username = $("input[name=username]").val();
 		if(!username){
-			$.dialog.alert('请填写会员账号');
+			$.dialog.alert('請填寫會員賬號');
 			return false;
 		}
 	}
 	var note = $("input[name=note]").val();
 	if(!note || note == 'undefined'){
-		$.dialog.alert('未填写备注');
+		$.dialog.alert('未填寫備註');
 		return false;
 	}
-	if(from_uid == 'admin' && note.indexOf('推荐')>-1){
-		$.dialog.alert('系统检测到可能是推荐人提成，请选择推荐人');
+	if(from_uid == 'admin' && note.indexOf('推薦')>-1){
+		$.dialog.alert('系統檢測到可能是推薦人提成，請選擇推薦人');
 		return false;
 	}
 	$("#post_save").ajaxSubmit({
@@ -80,7 +80,7 @@ function update_from_uid(val)
 			<li style="width:60px;text-align:right">
 				<select name="type">
 					<option value="+">增加</option>
-					<option value="-">减少</option>
+					<option value="-">減少</option>
 				</select>
 			</li>
 			<li><input type="text" name="val" id="val" class="short" /></li>
@@ -101,24 +101,24 @@ function update_from_uid(val)
 <div class="table">
 	<div class="content">
 		<ul class="layout">
-			<li style="width:60px;text-align:right">会员：</li>
+			<li style="width:60px;text-align:right">會員：</li>
 			<li>
 				<select name="from_uid" onchange="update_from_uid(this.value)">
-					<option value="admin">平台</option>
-					<option value="vouch">推荐人</option>
+					<option value="admin">平臺</option>
+					<option value="vouch">推薦人</option>
 					<option value="other">其他</option>
 				</select>
 			</li>
 			<li id="from_uid_vouch" class="hide">
 				<select name="vouch">
-					<option value="">请选择会员…</option>
+					<option value="">請選擇會員…</option>
 					<!-- loop from=$vlist key=$key value=$value id=$tmpid -->
 					<option value="{$value.id}">{$value.user}<!-- if $value.mobile -->_{$value.mobile}<!-- /if --></option>
 					<!-- /loop -->
 				</select>
 			</li>
 			<li id="from_uid_other" class="hide">
-				<input type="text" name="username" id="username" placeholder="请填写会员账号" />
+				<input type="text" name="username" id="username" placeholder="請填寫會員賬號" />
 			</li>
 		</ul>
 	</div>
@@ -126,11 +126,11 @@ function update_from_uid(val)
 <div class="table">
 	<div class="content">
 		<ul class="layout">
-			<li style="width:60px;text-align:right">备注：</li>
+			<li style="width:60px;text-align:right">備註：</li>
 			<li>
 				<div><input type="text" name="note" id="note" class="default" /></div>
 				<div class="button-group" style="margin-top:5px;">
-					<input type="button" value="赠送" onclick="$('#note').val('赠送')" class="phpok-btn" />
+					<input type="button" value="贈送" onclick="$('#note').val('贈送')" class="phpok-btn" />
 					<input type="button" value="提成" onclick="$('#note').val('提成')" class="phpok-btn" />
 					<input type="button" value="返利" onclick="$('#note').val('返利')" class="phpok-btn" />
 					<input type="button" value="{lang清空}" onclick="$('#note').val('')" class="phpok-btn" />
@@ -142,7 +142,7 @@ function update_from_uid(val)
 <div class="table">
 	<div class="content">
 		<ul class="layout">
-			<li style="width:60px;text-align:right">时间：</li>
+			<li style="width:60px;text-align:right">時間：</li>
 			<li><input type="text" name="dateline" id="dateline" class="default" value="{func date 'Y-m-d H:i:s' $sys.time}" /></li>
 		</ul>
 	</div>

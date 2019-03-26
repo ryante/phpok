@@ -1,10 +1,10 @@
 /**
- * 回复管理
+ * 回覆管理
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年08月08日
 **/
 ;(function($){
@@ -13,7 +13,7 @@
 		{
 			var url = get_url("reply","adm","id="+id);
 			$.dialog.open(url,{
-				title:p_lang('管理员回复：{id}','<span class="red">#'+id+'</span>')
+				title:p_lang('管理員回覆：{id}','<span class="red">#'+id+'</span>')
 				, width:"90%"
 				, height:"90%"
 				, resize:false
@@ -21,12 +21,12 @@
 				, ok:function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert(p_lang('iframe还没加载完毕呢'));
+						alert(p_lang('iframe還沒載入完畢呢'));
 						return false;
 					};
 					iframe.$.admin_reply.adm_save();
 					return false;
-				},okVal:p_lang('管理员回复')
+				},okVal:p_lang('管理員回覆')
 				,cancel:true
 			});
 		},
@@ -38,7 +38,7 @@
 				}
 			}
 			var opener = $.dialog.opener;
-			var lock_status = $.dialog.tips(p_lang('正在保存数据，请稍候…')).lock();
+			var lock_status = $.dialog.tips(p_lang('正在儲存資料，請稍候…')).lock();
 			$("#post_save").ajaxSubmit({
 				'url':get_url('reply','adm_save'),
 				'type':'post',
@@ -77,9 +77,9 @@
 		del:function(id,ifadm)
 		{
 			if(ifadm && ifadm != 'undefined'){
-				var tip = p_lang('确定要删除这条管理员回复信息吗？');
+				var tip = p_lang('確定要刪除這條管理員回覆資訊嗎？');
 			}else{
-				var tip = p_lang('确定要删除ID为{id}的评论吗?删除后是不能恢复！<br/>评论有回复将一起被删除'," <strong class='red'>"+id+"</strong> ");
+				var tip = p_lang('確定要刪除ID為{id}的評論嗎?刪除後是不能恢復！<br/>評論有回覆將一起被刪除'," <strong class='red'>"+id+"</strong> ");
 			}
 			$.dialog.confirm(tip,function(){
 				var url = get_url("reply","delete","id="+id);
@@ -100,23 +100,23 @@
 			});
 		},
 		/**
-		 * 附件预览
+		 * 附件預覽
 		**/
 		preview_attr:function(id)
 		{
 			$.dialog.open(get_url('upload','preview','id='+id),{
-				'title':p_lang('预览附件信息'),
+				'title':p_lang('預覽附件資訊'),
 				'width':'700px',
 				'height':'400px',
 				'lock':false,
 				'button': [{
-					'name': p_lang('下载原文件'),
+					'name': p_lang('下載原檔案'),
 					'callback': function () {
 						$.phpok.open(get_url('res','download','id='+id));
 						return false;
 					},
 				}],
-				'okVal':p_lang('关闭'),
+				'okVal':p_lang('關閉'),
 				'ok':true
 			});
 		},
@@ -124,7 +124,7 @@
 		{
 			var url = get_url("reply","edit","id="+id);
 			$.dialog.open(url,{
-				title:p_lang('编辑评论：{id}','<span class="red">#'+id+'</span>')
+				title:p_lang('編輯評論：{id}','<span class="red">#'+id+'</span>')
 				, width:"90%"
 				, height:"90%"
 				, resize:false
@@ -132,12 +132,12 @@
 				, ok:function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert(p_lang('iframe还没加载完毕呢'));
+						alert(p_lang('iframe還沒載入完畢呢'));
 						return false;
 					};
 					iframe.$.admin_reply.edit_ok();
 					return false;
-				},okVal:p_lang('修改评论')
+				},okVal:p_lang('修改評論')
 				,cancel:true
 			});
 		},

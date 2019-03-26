@@ -3,7 +3,7 @@
 
 <!-- if $rs.module && $search_list -->
 <div class="layui-card" id="search_html"{if !$keywords} style="display:none"{/if}>
-	<div class="layui-card-header">{lang搜索}</div>
+	<div class="layui-card-header">{lang搜尋}</div>
 	<div class="layui-card-body">
 		<form method="post" class="layui-form" action="{url ctrl=list func=action id=$pid/}">
 		<div class="layui-form-item phpok-search">
@@ -11,15 +11,15 @@
 			<div class="layui-inline">
 				<label class="layui-form-label">{$value.title}</label>
 				<div class="layui-input-block">
-					<input type="text" name="keywords[{$value.identifier}]" class="layui-input"{if $keywords} value="{$keywords[$value.identifier]}"{/if} placeholder="{if $value.search == 1}{lang仅支持精确搜索}{else}{lang支持模糊搜索}{/if}" />
+					<input type="text" name="keywords[{$value.identifier}]" class="layui-input"{if $keywords} value="{$keywords[$value.identifier]}"{/if} placeholder="{if $value.search == 1}{lang僅支援精確搜尋}{else}{lang支援模糊搜尋}{/if}" />
 				</div>
 			</div>
 			<!-- /loop -->
 			<div class="layui-inline">
 				<label class="layui-form-label">&nbsp;</label>
 				<div class="layui-input-block">
-					<input type="submit" value="{lang提交搜索}" class="layui-btn layui-btn-normal" />
-					<input type="button" value="{lang取消搜索}" onclick="$.phpok.go('{url ctrl=list func=action id=$rs.id/}')" class="layui-btn layui-btn-primary" />
+					<input type="submit" value="{lang提交搜尋}" class="layui-btn layui-btn-normal" />
+					<input type="button" value="{lang取消搜尋}" onclick="$.phpok.go('{url ctrl=list func=action id=$rs.id/}')" class="layui-btn layui-btn-primary" />
 				</div>
 			</div>
 		</div>
@@ -41,13 +41,13 @@
 		<span id="AP_ACTION_HTML"></span>
 		<div class="layui-btn-group fr">
 			<!-- if $popedom.add -->
-			<button class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.win('{$rs.title}_{lang添加内容}','{url ctrl=list func=edit2 pid=$pid/}')"><span class="layui-icon">&#xe654;</span>{lang添加内容}</button>
+			<button class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.win('{$rs.title}_{lang新增內容}','{url ctrl=list func=edit2 pid=$pid/}')"><span class="layui-icon">&#xe654;</span>{lang新增內容}</button>
 			<!-- /if -->
 			<!-- if $rs.module && $search_list -->
-			<button class="layui-btn layui-btn-sm" onclick="$.admin.hide_show('search_html')"><span class="layui-icon">&#xe615;</span>{lang搜索}</button>
+			<button class="layui-btn layui-btn-sm" onclick="$.admin.hide_show('search_html')"><span class="layui-icon">&#xe615;</span>{lang搜尋}</button>
 			<!-- /if -->
 			<!-- if $popedom.set || $session.admin_rs.if_system -->
-			<button class="layui-btn layui-btn-sm" onclick="$.phpok_list.set({$pid})"><span class="layui-icon">&#xe642;</span>{lang编辑项目}</button>
+			<button class="layui-btn layui-btn-sm" onclick="$.phpok_list.set({$pid})"><span class="layui-icon">&#xe642;</span>{lang編輯專案}</button>
 			<!-- /if -->
 		</div>
 	</div>
@@ -86,8 +86,8 @@
 			<!-- /loop -->
 			<td>
 				<div class="layui-btn-group">
-					<!-- if $popedom.modify --><input type="button" value="{lang编辑}" onclick="$.win('{$rs.title}_{lang编辑}_#{$value.id}','{url ctrl=list func=edit2 id=$value.id pid=$pid/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
-					<!-- if $popedom.delete --><input type="button" value="{lang删除}" onclick="$.admin_list.single_delete('{$pid}','{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" /><!-- /if -->
+					<!-- if $popedom.modify --><input type="button" value="{lang編輯}" onclick="$.win('{$rs.title}_{lang編輯}_#{$value.id}','{url ctrl=list func=edit2 id=$value.id pid=$pid/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
+					<!-- if $popedom.delete --><input type="button" value="{lang刪除}" onclick="$.admin_list.single_delete('{$pid}','{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" /><!-- /if -->
 				</div>
 			</td>
 		</tr>

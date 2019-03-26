@@ -3,13 +3,13 @@
 
 </script>
 <div class="layui-card">
-	<div class="layui-card-header">{lang产品属性管理}</div>
+	<div class="layui-card-header">{lang產品屬性管理}</div>
 	<div class="layui-card-body">
 		<table class="layui-table">
 			<thead>
 			<tr>
 				<th>ID</th>
-				<th>名称</th>
+				<th>名稱</th>
 				<th width="100">排序</th>
 				<th>操作</th>
 			</tr>
@@ -23,17 +23,17 @@
 				<td>
 					<div class="layui-btn-group">
 						<input type="button" value="{lang提交修改}" onclick="$.admin_options.update('{$value.id}')" class="layui-btn layui-btn-sm" />
-						<input type="button" value="{lang内容}" onclick="$.win('{lang属性内容维护}_#{$value.id}','{url ctrl=options func=list id=$value.id/}')" class="layui-btn layui-btn-sm" />
-						<input type="button" value="{lang删除}" onclick="$.admin_options.del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
+						<input type="button" value="{lang內容}" onclick="$.win('{lang屬性內容維護}_#{$value.id}','{url ctrl=options func=list id=$value.id/}')" class="layui-btn layui-btn-sm" />
+						<input type="button" value="{lang刪除}" onclick="$.admin_options.del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 					</div>
 				</td>
 			</tr>
 			<!-- /loop -->
 			<tr>
-				<td class="center">{lang添加}</td>
+				<td class="center">{lang新增}</td>
 				<td><input type="text" id="title_0" value="" class="layui-input" /></td>
 				<td class="center"><input type="text" id="taxis_0" value="{$taxis}" class="layui-input" /></td>
-				<td><input type="button" value="{lang添加}" onclick="$.admin_options.add()" class="layui-btn layui-btn-sm" /></td>
+				<td><input type="button" value="{lang新增}" onclick="$.admin_options.add()" class="layui-btn layui-btn-sm" /></td>
 			</tr>
 			</tbody>
 		</table>

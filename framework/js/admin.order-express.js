@@ -1,10 +1,10 @@
 /**
- * 物流快递
+ * 物流快遞
  * @作者 qinggan <admin@phpok.com>
- * @版权 2008-2018 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 2008-2018 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2018年10月07日
 **/
 ;(function($){
@@ -22,7 +22,7 @@
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						$.dialog.tips(p_lang('物流信息添加成功'),function(){
+						$.dialog.tips(p_lang('物流資訊新增成功'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;
@@ -35,12 +35,12 @@
 		},
 		del:function(id)
 		{
-			var tip = p_lang('确定要删除这条物流信息吗？删除后相应记录会被删除');
+			var tip = p_lang('確定要刪除這條物流資訊嗎？刪除後相應記錄會被刪除');
 			$.dialog.confirm(tip,function(){
 				var url = get_url('order','express_delete','id='+id);
 				$.phpok.json(url,function(rs){
 					if(rs.status){
-						$.dialog.tips(p_lang('删除成功'),function(){
+						$.dialog.tips(p_lang('刪除成功'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;
@@ -53,7 +53,7 @@
 		remote:function(id)
 		{
 			var url = api_url('express','remote','id='+id);
-			var tip = $.dialog.tips('正在获取数据，请稍候…',100);
+			var tip = $.dialog.tips('正在獲取資料，請稍候…',100);
 			$.phpok.json(url,function(rs){
 				tip.close();
 				if(rs.status){

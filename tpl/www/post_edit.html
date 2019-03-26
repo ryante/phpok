@@ -5,20 +5,20 @@ $(document).ready(function(){
 	var is_cate = '{$page_rs.cate ? "true" : "false"}';
 	$("#post_submit").submit(function(){
 		if(!$("#title").val()){
-			$.dialog.alert('{$page_rs.alias_title ? $page_rs.alias_title : "主题"}不能为空');
+			$.dialog.alert('{$page_rs.alias_title ? $page_rs.alias_title : "主題"}不能為空');
 			return false;
 		}
 		if(is_cate == 'true'){
 			var cate_id = $("#cate_id").val();
 			if(!cate_id){
-				$.dialog.alert('请选择分类');
+				$.dialog.alert('請選擇分類');
 				return false;
 			}
 		}
 		if(is_vcode == 'true'){
 			var chkcode = $("#_chkcode").val();
 			if(!chkcode){
-				$.dialog.alert('验证码不能为空');
+				$.dialog.alert('驗證碼不能為空');
 				$("#update_vcode").phpok_vcode();
 				return false;
 			}
@@ -29,7 +29,7 @@ $(document).ready(function(){
 			'dataType':'json',
 			'success':function(rs){
 				if(rs.status == 'ok'){
-					$.dialog.alert('内容编辑成功',function(){
+					$.dialog.alert('內容編輯成功',function(){
 						window.close();
 						window.opener.location.reload();
 					});
@@ -51,21 +51,21 @@ $(document).ready(function(){
 <div class="main">
 	<!-- include tpl=block/breadcrumb -->
 	<div class="am-panel am-panel-default">
-		<div class="am-panel-hd">编辑</div>
+		<div class="am-panel-hd">編輯</div>
 		<div class="am-panel-bd">
 			<form method="post" id="post_submit" class="am-form">
 			<input type="hidden" name="id" id="id" value="{$page_rs.identifier}" />
 			<input type="hidden" name="tid" value="{$rs.id}" />
 			<div class="am-g am-form-group">
-				<label class="am-u-sm-2" for="title">{$page_rs.alias_title ? $page_rs.alias_title : '主题'}</label>
+				<label class="am-u-sm-2" for="title">{$page_rs.alias_title ? $page_rs.alias_title : '主題'}</label>
 				<div class="am-u-sm-10"><input type="text" name="title" id="title" value="{$rs.title}" /></div>
 			</div>
 			<!-- if $catelist -->
 			<div class="am-g am-form-group">
-				<label class="am-u-sm-2" for="title">分类</label>
+				<label class="am-u-sm-2" for="title">分類</label>
 				<div class="am-u-sm-10">
 					<select name="cate_id" id="cate_id">
-						<option value="">请选择分类……</option>
+						<option value="">請選擇分類……</option>
 						<!-- loop from=$catelist key=$key value=$value id=$tmpid -->
 						<option value="{$value.id}"{if $cate_rs.id == $value.id} selected{/if}>{$value._space}{$value.title}</option>
 						<!-- /loop -->
@@ -81,13 +81,13 @@ $(document).ready(function(){
 			<!-- /loop -->
 			<!-- if $is_vcode -->
 			<div class="am-g am-form-group">
-				<label class="am-u-sm-2" for="_chkcode">验证码：</label>
+				<label class="am-u-sm-2" for="_chkcode">驗證碼：</label>
 				<div class="am-u-sm-4"><input type="text" name="_chkcode" id="_chkcode" class="vcode" /></div>
 				<div class="am-u-sm-6"><img src="" border="0" align="absmiddle" id="update_vcode" class="hand"></div>
 				<script type="text/javascript">
 				$(document).ready(function(){
 					$("#update_vcode").phpok_vcode();
-					//更新点击时操作
+					//更新點選時操作
 					$("#update_vcode").click(function(){
 						$(this).phpok_vcode();
 					});

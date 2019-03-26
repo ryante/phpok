@@ -3,12 +3,12 @@
 <script type="text/javascript" src="js/webuploader/admin.upload.js" charset="utf-8"></script>
 <!-- php:$catelist = $app->model('res')->cate_all(); -->
 
-<div class="tips">附件上传</div>
+<div class="tips">附件上傳</div>
 <div style="padding:10px;margin:5px;">
 <div class="table">
 	<div class="title">
-		{lang附件上传：}
-		<span class="note">{lang请选择要上传的附件分类}{lang上传的文件上传不能超过：}<span class="red">{func get_cfg_var upload_max_filesize}</span></span>
+		{lang附件上傳：}
+		<span class="note">{lang請選擇要上傳的附件分類}{lang上傳的檔案上傳不能超過：}<span class="red">{func get_cfg_var upload_max_filesize}</span></span>
 	</div>
 	<div class="content">
 		<table>
@@ -17,7 +17,7 @@
 				<select id="add_cate_id" onchange="cate_change()">
 					<!-- loop from=$catelist key=$key value=$value -->
 					<option value="{$value.id}"{if $value.is_default} selected{/if} data="{$value.filetypes}" catename="{$value.title}">
-					{$value.title}<!-- if $value.filetypes --> / {lang支持上传格式：}{$value.filetypes}<!-- /if --></option>
+					{$value.title}<!-- if $value.filetypes --> / {lang支援上傳格式：}{$value.filetypes}<!-- /if --></option>
 					<!-- /loop -->
 				</select>
 			</td>
@@ -40,7 +40,7 @@ function cate_change()
 {
 	val = $("#add_cate_id").val();
 	if(!val){
-		$.dialog.alert('请选择要存储的目标分类');
+		$.dialog.alert('請選擇要儲存的目標分類');
 		return false;
 	}
 	var data = $("#add_cate_id option[value="+val+"]").attr('data');
@@ -58,7 +58,7 @@ function cate_change()
 		'fileVal':'upfile',
 		'auto':true,
 		"success":function(){
-			$.dialog.alert('附件上传成功',function(){
+			$.dialog.alert('附件上傳成功',function(){
 				$.phpok.reload();
 			});
 		}

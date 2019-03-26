@@ -12,7 +12,7 @@ function pendding_info()
 				$("li[id=project_"+list[key]['id']+"] em").remove();
 				$("li[id=project_"+list[key]['id']+"]").append(html.replace('{total}',list[key]['total']));
 			}
-			//每隔一分钟检测一次
+			//每隔一分鐘檢測一次
 			window.setTimeout("pendding_info()", 60000);
 		}else{
 			window.setTimeout("pendding_info()", 180000);
@@ -36,7 +36,7 @@ $(document).ready(function(){
 			$.win(txt,url);
 			return true;
 		}
-		$.dialog.alert(p_lang('未指定动作'));
+		$.dialog.alert(p_lang('未指定動作'));
 		return false;
 	});
 });

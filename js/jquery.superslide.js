@@ -1,14 +1,14 @@
 /*!
  * SuperSlide v2.1.1 
- * 轻松解决网站大部分特效展示问题
- * 详尽信息请看官网：http://www.SuperSlide2.com/
+ * 輕鬆解決網站大部分特效展示問題
+ * 詳盡資訊請看官網：http://www.SuperSlide2.com/
  *
- * Copyright 2011-2013, 大话主席
+ * Copyright 2011-2013, 大話主席
  *
- * 请尊重原创，保留头部版权
- * 在保留版权的前提下可应用于个人或商业用途
+ * 請尊重原創，保留頭部版權
+ * 在保留版權的前提下可應用於個人或商業用途
 
- * v2.1.1：修复当调用多个SuperSlide，并设置returnDefault:true 时返回defaultIndex索引错误
+ * v2.1.1：修復當呼叫多個SuperSlide，並設定returnDefault:true 時返回defaultIndex索引錯誤
 
  */
 

@@ -1,11 +1,11 @@
 /**
- * 管理员登录页
+ * 管理員登入頁
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年08月05日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年08月05日
 **/
 
 ;(function($){
@@ -64,9 +64,9 @@ $(document).ready(function(){
 	}
 
 	layui.config({
-	  	base: webroot+'static/admin/' //静态资源所在路径
+	  	base: webroot+'static/admin/' //靜態資源所在路徑
 	}).extend({
-	  	index: 'lib/index' //主入口模块
+	  	index: 'lib/index' //主入口模組
 	}).use(['index', 'user', 'form'], function() {
 		setter = layui.setter,
 		admin = layui.admin,

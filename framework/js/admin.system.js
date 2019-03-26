@@ -1,10 +1,10 @@
 /**
- * 核心模块
+ * 核心模組
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年06月28日
 **/
 ;(function($){
@@ -18,7 +18,7 @@
 				}
 				var oldvalue = $(obj).val();
 				if(oldvalue == '禁用'){
-					$(obj).val('启用');
+					$(obj).val('啟用');
 				}else{
 					$(obj).val('禁用');
 				}
@@ -26,7 +26,7 @@
 		},
 		delete_sysmenu:function(id,title)
 		{
-			$.dialog.confirm(p_lang('确定要删除导航{title}吗？删除后是不能恢复的！',' <span class="red">'+title+'</span> '),function(){
+			$.dialog.confirm(p_lang('確定要刪除導航{title}嗎？刪除後是不能恢復的！',' <span class="red">'+title+'</span> '),function(){
 				var url = get_url('system','delete','id='+id);
 				var rs = $.phpok.json(url,function(rs){
 					if(rs.status != 'ok'){
@@ -53,20 +53,20 @@
 		{
 			var url = get_url('system','icon','id='+id);
 			$.dialog.open(url,{
-				'title':p_lang('设置图标'),
+				'title':p_lang('設定圖示'),
 				'width':'70%',
 				'height':'70%',
 				'lock':true,
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
-				'okVal':p_lang('提交保存'),
+				'okVal':p_lang('提交儲存'),
 				'cancel':true
 			});
 		},
@@ -80,11 +80,11 @@
 			$.phpok.json(url,function(rs){
 				if(rs.status == 'ok'){
 					if(!icon){
-						$("#icon_status_"+id).val(p_lang('显示')).attr("data-icon",'newtab');
+						$("#icon_status_"+id).val(p_lang('顯示')).attr("data-icon",'newtab');
 						$("#icon_"+id).removeClass().addClass("hand").addClass('icon-newtab').show();
 						return true;
 					}
-					$("#icon_status_"+id).val(p_lang('隐藏')).attr("data-icon",'');
+					$("#icon_status_"+id).val(p_lang('隱藏')).attr("data-icon",'');
 					$("#icon_"+id).removeClass().hide();
 					return true;
 				}
@@ -97,7 +97,7 @@
 		$("div[name=taxis]").click(function(){
 			var oldval = $(this).text();
 			var id = $(this).attr('data');
-			$.dialog.prompt(p_lang('请填写新的排序：'),function(val){
+			$.dialog.prompt(p_lang('請填寫新的排序：'),function(val){
 				if(val != oldval){
 					$.admin_system.update_taxis(val,id);
 				}

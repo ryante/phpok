@@ -1,10 +1,10 @@
-<!-- php:$title="修改头像 - 会员中心" --><!-- include tpl=head title=$title -->
+<!-- php:$title="修改頭像 - 會員中心" --><!-- include tpl=head title=$title -->
 <link rel="stylesheet" type="text/css" href="{#js#}/webuploader/webuploader.css" />
 <link href="css/imgareaselect/default.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="{#js#}/webuploader/webuploader.min.js"></script>
 <script type="text/javascript" src="js/jquery.imgareaselect.min.js"></script>
 <script type="text/javascript">
-//附件上传后执行的JS动作
+//附件上傳後執行的JS動作
 function update_avatar(rs)
 {
 	if(!rs || rs.status != 'ok'){
@@ -13,7 +13,7 @@ function update_avatar(rs)
 	}
 	//$("#avatar").val(rs.content.filename);
 	//$("#avatar_view").attr('src',rs.content.filename);
-	//更新头像ID
+	//更新頭像ID
 	$.ajax({
 		'url': api_url('usercp','avatar','data='+$.str.encode(rs.content.filename)),
 		'dataType': 'json',
@@ -66,11 +66,11 @@ function save_thumb()
 	var h = $('#h').val();
 	var thumb_id = $("#thumb_id").val();
 	if(!thumb_id){
-		$.dialog.alert('未上传图片');
+		$.dialog.alert('未上傳圖片');
 		return false;
 	}
 	if(x1=="" || y1=="" || x2=="" || y2=="" || w=="" || h==""){
-		$.dialog.alert("未设置裁剪框！");
+		$.dialog.alert("未設定裁剪框！");
 		return false;
 	}
 	var url = get_url('usercp','avatar_cut');
@@ -82,10 +82,10 @@ function save_thumb()
 	url += "&x1="+x1;
 	url += "&w="+w;
 	url += "&h="+h;
-	//存储并更新图片
+	//儲存並更新圖片
 	$.phpok.json(url,function(rs){
 		if(rs.status == "ok"){
-			$.dialog.alert('头像更新成功',function(){
+			$.dialog.alert('頭像更新成功',function(){
 				$.phpok.reload();
 			},'succeed');
 			return true;
@@ -101,14 +101,14 @@ function save_thumb()
 	<div class="right am-panel-group">
 		<!-- if $rs.avatar -->
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">当前头像</div>
+			<div class="am-panel-hd">當前頭像</div>
 			<div class="am-panel-bd am-text-center">
 				<img src="{$rs.avatar}"  border="0" style="max-width:100%" />
 			</div>
 		</div>
 		<!-- /if -->
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">修改图像</div>
+			<div class="am-panel-hd">修改影象</div>
 			<div class="am-panel-bd">
 				<div class="table">
 					<div style="margin:10px;">
@@ -119,8 +119,8 @@ function save_thumb()
 						</div>
 					</div>
 					<div style="display:none;margin:10px;padding:10px;border:1px solid #ccc;background:#efefef;" id="show_cut">
-						<div><img src="about:blank" width="500" alt="原图" id="thumbnail" /></div>
-						<div style="padding:10px"><input type="button" class="am-btn am-btn-primary" onclick="save_thumb()" value=" 保存图片 " /></div>
+						<div><img src="about:blank" width="500" alt="原圖" id="thumbnail" /></div>
+						<div style="padding:10px"><input type="button" class="am-btn am-btn-primary" onclick="save_thumb()" value=" 儲存圖片 " /></div>
 					</div>
 					<input type="hidden" name="thumb_id" value="" id="thumb_id" />
 					<input type="hidden" name="x1" value="" id="x1" />
@@ -141,13 +141,13 @@ $(document).ready(function(){
 		auto: true,
 		server: api_url('upload','save'),
 		compress: {width:800,height:800,quality:90,compressSize:200},
-		pick: {'id':'#btn_picture','innerHTML':'选择本地图片'},
+		pick: {'id':'#btn_picture','innerHTML':'選擇本地圖片'},
 		fileVal: 'upfile',
 		formdata:{
 			'{func session_name}':'{func session_id}'
 		},
 		accept: {
-			title: '图片',
+			title: '圖片',
 			extensions: 'gif,jpg,jpeg,bmp,png',
 			mimeTypes: 'image/*'
 		},
@@ -155,7 +155,7 @@ $(document).ready(function(){
 	});
 	uploader.on('fileQueued',function(file){
 		$("#upload_progress").append('<div id="phpok-upfile-' + file.id + '" class="phpok-upfile-list">' +
-			'<div class="title">' + file.name + ' <span class="status">等待上传…</span></div>' +
+			'<div class="title">' + file.name + ' <span class="status">等待上傳…</span></div>' +
 			'<div class="progress"><span>&nbsp;</span></div>' +
 			'<div class="cancel" id="phpok-upfile-cancel-'+file.id+'"></div>' + 
 		'</div>' );
@@ -169,7 +169,7 @@ $(document).ready(function(){
 		$percent = $li.find('.progress span');
 		var width = $li.find('.progress').width();
 		$percent.css( 'width', parseInt(width * percent, 10) + 'px' );
-		$li.find('span.status').html('正在上传…');
+		$li.find('span.status').html('正在上傳…');
 		self.upload_state = 'running';
 	});
 	uploader.on('uploadComplete',function(file){

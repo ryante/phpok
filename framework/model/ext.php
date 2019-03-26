@@ -56,7 +56,7 @@ class ext_model_base extends phpok_model
 	
 
 	# 取得資料庫下的欄位
-	# tbl 指定資料表名，多個數據表用英文逗號隔開
+	# tbl 指定資料表名，多個資料表用英文逗號隔開
 	# prefix 表名是否帶有字首，預設不帶
 	function fields($tbl,$prefix=false)
 	{

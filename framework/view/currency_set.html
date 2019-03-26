@@ -1,7 +1,7 @@
 <!-- include tpl=head_lay -->
 <div class="layui-card">
 	<div class="layui-card-header">
-		<!-- if $id -->{lang编辑货币信息}<!-- else -->{lang添加货币信息}<!-- /if -->
+		<!-- if $id -->{lang編輯貨幣資訊}<!-- else -->{lang新增貨幣資訊}<!-- /if -->
 		<div class="fr">
 			<button type="button" class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.phpok.go('{url ctrl=currency/}')">{lang返回}</button>
 		</div>
@@ -13,42 +13,42 @@
 		<!-- /if -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang名称}
+				{lang名稱}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="title" required lay-verify="required" name="title" value="{$rs.title}" autocomplete="off" class="layui-input" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang用于后台管理，使用您习惯的语言来编写}</div>
+			<div class="layui-input-inline auto gray lh38">{lang用於後臺管理，使用您習慣的語言來編寫}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang货币代号}
+				{lang貨幣代號}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="code" name="code" required lay-verify="required" value="{$rs.code}" autocomplete="off" class="layui-input" />
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang设置货币的标识，国际标准为三个大写的字母}</div>
+			<div class="layui-input-inline auto gray lh38">{lang設定貨幣的標識，國際標準為三個大寫的字母}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang数字代号}
+				{lang數字代號}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="code_num" name="code_num" required lay-verify="required" value="{$rs.code_num}" autocomplete="off" class="layui-input" />
 			</div>
 			<div class="layui-input-inline auto gray lh38">
-				{lang设置货币的数字代码，国际标准为三个数字}
+				{lang設定貨幣的數字程式碼，國際標準為三個數字}
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang汇率}
+				{lang匯率}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="val" name="val" required lay-verify="required" value="{$rs.val}" autocomplete="off" class="layui-input" />
 			</div>
 			<div class="layui-input-inline auto gray lh38">
-				{lang设置该货币的汇率，一般情况是以美元为1.00000为基础}
+				{lang設定該貨幣的匯率，一般情況是以美元為1.00000為基礎}
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -65,19 +65,19 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang状态}
+				{lang狀態}
 			</label>
 			<div class="layui-input-inline auto">
-				<input type="radio" name="status" value="1"{if $rs.status} checked{/if} title="{lang启用}" />
+				<input type="radio" name="status" value="1"{if $rs.status} checked{/if} title="{lang啟用}" />
 				<input type="radio" name="status" value="0"{if !$rs.status} checked{/if} title="{lang禁用}" />
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang是否显示}
+				{lang是否顯示}
 			</label>
 			<div class="layui-input-inline default-auto">
-				<input type="checkbox" name="hidden" lay-text="{lang显示}|{lang隐藏}" value="1" {if $rs.hidden} checked{end} lay-skin="switch">
+				<input type="checkbox" name="hidden" lay-text="{lang顯示}|{lang隱藏}" value="1" {if $rs.hidden} checked{end} lay-skin="switch">
 			</div>
 		</div>
 		<div class="layui-form-item">
@@ -88,7 +88,7 @@
 				<input type="text" id="taxis" name="taxis" value="{$rs.taxis ? $rs.taxis : 255}" autocomplete="off" class="layui-input" />
 			</div>
 			<div class="layui-input-inline auto gray lh38">
-				{lang设置排序，最大值不超过255，最小值为0，值越小越往前靠}
+				{lang設定排序，最大值不超過255，最小值為0，值越小越往前靠}
 			</div>
 		</div>
 		<div class="layui-form-item">

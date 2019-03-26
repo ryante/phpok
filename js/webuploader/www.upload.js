@@ -1,10 +1,10 @@
 /**************************************************************************************************
-	文件： js/webuploader/admin.upload.js
-	说明： 后台附件类型上传操作类，仅限后台操作
+	檔案： js/webuploader/admin.upload.js
+	說明： 後臺附件型別上傳操作類，僅限後臺操作
 	版本： 4.0
-	网站： www.phpok.com
+	網站： www.phpok.com
 	作者： qinggan <qinggan@188.com>
-	日期： 2015年04月27日 12时36分
+	日期： 2015年04月27日 12時36分
 ***************************************************************************************************/
 ;(function($){
 	$.www_upload = function(options){
@@ -24,18 +24,18 @@
 			'chunkSize':102400,
 			'threads':3,
 			'auto':false,
-			'accept':{'title':'图片(*.jpg, *.gif, *.png)','extensions':'jpg,png,gif'}
+			'accept':{'title':'圖片(*.jpg, *.gif, *.png)','extensions':'jpg,png,gif'}
 		};
 		var opts = $.extend({},defaults,options);
 		if(!opts.pick.innerHTML){
-			opts.pick.innerHTML = p_lang('选择本地文件');
+			opts.pick.innerHTML = p_lang('選擇本地檔案');
 		}
 		this.id = "#"+opts.id;
 		uploader = WebUploader.create(opts);
 		uploader.onBeforeFileQueued = function(file){
 			var extlist = (opts.accept.extensions).split(",");
 			if($.inArray((file.ext).toLowerCase(),extlist) < 0){
-				$.dialog.alert('附件类型不支持 <span class="red">'+file.ext+'</span> 格式');
+				$.dialog.alert('附件型別不支援 <span class="red">'+file.ext+'</span> 格式');
 				return false;
 			}
 		}
@@ -46,7 +46,7 @@
 		}
 		uploader.onFileQueued = function( file ) {
             $(self.id+"_progress").append('<div id="phpok-upfile-' + file.id + '" class="phpok-upfile-list">' +
-				'<div class="title">' + file.name + ' <span class="status">等待上传…</span></div>' +
+				'<div class="title">' + file.name + ' <span class="status">等待上傳…</span></div>' +
 				'<div class="progress"><span>&nbsp;</span></div>' +
 				'<div class="cancel" id="phpok-upfile-cancel-'+file.id+'"></div>' +
 			'</div>' );
@@ -60,7 +60,7 @@
 			$percent = $li.find('.progress span');
 			var width = $li.find('.progress').width();
 			$percent.css( 'width', parseInt(width * percent, 10) + 'px' );
-			$li.find('span.status').html('正在上传…');
+			$li.find('span.status').html('正在上傳…');
 			self.upload_state = 'running';
         }
         uploader.onUploadSuccess = function(file,data){
@@ -70,23 +70,23 @@
 				var info = lst[0];
 				var html = lst[1];
 				if(info.indexOf('$HTTP_RAW_POST_DATA') > -1){
-					//$.dialog.tips('建议更新您的PHP.INI环境，设置：always_populate_raw_post_data = -1');
+					//$.dialog.tips('建議更新您的PHP.INI環境，設定：always_populate_raw_post_data = -1');
 					data = $.parseJSON('{"status"'+html);
 				}else{
-					$.dialog.alert('上传异常，错误提示，系统未配置好上传环境');
+					$.dialog.alert('上傳異常，錯誤提示，系統未配置好上傳環境');
 					return false;
 				}
 			}
 			if(data.status != 'ok'){
-				$.dialog.alert('上传异常，错误提示：'+data.content);
+				$.dialog.alert('上傳異常，錯誤提示：'+data.content);
 				return false;
 			}
-			//执行自定义的方法
+			//執行自定義的方法
 			if(opts.success && opts.success != 'undefined'){
 				(opts.success)(file,data);
 				return true;
 			}
-			$('#phpok-upfile-'+file.id).find('span.status').html('上传成功');
+			$('#phpok-upfile-'+file.id).find('span.status').html('上傳成功');
 			var tmp = $.dialog.data('upload-'+opts.id);
 			if(opts.multiple == 'true'){
 				var val = $(self.id).val();
@@ -108,31 +108,31 @@
 			self.showhtml();
         }
 		uploader.on('uploadError',function(file,reason){
-			$('#phpok-upfile-'+file.id).find('span.status').html('上传错误：<span style="color:red">'+reason+'</span> ');
+			$('#phpok-upfile-'+file.id).find('span.status').html('上傳錯誤：<span style="color:red">'+reason+'</span> ');
 		});
 		uploader.on('uploadFinished',function(){
 			self.upload_state = 'ready';
 		});
-		//上传完成，无论失败与否，3秒后删除
+		//上傳完成，無論失敗與否，3秒後刪除
 		uploader.on('uploadComplete',function(file){
 			$("#phpok-upfile-"+file.id).fadeOut();
 		});
 		uploader.on('error',function(handle){
 			var tip = '';
 			if(handle == 'Q_EXCEED_NUM_LIMIT'){
-				tip = '要添加的文件数量超出系统限制';
+				tip = '要新增的檔案數量超出系統限制';
 			}
 			if(handle == 'Q_EXCEED_SIZE_LIMIT'){
-				tip = '要添加的文件总大小超出系统限制';
+				tip = '要新增的檔案總大小超出系統限制';
 			}
 			if(handle == 'Q_TYPE_DENIED'){
-				tip = '文件类型不符合要求';
+				tip = '檔案型別不符合要求';
 			}
 			if(handle == 'F_DUPLICATE'){
-				tip = '文件重复';
+				tip = '檔案重複';
 			}
 			if(handle =='F_EXCEED_SIZE'){
-				tip = '上传文件超过系统限制';
+				tip = '上傳檔案超過系統限制';
 			}
 			if(!tip){
 				tip = handle;
@@ -171,15 +171,15 @@
 			var html = '<div class="'+opts.id+'_thumb" name="_elist">';
 			html += '<div style="text-align:center;"><img src="'+rs.ico+'" width="100" height="100" /></div>';
 			html += '<div class="file-action" style="text-align:center;"><div class="button-group">';
-			html += '	<input type="button" value="预览" class="phpok-btn" onclick="obj_'+opts.id+'.preview(\''+rs.id+'\')" />';
-			html += '	<input type="button" value="删除" class="phpok-btn" onclick="obj_'+opts.id+'.del(\''+rs.id+'\')" /></div>';
+			html += '	<input type="button" value="預覽" class="phpok-btn" onclick="obj_'+opts.id+'.preview(\''+rs.id+'\')" />';
+			html += '	<input type="button" value="刪除" class="phpok-btn" onclick="obj_'+opts.id+'.del(\''+rs.id+'\')" /></div>';
 			html += '</div></div>';
 			html += '</div>';
 			return html;
 		};
 		this.update = function(id){
 			$.dialog.open(get_url('upload','editopen','id='+id),{
-				'title':'编辑附件信息',
+				'title':'編輯附件資訊',
 				'width':'700px',
 				'height':'400px',
 				'lock':true,
@@ -187,7 +187,7 @@
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
@@ -199,11 +199,11 @@
 		};
 		this.preview = function(id){
 			$.dialog.open(get_url('upload','preview','id='+id),{
-				'title':'预览附件信息',
+				'title':'預覽附件資訊',
 				'width':'700px',
 				'height':'400px',
 				'lock':true,
-				'okVal':'关闭',
+				'okVal':'關閉',
 				'ok':function(){}
 			});
 		};
@@ -212,13 +212,13 @@
 			if(!content || content == "undefined"){
 				return true;
 			}
-			//删除单个附件
+			//刪除單個附件
 			if(content == id){
 				$(self.id).val("");
 				$(self.id+"_list").fadeOut(function(){
 					$(this).html('');
 				});
-				//远程删除数据
+				//遠端刪除資料
 				self.remote_delete(id);
 				return true;
 			}
@@ -233,7 +233,7 @@
 			}
 			content = newlist.join(",");
 			$(self.id).val(content);
-			//远程删除数据
+			//遠端刪除資料
 			self.remote_delete(id);
 			self.showhtml();
 		};
@@ -291,12 +291,12 @@
 		};
 		$(this.id+"_submit").click(function(){
 			if($(this).hasClass('disabled')){
-				$.dialog.alert('正在上传中，已锁定');
+				$.dialog.alert('正在上傳中，已鎖定');
 				return false;
 			}
 			var f = $(self.id+"_progress .phpok-upfile-list").length;
 			if(f<1){
-				$.dialog.alert('请选择要上传的文件');
+				$.dialog.alert('請選擇要上傳的檔案');
 				return false;
 			}
 			if(self.upload_state == 'ready' || self.upload_state == 'paused'){

@@ -1,15 +1,15 @@
 /**
- * JS初始化库
+ * JS初始化庫
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年12月01日
 **/
 
 /**
- * 常规基础变量，也是系统用到的变量
+ * 常規基礎變數，也是系統用到的變數
  */
 var basefile = "{$basefile}";
 var ctrl_id = "{$sys.ctrl_id}";
@@ -23,17 +23,17 @@ var site_id = "{$site_id}";
 var session_name = '{func session_name}';
 var session_id = '{func session_id}';
 
-//是否启用电调
+//是否啟用電調
 var biz_status = '{$config.biz_status}';
 
 
 /**
- * 常规基础变量结束
+ * 常規基礎變數結束
  */
 
 
 /**
- * 加载语言包
+ * 載入語言包
  */
 var lang = new Array();
 
@@ -42,17 +42,17 @@ lang["{$key}"] = "{$value}";
 <!-- /loop -->
 
 /**
- * 结束语言包
+ * 結束語言包
  */
 
 /**
- * 开始加载Jquery，注意，系统会尝式智能检测加载的jquery版本
+ * 開始載入Jquery，注意，系統會嘗式智慧檢測載入的jquery版本
  */
 
 {$jquery}
 
 /**
- * 结束加载Jquery
+ * 結束載入Jquery
  */
 
 ;(function($){

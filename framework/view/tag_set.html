@@ -14,7 +14,7 @@ function save()
 		'dataType':'json',
 		'success':function(rs){
 			if(rs.status){
-				$.dialog.alert('标签提交成功',function(){
+				$.dialog.alert('標籤提交成功',function(){
 					opener.$.phpok.reload();
 				},'succeed');
 				return true;
@@ -30,7 +30,7 @@ function save()
 	<!-- if $id --><input type="hidden" name="id" id="id" value="{$id}" /><!-- /if -->
 <div class="table">
 	<div class="title">
-		{lang标签} <span class="note">请设置好相应的标签</span>
+		{lang標籤} <span class="note">請設定好相應的標籤</span>
 	</div>
 	<div class="content">
 		<input type="text" name="title" id="title" value="{$rs.title}" class="long" />
@@ -38,7 +38,7 @@ function save()
 </div>
 <div class="table">
 	<div class="title">
-		提示文字 <span class="note">自定义链接的提示文字，有助于SEO优化</span>
+		提示文字 <span class="note">自定義連結的提示文字，有助於SEO優化</span>
 	</div>
 	<div class="content">
 		<input type="text" name="alt" id="alt" value="{$rs.alt}" class="long" />
@@ -46,7 +46,7 @@ function save()
 </div>
 <div class="table">
 	<div class="title">
-		目标网址 <span class="note">这里主要是填写外部网址，如不需要，请留空</span>
+		目標網址 <span class="note">這裡主要是填寫外部網址，如不需要，請留空</span>
 	</div>
 	<div class="content">
 		<input type="text" name="url" id="url" value="{$rs.url}" class="long" />
@@ -54,18 +54,18 @@ function save()
 </div>
 <div class="table">
 	<div class="title">
-		打开方式 <span class="note">链接打开方式</span>
+		開啟方式 <span class="note">連結開啟方式</span>
 	</div>
 	<div class="content">
 		<ul class="layout">
-			<li><label><input type="radio" name="target" value="1"{if $rs.target} checked{/if} />新窗口</label></li>
-			<li><label><input type="radio" name="target" value="0"{if !$rs.target} checked{/if} />当前窗口</label></li>
+			<li><label><input type="radio" name="target" value="1"{if $rs.target} checked{/if} />新視窗</label></li>
+			<li><label><input type="radio" name="target" value="0"{if !$rs.target} checked{/if} />當前視窗</label></li>
 		</ul>
 	</div>
 </div>
 <div class="table">
 	<div class="title">
-		替换次数 <span class="note">请选择要替换的次数，默认为3次</span>
+		替換次數 <span class="note">請選擇要替換的次數，預設為3次</span>
 	</div>
 	<div class="content">
 		<ul class="layout">
@@ -79,7 +79,7 @@ function save()
 </div>
 <div class="table">
 	<div class="title">
-		全局属性 <span class="note">设置为是，表示系统为空时，会尝试以这些标签作为文章标签来使用</span>
+		全域性屬性 <span class="note">設定為是，表示系統為空時，會嘗試以這些標籤作為文章標籤來使用</span>
 	</div>
 	<div class="content">
 		<ul class="layout">

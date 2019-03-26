@@ -1,4 +1,4 @@
-<!-- php:$title = "修改邮箱 - 会员中心" --><!-- include tpl=head title=$title -->
+<!-- php:$title = "修改郵箱 - 會員中心" --><!-- include tpl=head title=$title -->
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#userinfo_email").submit(function(){
@@ -8,7 +8,7 @@ $(document).ready(function(){
 			'url':api_url('usercp','email'),
 			'success':function(rs){
 				if(rs.status == 'ok'){
-					$.dialog.alert("您的邮箱更新成功",function(){
+					$.dialog.alert("您的郵箱更新成功",function(){
 						$.phpok.reload();
 					},'succeed');
 				}else{
@@ -30,30 +30,30 @@ function update_send_email_loading()
 {
 	maxtime--;
 	if(maxtime < 1){
-		$("#email_send_status").val('发送验证码');
+		$("#email_send_status").val('傳送驗證碼');
 		email_send_lock = false;
 		maxtime = 60;
 		window.clearInterval(win_time_out);
 		return true;
 	}
-	var tips = "验证码已发送("+maxtime+")";
+	var tips = "驗證碼已傳送("+maxtime+")";
 	$("#email_send_status").val(tips);
 }
 
 function send_email()
 {
 	if(email_send_lock){
-		$.dialog.alert('验证码已发送，请一分钟后再执行');
+		$.dialog.alert('驗證碼已傳送，請一分鐘後再執行');
 		return false;
 	}
 	var url = api_url('usercp','emailcode');
 	var email = $("#email").val();
 	if(!email){
-		$.dialog.alert('邮箱不能为空');
+		$.dialog.alert('郵箱不能為空');
 		return false;
 	}
 	url += "&email="+email;
-	$.dialog.tips("正在执行中，请稍候…");
+	$.dialog.tips("正在執行中，請稍候…");
 	update_send_email_loading();
 	$.ajax({
 		'url':url,
@@ -70,7 +70,7 @@ function send_email()
 				win_time_out = setInterval("update_send_email_loading()",1000);
 			}else{
 				$.dialog.alert(rs.content);
-				$("#email_send_status").val('发送验证码');
+				$("#email_send_status").val('傳送驗證碼');
 			}
 		}
 	});
@@ -82,29 +82,29 @@ function send_email()
 	<div class="left"><!-- include tpl=block/usercp_nav --></div>
 	<div class="right am-panel-group">
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">邮箱修改</div>
+			<div class="am-panel-hd">郵箱修改</div>
 			<div class="am-panel-bd">
 				<form class="am-form am-form-horizontal" method="post" id="userinfo_email">
 				<div class="am-form-group">
-					<label for="pass" class="am-u-sm-2 am-form-label">会员密码</label>
+					<label for="pass" class="am-u-sm-2 am-form-label">會員密碼</label>
 					<div class="am-u-sm-10"><input type="password" name="pass" id="pass" /></div>
 				</div>
 				<!-- if $rs.email -->
 				<div class="am-form-group">
-					<label for="oldemail" class="am-u-sm-2 am-form-label">原邮箱</label>
+					<label for="oldemail" class="am-u-sm-2 am-form-label">原郵箱</label>
 					<div class="am-u-sm-10"><input type="text" name="oldemail" id="oldemail" value="{$rs.email}" disabled /></div>
 				</div>
 				<!-- /if -->
 				<div class="am-form-group">
-					<label for="email" class="am-u-sm-2 am-form-label">新邮箱</label>
+					<label for="email" class="am-u-sm-2 am-form-label">新郵箱</label>
 					<div class="am-u-sm-{$sendemail ? 8 : 10}"><input type="text" name="email" id="email" /></div>
 					<!-- if $sendemail -->
-					<div class="am-u-sm-2"><input type="button" value="发送验证码" onclick="send_email()" class="am-btn am-btn-default" id="email_send_status" /></div>
+					<div class="am-u-sm-2"><input type="button" value="傳送驗證碼" onclick="send_email()" class="am-btn am-btn-default" id="email_send_status" /></div>
 					<!-- /if -->
 				</div>
 				<!-- if $sendemail -->
 				<div class="am-form-group">
-					<label for="chkcode" class="am-u-sm-2 am-form-label">验证码</label>
+					<label for="chkcode" class="am-u-sm-2 am-form-label">驗證碼</label>
 					<div class="am-u-sm-10"><input type="text" name="chkcode" id="chkcode" /></div>
 				</div>
 				<!-- /if -->
@@ -116,11 +116,11 @@ function send_email()
 			</div>
 		</div>
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">友情说明</div>
+			<div class="am-panel-hd">友情說明</div>
 			<div class="am-panel-bd">
 				<ul class="tip">
-					<li>邮箱修改需要您提供会员密码认证</li>
-					<li>请确填写有效的邮箱，国内用户建议使用126邮箱或QQ邮箱</li>
+					<li>郵箱修改需要您提供會員密碼認證</li>
+					<li>請確填寫有效的郵箱，國內使用者建議使用126郵箱或QQ郵箱</li>
 				</ul>
 			</div>
 		</div>

@@ -1,10 +1,10 @@
 /**
- * 后台会员涉及到的地址
+ * 後臺會員涉及到的地址
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年05月27日
 **/
 ;(function($){
@@ -13,7 +13,7 @@
 		{
 			var url = get_url('address','open','type=user_id&keywords='+id);
 			$.dialog.open(url,{
-				'title':p_lang('会员地址'),
+				'title':p_lang('會員地址'),
 				'width':'800px',
 				'height':'500px',
 				'lock':true
@@ -23,14 +23,14 @@
 		{
 			var url = get_url('user','show_setting');
 			$.dialog.open(url,{
-				'title':p_lang('会员字段显示设置'),
+				'title':p_lang('會員欄位顯示設定'),
 				'width':'600px',
 				'height':'400px',
 				'lock':true,
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
@@ -40,7 +40,7 @@
 		},
 
 		/**
-		 * 会员字段快速添加
+		 * 會員欄位快速新增
 		**/
 		field_quick_add:function(id)
 		{
@@ -56,11 +56,11 @@
 		},
 
 		/**
-		 * 会员字段删除
+		 * 會員欄位刪除
 		**/
 		field_delete:function(id,title)
 		{
-			$.dialog.confirm(p_lang('确定要删除字段 {title} 吗？<br>删除后相应的字段内容也会被删除，不能恢复','<span class="red">'+title+'</span>'),function(){
+			$.dialog.confirm(p_lang('確定要刪除欄位 {title} 嗎？<br>刪除後相應的欄位內容也會被刪除，不能恢復','<span class="red">'+title+'</span>'),function(){
 				$.phpok.json( get_url("user","field_delete","id="+id),function(rs){
 					if(rs.status){
 						$.phpok.reload();
@@ -73,12 +73,12 @@
 		},
 
 		/**
-		 * 会员字段编辑
+		 * 會員欄位編輯
 		**/
 		field_edit:function(id)
 		{
 			$.dialog.open(get_url("user","field_edit","id="+id),{
-				"title" : p_lang('编辑字段属性'),
+				"title" : p_lang('編輯欄位屬性'),
 				"width" : "700px",
 				"height" : "80%",
 				"resize" : false,
@@ -86,24 +86,24 @@
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.$.admin_user.field_save();
 					return false;
 				},
-				'okVal':p_lang('保存'),
+				'okVal':p_lang('儲存'),
 				'cancel':true
 			});
 		},
 
 		/**
-		 * 会员字段添加
+		 * 會員欄位新增
 		**/
 		field_add:function()
 		{
 			$.dialog.open(get_url("user","field_edit"),{
-				"title" : p_lang('添加会员字段'),
+				"title" : p_lang('新增會員欄位'),
 				"width" : "700px",
 				"height" : "80%",
 				"resize" : false,
@@ -111,19 +111,19 @@
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.$.admin_user.field_save();
 					return false;
 				},
-				'okVal':p_lang('保存'),
+				'okVal':p_lang('儲存'),
 				'cancel':true
 			});
 		},
 
 		/**
-		 * 保存扩展字段信息
+		 * 儲存擴充套件欄位資訊
 		**/
 		field_save:function()
 		{
@@ -133,14 +133,14 @@
 				}
 			}
 			var opener = $.dialog.opener;
-			var obj = $.dialog.tips(p_lang('正在保存数据…'),100);
+			var obj = $.dialog.tips(p_lang('正在儲存資料…'),100);
 			$("#post_save").ajaxSubmit({
 				'url':get_url('user','field_edit_save'),
 				'type':'post',
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						obj.content(p_lang('数据保存成功'));
+						obj.content(p_lang('資料儲存成功'));
 						opener.$.phpok.reload();
 						return true;
 					}

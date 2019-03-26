@@ -1,5 +1,5 @@
 <!-- php:$cssfile = "css/style.css,artdialog.css,css/usercp.css" -->
-<!-- head title=填写您的银行汇款信息 css=$cssfile extjs="jquery.artdialog.js" js="js/global.js" html5=true -->
+<!-- head title=填寫您的銀行匯款資訊 css=$cssfile extjs="jquery.artdialog.js" js="js/global.js" html5=true -->
 <body>
 <header style="width:auto;min-width:980px;border-bottom:1px solid #ccc;margin-bottom:10px;">
 	<div style="width:980px;margin:0 auto;">
@@ -7,7 +7,7 @@
 			<div class="logo"><a href="{$sys.url}" title="{$config.title}"><img src="{$config.logo}" alt="{$config.title}" /></a></div>
 			<div class="right">
 				<div style="line-height:60px;margin-right:10px;">
-				<a href="{url ctrl=order func=info id=$rs.sn passwd=$rs.passwd/}">返回订单信息</a>
+				<a href="{url ctrl=order func=info id=$rs.sn passwd=$rs.passwd/}">返回訂單資訊</a>
 				</div>
 			</div>
 		</div>
@@ -19,21 +19,21 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#book_post").submit(function(){
-		//提交表单
+		//提交表單
 		if(!$('#title').val()){
-			$.dialog.alert("订单编号不能为空");
+			$.dialog.alert("訂單編號不能為空");
 			return false;
 		}
 		if(!$('#bankname').val()){
-			$.dialog.alert('汇款银行不能为空');
+			$.dialog.alert('匯款銀行不能為空');
 			return false;
 		}
 		if(!$('#fullname').val()){
-			$.dialog.alert('汇款人姓名不能为空');
+			$.dialog.alert('匯款人姓名不能為空');
 			return false;
 		}
 		if(!$('#mobile').val()){
-			$.dialog.alert('汇款人手机号不能为空');
+			$.dialog.alert('匯款人手機號不能為空');
 			return false;
 		}
 		$(this).ajaxSubmit({
@@ -42,7 +42,7 @@ $(document).ready(function(){
 			'dataType':'json',
 			'success':function(rs){
 				if(rs.status == 'ok'){
-					$.dialog.alert('您的汇款信息已经提交，请耐心等候管理员审核，感谢您的提交',function(){
+					$.dialog.alert('您的匯款資訊已經提交，請耐心等候管理員稽核，感謝您的提交',function(){
 						$.phpok.go('{url ctrl=order func=info sn=$order.sn/}');
 					},'succeed');
 				}else{
@@ -60,7 +60,7 @@ $(document).ready(function(){
 </script>
 <div class="main">
 	<div class="pfw book mb10">
-		<h3>填写银行汇款信息</h3>
+		<h3>填寫銀行匯款資訊</h3>
 		<div class="content mess">
 			<form method="post" id="book_post">
 			<input type="hidden" name="id" id="id" value="{$project.identifier}" />
@@ -74,7 +74,7 @@ $(document).ready(function(){
 			<!-- /loop -->
 			<!-- if $sys.is_vcode && function_exists("imagecreate") -->
 			<tr>
-				<td align="right" valign="top">验证码：</td>
+				<td align="right" valign="top">驗證碼：</td>
 				<td class="td">
 					<table cellpadding="0" cellspacing="0" width="180px">
 					<tr>
@@ -85,7 +85,7 @@ $(document).ready(function(){
 					<script type="text/javascript">
 					$(document).ready(function(){
 						$("#update_vcode").phpok_vcode();
-						//更新点击时操作
+						//更新點選時操作
 						$("#update_vcode").click(function(){
 							$(this).phpok_vcode();
 						});

@@ -1,6 +1,6 @@
 /***********************************************************
 	Filename: {phpok}/js/cate.js
-	Note	: 栏目管理
+	Note	: 欄目管理
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -19,13 +19,13 @@ function cate_ext()
 	$("#ext_html").html(msg);
 }
 
-// 检测存储的表单
+// 檢測儲存的表單
 function cate_check()
 {
 	var title = $("#title").val();
 	if(!title)
 	{
-		$.dialog.alert("分类名称不能为空！");
+		$.dialog.alert("分類名稱不能為空！");
 		return false;
 	}
 	var id = $("#id").val();
@@ -37,12 +37,12 @@ function cate_check()
 	var identifier = $("#identifier").val();
 	if(!identifier || identifier == "undefined")
 	{
-		$.dialog.alert("标识串不能为空！");
+		$.dialog.alert("標識串不能為空！");
 		return false;
 	}
 	if(!$.str.identifier(identifier))
 	{
-		$.dialog.alert("标识不符合系统要求，要求仅支持：字母、数字或下划线（中划线）且首字必须为字母");
+		$.dialog.alert("標識不符合系統要求，要求僅支援：字母、數字或下劃線（中劃線）且首字必須為字母");
 		return false;
 	}
 	url += "&sign="+$.str.encode(identifier);

@@ -1,20 +1,20 @@
-<!-- include tpl=head title=申请友情链接 -->
+<!-- include tpl=head title=申請友情連結 -->
 <script type="text/javascript">
 $(document).ready(function(){
 	var is_vcode = '<!-- if $sys.is_vcode && function_exists("imagecreate") -->true<!-- else -->false<!-- /if -->';
 	$("#post_submit").submit(function(){
 		if(!$("#title").val()){
-			$.dialog.alert('{$page_rs.alias_title ? $page_rs.alias_title : "主题"}不能为空');
+			$.dialog.alert('{$page_rs.alias_title ? $page_rs.alias_title : "主題"}不能為空');
 			return false;
 		}
 		if(!$("#link").val()){
-			$.dialog.alert('链接不能为空');
+			$.dialog.alert('連結不能為空');
 			return false;
 		}
 		if(is_vcode == 'true'){
 			var chkcode = $("#_chkcode").val();
 			if(!chkcode){
-				$.dialog.alert('验证码不能为空',function(){
+				$.dialog.alert('驗證碼不能為空',function(){
 					$("#_vcode").phpok_vcode();
 				});
 				return false;
@@ -27,7 +27,7 @@ $(document).ready(function(){
 			'dataType':'json',
 			'success':function(rs){
 				if(rs.status == 'ok'){
-					$.dialog.alert('您的申请已经提交，我们工作人员会尽快审核',true,'succeed');
+					$.dialog.alert('您的申請已經提交，我們工作人員會盡快稽核',true,'succeed');
 					return true;
 				}
 				$.dialog.alert(rs.content,function(){
@@ -53,15 +53,15 @@ $(document).ready(function(){
 			<input type="hidden" name="cate_id" id="cate_id" value="{$cate_rs.id}" />
 			<!-- /if -->
 			<div class="am-g am-form-group">
-				<label class="am-u-sm-2" for="title">{$page_rs.alias_title ? $page_rs.alias_title : '主题'}</label>
+				<label class="am-u-sm-2" for="title">{$page_rs.alias_title ? $page_rs.alias_title : '主題'}</label>
 				<div class="am-u-sm-10"><input type="text" name="title" id="title" /></div>
 			</div>
 			<!-- if $catelist && !$cate_rs -->
 			<div class="am-g am-form-group">
-				<label class="am-u-sm-2" for="title">分类</label>
+				<label class="am-u-sm-2" for="title">分類</label>
 				<div class="am-u-sm-10">
 					<select name="cate_id" id="cate_id">
-						<option value="">请选择分类……</option>
+						<option value="">請選擇分類……</option>
 						<!-- loop from=$catelist key=$key value=$value id=$tmpid -->
 						<option value="{$value.id}"{if $cate_rs.id == $value.id} selected{/if}>{$value._space}{$value.title}</option>
 						<!-- /loop -->
@@ -78,13 +78,13 @@ $(document).ready(function(){
 			<!-- /loop -->
 			<!-- if $is_vcode -->
 			<div class="am-g am-form-group">
-				<label class="am-u-sm-2" for="_chkcode">验证码：</label>
+				<label class="am-u-sm-2" for="_chkcode">驗證碼：</label>
 				<div class="am-u-sm-4"><input type="text" name="_chkcode" id="_chkcode" class="vcode" /></div>
 				<div class="am-u-sm-6"><img src="" border="0" align="absmiddle" id="_vcode" class="hand"></div>
 				<script type="text/javascript">
 				$(document).ready(function(){
 					$("#_vcode").phpok_vcode();
-					//更新点击时操作
+					//更新點選時操作
 					$("#_vcode").click(function(){
 						$(this).phpok_vcode();
 					});

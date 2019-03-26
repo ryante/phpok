@@ -1,10 +1,10 @@
 /**
- * 附件资料管理
+ * 附件資料管理
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年12月18日
 **/
 ;(function($){
@@ -12,13 +12,13 @@
 		edit_local:function(){
 			var url = get_url('res','setting_remote_to_local');
 			$.dialog.open(url,{
-				'title':p_lang('编辑器附件本地化设置'),
+				'title':p_lang('編輯器附件本地化設定'),
 				'width':'600px',
 				'height':'500px',
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.$.admin_res.edit_local_save();
@@ -27,7 +27,7 @@
 			});
 		},
 		/**
-		 * 配置保存
+		 * 配置儲存
 		**/
 		edit_local_save:function()
 		{
@@ -63,10 +63,10 @@
 				return true;
 			}
 			var url = get_url("res","update_pl") + "&id="+$.str.encode(id);
-			top.$.win(p_lang('附件批量更新中，请不要关掉这个页面'),url,{'is_max':true,'win_max':false,'width':600,'height':400});
+			top.$.win(p_lang('附件批量更新中，請不要關掉這個頁面'),url,{'is_max':true,'win_max':false,'width':600,'height':400});
 		},
 		/**
-		 * 批量删除指定的附件
+		 * 批量刪除指定的附件
 		**/
 		pl_delete:function()
 		{
@@ -75,11 +75,11 @@
 				$.dialog.alert(p_lang('未指定要操作的附件'));
 				return false;
 			}
-			$.dialog.confirm(p_lang('确定要删除选中的附件吗？删除后是不可恢复的'),function(){
+			$.dialog.confirm(p_lang('確定要刪除選中的附件嗎？刪除後是不可恢復的'),function(){
 				var url = get_url("res","delete_pl") + "&id="+$.str.encode(id);
 				$.phpok.json(url,function(rs){
 					if(rs.status == 'ok'){
-						$.dialog.tips(p_lang('批量删除附件操作成功'),function(){
+						$.dialog.tips(p_lang('批量刪除附件操作成功'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;
@@ -90,15 +90,15 @@
 			});
 		},
 		/**
-		 * 文件删除
+		 * 檔案刪除
 		**/
 		file_delete:function(id)
 		{
-			$.dialog.confirm(p_lang('确定要删除此附件吗？删除后不能恢复'),function(){
+			$.dialog.confirm(p_lang('確定要刪除此附件嗎？刪除後不能恢復'),function(){
 				url = get_url('upload','delete','id='+id);
 				$.phpok.json(url,function(rs){
 					if(rs.status == 'ok'){
-						$.dialog.tips(p_lang('附件删除成功'),function(){
+						$.dialog.tips(p_lang('附件刪除成功'),function(){
 							$("#thumb_"+id).remove();
 						}).lock();
 						return true;
@@ -109,64 +109,64 @@
 			});
 		},
 		/**
-		 * 附件预览
+		 * 附件預覽
 		**/
 		preview_attr:function(id)
 		{
 			$.dialog.open(get_url('upload','preview','id='+id),{
-				'title':p_lang('预览附件信息'),
+				'title':p_lang('預覽附件資訊'),
 				'width':'700px',
 				'height':'400px',
 				'lock':false,
 				'button': [{
-					'name': p_lang('下载原文件'),
+					'name': p_lang('下載原檔案'),
 					'callback': function () {
 						$.phpok.open(get_url('res','download','id='+id));
 						return false;
 					},
 				}],
-				'okVal':p_lang('关闭'),
+				'okVal':p_lang('關閉'),
 				'ok':true
 			});
 		},
 		/**
-		 * 更新全部附件信息
+		 * 更新全部附件資訊
 		**/
 		update_pl_pictures:function()
 		{
-			$.dialog.prompt(p_lang('请输入要开始更新的图片数字ID<br/>默认表示更新全部图片（会占用比较多的时间）'),function(val){
+			$.dialog.prompt(p_lang('請輸入要開始更新的圖片數字ID<br/>預設表示更新全部圖片（會佔用比較多的時間）'),function(val){
 				var url = get_url("res","update_pl","id=all");
 				if(parseInt(val)>0){
 					url +="&start_id="+val;
 				}
 				top.$.win(p_lang('附件批量更新中'),url,{'is_max':true,'win_max':false,'width':600,'height':400});
-			},0).title(p_lang('批量更新图片规格'));
+			},0).title(p_lang('批量更新圖片規格'));
 		},
 		/**
-		 * 添加附件
+		 * 新增附件
 		**/
 		add_file:function()
 		{
 			$.dialog.open(get_url('res','add'),{
-				'title':p_lang('添加附件信息'),
+				'title':p_lang('新增附件資訊'),
 				'width':'700px',
 				'height':'400px',
 				'lock':true,
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert(p_lang('iframe还没加载完毕呢'));
+						alert(p_lang('iframe還沒載入完畢呢'));
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
-				'okVal':p_lang('执行附件上传'),
-				'cancelVal':p_lang('取消上传并关闭'),
+				'okVal':p_lang('執行附件上傳'),
+				'cancelVal':p_lang('取消上傳並關閉'),
 				'cancel':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert(p_lang('iframe还没加载完毕呢'));
+						alert(p_lang('iframe還沒載入完畢呢'));
 						return false;
 					};
 					iframe.cancel();
@@ -175,12 +175,12 @@
 			});
 		},
 		/**
-		 * 编辑附件操作
+		 * 編輯附件操作
 		**/
 		modify:function(id)
 		{
 			$.dialog.open(get_url('res','set','id='+id),{
-				'title':p_lang('编辑附件信息'),
+				'title':p_lang('編輯附件資訊'),
 				'width':'700px',
 				'height':'400px',
 				'lock':true,
@@ -188,7 +188,7 @@
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert(p_lang('iframe还没加载完毕呢'));
+						alert(p_lang('iframe還沒載入完畢呢'));
 						return false;
 					};
 					iframe.save();
@@ -199,7 +199,7 @@
 			});
 		},
 		/**
-		 * 移动分类
+		 * 移動分類
 		**/
 		move_cate:function()
 		{
@@ -209,20 +209,20 @@
 				return false;
 			}
 			$.dialog({
-				'title':p_lang('移动分类，请选择目标移动分类'),
+				'title':p_lang('移動分類，請選擇目標移動分類'),
 				'content':document.getElementById('move_cate_html'),
 				'lock':true,
 				'width':'500px',
 				'height':'100px',
 				'cancel':function(){},
-				'cancelVal':p_lang('取消移动'),
-				'okVal':p_lang('执行'),
+				'cancelVal':p_lang('取消移動'),
+				'okVal':p_lang('執行'),
 				'ok':function(){
 					var newcate = $("input[name=newcate]:checked").val();
 					var url = get_url('res','movecate')+"&tid="+$.str.encode(id)+"&newcate="+newcate;
 					$.phpok.json(url,function(){
 						$.input.checkbox_none('.checkbox input[type=checkbox]');
-						$.dialog.tips(p_lang('分类移动成功'));
+						$.dialog.tips(p_lang('分類移動成功'));
 						return true;
 					});
 				}
@@ -230,17 +230,17 @@
 		},
 		zipit:function(id,ext)
 		{
-			$.dialog.confirm(p_lang('确定初始化当前文件原图大小吗？'),function(){
+			$.dialog.confirm(p_lang('確定初始化當前檔案原圖大小嗎？'),function(){
 				var width = $("#resize").val();
 				var url = get_url('res','resize','id='+id+'&width='+width);
 				if(ext == 'jpg' || ext == 'jpeg'){
 					url += "&ptype="+$("#ptype").val();
 				}
-				var tip = $.dialog.tips(p_lang('正在初始化图片，请稍候…'));
+				var tip = $.dialog.tips(p_lang('正在初始化圖片，請稍候…'));
 				$.phpok.json(url,function(data){
 					tip.close();
 					if(data.status){
-						$.dialog.tips('图片初始化成功');
+						$.dialog.tips('圖片初始化成功');
 						$.phpok.reload();
 						return true;
 					}

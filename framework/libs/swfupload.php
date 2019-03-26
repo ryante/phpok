@@ -76,7 +76,7 @@ class swfupload_lib
 			$html .= ' onclick="'.$id.'_swfu.cancelQueue();" disabled /></td>';
 		}
 		$html .= '</tr>';
-		# 顯示上傳程序
+		# 顯示上傳程式
 		$html .= '<tr><td colspan="2"><div id="'.$id.'_progress"></div></td></tr>';
 		$html .= '</table>';
 		$html .= "\n";

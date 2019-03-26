@@ -379,7 +379,7 @@ class ext_lib
 		return array("info"=>$rs["content"],"_admin"=>$_admin);
 	}
 	
-	//格式化複選框
+	//格式化核取方塊
 	function _format_checkbox($rs)
 	{
 		if(!$rs || !$rs["content"]) return false;

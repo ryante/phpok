@@ -4,24 +4,24 @@
 <div class="layui-card">
 	<div class="layui-card-body">
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang分类名称}</label>
+			<label class="layui-form-label">{lang分類名稱}</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" name="title" id="title" value="{$rs.title}" class="layui-input">
 			</div>
-			<div class="layui-form-mid layui-word-aux">{lang请设置附件分类名称，如图片库，影音库等，以方便管理}</div>
+			<div class="layui-form-mid layui-word-aux">{lang請設定附件分類名稱，如圖片庫，影音庫等，以方便管理}</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang存储目录}</label>
+			<label class="layui-form-label">{lang儲存目錄}</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" name="root" id="root" value="{$rs.root}" class="layui-input">
 			</div>
-			<div class="layui-form-mid layui-word-aux">{lang相对于程序的根目而设，建议设置在res/之下的目录}</div>
+			<div class="layui-form-mid layui-word-aux">{lang相對於程式的根目而設，建議設定在res/之下的目錄}</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang子文件夹}</label>
+			<label class="layui-form-label">{lang子資料夾}</label>
 			<div class="layui-input-inline default-auto">
 				<select name="folder">
-					<option value="">{lang不创建文件夹}</option>
+					<option value="">{lang不建立資料夾}</option>
 					<option value="Ym/d/"{if $rs.folder == 'Ym/d/'}selected{/if}>{lang年月/日/，示例} {func date Ym/d/}</option>
 					<option value="Y/m/d/"{if $rs.folder == 'Y/m/d/'}selected{/if}>{lang年/月/日/，示例} {func date Y/m/d/}</option>
 					<option value="Ymd/"{if $rs.folder == 'Ymd/'}selected{/if}>{lang年月日/，示例} {func date Ymd/}</option>
@@ -29,91 +29,91 @@
 					<option value="Y/"{if $rs.folder == 'Y/'}selected{/if}>{lang年/，示例} {func date Y/}</option>
 				</select>
 			</div>
-			<div class="layui-form-mid layui-word-aux">{lang设置是否创建子文件夹}</div>
+			<div class="layui-form-mid layui-word-aux">{lang設定是否建立子資料夾}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang存储接口}
+				{lang儲存介面}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<select name="etype" id="etype" lay-filter="etype">
-					<option value="0">{lang本地存储}</option>
+					<option value="0">{lang本地儲存}</option>
 					<!-- loop from=$osslist key=$key value=$value id=$tmpid -->
 					<option value="{$value.id}"{if $value.id == $rs.etype} selected{/if}>{$value.title}</option>
 					<!-- /loop -->
 				</select>
 			</div>
 			<div class="layui-form-mid">
-				{lang启用云存储后，本地不保存资源}
+				{lang啟用雲端儲存後，本地不儲存資源}
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang上传方式}
+				{lang上傳方式}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<select id="upload_binary" name="upload_binary">
-					<option value="0">{lang传统上传方式}</option>
-					<option value="1"{if $rs.upload_binary} selected{/if}>{lang使用二进制上传}</option>
+					<option value="0">{lang傳統上傳方式}</option>
+					<option value="1"{if $rs.upload_binary} selected{/if}>{lang使用二進位制上傳}</option>
 				</select>
 			</div>
 			<div class="layui-form-mid layui-word-aux">
-				{lang仅限本地存储，上传方式才是有效的}
+				{lang僅限本地儲存，上傳方式才是有效的}
 			</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang是否默认}</label>
+			<label class="layui-form-label">{lang是否預設}</label>
 			<div class="layui-input-inline auto">
 				<input type="checkbox" name="is_default" id="is_default" lay-skin="switch" value="1" {if $rs.is_default} checked{/if}>
 			</div>
-			<div class="layui-form-mid layui-word-aux">{lang当前端或未指定附件分类时，将使用这个默认来读取。整个附件分类管理中仅限支持一个}</div>
+			<div class="layui-form-mid layui-word-aux">{lang當前端或未指定附件分類時，將使用這個預設來讀取。整個附件分類管理中僅限支援一個}</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang附件类型}</label>
+			<label class="layui-form-label">{lang附件型別}</label>
 			<div class="layui-input-inline default-auto">
 				<input type="text" id="filetypes" name="filetypes" value="{$rs.filetypes}" class="layui-input">
 			</div>
-			<div class="layui-form-mid layui-word-aux">{lang多种附件类型用英文逗号隔开，如jpg,gif,png，以此类推}</div>
+			<div class="layui-form-mid layui-word-aux">{lang多種附件型別用英文逗號隔開，如jpg,gif,png，以此類推}</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang类型说明}</label>
+			<label class="layui-form-label">{lang型別說明}</label>
 			<div class="layui-input-inline auto">
 				<input type="text" id="typeinfo" name="typeinfo" value="{$rs.typeinfo}" class="layui-input">
 			</div>
-			<div class="layui-form-mid layui-word-aux">{lang描述附件类型信息，如jpg,gif,png，可以描述为图片，rar,zip等可以描述为压缩文件}</div>
+			<div class="layui-form-mid layui-word-aux">{lang描述附件型別資訊，如jpg,gif,png，可以描述為圖片，rar,zip等可以描述為壓縮檔案}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">{lang大小限制}</label>
 			<div class="layui-input-inline short">
 				<input type="text" id="filemax" name="filemax" value="{$rs.filemax}" class="layui-input">
 			</div>
-			<div class="layui-form-mid layui-word-aux">{lang设置单个文件大小，单位是KB，只需填写数值，本地存储建议不超过系统限制} <span class="layui-bg-red">{func get_cfg_var upload_max_filesize}B</span></div>
+			<div class="layui-form-mid layui-word-aux">{lang設定單個檔案大小，單位是KB，只需填寫數值，本地儲存建議不超過系統限制} <span class="layui-bg-red">{func get_cfg_var upload_max_filesize}B</span></div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang图片压缩}
+				{lang圖片壓縮}
 			</label>
 			<div class="layui-input-inline default-auto">
 				<select id="compress" name="compress">
-					<option value="0">{lang不压缩}</option>
-					<option value="500">{lang压缩图片仅当宽或高不小于} 500px</option>
-					<option value="600">{lang压缩图片仅当宽或高不小于} 600px</option>
-					<option value="700">{lang压缩图片仅当宽或高不小于} 700px</option>
-					<option value="800">{lang压缩图片仅当宽或高不小于} 800px</option>
-					<option value="900">{lang压缩图片仅当宽或高不小于} 900px</option>
-					<option value="1000">{lang压缩图片仅当宽或高不小于} 1000px</option>
-					<option value="1100">{lang压缩图片仅当宽或高不小于} 1100px</option>
-					<option value="1200">{lang压缩图片仅当宽或高不小于} 1200px</option>
-					<option value="1300">{lang压缩图片仅当宽或高不小于} 1300px</option>
-					<option value="1400">{lang压缩图片仅当宽或高不小于} 1400px</option>
-					<option value="1500">{lang压缩图片仅当宽或高不小于} 1500px</option>
-					<option value="1600">{lang压缩图片仅当宽或高不小于} 1600px</option>
-					<option value="1700">{lang压缩图片仅当宽或高不小于} 1700px</option>
-					<option value="1800">{lang压缩图片仅当宽或高不小于} 1800px</option>
+					<option value="0">{lang不壓縮}</option>
+					<option value="500">{lang壓縮圖片僅當寬或高不小於} 500px</option>
+					<option value="600">{lang壓縮圖片僅當寬或高不小於} 600px</option>
+					<option value="700">{lang壓縮圖片僅當寬或高不小於} 700px</option>
+					<option value="800">{lang壓縮圖片僅當寬或高不小於} 800px</option>
+					<option value="900">{lang壓縮圖片僅當寬或高不小於} 900px</option>
+					<option value="1000">{lang壓縮圖片僅當寬或高不小於} 1000px</option>
+					<option value="1100">{lang壓縮圖片僅當寬或高不小於} 1100px</option>
+					<option value="1200">{lang壓縮圖片僅當寬或高不小於} 1200px</option>
+					<option value="1300">{lang壓縮圖片僅當寬或高不小於} 1300px</option>
+					<option value="1400">{lang壓縮圖片僅當寬或高不小於} 1400px</option>
+					<option value="1500">{lang壓縮圖片僅當寬或高不小於} 1500px</option>
+					<option value="1600">{lang壓縮圖片僅當寬或高不小於} 1600px</option>
+					<option value="1700">{lang壓縮圖片僅當寬或高不小於} 1700px</option>
+					<option value="1800">{lang壓縮圖片僅當寬或高不小於} 1800px</option>
 				</select>
 			</div>
 			<div class="layui-form-mid layui-word-aux">
-				{lang仅限有图片时才执行，注意，这里压缩的是原图}
+				{lang僅限有圖片時才執行，注意，這裡壓縮的是原圖}
 			</div>
 		</div>
 
@@ -121,12 +121,12 @@
 		
 		
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang图片方案}</label>
+			<label class="layui-form-label">{lang圖片方案}</label>
 			<div class="layui-input-inline auto">
 				<input type="radio" name="gdall" title="{lang全部使用}" lay-filter="gdall" value="1"{if $rs.gdall} checked{/if} />
-				<input type="radio" name="gdall" title="{lang自定义使用}" lay-filter="gdall" value="0"{if !$rs.gdall} checked{/if} />
+				<input type="radio" name="gdall" title="{lang自定義使用}" lay-filter="gdall" value="0"{if !$rs.gdall} checked{/if} />
 			</div>
-			<div class="layui-form-mid layui-word-aux">{lang即上传到该分类下的图片，是否使用GD配置生成特定的图片规格}</div>
+			<div class="layui-form-mid layui-word-aux">{lang即上傳到該分類下的圖片，是否使用GD配置生成特定的圖片規格}</div>
 		</div>
 		<div class="layui-form-item" id="gdsetting">
 			<label class="layui-form-label">{lang方案}</label>
@@ -138,8 +138,8 @@
 					</colgroup>
 					<thead>
 					<tr>
-						<th>{lang标识}</th>
-						<th>{lang规格}</th>
+						<th>{lang標識}</th>
+						<th>{lang規格}</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -148,8 +148,8 @@
 						<td><input type="checkbox" name="gdtypes[]" id="gdtypes{$value.id}" title="{$value.identifier}" value="{$value.id}"{if in_array($value.id,$rs.gdtypes)} checked{/if} /> </td>
 						<td>
 							<label for="gdtypes{$value.id}">
-								<!-- if $value.width -->{$value.width}<!-- else -->{lang自动判定}<!-- /if --> x 
-								<!-- if $value.height -->{$value.height}<!-- else -->{lang自动判定}<!-- /if -->
+								<!-- if $value.width -->{$value.width}<!-- else -->{lang自動判定}<!-- /if --> x 
+								<!-- if $value.height -->{$value.height}<!-- else -->{lang自動判定}<!-- /if -->
 							</label>
 						</td>
 					</tr>
@@ -157,15 +157,15 @@
 					</tbody>
 				</table>
 			</div>
-			<div class="layui-form-mid layui-word-aux">{lang全部不选表示不使用GD方案}</div>
+			<div class="layui-form-mid layui-word-aux">{lang全部不選表示不使用GD方案}</div>
 		</div>
 		<div class="layui-form-item">
-			<label class="layui-form-label">{lang后台缩略图}</label>
+			<label class="layui-form-label">{lang後臺縮圖}</label>
 			<div class="layui-input-inline auto">
-				<input type="radio" name="ico" title="{lang启用}" value="1"{if $rs.ico} checked{/if} />
+				<input type="radio" name="ico" title="{lang啟用}" value="1"{if $rs.ico} checked{/if} />
 				<input type="radio" name="ico" title="{lang禁用}" value="0"{if !$rs.ico} checked{/if} />
 			</div>
-			<div class="layui-form-mid layui-word-aux">{lang即上传后，自动生成一张后台缩略图，方便后台预览，禁用后将直接使用原图}</div>
+			<div class="layui-form-mid layui-word-aux">{lang即上傳後，自動生成一張後臺縮圖，方便後臺預覽，禁用後將直接使用原圖}</div>
 		</div>
 	</div>
 </div>
@@ -173,7 +173,7 @@
 <div class="submit-info">
 	<div class="layui-container center">
 		<input type="submit" value="{lang提交}" class="layui-btn layui-btn-lg layui-btn-danger" />
-		<input type="button" value="{lang取消关闭}" class="layui-btn layui-btn-lg layui-btn-primary" onclick="$.admin.close()" />
+		<input type="button" value="{lang取消關閉}" class="layui-btn layui-btn-lg layui-btn-primary" onclick="$.admin.close()" />
 	</div>
 </div>
 </form>

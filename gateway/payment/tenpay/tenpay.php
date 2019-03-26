@@ -206,7 +206,7 @@ class tenpay_lib
 		curl_setopt($ch, CURLOPT_TIMEOUT,$timeout);
 		// 獲取的資訊以檔案流的形式返回，而不是直接輸出。
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER,1);
-		// 從證書中檢查SSL加密演算法是否存在
+		// 從證書中檢查SSL加密演演算法是否存在
 		curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 1);
 		$arr = explode("?", $url);
 		if(count($arr) >= 2 && $type == "post")

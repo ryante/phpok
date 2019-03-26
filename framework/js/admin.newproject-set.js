@@ -1,10 +1,10 @@
 /**
- * 项目编辑时有效处理
+ * 專案編輯時有效處理
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2018年03月10日
 **/
 function cate_add(title)
@@ -61,7 +61,7 @@ function refresh_catelist()
 {
 	$.phpok.json(get_url("project","rootcate"),function(rs){
 		if(rs.status == "ok"){
-			var info = '<option value="0">'+p_lang('不关联分类')+'</option>';
+			var info = '<option value="0">'+p_lang('不關聯分類')+'</option>';
 			var lst = rs.content;
 			for(var i in lst){
 				info += '<option value="'+lst[i]['id']+'">'+lst[i]['title']+'</option>';

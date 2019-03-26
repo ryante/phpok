@@ -1,17 +1,17 @@
 /**
- * 公共页面JS执行，需要加工 artdialog.css
+ * 公共頁面JS執行，需要加工 artdialog.css
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2018年03月17日
 **/
 function top_search()
 {
 	var title = $("#top-keywords").val();
 	if(!title){
-		$.dialog.alert('请输入要搜索的关键字');
+		$.dialog.alert('請輸入要搜尋的關鍵字');
 		return false;
 	}
 	return true;
@@ -20,7 +20,7 @@ function top_search()
 // 退出
 function logout(t)
 {
-	var q = confirm("您好，【"+t+"】，确定要退出吗？");
+	var q = confirm("您好，【"+t+"】，確定要退出嗎？");
 	if(q == '0')
 	{
 		return false;
@@ -33,12 +33,12 @@ function logout(t)
 ;(function($){
 
 	/**
-	 * 会员相关操作
+	 * 會員相關操作
 	**/
 	$.user = {
 		login: function(title){
 			if(!title || title == 'undefined'){
-				title = p_lang('会员登录');
+				title = p_lang('會員登入');
 			}
 			var email = $("#email").val();
 			var mobile = $("#mobile").val();
@@ -57,13 +57,13 @@ function logout(t)
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
-				'okVal':p_lang('会员登录'),
+				'okVal':p_lang('會員登入'),
 				'cancel':true
 			});
 		},
@@ -72,14 +72,14 @@ function logout(t)
 			//
 		},
 		logout: function(title){
-			$.dialog.confirm('您好，<span class="red">'+title+'</span>，您确定要退出吗？',function(){
+			$.dialog.confirm('您好，<span class="red">'+title+'</span>，您確定要退出嗎？',function(){
 				$.phpok.go(get_url('logout'));
 			});
 		}
 	};
 
 	/**
-	 * 评论相关操作
+	 * 評論相關操作
 	**/
 	$.comment = {
 		post:function()
@@ -90,7 +90,7 @@ function logout(t)
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						$.dialog.alert('感谢您提交的评论',function(){
+						$.dialog.alert('感謝您提交的評論',function(){
 							$.phpok.reload();
 						},'succeed');
 						return true;
@@ -104,7 +104,7 @@ function logout(t)
 	};
 
 	/**
-	 * 地址薄增删改管理
+	 * 地址薄增刪改管理
 	**/
 	$.address = {
 		add:function()
@@ -116,20 +116,20 @@ function logout(t)
 			}
 			var url = get_url('usercp','address_setting');
 			$.dialog.open(url,{
-				'title':p_lang('添加新地址'),
+				'title':p_lang('新增新地址'),
 				'lock':true,
 				'width':width,
 				'height':height,
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
-				'okVal':'提交保存',
+				'okVal':'提交儲存',
 				'cancel':true
 			})
 		},
@@ -143,27 +143,27 @@ function logout(t)
 			}
 			var url = get_url('usercp','address_setting','id='+id);
 			$.dialog.open(url,{
-				'title':p_lang('编辑地址 {id}',"#"+id),
+				'title':p_lang('編輯地址 {id}',"#"+id),
 				'lock':true,
 				'width':width,
 				'height':height,
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
-				'okVal':'保存数据',
+				'okVal':'儲存資料',
 				'cancel':true
 			});
 		},
 
 		del:function(id)
 		{
-			$.dialog.confirm(p_lang('确定要删除这个地址吗？地址ID {id}',"#"+id),function(){
+			$.dialog.confirm(p_lang('確定要刪除這個地址嗎？地址ID {id}',"#"+id),function(){
 				var url = api_url('usercp','address_delete','id='+id);
 				$.phpok.json(url,function(){
 					$.phpok.reload();
@@ -172,7 +172,7 @@ function logout(t)
 		},
 		set_default:function(id)
 		{
-			$.dialog.confirm(p_lang('确定要设置这个地址为默认地址吗？地址ID {id}',"#"+id),function(){
+			$.dialog.confirm(p_lang('確定要設定這個地址為預設地址嗎？地址ID {id}',"#"+id),function(){
 				var url = api_url('usercp','address_default','id='+id);
 				$.phpok.json(url,function(){
 					$.phpok.reload();
@@ -188,7 +188,7 @@ function logout(t)
 
 
 $(document).ready(function(){
-    //返回顶部
+    //返回頂部
     if ($("meta[name=toTop]").attr("content") == "true") {
     	$("<div id='toTop' class='toTop'></div>").appendTo('body');
     	$("#toTop").css({
@@ -220,7 +220,7 @@ $(document).ready(function(){
 
 
 	if($("#comment-post").length > 0){
-	    //提交评论
+	    //提交評論
 	    $("#comment-post").submit(function(){
 			$.comment.post();
 			return false;

@@ -4,21 +4,21 @@
 		<form method="post" action="{url ctrl=reply/}" class="layui-form">		
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang搜索}	
+				{lang搜尋}	
 			</label>
 			<div class="layui-input-inline">
 				<select  name="status" id="status" >
 					<option value="0">{lang全部}</option>
-					<option value="1"{if $status == 1} selected{/if}>{lang已审核}</option>
-					<option value="2"{if $status && $status != 1} selected{/if}>{lang未审核}</option>
+					<option value="1"{if $status == 1} selected{/if}>{lang已稽核}</option>
+					<option value="2"{if $status && $status != 1} selected{/if}>{lang未稽核}</option>
 				</select>
 			</div>
 			<div class="layui-input-inline">
-				<input type="text" id="keywords" name="keywords" placeholder="{lang输入关键字}" value="{$keywords}" class="layui-input">
+				<input type="text" id="keywords" name="keywords" placeholder="{lang輸入關鍵字}" value="{$keywords}" class="layui-input">
 			</div>
 			<div class="layui-inline">
-				<input type="submit" value="{lang搜索}" class="layui-btn layui-btn-sm" />
-				<input type="button" value="{lang取消搜索}" class="layui-btn layui-btn-sm" onclick="$.phpok.go('{url ctrl=reply/}')" />
+				<input type="submit" value="{lang搜尋}" class="layui-btn layui-btn-sm" />
+				<input type="button" value="{lang取消搜尋}" class="layui-btn layui-btn-sm" onclick="$.phpok.go('{url ctrl=reply/}')" />
 			</div>
 		</div>
 		</form>
@@ -29,10 +29,10 @@
 		<tr>
 			<th>ID</th>
 			<th width="20"></th>
-			<th>{lang主题}</th>
-			<th>{lang星数}</th>
-			<th>{lang图片}</th>
-			<th>{lang时间}</th>
+			<th>{lang主題}</th>
+			<th>{lang星數}</th>
+			<th>{lang圖片}</th>
+			<th>{lang時間}</th>
 			<th width="160"></th>
 		</tr>
 		</thead>
@@ -51,17 +51,17 @@
 			</td>
 			<td>
 				<div><!-- if $value.vtype == 'title' -->
-				[{lang主题}]
+				[{lang主題}]
 				<a href="{$sys.www_file}?id={$value.tid}" target="_blank">{$value.title}</a>
 				<!-- else -->
-					<!-- if $value.vtype == 'project' -->[{lang项目}]<!-- /if -->
-					<!-- if $value.vtype == 'cate' -->[{lang分类}]<!-- /if -->
-					<!-- if $value.vtype == 'order' -->[{lang订单}]<!-- /if -->
+					<!-- if $value.vtype == 'project' -->[{lang專案}]<!-- /if -->
+					<!-- if $value.vtype == 'cate' -->[{lang分類}]<!-- /if -->
+					<!-- if $value.vtype == 'order' -->[{lang訂單}]<!-- /if -->
 					{$value.title}
 				<!-- /if -->
 				<!-- if $value.parent_id --><div class="red">[{lang引用}]</div><!-- /if -->
 				</div>
-				<div>[{lang内容}] {func phpok_cut $value.content 150}</div>
+				<div>[{lang內容}] {func phpok_cut $value.content 150}</div>
 			</td>
 			<td>
 				<!-- loop from=$value.res key=$k value=$v id=$idxx -->
@@ -71,22 +71,22 @@
 			<td>{func date 'Y-m-d H:i:s' $value.addtime}</td>
 			<td>
 				<div class="layui-btn-group">
-					<input type="button" value="{lang新回复}" onclick="$.admin_reply.adm({$value.id})" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang新回覆}" onclick="$.admin_reply.adm({$value.id})" class="layui-btn layui-btn-sm" />
 					<input type="button" value="{lang修改}" onclick="$.admin_reply.edit({$value.id})" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang删除}" onclick="$.admin_reply.del({$value.id})" class="layui-btn layui-btn-sm layui-btn-danger" />
+					<input type="button" value="{lang刪除}" onclick="$.admin_reply.del({$value.id})" class="layui-btn layui-btn-sm layui-btn-danger" />
 				</div>
 			</td>
 		</tr>
 		<!-- loop from=$value.adm_reply key=$k value=$v id=$idxx -->
 		<tr data-id="replylist_{$value.id}" id="adm_reply_{$v.id}">
 			<td colspan="6">
-				<span class="red">{lang管理员回复} - {$idxx.num}</span>
-				<small class="gray">{lang回复时间} {func date 'Y-m-d H:i:s' $value.addtime}</small>
+				<span class="red">{lang管理員回覆} - {$idxx.num}</span>
+				<small class="gray">{lang回覆時間} {func date 'Y-m-d H:i:s' $value.addtime}</small>
 				{$v.content}
 			</td>
 			<td>
 				<!-- if ($popedom.delete && $v.admin_id == $session.admin_id) || $session.admin_rs.if_system -->
-				<input type="button" value="{lang删除}" onclick="$.admin_reply.del({$v.id},'reply')" class="layui-btn layui-btn-sm layui-btn-danger" />
+				<input type="button" value="{lang刪除}" onclick="$.admin_reply.del({$v.id},'reply')" class="layui-btn layui-btn-sm layui-btn-danger" />
 				<!-- /if -->
 			</td>
 		</tr>

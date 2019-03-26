@@ -1,18 +1,18 @@
 /**
  * GD操作中涉及到的JS
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年10月04日
 **/
 ;(function($){
 	$.admin_gd = {
 
 		/**
-		 * 设置编辑器使用哪个图片规格方案
-		 * @参数 id 方案ID
+		 * 設定編輯器使用哪個圖片規格方案
+		 * @引數 id 方案ID
 		**/
 		editor:function(id)
 		{
@@ -31,23 +31,23 @@
 		},
 
 		/**
-		 * 设置编辑器使用原图
+		 * 設定編輯器使用原圖
 		**/
 		tofile:function()
 		{
 			var self = this;
-			$.dialog.confirm(p_lang('确定要让编辑器调用原图吗？'),function(){
+			$.dialog.confirm(p_lang('確定要讓編輯器呼叫原圖嗎？'),function(){
 				self.editor(0);
 			});
 		},
 
 		/**
-		 * 删除配置
-		 * @参数 id 要删除的项目ID
+		 * 刪除配置
+		 * @引數 id 要刪除的專案ID
 		**/
 		del:function(id)
 		{
-			$.dialog.confirm(p_lang('确定要删除这个图片方案吗？'),function(rs){
+			$.dialog.confirm(p_lang('確定要刪除這個圖片方案嗎？'),function(rs){
 				var url = get_url('gd','delete','id='+id);
 				$.phpok.json(url,function(rs){
 					if(rs.status){
@@ -61,7 +61,7 @@
 		},
 
 		/**
-		 * 保存方案数据
+		 * 儲存方案資料
 		**/
 		save:function()
 		{
@@ -76,7 +76,7 @@
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						var info = $("#id").val() ? p_lang('方案编辑成功') : p_lang('方案添加成功');
+						var info = $("#id").val() ? p_lang('方案編輯成功') : p_lang('方案新增成功');
 						$.dialog.alert(info,function(){
 							$.phpok.go(get_url('gd'));
 						},'succeed');

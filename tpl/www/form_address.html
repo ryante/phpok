@@ -1,16 +1,16 @@
 <div class="table">
 	<div class="title">
 		收件人：
-		<span class="note">请填写收件人姓名</span>
+		<span class="note">請填寫收件人姓名</span>
 	</div>
 	<div class="content"><input type="text" id="fullname" name="fullname" class="long" value="{$address.fullname}" /></div>
 </div>
 <div class="table">
 	<div class="title">
-		所在地址及详细地址：
-		<span class="note">请选择相应的省市县及填写地址明细信息</span>
+		所在地址及詳細地址：
+		<span class="note">請選擇相應的省市縣及填寫地址明細資訊</span>
 	</div>
-	<input type="hidden" name="country" id="country" value="中国" />
+	<input type="hidden" name="country" id="country" value="中國" />
 	<div class="content">
 		<!-- php:$form_edit_content = array('p'=>$address.province,'c'=>$address.city,'a'=>$address.county) -->
 		<table width="100%" cellspacing="0" cellpadding="0">
@@ -25,29 +25,29 @@
 </div>
 <div class="table">
 	<div class="title">
-		邮编：
-		<span class="note">请填写邮编，不清楚请留空</span>
+		郵編：
+		<span class="note">請填寫郵編，不清楚請留空</span>
 	</div>
 	<div class="content"><input type="text" id="zipcode" name="zipcode" class="long" value="{$address.zipcode}" /></div>
 </div>
 <div class="table">
 	<div class="title">
-		手机号码：
-		<span class="note">请填写有效的手机号码</span>
+		手機號碼：
+		<span class="note">請填寫有效的手機號碼</span>
 	</div>
 	<div class="content"><input type="text" id="mobile" name="mobile" class="long" value="{$address.mobile}" /></div>
 </div>
 <div class="table">
 	<div class="title">
-		固定电话：
-		<span class="note">固定电话或手机号码必须有一个不能为空</span>
+		固定電話：
+		<span class="note">固定電話或手機號碼必須有一個不能為空</span>
 	</div>
 	<div class="content"><input type="text" id="tel" name="tel" class="long" value="{$address.tel}" /></div>
 </div>
 <div class="table">
 	<div class="title">
-		邮箱：
-		<span class="note">用来接收订单提醒邮件，便于您及时了解订单状态</span>
+		郵箱：
+		<span class="note">用來接收訂單提醒郵件，便於您及時瞭解訂單狀態</span>
 	</div>
 	<div class="content"><input type="text" id="email" name="email" class="long" value="{$address.email}" /></div>
 </div>
@@ -73,7 +73,7 @@ function monitor_address()
 			old_city = c;
 		})
 	}
-	//每三秒检测一次
+	//每三秒檢測一次
 	window.setTimeout(function(){monitor_address()},3000);
 }
 $(document).ready(function(){

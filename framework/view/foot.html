@@ -8,75 +8,75 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	var r_menu_in_copy = [{
-		'text':p_lang('复制'),
+		'text':p_lang('複製'),
 		'func':function(){
 			var info = $("#smart-phpok-copy-html").val();
 			if(window.clipboardData && info != ''){
 				window.clipboardData.setData("Text", info);
-				$.dialog.tips(p_lang('文本复制成功，请按 CTRL+V 粘贴'));
+				$.dialog.tips(p_lang('文字複製成功，請按 CTRL+V 貼上'));
 				return true;
 			}
 			if(document.execCommand && info != ''){
 				$("#smart-phpok-copy-html").focus().select();
 				document.execCommand("copy",false,null);
-				$.dialog.tips(p_lang('文本复制成功，请按 CTRL+V 粘贴'));
+				$.dialog.tips(p_lang('文字複製成功，請按 CTRL+V 貼上'));
 				return true;
 			}
-			$.dialog.tips(p_lang('复制失败，请按 CTRL+C 进行复制操作'));
+			$.dialog.tips(p_lang('複製失敗，請按 CTRL+C 進行復制操作'));
 			return true;
 		}
 	},{
-		'text':p_lang('刷新'),
+		'text':p_lang('重新整理'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	}];
 	var r_menu_not_copy = [{
-		'text':p_lang('刷新'),
+		'text':p_lang('重新整理'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	}];
 	var r_menu = [[{
-		'text':'{lang刷新}',
+		'text':'{lang重新整理}',
 		'func':function(){
 			$.phpok.reload();
 		}
 	}],[{
-		'text':"{lang清空缓存}",
+		'text':"{lang清空快取}",
 		'func': function() {
 			top.$.admin_index.clear();
 		}
 	},{
-		'text':'{lang修改我的信息}',
+		'text':'{lang修改我的資訊}',
 		'func':function(){
 			top.$.admin_index.me();
 		}
 	},{
-		'text':'{lang访问网站首页}',
+		'text':'{lang訪問網站首頁}',
 		'func':function(){
 			var url = "{$sys.www_file}?siteId={$session.admin_site_id}";
 			$.phpok.open(url,false);
 		}
 	}],[{
-		'text':'{lang网页属性}',
+		'text':'{lang網頁屬性}',
 		'func':function(){
 			var url = window.location.href;
-			//去除随机数
+			//去除隨機數
 			url = url.replace(/\_noCache=[0-9\.]+/g,'');
 			if(url.substr(-1) == '&' || url.substr(-1) == '?'){
 				url = url.substr(0,url.length-1);
 			}
 			top.$.dialog({
-				'title':'{lang网址属性}',
-				'content':'{lang网址：}'+url+'<br /><div style="text-indent:36px"><a href="'+url+'" target="_blank" class="red">{lang新窗口打开}</a></div>',
+				'title':'{lang網址屬性}',
+				'content':'{lang網址：}'+url+'<br /><div style="text-indent:36px"><a href="'+url+'" target="_blank" class="red">{lang新視窗開啟}</a></div>',
 				'lock':true,
 				'drag':false,
 				'fixed':true
 			});
 		}
 	},{
-		'text': "{lang新标签打开}",
+		'text': "{lang新標籤開啟}",
 		'func': function() {
 			var url = window.location.href;
 			url = $.phpok.nocache(url);
@@ -90,7 +90,7 @@ $(document).ready(function(){
 			$.win(title,url);
 		}
 	}],[{
-		'text': "{lang帮助说明}",
+		'text': "{lang幫助說明}",
 		'func': function() {
 			top.$("a[layadmin-event=about]").click();
 		}

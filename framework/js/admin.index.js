@@ -1,10 +1,10 @@
 /**
- * 后台首页涉及到的样式
+ * 後臺首頁涉及到的樣式
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年08月13日
 **/
 ;(function($){
@@ -12,7 +12,7 @@
 		site:function()
 		{
 			$.dialog.open(get_url('site','add'),{
-				'title': p_lang('添加站点')
+				'title': p_lang('新增站點')
 				,'lock': true
 				,'width': '450px'
 				,'height': '150px'
@@ -20,20 +20,20 @@
 				,'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				}
-				,'okVal':p_lang('添加新站点')
+				,'okVal':p_lang('新增新站點')
 				,'cancel':true
 			});
 		},
 		me:function()
 		{
 			$.dialog.open(get_url("me","setting"),{
-				"title":p_lang('修改管理员信息'),
+				"title":p_lang('修改管理員資訊'),
 				"width":600,
 				"height":260,
 				"lock":true,
@@ -41,13 +41,13 @@
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.$.admin_me.setting_submit();
 					return false;
 				},
-				'okVal':p_lang('提交保存'),
+				'okVal':p_lang('提交儲存'),
 				'cancel':true
 			});
 		},
@@ -55,7 +55,7 @@
 		{
 			
 			$.dialog.open(get_url("me","pass"),{
-				"title":p_lang('管理员密码修改'),
+				"title":p_lang('管理員密碼修改'),
 				"width":500,
 				"height":240,
 				"lock":true,
@@ -63,29 +63,29 @@
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.$.admin_me.pass_submit();
 					return false;
 				},
-				'okVal':p_lang('提交保存'),
+				'okVal':p_lang('提交儲存'),
 				'cancel':true
 			});
 		},
 		logout:function()
 		{
-			$.dialog.confirm(p_lang('您确定要退出吗？'),function(){
+			$.dialog.confirm(p_lang('您確定要退出嗎？'),function(){
 				$.phpok.go(get_url("logout"));
 			});
 		},
 		clear:function()
 		{
-			var obj = $.dialog.tips(p_lang('请稍候，正在执行'),100)
+			var obj = $.dialog.tips(p_lang('請稍候，正在執行'),100)
 			$.phpok.json(get_url("index","clear"),function(data){
 				obj.close();
 				if(data.status){
-					layer.msg(p_lang('缓存清空完成'));
+					layer.msg(p_lang('快取清空完成'));
 					return true;
 				}
 				$.dialog.alert(rs.info);
@@ -139,8 +139,8 @@
 				if(data.status == 'ok'){
 					$.dialog.notice({
 						title: '友情提示',
-						width: 220,// 必须指定一个像素宽度值或者百分比，否则浏览器窗口改变可能导致artDialog收缩
-						content: '您的程序有新的更新，为了保证系统安全，建议您及时更新程序',
+						width: 220,// 必須指定一個畫素寬度值或者百分比，否則瀏覽器視窗改變可能導致artDialog收縮
+						content: '您的程式有新的更新，為了保證系統安全，建議您及時更新程式',
 						icon: 'face-smile',
 						time: 10
 					});
@@ -150,7 +150,7 @@
 		develop:function(val)
 		{
 			if(val == 1){
-				$.dialog.tips(p_lang('正在切换到开发模式，请稍候…'));
+				$.dialog.tips(p_lang('正在切換到開發模式，請稍候…'));
 				$.phpok.json(get_url('index','develop','val=1'),function(data){
 					if(data.status){
 						$.phpok.reload();
@@ -160,7 +160,7 @@
 					return false;
 				});
 			}else{
-				$.dialog.tips(p_lang('正在切换到应用模式，请稍候…'));
+				$.dialog.tips(p_lang('正在切換到應用模式，請稍候…'));
 				$.phpok.json(get_url('index','develop','val=0'),function(data){
 					if(data.status){
 						$.phpok.reload();
@@ -176,7 +176,7 @@
 
 
 $(document).ready(function(){
-	//监听事件
+	//監聽事件
 	document.addEventListener("keydown", function (e) {
 	    if(e.keyCode==116) {
 	        e.preventDefault();
@@ -198,24 +198,24 @@ $(document).ready(function(){
 	}, false);
 	$.admin_index.pendding();
 	
-	//自定义右键
+	//自定義右鍵
 	var r_menu = [[{
-		'text':p_lang('刷新网页'),
+		'text':p_lang('重新整理網頁'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	},{
-		'text': p_lang('清空缓存'),
+		'text': p_lang('清空快取'),
 		'func': function() {
 			$.admin_index.clear();
 		}    
 	},{
-		'text':p_lang('修改我的信息'),
+		'text':p_lang('修改我的資訊'),
 		'func':function(){
 			$.admin_index.me();
 		}
 	}],[{
-		'text':p_lang('关于PHPOK'),
+		'text':p_lang('關於PHPOK'),
 		'func':function(){
 			$("a[layadmin-event=about]").click();
 		}

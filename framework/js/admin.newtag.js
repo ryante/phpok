@@ -1,10 +1,10 @@
 /**
- * Tag标签的增删查改操作
+ * Tag標籤的增刪查改操作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 GNU Lesser General Public License (LGPL)
+ * @授權 GNU Lesser General Public License (LGPL)
  * @日期 2017年04月20日
 **/
 ;(function($){
@@ -13,15 +13,15 @@
 		{
 			var url = get_url('tag','set');
 			$.dialog.open(url,{
-				'title':p_lang('添加标签'),
+				'title':p_lang('新增標籤'),
 				'width':'560px',
 				'height':'360px',
 				'lock':true,
-				'okVal':p_lang('提交保存'),
+				'okVal':p_lang('提交儲存'),
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
@@ -34,15 +34,15 @@
 		{
 			var url = get_url('tag','set','id='+id);
 			$.dialog.open(url,{
-				'title':p_lang('修改标签'),
+				'title':p_lang('修改標籤'),
 				'width':'560px',
 				'height':'360px',
 				'lock':true,
-				'okVal':p_lang('提交保存'),
+				'okVal':p_lang('提交儲存'),
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
@@ -53,7 +53,7 @@
 		},
 		del:function(id,title)
 		{
-			$.dialog.confirm(p_lang('确定要删除标签 {title} 吗？删除后相关标签数据也会删除','<span class="red">'+title+'</span>'),function(){
+			$.dialog.confirm(p_lang('確定要刪除標籤 {title} 嗎？刪除後相關標籤資料也會刪除','<span class="red">'+title+'</span>'),function(){
 				var url = get_url('tag','delete','id='+id);
 				$.phpok.json(url,function(data){
 					if(data.status){
@@ -69,15 +69,15 @@
 		{
 			var url = get_url('tag','config');
 			$.dialog.open(url,{
-				'title':p_lang('配置标签参数'),
+				'title':p_lang('配置標籤引數'),
 				'width':'500px',
 				'height':'300px',
 				'lock':true,
-				'okVal':p_lang('提交保存'),
+				'okVal':p_lang('提交儲存'),
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
@@ -100,7 +100,7 @@
 			var lst = old.split(cut_identifier);
 			var total = lst.length;
 			if(total>=10){
-				$.dialog.alert(p_lang('超出系统限制，请删除一些不常用的标签'));
+				$.dialog.alert(p_lang('超出系統限制，請刪除一些不常用的標籤'));
 				return false;
 			}
 			var status = true;
@@ -110,7 +110,7 @@
 				}
 			}
 			if(!status){
-				$.dialog.alert(p_lang('标签已经存在，不支持重复添加'));
+				$.dialog.alert(p_lang('標籤已經存在，不支援重複新增'));
 				return false;
 			}
 			opener.$("input[name=tag]").val(old+""+cut_identifier+""+val);

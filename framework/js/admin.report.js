@@ -1,10 +1,10 @@
 /**
- * 统计报表涉及到的JS操作
+ * 統計報表涉及到的JS操作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年10月17日
 **/
 ;(function($){
@@ -28,7 +28,7 @@
 					}
 					if(data.info.x){
 						var x = data.info.x;
-						var xhtml = '<option value="">'+p_lang('请选择…')+'</option>';
+						var xhtml = '<option value="">'+p_lang('請選擇…')+'</option>';
 						for(var i in x){
 							xhtml += '<option value="'+i+'">'+x[i]+'</option>';
 						}
@@ -38,7 +38,7 @@
 					if(data.info.y){
 						var y = data.info.y;
 						var yhtml = '<ul class="layout">';
-						//var yhtml = '<select name="x"><option value="">'+p_lang('请选择统计项目…')+'</option>';
+						//var yhtml = '<select name="x"><option value="">'+p_lang('請選擇統計專案…')+'</option>';
 						for(var i in y){
 							yhtml += '<li><label><input type="checkbox" name="y[]" lay-ignore value="'+i+'"/> '+y[i]+'</label></li>';
 						}

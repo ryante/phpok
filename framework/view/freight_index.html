@@ -5,9 +5,9 @@
 		<thead>
 		<tr>
 			<th>ID</th>
-			<th>{lang名称}</th>
-			<th>{lang计费方式}</th>
-			<th>{lang货币}</th>
+			<th>{lang名稱}</th>
+			<th>{lang計費方式}</th>
+			<th>{lang貨幣}</th>
 			<th width="60">{lang排序}</th>
 			<th>{lang操作}</th>
 		</tr>
@@ -35,15 +35,15 @@
 			<td>
 				<div class="layui-btn-group">
 					<input type="button" value="{lang提交修改}" onclick="$.admin_freight.update('{$value.id}')" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang区域设置}" onclick="$.win('{lang区域设置}_#{$value.id}','{url ctrl=freight func=zone fid=$value.id/}')" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang价格设置}" onclick="$.admin_freight.price('{$value.id}')" class="layui-btn layui-btn-sm" />
-					<input type="button" value="{lang删除}" onclick="$.admin_freight.del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
+					<input type="button" value="{lang區域設定}" onclick="$.win('{lang區域設定}_#{$value.id}','{url ctrl=freight func=zone fid=$value.id/}')" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang價格設定}" onclick="$.admin_freight.price('{$value.id}')" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang刪除}" onclick="$.admin_freight.del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 				</div>
 			</td>
 		</tr>
 		<!-- /loop -->
 		<tr>
-			<td class="center">{lang添加}</td>
+			<td class="center">{lang新增}</td>
 			<td><input type="text" id="title_0" class="layui-input" /></td>
 			<td>
 				<select id="type_0">
@@ -60,7 +60,7 @@
 				</select>
 			</td>
 			<td class="center"><input type="text" id="taxis_0" value="{$taxis}" class="layui-input" /></td>
-			<td><input type="button" value="{lang添加}" onclick="$.admin_freight.add()" class="layui-btn layui-btn-sm" /></td>
+			<td><input type="button" value="{lang新增}" onclick="$.admin_freight.add()" class="layui-btn layui-btn-sm" /></td>
 		</tr>
 		</tbody>
 		</table>

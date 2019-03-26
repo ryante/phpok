@@ -7,7 +7,7 @@
 		<div class="am-comment-main">
 			<div class="am-comment-hd">
 				<div class="am-comment-meta">
-					提交新评论<!-- if $comment.total -->，当前已有 {$comment.total} 条评论<!-- /if -->
+					提交新評論<!-- if $comment.total -->，當前已有 {$comment.total} 條評論<!-- /if -->
 				</div>
 			</div>
 			<div class="am-comment-bd">
@@ -18,7 +18,7 @@
 					<div class="am-form-group">{func form_edit comment $comment.content editor width=100%&height=150&btns[image]=1}</div>
 					<!-- else -->
 					<div class="am-form-group">
-						<textarea rows="5" name="comment" id="comment" placeholder="填写评论信息" style="resize: none;"></textarea>
+						<textarea rows="5" name="comment" id="comment" placeholder="填寫評論資訊" style="resize: none;"></textarea>
 					</div>
 					<!-- /if -->
 					<div class="am-form-group">
@@ -26,7 +26,7 @@
 					</div>
 					<!-- if $is_vcode -->
 					<div class="am-g am-form-group am-g-collapse">
-						<div class="am-u-sm-2"><input class="vcode"  type="text" name="_chkcode" id="_chkcode" placeholder="请填写验证码" /></div>
+						<div class="am-u-sm-2"><input class="vcode"  type="text" name="_chkcode" id="_chkcode" placeholder="請填寫驗證碼" /></div>
 						<div class="am-u-sm-4" style="padding-left:10px;padding-top:5px;"><img src="" border="0" align="absmiddle" id="vcode" class="hand" /></div>
 						<div class="am-u-sm-6"></div>
 					</div>
@@ -54,7 +54,7 @@
 		<div class="am-comment-main">
 			<div class="am-comment-hd">
 				<div class="am-comment-meta">
-					<a href="{url ctrl=user id=$value.uid.id/}" target="_blank" class="am-comment-author">{$value.uid.user}</a>评论于<time>{func time_format $value.addtime}</time>
+					<a href="{url ctrl=user id=$value.uid.id/}" target="_blank" class="am-comment-author">{$value.uid.user}</a>評論於<time>{func time_format $value.addtime}</time>
 				</div>
 			</div>
 			<div class="am-comment-bd">
@@ -75,7 +75,7 @@
 		<div class="am-comment-main">
 			<div class="am-comment-hd">
 				<div class="am-comment-meta">
-					管理员回复于<time>{func time_format $v.addtime}</time>
+					管理員回覆於<time>{func time_format $v.addtime}</time>
 				</div>
 			</div>
 			<div class="am-comment-bd">

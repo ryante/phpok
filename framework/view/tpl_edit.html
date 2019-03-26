@@ -14,7 +14,7 @@ $(document).ready(function(){
 	});
 	$("#post_save").submit(function(){
 		if(is_edit != '1'){
-			$.dialog.alert(p_lang('不支持在线保存'));
+			$.dialog.alert(p_lang('不支援線上儲存'));
 			return false;
 		}
 		code_editor.save();
@@ -24,7 +24,7 @@ $(document).ready(function(){
 			'dataType':'json',
 			'success':function(rs){
 				if(rs.status){
-					$.dialog.tips(p_lang('代码保存成功'),function(){
+					$.dialog.tips(p_lang('程式碼儲存成功'),function(){
 						var url = get_url("tpl","list","id="+$("input[name=id]").val());
 						$.admin.close(url);
 					}).lock();
@@ -58,7 +58,7 @@ $(document).ready(function(){
 <div class="submit-info">
 	<div class="layui-container center">
 		<!-- if $is_edit --><input type="submit" value="{lang提交}" class="layui-btn layui-btn-lg layui-btn-danger" /><!-- /if -->
-		<input type="button" value="{lang取消关闭}" class="layui-btn layui-btn-lg layui-btn-primary" onclick="$.admin.close()" />
+		<input type="button" value="{lang取消關閉}" class="layui-btn layui-btn-lg layui-btn-primary" onclick="$.admin.close()" />
 	</div>
 </div>
 

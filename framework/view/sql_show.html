@@ -1,18 +1,18 @@
 <!-- include tpl=head_lay -->
 <div class="layui-card">
 	<div class="layui-card-header " style="visibility: visible;">
-		<div>明细</div>
+		<div>明細</div>
 	</div>
 	<div class="layui-card-body">
 		<table class="layui-table">
 					<!--<colgroup>  .<col width="150"> <col width="200"> <col> </colgroup>-->
 					<thead>
 					<tr>
-						<th >&nbsp;{lang字段}</th>
-						<th>{lang类型}</th>
+						<th >&nbsp;{lang欄位}</th>
+						<th>{lang型別}</th>
 						<th>{lang空}</th>
-						<th width="30px">{lang默认}</th>
-						<th>{lang备注}</th>
+						<th width="30px">{lang預設}</th>
+						<th>{lang備註}</th>
 					</tr>
 					</thead>
 					<tbody>
@@ -21,7 +21,7 @@
 						<td>{$value.field}</td>
 						<td>{$value.type}</td>
 						<td><!-- if $value.null -->{lang是}<!-- else -->{lang否}<!-- /if --></td>
-						<td class="center"><!-- if $value.default == '' -->无<!-- else -->{$value.default}<!-- /if --></td>
+						<td class="center"><!-- if $value.default == '' -->無<!-- else -->{$value.default}<!-- /if --></td>
 						<td class="break">{$value.note}</td>
 					</tr>
 					<!-- /loop -->

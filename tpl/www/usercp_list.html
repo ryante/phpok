@@ -1,5 +1,5 @@
-<!-- php:$title = $page_rs.title.' - 会员中心' -->
-<!-- include tpl=head title=$title menutitle=会员中心 -->
+<!-- php:$title = $page_rs.title.' - 會員中心' -->
+<!-- include tpl=head title=$title menutitle=會員中心 -->
 <div class="main">
 	<!-- include tpl=block/breadcrumb -->
 	<div class="left"><!-- include tpl=block/usercp_nav --></div>
@@ -10,8 +10,8 @@
 				<thead>
 					<tr>
 						<th>ID</th>
-						<th class="am-text-left">{$page_rs.alias_title ? $page_rs.alias_title : '主题'}</th>
-						<th>状态</th>
+						<th class="am-text-left">{$page_rs.alias_title ? $page_rs.alias_title : '主題'}</th>
+						<th>狀態</th>
 						<th>操作</th>
 					</tr>
 				</thead>
@@ -21,17 +21,17 @@
 						<td>{$value.id}</td>
 						<td class="am-text-left">
 							<a href="{$value.url}" target="_blank">{$value.title}</a><br />
-							<span class="gray">发布时间：{func time_format $value.dateline}，查看次数：{$value.hits}</span>
+							<span class="gray">釋出時間：{func time_format $value.dateline}，檢視次數：{$value.hits}</span>
 						</td>
-						<td><!-- if $value.status -->正常<!-- else --><span class="am-text-danger">审核中</span><!-- /if --></td>
-						<td><a href="{url ctrl=post func=edit id=$value.id/}" class="am-btn am-btn-secondary am-btn-xs" target="_blank">编辑</a></td>
+						<td><!-- if $value.status -->正常<!-- else --><span class="am-text-danger">稽核中</span><!-- /if --></td>
+						<td><a href="{url ctrl=post func=edit id=$value.id/}" class="am-btn am-btn-secondary am-btn-xs" target="_blank">編輯</a></td>
 					</tr>
 					<!-- /loop -->
 				</tbody>
 			</table>
 		</div>
 		<div style="padding:10px;text-align:center">
-			<a href="{url ctrl=post id=$id/}" target="_blank" class="am-btn am-btn-primary">添加</a>
+			<a href="{url ctrl=post id=$id/}" target="_blank" class="am-btn am-btn-primary">新增</a>
 		</div>
 		<!-- include tpl=block/pagelist -->
 	</div>

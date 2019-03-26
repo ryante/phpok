@@ -30,8 +30,8 @@ function save()
 <form method="post" id="form_save" onsubmit="return false">
 <div class="table">
 	<div class="title">
-		{lang字段名称：}
-		<span class="note">{lang设置一个名称，该名称在表单的头部信息显示}</span></span>
+		{lang欄位名稱：}
+		<span class="note">{lang設定一個名稱，該名稱在表單的頭部資訊顯示}</span></span>
 	</div>
 	<div class="content">
 		<input type="text" id="title" name="title" class="w99" value="{$rs.title}" />
@@ -39,15 +39,15 @@ function save()
 </div>
 <div class="table">
 	<div class="title">
-		{lang字段标识：}
-		<span class="note">{lang要求}<span class="darkblue">{lang字母、数字及下划线，且必须以字母开头}</span></span>
+		{lang欄位標識：}
+		<span class="note">{lang要求}<span class="darkblue">{lang字母、數字及下劃線，且必須以字母開頭}</span></span>
 	</div>
 	<div class="content">
 		<ul class="layout">
 			<li><input type="text" id="identifier" name="identifier" class="default" value="{$rs.identifier}" /></li>
 			<li>
 				<div class="button-group">
-					<input type="button" value="{lang随机生成}" onclick="$('#identifier').val($.phpok.rand(10,'letter'))" class="layui-btn" />
+					<input type="button" value="{lang隨機生成}" onclick="$('#identifier').val($.phpok.rand(10,'letter'))" class="layui-btn" />
 				</div>
 			</li>
 		</ul>		
@@ -57,18 +57,18 @@ function save()
 
 <div class="table">
 	<div class="title">
-		{lang字段备注}：
-		<span class="note">{lang填写表单时，指定这个项目的注意事项}</span></span>
+		{lang欄位備註}：
+		<span class="note">{lang填寫表單時，指定這個專案的注意事項}</span></span>
 	</div>
 	<div class="content"><input type="text" id="note" name="note" class="w99" value="{$rs.note}" /></div>
 </div>
 <div class="table">
 	<div class="title">
-		{lang字段类型：}<span class="note">{lang请慎重选择，一经确定后是不能修改的}</span>
+		{lang欄位型別：}<span class="note">{lang請慎重選擇，一經確定後是不能修改的}</span>
 	</div>
 	<div class="content">
 		<select name="field_type" id="field_type" class="w99">
-			<option value="">{lang请选择字段类型…}</option>
+			<option value="">{lang請選擇欄位型別…}</option>
 			<!-- loop from=$field_list key=$key value=$value -->
 			<option value="{$key}"{if $rs.field_type == $key} selected{/if}>{$value.title}<!-- if $value.note -->（{$value.note}）<!-- /if --></option>
 			<!-- /loop -->
@@ -77,12 +77,12 @@ function save()
 </div>
 <div class="table">
 	<div class="title">
-		{lang表单类型：}
-		<span class="note">{lang请选择字段要使用的表单}</span>
+		{lang表單型別：}
+		<span class="note">{lang請選擇欄位要使用的表單}</span>
 	</div>
 	<div class="content">
 		<select id="form_type" name="form_type" class="w99" onchange="$._configForm.option(this.value,'form_type_ext','{$id}','module')">
-			<option value="">{lang请选择表单…}</option>
+			<option value="">{lang請選擇表單…}</option>
 			<!-- loop from=$form_list key=$key value=$value id=$tmpid -->
 			<option value="{$key}"{if $key == $rs.form_type} selected{/if}>{$value.title}<!-- if $value.note -->（{$value.note}）<!-- /if --></option>
 			<!-- /loop -->
@@ -94,24 +94,24 @@ function save()
 <div class="table">
 	<div class="title">
 		<span class="edit">
-			{lang表单样式：}
-			<span class="note">{lang不能超过250个字符，不熟悉CSS，请查相关手册}</span>
+			{lang表單樣式：}
+			<span class="note">{lang不能超過250個字元，不熟悉CSS，請查相關手冊}</span>
 		</span>
 	</div>
 	<div class="content"><input type="text" id="form_style" name="form_style" class="w99" value="{$rs.form_style}" /></div>
 </div>
 <div class="table">
 	<div class="title">
-		{lang表单默认值：}
-		<span class="note">{lang设置表单默认值，如果表单中有多个值，请用英文逗号隔开}</span>
+		{lang表單預設值：}
+		<span class="note">{lang設定表單預設值，如果表單中有多個值，請用英文逗號隔開}</span>
 	</div>
 	<div class="content"><input type="text" id="content" name="content" class="w99" value="{$rs.content}" /></div>
 </div>
 
 <div class="table">
 	<div class="title">
-		{lang接收数据格式化：}
-		<span class="note">{lang设置文本常见格式，如HTML，整型，浮点型等}</span>
+		{lang接收資料格式化：}
+		<span class="note">{lang設定文字常見格式，如HTML，整型，浮點型等}</span>
 	</div>
 	<div class="content">
 		<select name="format" id="format" class="w99">
@@ -125,7 +125,7 @@ function save()
 <div class="table">
 	<div class="title">
 		{lang排序}：
-		<span class="note">{lang值越小越往前靠，可选范围：1-255}</span>
+		<span class="note">{lang值越小越往前靠，可選範圍：1-255}</span>
 	</div>
 	<div class="content">
 		<input type="text" name="taxis" id="taxis" value="{$rs.taxis ? $rs.taxis : 255}" />
@@ -133,8 +133,8 @@ function save()
 </div>
 <div class="table">
 	<div class="title">
-		{lang前端处理}：
-		<span class="note">{lang设置前端是否可用，如果需要前端加载相应属性请在这里操作}</span>
+		{lang前端處理}：
+		<span class="note">{lang設定前端是否可用，如果需要前端載入相應屬性請在這裡操作}</span>
 	</div>
 	<div class="content">
 		<table>
@@ -156,16 +156,16 @@ function search_set(val){
 </script>
 <div class="table">
 	<div class="title">
-		{lang搜索}：
-		<span class="note">{lang指定该字段的搜索类型，使用区间搜索需要设置分隔符}</span>
+		{lang搜尋}：
+		<span class="note">{lang指定該欄位的搜尋型別，使用區間搜尋需要設定分隔符}</span>
 	</div>
 	<div class="content">
 		<table>
 		<tr>
-			<td><label><input type="radio" name="search" value="0" checked onclick="search_set(0)" />{lang不支持搜索}</label></td>
-			<td><label><input type="radio" name="search" value="1" onclick="search_set(1)" />{lang完全匹配搜索}</label></td>
-			<td><label><input type="radio" name="search" value="2" onclick="search_set(2)" />{lang部分匹配搜索}</label></td>
-			<td><label><input type="radio" name="search" value="3" onclick="search_set(3)" />{lang区间搜索}</label></td>
+			<td><label><input type="radio" name="search" value="0" checked onclick="search_set(0)" />{lang不支援搜尋}</label></td>
+			<td><label><input type="radio" name="search" value="1" onclick="search_set(1)" />{lang完全匹配搜尋}</label></td>
+			<td><label><input type="radio" name="search" value="2" onclick="search_set(2)" />{lang部分匹配搜尋}</label></td>
+			<td><label><input type="radio" name="search" value="3" onclick="search_set(3)" />{lang區間搜尋}</label></td>
 			<td id="search_separator_html"  style="display:none">
 				<input type="text" name="search_separator" id="search_separator" class="short" placeholder="{lang分隔符}" />
 			</td>

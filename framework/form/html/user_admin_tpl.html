@@ -18,7 +18,7 @@ function action_{$_rs.identifier}_show()
 				c += '<li id="{$_rs.identifier}_div_'+lst[i]['id']+'">';
 				c += '<div class="layui-btn-group">';
 				c += '<input type="button" value="'+lst[i]['user']+'" onclick="phpok_user_preview(\''+lst[i]['id']+'\')" class="layui-btn layui-btn-xs" />';
-				c += '<input type="button" value="'+p_lang('删除')+'" onclick="phpok_user_delete(\'{$_rs.identifier}\',\''+lst[i]['id']+'\')" class="layui-btn layui-btn-xs layui-btn-danger" />';
+				c += '<input type="button" value="'+p_lang('刪除')+'" onclick="phpok_user_delete(\'{$_rs.identifier}\',\''+lst[i]['id']+'\')" class="layui-btn layui-btn-xs layui-btn-danger" />';
 				c += '</div>';
 				c += '</li>';
 				m++;
@@ -35,7 +35,7 @@ $(document).ready(function(){
 		var url = get_url("open","user") + "&id={$_rs.identifier}&multi=1";
 		$.dialog.data("phpok_user_{$_rs.identifier}",$("#{$_rs.identifier}").val());
 		$.dialog.open(url,{
-			title: "会员管理器",
+			title: "會員管理器",
 			lock : true,
 			width: "700px",
 			height: "70%",
@@ -46,14 +46,14 @@ $(document).ready(function(){
 				action_{$_rs.identifier}_show();
 				$.dialog.data("phpok_user_{$_rs.identifier}","");
 			}
-			,"okVal":"确定"
+			,"okVal":"確定"
 		});
 	});
 	action_{$_rs.identifier}_show();
 });
 </script>
 <input type="hidden" name="{$_rs.identifier}" id="{$_rs.identifier}" value="{$_rs_content}" />
-<input id="_phpok_button_user_{$_rs.identifier}" type="button" value="{lang请选择会员}" class="layui-btn layui-btn-sm" />
+<input id="_phpok_button_user_{$_rs.identifier}" type="button" value="{lang請選擇會員}" class="layui-btn layui-btn-sm" />
 <ul class="layout" id="{$_rs.identifier}_div" style="margin-top:5px;"></ul>
 <div class="clear"></div>
 <!-- else -->
@@ -79,7 +79,7 @@ $(document).ready(function(){
 	$("#_phpok_button_user_{$_rs.identifier}").click(function(){
 		var url = get_url("open","user") + "&id={$_rs.identifier}";
 		$.dialog.open(url,{
-			title: "{lang会员管理器}",
+			title: "{lang會員管理器}",
 			lock : true,
 			width: "700px",
 			height: "70%",
@@ -96,8 +96,8 @@ $(document).ready(function(){
 	<td>&nbsp;</td>
 	<td>
 		<div class="layui-btn-group">
-			<input type="button" value="{lang选择会员}" id="_phpok_button_user_{$_rs.identifier}" class="layui-btn layui-btn-sm" />
-			<input type="button" value="{lang删除}" onclick="$('#{$_rs.identifier}').val('');$('#title_{$_rs.identifier}').val('')" class="layui-btn layui-btn-sm" />
+			<input type="button" value="{lang選擇會員}" id="_phpok_button_user_{$_rs.identifier}" class="layui-btn layui-btn-sm" />
+			<input type="button" value="{lang刪除}" onclick="$('#{$_rs.identifier}').val('');$('#title_{$_rs.identifier}').val('')" class="layui-btn layui-btn-sm" />
 		</div>
 	</td>
 </tr>

@@ -6,7 +6,7 @@
 	<meta http-equiv="expires" content="wed, 26 feb 1997 08:21:57 gmt"> 
 	<title>{$config.title}</title>
 <style type="text/css">
-html{font-size:14px;font-family:"Microsoft Yahei","宋体","Arial","Tahoma";margin:0;padding:0;background:#FFFFFF;}
+html{font-size:14px;font-family:"Microsoft Yahei","宋體","Arial","Tahoma";margin:0;padding:0;background:#FFFFFF;}
 body{margin:3px;padding:0;overflow-y:scroll;_margin:0; _height:100%;}
 a{color:#000;text-decoration: none;}
 .red{color:red;}
@@ -48,7 +48,7 @@ function check_search()
 	var cate_id = $("#top_cate_id").val();
 	var keywords = $("#keywords").val();
 	if(!cate_id && !keywords){
-		$.dialog.alert('请选择要搜索的项');
+		$.dialog.alert('請選擇要搜尋的項');
 		return false;
 	}
 	return true;
@@ -65,9 +65,9 @@ $(document).ready(function(){
 	<form method="post" action="{$pageurl}" onsubmit="return check_search()">
 	<table>
 	<tr>
-		<td>搜索：</td>
+		<td>搜尋：</td>
 		<td><select name="cate_id" id="top_cate_id">
-			<option value="">全部分类…</option>
+			<option value="">全部分類…</option>
 			<!-- loop from=$catelist key=$key value=$value id=$tmpid -->
 			<option value="{$value.id}"{if $value.id == $cate_id} selected{/if}>{$value.title}</option>
 			<!-- /loop -->
@@ -78,8 +78,8 @@ $(document).ready(function(){
 			<!-- /loop -->
 		</select></td>
 		<td><input type="text" name="keywords" id="keywords" value="{$keywords}" class="keywords" /></td>
-		<td><input type="submit" value="{lang搜索}" /></td>
-		<td><input type="button" value="{lang刷新页面}" onclick="$.phpok.reload()" /></td>
+		<td><input type="submit" value="{lang搜尋}" /></td>
+		<td><input type="button" value="{lang重新整理頁面}" onclick="$.phpok.reload()" /></td>
 	</tr>
 	</table>
 	</form>
@@ -90,9 +90,9 @@ $(document).ready(function(){
 		<div class="li_bg">
 		<div class="ico"><img src="{$value.ico}" class="img" /></div>
 		<div class="note">
-			<div class="info">名称：{$value.title}</div>
-			<div class="info">添加：{func date "Y-m-d H:i:s" $value.addtime}</div>
-			<div class="info">属性：{$value.attr ? $value.attr.width.' x '.$value.attr.height : '-'}</div>
+			<div class="info">名稱：{$value.title}</div>
+			<div class="info">新增：{func date "Y-m-d H:i:s" $value.addtime}</div>
+			<div class="info">屬性：{$value.attr ? $value.attr.width.' x '.$value.attr.height : '-'}</div>
 		</div>
 		<div class="clear"></div>
 		</div>
@@ -109,12 +109,12 @@ $(document).ready(function(){
 </ul>
 </div>
 <!-- /if -->
-<div class="search">附件上传</div>
+<div class="search">附件上傳</div>
 <div style="padding:10px;margin:5px;">
 <div class="table">
 	<div class="title">
-		{lang附件上传：}
-		<span class="note">{lang请选择要上传的附件分类}{lang上传的文件上传不能超过：}<span class="red">{func get_cfg_var upload_max_filesize}</span></span>
+		{lang附件上傳：}
+		<span class="note">{lang請選擇要上傳的附件分類}{lang上傳的檔案上傳不能超過：}<span class="red">{func get_cfg_var upload_max_filesize}</span></span>
 	</div>
 	<div class="content">
 		<table>
@@ -123,7 +123,7 @@ $(document).ready(function(){
 				<select id="add_cate_id" onchange="cate_change()">
 					<!-- loop from=$catelist key=$key value=$value -->
 					<option value="{$value.id}"{if $value.is_default} selected{/if} data="{$value.filetypes}" catename="{$value.title}">
-					{$value.title}<!-- if $value.typeinfos --> / {lang支持上传格式：}{$value.typeinfos}<!-- /if --></option>
+					{$value.title}<!-- if $value.typeinfos --> / {lang支援上傳格式：}{$value.typeinfos}<!-- /if --></option>
 					<!-- /loop -->
 				</select>
 			</td>
@@ -146,7 +146,7 @@ function cate_change()
 {
 	val = $("#add_cate_id").val();
 	if(!val){
-		$.dialog.alert('请选择要存储的目标分类');
+		$.dialog.alert('請選擇要儲存的目標分類');
 		return false;
 	}
 	var data = $("#add_cate_id option[value="+val+"]").attr('data');
@@ -164,7 +164,7 @@ function cate_change()
 		'fileVal':'upfile',
 		'auto':true,
 		"success":function(){
-			$.dialog.alert('附件上传成功',function(){
+			$.dialog.alert('附件上傳成功',function(){
 				$.phpok.reload();
 			});
 		}

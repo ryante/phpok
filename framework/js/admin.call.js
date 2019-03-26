@@ -1,11 +1,11 @@
 /**
- * 数据调用
+ * 資料呼叫
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年09月23日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年09月23日
 **/
 ;(function($){
 	$.admin_call = {
@@ -26,7 +26,7 @@
 			for(var i in lst){
 				$("div[name=ext_"+lst[i]+"]").show();
 			}
-			//动态执行Ajax
+			//動態執行Ajax
 			var chk_ajax = $("input[name=type_id][value="+val+"]").attr('ajax');
 			if(chk_ajax && chk_ajax != 'undefined'){
 				eval(chk_ajax+'()');
@@ -47,7 +47,7 @@
 			if(typeid != 'arclist' && typeid != 'total' && typeid != 'cate' && typeid != 'catelist' && typeid != 'subcate'){
 				return true;
 			}
-			//异步更新分类
+			//非同步更新分類
 			$.phpok.json(url,function(data){
 				if(data.status){
 					var cate = data.info.cate;
@@ -55,10 +55,10 @@
 					var html = '';
 					var space = '';
 					if(cate){
-						html += '<option value="'+cate.id+'">'+p_lang('根分类')+cate.title+'</option>';
+						html += '<option value="'+cate.id+'">'+p_lang('根分類')+cate.title+'</option>';
 						space = '&nbsp; &nbsp;';
 					}else{
-						html += '<option value="">'+p_lang('请选择…')+'</option>';
+						html += '<option value="">'+p_lang('請選擇…')+'</option>';
 					}
 					if(rslist){
 						for(var i in rslist){
@@ -115,8 +115,8 @@
 					$("div[name=ext_attr]").show();
 				}
 				html = '<div class="button-group">';
-				html += '<input type="button" value="'+p_lang('全部字段')+'" onclick="input_fields(\'*\')" class="layui-btn layui-btn-sm" />';
-				html += '<input type="button" value="'+p_lang('仅主表字段')+'" onclick="input_fields(\'id\')" class="layui-btn layui-btn-sm" />';
+				html += '<input type="button" value="'+p_lang('全部欄位')+'" onclick="input_fields(\'*\')" class="layui-btn layui-btn-sm" />';
+				html += '<input type="button" value="'+p_lang('僅主表字段')+'" onclick="input_fields(\'id\')" class="layui-btn layui-btn-sm" />';
 				var lst = info.rslist;
 				for(var i in lst){
 					html += '<input type="button" value="'+lst[i].title+'" onclick="input_fields(\''+lst[i].identifier+'\')" class="layui-btn layui-btn-sm" />'
@@ -144,7 +144,7 @@
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						var tip = $("#id").length > 0 ? p_lang('调用信息编辑成功') : p_lang('调用信息添加成功');
+						var tip = $("#id").length > 0 ? p_lang('呼叫資訊編輯成功') : p_lang('呼叫資訊新增成功');
 						$.dialog.tips(tip,function(){
 							$.admin.reload(get_url('call'));
 							$.admin.close();
@@ -160,11 +160,11 @@
 		del:function(id,title)
 		{
 			var url = get_url("call","delete","id="+id);
-			var tip = p_lang('确定要删除 {title}，删除后前台关于此调用的数据将都失效','<span class="red">'+title+'</span>');
+			var tip = p_lang('確定要刪除 {title}，刪除後前臺關於此呼叫的資料將都失效','<span class="red">'+title+'</span>');
 			$.dialog.confirm(tip,function(){
 				$.phpok.json(url,function(rs){
 					if(rs.status){
-						$.dialog.tips(p_lang('删除成功'));
+						$.dialog.tips(p_lang('刪除成功'));
 						$.phpok.reload();
 						return true;
 					}
@@ -243,7 +243,7 @@ function input_fields(val)
 	}
 }
 
-//不能为空字段选集
+//不能為空欄位選集
 function fields_click(val)
 {
 	var tmp = $("#fields_need").val();
@@ -262,13 +262,13 @@ function open_fields(id)
 {
 	var project_val = $("#pid").val();
 	if(!project_val || project_val == "undefined"){
-		$.dialog.alert("动态调用不支持字符选择框，请人工输入<br />不会编写的朋友，请登录官网查看帮助");
+		$.dialog.alert("動態呼叫不支援字元選擇框，請人工輸入<br />不會編寫的朋友，請登入官網檢視幫助");
 		return false;
 	}
 	var url = get_url("call","fields") +"&id="+$.str.encode(id);
 	url += "&project_id="+project_val;
 	$.dialog.open(url,{
-		"title":p_lang('字符串选择器'),
+		"title":p_lang('字串選擇器'),
 		"width" : "700px",
 		"height" : "80%",
 		"resize" : false,

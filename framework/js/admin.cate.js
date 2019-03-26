@@ -1,10 +1,10 @@
 /**
- * 分类相关操作
+ * 分類相關操作
  * @作者 qinggan <admin@phpok.com>
- * @版权 2008-2018 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 2008-2018 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2018年09月16日
 **/
 
@@ -12,7 +12,7 @@
 	$.admin_cate = {
 
 		/**
-		 * 保存分类操作
+		 * 儲存分類操作
 		**/
 		save:function()
 		{
@@ -29,9 +29,9 @@
 					if(rs.status){
 						var id = $("#id").val();
 						if(id && id > 0){
-							var tip = p_lang('分类信息编辑成功');
+							var tip = p_lang('分類資訊編輯成功');
 						}else{
-							var tip = p_lang('分类信息添加成功');
+							var tip = p_lang('分類資訊新增成功');
 						}
 						$.dialog.tips(tip,function(){
 							$.admin.reload(get_url('cate'));
@@ -47,15 +47,15 @@
 		},
 
 		/**
-		 * 删除分类
+		 * 刪除分類
 		**/
 		del:function(id)
 		{
-			$.dialog.confirm(p_lang('确定要删除此分类吗？{id}','<span class="red">#'+id+'</span>'),function(){
+			$.dialog.confirm(p_lang('確定要刪除此分類嗎？{id}','<span class="red">#'+id+'</span>'),function(){
 	            var url = get_url("cate","delete","id="+id);
 	            $.phpok.json(url,function(rs){
 		            if(rs.status){
-			            $.dialog.tips(p_lang('分类删除成功'),function(){
+			            $.dialog.tips(p_lang('分類刪除成功'),function(){
 				            $.phpok.reload();
 			            }).lock();
 			            return true;
@@ -67,13 +67,13 @@
 		},
 
 		/**
-		 * 添加扩展分类
+		 * 新增擴充套件分類
 		**/
 		ext_add:function(id)
 		{
 			var val = $("#_tmp_select_add").val();
 			if(!val){
-				$.dialog.alert(p_lang('请选择要添加的扩展'));
+				$.dialog.alert(p_lang('請選擇要新增的擴充套件'));
 				return false;
 			}
 			ext_add2(val,id);

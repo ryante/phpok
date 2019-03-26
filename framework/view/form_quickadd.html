@@ -9,7 +9,7 @@ function save()
 	}
 	var opener = $.dialog.opener;
 	var obj = opener.$("#{$identifier}");
-	var tip = $.dialog.tips(p_lang('正在保存数据…'),100);
+	var tip = $.dialog.tips(p_lang('正在儲存資料…'),100);
 	$("#post_save").ajaxSubmit({
 		'url':get_url('form','quick_save'),
 		'type':'post',
@@ -34,7 +34,7 @@ function save()
 				obj.val(newinfo);
 				opener.$.phpokform.extitle_reload('{$id}','{$identifier}');
 				$.dialog.close();
-				var tipinfo = is_new ? p_lang('添加成功') : p_lang('编辑成功');
+				var tipinfo = is_new ? p_lang('新增成功') : p_lang('編輯成功');
 				opener.$.dialog.tips(tipinfo);
 				return true;
 			}
@@ -52,10 +52,10 @@ function save()
 		<!-- if !$m_rs.mtype -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				<!-- if $p_rs.alias_title -->{$p_rs.alias_title}<!-- else -->{lang主题}<!-- /if -->
+				<!-- if $p_rs.alias_title -->{$p_rs.alias_title}<!-- else -->{lang主題}<!-- /if -->
 			</label>
 			<div class="layui-input-block">
-				<input type="text" name="title" id="title" value="{$rs.title}" class="layui-input" placeholder="{lang此项必填}{if $p_rs.alias_note}，{$p_rs.alias_note}{/if}" />
+				<input type="text" name="title" id="title" value="{$rs.title}" class="layui-input" placeholder="{lang此項必填}{if $p_rs.alias_note}，{$p_rs.alias_note}{/if}" />
 			</div>
 		</div>
 		<!-- /if -->

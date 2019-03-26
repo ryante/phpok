@@ -14,10 +14,10 @@
 	<div class="am-g" style="max-width:1200px;">
 		<!-- loop from=$list.rslist key=$key value=$value -->
 		<!-- if $value.qtype == 'qq' -->
-		<div class="am-u-sm-3 am-u-xx-centered"><a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin={$value.qq}&site=qq&menu=yes" title="点击这里给我发消息">{$value.title}（QQ：{$value.qq}） <img border="0" src="images/qq.png" alt="点击这里给我发消息" style="width:32px;"/></a></div>
+		<div class="am-u-sm-3 am-u-xx-centered"><a target="_blank" href="//wpa.qq.com/msgrd?v=3&uin={$value.qq}&site=qq&menu=yes" title="點選這裡給我發訊息">{$value.title}（QQ：{$value.qq}） <img border="0" src="images/qq.png" alt="點選這裡給我發訊息" style="width:32px;"/></a></div>
 		<!-- else -->
 		<div class="am-u-sm-3 am-u-xx-centered weixin">
-			<a href="javascript:void(0);">{$value.title}（微信：{$value.weixin}） <img border="0" src="images/weixin.png" alt="鼠标移到这里查看二维码" style="width:32px;"/></a>
+			<a href="javascript:void(0);">{$value.title}（微信：{$value.weixin}） <img border="0" src="images/weixin.png" alt="滑鼠移到這裡檢視二維碼" style="width:32px;"/></a>
 			<div class="wxpic" data-filename="{$value.qrcode.filename}"></div>
 		</div>
 		<!-- /if -->

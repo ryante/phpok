@@ -1,10 +1,10 @@
 /**
- * 后台公共JS
+ * 後臺公共JS
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2018年09月16日
 **/
 function alt_open(id,note)
@@ -40,10 +40,10 @@ function taxis(baseurl,default_value)
 	if(!default_value || default_value == "undefined") default_value = "0";
 	var id_string = $.input.checkbox_join();
 	if(!id_string || id_string == "undefined"){
-		$.dialog.alert("没有指定要更新的排序ID！");
+		$.dialog.alert("沒有指定要更新的排序ID！");
 		return false;
 	}
-	//取得排序值信息
+	//取得排序值資訊
 	var id_list = id_string.split(",");
 	var id_leng = id_list.length;
 	for(var i=0;i<id_leng;i++){
@@ -62,7 +62,7 @@ function taxis(baseurl,default_value)
 	}
 }
 
-/* 通用状态更新 */
+/* 通用狀態更新 */
 function phpok_status(id,url)
 {
 	if(!url || url == "undefined" || !id) return false;
@@ -73,7 +73,7 @@ function phpok_status(id,url)
 			if(info == 1){
                 var status_css="";
                 var old_cls = "layui-btn-danger";
-                $("#status_"+id).val("启用");
+                $("#status_"+id).val("啟用");
             }else{
                 var status_css="layui-btn-danger";
                 var old_cls = "";
@@ -88,10 +88,10 @@ function phpok_status(id,url)
 	})
 }
 
-/* 通用表单自动存储 */
-// formid，要自动存储的表单ID
-// type，要自动存储的类型，目前仅支持 cate list两种
-// func，返回执行的函数
+/* 通用表單自動儲存 */
+// formid，要自動儲存的表單ID
+// type，要自動儲存的型別，目前僅支援 cate list兩種
+// func，返回執行的函式
 function autosave(formid,type,func)
 {
 	if(!type || type == "undefined"){
@@ -102,11 +102,11 @@ function autosave(formid,type,func)
 	}
 	var str = $("#"+formid).serialize();
 	var url = get_url("auto") + "&__type="+type;
-	//通过POST存储数据
+	//通過POST儲存資料
 	$.post(url,str,function(rs){(func)(rs);},"json");
 }
 
-//弹出图片选择窗口
+//彈出圖片選擇視窗
 function phpok_pic(id)
 {
 	if(!id || id == "undefined"){
@@ -115,38 +115,38 @@ function phpok_pic(id)
 	}
 	var url = get_url("open","input",'id='+id);
 	$.dialog.open(url,{
-		title: p_lang('图片管理器'),
+		title: p_lang('圖片管理器'),
 		lock : true,
 		width: "650px",
 		height: "450px"
 	});
 }
 
-// 预览图片
+// 預覽圖片
 function phpok_pic_view(id)
 {
 	var url = $("#"+id).val();
 	if(!url || url == "undefined"){
-		$.dialog.alert("图片不存在，请在表单中填写图片地址");
+		$.dialog.alert("圖片不存在，請在表單中填寫圖片地址");
 	}else{
 		top.$.dialog({
-			'title':'预览',
+			'title':'預覽',
 			'content':'<img src="'+url+'" border="0" style="max-width:500px" />',
 			'lock':true,
 			'ok':function(){},
 			'height':350,
 			'width':500,
-			'okVal':'关闭预览'
+			'okVal':'關閉預覽'
 		});
 	}
 }
 
-//弹出窗口，选择模板
+//彈出視窗，選擇模板
 function phpok_tpl_open(id)
 {
 	var url = get_url("tpl","open") + "&id="+id;
 	$.dialog.open(url,{
-		title: "模板选择",
+		title: "模板選擇",
 		lock : true,
 		width: "700px",
 		height: "70%",
@@ -161,14 +161,14 @@ function phpok_tpl_open(id)
 function phpok_admin_orderby(id,val)
 {
 	$.dialog({
-		"title":"排序设置",
-		"content":'<div><label for="_phpok_tmp_desc_'+id+'"><input type="radio" name="_phpok_tmp_desc_asc_'+id+'" value="DESC" checked id="_phpok_tmp_desc_'+id+'"/>倒序↓，数值从高排到低，示例：Z→A，9→1</label></div><div><label for="_phpok_tmp_asc_'+id+'"><input type="radio" value="ASC" name="_phpok_tmp_desc_asc_'+id+'" id="_phpok_tmp_asc_'+id+'"/>正序↑，数值从低排到高，示例：A→Z，1→9</label></div>',
+		"title":"排序設定",
+		"content":'<div><label for="_phpok_tmp_desc_'+id+'"><input type="radio" name="_phpok_tmp_desc_asc_'+id+'" value="DESC" checked id="_phpok_tmp_desc_'+id+'"/>倒序↓，數值從高排到低，示例：Z→A，9→1</label></div><div><label for="_phpok_tmp_asc_'+id+'"><input type="radio" value="ASC" name="_phpok_tmp_desc_asc_'+id+'" id="_phpok_tmp_asc_'+id+'"/>正序↑，數值從低排到高，示例：A→Z，1→9</label></div>',
 		'lock':true,
 		"ok":function(){
 			var desc_asc = $("input[name=_phpok_tmp_desc_asc_"+id+"]:checked").val();
 			if(!desc_asc)
 			{
-				alert("请选择排序方式");
+				alert("請選擇排序方式");
 				return false;
 			}
 			val += " "+desc_asc;
@@ -188,7 +188,7 @@ function phpok_admin_orderby(id,val)
 
 function goto_site(id,oldid)
 {
-	$.dialog.confirm(p_lang('确定要切换到网站')+"<span style='color:red;font-weight:bold;'>"+$('#top_site_id').find("option:selected").text()+"</span>",function(){
+	$.dialog.confirm(p_lang('確定要切換到網站')+"<span style='color:red;font-weight:bold;'>"+$('#top_site_id').find("option:selected").text()+"</span>",function(){
 		var url = get_url("index","site") + "&id="+id.toString();
 		direct(url);
 	},function(){
@@ -196,12 +196,12 @@ function goto_site(id,oldid)
 	});
 }
 
-//添加自定义字段
+//新增自定義欄位
 function ext_add(module)
 {
 	var url = get_url('ext','create','id='+$.str.encode(module));
 	$.dialog.open(url,{
-		'title':'创建扩展字段',
+		'title':'建立擴充套件欄位',
 		'width':'750px',
 		'height':'580px',
 		'resize':false,
@@ -209,7 +209,7 @@ function ext_add(module)
 		'ok':function(){
 			var iframe = this.iframe.contentWindow;
 			if (!iframe.document.body) {
-				alert('iframe还没加载完毕呢');
+				alert('iframe還沒載入完畢呢');
 				return false;
 			};
 			iframe.save();
@@ -234,14 +234,14 @@ function ext_add2(id,module)
 }
 
 /**
- * 删除扩展字段
- * @参数 id 要删除的ID
- * @参数 module 指定模块
- * @参数 title 标题，用于提示说明
+ * 刪除擴充套件欄位
+ * @引數 id 要刪除的ID
+ * @引數 module 指定模組
+ * @引數 title 標題，用於提示說明
 **/
 function ext_delete(id,module,title)
 {
-	$.dialog.confirm(p_lang('确定要删除扩展字段：{title} 吗？<br>删除后是不能恢复的！','<span class="red">'+title+'</span>'),function(){
+	$.dialog.confirm(p_lang('確定要刪除擴充套件欄位：{title} 嗎？<br>刪除後是不能恢復的！','<span class="red">'+title+'</span>'),function(){
 		var url = get_url('ext','delete','module='+$.str.encode(module)+"&id="+id);
 		$.phpok.json(url,function(data){
 			if(data.status == 'ok'){
@@ -254,13 +254,13 @@ function ext_delete(id,module,title)
 	})
 }
 
-//编辑字段
+//編輯欄位
 function ext_edit(id,module)
 {
 	var url = get_url("ext","edit",'id='+id);
 	url += "&module="+$.str.encode(module);
 	$.dialog.open(url,{
-		"title" : "编辑扩展字段属性",
+		"title" : "編輯擴充套件欄位屬性",
 		"width" : "700px",
 		"height" : "95%",
 		"win_min":false,
@@ -271,7 +271,7 @@ function ext_edit(id,module)
 		'ok': function(){
 			var iframe = this.iframe.contentWindow;
 			if (!iframe.document.body) {
-				alert('iframe还没加载完毕呢');
+				alert('iframe還沒載入完畢呢');
 				return false;
 			};
 			iframe.save();
@@ -280,10 +280,10 @@ function ext_edit(id,module)
 	});
 }
 
-//前台常用JS函数封装
+//前臺常用JS函式封裝
 ;(function($){
 	$.admin = {
-		//更换Tab设置
+		//更換Tab設定
 		tab:function(val)
 		{
 			$("#float_tab li").each(function(i){
@@ -308,11 +308,11 @@ function ext_edit(id,module)
 				$(this).removeClass('on');
 				$("#"+name+"_setting").hide();
 			});
-			//显示当前的
+			//顯示當前的
 			$(obj).addClass('on');
 			$("#"+val+"_setting").show();
 		},
-		//基于父级窗口执行的badge，具体查看 admin.index.js
+		//基於父級視窗執行的badge，具體檢視 admin.index.js
 		badge:function()
 		{
 			$("em.toptip").remove();
@@ -328,7 +328,7 @@ function ext_edit(id,module)
 			}
 			return true;
 		},
-		//搜索框是否显示
+		//搜尋框是否顯示
 		hide_show:function(id)
 		{
 			if(!id || id == 'undefined'){
@@ -346,8 +346,8 @@ function ext_edit(id,module)
 		},
 
 		/**
-		 * 刷新父标签窗口
-		 * @参数 url 要刷新的父标签网址
+		 * 重新整理父標籤視窗
+		 * @引數 url 要重新整理的父標籤網址
 		**/
 		reload:function(url)
 		{
@@ -366,8 +366,8 @@ function ext_edit(id,module)
 		},
 
 		/**
-		 * 跳转到标签页
-		 * @参数 url 要跳转的标签页
+		 * 跳轉到標籤頁
+		 * @引數 url 要跳轉的標籤頁
 		**/
 		goto_tab:function(url)
 		{
@@ -390,7 +390,7 @@ function ext_edit(id,module)
 		},
 
 		/**
-		 * 关闭当前窗口
+		 * 關閉當前視窗
 		**/
 		close:function(url)
 		{
@@ -424,7 +424,7 @@ function ext_edit(id,module)
 		},
 
 		/**
-		 * 随机码
+		 * 隨機碼
 		**/
 		rand:function(id)
 		{
@@ -457,52 +457,52 @@ function ext_edit(id,module)
 $(document).ready(function(){
 	var clipboard = new Clipboard('.phpok-copy');
 	clipboard.on('success', function(e){
-		$.dialog.tips(p_lang('复制成功'));
+		$.dialog.tips(p_lang('複製成功'));
 		e.clearSelection();
 	});
 	clipboard.on('error', function(e){
-		$.dialog.tips(p_lang('复制失败'));
+		$.dialog.tips(p_lang('複製失敗'));
 	});
 	var r_menu_in_copy = [{
-		'text':p_lang('复制'),
+		'text':p_lang('複製'),
 		'func':function(){
 			var info = $("#smart-phpok-copy-html").val();
 			if(window.clipboardData && info != ''){
 				window.clipboardData.setData("Text", info);
-				$.dialog.tips(p_lang('文本复制成功，请按 CTRL+V 粘贴'));
+				$.dialog.tips(p_lang('文字複製成功，請按 CTRL+V 貼上'));
 				return true;
 			}
 			if(document.execCommand && info != ''){
 				$("#smart-phpok-copy-html").focus().select();
 				document.execCommand("copy",false,null);
-				$.dialog.tips(p_lang('文本复制成功，请按 CTRL+V 粘贴'));
+				$.dialog.tips(p_lang('文字複製成功，請按 CTRL+V 貼上'));
 				return true;
 			}
-			$.dialog.tips(p_lang('复制失败，请按 CTRL+C 进行复制操作'));
+			$.dialog.tips(p_lang('複製失敗，請按 CTRL+C 進行復制操作'));
 			return true;
 		}
 	},{
-		'text':p_lang('刷新'),
+		'text':p_lang('重新整理'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	}];
 	var r_menu_not_copy = [{
-		'text':p_lang('刷新'),
+		'text':p_lang('重新整理'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	}];
 	var r_menu = [[{
-		'text':p_lang('刷新'),
+		'text':p_lang('重新整理'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	}],[{
-		'text':p_lang('清空缓存'),
+		'text':p_lang('清空快取'),
 		'func': function() {top.$.admin_index.clear();}
 	},{
-		'text':p_lang('访问网站首页'),
+		'text':p_lang('訪問網站首頁'),
 		'func':function(){
 			var url = top.$(".layui-icon-website").parent().attr("href");
 			if(url){
@@ -514,27 +514,27 @@ $(document).ready(function(){
 		}
 	}],
 		[{
-		'text':p_lang('网页属性'),
+		'text':p_lang('網頁屬性'),
 		'func':function(){
 			var url = window.location.href;
-			//去除随机数
+			//去除隨機數
 			url = url.replace(/\_noCache=[0-9\.]+/g,'');
 			if(url.substr(-1) == '&' || url.substr(-1) == '?'){
 				url = url.substr(0,url.length-1);
 			}
 			top.$.dialog({
-				'title':p_lang('网址属性'),
-				'content':p_lang('网址：')+url+'<br /><div style="text-indent:36px"><a href="'+url+'" target="_blank" class="red">'+p_lang('新窗口打开')+'</a></div>',
+				'title':p_lang('網址屬性'),
+				'content':p_lang('網址：')+url+'<br /><div style="text-indent:36px"><a href="'+url+'" target="_blank" class="red">'+p_lang('新視窗開啟')+'</a></div>',
 				'lock':true,
 				'drag':false,
 				'fixed':true
 			});
 		}
 	},{
-		'text': p_lang('新窗口打开'),
+		'text': p_lang('新視窗開啟'),
 		'func': function() {
 			var url = window.location.href;
-			//去除随机数
+			//去除隨機數
 			url = url.replace(/\_noCache=[0-9\.]+/g,'');
 			if(url.substr(-1) == '&' || url.substr(-1) == '?'){
 				url = url.substr(0,url.length-1);
@@ -545,7 +545,7 @@ $(document).ready(function(){
 
         /*
         [{
-        'text': p_lang('帮助说明'),
+        'text': p_lang('幫助說明'),
         'func': function() {
             top.$("a[layadmin-event=about]").click();
         }
@@ -591,12 +591,12 @@ $(document).keydown(function(e){
 	});
 });
 
-//如果有加载layui，执行这个
+//如果有載入layui，執行這個
 if(typeof layui != 'undefined'){
 	layui.config({
-		base: webroot+'static/admin/' //静态资源所在路径
+		base: webroot+'static/admin/' //靜態資源所在路徑
 	}).extend({
-	    index: 'lib/index' //主入口模块
+	    index: 'lib/index' //主入口模組
 	}).use(['layer','form','laydate','index'],function(){
 		layui.form.on('radio',function(data){
 			$(data.elem).click();

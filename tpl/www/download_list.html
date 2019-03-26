@@ -28,11 +28,11 @@
 				</div>
 				<!-- if !$value.onlyuser || ($value.onlyuser && $session.user_id) -->
 				<div class="am-u-sm-2" style="text-align:right;">
-					<a href="{if $value.dfile}{url ctrl=download id=$value.dfile.id/}{else}{$value.dlink}{/if}" class="am-btn am-btn-success am-btn-xs am-radius" target="_blank" style="padding-right:1em;">下载附件</a>
+					<a href="{if $value.dfile}{url ctrl=download id=$value.dfile.id/}{else}{$value.dlink}{/if}" class="am-btn am-btn-success am-btn-xs am-radius" target="_blank" style="padding-right:1em;">下載附件</a>
 				</div>
 				<!-- else -->
 				<div class="am-u-sm-2" style="text-align:right;">
-					<a class="am-btn am-btn-danger am-btn-xs am-radius" href="{url ctrl=login _back=$value.url/}" style="padding-right:1em;">请先登录</a>
+					<a class="am-btn am-btn-danger am-btn-xs am-radius" href="{url ctrl=login _back=$value.url/}" style="padding-right:1em;">請先登入</a>
 				</div>
 				<!-- /if -->
 				

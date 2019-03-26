@@ -36,11 +36,11 @@ function select_post(val,title)
 <table width="100%" cellpadding="0" cellspacing="0" class="list">
 <tr>
 	<th class="id" height="30px">ID</th>
-	<th class="title">项目名称</th>
-	<th class="w60">分类</th>
-	<th class="w60">内容</th>
+	<th class="title">專案名稱</th>
+	<th class="w60">分類</th>
+	<th class="w60">內容</th>
 	<th class='w60'>操作</th>
-	<th class='w60'>表单</th>
+	<th class='w60'>表單</th>
 </tr>
 <!-- foreach($rslist AS $key=>$value) -->
 <tr>
@@ -48,14 +48,14 @@ function select_post(val,title)
 	<td style="text-align: left;height:33px;">&nbsp;{$value.space}{$value.title}<span class="gray"> / {$value.identifier}</span></td>
 	<td class="center">
 		<!-- if $value.cate -->
-		<a href="{echo admin_url('open','url')}&pid={$value.id}&type=cate&id={$id}">进入</a>
+		<a href="{echo admin_url('open','url')}&pid={$value.id}&type=cate&id={$id}">進入</a>
 		<!-- else -->
 		-
 		<!-- /if -->
 	</td>
 	<td class="center">
 		<!-- if $value.module -->
-		<a href="{echo admin_url('open','url')}&pid={$value.id}&type=list&id={$id}">进入</a>
+		<a href="{echo admin_url('open','url')}&pid={$value.id}&type=list&id={$id}">進入</a>
 		<!-- else -->
 		-
 		<!-- /if -->
@@ -64,7 +64,7 @@ function select_post(val,title)
 		<input type="button" value="提交" class="btn" onclick="select_input('{$value.identifier}','{$value.title}')" />
 	</td>
 	<td>
-		<input type="button" value="表单" class="btn" onclick="select_post('{$value.identifier}','{$value.title}')" />
+		<input type="button" value="表單" class="btn" onclick="select_post('{$value.identifier}','{$value.title}')" />
 	</td>
 </tr>
 <!-- /foreach -->

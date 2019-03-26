@@ -3,15 +3,15 @@
 <input type="hidden" id="id" name="id" value="{$id}" />
 <div class="table">
 	<div class="title">
-		{lang后台字段布局：}
-		<span class="note">{lang在这里设置要显示的字段属性}</span>
+		{lang後臺欄位佈局：}
+		<span class="note">{lang在這裡設定要顯示的欄位屬性}</span>
 	</div>
 	<div class="content">
 		<ul class="layout">
 			<!-- if !$rs.mtype -->
-			<li><label><input type="checkbox" name="layout[]" value="hits"{if in_array("hits",$layout)} checked{/if} />{lang查看次数}</label></li>
-			<li><label><input type="checkbox" name="layout[]" value="dateline"{if in_array("dateline",$layout)} checked{/if} />{lang发布时间}</label></li>
-			<li><label><input type="checkbox" name="layout[]" value="user_id"{if in_array("user_id",$layout)} checked{/if} />{lang会员账号}</label></li>
+			<li><label><input type="checkbox" name="layout[]" value="hits"{if in_array("hits",$layout)} checked{/if} />{lang檢視次數}</label></li>
+			<li><label><input type="checkbox" name="layout[]" value="dateline"{if in_array("dateline",$layout)} checked{/if} />{lang釋出時間}</label></li>
+			<li><label><input type="checkbox" name="layout[]" value="user_id"{if in_array("user_id",$layout)} checked{/if} />{lang會員賬號}</label></li>
 			<!-- /if -->
 			<!-- loop from=$used_list key=$key value=$value -->
 			<li><label><input type="checkbox" name="layout[]" id="layout_{$value.identifier}" value="{$value.identifier}"{if in_array($value[identifier],$layout)} checked{/if} />{$value.title}</label></li>

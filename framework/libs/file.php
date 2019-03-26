@@ -404,8 +404,8 @@ class file_lib
 	}
 
 	/**
-	 * 關閉控制代碼
-	 * @引數 $handle 控制代碼
+	 * 關閉控制程式碼
+	 * @引數 $handle 控制程式碼
 	**/
 	private function _close($handle)
 	{

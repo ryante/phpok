@@ -1,17 +1,17 @@
 /**
- * 在线升级执行动作
+ * 線上升級執行動作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2019年1月11日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2019年1月11日
 **/
 
 var lock = false;
 function start_update()
 {
-	$("#start_id").attr("disabled",true).val('正在升级，请稍候…');
+	$("#start_id").attr("disabled",true).val('正在升級，請稍候…');
 	ok_start();
 }
 function ok_start()
@@ -27,7 +27,7 @@ function ok_start()
 		}
 	});
 	if(is_end){
-		$.dialog.alert(p_lang('升级成功'),function(){
+		$.dialog.alert(p_lang('升級成功'),function(){
 			top.window.location.reload();
 		},'succeed');
 	}

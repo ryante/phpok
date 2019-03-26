@@ -2,7 +2,7 @@
 <script type="text/javascript" src="{func include_js list.js}"></script>
 <!-- if $project_list -->
 <div class="layui-card">
-	<div class="layui-card-header">{lang子项信息，请点击操作} <span class="red">{$rs.title}</span></div>
+	<div class="layui-card-header">{lang子項資訊，請點選操作} <span class="red">{$rs.title}</span></div>
 	<div class="layui-card-body">
 		<ul class="project" id="project">
 			<!-- loop from=$project_list key=$key value=$value -->
@@ -19,14 +19,14 @@
 
 <!-- if $rs.module -->
 <div class="layui-card" id="search_html"{if !$keywords} style="display:none"{/if}>
-	<div class="layui-card-header">{lang搜索}</div>
+	<div class="layui-card-header">{lang搜尋}</div>
 	<div class="layui-card-body">
 		<form method="post" class="layui-form" action="{url ctrl=list func=action id=$pid/}">
 		<div class="layui-form-item phpok-search">
 
 			<!-- if $rs.is_attr -->
 			<div class="layui-inline">
-				<label class="layui-form-label">{lang属性}</label>
+				<label class="layui-form-label">{lang屬性}</label>
 				<div class="layui-input-block">
 					<select name="keywords[attr]" id="search_attr">
 						<option value=""></option>
@@ -39,10 +39,10 @@
 			<!-- /if -->
 			<!-- if $rs.cate && $catelist -->
 			<div class="layui-inline">
-				<label class="layui-form-label">{lang分类}</label>
+				<label class="layui-form-label">{lang分類}</label>
 				<div class="layui-input-block">
 					<select name="keywords[cateid]">
-						<option value="">{lang选择分类…}</option>
+						<option value="">{lang選擇分類…}</option>
 						<!-- loop from=$opt_catelist key=$key value=$value -->
 						<option value="{$value.id}"{if $keywords && $keywords.cateid == $value.id} selected{/if}>{$value._space}{$value.title}</option>
 						<!-- /loop -->
@@ -54,22 +54,22 @@
 				<label class="layui-form-label">{lang排序}</label>
 				<div class="layui-input-block">
 					<select name="keywords[orderby_search]">
-						<option value="">{lang默认排序}</option>
-						<option value="sort_max"{if $keywords && $keywords.orderby_search=='sort_max'} selected{/if}>{lang排序从高到低}</option>
-						<option value="sort_min"{if $keywords && $keywords.orderby_search=='sort_min'} selected{/if}>{lang排序从低到高}</option>
-						<option value="dateline_max"{if $keywords && $keywords.orderby_search=='dateline_max'} selected{/if}>{lang最后发布排在前面}</option>
-						<option value="dateline_min"{if $keywords && $keywords.orderby_search=='dateline_min'} selected{/if}>{lang以前发布的排在前面}</option>
+						<option value="">{lang預設排序}</option>
+						<option value="sort_max"{if $keywords && $keywords.orderby_search=='sort_max'} selected{/if}>{lang排序從高到低}</option>
+						<option value="sort_min"{if $keywords && $keywords.orderby_search=='sort_min'} selected{/if}>{lang排序從低到高}</option>
+						<option value="dateline_max"{if $keywords && $keywords.orderby_search=='dateline_max'} selected{/if}>{lang最後釋出排在前面}</option>
+						<option value="dateline_min"{if $keywords && $keywords.orderby_search=='dateline_min'} selected{/if}>{lang以前釋出的排在前面}</option>
 					</select>
 				</div>
 			</div>
 			<div class="layui-inline">
-				<label class="layui-form-label">{lang开始时间}</label>
+				<label class="layui-form-label">{lang開始時間}</label>
 				<div class="layui-input-block">
 					<input type="text" name="keywords[dateline_start]" class="layui-input" id="dateline_start"{if $keywords} value="{$keywords.dateline_start}"{/if} />
 				</div>
 			</div>
 			<div class="layui-inline">
-				<label class="layui-form-label">{lang结束时间}</label>
+				<label class="layui-form-label">{lang結束時間}</label>
 				<div class="layui-input-block">
 					<input type="text" name="keywords[dateline_stop]" class="layui-input" id="dateline_stop"{if $keywords} value="{$keywords.dateline_stop}"{/if} />
 				</div>
@@ -80,38 +80,38 @@
 			<div class="layui-inline">
 				<label class="layui-form-label">{$value.title}</label>
 				<div class="layui-input-block">
-					<input type="text" name="keywords[{$value.identifier}]" class="layui-input"{if $keywords} value="{$keywords[$value.identifier]}"{/if} placeholder="{if $value.search == 1}{lang仅支持精确搜索}{else}{lang支持模糊搜索}{/if}" />
+					<input type="text" name="keywords[{$value.identifier}]" class="layui-input"{if $keywords} value="{$keywords[$value.identifier]}"{/if} placeholder="{if $value.search == 1}{lang僅支援精確搜尋}{else}{lang支援模糊搜尋}{/if}" />
 				</div>
 			</div>
 			<!-- /if -->
 			<!-- /loop -->
 			<!-- if $rs.is_tag -->
 			<div class="layui-inline">
-				<label class="layui-form-label">{lang标签Tag}</label>
+				<label class="layui-form-label">{lang標籤Tag}</label>
 				<div class="layui-input-block">
-					<input type="text" name="keywords[tag]" class="layui-input"{if $keywords} value="{$keywords.tag}"{/if} placeholder="{lang多个标签请用逗号隔开}" />
+					<input type="text" name="keywords[tag]" class="layui-input"{if $keywords} value="{$keywords.tag}"{/if} placeholder="{lang多個標籤請用逗號隔開}" />
 				</div>
 			</div>
 			<!-- /if -->
 			<!-- if $rs.is_userid -->
 			<div class="layui-inline">
-				<label class="layui-form-label">{lang会员}</label>
+				<label class="layui-form-label">{lang會員}</label>
 				<div class="layui-input-block">
-					<input type="text" name="keywords[user]" class="layui-input"{if $keywords} value="{$keywords.user}"{/if} placeholder="{lang会员账号、手机号及Email}" />
+					<input type="text" name="keywords[user]" class="layui-input"{if $keywords} value="{$keywords.user}"{/if} placeholder="{lang會員賬號、手機號及Email}" />
 				</div>
 			</div>
 			<!-- /if -->
 			<div class="layui-inline">
-				<label class="layui-form-label">{$rs.alias_title ? $rs.alias_title : P_Lang('主题')}</label>
+				<label class="layui-form-label">{$rs.alias_title ? $rs.alias_title : P_Lang('主題')}</label>
 				<div class="layui-input-block">
-					<input type="text" name="keywords[title]" class="layui-input"{if $keywords} value="{$keywords.title}"{/if} placeholder="{lang支持模糊搜索}" />
+					<input type="text" name="keywords[title]" class="layui-input"{if $keywords} value="{$keywords.title}"{/if} placeholder="{lang支援模糊搜尋}" />
 				</div>
 			</div>
 			<div class="layui-inline">
 				<label class="layui-form-label">&nbsp;</label>
 				<div class="layui-input-block">
-					<input type="submit" value="{lang提交搜索}" class="layui-btn layui-btn-normal" />
-					<input type="button" value="{lang取消搜索}" onclick="$.phpok.go('{url ctrl=list func=action id=$rs.id/}')" class="layui-btn layui-btn-primary" />
+					<input type="submit" value="{lang提交搜尋}" class="layui-btn layui-btn-normal" />
+					<input type="button" value="{lang取消搜尋}" onclick="$.phpok.go('{url ctrl=list func=action id=$rs.id/}')" class="layui-btn layui-btn-primary" />
 				</div>
 			</div>
 		</div>
@@ -134,11 +134,11 @@
 		<span id="AP_ACTION_HTML"></span>
 		<div class="layui-btn-group fr">
 			<!-- if $popedom.add -->
-			<button class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.win('{$rs.title}_{lang添加内容}','{url ctrl=list func=edit pid=$pid/}')"><span class="layui-icon">&#xe654;</span>{lang添加内容}</button>
+			<button class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.win('{$rs.title}_{lang新增內容}','{url ctrl=list func=edit pid=$pid/}')"><span class="layui-icon">&#xe654;</span>{lang新增內容}</button>
 			<!-- /if -->
-			<button class="layui-btn layui-btn-sm" onclick="$.admin.hide_show('search_html')"><span class="layui-icon">&#xe615;</span>{lang搜索}</button>
+			<button class="layui-btn layui-btn-sm" onclick="$.admin.hide_show('search_html')"><span class="layui-icon">&#xe615;</span>{lang搜尋}</button>
 			<!-- if $popedom.set || $session.admin_rs.if_system -->
-			<!--<button class="layui-btn layui-btn-sm" onclick="$.phpok_list.set({$pid})"><span class="layui-icon">&#xe642;</span>{lang编辑项目}</button>-->
+			<!--<button class="layui-btn layui-btn-sm" onclick="$.phpok_list.set({$pid})"><span class="layui-icon">&#xe642;</span>{lang編輯專案}</button>-->
 			<!-- /if -->
 		</div>
 	</div>
@@ -150,15 +150,15 @@
 			<th width="20px">&nbsp;</th>
 			<th width="20px">&nbsp;</th>
 			<th>&nbsp;</th>
-			<th>{$rs.alias_title ? $rs.alias_title : P_Lang('主题')}</th>
+			<th>{$rs.alias_title ? $rs.alias_title : P_Lang('主題')}</th>
 			<!-- if $rs.cate -->
-			<th class="center">{lang主分类}</th>
+			<th class="center">{lang主分類}</th>
 			<!-- /if -->
 			<!-- loop from=$layout key=$key value=$value -->
 				<!-- if $key == "dateline" -->
 				<th style="width:150px" class="center">{$value}</th>
 				<!-- elseif $key == "hits" -->
-				<th style="width:50px" class="center">{lang点击}</th>
+				<th style="width:50px" class="center">{lang點選}</th>
 				<!-- elseif $key == "sort" -->
 				<th style="width:80px" class="center">{lang排序}</th>
 				<!-- else -->
@@ -172,12 +172,12 @@
 		<!-- php:$tmp_m = 0 -->
 		<!-- loop from=$rslist key=$key value=$value id=$tmpid -->
 		<!-- php:$tmp_m++ -->
-		<tr id="list_{$value.id}" class="layui-tips" title="{$rs.alias_title ? $rs.alias_title : P_Lang('主题')}: {$value.title}&#10;{lang发布日期}: {func date 'Y-m-d H:i:s' $value.dateline}">
+		<tr id="list_{$value.id}" class="layui-tips" title="{$rs.alias_title ? $rs.alias_title : P_Lang('主題')}: {$value.title}&#10;{lang釋出日期}: {func date 'Y-m-d H:i:s' $value.dateline}">
 			<td class="center"><input type="checkbox" name="ids[]" id="id_{$value.id}" value="{$value.id}" /></td>
 			<td><span class="status{$value.status}" id="status_{$value.id}" {if $popedom.status}onclick="$.admin_list.status({$value.id})"{else} style="cursor: default;"{/if} value="{$value.status}"></span></td>
 			<td class="center">{$value.id}</td>
 			<td><label for="id_{$value.id}">
-				<a href="{$sys.url}?id={$value.id}" target="_blank" title="{lang前台访问}">{$value.title}</a>
+				<a href="{$sys.url}?id={$value.id}" target="_blank" title="{lang前臺訪問}">{$value.title}</a>
 				<!-- if $value.attr -->
 					<!-- php:$attr = explode(",",$value['attr']) -->
 					<!-- loop from=$attr key=$attr_k value=$attr_v -->
@@ -191,11 +191,11 @@
 				<span class="red i"> {func price_format $value.price $value.currency_id}</span>
 				<!-- /if -->
 				<!-- if $value.hidden -->
-				<span class="red i">({lang隐藏})</span>
+				<span class="red i">({lang隱藏})</span>
 				<!-- /if -->
 				<!-- if $clist && $clist[$value.id] -->
 				<div class="extcate">
-					分类：
+					分類：
 					<!-- loop from=$clist[$value.id] key=$ck value=$cv -->
 					<a href="{url ctrl=list func=action id=$pid cateid=$cv/}" class="i">{$cateall[$cv]}</a> 
 					<!-- /loop -->
@@ -208,7 +208,7 @@
 				<!-- if $value.cate_id && is_array($value.cate_id) -->
 				<a href="{echo admin_url('list','action')}&id={$pid}&cateid={$value.cate_id.id}">{$value.cate_id.title}</a>
 				<!-- else -->
-				{lang未设分类}
+				{lang未設分類}
 				<!-- /if -->
 			</td>
 			<!-- /if -->
@@ -243,30 +243,30 @@
 			<td>
 				<div class="layui-btn-group">
 					<!-- if $popedom.modify -->
-					<input type="button" value="{lang编辑}" onclick="top.$.win('{$rs.title}_{lang编辑}_#{$value.id}','{url ctrl=list func=edit id=$value.id/}')" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{lang編輯}" onclick="top.$.win('{$rs.title}_{lang編輯}_#{$value.id}','{url ctrl=list func=edit id=$value.id/}')" class="layui-btn layui-btn-sm" />
 					<!-- /if -->
 					<!-- if $popedom.delete -->
-					<input type="button" value="{lang删除}" onclick="content_del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
+					<input type="button" value="{lang刪除}" onclick="content_del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 					<!-- /if -->
 					<!-- if $popedom.comment && ($rs.comment_status || $comments[$value.id]) -->
 					<button type="button"class="layui-btn layui-btn-sm" onclick="$.admin_list.reply_it('{$value.id}')">
-						{lang评论}
+						{lang評論}
 						<!-- if $comments[$value.id][uncheck] --><span class="layui-badge layui-bg-orange">{$comments[$value.id][uncheck]}</span><!-- /if -->
 					</button>
 					<!-- /if -->
-					<!-- if $rs.subtopics && !$value.parent_id && $popedom.add --><input type="button" value="{lang加版本}" onclick="$.win('{lang加子主题}_{$rs.title}','{url ctrl=list func=edit parent_id=$value.id pid=$value.project_id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
+					<!-- if $rs.subtopics && !$value.parent_id && $popedom.add --><input type="button" value="{lang加版本}" onclick="$.win('{lang加子主題}_{$rs.title}','{url ctrl=list func=edit parent_id=$value.id pid=$value.project_id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
 					<!-- if $my_module --><input type="button" value="書籍管理" onclick="$.win('{$rs.title}_{$value.title}','{url ctrl=book func=action id=8 lid=$value.id /}')" class="layui-btn layui-btn-sm" /><!-- /if -->
 				</div>
 			</td>
 		</tr>
 			<!-- loop from=$value.sonlist key=$kk value=$vv -->
 			<!-- php:$tmp_m++ -->
-			<tr id="list_{$vv.id}" class="layui-tips" title="{$rs.alias_title ? $rs.alias_title : P_Lang('主题')}: {$vv.title}&#10;{lang发布日期}: {func date 'Y-m-d H:i:s' $vv.dateline}">
+			<tr id="list_{$vv.id}" class="layui-tips" title="{$rs.alias_title ? $rs.alias_title : P_Lang('主題')}: {$vv.title}&#10;{lang釋出日期}: {func date 'Y-m-d H:i:s' $vv.dateline}">
 				<td class="center"><input type="checkbox" name="ids[]" id="id_{$vv.id}" value="{$vv.id}" /></td>
 				<td><span class="status{$vv.status}" id="status_{$vv.id}" {if $popedom.status}onclick="$.admin_list.status({$vv.id})"{else} style="cursor: default;"{/if} value="{$vv.status}"></span></td>
 				<td class="center">{$vv.id}</td>
 				<td><label for="id_{$vv.id}">
-					&nbsp; &nbsp; ├─ <a href="{$sys.url}?id={$vv.id}" target="_blank" title="{lang前台访问}">{$vv.title}</a>
+					&nbsp; &nbsp; ├─ <a href="{$sys.url}?id={$vv.id}" target="_blank" title="{lang前臺訪問}">{$vv.title}</a>
 					<!-- if $vv.attr -->
 						<!-- php:$attr = explode(",",$vv['attr']) -->
 						<!-- loop from=$attr key=$attr_k value=$attr_v -->
@@ -280,11 +280,11 @@
 					<span class="red i"> {func price_format $vv.price $vv.currency_id}</span>
 					<!-- /if -->
 					<!-- if $vv.hidden -->
-					<span class="red i">(隐藏)</span>
+					<span class="red i">(隱藏)</span>
 					<!-- /if -->
 					<!-- if $clist && $clist[$vv.id] -->
 					<div class="extcate">
-						分类：
+						分類：
 						<!-- loop from=$clist[$vv.id] key=$ck value=$cv -->
 						<a href="{url ctrl=list func=action id=$pid cateid=$cv/}" class="i">{$cateall[$cv]}</a> 
 						<!-- /loop -->
@@ -297,7 +297,7 @@
 					<!-- if $vv.cate_id && is_array($vv.cate_id) -->
 					<a href="{echo admin_url('list','action')}&id={$pid}&cateid={$vv.cate_id.id}">{$vv.cate_id.title}</a>
 					<!-- else -->
-					未设分类
+					未設分類
 					<!-- /if -->
 				<!-- /if -->
 				<!-- loop from=$layout key=$k value=$v -->
@@ -328,11 +328,11 @@
 				<!-- /loop -->
 				<td>
 					<div class="layui-btn-group">
-						<!-- if $popedom.modify --><input type="button" value="{lang编辑}" onclick="top.$.win('{$rs.title}_{lang编辑}_#{$vv.id}','{url ctrl=list func=edit id=$vv.id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
-						<!-- if $popedom.delete --><input type="button" value="{lang删除}" onclick="content_del('{$vv.id}')" class="layui-btn layui-btn-sm layui-btn-danger" /><!-- /if -->
+						<!-- if $popedom.modify --><input type="button" value="{lang編輯}" onclick="top.$.win('{$rs.title}_{lang編輯}_#{$vv.id}','{url ctrl=list func=edit id=$vv.id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
+						<!-- if $popedom.delete --><input type="button" value="{lang刪除}" onclick="content_del('{$vv.id}')" class="layui-btn layui-btn-sm layui-btn-danger" /><!-- /if -->
 						<!-- if $popedom.comment && ($rs.comment_status || $comments[$vv.id]) -->
 						<button type="button"class="layui-btn layui-btn-sm" onclick="$.admin_list.reply_it('{$vv.id}')">
-							{lang评论}
+							{lang評論}
 							<!-- if $comments[$vv.id][uncheck] --><span class="layui-badge layui-bg-orange">{$comments[$vv.id][uncheck]}</span><!-- /if -->
 						</button>
 						<!-- /if -->
@@ -347,22 +347,22 @@
 		<ul class="layout">
 			<li>
 				<div class="layui-btn-group">
-					<input type="button" value="{lang全选}" class="layui-btn layui-btn-primary layui-btn-sm" onclick="$.input.checkbox_all()" />
-					<input type="button" value="{lang全不选}" class="layui-btn layui-btn-primary layui-btn-sm" onclick="$.input.checkbox_none()" />
-					<input type="button" value="{lang反选}" class="layui-btn layui-btn-primary layui-btn-sm" onclick="$.input.checkbox_anti()" />
+					<input type="button" value="{lang全選}" class="layui-btn layui-btn-primary layui-btn-sm" onclick="$.input.checkbox_all()" />
+					<input type="button" value="{lang全不選}" class="layui-btn layui-btn-primary layui-btn-sm" onclick="$.input.checkbox_none()" />
+					<input type="button" value="{lang反選}" class="layui-btn layui-btn-primary layui-btn-sm" onclick="$.input.checkbox_anti()" />
 				</div>
 			</li>
 			<li><select id="list_action_val" onchange="update_select()">
-				<option value="">{lang选择要执行的动作…}</option>
+				<option value="">{lang選擇要執行的動作…}</option>
 				<!-- if $opt_catelist -->
-				<optgroup label="{lang分类操作}">
+				<optgroup label="{lang分類操作}">
 					<!-- loop from=$opt_catelist key=$key value=$value -->
 					<option value="cate:{$value.id}">{$value._space}{$value.title}</option>
 					<!-- /loop -->
 				</optgroup>
 				<!-- /if -->
 				<!-- if $rs.is_attr -->
-				<optgroup label="{$rs.alias_title ? $rs.alias_title : P_Lang('主题')}{lang属性}">
+				<optgroup label="{$rs.alias_title ? $rs.alias_title : P_Lang('主題')}{lang屬性}">
 					<!-- loop from=$attrlist key=$key value=$value -->
 					<option value="attr:{$key}">{$value} {$key}</option>
 					<!-- /loop -->
@@ -370,23 +370,23 @@
 				<!-- /if -->
 				<optgroup label="其他">
 					<!-- if $popedom.status -->
-					<option value="status">{lang审核}</option>
-					<option value="unstatus">{lang取消审核}</option>
+					<option value="status">{lang稽核}</option>
+					<option value="unstatus">{lang取消稽核}</option>
 					<!-- /if -->
-					<option value="hidden">{lang隐藏}</option>
-					<option value="show">{lang显示}</option>
+					<option value="hidden">{lang隱藏}</option>
+					<option value="show">{lang顯示}</option>
 					<!-- if $popedom.delete -->
-					<option value="delete">{lang删除}</option>
+					<option value="delete">{lang刪除}</option>
 					<!-- /if -->
 					<!-- if $popedom.modify && $rs.subtopics -->
-					<option value="set_parent">{lang绑定父层}</option>
-					<option value="unset_parent">{lang取消父层}</option>
+					<option value="set_parent">{lang繫結父層}</option>
+					<option value="unset_parent">{lang取消父層}</option>
 					<!-- /if -->
 				</optgroup>
 				</select></li>
 			<li id="attr_set_li" class="hide">
 				<select name="attr_set_val" style="margin-top:0px;" id="attr_set_val">
-					<option value="add">{lang添加}</option>
+					<option value="add">{lang新增}</option>
 					<option value="delete">{lang移除}</option>
 				</select>
 			</li>
@@ -394,14 +394,14 @@
 			<li id="cate_set_li" class="hide">
 				<select name="cate_set_val" style="margin-top:0px;" id="cate_set_val">
 					<!-- if $rs.cate_multiple -->
-					<option value="add">{lang添加扩展分类}</option>
-					<option value="delete">{lang移除分类绑定}</option>
+					<option value="add">{lang新增擴充套件分類}</option>
+					<option value="delete">{lang移除分類繫結}</option>
 					<!-- /if -->
-					<option value="move">{lang移动主分类}</option>
+					<option value="move">{lang移動主分類}</option>
 				</select>
 			</li>
 			<!-- /if -->
-			<li id="plugin_button"><input type="button" value="{lang执行操作}" onclick="list_action_exec()" class="layui-btn layui-btn-sm" /></li>
+			<li id="plugin_button"><input type="button" value="{lang執行操作}" onclick="list_action_exec()" class="layui-btn layui-btn-sm" /></li>
 		</ul>
 		<div class="center"><!-- include tpl=pagelist --></div>		
 	</div>

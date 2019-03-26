@@ -14,7 +14,7 @@ function save()
 		'dataType':'json',
 		'success':function(rs){
 			if(rs.status == 'ok'){
-				$.dialog.alert('运费配置保存成功',function(){
+				$.dialog.alert('運費配置儲存成功',function(){
 					$.dialog.close();
 				},'succeed');
 			}else{
@@ -54,7 +54,7 @@ function delete_it(val,obj)
 		if(rs.status == 'ok'){
 			$(obj).parent().parent().remove();
 		}else{
-			$.dialog.alert('删除失败，请检查');
+			$.dialog.alert('刪除失敗，請檢查');
 		}
 	});
 }
@@ -75,7 +75,7 @@ function addline()
 	var html = '<tr><td class="center"><input type="text" name="unit_val[]" value="'+max+'" class="short" /></td>';
 	html += '<!-- loop from=$zonelist key=$k value=$v id=$tmpid -->';
 	html += '<td class="center"><input type="text" name="price{$v.id}[]" class="short" /></td><!-- /loop -->';
-	html += '<td class="center"><input type="button" value="删除" onclick="del_it(this)" /></td>';
+	html += '<td class="center"><input type="button" value="刪除" onclick="del_it(this)" /></td>';
 	html += '</tr>';
 	$("table.list tr:last").after(html);
 }
@@ -95,20 +95,20 @@ function addline()
 	<!-- loop from=$zonelist key=$k value=$v id=$tmpid -->
 	<td class="center"><input type="text" name="price{$v.id}[]" value="{$rslist['phpok'.$value][$v.id]}" class="short" /></td>
 	<!-- /loop -->
-	<td class="center"><input type="button" value="删除" onclick="delete_it('{$value}',this)" /></td>
+	<td class="center"><input type="button" value="刪除" onclick="delete_it('{$value}',this)" /></td>
 </tr>
 <!-- /loop -->
 </table>
 <div class="table">
 	<div class="content">
 		<input type="submit" value="增加一行" class="button2" onclick="addline()" />
-		支持使用变量字母：N，N为整数型，
+		支援使用變數字母：N，N為整數型，
 		<!-- if $rs.type == 'weight' -->
-		表示重量，单位是千克，如设置为：118*N，表示118*重量，对应的费用
+		表示重量，單位是千克，如設定為：118*N，表示118*重量，對應的費用
 		<!-- elseif $rs.type == 'number' -->
-		表示数量，如设置为：118*N，表示118*数量，对应的费用
+		表示數量，如設定為：118*N，表示118*數量，對應的費用
 		<!-- elseif $rs.type == 'volume' -->
-		表示体积，单位是立方米，如设置为：118*N，表示118*体积，对应的费用
+		表示體積，單位是立方米，如設定為：118*N，表示118*體積，對應的費用
 		<!-- /if -->
 	</div>
 </div>

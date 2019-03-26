@@ -1,14 +1,14 @@
 <input type="hidden" name="ext_form_id" id="ext_form_id" value="cate_id,is_multiple" />
 <div class="table">
 	<div class="title">
-		{lang附件分类} <span class="note">{lang选择附件所属分类，注意不同分类上传不同类型的文件}</span>
+		{lang附件分類} <span class="note">{lang選擇附件所屬分類，注意不同分類上傳不同型別的檔案}</span>
 	</div>
 	<div class="content">
 		<select id="cate_id" name="cate_id" class="w99">
-			<option value="">{lang默认存储到…}</option>
+			<option value="">{lang預設儲存到…}</option>
 			<!-- loop from=$catelist key=$key value=$value id=$tmpid -->
 			<option value="{$value.id}"{if $rs.cate_id == $value.id} selected{/if}>
-				{$value.title}<!-- if $value.filetypes -->({$value.filetypes})<!-- /if --><!-- if $value.etype -->_{lang云存储}<!-- else -->_{lang根目录}/{$value.root}{$value.folder}<!-- /if -->
+				{$value.title}<!-- if $value.filetypes -->({$value.filetypes})<!-- /if --><!-- if $value.etype -->_{lang雲端儲存}<!-- else -->_{lang根目錄}/{$value.root}{$value.folder}<!-- /if -->
 			</option>
 			<!-- /loop -->
 		</select>
@@ -16,12 +16,12 @@
 </div>
 <div class="table">
 	<div class="title">
-		{lang附件数量}<span class="note"></span>
+		{lang附件數量}<span class="note"></span>
 	</div>
 	<div class="content">
 		<ul class="layout">
-			<li><label><input type="radio" name="is_multiple" value="0"{if !$rs.is_multiple} checked{/if} />{lang单附件上传}</label></li>
-			<li><label><input type="radio" name="is_multiple" value="1"{if $rs.is_multiple} checked{/if} />{lang多附件上传}</label></li>
+			<li><label><input type="radio" name="is_multiple" value="0"{if !$rs.is_multiple} checked{/if} />{lang單附件上傳}</label></li>
+			<li><label><input type="radio" name="is_multiple" value="1"{if $rs.is_multiple} checked{/if} />{lang多附件上傳}</label></li>
 		</ul>
 	</div>
 </div>

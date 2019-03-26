@@ -4,7 +4,7 @@
 <tr>
 	<th width="30px">{langID}</th>
 	<th>{lang收件人}</th>
-	<th>{lang联系方式}</th>
+	<th>{lang聯絡方式}</th>
 	<th>{lang地址}</th>
 	<td>{lang操作}</td>
 </tr>
@@ -26,7 +26,7 @@
 		<!-- if $value.city != $value.county && $value.city -->/ {$value.city}<!-- /if -->
 		<!-- if $value.county -->/ {$value.county}<!-- /if -->
 		/ {$value.address}
-		<!-- if $value.is_default --><span class="layui-badge-rim">{lang默认}</span><!-- /if -->
+		<!-- if $value.is_default --><span class="layui-badge-rim">{lang預設}</span><!-- /if -->
 	</td>
 	<td><input type="button" class="layui-btn layui-btn-sm" value="{lang使用此地址}" onclick="$.admin_address.order('{$value.id}')" /></td>
 </tr>

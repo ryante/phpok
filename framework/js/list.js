@@ -1,6 +1,6 @@
 /***********************************************************
 	Filename: {phpok}/js/list.js
-	Note	: 内容管理里的JS
+	Note	: 內容管理裡的JS
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>
@@ -13,7 +13,7 @@ function project_check()
 	if(title) title = $.trim(title);
 	if(!title)
 	{
-		$.dialog.alert("名称不能为空");
+		$.dialog.alert("名稱不能為空");
 		return false;
 	}
 	return true;
@@ -23,12 +23,12 @@ function project_check()
 
 function content_del(id)
 {
-	$.dialog.confirm("确定要删除主题ID：<span class='red'>"+id+"</span> 的信息吗？<br />删除后是不能恢复的？",function(){
+	$.dialog.confirm("確定要刪除主題ID：<span class='red'>"+id+"</span> 的資訊嗎？<br />刪除後是不能恢復的？",function(){
 		var url = get_url("list","del") +"&id="+id;
 		var rs = json_ajax(url);
 		if(rs.status == "ok")
 		{
-			$.dialog.alert("主题删除成功",function(){
+			$.dialog.alert("主題刪除成功",function(){
 				window.location.reload();
 			});
 		}
@@ -56,7 +56,7 @@ function tab_id(id)
 	});
 }
 
-// 显示高级属性配置
+// 顯示高階屬性配置
 function show_advanced()
 {
 	if($("#advanced").is(":hidden"))
@@ -75,14 +75,14 @@ function project_delete(id)
 	var url = $("#delurl_"+id).attr("href");
 	if(!url)
 	{
-		$.dialog.alert("配置有错误，请检查");
+		$.dialog.alert("配置有錯誤，請檢查");
 		return false;
 	}
-	$.dialog.confirm("确定要删除 <span class='red'>"+title+"</span> 吗？删除后其内容将会一起被清除掉",function(){
+	$.dialog.confirm("確定要刪除 <span class='red'>"+title+"</span> 嗎？刪除後其內容將會一起被清除掉",function(){
 		var rs = json_ajax(url);
 		if(rs.status == "ok")
 		{
-			$.dialog.alert("删除成功",function(){
+			$.dialog.alert("刪除成功",function(){
 				window.location.reload();
 			});
 		}
@@ -99,7 +99,7 @@ function project_config(id)
 	var url = $("#config_"+id).attr("href");
 	if(!url)
 	{
-		$.dialog.alert("配置有错误，请检查");
+		$.dialog.alert("配置有錯誤，請檢查");
 		return false;
 	}
 	direct(url);
@@ -110,13 +110,13 @@ function project_content(id)
 	var url = $("#content_"+id).attr("href");
 	if(!url)
 	{
-		$.dialog.alert("配置有错误，请检查");
+		$.dialog.alert("配置有錯誤，請檢查");
 		return false;
 	}
 	direct(url);
 }
 
-//批量审核
+//批量稽核
 function set_status(id)
 {
 	var url = get_url("list","content_status") + '&id='+id;
@@ -163,21 +163,21 @@ function set_sort()
 	}
 }
 
-//批量删除
+//批量刪除
 function set_delete()
 {
 	var ids = $.input.checkbox_join();
 	if(!ids)
 	{
-		$.dialog.alert("未指定要删除的主题");
+		$.dialog.alert("未指定要刪除的主題");
 		return false;
 	}
-	$.dialog.confirm("确定要删除选定的主题吗？<br />删除后是不能恢复的？",function(){
+	$.dialog.confirm("確定要刪除選定的主題嗎？<br />刪除後是不能恢復的？",function(){
 		var url = get_url("list","del") +"&id="+$.str.encode(ids);
 		var rs = json_ajax(url);
 		if(rs.status == "ok")
 		{
-			$.dialog.alert("主题删除成功",function(){
+			$.dialog.alert("主題刪除成功",function(){
 				window.location.reload();
 			});
 		}
@@ -270,14 +270,14 @@ function set_admin_id(id)
 {
 	var url = get_url('workflow','title','id='+id);
 	$.dialog.open(url,{
-		'title':p_lang('指派管理员维护'),
+		'title':p_lang('指派管理員維護'),
 		'lock':true,
 		'width':'500px',
 		'height':'300px',
 		'ok':function(){
 			var iframe = this.iframe.contentWindow;
 			if (!iframe.document.body) {
-				alert(p_lang('iframe还没加载完毕呢'));
+				alert(p_lang('iframe還沒載入完畢呢'));
 				return false;
 			};
 			return iframe.save();
@@ -292,12 +292,12 @@ function set_parent()
 {
 	var ids = $.input.checkbox_join();
 	if(!ids){
-		$.dialog.alert(p_lang('未指定要操作的主题'));
+		$.dialog.alert(p_lang('未指定要操作的主題'));
 		return false;
 	}
-	$.dialog.prompt(p_lang('请输入绑定的主题ID号，要绑定的主题不能是选中的ID'),function(val){
+	$.dialog.prompt(p_lang('請輸入繫結的主題ID號，要繫結的主題不能是選中的ID'),function(val){
 		if(!val){
-			$.dialog.alert('内容不能为空');
+			$.dialog.alert('內容不能為空');
 			return false;
 		}
 		var lst = ids.split(',');
@@ -308,7 +308,7 @@ function set_parent()
 			}
 		}
 		if(isin){
-			$.dialog.alert(p_lang('输入的主题重复了'));
+			$.dialog.alert(p_lang('輸入的主題重複了'));
 			return false;
 		}
 		var url = get_url('list','set_parent','id='+val+"&ids="+$.str.encode(ids));
@@ -326,10 +326,10 @@ function unset_parent()
 {
 	var ids = $.input.checkbox_join();
 	if(!ids){
-		$.dialog.alert(p_lang('未指定要操作的主题'));
+		$.dialog.alert(p_lang('未指定要操作的主題'));
 		return false;
 	}
-	$.dialog.confirm(p_lang('确定要移除父子级关系吗？'),function(){
+	$.dialog.confirm(p_lang('確定要移除父子級關係嗎？'),function(){
 		var url = get_url('list','unset_parent','ids='+$.str.encode(ids));
 		var rs = $.phpok.json(url);
 		if(rs.status){
@@ -346,12 +346,12 @@ function list_action_exec()
 {
 	var ids = $.input.checkbox_join();
 	if(!ids){
-		$.dialog.alert(p_lang('未指定要操作的主题'));
+		$.dialog.alert(p_lang('未指定要操作的主題'));
 		return false;
 	}
 	var val = $("#list_action_val").val();
 	if(!val || val == ''){
-		$.dialog.alert(p_lang('未指定要操作的动作'),'','error');
+		$.dialog.alert(p_lang('未指定要操作的動作'),'','error');
 		return false;
 	}
 	if(val == 'appoint'){
@@ -374,7 +374,7 @@ function list_action_exec()
 		unset_parent();
 		return false;
 	}
-	//执行批量审核通过
+	//執行批量稽核通過
 	if(val == 'status' || val == 'unstatus' || val == 'show' || val == 'hidden'){
 		var url = get_url('list','execute','ids='+$.str.encode(ids)+"&title="+val);
 	}else{
@@ -387,7 +387,7 @@ function list_action_exec()
 			var url = get_url('list',"move_cate")+"&ids="+$.str.encode(ids)+"&cate_id="+tmp[1]+"&type="+type;
 		}
 	}
-	$.dialog.tips('正在执行操作，请稍候…');
+	$.dialog.tips('正在執行操作，請稍候…');
 	var rs = $.phpok.json(url);
 	if(rs.status == 'ok'){
 		$.phpok.reload();

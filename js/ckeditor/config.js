@@ -11,64 +11,64 @@ CKEDITOR.editorConfig = function( config ) {
     //
 	config.removeDialogTabs = 'link:advanced';
 
-	//读言包
+	//讀言包
 	config.language = 'zh-cn';
 	
-	//背景颜色
+	//背景顏色
 	//config.uiColor = '#fff';
 	
 	//高度
 	config.height = 300;
 	
-	//工具栏（基础'Basic'、全能'Full'、自定义）plugins/toolbar/plugin.js
+	//工具欄（基礎'Basic'、全能'Full'、自定義）plugins/toolbar/plugin.js
     config.toolbar = 'Full';
     
-    //工具栏是否可以被收缩
+    //工具欄是否可以被收縮
 	config.toolbarCanCollapse = false;
 	
-	config.image_previewText = 'PHPOK企业站系统（下述称“系统”或“本系统”）是一套使用PHP语言及MySQL数据库编写的企业网站建设系统，基于LGPL协议开源授权！';
+	config.image_previewText = 'PHPOK企業站系統（下述稱“系統”或“本系統”）是一套使用PHP語言及MySQL資料庫編寫的企業網站建設系統，基於LGPL協議開源授權！';
 	
 	config.resize_enabled = false;
 	config.resize_maxHeight = 3000;
 	config.toolbarStartupExpanded = true;
 	
-	//当提交包含有此编辑器的表单时，是否自动更新元素内的数据
+	//當提交包含有此編輯器的表單時，是否自動更新元素內的資料
 	config.autoUpdateElement =true;
 	
-	// 设置是使用绝对目录还是相对目录，为空为相对目录
+	// 設定是使用絕對目錄還是相對目錄，為空為相對目錄
 	config.baseHref = '';
 
-	// 编辑器的z-index值
+	// 編輯器的z-index值
 	config.baseFloatZIndex = 900;
 
-	//设置快捷键
+	//設定快捷鍵
     config.keystrokes = [
-    	[CKEDITOR.ALT + 121 /*F10*/ , 'toolbarFocus'], //获取焦点
-    	[CKEDITOR.ALT + 122 /*F11*/ , 'elementsPathFocus'], //元素焦点
+    	[CKEDITOR.ALT + 121 /*F10*/ , 'toolbarFocus'], //獲取焦點
+    	[CKEDITOR.ALT + 122 /*F11*/ , 'elementsPathFocus'], //元素焦點
 
-    	[CKEDITOR.SHIFT + 121 /*F10*/ , 'contextMenu'], //文本菜单
+    	[CKEDITOR.SHIFT + 121 /*F10*/ , 'contextMenu'], //文字選單
 
-    	[CKEDITOR.CTRL + 90 /*Z*/ , 'undo'], //撤销
+    	[CKEDITOR.CTRL + 90 /*Z*/ , 'undo'], //撤銷
     	[CKEDITOR.CTRL + 89 /*Y*/ , 'redo'], //重做
     	[CKEDITOR.CTRL + CKEDITOR.SHIFT + 90 /*Z*/ , 'redo'], //
 
-    	[CKEDITOR.CTRL + 76 /*L*/ , 'link'], //链接
+    	[CKEDITOR.CTRL + 76 /*L*/ , 'link'], //連結
 
-    	[CKEDITOR.CTRL + 66 /*B*/ , 'bold'], //粗体
-    	[CKEDITOR.CTRL + 73 /*I*/ , 'italic'], //斜体
-    	[CKEDITOR.CTRL + 85 /*U*/ , 'underline'], //下划线
+    	[CKEDITOR.CTRL + 66 /*B*/ , 'bold'], //粗體
+    	[CKEDITOR.CTRL + 73 /*I*/ , 'italic'], //斜體
+    	[CKEDITOR.CTRL + 85 /*U*/ , 'underline'], //下劃線
 
     	[CKEDITOR.ALT + 109 /*-*/ , 'toolbarCollapse']
     ];
 
-    //设置快捷键 可能与浏览器快捷键冲突plugins/keystrokes/plugin.js.
+    //設定快捷鍵 可能與瀏覽器快捷鍵衝突plugins/keystrokes/plugin.js.
     config.blockedKeystrokes = [
     	CKEDITOR.CTRL + 66 /*B*/ ,
     	CKEDITOR.CTRL + 73 /*I*/ ,
     	CKEDITOR.CTRL + 85 /*U*/
     ];
 
-    //设置编辑内元素的背景色的取值
+    //設定編輯內元素的背景色的取值
     config.colorButton_backStyle = {
     	element: 'span',
     	styles: {
@@ -76,153 +76,153 @@ CKEDITOR.editorConfig = function( config ) {
     	}
     };
 
-    //设置前景色的取值 
+    //設定前景色的取值 
     config.colorButton_colors = '000,800000,8B4513,2F4F4F,008080,000080,4B0082,696969,B22222,A52A2A,DAA520,006400,40E0D0,0000CD,800080,808080,F00,FF8C00,FFD700,008000,0FF,00F,EE82EE,A9A9A9,FFA07A,FFA500,FFFF00,00FF00,AFEEEE,ADD8E6,DDA0DD,D3D3D3,FFF0F5,FAEBD7,FFFFE0,F0FFF0,F0FFFF,F0F8FF,E6E6FA,FFF';
 
-    //是否在选择颜色时显示“其它颜色”选项plugins/colorbutton/plugin.js
+    //是否在選擇顏色時顯示“其它顏色”選項plugins/colorbutton/plugin.js
     config.colorButton_enableMore =false;
 
-    //区块的前景色默认值设置 plugins/colorbutton/plugin.js
+    //區塊的前景色預設值設定 plugins/colorbutton/plugin.js
     config.colorButton_foreStyle = {
         element : 'span',
        styles : { 'color' : '#(color)' }
     };
 
-	//所需要添加的CSS文件 在此添加 可使用相对路径和网站的绝对路径
+	//所需要新增的CSS檔案 在此新增 可使用相對路徑和網站的絕對路徑
     config.contentsCss = './js/ckeditor/contents.css';
 
 	//文字方向
-    config.contentsLangDirection ='ltr'; //从左到右
+    config.contentsLangDirection ='ltr'; //從左到右
 
-    //是否拒绝本地拼写检查和提示 默认为拒绝 目前仅firefox和safari支持plugins/wysiwygarea/plugin.js.
+    //是否拒絕本地拼寫檢查和提示 預設為拒絕 目前僅firefox和safari支援plugins/wysiwygarea/plugin.js.
     config.disableNativeSpellChecker =true;
 
-    //进行表格编辑功能 如：添加行或列 目前仅firefox支持plugins/wysiwygarea/plugin.js
-    config.disableNativeTableHandles =true; //默认为不开启
+    //進行表格編輯功能 如：新增行或列 目前僅firefox支援plugins/wysiwygarea/plugin.js
+    config.disableNativeTableHandles =true; //預設為不開啟
 
-    //是否开启 图片和表格 的改变大小的功能config.disableObjectResizing = true;
-    config.disableObjectResizing= false //默认为开启
+    //是否開啟 圖片和表格 的改變大小的功能config.disableObjectResizing = true;
+    config.disableObjectResizing= false //預設為開啟
 
-    //是否对编辑区域进行渲染plugins/editingblock/plugin.js
+    //是否對編輯區域進行渲染plugins/editingblock/plugin.js
     config.editingBlock = true;
 
-    //编辑器中回车产生的标签
-    config.enterMode =CKEDITOR.ENTER_P; //可选：CKEDITOR.ENTER_BR或CKEDITOR.ENTER_DIV
+    //編輯器中回車產生的標籤
+    config.enterMode =CKEDITOR.ENTER_P; //可選：CKEDITOR.ENTER_BR或CKEDITOR.ENTER_DIV
 
-    //是否转换一些难以显示的字符为相应的HTML字符plugins/entities/plugin.js
+    //是否轉換一些難以顯示的字元為相應的HTML字元plugins/entities/plugin.js
     config.entities_greek = true;
 
-    //是否转换一些拉丁字符为HTMLplugins/entities/plugin.js
+    //是否轉換一些拉丁字元為HTMLplugins/entities/plugin.js
     config.entities_latin = true;
 
-    //是否转换一些特殊字符为ASCII字符 如"This is Chinese:汉语."转换为"This is Chinese: 汉语."plugins/entities/plugin.js
+    //是否轉換一些特殊字元為ASCII字元 如"This is Chinese:漢語."轉換為"This is Chinese: 漢語."plugins/entities/plugin.js
     config.entities_processNumerical =false;
 
-//默认的字体名 plugins/font/plugin.js
+//預設的字型名 plugins/font/plugin.js
     config.font_defaultLabel = 'Arial';
 
-    //字体编辑时的字符集 可以添加常用的中文字符：宋体、楷体、黑体等plugins/font/plugin.js
+    //字型編輯時的字符集 可以新增常用的中文字元：宋體、楷體、黑體等plugins/font/plugin.js
     config.font_names = 'Arial;Times NewRoman;Verdana';
 
-    //文字的默认式样 plugins/font/plugin.js
+    //文字的預設式樣 plugins/font/plugin.js
     config.font_style = {
         element   : 'span',
         styles  : { 'font-family' : '#(family)' },
         overrides : [ { element :'font', attributes : { 'face' : null } } ]
     };
 
-    //字体默认大小 plugins/font/plugin.js
+    //字型預設大小 plugins/font/plugin.js
     config.fontSize_defaultLabel = '14px';
 
-    //字体编辑时可选的字体大小 plugins/font/plugin.js
+    //字型編輯時可選的字型大小 plugins/font/plugin.js
     config.fontSize_sizes='10/10px;11/11px;12/12px;14/14px;16/16px;18/18px;20/20px;22/22px;24/24px;26/26px;28/28px;36/36px;48/48px;72/72px';
 
-    //设置字体大小时 使用的式样 plugins/font/plugin.js
+    //設定字型大小時 使用的式樣 plugins/font/plugin.js
     config.fontSize_style = {
         element   : 'span',
        styles   : { 'font-size' : '#(size)' },
         overrides : [ {element : 'font', attributes : { 'size' : null } } ]
     };
 
-    //是否强制复制来的内容去除格式plugins/pastetext/plugin.js
+    //是否強制複製來的內容去除格式plugins/pastetext/plugin.js
     config.forcePasteAsPlainText =false//不去除
 
-   //是否强制用“&”来代替“&amp;”plugins/htmldataprocessor/plugin.js
+   //是否強制用“&”來代替“&amp;”plugins/htmldataprocessor/plugin.js
     config.forceSimpleAmpersand = false;
 
-    //对address标签进行格式化 plugins/format/plugin.js
+    //對address標籤進行格式化 plugins/format/plugin.js
     config.format_address = { element : 'address', attributes : { class :'styledAddress' } };
 
-    //对DIV标签自动进行格式化 plugins/format/plugin.js
+    //對DIV標籤自動進行格式化 plugins/format/plugin.js
     config.format_div = { element : 'div', attributes : { class :'normalDiv' } };
 
-    //对H1标签自动进行格式化 plugins/format/plugin.js
+    //對H1標籤自動進行格式化 plugins/format/plugin.js
     config.format_h1 = { element : 'h1', attributes : { class :'contentTitle1' } };
 
-    //对H2标签自动进行格式化 plugins/format/plugin.js
+    //對H2標籤自動進行格式化 plugins/format/plugin.js
     config.format_h2 = { element : 'h2', attributes : { class :'contentTitle2' } };
 
-    //对H3标签自动进行格式化 plugins/format/plugin.js
+    //對H3標籤自動進行格式化 plugins/format/plugin.js
     config.format_h1 = { element : 'h3', attributes : { class :'contentTitle3' } };
 
-    //对H4标签自动进行格式化 plugins/format/plugin.js
+    //對H4標籤自動進行格式化 plugins/format/plugin.js
     config.format_h1 = { element : 'h4', attributes : { class :'contentTitle4' } };
 
-    //对H5标签自动进行格式化 plugins/format/plugin.js
+    //對H5標籤自動進行格式化 plugins/format/plugin.js
     config.format_h1 = { element : 'h5', attributes : { class :'contentTitle5' } };
 
-    //对H6标签自动进行格式化 plugins/format/plugin.js
+    //對H6標籤自動進行格式化 plugins/format/plugin.js
     config.format_h1 = { element : 'h6', attributes : { class :'contentTitle6' } };
 
-    //对P标签自动进行格式化 plugins/format/plugin.js
+    //對P標籤自動進行格式化 plugins/format/plugin.js
     config.format_p = { element : 'p', attributes : { class : 'normalPara' }};
 
-    //对PRE标签自动进行格式化 plugins/format/plugin.js
+    //對PRE標籤自動進行格式化 plugins/format/plugin.js
     config.format_pre = { element : 'pre', attributes : { class : 'code'} };
 
-    //用分号分隔的标签名字 在工具栏上显示plugins/format/plugin.js
+    //用分號分隔的標籤名字 在工具欄上顯示plugins/format/plugin.js
     config.format_tags ='p;h1;h2;h3;h4;h5;h6;pre;address;div';
 
-    //是否使用完整的html编辑模式如使用，其源码将包含：<html><body></body></html>等标签
+    //是否使用完整的html編輯模式如使用，其原始碼將包含：<html><body></body></html>等標籤
     config.fullPage = false;
 
-    //是否忽略段落中的空字符 若不忽略 则字符将以表示plugins/wysiwygarea/plugin.js
+    //是否忽略段落中的空字元 若不忽略 則字元將以表示plugins/wysiwygarea/plugin.js
     config.ignoreEmptyParagraph = true;
 
-    //在清除图片属性框中的链接属性时 是否同时清除两边的<a>标签plugins/image/plugin.js
+    //在清除圖片屬性框中的連結屬性時 是否同時清除兩邊的<a>標籤plugins/image/plugin.js
     config.image_removeLinkByEmptyURL = true;
 
-    //一组用逗号分隔的标签名称，显示在左下角的层次嵌套中plugins/menu/plugin.js.
+    //一組用逗號分隔的標籤名稱，顯示在左下角的層次巢狀中plugins/menu/plugin.js.
     config.menu_groups='clipboard,form,tablecell,tablecellproperties,tablerow,tablecolumn,table,anchor,link,image,flash,checkbox,radio,textfield,hiddenfield,imagebutton,button,select,textarea';
 
-    //显示子菜单时的延迟，单位：ms plugins/menu/plugin.js
+    //顯示子選單時的延遲，單位：ms plugins/menu/plugin.js
     config.menu_subMenuDelay = 400;
 
-    //当执行“新建”命令时，编辑器中的内容plugins/newpage/plugin.js
+    //當執行“新建”命令時，編輯器中的內容plugins/newpage/plugin.js
     config.newpage_html = '';
 
-    //当从word里复制文字进来时，是否进行文字的格式化去除plugins/pastefromword/plugin.js
-    config.pasteFromWordIgnoreFontFace = true; //默认为忽略格式
+    //當從word裡複製文字進來時，是否進行文字的格式化去除plugins/pastefromword/plugin.js
+    config.pasteFromWordIgnoreFontFace = true; //預設為忽略格式
 
-    //是否使用<h1><h2>等标签修饰或者代替从word文档中粘贴过来的内容plugins/pastefromword/plugin.js
+    //是否使用<h1><h2>等標籤修飾或者代替從word文件中貼上過來的內容plugins/pastefromword/plugin.js
     config.pasteFromWordKeepsStructure = false;
 
-    //从word中粘贴内容时是否移除格式plugins/pastefromword/plugin.js
+    //從word中貼上內容時是否移除格式plugins/pastefromword/plugin.js
     config.pasteFromWordRemoveStyle =false;
 
-    //当输入：shift+Enter时插入的标签
-    config.shiftEnterMode = CKEDITOR.ENTER_P; //可选：CKEDITOR.ENTER_BR或CKEDITOR.ENTER_DIV
+    //當輸入：shift+Enter時插入的標籤
+    config.shiftEnterMode = CKEDITOR.ENTER_P; //可選：CKEDITOR.ENTER_BR或CKEDITOR.ENTER_DIV
     
-	//页面载入时，编辑框是否立即获得焦点plugins/editingblock/plugin.js plugins/editingblock/plugin.js.
+	//頁面載入時，編輯框是否立即獲得焦點plugins/editingblock/plugin.js plugins/editingblock/plugin.js.
     config.startupFocus = false;
 
-    //载入时，以何种方式编辑 源码和所见即所得 "source"和"wysiwyg"plugins/editingblock/plugin.js.
+    //載入時，以何種方式編輯 原始碼和所見即所得 "source"和"wysiwyg"plugins/editingblock/plugin.js.
     config.startupMode ='wysiwyg';
 
-    //载入时，是否显示框体的边框plugins/showblocks/plugin.js
+    //載入時，是否顯示框體的邊框plugins/showblocks/plugin.js
     config.startupOutlineBlocks = false;
 
-	//撤销的记录步数
+	//撤銷的記錄步數
     config.undoStackSize =20;
 
     config.smiley_columns = 12;

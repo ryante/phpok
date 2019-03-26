@@ -1,10 +1,10 @@
 /**
- * 风格管理
+ * 風格管理
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年06月29日
 **/
 ;(function($){
@@ -16,7 +16,7 @@
 					val = title;
 				}
 				if(val == title){
-					layer.alert("新旧名称一样");
+					layer.alert("新舊名稱一樣");
 					return false;
 				}
 				var url = get_url("tpl","rename","id="+id+"&folder="+$.str.encode(folder)+"&old="+$.str.encode(title)+"&title="+$.str.encode(val));
@@ -33,9 +33,9 @@
 		
 		del:function(id,folder,title)
 		{
-			layer.confirm(p_lang('确定要删除文件（夹）{title}吗？<br>删除后是不能恢复的！','<span class="red">'+title+'</span> '),function(){
+			layer.confirm(p_lang('確定要刪除檔案（夾）{title}嗎？<br>刪除後是不能恢復的！','<span class="red">'+title+'</span> '),function(){
 				if(!title){
-					layer.alert("操作异常！");
+					layer.alert("操作異常！");
 					return false;
 				}
 				var url = get_url("tpl","delfile","id="+id+"&folder="+$.str.encode(folder)+"&title="+$.str.encode(title));
@@ -59,21 +59,21 @@
 		
 		folder_rename:function(id,folder,title)
 		{
-			var notice = p_lang('将文件夹{title}改名为：（仅支持字母、数字、下划线）',' <span class="red">'+title+'</span> ');
+			var notice = p_lang('將資料夾{title}改名為：（僅支援字母、數字、下劃線）',' <span class="red">'+title+'</span> ');
 			this.rename(id,folder,title,notice);
 		},
 		
 		file_rename:function(id,folder,title)
 		{
-			var notice = p_lang('将文件{title}改名为：<br><span class="red">仅支持字母、数字、下划线和点，注意扩展名必须填写</span>',' <span class="red">'+title+'</span> ');
+			var notice = p_lang('將檔案{title}改名為：<br><span class="red">僅支援字母、數字、下劃線和點，注意副檔名必須填寫</span>',' <span class="red">'+title+'</span> ');
 			this.rename(id,folder,title,notice);
 		},
 		
 		add_folder:function(id,folder)
 		{
-			layer.prompt(p_lang('请填写要创建的文件夹名称，<span class="red">仅支持数字，字母及下划线</span>：'),function(val){
+			layer.prompt(p_lang('請填寫要建立的資料夾名稱，<span class="red">僅支援數字，字母及下劃線</span>：'),function(val){
 				if(!val || val == "undefined"){
-					layer.alert("文件夹名称不能为空");
+					layer.alert("資料夾名稱不能為空");
 					return false;
 				}
 				var url_ext = "id="+id+"&folder="+$.str.encode(folder)+"&type=folder&title="+$.str.encode(val);
@@ -94,10 +94,10 @@
 			if(!ext || ext == 'undefined'){
 				ext = 'html';
 			}
-			var tip = p_lang('填写要创建的文件名，<span class="red">仅持数字，字母，下划线及点</span>：');
+			var tip = p_lang('填寫要建立的檔名，<span class="red">僅持數字，字母，下劃線及點</span>：');
 			layer.prompt(tip,function(val){
 				if(!val || val == "undefined"){
-					layer.alert("文件名称不能为空");
+					layer.alert("檔名稱不能為空");
 					return false;
 				}
 				var extlen = -(ext.length + 1);
@@ -122,7 +122,7 @@
 		{
 			var html = '<img src="'+url+'" border="0" />';
 			layer.through({
-				title: p_lang('预览图片'),
+				title: p_lang('預覽圖片'),
 				lock: true,
 				content:html,
 				width: '400px',
@@ -134,10 +134,10 @@
 		edit:function(id,folder,title)
 		{
 			var url = get_url('tpl','edit','id='+id+"&folder="+$.str.encode(folder)+"&title="+$.str.encode(title));
-			$.win(p_lang('编辑')+"_"+title,url);
+			$.win(p_lang('編輯')+"_"+title,url);
 			
 			/*var url_ext = "id="+id+"&folder="+$.str.encode(folder)+"&title="+$.str.encode(title);
-			var title = p_lang('编辑文件：{title} 在线编辑请确保文件有写入权限','<span class="red">'+title+'</span>');
+			var title = p_lang('編輯檔案：{title} 線上編輯請確保檔案有寫入許可權','<span class="red">'+title+'</span>');
 			$.dialog.open(get_url("tpl","edit",url_ext),{
 				'width':'1000px',
 				'height':'700px',
@@ -146,15 +146,15 @@
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
-				'okVal':p_lang('保存代码'),
+				'okVal':p_lang('儲存程式碼'),
 				'cancel':true,
-				'cancelVal':p_lang('取消并关闭窗口')
+				'cancelVal':p_lang('取消並關閉視窗')
 			});*/
 		},
 		
@@ -173,12 +173,12 @@
 		
 		tpl_delete:function(id,title)
 		{
-			var tip = p_lang('确定要删除{title}吗？<br>删除后请手动删除相应文件目录',' <span class="red b">'+title+'</span> ');
+			var tip = p_lang('確定要刪除{title}嗎？<br>刪除後請手動刪除相應檔案目錄',' <span class="red b">'+title+'</span> ');
 			layer.confirm(tip,function(){
 				var url = get_url("tpl","delete","id="+id);
 				$.phpok.json(url,function(rs){
 					if(rs.status){
-						$.dialog.tips(p_lang('风格删除成功'),function(){
+						$.dialog.tips(p_lang('風格刪除成功'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;
@@ -190,13 +190,13 @@
 		},
 		tpl_set:function(id)
 		{
-			$.win(p_lang('风格编辑 #'+id),get_url('tpl','set','id='+id));
+			$.win(p_lang('風格編輯 #'+id),get_url('tpl','set','id='+id));
 		},
 		
 		tpl_filelist:function(id)
 		{
 			let url = get_url('tpl','list','id='+id);
-			$.win(p_lang('文件管理 #'+id),get_url('tpl','list','id='+id));
+			$.win(p_lang('檔案管理 #'+id),get_url('tpl','list','id='+id));
 		},
 		
 		set_folder:function(val)
@@ -232,17 +232,17 @@
 		{
 			var title = $("#title").val();
 			if(!title){
-				$.dialog.alert(p_lang('名称不能为空'));
+				$.dialog.alert(p_lang('名稱不能為空'));
 				return false;
 			}
 			var folder = $("#folder").val();
 			if(!folder){
-				$.dialog.alert(p_lang('文件夹不能为空'));
+				$.dialog.alert(p_lang('資料夾不能為空'));
 				return false;
 			}
 			var ext = $("#ext").val();
 			if(!ext){
-				$.dialog.alert(p_lang('后缀不允许为空'));
+				$.dialog.alert(p_lang('字尾不允許為空'));
 				return false;
 			}
 			$("#post_save").ajaxSubmit({

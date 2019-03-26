@@ -1,22 +1,22 @@
 /**
- * 附件分类管理器
+ * 附件分類管理器
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年12月30日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年12月30日
 **/
 ;(function($){
 	$.admin_rescate = {
 		del:function(id,title)
 		{
-			var tip = p_lang('确定要删除这个附件分类吗？{title}','<span class="red">'+title+'</span>');
+			var tip = p_lang('確定要刪除這個附件分類嗎？{title}','<span class="red">'+title+'</span>');
 			$.dialog.confirm(tip,function(){
 	            var url = get_url('rescate','delete','id='+id);
 	            $.phpok.json(url,function(rs){
 	                if(rs.status == 'ok'){
-	                    $.dialog.alert('删除成功',function(){
+	                    $.dialog.alert('刪除成功',function(){
 	                        $.phpok.reload();
 	                    },'succeed');
 	                }else{

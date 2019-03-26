@@ -1,11 +1,11 @@
 /**
- * 订单产品保存操作
+ * 訂單產品儲存操作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年10月03日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年10月03日
 **/
 function save()
 {
@@ -22,7 +22,7 @@ function save()
 		'success':function(rs){
 			if(rs.status){
 				$.dialog.close();
-				$.dialog.tips(p_lang('产品信息操作成功'),function(){
+				$.dialog.tips(p_lang('產品資訊操作成功'),function(){
 					opener.$.admin_order_set.product_reload();
 				}).lock();
 				return true;

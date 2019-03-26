@@ -1,10 +1,10 @@
 /**
- * 通用桌面组件
+ * 通用桌面元件
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年06月21日
 **/
 ;(function($){
@@ -18,10 +18,10 @@
 				'win_refresh'	:true,
 				'win_resize'	:true,
 				'title'			:'',
-				'iframe'		:'', // 定义iframe地址
-				'content'		:'', // 定义内容信息，当内容为iframe时，调用iframe对应的url
+				'iframe'		:'', // 定義iframe地址
+				'content'		:'', // 定義內容資訊，當內容為iframe時，呼叫iframe對應的url
 				'bgcolor'		:'#fff',
-				'position'		:'center center', //支持数字及常用单词center
+				'position'		:'center center', //支援數字及常用單詞center
 				'taskbar'		:false,
 				'taskbar_close'	:false,
 				'width'			:'auto',
@@ -30,9 +30,9 @@
 				'exheight'		:0,
 				'exwidth'		:0,
 				'is_max'		:false, //是否直接全屏
-				'move'			:true, //允许移动
-				'z_index'		:1000, //弹出层的默认层级
-				'close_tip'		:'' //关闭窗口前是否弹出提示
+				'move'			:true, //允許移動
+				'z_index'		:1000, //彈出層的預設層級
+				'close_tip'		:'' //關閉視窗前是否彈出提示
 			};
 			this.opt = $.extend({},defaults, opts);
 			this.prefix = this.opt.prefix ? this.opt.prefix : 'phpok-';
@@ -108,7 +108,7 @@
 						$(this).removeClass('on');
 					}
 				});
-				//当
+				//當
 				if(zindex.length>0 && idlist.length>0){
 					zmax = Math.max.apply(null,zindex);
 					var t = 0;
@@ -164,7 +164,7 @@
 			this._taskbar_on();
 			return zIndex;
 		},
-		//触发当前高亮的taskbar
+		//觸發當前高亮的taskbar
 		_taskbar_on: function()
 		{
 			var id;
@@ -181,7 +181,7 @@
 				}
 				$(this).removeClass('on');
 			});
-			//当
+			//當
 			if(zindex.length>0 && idlist.length>0){
 				zmax = Math.max.apply(null,zindex);
 				var t = 0;
@@ -194,7 +194,7 @@
 				$("#taskbar-"+id).addClass('on');
 			}
 		},
-		//取得当前窗口中的最大值
+		//取得當前視窗中的最大值
 		max_zindex: function()
 		{
 			var list = new Array();
@@ -217,7 +217,7 @@
 				}
 			}
 			if(!id || id == 'undefined'){
-				//获取ID
+				//獲取ID
 				var obj = $("div.phpok-win").length > 0 ? $("div.phpok-win") : parent.$("div.phpok-win");
 				var zlist = new Array();
 				var is_each = false;
@@ -255,7 +255,7 @@
 				id = this.id;
 			}
 			var arg = this._arg(id);
-			//判断当前窗口是否是最大值
+			//判斷當前視窗是否是最大值
 			var w = $("#"+id).width();
 			var is_max = w <= arg.width ? false : true;
 			if(is_max){
@@ -296,7 +296,7 @@
 				id = this.id;
 			}
 			var arg = this._arg(id);
-			//判断当前窗口是否是最大值
+			//判斷當前視窗是否是最大值
 			var w = $("#"+id).width();
 			var is_max = w <= arg.width ? false : true;
 			if(is_max){
@@ -315,7 +315,7 @@
 		},
 		taskbar_min:function(id)
 		{
-			//判断是否最小化了
+			//判斷是否最小化了
 			var is_hidden = $("#"+id).is(":hidden");
 			if(is_hidden){
 				$("#"+id).show();
@@ -354,7 +354,7 @@
 			var win = this._win();
 			var doc = this._doc();
 			var zindex = this.zindex();
-			//取得left，top位置坐标
+			//取得left，top位置座標
 			var position = this.opt.position ? (this.opt.position).toLowerCase() : 'center center';
 			if(!position || position == 'center center' || position == 'center'){
 				var left = parseInt((win.width - width)/2,10);
@@ -375,11 +375,11 @@
 			this.style += 'left:'+left+'px;';
 			this.style += 'top:'+top+'px;';
 			this.style += 'z-index:'+(zindex+1)+';';
-			//内容高度样式
+			//內容高度樣式
 			this.bodystyle  = 'position:relative;';
 			this.bodystyle += 'width:'+parseInt((width-12),10)+'px;';
 			this.bodystyle += 'height:'+parseInt((height-38),10)+'px;';
-			//记住当前窗口的宽高
+			//記住當前視窗的寬高
 			this.arg = 'width:'+width+";height:"+height+";win_width:"+win.width+";win_height:"+win.height;
 			this.arg+= ";exheight:"+this.opt.exheight+";exwidth:"+this.opt.exwidth;
 			this.arg+= ";left:"+left+";top:"+top;
@@ -402,12 +402,12 @@
 		_content:function()
 		{
 			if((this.opt.content).substr(0,1) == '.' || (this.opt.content).substr(0,1) == '#'){
-				//取得内容
+				//取得內容
 				var div_content = $(this.opt.content).html();
 				var content = '<div id="'+this.id+'-content" class="content">'+div_content+'</div>';
-				//清空现有的标识内容
+				//清空現有的標識內容
 				$(this.opt.content).html('');
-				//增加取消触发事件
+				//增加取消觸發事件
 				this.opt.func_cancel = function(){
 					$(this.opt.content).html(div_content);
 					$("#"+this.id+'-content').html('');
@@ -502,14 +502,14 @@
 			html += '<div class="phpok-win-vlayer" id="vlayer-'+id+'" style="'+css+'">&nbsp;</div>';
 			$(html).appendTo('body');
 		},
-		//关闭移动时的触发
+		//關閉移動時的觸發
 		_vlayer_close: function(id,ext)
 		{
 			var arg = this._arg(id);
 			var top = parseInt($("#vlayer-"+id).css("top"),10);
 			var left = parseInt($("#vlayer-"+id).css('left'),10);
 			
-			$("#"+id).css({'top':top+"px",'left':left+"px"});//控件新位置
+			$("#"+id).css({'top':top+"px",'left':left+"px"});//控制元件新位置
 			if(ext && ext != 'undefined'){
 				var width = parseInt($("#vlayer-"+id).width(),10);
 				var height = parseInt($("#vlayer-"+id).height(),10);
@@ -518,7 +518,7 @@
 				$("#"+id).css({
 					'width':width+"px",
 					'height':height+"px"
-				});//控件新位置
+				});//控制元件新位置
 				$("#"+id+"-body").css({
 					"width":parseInt((width-12),10)+"px",
 					'height':parseInt((height-38),10)+"px"
@@ -531,27 +531,27 @@
 			$("#vlayer-"+id).remove();
 			return true;
 		},
-		//绑定相应的动作
+		//繫結相應的動作
 		_action:function()
 		{
-			var _x,_y;//鼠标离控件左上角的相对位置
+			var _x,_y;//滑鼠離控制元件左上角的相對位置
 			var _move = false;
 			var _resize = false;
 			var self = this;
 			var id = this.id;
 			var arg = this._arg(id);
 			var resize_width,resize_height;
-			//存在关闭窗口执行的触发
+			//存在關閉視窗執行的觸發
 			if(this.opt.win_close){
 				$("#close-"+id).click(function(){
 					self.close(id);
 				});
 			}
-			//有最大化按钮时
+			//有最大化按鈕時
 			if(this.opt.win_max){
 				$("#max-"+id).click(function(){self.max(id);});
 			}
-			//有最小化时的按钮信息
+			//有最小化時的按鈕資訊
 			if(this.opt.win_min){
 				$("#min-"+id).click(function(){self.min(id);});
 			}
@@ -577,7 +577,7 @@
 					e.preventDefault && e.preventDefault();
 				});
 			}
-			//如果有启用taskbar
+			//如果有啟用taskbar
 			if(this.opt.taskbar){
 				$("#phpok-taskbar-close-"+id).click(function(){
 					self.close(id);
@@ -587,7 +587,7 @@
 						self._taskbar_on();
 						return true;
 					}
-					//判断是否最小化了
+					//判斷是否最小化了
 					var is_hidden = $("#"+id).is(":hidden");
 					if(is_hidden){
 						$("#"+id).show();
@@ -605,15 +605,15 @@
 					self._taskbar_on();
 				});
 			}
-			//如果默认启用了is_max
+			//如果預設啟用了is_max
 			if(this.opt.is_max){
 				this.max(id);
 			}
-			//移动
+			//移動
 			$("#title-"+id).mousedown(function(e){
 				e = e || window.event;
 				var zindex = self.zindex(id);
-				//创建一个虚拟的DIV层
+				//建立一個虛擬的DIV層
 				_x = e.pageX-parseInt($("#"+id).css("left"));
 				_y = e.pageY-parseInt($("#"+id).css("top"));
 				if(arg.move == 1){
@@ -640,7 +640,7 @@
 					if(resize_height > arg.win_height){
 						resize_height = arg.win_height;
 					}
-					$("#vlayer-"+id).css({'width':resize_width+"px",'height':resize_height+"px"});//控件新位置
+					$("#vlayer-"+id).css({'width':resize_width+"px",'height':resize_height+"px"});//控制元件新位置
 					e.preventDefault && e.preventDefault();
 					return false;
 				}
@@ -676,7 +676,7 @@
 				if((max_height - height) < y){
 					y = max_height - height;
 				}
-				$("#vlayer-"+id).css({'top':y+"px",'left':x+"px"});//控件新位置
+				$("#vlayer-"+id).css({'top':y+"px",'left':x+"px"});//控制元件新位置
 				e.preventDefault && e.preventDefault();
 			}).mouseup(function(e){
 				e = e || window.event;
@@ -695,7 +695,7 @@
 	$.win = function(title,url,opts){
 		top.layui.index.openTabsPage(url, title);
 		return true;
-		//检查是否窗口已存在
+		//檢查是否視窗已存在
 		/*var open_id = false;
 		$("ul#phpok-taskbar li").each(function(i){
 			var txt = $(this).text();
@@ -713,7 +713,7 @@
 			this_max += parseInt($(this).outerWidth(true));
 		});
 		if(max <= this_max){
-			$.dialog.alert('您弹出的窗口太多了，请先关闭几个没有用的窗口');
+			$.dialog.alert('您彈出的視窗太多了，請先關閉幾個沒有用的視窗');
 			return false;
 		}
 		var height = parseInt(($(window).height() - 45) * 0.8);

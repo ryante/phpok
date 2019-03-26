@@ -1,10 +1,10 @@
 /**
- * 地址库中涉及到的 JS
+ * 地址庫中涉及到的 JS
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年06月04日
 **/
 
@@ -36,52 +36,52 @@
 		edit:function(id)
 		{
 			$.dialog.open(get_url('address','set','id='+id),{
-				'title':p_lang('编辑地址')+" #"+id,
+				'title':p_lang('編輯地址')+" #"+id,
 				'width':'650px',
 				'height':'550px',
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.$.admin_address.save();
 					return false;
 				},
 				'resize':false,
-				'okVal':p_lang('保存地址'),
+				'okVal':p_lang('儲存地址'),
 				'cancel':true
 			});
 		},
-		//添加地址
+		//新增地址
 		add:function()
 		{
 			$.dialog.open(get_url('address','set'),{
-				'title':p_lang('添加地址'),
+				'title':p_lang('新增地址'),
 				'width':'650px',
 				'height':'550px',
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.$.admin_address.save();
 					return false;
 				},
 				'resize':false,
-				'okVal':p_lang('保存地址'),
+				'okVal':p_lang('儲存地址'),
 				'cancel':true
 			});
 		},
 		del:function(id)
 		{
-			var tip = p_lang('确定要ID为 <span class="red">{id}</span> 的数据吗？<br>删除后地址库信息是不能恢复的',"#"+id);
+			var tip = p_lang('確定要ID為 <span class="red">{id}</span> 的資料嗎？<br>刪除後地址庫資訊是不能恢復的',"#"+id);
 			layer.confirm(tip,function(index){
 				var url = get_url('address','delete','id='+id);
 				$.phpok.json(url,function(data){
 					if(data.status){
-						layer.msg(p_lang('地址删除成功'));
+						layer.msg(p_lang('地址刪除成功'));
 						$("#address_"+id).remove();
 						layer.close(index);
 						return true;
@@ -106,7 +106,7 @@
 				'success':function(rs){
 					if(rs.status){
 						var id = $("#id").val();
-						var tip = id ? p_lang('地址信息编辑成功') : p_lang('地址信息添加成功');
+						var tip = id ? p_lang('地址資訊編輯成功') : p_lang('地址資訊新增成功');
 						$.dialog.tips(tip,function(){
 							opener.$.phpok.reload();
 						}).lock();

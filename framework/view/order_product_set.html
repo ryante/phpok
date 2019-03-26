@@ -7,49 +7,49 @@
 		<input type="hidden" name="order_id" id="order_id" value="{$order.id}" />
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang产品名称}
+				{lang產品名稱}
 			</label>
 			<div class="layui-input-inline long-auto">
 				<input type="text" name="title" value="{$rs.title}" class="layui-input" />
 			</div>
 			<div class="layui-input-line">
-				<input type="button" value="{lang选择}" onclick="$.admin_order.prolist()" class="layui-btn" />
+				<input type="button" value="{lang選擇}" onclick="$.admin_order.prolist()" class="layui-btn" />
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang产品类型}
+				{lang產品型別}
 			</label>
 			<div class="layui-input-inline auto">
 				<ul class="layout">
-					<li><input type="radio" name="is_virtual" value="0"{if !$rs.is_virtual} checked{/if} title="{lang实物}" onclick="$.admin_order.product_virtual(0)" /></li>
-					<li><input type="radio" name="is_virtual" value="1"{if $rs.is_virtual} checked{/if} title="{lang虚拟或服务}" onclick="$.admin_order.product_virtual(1)" /></li>
+					<li><input type="radio" name="is_virtual" value="0"{if !$rs.is_virtual} checked{/if} title="{lang實物}" onclick="$.admin_order.product_virtual(0)" /></li>
+					<li><input type="radio" name="is_virtual" value="1"{if $rs.is_virtual} checked{/if} title="{lang虛擬或服務}" onclick="$.admin_order.product_virtual(1)" /></li>
 				</ul>
 			</div>
 			<div class="layui-input-inline auto gray lh38"></div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang单价}
+				{lang單價}
 			</label>
 			<div class="layui-input-inline">
 				<input type="text" name="price" value="{$rs.price}" class="layui-input" />
 			</div>
 			<!-- if $currency -->
 			<div class="layui-input-inline auto lh38" id="currency_info" data-id="{$currency.id}">
-				{$currency.title} {$currency.code} {lang汇率} {$currency.val}
+				{$currency.title} {$currency.code} {lang匯率} {$currency.val}
 			</div>
 			<!-- /if -->
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang数量}
+				{lang數量}
 			</label>
 			<div class="layui-input-inline">
 				<input type="text" name="qty" value="{$rs.qty}" class="layui-input" />
 			</div>
 			<label class="layui-form-label">
-				{lang计量单位}
+				{lang計量單位}
 			</label>
 			<div class="layui-input-inline">
 				<input type="text" name="unit" value="{$rs.unit}" class="layui-input" />
@@ -57,7 +57,7 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang图片}
+				{lang圖片}
 			</label>
 			<div class="layui-input-inline default-auto">
 				{func form_edit thumb $rs.thumb text form_btn=image&form_style=width:400px}
@@ -75,7 +75,7 @@
 				Kg
 			</div>
 			<label class="layui-form-label">
-				{lang体积}
+				{lang體積}
 			</label>
 			<div class="layui-input-inline">
 				<input type="text" name="volume" value="{$rs.volume}" class="layui-input" />
@@ -86,7 +86,7 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang扩展属性}
+				{lang擴充套件屬性}
 			</label>
 			<div class="layui-input-block" id="ext_html">
 				<!-- if !$rs.ext -->

@@ -1,10 +1,10 @@
 /**
- * 表单页面涉及到的一些信息
+ * 表單頁面涉及到的一些資訊
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2018年01月21日
 **/
 ;(function($){
@@ -12,7 +12,7 @@
 		view:function(id,pid){
 			var url = get_url('form','preview','id='+id+"&pid="+pid);
 			$.dialog.open(url,{
-				'title':p_lang('预览'),
+				'title':p_lang('預覽'),
 				'lock':true,
 				'width':'750px',
 				'height':'650px',

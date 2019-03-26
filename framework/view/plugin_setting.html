@@ -1,10 +1,10 @@
 <!-- include tpl=head_lay -->
 <div class="layui-card">
 	<div class="layui-card-header ">
-		{lang插件快捷图标设置}
+		{lang外掛快捷圖示設定}
 		<div class="fr">
-		<button class="layui-btn layui-btn-sm" onclick="$.admin_plugin.icon('{$id}','','{lang添加图标}');">
-			<i class="layui-icon">&#xe608;</i> {lang添加图标}
+		<button class="layui-btn layui-btn-sm" onclick="$.admin_plugin.icon('{$id}','','{lang新增圖示}');">
+			<i class="layui-icon">&#xe608;</i> {lang新增圖示}
 		</button>
 		</div>
 	</div>
@@ -18,9 +18,9 @@
 		<table class="layui-table">
 			<thead>
 			<tr>
-				<th>标题</th>
-				<th>显示区域</th>
-				<th>执行方法</th>
+				<th>標題</th>
+				<th>顯示區域</th>
+				<th>執行方法</th>
 				<th>排序</th>
 				<th width="150px">操作</th>
 			</tr>
@@ -35,7 +35,7 @@
 				<td>
 					<div class="layui-btn-group">
 						<input type="button" value="{lang修改}" onclick="$.admin_plugin.icon('{$id}','{$value.id}','{lang修改}')" class="layui-btn layui-btn-sm" />
-						<input type="button" value="{lang删除}" onclick="$.admin_plugin.icon_del('{$id}','{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" />
+						<input type="button" value="{lang刪除}" onclick="$.admin_plugin.icon_del('{$id}','{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 					</div>
 				</td>
 			</tr>

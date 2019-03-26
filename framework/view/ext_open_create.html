@@ -16,7 +16,7 @@ function save()
 		'success':function(rs){
 			if(rs.status == 'ok')
 			{
-				$.dialog.alert('添加成功',function(){
+				$.dialog.alert('新增成功',function(){
 					obj.$.dialog.close();
 					obj.$.phpok.reload();
 				},'succeed');
@@ -33,8 +33,8 @@ function save()
 <form method="post" id="ext_add">
 <div class="table">
 	<div class="title">
-		字段名称：
-		<span class="note">设置一个名称，该名称在表单的头部信息显示</span></span>
+		欄位名稱：
+		<span class="note">設定一個名稱，該名稱在表單的頭部資訊顯示</span></span>
 	</div>
 	<div class="content">
 		<table cellpadding="0" cellspacing="0">
@@ -48,16 +48,16 @@ function save()
 
 <div class="table">
 	<div class="title">
-		字段备注：
-		<span class="note">仅限后台管理使用，用于查看这个字段主要做什么</span></span>
+		欄位備註：
+		<span class="note">僅限後臺管理使用，用於檢視這個欄位主要做什麼</span></span>
 	</div>
 	<div class="content"><input type="text" id="note" name="note" class="long" /></div>
 </div>
 
 <div class="table">
 	<div class="title">
-		字段标识：
-		<span class="note">仅限 <span class="darkblue b">字母、数字及下划线，且必须以字母开头</span></span>
+		欄位標識：
+		<span class="note">僅限 <span class="darkblue b">字母、數字及下劃線，且必須以字母開頭</span></span>
 	</div>
 	<div class="content">
 		<table cellpadding="0" cellspacing="0">
@@ -71,12 +71,12 @@ function save()
 
 <div class="table">
 	<div class="title">
-		表单类型：
-		<span class="note">请选择字段要使用的表单</span>
+		表單型別：
+		<span class="note">請選擇欄位要使用的表單</span>
 	</div>
 	<div class="content">
 		<select name="form_type" id="form_type" onchange="_phpok_form_opt(this.value,'form_type_ext','{$id}','fields')">
-			<option value="">请选择…</option>
+			<option value="">請選擇…</option>
 			<!-- loop from=$form_list key=$key value=$value -->
 			<option value="{$key}"{if $key == $rs.form_type} selected{/if}>{$value}</option>
 			<!-- /loop -->
@@ -89,15 +89,15 @@ function save()
 <div class="table">
 	<div class="title">
 		CSS：
-		<span class="note">长度不能超过250个字符，建议您不要在这里设置宽高</span>
+		<span class="note">長度不能超過250個字元，建議您不要在這裡設定寬高</span>
 	</div>
 	<div class="content"><input type="text" id="form_style" name="form_style" class="long" value="{$rs.form_style}" /></div>
 </div>
 
 <div class="table">
 	<div class="title">
-		表单默认值：
-		<span class="note">设置表单默认值，如果表单中有多个值，请用英文逗号隔开</span>
+		表單預設值：
+		<span class="note">設定表單預設值，如果表單中有多個值，請用英文逗號隔開</span>
 	</div>
 	<div class="content"><input type="text" id="content" name="content" class="long" value="{$rs.content}" /></div>
 </div>
@@ -105,12 +105,12 @@ function save()
 
 <div class="table">
 	<div class="title">
-		接收数据格式化：
-		<span class="note">设置文本常见格式，如HTML，整型，浮点型等</span>
+		接收資料格式化：
+		<span class="note">設定文字常見格式，如HTML，整型，浮點型等</span>
 	</div>
 	<div class="content">
 		<select name="format" id="format">
-			{if !$id}<option value="">请选择…</option>{/if}
+			{if !$id}<option value="">請選擇…</option>{/if}
 			<!-- loop from=$format_list key=$key value=$value id=format_list_id -->
 			<option value="{$key}"{if $rs.format == $key} selected{/if}>{$value}</option>			
 			<!-- /loop -->
@@ -121,7 +121,7 @@ function save()
 <div class="table">
 	<div class="title">
 		排序：
-		<span class="note">用于被使用的字段人工排序</span>
+		<span class="note">用於被使用的欄位人工排序</span>
 	</div>
 	<div class="content"><input type="text" id="taxis" name="taxis" class="short" value="{$taxis}" /></div>
 </div>

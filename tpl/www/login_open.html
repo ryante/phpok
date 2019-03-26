@@ -9,13 +9,13 @@ function save()
 		dataType:'json',
 		success:function(rs){
 			if(rs.status){
-				$.dialog.alert('您已成功登录',function(){
+				$.dialog.alert('您已成功登入',function(){
 					top.$.phpok.reload();
 				},'succeed');
 				return true;
 			}
 			if(!rs.info){
-				rs.info = '登录失败';
+				rs.info = '登入失敗';
 			}
 			$.dialog.alert(rs.info,function(){
 				if(open_vcode == '1'){
@@ -32,17 +32,17 @@ function save()
 <div style="padding:10px;">
 <form method="post" id="login-form" class="am-form" onsubmit="return false">
 	<div class="am-form-group">
-		<input type="text" name="user" id="user" value="{$accout}" autocomplete="off" placeholder="输入账号/邮箱/手机号" />
+		<input type="text" name="user" id="user" value="{$accout}" autocomplete="off" placeholder="輸入賬號/郵箱/手機號" />
     </div>
 
     <div class="am-form-group">
-		<input class="input" type="password" name="pass" id="pass" autocomplete="off" placeholder="输入登录密码" />
+		<input class="input" type="password" name="pass" id="pass" autocomplete="off" placeholder="輸入登入密碼" />
 	</div>
 	<!-- if $is_vcode -->
 	<div class="am-form-group">
 		<div class="am-g am-g-collapse">
 			<div class="am-u-sm-6">
-				<input class="vcode"  type="text" name="_chkcode" autocomplete="off" id="_chkcode" placeholder="输入验证码" />
+				<input class="vcode"  type="text" name="_chkcode" autocomplete="off" id="_chkcode" placeholder="輸入驗證碼" />
 			</div>
 			<div class="am-u-sm-6">
 				<img src="" border="0" align="absmiddle" id="vcode" class="hand" style="margin-top:5px;" />

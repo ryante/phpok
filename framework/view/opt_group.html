@@ -1,10 +1,10 @@
 <!-- include tpl=head_lay -->
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang表单选项}
+		{lang表單選項}
 		<div class="layui-btn-group fr">
-			<input type="button" value="{lang添加新组}" onclick="$.admin_opt.group_add()" class="layui-btn layui-btn-sm" />
-			<input type="button" value="{lang导入项目}" onclick="$.admin_opt.opt_import()" class="layui-btn layui-btn-sm" />
+			<input type="button" value="{lang新增新組}" onclick="$.admin_opt.group_add()" class="layui-btn layui-btn-sm" />
+			<input type="button" value="{lang匯入專案}" onclick="$.admin_opt.opt_import()" class="layui-btn layui-btn-sm" />
 		</div>
 	</div>
 	<div class="layui-card-body">
@@ -12,8 +12,8 @@
 		<thead>
 		<tr>
 			<th width="30">ID</th>
-			<th>{lang名称}</th>
-			<th><i class="layui-icon layui-tips" lay-tips="{lang仅限用户自定义字段使用多选时有效，留空使用英文竖线}">&#xe702;</i> {lang连字符}</th>
+			<th>{lang名稱}</th>
+			<th><i class="layui-icon layui-tips" lay-tips="{lang僅限使用者自定義欄位使用多選時有效，留空使用英文豎線}">&#xe702;</i> {lang連字元}</th>
 			<th></th>
 		</tr>
 		</thead>
@@ -24,12 +24,12 @@
 			<td><!-- if $value.link_symbol -->{$value.link_symbol}<!-- /if --></td>
 			<td>
 				<div class="layui-btn-group">
-					<input type="button" value="{lang内容}" onclick="$.win('{lang内容}_{$value.title}','{url ctrl=opt func=list group_id=$value.id/}');" class="layui-btn  layui-btn-sm" />
+					<input type="button" value="{lang內容}" onclick="$.win('{lang內容}_{$value.title}','{url ctrl=opt func=list group_id=$value.id/}');" class="layui-btn  layui-btn-sm" />
 					<!-- if $popedom.set -->
-					<input type="button" value="{lang导入}" onclick="$.admin_opt.opt_import('{$value.id}')" class="layui-btn  layui-btn-sm" />
-					<!-- if $value._export --><input type="button" value="{lang导出}" onclick="$.admin_opt.opt_export('{$value.id}',true)" class="layui-btn  layui-btn-sm" /><!-- /if -->
-					<input type="button" value="{lang编辑}" onclick="$.admin_opt.group_edit('{$value.id}','{$value.title}')" class="layui-btn  layui-btn-sm" />
-					<input type="button" value="{lang删除}" onclick="$.admin_opt.group_delete('{$value.id}','{$value.title}')" class="layui-btn  layui-btn-sm" />
+					<input type="button" value="{lang匯入}" onclick="$.admin_opt.opt_import('{$value.id}')" class="layui-btn  layui-btn-sm" />
+					<!-- if $value._export --><input type="button" value="{lang匯出}" onclick="$.admin_opt.opt_export('{$value.id}',true)" class="layui-btn  layui-btn-sm" /><!-- /if -->
+					<input type="button" value="{lang編輯}" onclick="$.admin_opt.group_edit('{$value.id}','{$value.title}')" class="layui-btn  layui-btn-sm" />
+					<input type="button" value="{lang刪除}" onclick="$.admin_opt.group_delete('{$value.id}','{$value.title}')" class="layui-btn  layui-btn-sm" />
 					<!-- /if -->
 				</div>
 			</td>

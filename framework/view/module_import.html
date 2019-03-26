@@ -25,7 +25,7 @@ $(document).ready(function(){
 				var url = get_url('module','import','zipfile='+$.str.encode(data.content));
 				var rs = $.phpok.json(url);
 				if(rs.status){
-					$.dialog.alert('数据导入成功',function(){
+					$.dialog.alert('資料匯入成功',function(){
 						obj.$.phpok.reload();
 					});
 				}else{
@@ -51,7 +51,7 @@ function save()
 	}
 	var f = $("#upload_progress .phpok-upfile-list").length;
 	if(f<1){
-		$.dialog.alert('请选择要上传的文件');
+		$.dialog.alert('請選擇要上傳的檔案');
 		return false;
 	}
 	obj_upload.uploader.upload();
@@ -65,8 +65,8 @@ function cancel()
 
 <div class="table">
 	<div class="title">
-		{lang单个文件上传不能超过：}
-		<span class="red">{func get_cfg_var upload_max_filesize}</span>，仅支持ZIP上传
+		{lang單個檔案上傳不能超過：}
+		<span class="red">{func get_cfg_var upload_max_filesize}</span>，僅支援ZIP上傳
 	</div>
 	<div class="content"><div id="upload_picker" class=""></div></div>
 </div>

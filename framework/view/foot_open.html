@@ -3,15 +3,15 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	var r_menu = [[{
-		'text':'{lang刷新}',
+		'text':'{lang重新整理}',
 		'func':function(){
 			$.phpok.reload();
 		}
 	},{
-		'text': "{lang新窗口打开}",
+		'text': "{lang新視窗開啟}",
     	'func': function() {
 	    	var url = window.location.href;
-			//去除随机数
+			//去除隨機數
 			url = url.replace(/\_noCache=[0-9\.]+/g,'');
 			if(url.substr(-1) == '&' || url.substr(-1) == '?'){
 				url = url.substr(0,url.length-1);
@@ -19,18 +19,18 @@ $(document).ready(function(){
 			window.open(url);
 	    }
 	},{
-		'text':'{lang帮助说明}',
+		'text':'{lang幫助說明}',
 		'func':function(){
 			var url = window.location.href;
-			//去除随机数
+			//去除隨機數
 			url = url.replace(/\_noCache=[0-9\.]+/g,'');
 			if(url.substr(-1) == '&' || url.substr(-1) == '?'){
 				url = url.substr(0,url.length-1);
 			}
-			var tip = '{lang网址：}'+url+'<br /><div style="text-indent:36px"><a href="'+url+'" target="_blank" class="red">{lang新窗口打开}</a></div>';
-			tip += '<div style="text-indent:36px">{lang复制请按快捷键：CTRL+C，粘贴请使用：CTRL+V}</div>';
+			var tip = '{lang網址：}'+url+'<br /><div style="text-indent:36px"><a href="'+url+'" target="_blank" class="red">{lang新視窗開啟}</a></div>';
+			tip += '<div style="text-indent:36px">{lang複製請按快捷鍵：CTRL+C，貼上請使用：CTRL+V}</div>';
 			top.$.dialog({
-				'title':'{lang帮助说明}',
+				'title':'{lang幫助說明}',
 				'content':tip,
 				'lock':true,
 				'drag':false,

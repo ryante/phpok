@@ -1,10 +1,10 @@
 <!-- include tpl=head_lay -->
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang资源分类列表}
+		{lang資源分類列表}
 		<div class="fr">
-			<button class="layui-btn layui-btn-sm" onclick="$.win('{lang创建资源分类}','{url ctrl=rescate func=set/}');">
-				<i class="layui-icon">&#xe608;</i> {lang创建资源分类}
+			<button class="layui-btn layui-btn-sm" onclick="$.win('{lang建立資源分類}','{url ctrl=rescate func=set/}');">
+				<i class="layui-icon">&#xe608;</i> {lang建立資源分類}
 			</button>
 		</div>
 	</div>
@@ -13,10 +13,10 @@
 			<thead>
 			<tr>
 				<th>ID</th>
-				<th>{lang名称}</th>
-				<th>{lang目录}</th>
-				<th>{lang附件类型}</th>
-				<th>{lang是否默认}</th>
+				<th>{lang名稱}</th>
+				<th>{lang目錄}</th>
+				<th>{lang附件型別}</th>
+				<th>{lang是否預設}</th>
 				<th>{langGD方案}</th>
 				<th width="120">{lang操作}</th>
 			</tr>
@@ -38,8 +38,8 @@
 				</td>
 				<td>
 					<div class="layui-btn-group">
-						<!-- if $popedom.modify --><input type="button" value="{lang编辑}" onclick="$.win('{lang编辑附件分类}_#{$value.id}','{url ctrl=rescate func=set id=$value.id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
-						<!-- if $popedom.delete --><input type="button" value="{lang删除}" onclick="$.admin_rescate.del('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" /><!-- /if -->
+						<!-- if $popedom.modify --><input type="button" value="{lang編輯}" onclick="$.win('{lang編輯附件分類}_#{$value.id}','{url ctrl=rescate func=set id=$value.id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
+						<!-- if $popedom.delete --><input type="button" value="{lang刪除}" onclick="$.admin_rescate.del('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" /><!-- /if -->
 					</div>
 				</td>
 			</tr>

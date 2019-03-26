@@ -27,35 +27,35 @@
     });
     window.onload = function () {
         var settings = {
-            upload_url:editor.options.fileUrl,           //附件上传服务器地址
-            file_post_name:editor.options.fileFieldName,      //向后台提交的表单名
+            upload_url:editor.options.fileUrl,           //附件上傳伺服器地址
+            file_post_name:editor.options.fileFieldName,      //向後臺提交的表單名
             flash_url:"js/swfupload/swfupload.swf",
-            post_params:{"{$app->session->sid()}":"{$app->session->sessid()}"}, //解决session丢失问题
-            file_size_limit:"100 MB",                                 //文件大小限制，此处仅是前端flash选择时候的限制，具体还需要和后端结合判断
-            file_types:"*.*",                                         //允许的扩展名，多个扩展名之间用分号隔开，支持*通配符
-            file_types_description:"All Files",                      //扩展名描述
-            file_upload_limit:100,                                   //单次可同时上传的文件数目
-            file_queue_limit:10,                                      //队列中可同时上传的文件数目
-            custom_settings:{                                         //自定义设置，用户可在此向服务器传递自定义变量
+            post_params:{"{$app->session->sid()}":"{$app->session->sessid()}"}, //解決session丟失問題
+            file_size_limit:"100 MB",                                 //檔案大小限制，此處僅是前端flash選擇時候的限制，具體還需要和後端結合判斷
+            file_types:"*.*",                                         //允許的副檔名，多個副檔名之間用分號隔開，支援*萬用字元
+            file_types_description:"All Files",                      //副檔名描述
+            file_upload_limit:100,                                   //單次可同時上傳的檔案數目
+            file_queue_limit:10,                                      //佇列中可同時上傳的檔案數目
+            custom_settings:{                                         //自定義設定，使用者可在此向伺服器傳遞自定義變數
                 progressTarget:"fsUploadProgress",
                 startUploadId:"startUpload"
             },
             debug:false,
 
-            // 按钮设置
+            // 按鈕設定
             button_image_url:"images/swfupload.png",
             button_width:"92",
             button_height:"23",
             button_placeholder_id:"spanButtonPlaceHolder",
 
-            // 所有回调函数 in handlersplugin.js
+            // 所有回撥函式 in handlersplugin.js
             swfupload_preload_handler:preLoad,
             swfupload_load_failed_handler:loadFailed,
             file_queued_handler:fileQueued,
             file_queue_error_handler:fileQueueError,
-            //选择文件完成回调
+            //選擇檔案完成回撥
             file_dialog_complete_handler:function(numFilesSelected, numFilesQueued) {
-                var me = this;        //此处的this是swfupload对象
+                var me = this;        //此處的this是swfupload物件
                 if (numFilesQueued > 0) {
                     dialog.buttons[0].setDisabled(true);
                     var start = $G(this.customSettings.startUploadId);
@@ -85,15 +85,15 @@
                     progress.toggleCancel(true,this,lang.delFailSaveFile);
                 }
             },
-            //上传完成回调
+            //上傳完成回撥
             upload_complete_handler:uploadComplete,
-            //队列完成回调
+            //佇列完成回撥
             queue_complete_handler:function(numFilesUploaded){
                 dialog.buttons[0].setDisabled(false);
             }
         };
         swfupload = new SWFUpload( settings );
-        //点击OK按钮
+        //點選OK按鈕
         dialog.onok = function(){
             str="";
             for(var i=0,ci;ci=filesList[i++];){

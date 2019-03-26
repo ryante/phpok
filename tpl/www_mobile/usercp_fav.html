@@ -1,12 +1,12 @@
-<!-- include tpl=head title=收藏夹 -->
+<!-- include tpl=head title=收藏夾 -->
 <div class="am-margin-xs">
 	<!-- loop from=$rslist key=$key value=$value id=$tmpid -->
 	<div class="am-panel am-panel-default">
 		<div class="am-panel-hd">
 			#{$value.id}
 			<div class="am-btn-group am-fr">
-				<button type="button" onclick="$.phpok.go('{url id=$value.lid/}')" class="am-btn am-btn-default am-btn-xs">访问</button>
-				<button type="button" onclick="$.phpok_app_fav.del('{$value.id}')" class="am-btn am-btn-danger am-btn-xs">删除</button>
+				<button type="button" onclick="$.phpok.go('{url id=$value.lid/}')" class="am-btn am-btn-default am-btn-xs">訪問</button>
+				<button type="button" onclick="$.phpok_app_fav.del('{$value.id}')" class="am-btn am-btn-danger am-btn-xs">刪除</button>
 			</div>
 		</div>
 		<div class="am-panel-bd">{$value.title}</div>

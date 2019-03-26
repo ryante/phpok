@@ -5,7 +5,7 @@
 	<th class="center" style="min-width:120px;">{$rs.title}</th>
 	<th colspan="4" class="center">
 		<select id="attr_{$rs.id}_opt" lay-ignore style="width:90%" onchange="$.admin_list_edit.attr_option_quickadd('{$rs.id}',this.value)">
-			<option value="">{lang请选择…}</option>
+			<option value="">{lang請選擇…}</option>
 			<!-- loop from=$optlist key=$key value=$value id=$tmpid -->
 			<option value="{$value.id}">{$value.title}</option>
 			<!-- /loop -->
@@ -13,16 +13,16 @@
 	</th>
 	<th class="center" style="min-width:120px;">
 		<div class="layui-btn-group">
-			<input type="button" value="{lang添加}" onclick="$.admin_list_edit.attr_option_add('{$rs.id}')" class="layui-btn layui-btn-sm" />
-			<input type="button" value="{lang删除}" onclick="$.admin_list_edit.attr_remove('{$rs.id}')" class="layui-btn layui-btn-sm" />
+			<input type="button" value="{lang新增}" onclick="$.admin_list_edit.attr_option_add('{$rs.id}')" class="layui-btn layui-btn-sm" />
+			<input type="button" value="{lang刪除}" onclick="$.admin_list_edit.attr_remove('{$rs.id}')" class="layui-btn layui-btn-sm" />
 		</div>
 	</th>
 </tr>
 <tr name="attr_{$rs.id}_thead">
-	<th class="center">{lang属性名称}</th>
-	<th class="center">{lang重量加减} Kg</th>
-	<th class="center">{lang体积加减} M<sup>3</sup></th>
-	<th class="center">{lang价格加减}</th>
+	<th class="center">{lang屬性名稱}</th>
+	<th class="center">{lang重量加減} Kg</th>
+	<th class="center">{lang體積加減} M<sup>3</sup></th>
+	<th class="center">{lang價格加減}</th>
 	<th class="center">{lang排序}</th>
 	<th class="center">{lang操作}</th>
 </tr>
@@ -38,7 +38,7 @@
 	<td class="center"><input type="text" name="_attr_volume_{$rs.id}[{$value.vid}]" value="{$value.volume}" class="layui-input" /></td>
 	<td class="center"><input type="text" name="_attr_price_{$rs.id}[{$value.vid}]" value="{func round $value.price 2}" class="layui-input" /></td>
 	<td class="center"><input type="text" name="_attr_taxis_{$rs.id}[{$value.vid}]" value="{$value.taxis}" class="layui-input" /></td>
-	<td class="center"><input type="button" value="{lang删除}" onclick="$.admin_list_edit.attr_option_delete('{$rs.id}','{$value.vid}')" class="layui-btn layui-btn-sm" /></td>
+	<td class="center"><input type="button" value="{lang刪除}" onclick="$.admin_list_edit.attr_option_delete('{$rs.id}','{$value.vid}')" class="layui-btn layui-btn-sm" /></td>
 </tr>
 <!-- /loop -->
 </tbody>

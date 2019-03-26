@@ -13,7 +13,7 @@ $(document).ready(function(){
 	obj_zipfile = new $.admin_upload({
 		'id':'zipfile',
 		'server':'{url ctrl=upload func=zip/}',
-		'pick':{'id':'#zipfile_picker','multiple':false,'innerHTML':'{lang选择本地文件}'},
+		'pick':{'id':'#zipfile_picker','multiple':false,'innerHTML':'{lang選擇本地檔案}'},
 		'resize':false,
 		'multiple':"false",
 		"formData":{'{func session_name}':'{func session_id}'},
@@ -22,15 +22,15 @@ $(document).ready(function(){
 		'compress':false,
 		'auto':false,
 		'sendAsBinary':true,
-		'accept':{'title':'压缩包(*.zip)','extensions':'zip'},
+		'accept':{'title':'壓縮包(*.zip)','extensions':'zip'},
 		'fileSingleSizeLimit':'204800000',
 		'success':function(file,data){
-			//执行在线解压
+			//執行線上解壓
 			var url = get_url('plugin','unzip','filename='+$.str.encode(data.content));
-			$.dialog.tips("正在解压插件，请稍候…",2);
+			$.dialog.tips("正在解壓外掛，請稍候…",2);
 			var rs = $.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.alert('插件导入成功，请执行安装',function(){
+					$.dialog.alert('外掛匯入成功，請執行安裝',function(){
 						obj.$.phpok.reload();
 					},'succeed');
 					return true;
@@ -50,7 +50,7 @@ function save()
 	}
 	var f = $("#zipfile_progress .phpok-upfile-list").length;
 	if(f<1){
-		$.dialog.alert('请选择要上传的文件');
+		$.dialog.alert('請選擇要上傳的檔案');
 		return false;
 	}
 	obj_zipfile.uploader.upload();

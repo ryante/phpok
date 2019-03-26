@@ -7,20 +7,20 @@
 		<!-- /if -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang组名称}
+				{lang組名稱}
 			</label>
 			<div class="layui-input-block">
 				<input type="text" id="title" name="title" value="{$rs.title}" class="layui-input" >
 			</div>
-			<div class="layui-input-block mtop">{lang设置支付组的名称，请根据您的站点需求设置相应的组名称}</div>
+			<div class="layui-input-block mtop">{lang設定支付組的名稱，請根據您的站點需求設定相應的組名稱}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				<i class="layui-icon layui-tips" lay-tips="{lang禁用组后，其组下列的支付方案将不生效}">&#xe702;</i>
-				{lang状态}
+				<i class="layui-icon layui-tips" lay-tips="{lang禁用組後，其組下列的支付方案將不生效}">&#xe702;</i>
+				{lang狀態}
 			</label>
 			<div class="layui-input-block">
-				<input type="radio" name="status" value="1" {if $rs.status} checked{/if} title="{lang启用}">
+				<input type="radio" name="status" value="1" {if $rs.status} checked{/if} title="{lang啟用}">
 				<input type="radio" name="status" value="0" {if !$rs.status} checked{/if} title="{lang禁用}">
 			</div>
 		</div>
@@ -31,32 +31,32 @@
 			<div class="layui-input-inline">
 				<input type="text" id="taxis" name="taxis" value="{$id ? $rs.taxis : 255}" class="layui-input" >
 			</div>
-			<div class="layui-input-inline auto gray lh38">{lang范围控制在0-255，值越小越往前排，默认为255}</div>
+			<div class="layui-input-inline auto gray lh38">{lang範圍控制在0-255，值越小越往前排，預設為255}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				<i class="layui-icon layui-tips" lay-tips="{lang启用默认组功能后，其他其将显示为可选类型}">&#xe702;</i>
-				{lang默认组}
+				<i class="layui-icon layui-tips" lay-tips="{lang啟用預設組功能後，其他其將顯示為可選型別}">&#xe702;</i>
+				{lang預設組}
 			</label>
 			<div class="layui-input-block">
-				<input type="radio" name="is_default" value="1"{if $rs.is_default} checked{/if} title="{lang启用}">
+				<input type="radio" name="is_default" value="1"{if $rs.is_default} checked{/if} title="{lang啟用}">
 				<input type="radio" name="is_default" value="0"{if !$rs.is_default} checked{/if} title="{lang禁用}">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				<i class="layui-icon layui-tips" lay-tips="{lang指定支付组使用范围，手机或PC}">&#xe702;</i>
-				{lang范围}
+				<i class="layui-icon layui-tips" lay-tips="{lang指定支付組使用範圍，手機或PC}">&#xe702;</i>
+				{lang範圍}
 			</label>
 			<div class="layui-input-block">
-				<input type="radio" name="is_wap" value="1"{if $rs.is_wap} checked{/if} title="{lang手机端}">
-				<input type="radio" name="is_wap" value="0"{if !$rs.is_wap} checked{/if} title="{lang电脑端}">
+				<input type="radio" name="is_wap" value="1"{if $rs.is_wap} checked{/if} title="{lang手機端}">
+				<input type="radio" name="is_wap" value="0"{if !$rs.is_wap} checked{/if} title="{lang電腦端}">
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">&nbsp;</label>
 			<div class="layui-input-block">
-				<input type="submit" class="layui-btn" value="{lang提交保存}" />
+				<input type="submit" class="layui-btn" value="{lang提交儲存}" />
 				<input type="button" value="{lang返回上一步}" onclick="$.phpok.go('{url ctrl=payment/}')" class="layui-btn layui-btn-danger am-fr" />
 			</div>
 		</div>

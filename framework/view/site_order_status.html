@@ -20,7 +20,7 @@
         }
         $.phpok.json(url, function (rs) {
             if (rs.status == 'ok') {
-                $.dialog.tips('标识：<span class="red">' + code + '</span> 配置更新成功');
+                $.dialog.tips('標識：<span class="red">' + code + '</span> 配置更新成功');
             } else {
                 $.dialog.alert(rs.content);
                 return false;
@@ -29,17 +29,17 @@
     }
 </script>
 <div class="layui-card">
-    <div class="layui-card-header">{lang前台订单状态}</div>
+    <div class="layui-card-header">{lang前臺訂單狀態}</div>
     <div class="layui-card-body">
         <table class="layui-table">
             <thead>
             <tr>
-                <th class="lft">{lang标识}</th>
+                <th class="lft">{lang標識}</th>
                 <th>{lang排序}</th>
-                <th class="lft">{lang名称}</th>
-                <th>{lang状态}</th>
-                <th class="lft">{lang通知会员}</th>
-                <th class="lft">{lang通知管理员}</th>
+                <th class="lft">{lang名稱}</th>
+                <th>{lang狀態}</th>
+                <th class="lft">{lang通知會員}</th>
+                <th class="lft">{lang通知管理員}</th>
                 <th>&nbsp;</th>
             </tr>
             </thead>
@@ -51,7 +51,7 @@
                 <td>{$value.title}</td>
                 <td class="center">
 	                <!-- if $value.status -->
-	                {lang启用}
+	                {lang啟用}
 	                <!-- else -->
 	                <span class="red">{lang禁用}</span>
                     <!-- /if -->
@@ -61,10 +61,10 @@
                     <span class="red">不通知</span>
                     <!-- /if -->
                     <!-- if $value.email_tpl_user && $value.sms_tpl_user -->
-                    邮件 + 短信
+                    郵件 + 簡訊
                     <!-- else -->
-                    	<!-- if $value.email_tpl_user -->邮件<!-- /if -->
-                    	<!-- if $value.sms_tpl_user -->短信<!-- /if -->
+                    	<!-- if $value.email_tpl_user -->郵件<!-- /if -->
+                    	<!-- if $value.sms_tpl_user -->簡訊<!-- /if -->
                     <!-- /if -->
                 </td>
                 <td>
@@ -72,14 +72,14 @@
                     <span class="red">不通知</span>
                     <!-- /if -->
                     <!-- if $value.email_tpl_admin && $value.sms_tpl_admin -->
-                    邮件 + 短信
+                    郵件 + 簡訊
                     <!-- else -->
-                    	<!-- if $value.email_tpl_admin -->邮件<!-- /if -->
-                    	<!-- if $value.sms_tpl_admin -->短信<!-- /if -->
+                    	<!-- if $value.email_tpl_admin -->郵件<!-- /if -->
+                    	<!-- if $value.sms_tpl_admin -->簡訊<!-- /if -->
                     <!-- /if -->
                 </td>
                 <td>
-	                <input type="button" value="{lang编辑}" onclick="$.admin_site.order_edit('{$value.identifier}')" class="layui-btn"/>
+	                <input type="button" value="{lang編輯}" onclick="$.admin_site.order_edit('{$value.identifier}')" class="layui-btn"/>
 	            </td>
             </tr>
             <!-- /loop -->
@@ -88,17 +88,17 @@
     </div>
 </div>
 <div class="layui-card">
-    <div class="layui-card-header">{lang后台订单状态}</div>
+    <div class="layui-card-header">{lang後臺訂單狀態}</div>
     <div class="layui-card-body">
         <table class="layui-table">
             <thead>
             <tr>
-                <th class="lft">{lang标识}</th>
+                <th class="lft">{lang標識}</th>
                 <th>{lang排序}</th>
-                <th class="lft">{lang名称}</th>
-                <th class="lft">{lang前台订单状态}</th>
-                <th>{lang状态}</th>
-                <th><input type="button" value="{lang添加}" onclick="$.admin_site.adm_add_it()" class="layui-btn"/></th>
+                <th class="lft">{lang名稱}</th>
+                <th class="lft">{lang前臺訂單狀態}</th>
+                <th>{lang狀態}</th>
+                <th><input type="button" value="{lang新增}" onclick="$.admin_site.adm_add_it()" class="layui-btn"/></th>
             </tr>
             </thead>
             <tbody>
@@ -110,14 +110,14 @@
                 <td>{$value.ostatus}</td>
                 <td class="center">
 	                <!-- if $value.status -->
-	                {lang启用}
+	                {lang啟用}
 	                <!-- else -->
 	                <span class="red">{lang禁用}</span>
                     <!-- /if -->
                 </td>
                 <td class="center">
-	                <input type="button" value="{lang编辑}" onclick="$.admin_site.adm_edit_it('{$value.identifier}')" class="layui-btn"/>
-	                <input type="button" value="{lang删除}" onclick="$.admin_site.delete_it('{$value.identifier}',this)" class="layui-btn"/>
+	                <input type="button" value="{lang編輯}" onclick="$.admin_site.adm_edit_it('{$value.identifier}')" class="layui-btn"/>
+	                <input type="button" value="{lang刪除}" onclick="$.admin_site.delete_it('{$value.identifier}',this)" class="layui-btn"/>
                 </td>
             </tr>
             <!-- /loop -->
@@ -126,7 +126,7 @@
     </div>
 </div>
 <div class="layui-card">
-    <div class="layui-card-header">{lang订单价格方案}</div>
+    <div class="layui-card-header">{lang訂單價格方案}</div>
     <div class="layui-card-body layui-form">
         <table class="layui-table">
             <colgroup>
@@ -139,10 +139,10 @@
             </colgroup>
             <thead>
             <tr>
-                <th class="lft" width="100">标识</th>
-                <th class="lft">名称</th>
-                <th>金额动作</th>
-                <th>状态</th>
+                <th class="lft" width="100">標識</th>
+                <th class="lft">名稱</th>
+                <th>金額動作</th>
+                <th>狀態</th>
                 <th>排序</th>
                 <th>操作</th>
             </tr>
@@ -157,7 +157,7 @@
                 </td>
                 <td class="center">
 	                <!-- if $value.status -->
-	                {lang启用}
+	                {lang啟用}
 	                <!-- else -->
 	                <span class="red">{lang禁用}</span>
                     <!-- /if -->
@@ -165,7 +165,7 @@
                 <td class="center">
 	                {$value.taxis}
                 </td>
-                <td><input type="button" value="{lang编辑}" onclick="$.admin_site.edit_price('{$value.identifier}')" class="layui-btn"/></td>
+                <td><input type="button" value="{lang編輯}" onclick="$.admin_site.edit_price('{$value.identifier}')" class="layui-btn"/></td>
             </tr>
             <!-- /loop -->
             </tbody>

@@ -2,7 +2,7 @@
 <form method="post" id="post_save">
 <div class="table">
 	<div class="title">
-		{lang服务器} <span class="note">{lang请配置远程服务器}</span>
+		{lang伺服器} <span class="note">{lang請配置遠端伺服器}</span>
 	</div>
 	<div class="content">
 		<input type="text" name="server" id="server" value="{$rs.server}" class="w99" />
@@ -10,7 +10,7 @@
 </div>
 <div class="table">
 	<div class="title">
-		{langIP} <span class="note">{lang如无法解析域名，请手工指定IP}</span>
+		{langIP} <span class="note">{lang如無法解析域名，請手工指定IP}</span>
 	</div>
 	<div class="content">
 		<input type="text" name="ip" id="ip" value="{$rs.ip}" class="w99" />
@@ -18,7 +18,7 @@
 </div>
 <div class="table">
 	<div class="title">
-		{lang目录} <span class="note">{lang不清楚请设置为} /</span>
+		{lang目錄} <span class="note">{lang不清楚請設定為} /</span>
 	</div>
 	<div class="content">
 		<input type="text" name="folder" id="folder" value="{$rs.folder}" class="w99" />
@@ -26,11 +26,11 @@
 </div>
 <div class="table">
 	<div class="title">
-		{lang是否启用HTTPS} <span class="note">{lang官网提供的APP接口默认是没有启用 HTTPS}</span>
+		{lang是否啟用HTTPS} <span class="note">{lang官網提供的APP介面預設是沒有啟用 HTTPS}</span>
 	</div>
 	<div class="content">
 		<ul class="layout">
-			<li><label><input type="radio" name="https" value="1"{if $rs.https} checked{/if} />{lang启用 HTTPS}</label></li>
+			<li><label><input type="radio" name="https" value="1"{if $rs.https} checked{/if} />{lang啟用 HTTPS}</label></li>
 			<li><label><input type="radio" name="https" value="0"{if !$rs || !$rs.https} checked{/if} />{lang禁用 HTTPS}</label></li>
 		</ul>
 	</div>

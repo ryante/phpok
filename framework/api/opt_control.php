@@ -1,7 +1,7 @@
 <?php
 /***********************************************************
 	Filename: {phpok}/api/opt_control.php
-	Note	: OPT選項功能前後臺數據讀取
+	Note	: OPT選項功能前後臺資料讀取
 	Version : 4.0
 	Web		: www.phpok.com
 	Author  : qinggan <qinggan@188.com>

@@ -7,7 +7,7 @@ function save_pic()
 	var vals = $("#selected").val();
 	if(!vals || vals == "undefined")
 	{
-		$.dialog.alert("没有选择图片");
+		$.dialog.alert("沒有選擇圖片");
 		callback(null);
 	}
 	var list = vals.split(",");
@@ -160,7 +160,7 @@ function load_picture(str)
 		var t4 =$("#attr_"+list[i]).attr("t4");
 		var t = (parseInt(i)+1).toString();
 		$("#attr_"+list[i]).hide();
-		html += '<li title="附件名称：'+t1+'&#10;上传时间：'+t4+'" id="selected_'+list[i]+'">';
+		html += '<li title="附件名稱：'+t1+'&#10;上傳時間：'+t4+'" id="selected_'+list[i]+'">';
 		html += '<img src="'+t2+'" width="80px" height="80px" border="0" />';
 		html += '<span class="idd">'+list[i]+'</span>';
 		html += '<span class="del" onclick="delete_picture(\''+list[i]+'\')"></span>';
@@ -176,16 +176,16 @@ function load_picture(str)
 <table cellpadding="0" cellspacing="0">
 <tr>
 	<form method="post" action="{echo admin_url('uedit','picture')}">
-	<td>&nbsp; 关键字：</td>
+	<td>&nbsp; 關鍵字：</td>
 	<td><input type="text" id="keywords" name="keywords" value="{$keywords}" /></td>
 	<td style="padding-left:5px;"><select id="cate_id" name="cate_id">
-			<option value="0">请选择分类</option>
+			<option value="0">請選擇分類</option>
 			<!-- $catelist AS $key=>$value -->
 			<option value="{$value.id}"{if $value.id == $cate_id} selected="selected"{/if}>{$value.title}</option>
 			<!-- end -->
 		</select>
 	</td>
-	<td style="padding-left:5px;"><input type="submit" value="搜索" class="submit" /></td>
+	<td style="padding-left:5px;"><input type="submit" value="搜尋" class="submit" /></td>
 	</form>
 </tr>
 </table>
@@ -197,9 +197,9 @@ function load_picture(str)
 	<div class="tips" align="right">
 	<table>
 	<tr>
-		<td>↑↑↑ 已选择要插入的图片，不支持翻页，翻页前请先提交&nbsp; &nbsp;</td>
+		<td>↑↑↑ 已選擇要插入的圖片，不支援翻頁，翻頁前請先提交&nbsp; &nbsp;</td>
 		<td><input type="button" value="手工排序" class="button" onclick="sort_taxis()" /></td>
-		<td><input type="button" value="ID顺序" class="button" onclick="sort_taxis2()" /></td>
+		<td><input type="button" value="ID順序" class="button" onclick="sort_taxis2()" /></td>
 		<td><input type="button" value="ID倒序" class="button" onclick="sort_taxis3()" /></td>
 	</tr>
 	</table>
@@ -207,7 +207,7 @@ function load_picture(str)
 </div>
 <ul class="piclist" id="piclist">
 	<!-- loop from=$rslist key=$key value=$value -->
-	<li id="attr_{$value.id}" t1="{$value.title}" t2="{$value.ico}" t3="{$value.filename}" t4="{echo date('Y-m-d H:i:s',$value['addtime'])}" title="附件名称：{$value.title}&#10;上传时间：{echo date('Y-m-d H:i:s',$value['addtime'])}" onclick="add_picture('{$value.id}')"><img src="{$value.ico}" width="80px" height="80px" border="0" /></li>
+	<li id="attr_{$value.id}" t1="{$value.title}" t2="{$value.ico}" t3="{$value.filename}" t4="{echo date('Y-m-d H:i:s',$value['addtime'])}" title="附件名稱：{$value.title}&#10;上傳時間：{echo date('Y-m-d H:i:s',$value['addtime'])}" onclick="add_picture('{$value.id}')"><img src="{$value.ico}" width="80px" height="80px" border="0" /></li>
 	<!-- /loop -->
 </ul>
 <div class="clear"></div>

@@ -1,8 +1,8 @@
 <!-- inc:head_open -->
 <!-- 
-	弹出窗口创建字段功能，自定义目标存储
-	特别说明：创建的字段自动存储到目标，不会在字段管理体现
-	提交使用了jquery.ajaxSubmit功能，请确认相应的JS有加载
+	彈出視窗建立欄位功能，自定義目標儲存
+	特別說明：建立的欄位自動儲存到目標，不會在欄位管理體現
+	提交使用了jquery.ajaxSubmit功能，請確認相應的JS有載入
  -->
 <script type="text/javascript">
 function field_form_opt(val,eid)
@@ -34,7 +34,7 @@ $(document).ready(function(){
 			'success':function(rs){
 				if(rs.status == 'ok')
 				{
-					$.dialog.alert('字段创建成功',function(){
+					$.dialog.alert('欄位建立成功',function(){
 						parent.$.phpok.reload();
 					});
 				}
@@ -52,15 +52,15 @@ $(document).ready(function(){
 <form method="post" id="form_save">
 <div class="table">
 	<div class="title">
-		名称/标识：
-		<span class="note">名称会在表单中体现，标识限：<span class="darkblue b">字母、数字及下划线，且必须以字母开头</span></span>
+		名稱/標識：
+		<span class="note">名稱會在表單中體現，標識限：<span class="darkblue b">字母、數字及下劃線，且必須以字母開頭</span></span>
 	</div>
 	<div class="content">
 		<table cellpadding="0" cellspacing="0">
 		<tr>
-			<td><input type="text" id="title" name="title" value="{$rs.title}" placeholder="名称" /></td>
+			<td><input type="text" id="title" name="title" value="{$rs.title}" placeholder="名稱" /></td>
 			<td>&nbsp;/&nbsp;</td>
-			<td><input type="text" id="identifier" name="identifier" value="{$rs.identifier}" placeholder="标识" /></td>
+			<td><input type="text" id="identifier" name="identifier" value="{$rs.identifier}" placeholder="標識" /></td>
 		</tr>
 		</table>
 	</div>
@@ -68,23 +68,23 @@ $(document).ready(function(){
 
 <div class="table">
 	<div class="title">
-		字段备注：
-		<span class="note">填写表单时，指定这个项目的注意事项</span></span>
+		欄位備註：
+		<span class="note">填寫表單時，指定這個專案的注意事項</span></span>
 	</div>
 	<div class="content"><input type="text" id="note" name="note" class="long" value="{$rs.note}" /></div>
 </div>
 
 <div class="table">
 	<div class="title">
-		字段类型 / 表单类型：
-		<span class="note">请慎重选项此项，一般创建后不要修改。</span>
+		欄位型別 / 表單型別：
+		<span class="note">請慎重選項此項，一般建立後不要修改。</span>
 	</div>
 	<div class="content">
 		<table cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
 				<select name="field_type" id="field_type">
-					<option value="">请选择字段类型…</option>
+					<option value="">請選擇欄位型別…</option>
 					<!-- loop from=$fields key=$key value=$value -->
 					<option value="{$key}"{if $rs.field_type == $key} selected{/if}>{$value}</option>
 					<!-- /loop -->
@@ -93,7 +93,7 @@ $(document).ready(function(){
 			<td>&nbsp;/&nbsp;</td>
 			<td>
 				<select name="form_type" id="form_type" onchange="field_form_opt(this.value,'{$id}')">
-					<option value="">请选择表单类型…</option>
+					<option value="">請選擇表單型別…</option>
 					<!-- loop from=$forms key=$key value=$value -->
 					<option value="{$key}"{if $key == $rs.form_type} selected{/if}>{$value}</option>
 					<!-- /loop -->
@@ -109,8 +109,8 @@ $(document).ready(function(){
 
 <div class="table">
 	<div class="title">
-		表单默认值：
-		<span class="note">设置表单默认值，如果表单中有多个值，请用英文逗号隔开</span>
+		表單預設值：
+		<span class="note">設定表單預設值，如果表單中有多個值，請用英文逗號隔開</span>
 	</div>
 	<div class="content"><input type="text" id="content" name="content" class="long" value="{$rs.content}" /></div>
 </div>
@@ -118,8 +118,8 @@ $(document).ready(function(){
 
 <div class="table">
 	<div class="title">
-		接收数据格式化：
-		<span class="note">设置文本常见格式，如HTML，整型，浮点型等</span>
+		接收資料格式化：
+		<span class="note">設定文字常見格式，如HTML，整型，浮點型等</span>
 	</div>
 	<div class="content">
 		<select name="format" id="format">
@@ -133,7 +133,7 @@ $(document).ready(function(){
 <div class="table">
 	<div class="title">
 		排序：
-		<span class="note">值越小越往前靠，可选范围：1-255</span>
+		<span class="note">值越小越往前靠，可選範圍：1-255</span>
 	</div>
 	<div class="content">
 		<input type="text" name="taxis" id="taxis" value="{$rs.taxis ? $rs.taxis : 255}" />

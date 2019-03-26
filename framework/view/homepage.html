@@ -3,34 +3,34 @@
 <!-- if $all_info -->
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang全局信息}
+		{lang全域性資訊}
 	</div>
 	<div class="layui-card-body">
 		<div class="sub_box" id="all_setting">
 			<div class="box_item">
 				<ul>
 					<!-- if $all_popedom.site -->
-					<li><a title="{lang配置网站信息，包括网址域名，布全局关键字等}" href="javascript:$.win('{lang网站信息}','{url ctrl=all func=setting/}');void(0);">
-						<div class="top_img"><img src="images/ico/setting.png" alt="{lang网站信息}" class="ie6png" width="48" height="48" /></div>
-						<div class="name">{lang网站信息}</div></a>
+					<li><a title="{lang配置網站資訊，包括網址域名，布全域性關鍵字等}" href="javascript:$.win('{lang網站資訊}','{url ctrl=all func=setting/}');void(0);">
+						<div class="top_img"><img src="images/ico/setting.png" alt="{lang網站資訊}" class="ie6png" width="48" height="48" /></div>
+						<div class="name">{lang網站資訊}</div></a>
 					</li>
 						<!-- if $show_vcode_setting -->
-						<li><a title="{lang验证码开启或关闭设置}" href="javascript:$.win('{lang验证码配置}','{url ctrl=all func=vcode/}');void(0);">
-							<div class="top_img"><img src="images/ico/setting2.png" alt="{lang验证码配置}" class="ie6png" width="48" height="48" /></div>
-							<div class="name">{lang验证码}</div></a>
+						<li><a title="{lang驗證碼開啟或關閉設定}" href="javascript:$.win('{lang驗證碼配置}','{url ctrl=all func=vcode/}');void(0);">
+							<div class="top_img"><img src="images/ico/setting2.png" alt="{lang驗證碼配置}" class="ie6png" width="48" height="48" /></div>
+							<div class="name">{lang驗證碼}</div></a>
 						</li>
 						<!-- /if -->
 					<!-- /if -->
 					<!-- if $all_popedom.domain -->
-					<li><a title="{lang网站可以绑定的域名}" href="javascript:$.win('{lang网站域名}','{url ctrl=all func=domain/}');void(0);">
-						<div class="top_img"><img src="images/ico/alias.png" alt="{lang网站域名}" class="ie6png" width="48" height="48" /></div>
-						<div class="name">{lang网站域名}</div></a>
+					<li><a title="{lang網站可以繫結的域名}" href="javascript:$.win('{lang網站域名}','{url ctrl=all func=domain/}');void(0);">
+						<div class="top_img"><img src="images/ico/alias.png" alt="{lang網站域名}" class="ie6png" width="48" height="48" /></div>
+						<div class="name">{lang網站域名}</div></a>
 					</li>
 					<!-- /if -->
 					<!-- if $site_popedom.order && $config.biz_status -->
-					<li><a title="{lang订单常规配置}" href="javascript:$.win('{lang订单常规配置}','{url ctrl=site func=order_status/}');void(0);">
-						<div class="top_img"><img src="images/ico/shopping_setting.png" alt="{lang订单常规配置}" class="ie6png" width="48" height="48" /></div>
-						<div class="name">{lang订单配置}</div></a>
+					<li><a title="{lang訂單常規配置}" href="javascript:$.win('{lang訂單常規配置}','{url ctrl=site func=order_status/}');void(0);">
+						<div class="top_img"><img src="images/ico/shopping_setting.png" alt="{lang訂單常規配置}" class="ie6png" width="48" height="48" /></div>
+						<div class="name">{lang訂單配置}</div></a>
 					</li>
 					<!-- /if -->
 					<!-- loop from=$plugin_alist key=$key value=$value id=$tmpid -->
@@ -57,7 +57,7 @@
 <!-- if $list_rslist -->
 <div class="layui-card">
 	<div class="layui-card-header">
-		<h3>{lang内容管理}</h3>
+		<h3>{lang內容管理}</h3>
 	</div>
 	<div class="layui-card-body">
 		<!-- if $list_rslist -->
@@ -80,7 +80,7 @@
 <!-- if $all_status -->
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang内容统计}
+		{lang內容統計}
 	</div>
 	<div class="layui-card-body">
 		<ul class="layui-row layui-col-space10 layadmin-backlog">
@@ -102,9 +102,9 @@
 </style>
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang主机环境}
+		{lang主機環境}
 		<div class="fr">
-			<input type="button" value="查看更多" onclick="$.win('{lang主机信息}','{url ctrl=index func=info/}')" class="layui-btn layui-btn-sm layui-btn-normal" />
+			<input type="button" value="檢視更多" onclick="$.win('{lang主機資訊}','{url ctrl=index func=info/}')" class="layui-btn layui-btn-sm layui-btn-normal" />
 		</div>
 	</div>
 	<div class="layui-card-body">

@@ -1,12 +1,12 @@
 /**
- * 自定义表单中涉及到的JS操作
+ * 自定義表單中涉及到的JS操作
  * @package phpok
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
- * @时间 2017年03月22日
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
+ * @時間 2017年03月22日
 **/
 
 function phpok_form_password(id,len)
@@ -19,13 +19,13 @@ function phpok_form_password(id,len)
 		var num = Math.floor(Math.random()*36+0);
 		rand = rand + list[num];
 	}
-	var htm = "随机密码："+rand;
+	var htm = "隨機密碼："+rand;
 	$("#"+id+"_html").html(htm);
 	$("#"+id).val(rand);
 }
 
-//表单扩展按钮
-//btn，类型
+//表單擴充套件按鈕
+//btn，型別
 function phpok_btn_action(btn,id)
 {
 	if(btn == "image")
@@ -37,7 +37,7 @@ function phpok_btn_action(btn,id)
 		}
 		var url = get_url("open","input") + "&ext="+$.str.encode("png,jpg,gif,jpeg,bmp")+"&id="+id;
 		$.dialog.open(url,{
-			title: "图片管理器",
+			title: "圖片管理器",
 			lock : true,
 			width: "80%",
 			height: "70%",
@@ -53,12 +53,12 @@ function phpok_btn_view(btn,id)
 		var url = $("#"+id).val();
 		if(!url || url == "undefined")
 		{
-			$.dialog.alert("图片不存在，请在表单中填写图片地址");
+			$.dialog.alert("圖片不存在，請在表單中填寫圖片地址");
 		}
 		else
 		{
 			$.dialog({
-				"title":"预览",
+				"title":"預覽",
 				"content": '<img src="'+url+'" border="0" />',
 				"lock":true
 			});
@@ -96,7 +96,7 @@ function phpok_btn_editor_picture(id)
 {
 	var url = get_url("edit","picture") + "&input="+id;
 	$.dialog.open(url,{
-		"title" : "图片库",
+		"title" : "圖片庫",
 		"width" : "760px",
 		"height" : "80%",
 		"resize" : false,
@@ -108,7 +108,7 @@ function phpok_btn_editor_file(id)
 {
 	var url = get_url("edit","file") + "&input="+id+"&nopic=1";
 	$.dialog.open(url,{
-		"title" : "附件资源",
+		"title" : "附件資源",
 		"width" : "760px",
 		"height" : "80%",
 		"resize" : false,
@@ -120,7 +120,7 @@ function phpok_btn_editor_video(id)
 {
 	var url = get_url("edit","video") + "&input="+id+"&nopic=1";
 	$.dialog.open(url,{
-		"title" : "添加影音",
+		"title" : "新增影音",
 		"width" : "760px",
 		"height" : "80%",
 		"resize" : false,
@@ -128,7 +128,7 @@ function phpok_btn_editor_video(id)
 	});
 }
 
-//删除单个主题关联
+//刪除單個主題關聯
 function phpok_title_delete_single(id)
 {
 	$("#"+id).val("");
@@ -136,7 +136,7 @@ function phpok_title_delete_single(id)
 	$("#layui-btn-"+id+"-delete").hide();
 }
 
-//删除多个主题关联
+//刪除多個主題關聯
 function phpok_title_delete(id,val)
 {
 	if(val && val != "undefined")
@@ -178,7 +178,7 @@ function phpok_title_delete(id,val)
 	val = $.input.checkbox_join(id+"_div");
 	if(!val || val == "undefined")
 	{
-		$.dialog.alert("请选择要删除的信息");
+		$.dialog.alert("請選擇要刪除的資訊");
 		return false;
 	}
 	var lst = val.split(",");
@@ -189,7 +189,7 @@ function phpok_title_delete(id,val)
 	return true;
 }
 
-//选择主题关联
+//選擇主題關聯
 function phpok_title_select(project_id,is_multi,title,input)
 {
 	var url = get_url("inp","title")+"&project_id="+$.str.encode(project_id);
@@ -257,20 +257,20 @@ function phpok_user_delete(id,val)
 	return true;
 }
 
-/* PHPOK编辑器扩展按钮属性 */
+/* PHPOK編輯器擴充套件按鈕屬性 */
 function phpok_edit_type(id)
 {
 	var t = "#sMode_"+id;
-	if($(t).val() == "可视化")
+	if($(t).val() == "視覺化")
 	{
 		$(eval("pageInit_"+id+"()"));
-		$(t).val("源代码");
+		$(t).val("原始碼");
 	}
 	else
 	{
 		$("#"+id).xheditor(false);
 		eval("CodeMirror_PHPOK_"+id+"()");
-		$(t).val("可视化");
+		$(t).val("視覺化");
 	}
 }
 
@@ -282,7 +282,7 @@ function phpok_form_upload_attr_cate_id()
 	var type = $("#upload_type").val();
 	if(!dataType || dataType == 'undefined'){
 		if(name == '' || name == 'undefined'){
-			$("#upload_name").val('图片');
+			$("#upload_name").val('圖片');
 		}
 		if(type == '' || type == 'undefined'){
 			$("#upload_type").val('jpg,png,gif');
@@ -302,7 +302,7 @@ function go_to_page_action()
 {
 	var page = $("#go_to_page").val();
 	if(!page){
-		$.dialog.alert('请输入要跳转的页码');
+		$.dialog.alert('請輸入要跳轉的頁碼');
 		return false;
 	}
 	page = parseInt(page);
@@ -335,9 +335,9 @@ function go_to_page_action()
 	};
 	$.phpokform = {
 		upload_cate_create:function(id,name,filetypes){
-			$.dialog.prompt(p_lang('请输入分类名称'),function(val){
+			$.dialog.prompt(p_lang('請輸入分類名稱'),function(val){
 				if(!val){
-					$.dialog.alert(p_lang('分类名称不能为空'));
+					$.dialog.alert(p_lang('分類名稱不能為空'));
 					return false;
 				}
 				var url = config.url;
@@ -354,29 +354,29 @@ function go_to_page_action()
 				});
 			},'');
 		},
-		//图片预览
+		//圖片預覽
 		upload_preview:function(id)
 		{
 			$.dialog.open(get_url('upload','preview','id='+id),{
-				'title':p_lang('预览附件信息'),
+				'title':p_lang('預覽附件資訊'),
 				'width':'700px',
 				'height':'400px',
 				'lock':true,
 				'button': [{
-					'name': p_lang('下载原文件'),
+					'name': p_lang('下載原檔案'),
 					'callback': function () {
 						$.phpok.open(get_url('res','download','id='+id));
 						return false;
 					},
 				}],
-				'okVal':p_lang('关闭'),
+				'okVal':p_lang('關閉'),
 				'ok':true
 			});
 		},
 		upload_update:function(id)
 		{
 			$.dialog.open(get_url('upload','editopen','id='+id),{
-				'title':p_lang('编辑附件信息'),
+				'title':p_lang('編輯附件資訊'),
 				'width':'700px',
 				'height':'400px',
 				'lock':true,
@@ -384,7 +384,7 @@ function go_to_page_action()
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert(p_lang('iframe还没加载完毕呢'));
+						alert(p_lang('iframe還沒載入完畢呢'));
 						return false;
 					};
 					iframe.save();
@@ -404,7 +404,7 @@ function go_to_page_action()
 			if(!content || content == "undefined"){
 				return true;
 			}
-			//删除单个附件
+			//刪除單個附件
 			if(content == id){
 				$(fid).val("");
 				$(fid+"_list").fadeOut().html('');
@@ -477,8 +477,8 @@ function go_to_page_action()
 			html += '<div style="text-align:center;"><img src="'+rs.ico+'" width="100" height="100" /></div>';
 			html += '<div class="file-action" style="text-align:center;"><div class="button-group">';
 			html += '	<input type="button" value="'+p_lang('修改')+'" class="phpok-btn" onclick="$.phpokform.upload_update(\''+rs.id+'\')" />';
-			html += '	<input type="button" value="'+p_lang('预览')+'" class="phpok-btn" onclick="$.phpokform.upload_preview(\''+rs.id+'\')" />';
-			html += '	<input type="button" value="'+p_lang('删除')+'" class="phpok-btn" onclick="$.phpokform.upload_delete(\''+identifier+'\',\''+rs.id+'\')" /></div>';
+			html += '	<input type="button" value="'+p_lang('預覽')+'" class="phpok-btn" onclick="$.phpokform.upload_preview(\''+rs.id+'\')" />';
+			html += '	<input type="button" value="'+p_lang('刪除')+'" class="phpok-btn" onclick="$.phpokform.upload_delete(\''+identifier+'\',\''+rs.id+'\')" /></div>';
 			html += '</div></div>';
 			html += '</div>';
 			return html;
@@ -530,12 +530,12 @@ function go_to_page_action()
 					$.phpok.data('select-'+identifier,old);
 				}
 				$.dialog.open(url,{
-					'title': p_lang('资源管理器'),
+					'title': p_lang('資源管理器'),
 					'lock' : true,
 					'width': '64%',
 					'height': '80%',
 					'ok': true,
-					'okVal':p_lang('关闭')
+					'okVal':p_lang('關閉')
 				});
 				return true;
 			}
@@ -543,7 +543,7 @@ function go_to_page_action()
 				url += "&selected="+old;
 			}
 			$.dialog.open(url,{
-				'title':p_lang('资源管理器'),
+				'title':p_lang('資源管理器'),
 				'width': '64%',
 				'height': '80%',
 				'lock' : true
@@ -588,7 +588,7 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 文本框旁边的日期按钮控件
+		 * 文字框旁邊的日期按鈕控制元件
 		**/
 		laydate_button:function(id,type)
 		{
@@ -600,7 +600,7 @@ function go_to_page_action()
 			});
 		},
 		/**
-		 * 清空文本框内容
+		 * 清空文字框內容
 		**/
 		clear:function(id){
 			if(id.substr(0,1) != '.' && id.substr(0,1) != '#'){
@@ -610,7 +610,7 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 文件选择器
+		 * 檔案選擇器
 		**/
 		text_button_file_select:function(id)
 		{
@@ -624,7 +624,7 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 文件下载
+		 * 檔案下載
 		**/
 		text_button_file_download:function(id)
 		{
@@ -633,7 +633,7 @@ function go_to_page_action()
 			}
 			var file = $(id).val();
 			if(!file){
-				$.dialog.alert(p_lang('没有可下载的附件'));
+				$.dialog.alert(p_lang('沒有可下載的附件'));
 				return false;
 			}
 			var url = get_url("res_action","download",'file='+$.str.encode(file));
@@ -641,12 +641,12 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 图片选择器
+		 * 圖片選擇器
 		**/
 		text_button_image_select:function(id)
 		{
 			$.dialog.open(get_url("open","input","id="+id+"&type=image"),{
-				title: p_lang('图片管理器'),
+				title: p_lang('圖片管理器'),
 				lock : true,
 				width: "700px",
 				height: "70%",
@@ -655,7 +655,7 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 图片预览
+		 * 圖片預覽
 		**/
 		text_button_image_preview:function(id)
 		{
@@ -664,12 +664,12 @@ function go_to_page_action()
 			}
 			var file = $(id).val();
 			if(!file){
-				$.dialog.alert(p_lang('没有指定图片'));
+				$.dialog.alert(p_lang('沒有指定圖片'));
 				return false;
 			}
 			var url = get_url("res_action","view",'file='+$.str.encode(file));
 			$.dialog.open(url,{
-				title: p_lang('预览图片'),
+				title: p_lang('預覽圖片'),
 				lock: true,
 				width: '700px',
 				height: '70%',
@@ -679,13 +679,13 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 视频选择器
+		 * 視訊選擇器
 		**/
 		text_button_video_select:function(id)
 		{
 			var url = get_url("open","input","id="+id+"&type=video");
 			$.dialog.open(url,{
-				title: p_lang('视频管理器'),
+				title: p_lang('視訊管理器'),
 				lock : true,
 				width: "700px",
 				height: "70%"
@@ -693,7 +693,7 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 视频预览
+		 * 視訊預覽
 		**/
 		text_button_video_preview:function(id)
 		{
@@ -702,12 +702,12 @@ function go_to_page_action()
 			}
 			var file = $(id).val();
 			if(!file){
-				$.dialog.alert(p_lang('没有指定视频'));
+				$.dialog.alert(p_lang('沒有指定視訊'));
 				return false;
 			}
 			var url = get_url("res_action","video","file="+$.str.encode(file));
 			$.dialog.open(url,{
-				title: p_lang('视频预览'),
+				title: p_lang('視訊預覽'),
 				lock: true,
 				width: '670px',
 				height: '510px',
@@ -716,13 +716,13 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 网址选择器
+		 * 網址選擇器
 		**/
 		text_button_url_select:function(id)
 		{
 			var url = get_url("open","url","id="+id);
 			$.dialog.open(url,{
-				title: p_lang('网址管理器'),
+				title: p_lang('網址管理器'),
 				lock : true,
 				width: "700px",
 				height: "70%"
@@ -730,7 +730,7 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 网址预览
+		 * 網址預覽
 		**/
 		text_button_url_open:function(id)
 		{
@@ -739,20 +739,20 @@ function go_to_page_action()
 			}
 			var url = $(id).val();
 			if(!url || url == "http://" || url == "https://"){
-				$.dialog.alert(p_lang('未指定网址'));
+				$.dialog.alert(p_lang('未指定網址'));
 				return false;
 			}
 			window.open(url);
 		},
 
 		/**
-		 * 会员选择库
+		 * 會員選擇庫
 		**/
 		text_button_user_select:function(id)
 		{
 			var url = get_url("open","user2","id="+id);
 			$.dialog.open(url,{
-				title: p_lang('会员列表'),
+				title: p_lang('會員列表'),
 				lock : true,
 				width: "700px",
 				height: "70%",
@@ -761,7 +761,7 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 快速插入文本
+		 * 快速插入文字
 		**/
 		text_button_quickwords:function(id,val,type)
 		{
@@ -779,10 +779,10 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 快速添加主题
-		 * @参数 fid 字段ID
-		 * @参数 input_id 表单字段名
-		 * @参数 maxcount 最大数量，默认为1
+		 * 快速新增主題
+		 * @引數 fid 欄位ID
+		 * @引數 input_id 表單欄位名
+		 * @引數 maxcount 最大數量，預設為1
 		**/
 		extitle_quickadd:function(fid,input_id,maxcount)
 		{
@@ -794,51 +794,51 @@ function go_to_page_action()
 				var list = str.split(",");
 				var total = list.length;
 				if(total >= maxcount){
-					$.dialog.alert(p_lang('超出系统限制添加的数量'));
+					$.dialog.alert(p_lang('超出系統限制新增的數量'));
 					return false;
 				}
 			}
 			var url = get_url('form','quickadd','id='+fid);
 			$.dialog.open(url,{
-				'title':p_lang('添加'),
+				'title':p_lang('新增'),
 				'width':'80%',
 				'height':'70%',
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
 				'lock':true,
-				'okVal':p_lang('保存'),
+				'okVal':p_lang('儲存'),
 				'cancel':true
 			});
 		},
 
 		/**
-		 * 快速编辑
+		 * 快速編輯
 		**/
 		extitle_quickedit:function(id,fid)
 		{
 			var url = get_url('form','quickadd','id='+fid+"&tid="+id);
 			$.dialog.open(url,{
-				'title':p_lang('编辑 #'+id),
+				'title':p_lang('編輯 #'+id),
 				'width':'80%',
 				'height':'70%',
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
 				},
 				'lock':true,
-				'okVal':p_lang('保存'),
+				'okVal':p_lang('儲存'),
 				'cancel':true
 			});
 		},
@@ -853,7 +853,7 @@ function go_to_page_action()
 				var list = str.split(",");
 				var total = list.length;
 				if(total >= maxcount){
-					$.dialog.alert(p_lang('超出系统限制添加的数量'));
+					$.dialog.alert(p_lang('超出系統限制新增的數量'));
 					return false;
 				}
 			}
@@ -868,7 +868,7 @@ function go_to_page_action()
 						var title = $("#form_html_"+list[i]+" .title").html();
 						title = title.replace(/<span.+>.+<\/span>/g,'');
 						title = title.replace("：",'');
-						$.dialog.alert('请先选择：'+title);
+						$.dialog.alert('請先選擇：'+title);
 						break;
 					}
 					url += "&ext["+list[i]+"]="+$.str.encode(val);
@@ -878,19 +878,19 @@ function go_to_page_action()
 				}
 			}
 			$.dialog.open(url,{
-				'title':p_lang('选择'),
+				'title':p_lang('選擇'),
 				'width':'90%',
 				'height':'80%',
 				'ok':true,
 				'lock':true,
-				'okVal':p_lang('关闭')
+				'okVal':p_lang('關閉')
 			});
 		},
 
 		/**
-		 * 重载扩展字段
-		 * @参数 id 模块字段ID
-		 * @参数 identifier 标识
+		 * 過載擴充套件欄位
+		 * @引數 id 模組欄位ID
+		 * @引數 identifier 標識
 		**/
 		extitle_reload:function(id,identifier)
 		{
@@ -911,7 +911,7 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 删除已存在的主题，防止重复筛选
+		 * 刪除已存在的主題，防止重複篩選
 		**/
 		extitle_remove_selected:function(identifier)
 		{
@@ -926,10 +926,10 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 选中已存在主题
-		 * @参数 id 主题ID
-		 * @参数 pid 项目ID
-		 * @参数 identifier 要更新的标识内容
+		 * 選中已存在主題
+		 * @引數 id 主題ID
+		 * @引數 pid 專案ID
+		 * @引數 identifier 要更新的標識內容
 		**/
 		extitle_select_action:function(id,pid,identifier,maxcount)
 		{
@@ -942,7 +942,7 @@ function go_to_page_action()
 			if(content){
 				var tmp = content.split(",");
 				if(tmp.length >= maxcount){
-					$.dialog.alert(p_lang('超出系统限制添加的数量'));
+					$.dialog.alert(p_lang('超出系統限制新增的數量'));
 					return false;
 				}
 				content = content+","+id;
@@ -992,7 +992,7 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 向后移一位
+		 * 向後移一位
 		**/
 		extitle_sortdown:function(obj,id,identifier)
 		{
@@ -1028,7 +1028,7 @@ function go_to_page_action()
 		},
 
 		/**
-		 * 删除操作
+		 * 刪除操作
 		**/
 		extitle_delete:function(val,id,identifier)
 		{

@@ -1,4 +1,4 @@
-<!-- php:$title = "我的推荐 - 会员中心" --><!-- include tpl=head title=$title -->
+<!-- php:$title = "我的推薦 - 會員中心" --><!-- include tpl=head title=$title -->
 <script type="text/javascript">
 function relation_reload(val)
 {
@@ -14,26 +14,26 @@ function relation_reload(val)
 	<div class="left"><!-- include tpl=block/usercp_nav --></div>
 	<div class="right am-panel-group">
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">推广链接</div>
+			<div class="am-panel-hd">推廣連結</div>
 			<div class="am-panel-bd">
 				{$vlink}
 			</div>
 		</div>
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">友情说明</div>
+			<div class="am-panel-hd">友情說明</div>
 			<div class="am-panel-bd">
 				<ul>
-					<li>您可以把推广链接放到您适合的文章里嵌入，也可以发给好友分享</li>
+					<li>您可以把推廣連結放到您適合的文章裡嵌入，也可以發給好友分享</li>
 				</ul>
 			</div>
 		</div>
 		
 		<!-- if $monthlist -->
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">月统计</div>
+			<div class="am-panel-hd">月統計</div>
 			<div class="am-panel-bd am-form">
 				<select onchange="relation_reload(this.value)">
-				<option value="">请选择</option>
+				<option value="">請選擇</option>
 				<!-- loop from=$monthlist key=$key value=$value id=$tmpid -->
 				<option value="{$value.month}"{if $month == $value.month} selected{/if}>{func substr $value.month 0 4}年{func substr $value.month -2}月 ({$value.total}人)</option>
 				<!-- /loop -->
@@ -43,12 +43,12 @@ function relation_reload(val)
 		<!-- /if -->
 		<!-- if $rslist -->
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">我推荐的会员</div>
+			<div class="am-panel-hd">我推薦的會員</div>
 			<table class="am-table am-table-centered am-table-hover">
 				<thead>
 					<tr>
-						<th>会员账号</th>
-						<th>注册时间</th>
+						<th>會員賬號</th>
+						<th>註冊時間</th>
 						<th>姓名</th>
 					</tr>
 				</thead>

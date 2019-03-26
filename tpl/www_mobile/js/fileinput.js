@@ -1,15 +1,15 @@
 /**
- * input输入框快速选择image
+ * input輸入框快速選擇image
  */
 (function() {
     'use strict';
 
     /**
-     * 全局生效默认设置
-     * 默认设置可以最大程度的减小调用时的代码
+     * 全域性生效預設設定
+     * 預設設定可以最大程度的減小呼叫時的程式碼
      */
     var defaultSetting = {
-        // 可选参数  File Image Camera Image_Camera Image_File Camera_File Text All
+        // 可選引數  File Image Camera Image_Camera Image_File Camera_File Text All
         type: 'ALL',
         isMulti: false,
         container: ''
@@ -42,34 +42,34 @@
     }
 
     /**
-     * 从一个file对象,加载对应的数据
+     * 從一個file物件,載入對應的資料
      * FileReader的方法
-     * 方法名              参数              描述
-     * readAsBinaryString   file            将文件读取为二进制编码
-     * readAsText           file,[encoding] 将文件读取为文本
-     * readAsDataURL        file            将文件读取为DataURL
-     * abort                (none)          终端读取操作
-     * @param {FileReader} oFReader 对应的加载器
-     * @param {File} file 文件对象,选择的是img类型
-     * @param {Function} success 成功加载完毕后的回调,回调result(不同的加载方式result类型不同)
-     * @param {Function} error 失败回调
-     * @return {FileReader} 返回文件加载器对象
-     * @param {String} type 类型,DataUrl还是Text还是Binary
+     * 方法名              引數              描述
+     * readAsBinaryString   file            將檔案讀取為二進位制編碼
+     * readAsText           file,[encoding] 將檔案讀取為文字
+     * readAsDataURL        file            將檔案讀取為DataURL
+     * abort                (none)          終端讀取操作
+     * @param {FileReader} oFReader 對應的載入器
+     * @param {File} file 檔案物件,選擇的是img型別
+     * @param {Function} success 成功載入完畢後的回撥,回撥result(不同的載入方式result型別不同)
+     * @param {Function} error 失敗回撥
+     * @return {FileReader} 返回檔案載入器物件
+     * @param {String} type 型別,DataUrl還是Text還是Binary
      */
     function loadDataFromFile(oFReader, file, success, error, type) {
         if (window.FileReader || !oFReader || !(oFReader instanceof FileReader)) {
             oFReader.onload = function(oFREvent) {
-                // 解决DataUrl模式下的b64字符串不正确问题
+                // 解決DataUrl模式下的b64字串不正確問題
                 var b64 = oFREvent.target.result;
 
                 if (type === 'DataUrl') {
-                    // 正常的图片应该是data:image/gif;data:image/png;;data:image/jpeg;data:image/x-icon;
-                    // 而在Android的一些5.0系统以下(如4.0)的设备中,有些返回的b64字符串缺少关键image/gif标识,所以需要手动加上
+                    // 正常的圖片應該是data:image/gif;data:image/png;;data:image/jpeg;data:image/x-icon;
+                    // 而在Android的一些5.0系統以下(如4.0)的裝置中,有些返回的b64字串缺少關鍵image/gif標識,所以需要手動加上
                     if (b64 && b64.indexOf('data:base64,') !== -1) {
-                        // 去除旧有的错误头部
+                        // 去除舊有的錯誤頭部
                         b64 = b64.replace('data:base64,', '');
                         var dataType = '';
-                        // 文件名字
+                        // 檔名字
                         var name = file.name;
 
                         if (name && name.toLowerCase().indexOf('.jpg') !== -1) {
@@ -103,13 +103,13 @@
 
             return oFReader;
         } else {
-            error && error('错误:FileReader不存在!');
+            error && error('錯誤:FileReader不存在!');
         }
     }
 
     /**
-     * 构造一个 FileInpput 对象
-     * @param {Object} options 配置参数
+     * 構造一個 FileInpput 物件
+     * @param {Object} options 配置引數
      * @constructor
      */
     function FileInput(options) {
@@ -134,7 +134,7 @@
                 container = this.container,
                 isEjs = /EpointEJS/.test(navigator.userAgent);;
 
-            // 设置单个文件选择需要的 属性
+            // 設定單個檔案選擇需要的 屬性
             container.setAttribute('type', 'file');
 
             if (options.isMulti) {
@@ -209,8 +209,8 @@
 
         /**
          * 增加事件，包括
-         * 轮播图片的监听
-         * 图片滑动的监听，等等
+         * 輪播圖片的監聽
+         * 圖片滑動的監聽，等等
          */
         _addEvent: function() {
             var container = this.container,
@@ -219,7 +219,7 @@
                 error = options.error,
                 self = this;
 
-            // 选择的回调中进行预处理
+            // 選擇的回撥中進行預處理
             var changeHandle = function() {
                 var aFiles = container.files;
                 var len = aFiles.length;
@@ -227,7 +227,7 @@
                 if (len === 0) {
                     return;
                 }
-                // 定义文件读取器和后缀类型过滤器
+                // 定義檔案讀取器和字尾型別過濾器
                 var oFReader = new window.FileReader();
                 var index = 0;
 
@@ -251,12 +251,12 @@
 
             container.addEventListener('change', changeHandle);
 
-            // 注册一个委托对象，方便取消
+            // 註冊一個委託物件，方便取消
             this.delegatesHandle = changeHandle;
         },
 
         /**
-         * 将需要暴露的destroy绑定到了 原型链上
+         * 將需要暴露的destroy繫結到了 原型鏈上
          */
         destroy: function() {
 

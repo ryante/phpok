@@ -1,11 +1,11 @@
-<!-- include tpl=head_lay title=标签管理 -->
+<!-- include tpl=head_lay title=標籤管理 -->
 <div class="layui-card">
 	<div class="layui-card-header">
 		{lang列表}
 		<!-- if $session.admin_rs.if_system || $popedom.add -->
 		<div class="layui-btn-group fr">
-			<!-- if $session.admin_rs.if_system --><button class="layui-btn layui-btn-sm" onclick="$.phpok_tag.config();void(0);">{lang配置标签}</button><!-- /if -->
-			<!-- if $popedom.add --><button class="layui-btn layui-btn-sm" onclick="$.phpok_tag.add();void(0);">{lang添加标签}</button><!-- /if -->
+			<!-- if $session.admin_rs.if_system --><button class="layui-btn layui-btn-sm" onclick="$.phpok_tag.config();void(0);">{lang配置標籤}</button><!-- /if -->
+			<!-- if $popedom.add --><button class="layui-btn layui-btn-sm" onclick="$.phpok_tag.add();void(0);">{lang新增標籤}</button><!-- /if -->
 		</div>
 		<!-- /if -->
 	</div>
@@ -14,13 +14,13 @@
 		<thead>
 		<tr>
 			<th width="70">ID</th>
-			<th>{lang名称}/{lang网址}</th>
+			<th>{lang名稱}/{lang網址}</th>
 			<th>{lang提示文字}</th>
-			<th width="95">{lang是否新窗口}</th>
-			<th width="95">{lang全局性}</th>
-			<th width="70" class="center">{lang替换次数}</th>
-			<th width="90" class="center">{lang主题数}</th>
-			<th width="90" class="center">{lang点击数}</th>
+			<th width="95">{lang是否新視窗}</th>
+			<th width="95">{lang全域性性}</th>
+			<th width="70" class="center">{lang替換次數}</th>
+			<th width="90" class="center">{lang主題數}</th>
+			<th width="90" class="center">{lang點選數}</th>
 			<th>{lang操作}</th>
 		</tr>
 		</thead>
@@ -30,18 +30,18 @@
 			<td>{$value.title}<!-- if $value.url --><br />{$value.url}<!-- /if --></td>
 			<td>{$value.alt ? $value.alt : '-'}</td>
 			<td>
-				<!-- if $value.target --><span class="red">{lang新窗口}</span><!-- else --><span class="darkblue">{lang当前窗口}</span><!-- /if -->
+				<!-- if $value.target --><span class="red">{lang新視窗}</span><!-- else --><span class="darkblue">{lang當前視窗}</span><!-- /if -->
 			</td>
 			<td>
-				<!-- if $value.is_global --><span class="darkblue">{lang全局可用}</span><!-- else -->-<!-- /if -->
+				<!-- if $value.is_global --><span class="darkblue">{lang全域性可用}</span><!-- else -->-<!-- /if -->
 			</td>
 			<td class="center">{$value.replace_count}</td>
 			<td class="center">{$value.count ? $value.count : 0}</td>
 			<td class="center">{$value.hits ? $value.hits : 0}</td>
 			<td>
 				<div class="layui-btn-group">
-					<input type="button" value="{lang编辑}" onclick="$.phpok_tag.edit('{$value.id}')" class="layui-btn  layui-btn-sm" />
-					<input type="button" value="{lang删除}" onclick="$.phpok_tag.del('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" />
+					<input type="button" value="{lang編輯}" onclick="$.phpok_tag.edit('{$value.id}')" class="layui-btn  layui-btn-sm" />
+					<input type="button" value="{lang刪除}" onclick="$.phpok_tag.del('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 				</div>
 			</td>
 		</tr>

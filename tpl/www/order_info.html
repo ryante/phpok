@@ -1,4 +1,4 @@
-<!-- php:$title = '订单信息：'.$rs.sn --><!-- include tpl=head title=$title -->
+<!-- php:$title = '訂單資訊：'.$rs.sn --><!-- include tpl=head title=$title -->
 <script type="text/javascript">
 function order_payment(orderid,passwd)
 {
@@ -14,36 +14,36 @@ function order_payment(orderid,passwd)
 	<!-- include tpl=block/breadcrumb -->
 	<div class="am-panel-group">
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">订单基本信息</div>
+			<div class="am-panel-hd">訂單基本資訊</div>
 			<ul class="am-list am-list-static am-list-striped">
 				<li>
 					<div class="am-g">
-						<div class="am-u-sm-4">订单编号</div>
+						<div class="am-u-sm-4">訂單編號</div>
 						<div class="am-u-sm-8">{$rs.sn}</div>
 					</div>
 				</li>
 				<li>
 					<div class="am-g">
-						<div class="am-u-sm-4">下单时间</div>
+						<div class="am-u-sm-4">下單時間</div>
 						<div class="am-u-sm-8">{func time_format $rs.addtime}</div>
 					</div>
 				</li>
 				<li>
 					<div class="am-g">
-						<div class="am-u-sm-4">订单金额</div>
+						<div class="am-u-sm-4">訂單金額</div>
 						<div class="am-u-sm-8">{func price_format $rs.price $rs.currency_id}</div>
 					</div>
 				</li>
 				<li>
 					<div class="am-g">
-						<div class="am-u-sm-4">订单状态</div>
+						<div class="am-u-sm-4">訂單狀態</div>
 						<div class="am-u-sm-8">{$rs.status_info}</div>
 					</div>
 				</li>
 				<!-- if $rs.email -->
 				<li>
 					<div class="am-g">
-						<div class="am-u-sm-4">邮箱</div>
+						<div class="am-u-sm-4">郵箱</div>
 						<div class="am-u-sm-8">{$rs.email}</div>
 					</div>
 				</li>
@@ -51,7 +51,7 @@ function order_payment(orderid,passwd)
 				<!-- if $rs.mobile -->
 				<li>
 					<div class="am-g">
-						<div class="am-u-sm-4">手机号</div>
+						<div class="am-u-sm-4">手機號</div>
 						<div class="am-u-sm-8">{$rs.mobile}</div>
 					</div>
 				</li>
@@ -59,8 +59,8 @@ function order_payment(orderid,passwd)
 				<!-- if $invoice -->
 				<li>
 					<div class="am-g">
-						<div class="am-u-sm-4">发票信息</div>
-						<div class="am-u-sm-8">{$invoice.type}，抬头：<span class="am-text-danger">{$invoice.title}</span>，内容：<span class="am-text-danger">{$invoice.content}</span></div>
+						<div class="am-u-sm-4">發票資訊</div>
+						<div class="am-u-sm-8">{$invoice.type}，抬頭：<span class="am-text-danger">{$invoice.title}</span>，內容：<span class="am-text-danger">{$invoice.content}</span></div>
 					</div>
 				</li>
 				<!-- /if -->
@@ -75,7 +75,7 @@ function order_payment(orderid,passwd)
 				<!-- if $rs.note -->
 				<li>
 					<div class="am-g">
-						<div class="am-u-sm-4">备注</div>
+						<div class="am-u-sm-4">備註</div>
 						<div class="am-u-sm-8">{func nl2br $rs.note}</div>
 					</div>
 				</li>
@@ -85,7 +85,7 @@ function order_payment(orderid,passwd)
 		
 		<!-- if $address -->
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">收件人信息</div>
+			<div class="am-panel-hd">收件人資訊</div>
 			<ul class="am-list am-list-static">
 				<li>
 					<div class="am-g">
@@ -102,20 +102,20 @@ function order_payment(orderid,passwd)
 							{$address.city}
 							<!-- /if -->
 							{$address.county}
-							{$address.address}<!-- if $address.zipcode --><i>（邮编：{$address.zipcode}）</i><!-- /if -->
+							{$address.address}<!-- if $address.zipcode --><i>（郵編：{$address.zipcode}）</i><!-- /if -->
 						</div>
 					</div>
 				</li>
 				<li>
 					<div class="am-g">
-						<div class="am-u-sm-4">联系方式</div>
+						<div class="am-u-sm-4">聯絡方式</div>
 						<div class="am-u-sm-8">{$address.tel}<!-- if $address.tel && $address.mobile --> / <!-- /if -->{$address.mobile}</div>
 					</div>
 				</li>
 				<!-- if $address.email -->
 				<li>
 					<div class="am-g">
-						<div class="am-u-sm-4">邮箱 Email</div>
+						<div class="am-u-sm-4">郵箱 Email</div>
 						<div class="am-u-sm-8">{$address.email}</div>
 					</div>
 				</li>
@@ -125,14 +125,14 @@ function order_payment(orderid,passwd)
 		<!-- /if -->
 
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">产品信息</div>
+			<div class="am-panel-hd">產品資訊</div>
 			<table class="am-table am-table-centered">
 				<thead>
 					<tr>
-						<th>图片</th>
-						<th class="am-text-left">产品信息</th>
-						<th>购买数量</th>
-						<th>价格</th>
+						<th>圖片</th>
+						<th class="am-text-left">產品資訊</th>
+						<th>購買數量</th>
+						<th>價格</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -150,7 +150,7 @@ function order_payment(orderid,passwd)
 							<!-- loop from=$value.ext key=$k value=$v id=$tmpid -->
 							<div>{$v.title}：{$v.content}</div>
 							<!-- /loop -->
-							<div>售价：{func price_format $value.price $rs.currency_id $rs.currency_id}</div>
+							<div>售價：{func price_format $value.price $rs.currency_id $rs.currency_id}</div>
 						</td>
 						<td>{$value.qty}</td>
 						<td>{func price_format $value.price*$value.qty $rs.currency_id $rs.currency_id}</td>
@@ -161,7 +161,7 @@ function order_payment(orderid,passwd)
 		</div>
 
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">价格明细</div>
+			<div class="am-panel-hd">價格明細</div>
 			<div class="am-panel-bd">
 				<ul class="am-list am-list-static">
 					<!-- loop from=$pricelist key=$key value=$value id=$tmpid -->
@@ -174,7 +174,7 @@ function order_payment(orderid,passwd)
 					<!-- /loop -->
 					<li>
 						<div class="am-g">
-							<div class="am-u-sm-10 am-text-right">总价</div>
+							<div class="am-u-sm-10 am-text-right">總價</div>
 							<div class="am-u-sm-2 am-text-danger">{func price_format $rs.price $rs.currency_id $rs.currency_id}</div>
 						</div>
 					</li>
@@ -183,12 +183,12 @@ function order_payment(orderid,passwd)
 		</div>
 		<!-- if $loglist -->
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">订单日志</div>
+			<div class="am-panel-hd">訂單日誌</div>
 			<table class="am-table am-table-centered am-table-striped am-table-hover">
 				<thead>
 					<tr>
-						<th class="am-text-left">说明</th>
-						<th>时间</th>
+						<th class="am-text-left">說明</th>
+						<th>時間</th>
 						<th>操作人</th>
 					</tr>
 				</thead>
@@ -210,9 +210,9 @@ function order_payment(orderid,passwd)
 	<!-- if !$pay_end -->
 	<div align="center">
 		<!-- if $session.user_id -->
-		<a href="{url ctrl=order func=payment id=$rs.id/}" class="am-btn am-btn-primary">在线支付</a>
+		<a href="{url ctrl=order func=payment id=$rs.id/}" class="am-btn am-btn-primary">線上支付</a>
 		<!-- else -->
-		<a href="{url ctrl=order func=payment sn=$rs.sn passwd=$rs.passwd/}" class="am-btn am-btn-primary">在线支付</a>
+		<a href="{url ctrl=order func=payment sn=$rs.sn passwd=$rs.passwd/}" class="am-btn am-btn-primary">線上支付</a>
 		<!-- /if -->
 	</div>
 	<!-- /if -->

@@ -1,19 +1,19 @@
-<!-- include tpl=head title="配置升级服务环境 - 程序升级" -->
+<!-- include tpl=head title="配置升級服務環境 - 程序升級" -->
 <div class="tips">
-	您当前位置：
-	<a href="{url ctrl=update/}" title="程序升级">程序升级</a>
-	&raquo; 配置升级服务环境
+	您當前位置：
+	<a href="{url ctrl=update/}" title="程序升級">程序升級</a>
+	&raquo; 配置升級服務環境
 </div>
 <form method="post" action="{url ctrl=update func=save/}">
 <div class="table">
 	<div class="title">
-		升级：
-		<span class="note">只有启用升级后才能实现在线升级，如果您不需要此功能，请禁用</span>
+		升級：
+		<span class="note">只有啟用升級後才能實現線上升級，如果您不需要此功能，請禁用</span>
 	</div>
 	<div class="content">
 		<table cellpadding="0" cellspacing="0">
 		<tr>
-			<td><label><input type="radio" name="status" value="1"{if $rs.status} checked{/if} /> 启用</label></td>
+			<td><label><input type="radio" name="status" value="1"{if $rs.status} checked{/if} /> 啟用</label></td>
 			<td>&nbsp; &nbsp;</td>
 			<td><label><input type="radio" name="status" value="0"{if !$rs.status} checked{/if} /> 禁用</label></td>
 		</tr>
@@ -22,8 +22,8 @@
 </div>
 <div class="table">
 	<div class="title">
-		升级服务器：
-		<span class="note">设置升级服务器信息</span>
+		升級伺服器：
+		<span class="note">設定升級伺服器資訊</span>
 	</div>
 	<div class="content">
 		<input type="text" id="server" name="server" class="long" value="{$rs.server}" />
@@ -31,8 +31,8 @@
 </div>
 <div class="table">
 	<div class="title">
-		升级服务器IP：
-		<span class="note">如远程访问获取失败，可以在这里设置远程IP</span>
+		升級伺服器IP：
+		<span class="note">如遠端訪問獲取失敗，可以在這裡設定遠端IP</span>
 	</div>
 	<div class="content">
 		<input type="text" name="ip" class="long" value="{$rs.ip}" />
@@ -40,8 +40,8 @@
 </div>
 <div class="table">
 	<div class="title">
-		自动检测周期：
-		<span class="note">设置为0，表示不自动检测，设置大于0表示每隔几天进行一次检测，建议设置为30天检测一次</span>
+		自動檢測週期：
+		<span class="note">設定為0，表示不自動檢測，設定大於0表示每隔幾天進行一次檢測，建議設定為30天檢測一次</span>
 	</div>
 	<div class="content">
 		<input type="text" id="date" name="date" class="short" value="{$rs.date}" />

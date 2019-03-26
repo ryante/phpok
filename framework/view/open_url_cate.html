@@ -25,7 +25,7 @@ function go_back()
 <table width="100%" cellpadding="0" cellspacing="0" class="list">
 <tr>
 	<th class="id">ID</th>
-	<th class="title">分类名称</th>
+	<th class="title">分類名稱</th>
 	<th style='width:80px;'>操作</th>
 </tr>
 <!-- foreach($rslist AS $key=>$value) -->
@@ -42,7 +42,7 @@ function go_back()
 			<!-- /if -->
 			<td><label for="id_{$value.id}">{$value.title}<span class="gray i">（{$value.identifier}）</span></label></td>
 			<!-- if !$value[status] -->
-			<td><span class="red i">未审核</span></td>			
+			<td><span class="red i">未稽核</span></td>			
 			<!-- /if -->
 			<!-- if($value[note]) -->
 			<td class="cate_note">（{$value.note}）</td>

@@ -1,6 +1,6 @@
 <!-- include tpl=head -->
 <div class="tips">
-	{lang当前位置：}<a href="{url ctrl=wealth/}">{lang财富方案}</a> &raquo; 未审核
+	{lang當前位置：}<a href="{url ctrl=wealth/}">{lang財富方案}</a> &raquo; 未稽核
 	<div class="action"><a href="{url ctrl=wealth/}">{lang返回}</a></div>
 	<div class="clear"></div>
 </div>
@@ -8,7 +8,7 @@
 function check_it(id,type)
 {
 	if(type == 'error'){
-		$.dialog.confirm('确定要此财富信息无效吗？确定后，数据将被删除！',function(){
+		$.dialog.confirm('確定要此財富資訊無效嗎？確定後，資料將被刪除！',function(){
 			var url = get_url('wealth','action','id='+id+"&action=error");
 			var rs = $.phpok.json(url);
 			if(rs.status == 'ok'){
@@ -21,7 +21,7 @@ function check_it(id,type)
 		var url = get_url('wealth','action','id='+id+"&action=ok");
 		var rs = $.phpok.json(url);
 		if(rs.status == 'ok'){
-			$.dialog.alert('审核通过',function(){
+			$.dialog.alert('稽核通過',function(){
 				$.phpok.reload();
 			},'succeed');
 		}else{
@@ -34,10 +34,10 @@ function check_it(id,type)
 <tr>
 	<th>ID</th>
 	<th>方案</th>
-	<th>会员</th>
-	<th width="140">时间</th>
-	<th width="100">财富</th>
-	<th class="lft">备注</th>
+	<th>會員</th>
+	<th width="140">時間</th>
+	<th width="100">財富</th>
+	<th class="lft">備註</th>
 	<th class="lft">&nbsp;</th>
 </tr>
 <!-- loop from=$rslist key=$key value=$value -->
@@ -50,8 +50,8 @@ function check_it(id,type)
 	<td height="22">{$value.note}</td>
 	<td>
 		<div class="button-group">
-			<input type="button" value="{lang审核通过}" onclick="check_it('{$value.id}','ok')" class="layui-btn" />
-			<input type="button" value="{lang审核无效}" onclick="check_it('{$value.id}','error')" class="layui-btn" />
+			<input type="button" value="{lang稽核通過}" onclick="check_it('{$value.id}','ok')" class="layui-btn" />
+			<input type="button" value="{lang稽核無效}" onclick="check_it('{$value.id}','error')" class="layui-btn" />
 		</div>
 	</td>
 </tr>

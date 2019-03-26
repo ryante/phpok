@@ -1,10 +1,10 @@
 /**
- * 后台订单管理相关操作
+ * 後臺訂單管理相關操作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年06月07日
 **/
 ;(function($){
@@ -17,7 +17,7 @@
 				url = get_url('address','open','tpl=address_order&type=user_id&keywords='+uid);
 			}
 			$.dialog.open(url,{
-				'title':p_lang('选择收件人地址'),
+				'title':p_lang('選擇收件人地址'),
 				'lock':true,
 				'width':'800px',
 				'height':'600px'
@@ -77,7 +77,7 @@
 			}
 			var uid = $("#user_id").val();
 			if(!uid){
-				$.dialog.alert(p_lang('未绑定会员账号'));
+				$.dialog.alert(p_lang('未繫結會員賬號'));
 				return false;
 			}
 			$.phpok.json(get_url('order','user','id='+uid+"&type="+type),function(rs){
@@ -125,7 +125,7 @@
 			}
 
 			$.dialog.open(url,{
-				'title':p_lang('选择商品'),
+				'title':p_lang('選擇商品'),
 				'width':'70%',
 				'height':'70%',
 				'lock':true,
@@ -149,9 +149,9 @@
 						$.dialog.alert(rs.info);
 						return false;
 					}
-					var tip = p_lang('订单创建成功');
+					var tip = p_lang('訂單建立成功');
 					if($("#id").length>0){
-						tip = p_lang('订单编辑成功');
+						tip = p_lang('訂單編輯成功');
 					}
 					$.dialog.tips(tip,function(){
 						$.admin.reload(get_url('order'));
@@ -163,12 +163,12 @@
 		},
 		del:function(id,title)
 		{
-			var tip = p_lang('确定要删除订单 {title} 吗？<br />删除后您不能再恢复，请慎用','<span class="red">'+title+'</span>');
+			var tip = p_lang('確定要刪除訂單 {title} 嗎？<br />刪除後您不能再恢復，請慎用','<span class="red">'+title+'</span>');
 			$.dialog.confirm(tip,function(){
 				var url = get_url('order','delete','id='+id);
 				$.phpok.json(url,function(data){
 					if(data.status){
-						$.dialog.tips(p_lang('订单删除成功'),function(){
+						$.dialog.tips(p_lang('訂單刪除成功'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;
@@ -182,61 +182,61 @@
 		{
 			var url = get_url('order','info','id='+id);
 			$.dialog.open(url,{
-				'title':p_lang('查看订单')+"_#"+id,
+				'title':p_lang('檢視訂單')+"_#"+id,
 				'lock':true,
 				'width':'70%',
 				'height':'70%',
 				'cancel':function(){
 					return true;
 				},
-				'cancelVal':p_lang('关闭')
+				'cancelVal':p_lang('關閉')
 			})
 		},
 		payment:function()
 		{
 			var id = $.checkbox.join();
 			if(!id){
-				$.dialog.alert(p_lang('请选择要操作的订单'));
+				$.dialog.alert(p_lang('請選擇要操作的訂單'));
 				return false;
 			}
 			if(id.indexOf(',') !== -1){
-				$.dialog.alert(p_lang('付款操作每次只能操作一个订单'));
+				$.dialog.alert(p_lang('付款操作每次只能操作一個訂單'));
 				return false;
 			}
 			var url = get_url('order','payment','id='+id);
 			$.dialog.open(url,{
-				'title':p_lang('订单支付')+'_#<span class="red">'+id+'</span>',
+				'title':p_lang('訂單支付')+'_#<span class="red">'+id+'</span>',
 				'lock':true,
 				'width':'90%',
 				'height':'70%',
 				'ok':function(){
 					$.phpok.reload();
 				},
-				'okVal':p_lang('关闭并刷新'),
+				'okVal':p_lang('關閉並重新整理'),
 				'cancel':function(){
 					return true;
 				},
-				'cancelVal':p_lang('关闭')
+				'cancelVal':p_lang('關閉')
 			})
 		},
 		express:function()
 		{
 			var id = $.checkbox.join();
 			if(!id){
-				$.dialog.alert(p_lang('请选择要操作的订单'));
+				$.dialog.alert(p_lang('請選擇要操作的訂單'));
 				return false;
 			}
 			if(id.indexOf(',') !== -1){
-				$.dialog.alert(p_lang('物流快递每次只能一个订单'));
+				$.dialog.alert(p_lang('物流快遞每次只能一個訂單'));
 				return false;
 			}
 			url = get_url('order','express','id='+id);
 			$.dialog.open(url,{
-				'title':p_lang('物流快递，您的订单编号')+'_#<span class="red">'+id+'</span>',
+				'title':p_lang('物流快遞，您的訂單編號')+'_#<span class="red">'+id+'</span>',
 				'width':'70%',
 				'height':'70%',
 				'lock':true,
-				'cancelVal':p_lang('关闭'),
+				'cancelVal':p_lang('關閉'),
 				'cancel':true
 			});
 		},
@@ -244,37 +244,37 @@
 		{
 			var id = $.checkbox.join();
 			if(!id){
-				$.dialog.alert(p_lang('请选择要操作的订单'));
+				$.dialog.alert(p_lang('請選擇要操作的訂單'));
 				return false;
 			}
 			if(id.indexOf(',') !== -1){
-				$.dialog.alert(p_lang('取消操作每次只能一个订单'));
+				$.dialog.alert(p_lang('取消操作每次只能一個訂單'));
 				return false;
 			}
 			var sn = $("td[data-id="+id+"]").attr("data-sn");
 			var status = $("td[data-id="+id+"]").attr('data-status');
 			if(status == 'end'){
-				$.dialog.alert(p_lang('订单已完成，不能执行取消操作'));
+				$.dialog.alert(p_lang('訂單已完成，不能執行取消操作'));
 				return false;
 			}
 			if(status == 'stop'){
-				$.dialog.alert(p_lang('订单已结束，不能执行取消操作'));
+				$.dialog.alert(p_lang('訂單已結束，不能執行取消操作'));
 				return false;
 			}
 			if(status == 'cancel'){
-				$.dialog.alert(p_lang('不能重复执行取消操作'));
+				$.dialog.alert(p_lang('不能重複執行取消操作'));
 				return false;
 			}
-			var tip = p_lang('确定要取消订单{sn}吗？<br/>请填写理由',' <span class="red">'+sn+'</span> ');
+			var tip = p_lang('確定要取消訂單{sn}嗎？<br/>請填寫理由',' <span class="red">'+sn+'</span> ');
 			$.dialog.prompt(tip,function(val){
 				if(!val){
-					$.dialog.alert(p_lang('取消理由不能为空'));
+					$.dialog.alert(p_lang('取消理由不能為空'));
 					return false;
 				}
 				var url = get_url('order','cancel','id='+id+"&note="+$.str.encode(val));
 				$.phpok.json(url,function(data){
 					if(data.status){
-						$.dialog.tips(p_lang('订单取消成功'),function(){
+						$.dialog.tips(p_lang('訂單取消成功'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;
@@ -288,33 +288,33 @@
 		{
 			var id = $.checkbox.join();
 			if(!id){
-				$.dialog.alert(p_lang('请选择要操作的订单'));
+				$.dialog.alert(p_lang('請選擇要操作的訂單'));
 				return false;
 			}
 			if(id.indexOf(',') !== -1){
-				$.dialog.alert(p_lang('结束操作每次只能一个订单'));
+				$.dialog.alert(p_lang('結束操作每次只能一個訂單'));
 				return false;
 			}
 			var sn = $("td[data-id="+id+"]").attr("data-sn");
 			var status = $("td[data-id="+id+"]").attr('data-status');
 			if(status == 'end'){
-				$.dialog.alert(p_lang('订单已完成，不能执行结束操作'));
+				$.dialog.alert(p_lang('訂單已完成，不能執行結束操作'));
 				return false;
 			}
 			if(status == 'cancel'){
-				$.dialog.alert(p_lang('订单已取消，不能执行取消操作'));
+				$.dialog.alert(p_lang('訂單已取消，不能執行取消操作'));
 				return false;
 			}
 			if(status == 'stop'){
-				$.dialog.alert(p_lang('不能重复执行取消操作'));
+				$.dialog.alert(p_lang('不能重複執行取消操作'));
 				return false;
 			}
-			var tip = p_lang('确定要结束该订单吗？执行后订单')+'<br/><span class="red">'+sn+'</span>';
+			var tip = p_lang('確定要結束該訂單嗎？執行後訂單')+'<br/><span class="red">'+sn+'</span>';
 			$.dialog.confirm(tip,function(){
 				var url = get_url('order','stop','id='+id);
 				$.phpok.json(url,function(data){
 					if(data.status){
-						$.dialog.tips(p_lang('订单已结束'),function(){
+						$.dialog.tips(p_lang('訂單已結束'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;
@@ -328,33 +328,33 @@
 		{
 			var id = $.checkbox.join();
 			if(!id){
-				$.dialog.alert(p_lang('请选择要操作的订单'));
+				$.dialog.alert(p_lang('請選擇要操作的訂單'));
 				return false;
 			}
 			if(id.indexOf(',') !== -1){
-				$.dialog.alert(p_lang('完成操作每次只能一个订单'));
+				$.dialog.alert(p_lang('完成操作每次只能一個訂單'));
 				return false;
 			}
 			var sn = $("td[data-id="+id+"]").attr("data-sn");
 			var status = $("td[data-id="+id+"]").attr('data-status');
 			if(status == 'end'){
-				$.dialog.alert(p_lang('不能重复执行取消操作'));
+				$.dialog.alert(p_lang('不能重複執行取消操作'));
 				return false;
 			}
 			if(status == 'cancel'){
-				$.dialog.alert(p_lang('订单已取消，不能执行完成操作'));
+				$.dialog.alert(p_lang('訂單已取消，不能執行完成操作'));
 				return false;
 			}
 			if(status == 'stop'){
-				$.dialog.alert(p_lang('订单已结束，不能执行完成操作'));
+				$.dialog.alert(p_lang('訂單已結束，不能執行完成操作'));
 				return false;
 			}
-			var tip = p_lang('确定该订单已完成吗？')+'<br/><span class="red">'+sn+'</span>';
+			var tip = p_lang('確定該訂單已完成嗎？')+'<br/><span class="red">'+sn+'</span>';
 			$.dialog.confirm(tip,function(){
 				var url = get_url('order','end','id='+id);
 				$.phpok.json(url,function(data){
 					if(data.status){
-						$.dialog.tips(p_lang('订单已完成'),function(){
+						$.dialog.tips(p_lang('訂單已完成'),function(){
 							$.phpok.reload();
 						}).lock();
 						return true;

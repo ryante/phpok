@@ -3,8 +3,8 @@
 <!-- if $id --><input type="hidden" id="id" name="id" value="{$id}" /><!-- /if -->
 <div class="table">
 	<div class="title">
-		{lang字段名称：}
-		<span class="note">{lang设置一个名称，该名称在表单的头部信息显示}</span></span>
+		{lang欄位名稱：}
+		<span class="note">{lang設定一個名稱，該名稱在表單的頭部資訊顯示}</span></span>
 	</div>
 	<div class="content">
 		<input type="text" id="title" name="title" class="w99" value="{$rs.title}" />
@@ -13,23 +13,23 @@
 
 <div class="table">
 	<div class="title">
-		{lang字段备注：}
-		<span class="note">{lang仅限后台管理使用，用于查看这个字段主要做什么}</span></span>
+		{lang欄位備註：}
+		<span class="note">{lang僅限後臺管理使用，用於檢視這個欄位主要做什麼}</span></span>
 	</div>
 	<div class="content"><input type="text" id="note" name="note" class="w99" value="{$rs.note}" /></div>
 </div>
 <!-- if !$id -->
 <div class="table">
 	<div class="title">
-		{lang字段标识：}
-		<span class="note">{lang要求}<span class="darkblue">{lang字母、数字及下划线，且必须以字母开头}</span></span>
+		{lang欄位標識：}
+		<span class="note">{lang要求}<span class="darkblue">{lang字母、數字及下劃線，且必須以字母開頭}</span></span>
 	</div>
 	<div class="content">
 		<ul class="layout">
 			<li><input type="text" id="identifier" name="identifier" class="default" value="{$rs.identifier}" /></li>
 			<li>
 				<div class="button-group">
-					<input type="button" value="{lang随机生成}" onclick="$('#identifier').val($.phpok.rand(10,'letter'))" class="layui-btn" />
+					<input type="button" value="{lang隨機生成}" onclick="$('#identifier').val($.phpok.rand(10,'letter'))" class="layui-btn" />
 				</div>
 			</li>
 		</ul>		
@@ -38,11 +38,11 @@
 
 <div class="table">
 	<div class="title">
-		{lang字段类型：}<span class="note">{lang请慎重选择，一经确定后是不能修改的}</span>
+		{lang欄位型別：}<span class="note">{lang請慎重選擇，一經確定後是不能修改的}</span>
 	</div>
 	<div class="content">
 		<select name="field_type" id="field_type" class="w99">
-			<option value="">{lang请选择字段类型…}</option>
+			<option value="">{lang請選擇欄位型別…}</option>
 			<!-- loop from=$field_list key=$key value=$value -->
 			<option value="{$key}"{if $rs.field_type == $key} selected{/if}>{$value.title}<!-- if $value.note -->（{$value.note}）<!-- /if --></option>
 			<!-- /loop -->
@@ -52,12 +52,12 @@
 <!-- /if -->
 <div class="table">
 	<div class="title">
-		{lang表单类型：}
-		<span class="note">{lang请选择字段要使用的表单}</span>
+		{lang表單型別：}
+		<span class="note">{lang請選擇欄位要使用的表單}</span>
 	</div>
 	<div class="content">
 		<select id="form_type" name="form_type" class="w99" onchange="$._configForm.option(this.value,'form_type_ext','{$id}','user')">
-			<option value="">{lang请选择表单…}</option>
+			<option value="">{lang請選擇表單…}</option>
 			<!-- loop from=$form_list key=$key value=$value id=$tmpid -->
 			<option value="{$key}"{if $key == $rs.form_type} selected{/if}>{$value.title}<!-- if $value.note -->（{$value.note}）<!-- /if --></option>
 			<!-- /loop -->
@@ -68,8 +68,8 @@
 <div class="table">
 	<div class="title">
 		<span class="edit">
-			{lang表单样式：}
-			<span class="note">{lang不能超过250个字符，不熟悉CSS，请查相关手册}</span>
+			{lang表單樣式：}
+			<span class="note">{lang不能超過250個字元，不熟悉CSS，請查相關手冊}</span>
 		</span>
 	</div>
 	<div class="content"><input type="text" id="form_style" name="form_style" class="w99" value="{$rs.form_style}" /></div>
@@ -77,8 +77,8 @@
 
 <div class="table">
 	<div class="title">
-		{lang表单默认值：}
-		<span class="note">{lang设置表单默认值，如果表单中有多个值，请用英文逗号隔开}</span>
+		{lang表單預設值：}
+		<span class="note">{lang設定表單預設值，如果表單中有多個值，請用英文逗號隔開}</span>
 	</div>
 	<div class="content"><input type="text" id="content" name="content" class="w99" value="{$rs.content}" /></div>
 </div>
@@ -86,8 +86,8 @@
 
 <div class="table">
 	<div class="title">
-		{lang接收数据格式化：}
-		<span class="note">{lang设置文本常见格式，如HTML，整型，浮点型等}</span>
+		{lang接收資料格式化：}
+		<span class="note">{lang設定文字常見格式，如HTML，整型，浮點型等}</span>
 	</div>
 	<div class="content">
 		<select name="format" id="format" class="w99">
@@ -101,15 +101,15 @@
 <div class="table">
 	<div class="title">
 		排序：
-		<span class="note">值越小越往前靠，最小值为0，最大值为255</span>
+		<span class="note">值越小越往前靠，最小值為0，最大值為255</span>
 	</div>
 	<div class="content"><input type="text" id="taxis" name="taxis" class="short" value="{$rs.taxis ? $rs.taxis : 255}" /></div>
 </div>
 
 <div class="table">
 	<div class="title">
-		前台可编辑：
-		<span class="note">设置字段在前台个人中心是否可编写</span>
+		前臺可編輯：
+		<span class="note">設定欄位在前臺個人中心是否可編寫</span>
 	</div>
 	<div class="content">
 		<ul class="layout">

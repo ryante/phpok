@@ -1,20 +1,20 @@
-<!-- include tpl=head title=在线充值 -->
+<!-- include tpl=head title=線上充值 -->
 <script type="text/javascript">
 function checksubmit()
 {
 	var wid = $("#wealth").val();
 	if(!wid){
-		$.dialog.alert('未指定充值目标');
+		$.dialog.alert('未指定充值目標');
 		return false;
 	}
 	var price = $("#wealth").val();
 	if(!price){
-		$.dialog.alert('没有填写充值金额');
+		$.dialog.alert('沒有填寫充值金額');
 		return false;
 	}
 	var payment_id = $("input[name=payment]:checked").val();
 	if(!payment_id){
-		$.dialog.alert('请选择支付方式');
+		$.dialog.alert('請選擇支付方式');
 		return false;
 	}
 	return true;
@@ -22,7 +22,7 @@ function checksubmit()
 </script>
 <form class="am-form am-form-horizontal" method="post" action="{url ctrl=payment func=create type=recharge/}" onsubmit="return checksubmit()">
 <div class="am-form-group">
-	<label for="wealth" class="am-u-sm-12 am-form-label">充值目标</label>
+	<label for="wealth" class="am-u-sm-12 am-form-label">充值目標</label>
 	<div class="am-u-sm-12">
 		<select name="wealth" id="wealth" style="padding:3px;">
 			<!-- if $id && $rs -->
@@ -36,13 +36,13 @@ function checksubmit()
 	</div>
 </div>
 <div class="am-form-group">
-	<label for="price" class="am-u-sm-12 am-form-label">充值金额</label>
+	<label for="price" class="am-u-sm-12 am-form-label">充值金額</label>
 	<div class="am-u-sm-6"><input type="text" name="price" id="price" value="{$price}" onchange="checkmoney()" /></div>
 	<div class="am-u-sm-6">元</div>
 </div>
 <!-- if $paylist -->
 <div class="am-form-group">
-	<label class="am-u-sm-12 am-form-label">请选择支付方式</label>
+	<label class="am-u-sm-12 am-form-label">請選擇支付方式</label>
 	<div class="am-u-sm-12">
 		<div class="am-tabs" data-am-tabs>
 			<ul class="am-tabs-nav am-nav am-nav-tabs">

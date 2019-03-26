@@ -2,22 +2,22 @@
 <script type="text/javascript">
 $(document).ready(function(){
 	$("#book_post").submit(function(){
-		//提交表单
+		//提交表單
 		if(!$('#title').val()){
-			$.dialog.alert("留言主题不能为空");
+			$.dialog.alert("留言主題不能為空");
 			return false;
 		}
 		if(!$('#fullname').val()){
-			$.dialog.alert('留言人姓名不能为空');
+			$.dialog.alert('留言人姓名不能為空');
 			return false;
 		}
 		if(!$('#email').val()){
-			$.dialog.alert('邮箱不能为空');
+			$.dialog.alert('郵箱不能為空');
 			return false;
 		}
 		var content = UE.getEditor('content').getContentTxt();
 		if(!content){
-			$.dialog.alert('留言内容不能为空');
+			$.dialog.alert('留言內容不能為空');
 			return false;
 		}
 		$(this).ajaxSubmit({
@@ -26,7 +26,7 @@ $(document).ready(function(){
 			'dataType':'json',
 			'success':function(rs){
 				if(rs.status == 'ok'){
-					$.dialog.alert('您的留言信息已发布，请耐心等候管理员审核，感谢您的提交',function(){
+					$.dialog.alert('您的留言資訊已釋出，請耐心等候管理員稽核，感謝您的提交',function(){
 						$.phpok.reload();
 					},'succeed');
 				}else{
@@ -53,7 +53,7 @@ $(document).ready(function(){
 	</div>
 	<div class="right am-panel-group">
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">发布新留言</div>
+			<div class="am-panel-hd">釋出新留言</div>
 			<div class="am-panel-bd">
 				<form method="post" id="book_post" class="am-form">
 				<input type="hidden" name="id" id="id" value="{$page_rs.identifier}" />
@@ -66,13 +66,13 @@ $(document).ready(function(){
 				<!-- /loop -->
 				<!-- if $sys.is_vcode && function_exists("imagecreate") -->
 				<div class="am-g am-form-group">
-					<label class="am-u-sm-2" for="_chkcode">验证码</label>
+					<label class="am-u-sm-2" for="_chkcode">驗證碼</label>
 					<div class="am-u-sm-4"><input type="text" name="_chkcode" id="_chkcode" class="vcode" /></div>
 					<div class="am-u-sm-6"><img src="" border="0" align="absmiddle" id="update_vcode" class="hand"></div>
 					<script type="text/javascript">
 					$(document).ready(function(){
 						$("#update_vcode").phpok_vcode();
-						//更新点击时操作
+						//更新點選時操作
 						$("#update_vcode").click(function(){
 							$(this).phpok_vcode();
 						});
@@ -91,7 +91,7 @@ $(document).ready(function(){
 
 		<!-- loop from=$rslist key=$key value=$value id=$tmpid -->
 		<div class="am-panel am-panel-default">
-			<div class="am-panel-hd">{$value.title}<small class="am-fr gray">发布时间：{func time_format $value.dateline}</small></div>
+			<div class="am-panel-hd">{$value.title}<small class="am-fr gray">釋出時間：{func time_format $value.dateline}</small></div>
 			<div class="am-panel-bd">
 				<div class="content">
 					{$value.content}
@@ -104,7 +104,7 @@ $(document).ready(function(){
 					<!-- /if -->
 				</div>
 				<!-- if $value.adm_reply -->
-				<div class="adm_reply"><div class="adminer">管理员回复：</div>{$value.adm_reply}</div>
+				<div class="adm_reply"><div class="adminer">管理員回覆：</div>{$value.adm_reply}</div>
 				<!-- /if -->
 			</div>
 		</div>

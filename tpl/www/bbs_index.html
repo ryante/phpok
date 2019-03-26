@@ -14,7 +14,7 @@
 				<div class="am-u-sm-1"><a href="{$value.url}" title="{$value.title}"><img src="{$value.thumb ? $value.thumb.filename : 'images/bbs.png'}" alt="{$value.title}" /></a></div>
 				<div class="am-u-sm-4">
 					<div class="am-title"><a href="{$value.url}" title="{$value.title}">{$value.title}</a></div>
-					<!-- if $value.note -->{func nl2br $value.note}<!-- else -->暂无摘要<!-- /if -->
+					<!-- if $value.note -->{func nl2br $value.note}<!-- else -->暫無摘要<!-- /if -->
 				</div>
 				<div class="am-u-sm-1 am-text-center"><!-- php:$total = phpok('_total','pid='.$page_rs.id.'&cateid='.$value.id) -->{$total}</div>
 				<div class="am-u-sm-6">
@@ -22,7 +22,7 @@
 					<!-- loop from=$list.rslist key=$k value=$v -->
 					<div><a href="{$v.url}" title="{$v.title}">{func phpok_cut $v.title 70 …}</a></div>
 					<!-- /loop -->
-					<!-- if !$list.rslist -->无主题<!-- /if -->
+					<!-- if !$list.rslist -->無主題<!-- /if -->
 				</div>
 			</div>
 		</div>

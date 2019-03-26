@@ -1,20 +1,20 @@
 <!-- include tpl=head_lay -->
 <div class="layui-card">
 	<div class="layui-card-header " style="visibility: visible;">
-		<div>{lang多站点维护}</div>
+		<div>{lang多站點維護}</div>
 	</div>
 
 	<div class="layui-card-body">
 
 		<blockquote class="layui-elem-quote">
-			{lang本系统支持多站点多语言模式，所有站点可以通过代码来实现跳转：} <span class="layui-bg-red">{#{#}$sys.url{#}#}?siteId=站点ID</span><br>
-			{lang要开启多语言功能，请在 _config/global.ini.php 里开启 multiple_language=true} <br>
-			{lang站点列表（别名用于后台管理，在前台并不调用）}
+			{lang本系統支援多站點多語言模式，所有站點可以通過程式碼來實現跳轉：} <span class="layui-bg-red">{#{#}$sys.url{#}#}?siteId=站點ID</span><br>
+			{lang要開啟多語言功能，請在 _config/global.ini.php 裡開啟 multiple_language=true} <br>
+			{lang站點列表（別名用於後臺管理，在前臺並不呼叫）}
 		</blockquote>
 
 		<div class="layui-btn-group test-table-operate-btn" style="margin-bottom: 10px;">
 			<button class="layui-btn" onclick="$.phpok_site.add();void(0);">
-				<i class="layui-icon">&#xe608;</i> {lang添加新站点}
+				<i class="layui-icon">&#xe608;</i> {lang新增新站點}
 			</button>
 		</div>
 
@@ -29,10 +29,10 @@
 			</colgroup>
 			<thead>
 			<tr>
-				<th>{lang站点ID}</th>
-				<th>{lang名称}</th>
-				<th>{lang目录}</th>
-				<th>{lang别名}</th>
+				<th>{lang站點ID}</th>
+				<th>{lang名稱}</th>
+				<th>{lang目錄}</th>
+				<th>{lang別名}</th>
 				<th>{lang域名}</th>
 				<th>&nbsp;</th>
 			</tr>
@@ -44,23 +44,23 @@
 				<td>
 					{$value.title}
 					<!-- if $value.is_default -->
-					<span class="layui-bg-green">({lang默认站点})</span>
+					<span class="layui-bg-green">({lang預設站點})</span>
 					<!-- /if -->
 				</td>
 				<td>{$value.dir}</td>
 				<td>
-					<input type="button" value="{$value.alias ? $value.alias : '无别名，点击设置'}" onclick="$.phpok_site.alias('{$value.id}','{$value.alias}')" class="layui-btn layui-btn-sm" />
+					<input type="button" value="{$value.alias ? $value.alias : '無別名，點選設定'}" onclick="$.phpok_site.alias('{$value.id}','{$value.alias}')" class="layui-btn layui-btn-sm" />
 				</td>
 				<td>{$value.dlist_string}</td>
 				<td>
 					<div class="layui-btn-group">
 						<!-- if !$value.is_default && $popedom.default -->
-						<input type="button" value="{lang设为默认站点}" onclick="$.phpok_site.set_default('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm" />
+						<input type="button" value="{lang設為預設站點}" onclick="$.phpok_site.set_default('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm" />
 						<!-- /if -->
 						<!-- if $popedom.delete && !$value.is_default -->
-						<input type="button" value="{lang删除}" onclick="$.phpok_site.del('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm" />
+						<input type="button" value="{lang刪除}" onclick="$.phpok_site.del('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm" />
 						<!-- /if -->
-						<input type="button" value="{lang复制链接}" onclick="" class="layui-btn layui-btn-sm site-url-copy"  data-clipboard-text="{#{#}$sys.url{#}#}?siteId={$value.id}" />
+						<input type="button" value="{lang複製連結}" onclick="" class="layui-btn layui-btn-sm site-url-copy"  data-clipboard-text="{#{#}$sys.url{#}#}?siteId={$value.id}" />
 					</div>
 				</td>
 			</tr>

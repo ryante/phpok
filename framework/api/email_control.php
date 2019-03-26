@@ -23,8 +23,8 @@ class email_control extends phpok_control
 
 	/**
 	 * 郵件傳送
-	 * @引數 email 僅限管理員登入後可直接通過email來發送郵件
-	 * @引數 token 限前臺使用，用於普通會員使用PHPOK伺服器來發送郵件
+	 * @引數 email 僅限管理員登入後可直接通過email來傳送郵件
+	 * @引數 token 限前臺使用，用於普通會員使用PHPOK伺服器來傳送郵件
 	 * @引數 title 郵件標題
 	 * @引數 content 郵件內容，支援HTML
 	 * @引數 fullname 收件人姓名，留空使用Email中@的前半部分做名稱

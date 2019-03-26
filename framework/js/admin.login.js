@@ -1,21 +1,21 @@
 /**
- * 管理员登录页
+ * 管理員登入頁
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @主页 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @主頁 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html 开源授权协议：GNU Lesser General Public License
- * @时间 2018年08月07日
+ * @授權 http://www.phpok.com/lgpl.html 開源授權協議：GNU Lesser General Public License
+ * @時間 2018年08月07日
 **/
 
-//验证码
+//驗證碼
 function login_code(appid)
 {
 	var src_url = api_url("vcode","","id="+appid);
 	$("#src_code").attr("src",$.phpok.nocache(src_url));
 }
 
-//验证并登录
+//驗證並登入
 function admlogin()
 {
 	$("#adminlogin").ajaxSubmit({

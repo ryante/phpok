@@ -1,21 +1,21 @@
 /**
- * 常用字段管理器
+ * 常用欄位管理器
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年06月13日
 **/
 ;(function($){
 	$.admin_fields = {
 		set:function(id)
 		{
-			var title = p_lang('添加新字段');
+			var title = p_lang('新增新欄位');
 			var url = get_url('fields','set');
 			if(id && id != 'undefined'){
 				url = get_url('fields','set','id='+id);
-				title = p_lang('编辑字段：#{id}',id);
+				title = p_lang('編輯欄位：#{id}',id);
 			}
 			$.dialog.open(url,{
 				'title':title,
@@ -25,12 +25,12 @@
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.save();
 					return false;
-				},'okVal':p_lang('提交保存')
+				},'okVal':p_lang('提交儲存')
 			})
 		},
 		loading:function(id,eid)
@@ -51,7 +51,7 @@
 		},
 		del:function(id)
 		{
-			$.dialog.confirm(p_lang('确定要删除常用字段 #{id} 吗？','<span class="red">'+id+'</span>'),function(){
+			$.dialog.confirm(p_lang('確定要刪除常用欄位 #{id} 嗎？','<span class="red">'+id+'</span>'),function(){
 				var url = get_url('fields','delete','id='+id);
 				$.phpok.json(url,function(data){
 					if(data.status){

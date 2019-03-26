@@ -5,29 +5,29 @@ function check_save()
 	var module = $("#module").val();
 	if(!module)
 	{
-		$.dialog.alert("操作异常！");
+		$.dialog.alert("操作異常！");
 		return false;
 	}
 	var title = $("#title").val();
 	if(!title || title == "undefined")
 	{
-		$.dialog.alert("名称不能为空");
+		$.dialog.alert("名稱不能為空");
 		return false;
 	}
-	//判断标识符是否被使用
+	//判斷識別符號是否被使用
 	var c = $("#identifier").val();
 	if(!c)
 	{
-		$.dialog.alert("标识串不能为空！");
+		$.dialog.alert("標識串不能為空！");
 		return false;
 	}
-	//验证标识串是否符合要求
+	//驗證標識串是否符合要求
 	if(!$.str.identifier(c))
 	{
-		$.dialog.alert("标识串不符合系统要求，要求仅支持：字母、数字或下划线且首字必须为字母");
+		$.dialog.alert("標識串不符合系統要求，要求僅支援：字母、數字或下劃線且首字必須為字母");
 		return false;
 	}
-	//通过服务端验证数据是否存在
+	//通過服務端驗證資料是否存在
 	var url = get_url("ajax","exit","filename=field_identifier") + "&identifier="+c;
 	var rs = json_ajax(url);
 	if(rs.status != "ok")
@@ -42,8 +42,8 @@ function check_save()
 <input type="hidden" id="module" name="module" value="{$module}" />
 <div class="table">
 	<div class="title">
-		字段名称：
-		<span class="note">设置一个名称，该名称在表单的头部信息显示</span></span>
+		欄位名稱：
+		<span class="note">設定一個名稱，該名稱在表單的頭部資訊顯示</span></span>
 	</div>
 	<div class="content">
 		<table cellpadding="0" cellspacing="0">
@@ -57,16 +57,16 @@ function check_save()
 
 <div class="table">
 	<div class="title">
-		字段备注：
-		<span class="note">仅限后台管理使用，用于查看这个字段主要做什么</span></span>
+		欄位備註：
+		<span class="note">僅限後臺管理使用，用於檢視這個欄位主要做什麼</span></span>
 	</div>
 	<div class="content"><input type="text" id="note" name="note" class="long" value="{$rs.note}" /></div>
 </div>
 
 <div class="table">
 	<div class="title">
-		字段标识：
-		<span class="note">仅限 <span class="darkblue b">字母、数字及下划线，且必须以字母开头</span></span>
+		欄位標識：
+		<span class="note">僅限 <span class="darkblue b">字母、數字及下劃線，且必須以字母開頭</span></span>
 	</div>
 	<div class="content">
 		<table cellpadding="0" cellspacing="0">
@@ -81,14 +81,14 @@ function check_save()
 
 <div class="table">
 	<div class="title">
-		表单类型：
-		<span class="note">请选择字段要使用的表单 <span class="red n">添加完后，将不允许再修改</span></span>
+		表單型別：
+		<span class="note">請選擇欄位要使用的表單 <span class="red n">新增完後，將不允許再修改</span></span>
 	</div>
 	<div class="content">
 		<table>
 		<tr>
 			<td><select id="form_type" name="form_type" onchange="_phpok_form_opt(this.value,'form_type_ext','{$id}')">
-					<option value="">请选择表单</option>
+					<option value="">請選擇表單</option>
 					<!-- foreach($form_list AS $key=>$value) -->
 					<option value="{$key}"{if $key == $rs.form_type} selected{/if}>{$value}</option>
 					<!-- /foreach -->
@@ -103,8 +103,8 @@ function check_save()
 <div class="table">
 	<div class="title">
 		<span class="edit">
-			表单样式（CSS）：
-			<span class="note">不能超过250个字符，不熟悉CSS，请查手册：<a href="http://www.phpok.com" target="_blank">phpok.com</a></span>
+			表單樣式（CSS）：
+			<span class="note">不能超過250個字元，不熟悉CSS，請查手冊：<a href="http://www.phpok.com" target="_blank">phpok.com</a></span>
 		</span>
 	</div>
 	<div class="content"><input type="text" id="form_style" name="form_style" class="long" value="{$rs.form_style}" /></div>
@@ -112,8 +112,8 @@ function check_save()
 
 <div class="table">
 	<div class="title">
-		表单默认值：
-		<span class="note">设置表单默认值，如果表单中有多个值，请用英文逗号隔开</span>
+		表單預設值：
+		<span class="note">設定表單預設值，如果表單中有多個值，請用英文逗號隔開</span>
 	</div>
 	<div class="content"><input type="text" id="content" name="content" class="long" value="{$rs.content}" /></div>
 </div>
@@ -121,8 +121,8 @@ function check_save()
 
 <div class="table">
 	<div class="title">
-		接收数据格式化：
-		<span class="note">设置文本常见格式，如HTML，整型，浮点型等</span>
+		接收資料格式化：
+		<span class="note">設定文字常見格式，如HTML，整型，浮點型等</span>
 	</div>
 	<div class="content">
 		<select name="format" id="format">
@@ -136,7 +136,7 @@ function check_save()
 <div class="table">
 	<div class="title">
 		排序：
-		<span class="note">值越小越往前靠，最小值为0，最大值为255</span>
+		<span class="note">值越小越往前靠，最小值為0，最大值為255</span>
 	</div>
 	<div class="content"><input type="text" id="taxis" name="taxis" class="short" value="{$rs.taxis ? $rs.taxis : 255}" /></div>
 </div>

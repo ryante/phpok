@@ -11,22 +11,22 @@ function save()
 	var url = get_url("site",'addok');
 	var title = $("#title").val();
 	if(!title){
-		$.dialog.alert("{lang网站名称不能为空}");
+		$.dialog.alert("{lang網站名稱不能為空}");
 		return false;
 	}
 	var domain = $("#domain").val();
 	if(!domain){
-		$.dialog.alert("{lang域名不能为空}");
+		$.dialog.alert("{lang域名不能為空}");
 		return false;
 	}
 	var url = get_url('site','addok','title='+$.str.encode(title)+"&domain="+$.str.encode(domain));
 	$.phpok.json(url,function(rs){
 		if(rs.status){
-			$.dialog.alert("{lang网站添加成功}",function(){
+			$.dialog.alert("{lang網站新增成功}",function(){
 				$parent.$.phpok.reload();
 			});
 		}else{
-			if(!rs.info) rs.info = "{lang创建失败}";
+			if(!rs.info) rs.info = "{lang建立失敗}";
 			$.dialog.alert(rs.info);
 			return false;
 		}
@@ -37,8 +37,8 @@ function save()
 <form method="post" action="javascript:void(0)" onsubmit="return false;">
 <div class="table">
 	<div class="title">
-		{lang网站名称：}
-		<span class="note">{lang设置网站的名称}</span>
+		{lang網站名稱：}
+		<span class="note">{lang設定網站的名稱}</span>
 	</div>
 	<div class="content">
 		<input type="text" id="title" name="title" class="default" />
@@ -47,8 +47,8 @@ function save()
 
 <div class="table">
 	<div class="title">
-		{lang网站主域名：}
-		<span class="note">{lang设置访问此网站的域名，此项不能为空}</span>
+		{lang網站主域名：}
+		<span class="note">{lang設定訪問此網站的域名，此項不能為空}</span>
 	</div>
 	<div class="content">
 		<input type="text" id="domain" name="domain" class="default" />

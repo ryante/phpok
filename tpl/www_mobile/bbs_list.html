@@ -7,9 +7,9 @@
 		<!-- /loop -->
 	</ul>
 	<!-- if $session.user_id -->
-	<a class="am-btn am-btn-primary" href="{url ctrl=post id=$page_rs.identifier cateid=$cate_rs.id/}">发布新主题</a>
+	<a class="am-btn am-btn-primary" href="{url ctrl=post id=$page_rs.identifier cateid=$cate_rs.id/}">釋出新主題</a>
 	<!-- else -->
-	<a class="am-btn am-btn-danger"  href="{url ctrl=login _back=$cate_rs.url/}" class="red">仅限会员才有发布权限</a>
+	<a class="am-btn am-btn-danger"  href="{url ctrl=login _back=$cate_rs.url/}" class="red">僅限會員才有釋出許可權</a>
 	<!-- /if -->
 	<!-- include tpl=block/pagelist -->
 </div>

@@ -4,10 +4,10 @@
 		<div class="am-article-hd">
 			<h1 class="am-article-title">{$rs.title}</h1>
 			<p class="am-article-meta">
-				发布日期：<span>{func time_format $rs.dateline}</span><br />
-				浏览次数：<span id="lblVisits">{$rs.hits}</span>
+				釋出日期：<span>{func time_format $rs.dateline}</span><br />
+				瀏覽次數：<span id="lblVisits">{$rs.hits}</span>
 				<!-- if $rs.tag -->
-				<br />关键字：
+				<br />關鍵字：
 					<!-- loop from=$rs.tag key=$key value=$value -->
 					<a href="{$value.url}" title="{$value.alt}" target="{$value.target}" style="color:#999;">{$value.title}</a>
 					<!-- /loop -->

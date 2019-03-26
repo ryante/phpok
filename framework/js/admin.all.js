@@ -1,20 +1,20 @@
 /**
- * 全局参数动作
+ * 全域性引數動作
  * @作者 qinggan <admin@phpok.com>
- * @版权 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 4.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2017年07月01日
 **/
 ;(function($){
 	$.admin_all = {
-		//样式
+		//樣式
 		setting_style:function(site_id)
 		{
 			var tpl_id = $("#tpl_id").val();
 			$.dialog.open(get_url('all','tpl_setting','id='+site_id+"&tplid="+tpl_id),{
-				'title':p_lang('站点ID {id} 自定义模板设置','<span class="red">#'+site_id+'</span>'),
+				'title':p_lang('站點ID {id} 自定義模板設定','<span class="red">#'+site_id+'</span>'),
 				'lock':true,
 				'id':'phpok_tpl_setting',
 				'width':'800px',
@@ -22,11 +22,11 @@
 				'lock':true,
 				'drag':false,
 				'button': [{
-					name:p_lang('提交保存配置'),
+					name:p_lang('提交儲存配置'),
 					callback: function () {
 						var iframe = this.iframe.contentWindow;
 						if (!iframe.document.body) {
-							alert('iframe还没加载完毕呢');
+							alert('iframe還沒載入完畢呢');
 							return false;
 						};
 						iframe.save();
@@ -40,7 +40,7 @@
 						var url = get_url('all','tpl_resetting','id='+site_id);
 						$.phpok.json(url,function(rs){
 							if(rs.status){
-								$.dialog.alert(p_lang('数据初始化成功'),function(){
+								$.dialog.alert(p_lang('資料初始化成功'),function(){
 									iframe.$.phpok.reload();
 								},'succeed');
 								return true;
@@ -51,10 +51,10 @@
 						return false;
 					}
 				}],
-				'cancel':true,'cancelVal':p_lang('关闭')
+				'cancel':true,'cancelVal':p_lang('關閉')
 			})
 		},
-		//保存全局信息
+		//儲存全域性資訊
 		save:function()
 		{
 			if(typeof(CKEDITOR) != "undefined"){
@@ -68,7 +68,7 @@
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						layer.msg(p_lang('数据信息保存成功'));
+						layer.msg(p_lang('資料資訊儲存成功'));
 						return true;
 					}
 					$.dialog.alert(rs.info);
@@ -78,7 +78,7 @@
 			return false;
 		},
 		/**
-		 * 随机码
+		 * 隨機碼
 		**/
 		rand:function()
 		{
@@ -98,7 +98,7 @@
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						$.dialog.tips(p_lang('数据保存成功'));
+						$.dialog.tips(p_lang('資料儲存成功'));
 						return true;
 					}
 					$.dialog.alert(rs.info);
@@ -111,10 +111,10 @@
 		{
 			if(id && id != 'undefined'){
 				var url = get_url('all','gset','id='+id);
-				var title = p_lang('编护设置');
+				var title = p_lang('編護設定');
 			}else{
 				var url = get_url('all','gset');
-				var title = p_lang('添加全局组');
+				var title = p_lang('新增全域性組');
 			}
 			$.dialog.open(url,{
 				'title':title,
@@ -124,13 +124,13 @@
 				'ok':function(){
 					var iframe = this.iframe.contentWindow;
 					if (!iframe.document.body) {
-						alert('iframe还没加载完毕呢');
+						alert('iframe還沒載入完畢呢');
 						return false;
 					};
 					iframe.$.admin_all.group_set();
 					return false;
 				},
-				'okVal':p_lang('保存设置'),
+				'okVal':p_lang('儲存設定'),
 				'cancel':true
 			})
 		},
@@ -148,7 +148,7 @@
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						//刷新父级标签
+						//重新整理父級標籤
 						var all_seturl = get_url('all');
 						var home_url = get_url('index','homepage');
 						var id = $("#id").val();
@@ -169,7 +169,7 @@
 								$(this).find("span").text($("#title").val());
 							}
 						});
-						$.dialog.tips(p_lang('保存操作成功'));
+						$.dialog.tips(p_lang('儲存操作成功'));
 						window.setTimeout(function(){
 							$.dialog.close();
 						}, 1000);
@@ -183,10 +183,10 @@
 		group_delete:function(id)
 		{
 			var url = get_url('all','ext_gdelete','id='+id);
-			$.dialog.confirm(p_lang('确定要删除此组信息吗？删除后相关数据都会一起被删除'),function(){
+			$.dialog.confirm(p_lang('確定要刪除此組資訊嗎？刪除後相關資料都會一起被刪除'),function(){
 				$.phpok.json(url,function(data){
 					if(data.status){
-						$.dialog.tips(p_lang('组删除成功'),function(){							
+						$.dialog.tips(p_lang('組刪除成功'),function(){							
 							var all_seturl = get_url('all')+'&_noCache';
 							var home_url = get_url('index','homepage');
 							var delete_url = get_url('all','set','id='+id);
@@ -213,7 +213,7 @@
 			var url = get_url("all","domain_default","id="+id);
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					layer.msg(p_lang('主域名设置成功'),{time:1500},function(){
+					layer.msg(p_lang('主域名設定成功'),{time:1500},function(){
 						$.phpok.reload();
 					})
 					return true;
@@ -231,7 +231,7 @@
 			var url = get_url("all","domain_save","domain="+$.str.encode(domain));
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					$.dialog.tips(p_lang('域名添加成功'),function(){
+					$.dialog.tips(p_lang('域名新增成功'),function(){
 						$.phpok.reload();
 					});
 					return true;
@@ -258,7 +258,7 @@
 		},
 		domain_delete:function(id)
 		{
-			layer.confirm(p_lang('确定要删除此域名吗'),function(){
+			layer.confirm(p_lang('確定要刪除此域名嗎'),function(){
 				var url = get_url("all","domain_delete")+"&id="+id;
 				$.phpok.json(url,function(rs){
 					if(rs.status){
@@ -290,7 +290,7 @@
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						layer.msg(p_lang('验证码信息配置保存成功'));
+						layer.msg(p_lang('驗證碼資訊配置儲存成功'));
 						return true;
 					}
 					$.dialog.alert(rs.info);
@@ -299,21 +299,21 @@
 			});
 			return false;
 		},
-		//域名规则测试
+		//域名規則測試
 		_domain_check:function(domain)
 		{
 			if(!domain || domain == 'undefined'){
-				$.dialog.alert(p_lang('域名不能为空'));
+				$.dialog.alert(p_lang('域名不能為空'));
 				return false;
 			}
 			domain = domain.toLowerCase();
 			if(domain.substr(0,7) == "http://" || domain.substr(0,8) == "https://"){
-				$.dialog.alert(p_lang('域名不能以http://或https://开头'));
+				$.dialog.alert(p_lang('域名不能以http://或https://開頭'));
 				return false;
 			}
 			var chk = new RegExp('/');
 			if(chk.test(domain)){
-				$.dialog.alert(p_lang('域名填写不正确'));
+				$.dialog.alert(p_lang('域名填寫不正確'));
 				return false;
 			}
 			return true;

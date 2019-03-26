@@ -6,7 +6,7 @@
  * 版本：3.3
  * 日期：2012-07-23
  * 說明：
- * 以下程式碼只是為了方便商戶測試而提供的樣例程式碼，商戶可以根據自己網站的需要，按照技術文件編寫,並非一定要使用該程式碼。
+ * 以下程式碼只是為了方便商戶測試而提供的樣例程式碼，商戶可以根據自己網站的需要，按照技術檔案編寫,並非一定要使用該程式碼。
  * 該程式碼僅供學習和研究支付寶介面使用，只是提供一個參考。
  */
 require_once("alipay_core.function.php");
@@ -63,7 +63,7 @@ class AlipaySubmit {
 		//生成簽名結果
 		$mysign = $this->buildRequestMysign($para_sort);
 		
-		//簽名結果與簽名方式加入請求提交引數組中
+		//簽名結果與簽名方式加入請求提交引陣列中
 		$para_sort['sign'] = $mysign;
 		$para_sort['sign_type'] = strtoupper(trim($this->alipay_config['sign_type']));
 		
@@ -79,7 +79,7 @@ class AlipaySubmit {
 		//待請求引數陣列
 		$para = $this->buildRequestPara($para_temp);
 		
-		//把引數組中所有元素，按照“引數=引數值”的模式用“&”字元拼接成字串，並對字串做urlencode編碼
+		//把引陣列中所有元素，按照“引數=引數值”的模式用“&”字元拼接成字串，並對字串做urlencode編碼
 		$request_data = createLinkstringUrlencode($para);
 		
 		return $request_data;

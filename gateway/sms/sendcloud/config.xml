@@ -11,7 +11,7 @@
 		</api_user>
 		<api_key>
 			<title>API_KEY</title>
-			<note>建立完成API_USER後，系會發送API_KEY到您的郵箱，請將值寫到這裡來</note>
+			<note>建立完成API_USER後，系會傳送API_KEY到您的郵箱，請將值寫到這裡來</note>
 			<type>text</type>
 			<required>true</required>
 		</api_key>

@@ -1,10 +1,10 @@
 /**
- * 全局配置页
+ * 全域性配置頁
  * @作者 qinggan <admin@phpok.com>
- * @版权 2008-2018 深圳市锟铻科技有限公司
- * @网站 http://www.phpok.com
+ * @版權 2008-2018 深圳市錕鋙科技有限公司
+ * @網站 http://www.phpok.com
  * @版本 5.x
- * @授权 http://www.phpok.com/lgpl.html PHPOK开源授权协议：GNU Lesser General Public License
+ * @授權 http://www.phpok.com/lgpl.html PHPOK開源授權協議：GNU Lesser General Public License
  * @日期 2018年10月25日
 **/
 

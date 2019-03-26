@@ -3,45 +3,45 @@
 	<div class="layui-fluid">
 		<div class="layui-form">
 			<div class="layui-form-item">
-				<label class="layui-form-label">{lang插件名称}</label>
+				<label class="layui-form-label">{lang外掛名稱}</label>
 				<div class="layui-input-inline" style="width: 350px;">
 					<input type="text" id="plugin_name" class="layui-input" />
 				</div>
-				<div class="layui-form-mid layui-word-aux">{lang设置插件的名称}</div>
+				<div class="layui-form-mid layui-word-aux">{lang設定外掛的名稱}</div>
 			</div>
 			<div class="layui-form-item">
-				<label class="layui-form-label">{lang插件标识}</label>
+				<label class="layui-form-label">{lang外掛標識}</label>
 				<div class="layui-input-inline" style="width: 350px;">
 					<input type="text" id="plugin_id" class="layui-input" />
 				</div>
-				<div class="layui-form-mid layui-word-aux">{lang限英文字母和数字，为空由系统生成32位长度字串}</div>
+				<div class="layui-form-mid layui-word-aux">{lang限英文字母和數字，為空由系統生成32位長度字串}</div>
 			</div>
 			<div class="layui-form-item">
-				<label class="layui-form-label">{lang插件功能}</label>
+				<label class="layui-form-label">{lang外掛功能}</label>
 				<div class="layui-input-inline" style="width: 350px;">
 					<input type="text" id="plugin_note" class="layui-input" />
 				</div>
-				<div class="layui-form-mid layui-word-aux">{lang简单一句话描述这个插件做什么}</div>
+				<div class="layui-form-mid layui-word-aux">{lang簡單一句話描述這個外掛做什麼}</div>
 			</div>
 			<div class="layui-form-item">
-				<label class="layui-form-label">{lang开发者}</label>
+				<label class="layui-form-label">{lang開發者}</label>
 				<div class="layui-input-inline" style="width: 350px;">
 					<input type="text" id="plugin_author" class="layui-input" />
 				</div>
-				<div class="layui-form-mid layui-word-aux">{lang设置这个插件的开发人员或团队}</div>
+				<div class="layui-form-mid layui-word-aux">{lang設定這個外掛的開發人員或團隊}</div>
 			</div>
 		</div>
 	</div>
 </div>
 <div class="layui-card">
 	<div class="layui-card-header">
-		{lang已安装的插件}
+		{lang已安裝的外掛}
 		<div class="layui-btn-group fr">
 			<button class="layui-btn layui-btn-sm" onclick="$.admin_plugin.create()">
-				<i class="layui-icon">&#xe608;</i> {lang创建插件}
+				<i class="layui-icon">&#xe608;</i> {lang建立外掛}
 			</button>
 			<button class="layui-btn layui-btn-sm" onclick="$.admin_plugin.upload()">
-				<i class="layui-icon">&#xe67c;</i> {lang本地上传插件}
+				<i class="layui-icon">&#xe67c;</i> {lang本地上傳外掛}
 			</button>
 		</div>
 	</div>
@@ -49,10 +49,10 @@
 		<table class="layui-table" lay-size="sm">
 			<thead>
 			<tr>
-				<th>{lang序号}</th>
-				<th>{lang状态}</th>
-				<th>{lang标识}</th>
-				<th>{lang名称}</th>
+				<th>{lang序號}</th>
+				<th>{lang狀態}</th>
+				<th>{lang標識}</th>
+				<th>{lang名稱}</th>
 				<th class="center">{lang排序}</th>
 				<th>{lang操作}</th>
 			</tr>
@@ -72,10 +72,10 @@
 						<!-- if $popedom.config -->
 						<!-- if $value.extconfig --><input type="button" value="{lang配置}" class="layui-btn layui-btn-sm" onclick="$.admin_plugin.config('{$key}','{$value.title}')" /><!-- /if -->
 						<input type="button" value="{lang管理}" class="layui-btn layui-btn-sm" onclick="$.admin_plugin.setting('{$key}','{$idx.num}')" />
-						<input type="button" value="{lang导出}" class="layui-btn layui-btn-sm" onclick="$.admin_plugin.tozip('{$key}')" />
+						<input type="button" value="{lang匯出}" class="layui-btn layui-btn-sm" onclick="$.admin_plugin.tozip('{$key}')" />
 						<!-- /if -->
 						<!-- if $popedom.uninstall -->
-						<input type="button" value="{lang卸载}" class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.admin_plugin.uninstall('{$key}','{$value.title}')" />
+						<input type="button" value="{lang解除安裝}" class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.admin_plugin.uninstall('{$key}','{$value.title}')" />
 						<!-- /if -->
 					</div>
 				</td>
@@ -87,13 +87,13 @@
 </div>
 <!-- if $popedom.install -->
 <div class="layui-card">
-	<div class="layui-card-header">{lang未安装插件}</div>
+	<div class="layui-card-header">{lang未安裝外掛}</div>
 	<div class="layui-card-body">
 		<table class="layui-table" lay-size="sm">
 			<thead>
 			<tr>
-				<th>{lang名称}</th>
-				<th>{lang标识}</th>
+				<th>{lang名稱}</th>
+				<th>{lang標識}</th>
 				<th>{lang摘要}</th>
 				<th>{lang操作}</th>
 			</tr>
@@ -104,7 +104,7 @@
 				<td>{$value.title}</td>
 				<td>{$key}</td>
 				<td>{$value.note ? $value.note : $value.desc}</td>
-				<td><input  type="button" value="{lang安装}" onclick="$.admin_plugin.install('{$key}','{$value.title}')" class="layui-btn  layui-btn-sm"></td>
+				<td><input  type="button" value="{lang安裝}" onclick="$.admin_plugin.install('{$key}','{$value.title}')" class="layui-btn  layui-btn-sm"></td>
 			</tr>
 			<!-- /loop -->
 			</tbody>

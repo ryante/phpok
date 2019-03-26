@@ -255,7 +255,7 @@ class cart_model_base extends phpok_model
 
 	/**
 	 * 計算運費
-	 * @引數 $data 陣列，裡面包含：number數量，weight重量，volume體積
+	 * @引數 $data 陣列，裡麵包含：number數量，weight重量，volume體積
 	 * @引數 $province 省份
 	 * @引數 $city 城市
 	 * @返回 false 或 實際運費

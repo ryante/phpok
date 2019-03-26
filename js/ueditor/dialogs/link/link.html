@@ -78,8 +78,8 @@
                 'title' : $G("title").value.replace(/^\s+|\s+$/g, ''),
                 '_href':href
             };
-            //修改链接内容的情况太特殊了，所以先做到这里了
-            //todo:情况多的时候，做到command里
+            //修改連結內容的情況太特殊了，所以先做到這裡了
+            //todo:情況多的時候，做到command裡
             if(orgText && text.value != orgText){
                 link[browser.ie ? 'innerText' : 'textContent'] =  obj.textValue = text.value;
                 range.selectNode(link).select()

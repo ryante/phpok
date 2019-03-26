@@ -19,19 +19,19 @@
 				<h2>{$rs.title}</h2>
 				<ul class="am-list am-list-static">
 					<!-- if $rs.fsize -->
-					<li><span>软件大小：</span>{$rs.fsize}</li>
+					<li><span>軟體大小：</span>{$rs.fsize}</li>
 					<!-- /if -->
 					<!-- if $rs.version -->
-					<li><span>软件版本：</span>{$rs.version}</li>
+					<li><span>軟體版本：</span>{$rs.version}</li>
 					<!-- /if -->
 					<!-- if $rs.author -->
-					<li><span>开发作者：</span>{$rs.author}<!-- if $rs.website --> &nbsp; <a href="{$rs.website}" target="_blank" class="red" style="display:inline;" title="访问{$rs.author}">访问官网</a><!-- /if --></li>
+					<li><span>開發作者：</span>{$rs.author}<!-- if $rs.website --> &nbsp; <a href="{$rs.website}" target="_blank" class="red" style="display:inline;" title="訪問{$rs.author}">訪問官網</a><!-- /if --></li>
 					<!-- /if -->
 				</ul>
 				<!-- if !$rs.onlyuser || ($rs.onlyuser && $session.user_id) -->
-				<a href="{if $rs.dfile}{url ctrl=download id=$rs.dfile.id/}{else}{$rs.dlink}{/if}" class="am-btn am-btn-primary am-radius" target="_blank" style="padding-right:1em;">下载附件</a>
+				<a href="{if $rs.dfile}{url ctrl=download id=$rs.dfile.id/}{else}{$rs.dlink}{/if}" class="am-btn am-btn-primary am-radius" target="_blank" style="padding-right:1em;">下載附件</a>
 				<!-- else -->
-				<a class="am-btn am-btn-danger am-radius" href="{url ctrl=login _back=$rs.url/}" style="padding-right:1em;">请先登录</a>
+				<a class="am-btn am-btn-danger am-radius" href="{url ctrl=login _back=$rs.url/}" style="padding-right:1em;">請先登入</a>
 				<!-- /if -->
 			</div>
 		</div>

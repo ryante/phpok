@@ -5,17 +5,17 @@
 <!-- else -->
 <input type="hidden" name="fid" id="fid" value="{$fid}" />
 <!-- /if -->
-<input type="hidden" name="country" id="country" value="中国" />
+<input type="hidden" name="country" id="country" value="中國" />
 <div class="layui-card">
 	<div class="layui-card-body">
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang名称}
+				{lang名稱}
 			</label>
 			<div class="layui-input-block">
 				<input type="text" id="title" name="title" class="layui-input" value="{$rs.title}" />
 			</div>
-			<div class="layui-input-block mtop">{lang设定一个名称用于后台维护管理，如为：区域一，域二或是华东区，华北区等}</div>
+			<div class="layui-input-block mtop">{lang設定一個名稱用於後臺維護管理，如為：區域一，域二或是華東區，華北區等}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
@@ -24,7 +24,7 @@
 			<div class="layui-input-block">
 				<input type="text" id="note" name="note" class="layui-input" value="{$rs.note}" />
 			</div>
-			<div class="layui-input-block mtop">{lang简单描述该区域的主要地址}</div>
+			<div class="layui-input-block mtop">{lang簡單描述該區域的主要地址}</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
@@ -34,12 +34,12 @@
 				<input type="text" id="taxis" name="taxis" class="layui-input" value="{$rs ? $rs.taxis : $taxis}" />
 			</div>
 			<div class="layui-input-inline auto gray lh38">
-				{lang自定义区域排序}
+				{lang自定義區域排序}
 			</div>
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				<i class="layui-icon layui-tips" lay-tips="{lang注意，要勾选城市，相应的省份也应当勾选上}">&#xe702;</i>
+				<i class="layui-icon layui-tips" lay-tips="{lang注意，要勾選城市，相應的省份也應當勾選上}">&#xe702;</i>
 				{lang省市}
 			</label>
 			<div class="layui-input-block">
