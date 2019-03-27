@@ -1,0 +1,20 @@
+ .layui-nav{padding: 0px 0px !important} .head-img{height: 52px;} .layui-header{
+ 	background-color: #fff !important; box-shadow: 0 2px 2px rgba(0, 0, 0,
+ 		0.05), 0 1px 0 rgba(0, 0, 0, 0.05); } .layui-nav .layui-nav-item1 { position:
+ 		relative; display: inline-block; *display: inline; *zoom: 1; vertical-align:
+ 		middle; line-height: 60px; } .layui-tab-content{background-color: #fff;}
+ 		.layui-card-header {background-color: #fff;} .img-href{border: 1px solid
+ 			#ddd;padding: 4px; display: block;border-radius:3px;} .img-href:hover{border-color:
+ 				#2c3e50} .img-href img{width: 100%} .layui-badge{margin-top: 4px} #lib-list
+ 				.layui-col-md3{ overflow: hidden; text-align: center; } #lib-list .layui-col-md3
+ 				img{ width: 150px; } #lib-list table tr td:first-child{ background-color:
+ 					#f2f2f2; font-weight: 700 } #lib-list .layui-table{margin: 0px}
+
+ #lib-list .layui-col-md3{padding: 10px 0px;} 
+            #lib-list .layui-col-md3 p{margin-top: 10px}
+            #lib-list .layui-col-md3 a{display: block; padding: 10px 0px;}
+            #lib-list .layui-col-md3 a:hover { background-color:whitesmoke; color: #009688; }
+#book-nav .layui-nav {background-color: #fff}
+#book-nav ul.layui-nav {border-bottom: 1px solid gray}
+#book-nav .layui-nav .layui-nav-item a{color: rgba(150, 150, 150, 0.7)}
+

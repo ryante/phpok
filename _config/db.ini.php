@@ -17,10 +17,12 @@ port = "3306"
 ; 连接数据库的账号
 ; 使用 http 模式时，这里是认证账号，不需要请留空
 user = "root"
+;user = "root"
 
 ; 连接数据库的密码
 ; 使用 http 模式时的基本验证，不需要请留空
-pass = "root"
+pass = "abc1234!?"
+;pass = "root"
 
 ; 数据库名称
 ; 使用 sqlite 或 pdo_sqlite 时，请填写数据库相对地址，要确保文件存在
