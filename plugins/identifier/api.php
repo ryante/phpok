@@ -133,6 +133,7 @@ class api_identifier extends phpok_plugin
 		if(!$title){
 			$this->error('未指定要翻譯的資訊');
 		}
+        $title = $this->twToCn($title);
 		$url = $this->kunwu_url.'?_appid='.$this->kunwu_appid;
 		$data = array("keywords"=>$title);
 		$data['first'] = $is_first ? 1 : 0;
@@ -165,4 +166,22 @@ class api_identifier extends phpok_plugin
 		}
 		return md5($string);
 	}
+
+    /**
+     * 繁體轉簡體，用於獲取拚音
+     * @param $word
+     * @return bool
+     */
+    public function twToCn($word) {
+        if (empty($word)) {
+            return false;
+        }
+        $api = "http://api.k780.com/?app=code.hanzi_fanjian&typeid=2&wd={$word}&appkey=10003&sign=b59bc3ef6191eb9f747dd4e83c99f2a4&format=json";
+        $info = $this->lib('curl')->get_json($api);
+        if (empty($info) || $info['success'] != 1 || empty($info['result']['text'])) {
+            return $word;
+        }
+        return $info['result']['text'];
+
+    }
 }
