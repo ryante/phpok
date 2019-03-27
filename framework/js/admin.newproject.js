@@ -294,7 +294,7 @@
             $.phpok.json(url,function(data){
                 if(data.status){
                     $("div[name=taxis][data="+id+"]").text(val);
-                    $.dialog.tips(p_lang('排序編輯成功，您可以手動重新整理看新的排序效果'));
+                    $.dialog.tips(p_lang('排序編輯成功，您可以手動刷新看新的排序效果'));
                     return true;
                 }
                 $.dialog.alert(data.info);

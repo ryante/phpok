@@ -155,7 +155,7 @@ class book_control extends phpok_control
             if($m_rs['mtype']){
                 $this->standalone_app($rs,$m_rs);
             }
-            $this->content_list($rs);
+            $this->content_list($rs, $lid);
             $this->view($contentTpl);
         }
         $show_edit = true;
@@ -341,7 +341,7 @@ class book_control extends phpok_control
         $this->view('list_standalone');
     }
     //列表管理
-    private function content_list($project_rs)
+    private function content_list($project_rs, $lid)
     {
         if(!$project_rs){
             $this->error(P_Lang('專案資訊不能為空'));
@@ -398,7 +398,7 @@ class book_control extends phpok_control
         $offset = ($pageid-1) * $psize;
         $lid = $this->get('lid');
         $condition = "l.site_id='".$site_id."' AND l.project_id='".$pid."' AND l.parent_id='0' AND ext.lid={$lid} ";
-        $pageurl = $this->url("list","action","id=".$pid);
+        $pageurl = $this->url("book","action","id=".$pid."&lid={$lid}");
         $keywords = $this->get('keywords');
         if($keywords){
             $this->assign('keywords',$keywords);

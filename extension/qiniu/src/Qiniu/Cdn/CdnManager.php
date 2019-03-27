@@ -19,7 +19,7 @@ final class CdnManager
     }
 
     /**
-     * @param array $urls 待重新整理的檔案連結陣列
+     * @param array $urls 待刷新的檔案連結陣列
      * @return array
      */
     public function refreshUrls(array $urls)
@@ -28,10 +28,10 @@ final class CdnManager
     }
 
     /**
-     * @param array $dirs 待重新整理的檔案連結陣列
+     * @param array $dirs 待刷新的檔案連結陣列
      * @return array
-     * 目前客戶預設沒有目錄重新整理許可權，重新整理會有400038報錯，參考：https://developer.qiniu.com/fusion/api/1229/cache-refresh
-     * 需要重新整理目錄請工單聯絡技術支援 https://support.qiniu.com/tickets/category
+     * 目前客戶預設沒有目錄刷新許可權，刷新會有400038報錯，參考：https://developer.qiniu.com/fusion/api/1229/cache-refresh
+     * 需要刷新目錄請工單聯絡技術支援 https://support.qiniu.com/tickets/category
      */
     public function refreshDirs(array $dirs)
     {
@@ -39,14 +39,14 @@ final class CdnManager
     }
 
     /**
-     * @param array $urls 待重新整理的檔案連結陣列
-     * @param array $dirs 待重新整理的目錄連結陣列
+     * @param array $urls 待刷新的檔案連結陣列
+     * @param array $dirs 待刷新的目錄連結陣列
      *
-     * @return array 重新整理的請求回覆和錯誤，參考 examples/cdn_manager.php 程式碼
+     * @return array 刷新的請求回覆和錯誤，參考 examples/cdn_manager.php 程式碼
      * @link http://developer.qiniu.com/article/fusion/api/refresh.html
      *
-     * 目前客戶預設沒有目錄重新整理許可權，重新整理會有400038報錯，參考：https://developer.qiniu.com/fusion/api/1229/cache-refresh
-     * 需要重新整理目錄請工單聯絡技術支援 https://support.qiniu.com/tickets/category
+     * 目前客戶預設沒有目錄刷新許可權，刷新會有400038報錯，參考：https://developer.qiniu.com/fusion/api/1229/cache-refresh
+     * 需要刷新目錄請工單聯絡技術支援 https://support.qiniu.com/tickets/category
      */
     public function refreshUrlsAndDirs(array $urls, array  $dirs)
     {

@@ -85,6 +85,7 @@
 	<div class="layui-card-body">
 		<ul class="layui-row layui-col-space10 layadmin-backlog">
 			<!-- loop from=$all_status key=$key value=$value id=$tmpid -->
+            <?php if ($value['id'] == 8) continue;?>
 			<li class="layui-col-xs6 layui-col-sm4 layui-col-md2">
 				<a href="javascript:$.win('{$value.title}','{url ctrl=list func=action id=$value.id/}');void(0)" class="layadmin-backlog-body">
 					<h3>{$value.title}</h3>
@@ -103,7 +104,7 @@
 <div class="layui-card">
 	<div class="layui-card-header">
 		{lang主機環境}
-		<div class="fr">
+		<div class="fr" style="display: none">
 			<input type="button" value="檢視更多" onclick="$.win('{lang主機資訊}','{url ctrl=index func=info/}')" class="layui-btn layui-btn-sm layui-btn-normal" />
 		</div>
 	</div>

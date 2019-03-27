@@ -9,12 +9,12 @@
 **/
 $(document).ready(function(){
 	var r_menu = [[{
-		'text':p_lang('重新整理'),
+		'text':p_lang('刷新'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	}],[{
-		'text':p_lang('清空快取'),
+		'text':p_lang('清空緩存'),
 		'func': function() {top.$.admin_index.clear();}
 	},{
 		'text':p_lang('修改我的資訊'),

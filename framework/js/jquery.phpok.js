@@ -12,7 +12,7 @@
 	$.phpok = {
 
 		/**
-		 * 重新整理當前頁面，使用方法：$.phpok.refresh();
+		 * 刷新當前頁面，使用方法：$.phpok.refresh();
 		**/
 		refresh: function()
 		{
@@ -20,7 +20,7 @@
 		},
 
 		/**
-		 * 重新整理頁面別名，使用方法：$.phpok.reload();
+		 * 刷新頁面別名，使用方法：$.phpok.reload();
 		**/
 		reload:function()
 		{

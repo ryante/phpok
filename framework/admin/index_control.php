@@ -411,7 +411,7 @@ class index_control extends phpok_control
 	}
 
 	/**
-	 * 清空快取，包括過時的購物車，及Data目錄下的Session檔案
+	 * 清空緩存，包括過時的購物車，及Data目錄下的Session檔案
 	**/
 	public function clear_f()
 	{

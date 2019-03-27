@@ -77,7 +77,7 @@
 				$.phpok.json(url,function(data){
 					tip.close();
 					if(data.status){
-						var info = data.info ? data.info : p_lang('應用發裝成功，涉及到選單項請全域性重新整理');
+						var info = data.info ? data.info : p_lang('應用發裝成功，涉及到選單項請全域性刷新');
 						$.dialog.alert(info,function(){
 							$.phpok.reload();
 						},'succeed');

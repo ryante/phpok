@@ -26,24 +26,24 @@ $(document).ready(function(){
 			return true;
 		}
 	},{
-		'text':p_lang('重新整理'),
+		'text':p_lang('刷新'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	}];
 	var r_menu_not_copy = [{
-		'text':p_lang('重新整理'),
+		'text':p_lang('刷新'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	}];
 	var r_menu = [[{
-		'text':'{lang重新整理}',
+		'text':'{lang刷新}',
 		'func':function(){
 			$.phpok.reload();
 		}
 	}],[{
-		'text':"{lang清空快取}",
+		'text':"{lang清空緩存}",
 		'func': function() {
 			top.$.admin_index.clear();
 		}

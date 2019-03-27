@@ -346,8 +346,8 @@ function ext_edit(id,module)
 		},
 
 		/**
-		 * 重新整理父標籤視窗
-		 * @引數 url 要重新整理的父標籤網址
+		 * 刷新父標籤視窗
+		 * @引數 url 要刷新的父標籤網址
 		**/
 		reload:function(url)
 		{
@@ -482,24 +482,24 @@ $(document).ready(function(){
 			return true;
 		}
 	},{
-		'text':p_lang('重新整理'),
+		'text':p_lang('刷新'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	}];
 	var r_menu_not_copy = [{
-		'text':p_lang('重新整理'),
+		'text':p_lang('刷新'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	}];
 	var r_menu = [[{
-		'text':p_lang('重新整理'),
+		'text':p_lang('刷新'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	}],[{
-		'text':p_lang('清空快取'),
+		'text':p_lang('清空緩存'),
 		'func': function() {top.$.admin_index.clear();}
 	},{
 		'text':p_lang('訪問網站首頁'),

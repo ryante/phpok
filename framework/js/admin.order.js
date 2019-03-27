@@ -212,7 +212,7 @@
 				'ok':function(){
 					$.phpok.reload();
 				},
-				'okVal':p_lang('關閉並重新整理'),
+				'okVal':p_lang('關閉並刷新'),
 				'cancel':function(){
 					return true;
 				},

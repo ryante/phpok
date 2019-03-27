@@ -121,7 +121,7 @@ function direct(url)
 	$.phpok.go(url);
 }
 
-//自動重新整理
+//自動刷新
 function auto_refresh(rs)
 {
 	$.phpok.reload();

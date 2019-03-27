@@ -200,12 +200,12 @@ $(document).ready(function(){
 	
 	//自定義右鍵
 	var r_menu = [[{
-		'text':p_lang('重新整理網頁'),
+		'text':p_lang('刷新網頁'),
 		'func':function(){
 			$.phpok.reload();
 		}
 	},{
-		'text': p_lang('清空快取'),
+		'text': p_lang('清空緩存'),
 		'func': function() {
 			$.admin_index.clear();
 		}    

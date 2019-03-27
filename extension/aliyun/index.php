@@ -355,7 +355,7 @@ class aliyun_lib
 	}
 
 	/**
-	 * 視訊重新整理
+	 * 視訊刷新
 	 * @引數 $videoid 視訊ID
 	**/
 	public function refresh_upload_video($videoid)

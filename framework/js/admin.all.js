@@ -148,7 +148,7 @@
 				'dataType':'json',
 				'success':function(rs){
 					if(rs.status){
-						//重新整理父級標籤
+						//刷新父級標籤
 						var all_seturl = get_url('all');
 						var home_url = get_url('index','homepage');
 						var id = $("#id").val();

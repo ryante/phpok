@@ -14,7 +14,7 @@
 			url = get_url('rewrite','taxis','id='+id+"&sort="+val);
 			$.phpok.json(url,function(rs){
 				if(rs.status){
-					layer.msg(p_lang('排序變更成功，請手動重新整理'));
+					layer.msg(p_lang('排序變更成功，請手動刷新'));
 					return true;
 				}
 				layer.alert(rs.info);
