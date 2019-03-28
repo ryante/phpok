@@ -11,19 +11,20 @@ require_once dirname(dirname(__FILE__)) . "/framework/engine/db.php";
 require_once dirname(dirname(__FILE__)) . "/framework/engine/db/mysqli.php";
 global $dbconfig;
 $dbconfig = [
-    'phpok' => [
-        'host' => '47.92.198.155',
-        'data' => 'daojiao',
-        'user' => 'szg',
-        'pass' => 'szg123!?',
+    'fastadmin' => [
+        'host' => '127.0.0.1',
+        'data' => 'fastadmin',
+        'user' => 'root',
+        'pass' => 'root',
         'port' => '3306',
     ],
-'localhost' => [
+    'localhost' => [
         'host' => '127.0.0.1',
         'data' => 'daojiao',
         'user' => 'root',
-        'pass' => 'abc1234!?',
+        'pass' => 'root',
         'port' => '3306',
+        'prefix' => '',
     ]
 
 ];

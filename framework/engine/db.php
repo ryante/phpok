@@ -255,9 +255,9 @@ class db
 	public function error($error='',$errid='')
 	{
 		if($this->debug){
-			$info = P_Lang('SQL執行錯誤【ID：{errid}，錯誤資訊是：{error}】',array('errid'=>$errid,'error'=>$error));
+			$info = "SQL執行錯誤【ID：{'{$errid}'}，錯誤資訊是：{'{$error}'}】";
 		}else{
-			$info = P_Lang('SQL執行錯誤，請檢查');
+			$info = 'SQL執行錯誤，請檢查';
 		}
 		if($this->error_type == 'json'){
 			$array = array('status'=>'error','content'=>$info);
