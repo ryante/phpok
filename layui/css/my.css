@@ -17,4 +17,6 @@
 #book-nav .layui-nav {background-color: #fff}
 #book-nav ul.layui-nav {border-bottom: 1px solid gray}
 #book-nav .layui-nav .layui-nav-item a{color: rgba(150, 150, 150, 0.7)}
+.clear{ float: none; clear: both; }
+#lib-list table tr td:first-child{ background-color:#f2f2f2; font-weight: 700 }
 

@@ -113,32 +113,101 @@
                       </span>
                       <!-- breadcrumb  end -->
                         <!-- 库列表 start -->
-                        <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
-                            <div class="layui-tab-content" id="book-nav">
-                                <ul class="layui-nav">
-                                  <li class="layui-nav-item"><a href="">最新活动</a></li>
-                                  <li class="layui-nav-item layui-this">
-                                    <a href="javascript:;">产品</a>
-                                    <dl class="layui-nav-child">
-                                      <dd><a href="">选项1</a></dd>
-                                      <dd><a href="">选项2</a></dd>
-                                      <dd><a href="">选项3</a></dd>
-                                    </dl>
-                                  </li>
-                                  <li class="layui-nav-item"><a href="">大数据</a></li>
-                                  <li class="layui-nav-item">
-                                    <a href="javascript:;">解决方案</a>
-                                    <dl class="layui-nav-child">
-                                      <dd><a href="">移动模块</a></dd>
-                                      <dd><a href="">后台模版</a></dd>
-                                      <dd class="layui-this"><a href="">选中项</a></dd>
-                                      <dd><a href="">电商平台</a></dd>
-                                    </dl>
-                                  </li>
-                                  <li class="layui-nav-item"><a href="">社区</a></li>
-                                </ul>
+                        <div class="layui-tab-content" style="padding: 20px; margin-top: 20px">
+                            <form class="layui-form" action="">
+                                <div class="layui-row layui-col-space10">
+                                    <div class="layui-col-md2">
+                                        <select name="modules" lay-verify="required" lay-search="">
+                                          <option value="">直接选择或搜索选择</option>
+                                          <option value="1">layer</option>
+                                          <option value="2">form</option>
+                                          <option value="3">layim</option>
+                                          <option value="4">element</option>
+                                      </select>
+                                  </div>
+                                  <div class="layui-col-md10">
+                                    <div style="float: right;">
+                                        <button class="layui-btn">
+                                            默认按钮
+                                        </button>
+                                    </div>
+
+                                    <div style="margin-right: 100px">
+                                        <input type="text" name="title" lay-verify="title" autocomplete="off"
+                                        placeholder="请输入标题" class="layui-input" />
+                                    </div>
+                                </div>
+                            </div>
+                            </form>
+                        </div>
+
+                        <div class="layui-tab-content" style="margin-top: 20px">
+                            <div class="layui-tab layui-tab-brief" style="margin-top: 0px" lay-filter="component-tabs-brief">
+                                <ul class="layui-tab-title">
+                                  <li class="layui-this">网站设置</li>
+                                  <li>用户管理</li>
+                                  <li>权限分配</li>
+                                  <li>商品管理</li>
+                                  <li>订单管理</li>
+                              </ul>
+                              <div class="layui-tab-content">
+                                  <div class="layui-tab-item layui-show" id="lib-list">
+                                    <table class="layui-table">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>
+                                                                    贤心
+                                                                </td>
+                                                                <td>
+                                                                    汉族
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    张爱玲
+                                                                </td>
+                                                                <td>
+                                                                    汉族
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    Helen Keller
+                                                                </td>
+                                                                <td>
+                                                                    拉丁美裔
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    岳飞
+                                                                </td>
+                                                                <td>
+                                                                    教科书再滥改，也抹不去“民族英雄”的事实
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>
+                                                                    孟子
+                                                                </td>
+                                                                <td>
+                                                                    华夏族（汉族）
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                </div>
+                                <div class="layui-tab-item">内容2</div>
+                                <div class="layui-tab-item">内容3</div>
+                                <div class="layui-tab-item">内容4</div>
+                                <div class="layui-tab-item">内容5</div>
                             </div>
                         </div>
+                    </div>
+
+
+
+                        
                         <!-- 库列表 end -->
                     </div>
                 </div>
@@ -150,11 +219,6 @@
             layui.use(['element', 'form'],function() {
                 var element = layui.element;
                 var form = layui.form;
-
-             //监听导航点击
-  element.on('nav(demo)', function(elem){
-    layer.msg(elem.text());
-  });
             });
         </script>
     </body>

@@ -107,30 +107,33 @@
                         <!-- search form start -->
                         <form class="layui-form" action="">
                             <div class="layui-row layui-col-space10">
-                              <div class="layui-col-md3">
-                                <select name="modules" lay-verify="required" lay-search="">
-                                  <option value="">直接选择或搜索选择</option>
-                                  <option value="1">layer</option>
-                                  <option value="2">form</option>
-                                  <option value="3">layim</option>
-                                  <option value="4">element</option>
-                                </select>
+                                <div class="layui-col-md2">
+                                    <select name="modules" lay-verify="required" lay-search="">
+                                      <option value="">直接选择或搜索选择</option>
+                                      <option value="1">layer</option>
+                                      <option value="2">form</option>
+                                      <option value="3">layim</option>
+                                      <option value="4">element</option>
+                                  </select>
                               </div>
-
-                                <div class="layui-col-md6">
-                                    <input type="text" name="title" lay-verify="title" autocomplete="off"
-                                    placeholder="请输入标题" class="layui-input" />
-                                </div>
-                                <div class="layui-col-md3">
+                              <div class="layui-col-md10">
+                                <div style="float: right;">
                                     <button class="layui-btn">
                                         默认按钮
                                     </button>
-                                    <button class="layui-btn" style="float: right;">
+                                    <button class="layui-btn" >
                                         进阶搜索
                                     </button>
                                 </div>
+
+                                <div style="margin-right: 210px">
+                                    <input type="text" name="title" lay-verify="title" autocomplete="off"
+                                    placeholder="请输入标题" class="layui-input" />
+                                </div>
                             </div>
-                            <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
+                        </div>
+
+                        <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
                                 <div class="layui-card-header">
                                     卡片面板
                                 </div>
