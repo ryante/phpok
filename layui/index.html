@@ -10,6 +10,8 @@
         <link rel="stylesheet" href="css/layui.css" />
         <link rel="stylesheet" href="css/my.css" />
         <script src="layui.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="js/my.js"></script>
     </head>
     
     <body class="layui-layout-body" style="background-color: #f2f2f2">
@@ -109,7 +111,7 @@
                             <div class="layui-row layui-col-space10">
                                 <div class="layui-col-md2">
                                     <select name="modules" lay-verify="required" lay-search="">
-                                      <option value="">直接选择或搜索选择</option>
+                                      <option value="">请选择文库</option>
                                       <option value="1">layer</option>
                                       <option value="2">form</option>
                                       <option value="3">layim</option>
@@ -119,11 +121,12 @@
                               <div class="layui-col-md10">
                                 <div style="float: right;">
                                     <button class="layui-btn">
-                                        默认按钮
+                                        搜索
                                     </button>
-                                    <button class="layui-btn" >
+                                    <a class="layui-btn" id="more_search_btn" >
                                         进阶搜索
-                                    </button>
+                                        <i class="layui-icon layui-icon-down"></i>
+                                    </a>
                                 </div>
 
                                 <div style="margin-right: 210px">
@@ -133,61 +136,43 @@
                             </div>
                         </div>
 
-                        <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
+                        <div class="layui-tab layui-tab-card" id="more_search_text" style="margin-top: 20px;">
                                 <div class="layui-card-header">
-                                    卡片面板
+                                    搜索项
                                 </div>
                                 <div class="layui-tab-content">
                                     <div class="layui-form-item">
+                                        <div class="layui-block choose-item">
+                                            <input type="checkbox" name="arr[1][]" value="0"  title="写作" />
+                                        </div>
                                         <div class="layui-block">
-                                            <input type="checkbox" name="like[write]" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
                                         </div>
                                     </div>
                                     <div class="layui-form-item">
+                                        <div class="layui-block choose-item">
+                                            <input type="checkbox" name="arr[2][]" title="写作" />
+                                        </div>
                                         <div class="layui-block">
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
                                         </div>
                                     </div>
-                                    <div class="layui-form-item">
-                                        <div class="layui-block">
-                                            <input type="checkbox" name="like[write]" title="写作" />
-                                        </div>
-                                    </div>
-                                    <div class="layui-form-item">
-                                        <div class="layui-block">
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="写作"
-                                            checked="" />
-                                        </div>
-                                    </div>
+
                                 </div>
                             </div>
                         </form>
