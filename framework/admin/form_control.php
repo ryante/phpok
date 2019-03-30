@@ -288,7 +288,7 @@ class form_control extends phpok_control
 	}
 
 	/**
-	 * 過載入擴充套件資訊
+	 * 過載入擴展信息
 	**/
 	public function redata_f()
 	{

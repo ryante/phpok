@@ -307,7 +307,7 @@ class res_model_base extends phpok_model
 	/**
 	 * 取得附件資訊
 	 * @引數 $filename 附件檔名
-	 * @引數 $is_ext 是否讀取擴充套件資訊
+	 * @引數 $is_ext 是否讀取擴展信息
 	 * @返回 false / 陣列
 	**/
 	public function get_one_filename($filename,$is_ext=true)

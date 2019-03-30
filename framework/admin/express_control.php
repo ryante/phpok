@@ -67,7 +67,7 @@ class express_control extends phpok_control
 			}
 			$this->assign('code',$code);
 		}
-		//擴充套件資訊
+		//擴展信息
 		$extlist = $this->model('express')->code_one($code);
 		$this->assign('extlist',$extlist);
 		$this->lib('form')->cssjs();

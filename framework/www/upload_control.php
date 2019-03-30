@@ -129,7 +129,7 @@ class upload_control extends phpok_control
 		$tmp = array("addtime"=>$this->time);
 		$tmp["attr"] = serialize($my_ext);
 		$this->model('res')->save($tmp,$id);
-		//更新附件擴充套件資訊
+		//更新附件擴展信息
 		$this->model('res')->gd_update($id);
 		$rs = $this->model('res')->get_one($id);
 		$this->json($rs,true);

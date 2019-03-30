@@ -2204,7 +2204,7 @@ class _init_phpok
 
 	/**
 	 * 第三方閘道器執行
-	 * @引數 $action 要執行的閘道器，param表示讀取閘道器資訊，extinfo表示變更閘道器擴充套件資訊extinfo，exec表示閘道器路由檔案的執行
+	 * @引數 $action 要執行的閘道器，param表示讀取閘道器資訊，extinfo表示變更閘道器擴展信息extinfo，exec表示閘道器路由檔案的執行
 	 * @引數 $param action為param時表示閘道器ID，default表示讀預設閘道器，action為extinfo時，param表示內容，
 	 *              action為exec時表示輸出方式，為空返回，支援json，action為check時表示檢測閘道器是否存在
 	**/

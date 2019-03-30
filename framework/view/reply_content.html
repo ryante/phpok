@@ -6,7 +6,7 @@
 		<div class="help">
 			<div class="title red">
 				{$rs.title}
-				<!-- if $title_rs --><span class="darkblue i">{lang釋出時間} {func date 'Y-m-d H:i:s' $title_rs.dateline}</span><!-- /if -->
+				<!-- if $title_rs --><span class="darkblue i">{lang發布時間} {func date 'Y-m-d H:i:s' $title_rs.dateline}</span><!-- /if -->
 			</div>
 			<!-- if $title_rs && $title_rs.content -->
 			<div class="content">{func phpok_cut $title_rs.content 255 …}</div>

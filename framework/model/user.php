@@ -225,7 +225,7 @@ class user_model_base extends phpok_model
 	}
 
 	/**
-	 * 取得擴充套件欄位的所有擴充套件資訊
+	 * 取得擴充套件欄位的所有擴展信息
 	 * @引數 $condition 取得會員擴充套件欄位配置
 	 * @引數 $pri_id 主鍵ID
 	**/

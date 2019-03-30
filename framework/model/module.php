@@ -32,7 +32,7 @@ class module_model_base extends phpok_model
 		return $this->db->get_one($sql);
 	}
 
-	//取得擴充套件欄位的所有擴充套件資訊
+	//取得擴充套件欄位的所有擴展信息
 	public function fields_all($module_id=0,$pri_id="")
 	{
 		if(!$module_id){

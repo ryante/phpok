@@ -141,7 +141,7 @@ class payment_control extends phpok_control
 		//讀取支付組
 		$grouplist = $this->model('payment')->group_all($_SESSION['admin_site_id']);
 		$this->assign('grouplist',$grouplist);
-		//擴充套件資訊
+		//擴展信息
 		$extlist = $this->model('payment')->code_one($code);
 		$this->assign('extlist',$extlist);
 		$this->lib('form')->cssjs();
@@ -184,7 +184,7 @@ class payment_control extends phpok_control
 		$data['status'] = $this->get('status','int');
 		$data['wap'] = $this->get('wap','int');
 		$data['note'] = $this->get('note','html');
-		//讀取擴充套件資訊
+		//讀取擴展信息
 		if($codeinfo['code'] && is_array($codeinfo['code'])){
 			$ext = array();
 			foreach($codeinfo['code'] as $key=>$value){

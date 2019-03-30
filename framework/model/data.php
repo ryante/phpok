@@ -48,7 +48,7 @@ class data_model_base extends phpok_model
 		{
 			$rs['user_id'] = $this->_user_info($rs['user_id']);
 		}
-		//讀分類及其擴充套件資訊
+		//讀分類及其擴展信息
 		if($rs['cate_id'])
 		{
 			$rs['cate_id'] = $this->_cate_info($rs['cate_id']);
@@ -69,7 +69,7 @@ class data_model_base extends phpok_model
 		return $rs;
 	}
 
-	//讀單篇主題的擴充套件資訊
+	//讀單篇主題的擴展信息
 	private function _list_ext_info($id=0,$mid=0)
 	{
 		if(!$id || !$mid)
@@ -109,7 +109,7 @@ class data_model_base extends phpok_model
 		return $rs;
 	}
 
-	//讀取分類及期擴充套件資訊，但並不格式化
+	//讀取分類及期擴展信息，但並不格式化
 	private function _cate_info($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."cate WHERE id='".$id."' AND status=1";
@@ -143,7 +143,7 @@ class data_model_base extends phpok_model
 		return $list;
 	}
 	
-	//取得會員內容及未格式化的擴充套件資訊
+	//取得會員內容及未格式化的擴展信息
 	private function _user_info($id)
 	{
 		$sql = "SELECT * FROM ".$this->db->prefix."user WHERE id='".$id."' AND status=1";
@@ -480,7 +480,7 @@ class data_model_base extends phpok_model
 		return $this->model('id')->id($identifier,$site_id,true);
 	}
 
-	//獲取專案，分類的擴充套件資訊
+	//獲取專案，分類的擴展信息
 	public function ext_all($id,$baseinfo='')
 	{
 		$sql = "SELECT ext.ext,ext.identifier,ext.form_type,c.content FROM ".$this->db->prefix."fields ext ";

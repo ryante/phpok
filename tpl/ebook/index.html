@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+        <title>
+            layout 后台大布局 - Layui
+        </title>
+        <link rel="stylesheet" href="css/layui.css" />
+        <link rel="stylesheet" href="css/my.css" />
+    </head>
+    
+    <body class="layui-layout-body" style="background-color: #f2f2f2">
+        <div class="layui-layout layui-layout-admin">
+            <div class="layui-header">
+                <div class="layui-logo">
+                    <a href="/">
+                        <img class="head-img" src="images/logo1.png" />
+                    </a>
+                </div>
+                <!-- 头部区域（可配合layui已有的水平导航） -->
+                <ul class="layui-nav layui-layout-left">
+                    <li class="layui-nav-item1" style="margin-right: 10px">
+                        <img class="head-img" src="images/logo2.png" />
+                    </li>
+                    <li class="layui-nav-item1">
+                        <img class="head-img" src="images/logo3.png" />
+                    </li>
+                </ul>
+                <ul class="layui-nav layui-layout-right">
+                    <img src="images/bg-top-right.png" style="height: 60px" alt="placeholder+image"
+                    />
+                </ul>
+            </div>
+            <div class="layui-side layui-bg-black">
+                <div class="layui-side-scroll">
+                    <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+                    <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                        <li class="layui-nav-item layui-nav-itemed">
+                            <a class="" href="javascript:;">
+                                所有商品
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd>
+                                    <a href="javascript:;">
+                                        列表一
+                                    </a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">
+                                        列表二
+                                    </a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">
+                                        列表三
+                                    </a>
+                                </dd>
+                                <dd>
+                                    <a href="">
+                                        超链接
+                                    </a>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="javascript:;">
+                                解决方案
+                            </a>
+                            <dl class="layui-nav-child">
+                                <dd>
+                                    <a href="javascript:;">
+                                        列表一
+                                    </a>
+                                </dd>
+                                <dd>
+                                    <a href="javascript:;">
+                                        列表二
+                                    </a>
+                                </dd>
+                                <dd>
+                                    <a href="">
+                                        超链接
+                                    </a>
+                                </dd>
+                            </dl>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="">
+                                云市场
+                            </a>
+                        </li>
+                        <li class="layui-nav-item">
+                            <a href="">
+                                发布商品
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-body">
+                <!-- 内容主体区域 -->
+                <div style="padding: 15px; margin-top: 8%">
+                    <div class="layui-container">
+                        <!-- search form start -->
+                        <form class="layui-form" action="">
+                            <div class="layui-row layui-col-space10">
+                                <div class="layui-col-md2">
+                                    <select name="modules" lay-verify="required" lay-search="">
+                                      <option value="">请选择文库</option>
+                                      <option value="1">layer</option>
+                                      <option value="2">form</option>
+                                      <option value="3">layim</option>
+                                      <option value="4">element</option>
+                                  </select>
+                              </div>
+                              <div class="layui-col-md10">
+                                <div style="float: right;">
+                                    <button class="layui-btn">
+                                        搜索
+                                    </button>
+                                    <a class="layui-btn" id="more_search_btn" >
+                                        进阶搜索
+                                        <i class="layui-icon layui-icon-right"></i>
+                                    </a>
+                                </div>
+
+                                <div style="margin-right: 210px">
+                                    <input type="text" name="title" lay-verify="title" autocomplete="off"
+                                    placeholder="请输入标题" class="layui-input" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="layui-tab layui-tab-card" id="more_search_text" style="display:none;margin-top: 20px;">
+                                <div class="layui-card-header">
+                                    搜索项
+                                </div>
+                                <div class="layui-tab-content">
+                                    <div class="layui-form-item">
+                                        <div class="layui-block choose-item">
+                                            <input type="checkbox" name="arr[1][]" value="0"  title="写作" />
+                                        </div>
+                                        <div class="layui-block">
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                            <input type="checkbox" name="arr[1][]" lay-skin="primary" title="写作" />
+                                        </div>
+                                    </div>
+                                    <div class="layui-form-item">
+                                        <div class="layui-block choose-item">
+                                            <input type="checkbox" name="arr[2][]" title="写作" />
+                                        </div>
+                                        <div class="layui-block">
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                            <input type="checkbox" name="arr[2][]" lay-skin="primary"  title="写作" />
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                        <!-- search form end -->
+                        <!-- 库列表 start -->
+                        <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
+                            <div class="layui-tab-content" style="padding: 20px">
+                                <div class="layui-row layui-col-space20">
+                                    <div class="layui-col-md3">
+                                        <a href="" class="img-href">
+                                            <img src="http://daodm2.crs.cuhk.edu.hk/uploads/20171106/6a1c642868b3762bdae22ccefe5e35c0.png"
+                                            />
+                                        </a>
+                                    </div>
+                                    <div class="layui-col-md3">
+                                        <a href="" class="img-href">
+                                            <img src="http://daodm2.crs.cuhk.edu.hk/uploads/20171106/6a1c642868b3762bdae22ccefe5e35c0.png"
+                                            />
+                                        </a>
+                                    </div>
+                                    <div class="layui-col-md3">
+                                        <a href="" class="img-href">
+                                            <img src="http://daodm2.crs.cuhk.edu.hk/uploads/20171106/6a1c642868b3762bdae22ccefe5e35c0.png"
+                                            />
+                                        </a>
+                                    </div>
+                                    <div class="layui-col-md3">
+                                        <h2>
+                                            ...
+                                        </h2>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- 库列表 end -->
+                    </div>
+                </div>
+                <!-- 内容主体区域 -->
+            </div>
+        </div>
+        <script src="js/layui.js"></script>
+        <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+        <script src="js/my.js"></script>
+        <script>
+            //JavaScript代码区域
+            layui.use(['element', 'form'],function() {
+                var element = layui.element;
+                var form = layui.form;
+            });
+        </script>
+    </body>
+
+</html>

@@ -114,7 +114,7 @@
 
 <div class="layui-card">
 	<div class="layui-card-header hand" onclick="$.admin.card(this)">
-		{lang擴充套件資訊}
+		{lang擴展信息}
 		<i class="layui-icon layui-icon-right"></i>
 	</div>
 	<div class="layui-card-body">
@@ -202,7 +202,7 @@
 		</div>
 		<div class="layui-form-item">
 			<label class="layui-form-label">
-				{lang釋出時間}
+				{lang發布時間}
 			</label>
 			<div class="layui-input-inline auto">
 				<input type="text" id="dateline" name="dateline" class="layui-input" value="{if $rs.dateline}{func date 'Y-m-d H:i:s' $rs.dateline}{/if}" />
@@ -213,7 +213,7 @@
 					<input type="button" value="{lang清空}" onclick="$.phpokform.clear('dateline')" class="layui-btn layui-btn-sm" />
 				</div>
 			</div>
-			<div class="layui-input-inline auto gray lh30">{lang自定義釋出時間，留空使用系統時間}</div>
+			<div class="layui-input-inline auto gray lh30">{lang自定義發布時間，留空使用系統時間}</div>
 		</div>
 		<div class="layui-form-item" style="display: none">
 			<label class="layui-form-label">
