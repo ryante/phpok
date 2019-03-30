@@ -169,10 +169,152 @@ class index_control extends phpok_control
         return $data;
     }
 
+    // 拉取所有文献
+    public function getAllDocs() {
+        $cacheKey = "all_doc_lists";
+        $data = $this->getCache($cacheKey);
+        if (!empty($data)) {
+            return json_decode($data, true);
+        }
+	    $result = [];
+	    $rows[2] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_2 b on a.id=b.id where a.status=1 ");
+        $rows[3] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_3 b on a.id=b.id where a.status=1 ");
+        $rows[5] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_5 b on a.id=b.id where a.status=1 ");
+        $rows[2] = empty($rows[2]) ? [] : $rows[2];
+        $rows[3] = empty($rows[3]) ? [] : $rows[3];
+        $rows[5] = empty($rows[5]) ? [] : $rows[5];
+        $data = array_merge($rows[2], $rows[3], $rows[5]);
+        if (empty($data)) {
+            return false;
+        }
+        $sortKey = array_column($data, "id", "id");
+        array_multisort($sortKey, SORT_DESC, $data);
+        foreach ($data as $val) {
+            $result[$val['id']] = $val;
+        }
+        $this->saveCache($cacheKey, json_encode($result, true));
+        return $result;
+    }
+
+    // 通过关键字搜索文献
+    public function searchDocsByKw($keyWord = '', $searchField = [] )
+    {
+        $result = [];
+        $docs = $this->getAllDocs();
+        if (empty($docs)) {
+            return false;
+        }
+        if (empty($keyWord)) {
+            return $docs;
+        }
+
+        // 搜索要带上标题
+        if (empty($searchField)) {
+            $searchField = [
+                2 => ['title'],
+                3 => ['title'],
+                5 => ['title']
+            ];
+        } else {
+            foreach ($searchField as $key => $val) {
+                if (!empty($val)){
+                    $searchField[$key][] = "title";
+                }
+            }
+        }
+        foreach ($docs as $val) {
+            if (empty($searchField[$val['module_id']])) {
+                continue;
+            }
+            foreach ($val as $k => &$v) {
+                if (empty($v)) {
+                    continue;
+                }
+                if (!in_array($k, $searchField[$val['module_id']])) {
+                   continue;
+                }
+                if (stripos($v, $keyWord) !== false) {
+                   $v = str_replace($keyWord, "<span class='search-kw'>{$keyWord}</span>", $v);
+                   $result[$val['id']] = $val;
+                }
+            }
+        }
+        return $result;
+    }
+
+    // 通过文库标签、文献标签、书籍标签搜索文献
+    public function searchDocByTag($libTag = "", $docTag = "", $bookTag = "") {
+	    if (!empty($libTag) && empty($docTag)) {
+	        return false;
+        }
+        $data = [];
+        $idsArr = [];
+        if (!empty($libTag)) {
+	        $libTags = $this->getLibTags();
+	        if (empty($libTags[$libTag])) {
+	            return false;
+            }
+	        $projectId = implode(',', $libTags[$libTag]);
+	        $ids = $this->db->get_all("select id from dj_list where project_id in ({$projectId}) and status=1");
+	        if (empty($ids)) {
+	            return false;
+            }
+            foreach ($ids as $val) {
+	           $idsArr[] = $val;
+            }
+        }
+        if (!empty($docTag)) {
+	        $docTags =  $this->getDocTags();
+	        $idsArr = $docTags[$docTag];
+        }
+        if (!empty($bookTag)) {
+            $bookTags = $this->getBookTags();
+            if (empty($bookTags[$bookTag])) {
+                return false;
+            }
+            $bookId = implode(",", $bookTags[$bookTag]);
+            $ids = $this->db->get_all("select lid id from dj_list_6 where id in ({$bookId})");
+            if (empty($ids)) {
+                return false;
+            }
+            foreach ($ids as $val) {
+                $idsArr[] = $val;
+            }
+        }
+        if (empty($idsArr)) {
+            return false;
+        }
+        $allDocs = $this->getAllDocs();
+        foreach ($idsArr as $val) {
+            $data[] = $allDocs[$val];
+        }
+        return $data;
+    }
+
+
+    // 获取文献书籍
+    public function getDocBooks($lid) {
+	    if (empty($lid)) {
+	        return false;
+        }
+        $cacheKey = "doc_{$lid}_book_lists";
+        $data = $this->getCache($cacheKey);
+        if (!empty($data)) {
+            return json_decode($data, true);
+        }
+        $where = " b.lid = {$lid} and a.status=1";
+        $row = $this->db->get_one("select a.title,a.dateline,a.sort,a.tag,b.* from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc,a.id desc");
+        if (empty($row)) {
+            return false;
+        }
+        $this->saveCache($cacheKey, json_encode($row, true));
+        return $row;
+    }
+
 
 	public function index_f()
 	{
-	    $libs = $this->getModuleFields();
+	    $libs = $this->searchDocsByKw('宮', [3=>['temple_address','store_address','store_temple']]);
 	    print_r($libs);die;
 	    $this->saveCache('libs_list', json_encode($libs, true));die;
 		$tplfile = $this->model('site')->tpl_file($this->ctrl,$this->func);
