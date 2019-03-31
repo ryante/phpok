@@ -14,6 +14,12 @@ class index_control extends phpok_control
 	{
 		parent::control();
 		$this->myModuleId = "2,3,5";
+		$this->myModule = [
+		    2 => '經書',
+            3 => '碑刻集',
+            5 => '科儀文獻',
+        ];
+		$this->assign('my_module', $this->myModule);
 	}
 
     /**
@@ -55,7 +61,7 @@ class index_control extends phpok_control
         if (!empty($data)) {
             return json_decode($data, true);
         }
-        $rows = $this->db->get_all("select id,parent_id,title,pic from dj_project where module in ({$this->myModuleId}) and parent_id=0");
+        $rows = $this->db->get_all("select id,parent_id,title,pic from dj_project where id in (2,3,4) order by taxis desc,id desc");
         if (empty($rows)) {
             return false;
         }
@@ -314,26 +320,12 @@ class index_control extends phpok_control
 
 	public function index_f()
 	{
-	    $libs = $this->searchDocsByKw('宮', [3=>['temple_address','store_address','store_temple']]);
-	    print_r($libs);die;
-	    $this->saveCache('libs_list', json_encode($libs, true));die;
-		$tplfile = $this->model('site')->tpl_file($this->ctrl,$this->func);
-		if(!$tplfile){
-			$tplfile = 'index';
-		}
-		//檢測是否有指定
-		$tmp = $this->model('id')->id('index',$this->site['id'],true);
-		if($tmp){
-			$pid = $tmp['id'];
-			$page_rs = $this->call->phpok('_project',array('pid'=>$pid));
-			$this->phpok_seo($page_rs);
-			$this->assign("page_rs",$page_rs);
-			if($page_rs["tpl_index"] && $this->tpl->check_exists($page_rs["tpl_index"])){
-				$tplfile = $page_rs["tpl_index"];
-			}
-			unset($page_rs);
-		}
-		$this->view($tplfile);
+	    $libs = $this->getLibs();
+	    $moduleFields = $this->getModuleFields();
+	    $this->assign('libs', $libs);
+        $this->assign('module_fields', $moduleFields);
+        $this->assign('seo_title','首页');
+		$this->view("index");
 	}
 
 	public function tips_f()

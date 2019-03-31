@@ -1,0 +1,16 @@
+<div class="layui-side layui-bg-black" id="left-slide">
+    <div class="layui-side-scroll">
+        <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+        <ul class="layui-nav layui-nav-tree" lay-filter="test">
+            <li class="layui-nav-item"> <a href="/" {if $sys.func=='index'}class='avtive-menu'{{/if}><i class="layui-icon layui-icon-home"></i> &nbsp;首页</a> </li>
+            <li class="layui-nav-item layui-nav-itemed"> <a href="javascript:;" {if $sys.func=='docss'}class='avtive-menu'{{/if}><i class="layui-icon layui-icon-read"></i>  &nbsp;文库</a>
+                <dl class="layui-nav-child">
+                    <!-- loop from=$libs key=$key value=$value -->
+                    <dd><a href="{url ctrl=index func=docs pid=$value.id/}"><i class="layui-icon layui-icon-circle-dot"></i> &nbsp;{$value.title} </a></dd>
+                    <!-- /loop -->
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="">  <i class="layui-icon layui-icon-set-fill"></i>&nbsp;管理后台</a></li>
+        </ul>
+    </div>
+</div>

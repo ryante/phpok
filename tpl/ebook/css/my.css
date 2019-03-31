@@ -19,4 +19,5 @@
 #book-nav .layui-nav .layui-nav-item a{color: rgba(150, 150, 150, 0.7)}
 .clear{ float: none; clear: both; }
 #lib-list table tr td:first-child{ background-color:#f2f2f2; font-weight: 700 }
-
+ #left-slide .layui-nav-tree .layui-nav-item a{border-bottom: 1px solid #232527 !important; border-top: 1px solid #4d515a !important;}
+ #left-slide .avtive-menu{background-color: #4E5465; border-left:5px solid #009688}
