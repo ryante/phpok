@@ -20,6 +20,10 @@ class index_control extends phpok_control
             5 => '科儀文獻',
         ];
 		$this->assign('my_module', $this->myModule);
+		$libs = $this->getLibs();
+        $this->assign('libs', $libs);
+	    $moduleFields = $this->getModuleFields();
+        $this->assign('module_fields', $moduleFields);
 	}
 
     /**
@@ -32,7 +36,8 @@ class index_control extends phpok_control
         $editTime = filemtime($file);
         $nowTime = time();
         if (empty($times)) {
-            $times = 600;
+//            $times = 600;
+            $times = 0;
         }
         if (!file_exists($file) || ($nowTime - $editTime) > $times) {
             return false;
@@ -163,17 +168,17 @@ class index_control extends phpok_control
             return false;
         }
         foreach ($rows as $val) {
-            $tmp = ['identifier' => $val['identifier'], 'title' => $val['title']];
             if ($val['is_front'] == 1 ) {
-                $data[$val['ftype']]['is_front'][] = $tmp;
+                $data[$val['ftype']]['is_front'][$val['identifier']] = $val['title'];
             }
             if ($val['search'] == 2 ) {
-                $data[$val['ftype']]['search'][] = $tmp;
+                $data[$val['ftype']]['search'][$val['identifier']] = $val['title'];
             }
         }
         $this->saveCache($cacheKey, json_encode($data, true));
         return $data;
     }
+
 
     // 拉取所有文献
     public function getAllDocs() {
@@ -195,8 +200,29 @@ class index_control extends phpok_control
         }
         $sortKey = array_column($data, "id", "id");
         array_multisort($sortKey, SORT_DESC, $data);
-        foreach ($data as $val) {
-            $result[$val['id']] = $val;
+        foreach ($data as $key => $val) {
+            if (!empty($val['start_cover_pic'])) {
+                $picInfo = $this->model('res')->get_one($val['start_cover_pic'],true);
+                if (!empty($picInfo)) {
+                    $pic = ['filename' => $picInfo['filename'], 'gd' => $picInfo['gd']];
+                    $data[$key]['start_cover_pic'] = $pic;
+                }
+            }
+            if (!empty($val['end_cover_pic'])) {
+                $picInfo = $this->model('res')->get_one($val['end_cover_pic'],true);
+                if (!empty($picInfo)) {
+                    $pic = ['filename' => $picInfo['filename'], 'gd' => $picInfo['gd']];
+                    $data[$key]['start_cover_pic'] = $pic;
+                }
+            }
+            if (!empty($val['pdf_file'])) {
+                $fileInfo = $this->model('res')->get_one($val['pdf_file'],true);
+                if (!empty($fileInfo)) {
+                    $pdf = ['filename' => $fileInfo['filename'], 'title' => $fileInfo['title']];
+                    $data[$key]['pdf_file'] = $pdf;
+                }
+            }
+            $result[$val['id']] = $data[$key];
         }
         $this->saveCache($cacheKey, json_encode($result, true));
         return $result;
@@ -255,19 +281,18 @@ class index_control extends phpok_control
         }
         $data = [];
         $idsArr = [];
+        $allDocs = $this->getAllDocs();
         if (!empty($libTag)) {
 	        $libTags = $this->getLibTags();
 	        if (empty($libTags[$libTag])) {
 	            return false;
             }
-	        $projectId = implode(',', $libTags[$libTag]);
-	        $ids = $this->db->get_all("select id from dj_list where project_id in ({$projectId}) and status=1");
-	        if (empty($ids)) {
-	            return false;
+            foreach ($allDocs as $val) {
+                if (in_array($val['project_id'], $libTags[$libTag])) {
+                    $data[] = $val;
+                }
             }
-            foreach ($ids as $val) {
-	           $idsArr[] = $val;
-            }
+            return $data;
         }
         if (!empty($docTag)) {
 	        $docTags =  $this->getDocTags();
@@ -290,12 +315,38 @@ class index_control extends phpok_control
         if (empty($idsArr)) {
             return false;
         }
-        $allDocs = $this->getAllDocs();
         foreach ($idsArr as $val) {
             $data[] = $allDocs[$val];
         }
         return $data;
     }
+
+
+    // 通过project_id搜索文献
+    public function searchDocByPid($pid) {
+	   if (empty($pid)) {
+	       return false;
+       }
+       $data = [];
+       $sonPid = $this->db->get_all("select id from dj_project where parent_id = {$pid}");
+	   if (!empty($sonPid)) {
+	      foreach ($sonPid as $val) {
+	          $pidArr[] = $val;
+          }
+       } else {
+	       $pidArr[] = $pid;
+       }
+       $docs = $this->getAllDocs();
+	   if (empty($docs)) {
+           return false;
+       }
+       foreach ($docs as $val) {
+	       if (in_array($val['project_id'], $pidArr)) {
+	           $data[] = $val;
+           }
+       }
+       return $data;
+	}
 
 
     // 获取文献书籍
@@ -320,13 +371,51 @@ class index_control extends phpok_control
 
 	public function index_f()
 	{
-	    $libs = $this->getLibs();
-	    $moduleFields = $this->getModuleFields();
-	    $this->assign('libs', $libs);
-        $this->assign('module_fields', $moduleFields);
+
         $this->assign('seo_title','首页');
 		$this->view("index");
 	}
+
+	public function docs_f() {
+	    $pid = $this->get('pid');
+        $libTags = $this->get('lib_tags');
+        $docTags = $this->get('doc_tags');
+        $keywords = $this->get('keywords');
+        $searchFields = $this->get('fields');
+        if (empty($pid) && empty($libTags) && empty($docTags) && empty($keywords)) {
+            $docs = $this->getAllDocs();
+        }
+        if (!empty($pid)) {
+            $prs = $this->db->get_one("select title from dj_project where id={$pid}");
+            $docs = $this->searchDocByPid($pid);
+            $this->assign('pid', $pid);
+            $this->assign('nav_title', $prs['title']);
+        }
+        if (!empty($libTags)) {
+            $docs = $this->searchDocByTag($libTags);
+            $this->assign('lib_tags', $docTags);
+            $this->assign('nav_title', "文库标签'{$libTags}'");
+        }
+        if (!empty($docTags)) {
+            $docs = $this->searchDocByTag($docTags);
+            $this->assign('doc_tags', $docTags);
+            $this->assign('nav_title', "文献标签'{$libTags}'");
+        }
+        if (!empty($keywords)) {
+            $docs = $this->searchDocsByKw($keywords, $searchFields);
+            $this->assign('keywords', $keywords);
+            $this->assign('search_fields', $searchFields);
+            $this->assign('nav_title', "关键字'{$keywords}'");
+        }
+        $libTags = $this->getLibTags();
+        $docTags = $this->getDocTags();
+        $bookTags = $this->getBookTags();
+        $this->assign('lib_tags', $libTags);
+        $this->assign('doc_tags', $docTags);
+        $this->assign('book_tags', $bookTags);
+        $this->assign('docs', $docs);
+        $this->view('img_list');
+    }
 
 	public function tips_f()
 	{

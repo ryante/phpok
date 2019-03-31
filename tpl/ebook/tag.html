@@ -1,0 +1,37 @@
+<div class="layui-tab layui-tab-card" style="margin-top: 20px;">
+    <div class="layui-card-header">
+        标签云
+    </div>
+    <div class="layui-tab-content">
+        <!-- if $lib_tags -->
+        <fieldset class="layui-elem-field" >
+            <legend> 文库 </legend>
+            <div class="layui-field-box">
+                <!-- loop from=lib_tags key=$key value=$value -->
+                <a href="{url ctrl=index func=docs lib_tags=$value/}"> <span class="layui-badge layui-bg-cyan">{$key}</span> </a>
+                <!-- /loop -->
+            </div>
+        </fieldset>
+        <!-- /if -->
+        <!-- if $doc_tags -->
+        <fieldset class="layui-elem-field">
+            <legend> 文献 </legend>
+            <div class="layui-field-box">
+                <!-- loop from=doc_tags key=$key value=$value -->
+                <a href="{url ctrl=index func=docs doc_tags=$value/}"> <span class="layui-badge layui-bg-cyan"> {$key} </span> </a>
+                <!-- /loop -->
+            </div>
+        </fieldset>
+        <!-- /if -->
+        <!-- if $book_tags -->
+        <fieldset class="layui-elem-field">
+            <legend> 书籍 </legend>
+            <div class="layui-field-box">
+                <!-- loop from=doc_tags key=$key value=$value -->
+                <a href="{url ctrl=index func=docs book_tags=$value/}"> <span class="layui-badge layui-bg-cyan"> {$key} </span> </a>
+                <!-- /loop -->
+            </div>
+        </fieldset>
+        <!-- /if -->
+    </div>
+</div>

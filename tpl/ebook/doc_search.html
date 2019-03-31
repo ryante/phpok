@@ -1,0 +1,34 @@
+<div class="layui-tab-content" style="padding: 20px; margin-top: 20px">
+    <form class="layui-form" action="">
+        <div class="layui-row">
+            <div style="float: right;">
+                <button class="layui-btn"> 搜索 </button>
+                <a class="layui-btn" id="more_search_btn"> 进阶搜索 <i class="layui-icon {if $search_fields}layui-icon-down{else}layui-icon-right{/if}"></i> </a>
+            </div>
+            <div style="margin-right: 210px">
+                <input type="text" name="title" lay-verify="title" value="{$keywords}" autocomplete="off" placeholder="请输入标题" class="layui-input" />
+            </div>
+        </div>
+        <div class="layui-tab layui-tab-card" id="more_search_text" style="display:{if $search_fields}block{else}none{/if};margin-top: 20px;">
+            <div class="layui-card-header">
+                搜索项
+            </div>
+            <div class="layui-tab-content">
+                <!-- loop from=$module_fields key=$key value=$value -->
+                <!-- if $value.search -->
+                <div class="layui-form-item">
+                    <div class="layui-block choose-item">
+                        <input type="checkbox" name="fields[{$key}][]" value="0" title="{$my_module[$key]}" />
+                    </div>
+                    <div class="layui-block">
+                        <!-- loop from=$value.search key=$k value=$v -->
+                        <input type="checkbox" name="fields[{$key}][]" lay-skin="primary" value="{$k}" title="{$v}" />
+                        <!-- /loop -->
+                    </div>
+                </div>
+                <!-- /if -->
+                <!-- /loop -->
+            </div>
+        </div>
+    </form>
+</div>
