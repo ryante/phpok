@@ -5,21 +5,21 @@
  		middle; line-height: 60px; } .layui-tab-content{background-color: #fff;}
  		.layui-card-header {background-color: #fff;} .img-href{border: 1px solid
  			#ddd;padding: 4px; display: block;border-radius:3px;} .img-href:hover{border-color:
- 				#2c3e50} .img-href img{width: 100%} .layui-badge{margin-top: 4px} #lib-list
- 				.layui-col-md3{ overflow: hidden; text-align: center; } #lib-list .layui-col-md3
- 				img{ width: 150px; } #lib-list table tr td:first-child{ background-color:
- 					#f2f2f2; font-weight: 700 } #lib-list .layui-table{margin: 0px}
-
- #lib-list .layui-col-md3{padding: 10px 0px;} 
-            #lib-list .layui-col-md3 p{margin-top: 10px}
-            #lib-list .layui-col-md3 a{display: block; padding: 10px 0px;}
-            #lib-list .layui-col-md3 a:hover { background-color:whitesmoke; color: #009688; }
-#book-nav .layui-nav {background-color: #fff}
+ 				#2c3e50} .img-href img{width: 100%} .layui-badge{margin-top: 4px}
+ #lib-list2 .layui-col-md3{ overflow: hidden; text-align: center; }
+ #lib-list2 .layui-col-md3 img{ width: 150px; }
+ #lib-list2 table tr td:first-child{ background-color: #f2f2f2; font-weight: 700 }
+ #lib-list2 .layui-table{margin: 0px}
+ #lib-list2 .layui-col-md3{padding: 10px 0px;}
+ #lib-list2 .layui-col-md3 p{margin-top: 10px}
+ #lib-list2 .layui-col-md3 a{display: block; padding: 10px 0px;}
+ #lib-list2 .layui-col-md3 a:hover { background-color:whitesmoke; color: #009688; }
+ #book-nav .layui-nav {background-color: #fff}
 #book-nav ul.layui-nav {border-bottom: 1px solid gray}
 #book-nav .layui-nav .layui-nav-item a{color: rgba(150, 150, 150, 0.7)}
 .clear{ float: none; clear: both; }
-#lib-list table tr td:first-child{ background-color:#f2f2f2; font-weight: 700 }
- #lib-list .layui-table tr td i{ color: #009688;}
+#lib-list1 table tr td:first-child{ background-color:#f2f2f2; font-weight: 700 }
+ #lib-list1 .layui-table tr td i{ color: #009688;}
  #left-slide .layui-nav-tree .layui-nav-item a{border-bottom: 1px solid #232527 !important; border-top: 1px solid #4d515a !important;}
  #left-slide .avtive-menu{background-color: #4E5465; border-left:5px solid #009688}
  #left-slide .layui-nav-tree .layui-nav-child .active{ color: #fff;}

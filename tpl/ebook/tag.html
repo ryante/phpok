@@ -8,7 +8,7 @@
             <legend> 文库 </legend>
             <div class="layui-field-box">
                 <!-- loop from=lib_tags key=$key value=$value -->
-                <a href="{url ctrl=index func=docs lib_tags=$value/}"> <span class="layui-badge layui-bg-cyan">{$key}</span> </a>
+                <a href="{url ctrl=index func=docs lib_tags=$key/}"> <span class="layui-badge layui-bg-cyan">{$key}</span> </a>
                 <!-- /loop -->
             </div>
         </fieldset>
@@ -18,7 +18,7 @@
             <legend> 文献 </legend>
             <div class="layui-field-box">
                 <!-- loop from=doc_tags key=$key value=$value -->
-                <a href="{url ctrl=index func=docs doc_tags=$value/}"> <span class="layui-badge layui-bg-cyan"> {$key} </span> </a>
+                <a href="{url ctrl=index func=docs doc_tags=$key/}"> <span class="layui-badge layui-bg-cyan"> {$key} </span> </a>
                 <!-- /loop -->
             </div>
         </fieldset>
@@ -28,7 +28,7 @@
             <legend> 书籍 </legend>
             <div class="layui-field-box">
                 <!-- loop from=doc_tags key=$key value=$value -->
-                <a href="{url ctrl=index func=docs book_tags=$value/}"> <span class="layui-badge layui-bg-cyan"> {$key} </span> </a>
+                <a href="{url ctrl=index func=docs book_tags=$key/}"> <span class="layui-badge layui-bg-cyan"> {$key} </span> </a>
                 <!-- /loop -->
             </div>
         </fieldset>

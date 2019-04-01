@@ -266,7 +266,7 @@ class index_control extends phpok_control
                    continue;
                 }
                 if (stripos($v, $keyWord) !== false) {
-                   $v = str_replace($keyWord, "<span class='search-kw'>{$keyWord}</span>", $v);
+                   $v = str_replace($keyWord, "<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $v);
                    $result[$val['id']] = $val;
                 }
             }
@@ -276,7 +276,7 @@ class index_control extends phpok_control
 
     // 通过文库标签、文献标签、书籍标签搜索文献
     public function searchDocByTag($libTag = "", $docTag = "", $bookTag = "") {
-	    if (!empty($libTag) && empty($docTag)) {
+	    if (empty($libTag) && empty($docTag)) {
 	        return false;
         }
         $data = [];
@@ -331,7 +331,7 @@ class index_control extends phpok_control
        $sonPid = $this->db->get_all("select id from dj_project where parent_id = {$pid}");
 	   if (!empty($sonPid)) {
 	      foreach ($sonPid as $val) {
-	          $pidArr[] = $val;
+	          $pidArr[] = $val['id'];
           }
        } else {
 	       $pidArr[] = $pid;
@@ -394,18 +394,18 @@ class index_control extends phpok_control
         if (!empty($libTags)) {
             $docs = $this->searchDocByTag($libTags);
             $this->assign('lib_tags', $docTags);
-            $this->assign('nav_title', "文库标签'{$libTags}'");
+            $this->assign('nav_title', "文库标签:  {$libTags}");
         }
         if (!empty($docTags)) {
-            $docs = $this->searchDocByTag($docTags);
+            $docs = $this->searchDocByTag("", $docTags);
             $this->assign('doc_tags', $docTags);
-            $this->assign('nav_title', "文献标签'{$libTags}'");
+            $this->assign('nav_title', "文献标签:  {$docTags}");
         }
         if (!empty($keywords)) {
             $docs = $this->searchDocsByKw($keywords, $searchFields);
             $this->assign('keywords', $keywords);
             $this->assign('search_fields', $searchFields);
-            $this->assign('nav_title', "关键字'{$keywords}'");
+            $this->assign('nav_title', "关键字:  {$keywords}");
         }
         $libTags = $this->getLibTags();
         $docTags = $this->getDocTags();

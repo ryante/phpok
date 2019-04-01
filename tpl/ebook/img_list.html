@@ -25,11 +25,11 @@
                         <div class="layui-card-header">
                             检索结果
                             <div style="float: right;">
-                                <a href="" title="图表显示"> <i class="layui-icon layui-icon-table" style="font-size: 26px; color: #009688"> </i> </a>
-                                <a href="" title="列表显示"> <i class="layui-icon layui-icon-list" style="font-size: 26px;color: #009688"> </i> </a>
+                                <span id="list_view_1" title="图表显示"> <i class="layui-icon layui-icon-table" style="font-size: 26px; color: #009688"> </i> </span>
+                                <span  id="list_view_2"title="列表显示"> <i class="layui-icon layui-icon-list" style="font-size: 26px;color: #009688"> </i> </span>
                             </div>
                         </div>
-                        <div class="layui-tab-content" id="lib-list">
+                        <div class="layui-tab-content" id="lib-list1" >
                             <!-- if $docs -->
                             <!-- loop from=docs key=$key value=$value -->
                             <div class="layui-row layui-col-space30">
@@ -72,6 +72,56 @@
                             <p style="text-align: center"> 暂无内容~ </p>
                             <!-- /if  -->
                         </div>
+
+
+                        <div class="layui-tab-content" id="lib-list2" style="display: none">
+                            <div class="layui-row">
+                                <!-- if $docs -->
+                                <!-- loop from=docs key=$key value=$value -->
+                                <div class="layui-col-md3">
+                                    <a href="">
+                                    {if $value.start_cover_pic}
+                                    <img src="{$value.start_cover_pic.gd.book-cover}" />
+                                    {else}
+                                    <img src="img.php?token=YToxMjp7czoyOiJpZCI7czoyOiIxMyI7czoxMDoiaWRlbnRpZmllciI7czoxMDoiYm9vay1jb3ZlciI7czo1OiJ3aWR0aCI7czozOiIxNTAiO3M6NjoiaGVpZ2h0IjtzOjM6IjIwMCI7czoxMjoibWFya19waWN0dXJlIjtzOjA6IiI7czoxMzoibWFya19wb3NpdGlvbiI7czoxMjoiYm90dG9tLXJpZ2h0IjtzOjg6ImN1dF90eXBlIjtzOjE6IjAiO3M6NzoicXVhbGl0eSI7czoyOiI4MCI7czo3OiJiZ2NvbG9yIjtzOjY6IkZGRkZGRiI7czo1OiJ0cmFucyI7czoxOiIwIjtzOjY6ImVkaXRvciI7czoxOiIxIjtzOjM6InVybCI7czozNDoicmVzLzIwMTkwMy8zMS80ZjQ3OGEwYmZlMDM4OGJjLnBuZyI7fQ" />
+                                    {/if}
+                                        <p>{$value.title}</p>
+                                    </a>
+                                </div>
+                                <!-- /loop -->
+                                <!-- else  -->
+                                <p style="text-align: center"> 暂无内容~ </p>
+                                <!-- /if  -->
+                            </div>
+
+                            <div class="layui-row">
+                                <div class="layui-col-md3">
+                                    <a href="">
+                                        <img src="http://daodm2.crs.cuhk.edu.hk/uploads/20171106/6a1c642868b3762bdae22ccefe5e35c0.png">
+                                        <p>asdfsdfds</p>
+                                    </a>
+                                </div>
+                                <div class="layui-col-md3">
+                                    <a href="">
+                                        <img src="http://daodm2.crs.cuhk.edu.hk/uploads/20171106/6a1c642868b3762bdae22ccefe5e35c0.png">
+                                        <p>asdfsdfds</p>
+                                    </a>
+                                </div>
+                                <div class="layui-col-md3">
+                                    <a href="">
+                                        <img src="http://daodm2.crs.cuhk.edu.hk/uploads/20171106/6a1c642868b3762bdae22ccefe5e35c0.png">
+                                        <p>asdfsdfds</p>
+                                    </a>
+                                </div>
+                                <div class="layui-col-md3">
+                                    <a href="">
+                                        <img src="http://daodm2.crs.cuhk.edu.hk/uploads/20171106/6a1c642868b3762bdae22ccefe5e35c0.png">
+                                        <p>asdfsdfds</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

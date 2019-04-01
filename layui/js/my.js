@@ -17,13 +17,12 @@ $(function(){
 		var checked = $(this).children('div').hasClass('layui-form-checked');
 		if (checked) {
 			$(this).next().children("[type='checkbox']").each(function(){
-				$(this).attr('checked', true);
 				$(this).next().addClass('layui-form-checked');
 			});
 		} else {
 			$(this).next().children("[type='checkbox']").each(function(){
-				$(this).attr('checked', true);
-				$(this).next().removeClass('layui-form-checked');
+                $(this).next().removeClass('layui-form-checked');
+				$(this).removeAttr('checked');
 			});
 		}
 	})
