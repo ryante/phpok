@@ -1,228 +1,94 @@
-<!DOCTYPE html>
-<html>
-    
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-        <title>
-            layout 后台大布局 - Layui
-        </title>
-        <link rel="stylesheet" href="css/layui.css" />
-       <link rel="stylesheet" href="css/my.css" /> 
-        <script src="js/layui.js">
-        </script>
-    </head>
-    
-    <body class="layui-layout-body" style="background-color: #f2f2f2">
-        <div class="layui-layout layui-layout-admin">
-            <div class="layui-header">
-                <div class="layui-logo">
-                    <a href="/">
-                        <img class="head-img" src="images/logo1.png" />
-                    </a>
-                </div>
-                <!-- 头部区域（可配合layui已有的水平导航） -->
-                <ul class="layui-nav layui-layout-left">
-                    <li class="layui-nav-item1" style="margin-right: 10px">
-                        <img class="head-img" src="images/logo2.png" />
-                    </li>
-                    <li class="layui-nav-item1">
-                        <img class="head-img" src="images/logo3.png" />
-                    </li>
-                </ul>
-                <ul class="layui-nav layui-layout-right">
-                    <img src="images/bg-top-right.png" style="height: 60px" alt="placeholder+image"
-                    />
-                </ul>
+<!-- include tpl=header -->
+<!-- include tpl=left_side -->
+<div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px; ">
+        <div class="layui-container">
+             <span class="layui-breadcrumb" style="visibility: visible;">
+                <a href="/">首页</a><span lay-separator="">/</span>
+                <!-- if !$nav_title -->
+                <a><cite>文献列表</cite></a>
+                <!-- else -->
+                <a href="{url ctrl=index func=docs }">文献列表</a><span lay-separator="">/</span>
+                <a><cite>{$nav_title}</cite></a>
+                <!-- /if -->
+            </span>
+
+            <!-- 库列表 start -->
+            <div class="layui-tab-content" style="margin-top: 30px">
+                <form class="layui-form" action="">
+                    <div class="layui-row layui-col-space10">
+                        <div class="layui-col-md2">
+                            <select name="modules" lay-verify="required" lay-search="">
+                                <option value="1">当前内文</option>
+                                <option value="2">当前文献</option>
+                                <option value="3">当前系列</option>
+                            </select>
+                        </div>
+                        <div class="layui-col-md10">
+                            <div style="float: right;">
+                                <button class="layui-btn">
+                                    搜索
+                                </button>
+                            </div>
+
+                            <div style="margin-right: 100px">
+                                <input type="text" name="title" lay-verify="title" autocomplete="off"
+                                       placeholder="请输入标题" class="layui-input" />
+                            </div>
+                        </div>
+                    </div>
+                </form>
             </div>
-            <div class="layui-side layui-bg-black">
-                <div class="layui-side-scroll">
-                    <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-                    <ul class="layui-nav layui-nav-tree" lay-filter="test">
-                        <li class="layui-nav-item layui-nav-itemed">
-                            <a class="" href="javascript:;">
-                                所有商品
-                            </a>
-                            <dl class="layui-nav-child">
-                                <dd>
-                                    <a href="javascript:;">
-                                        列表一
-                                    </a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;">
-                                        列表二
-                                    </a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;">
-                                        列表三
-                                    </a>
-                                </dd>
-                                <dd>
-                                    <a href="">
-                                        超链接
-                                    </a>
-                                </dd>
-                            </dl>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a href="javascript:;">
-                                解决方案
-                            </a>
-                            <dl class="layui-nav-child">
-                                <dd>
-                                    <a href="javascript:;">
-                                        列表一
-                                    </a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;">
-                                        列表二
-                                    </a>
-                                </dd>
-                                <dd>
-                                    <a href="">
-                                        超链接
-                                    </a>
-                                </dd>
-                            </dl>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a href="">
-                                云市场
-                            </a>
-                        </li>
-                        <li class="layui-nav-item">
-                            <a href="">
-                                发布商品
-                            </a>
-                        </li>
+
+            <div class="layui-tab-content" style="margin-top: 20px">
+                <div class="layui-tab layui-tab-brief" style="margin-top: 0px" lay-filter="component-tabs-brief">
+                    <ul class="layui-tab-title">
+                        <li class="layui-this">简介</li>
+                        <li>对读</li>
+                        <li>文字</li>
+                        <li>阅读</li>
                     </ul>
-                </div>
-            </div>
-            <div class="layui-body">
-                <!-- 内容主体区域 -->
-                <div style="padding: 15px;">
-                    <div class="layui-container">
-                        <!-- breadcrumb  start -->
-                        <span class="layui-breadcrumb" style="visibility: visible;">
-                          <a href="/">首页</a><span lay-separator="">/</span>
-                          <a href="/demo/">演示</a><span lay-separator="">/</span>
-                          <a><cite>导航元素</cite></a>
-                      </span>
-                      <!-- breadcrumb  end -->
-                        <!-- 库列表 start -->
-                        <div class="layui-tab-content" style="padding: 20px; margin-top: 20px">
-                            <form class="layui-form" action="">
-                                <div class="layui-row layui-col-space10">
-                                    <div class="layui-col-md2">
-                                        <select name="modules" lay-verify="required" lay-search="">
-                                          <option value="">直接选择或搜索选择</option>
-                                          <option value="1">layer</option>
-                                          <option value="2">form</option>
-                                          <option value="3">layim</option>
-                                          <option value="4">element</option>
-                                      </select>
-                                  </div>
-                                  <div class="layui-col-md10">
-                                    <div style="float: right;">
-                                        <button class="layui-btn">
-                                            默认按钮
-                                        </button>
-                                    </div>
-
-                                    <div style="margin-right: 100px">
-                                        <input type="text" name="title" lay-verify="title" autocomplete="off"
-                                        placeholder="请输入标题" class="layui-input" />
-                                    </div>
-                                </div>
-                            </div>
-                            </form>
+                    <div class="layui-tab-content">
+                        <div class="layui-tab-item layui-show" id="lib-list1">
+                            <!-- if $module_fields[$rs['module_id']]['search'] -->
+                            <table class="layui-table">
+                                <tbody>
+                                <tr>
+                                    <td style="width: 160px"> 标题 </td>
+                                    <td> {$rs.title} </td>
+                                </tr>
+                                <!-- loop from=$module_fields[$rs['module_id']]['search'] key=$k value=$v -->
+                                {if $k == 'pdf_file'}
+                                <tr>
+                                    <td style="width: 160px"> {$v} </td>
+                                    <td>{if $rs[$k]}{$rs[$k]['title']} &nbsp;&nbsp;&nbsp;<a href="{$rs[$k]['filename']}" title="点击下载"><i class="layui-icon layui-icon-download-circle"></i></a>{/if} </td>
+                                </tr>
+                                {else}
+                                <tr>
+                                    <td style="width: 160px"> {$v} </td>
+                                    <td> {$rs[$k]} </td>
+                                </tr>
+                                {/if}
+                                <!-- /loop -->
+                                </tbody>
+                            </table>
+                            <!-- /if  -->
                         </div>
-
-                        <div class="layui-tab-content" style="margin-top: 20px">
-                            <div class="layui-tab layui-tab-brief" style="margin-top: 0px" lay-filter="component-tabs-brief">
-                                <ul class="layui-tab-title">
-                                  <li class="layui-this">网站设置</li>
-                                  <li>用户管理</li>
-                                  <li>权限分配</li>
-                                  <li>商品管理</li>
-                                  <li>订单管理</li>
-                              </ul>
-                              <div class="layui-tab-content">
-                                  <div class="layui-tab-item layui-show" id="lib-list">
-                                    <table class="layui-table">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td>
-                                                                    贤心
-                                                                </td>
-                                                                <td>
-                                                                    汉族
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    张爱玲
-                                                                </td>
-                                                                <td>
-                                                                    汉族
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    Helen Keller
-                                                                </td>
-                                                                <td>
-                                                                    拉丁美裔
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    岳飞
-                                                                </td>
-                                                                <td>
-                                                                    教科书再滥改，也抹不去“民族英雄”的事实
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td>
-                                                                    孟子
-                                                                </td>
-                                                                <td>
-                                                                    华夏族（汉族）
-                                                                </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                </div>
-                                <div class="layui-tab-item">
-                                    <iframe src="https://previews.customer.envatousercontent.com/files/251648489/index.html" frameborder="0" width="100%" height="650px"></iframe>
-                                </div>
-                                <div class="layui-tab-item">内容3</div>
-                                <div class="layui-tab-item">内容4</div>
-                                <div class="layui-tab-item">内容5</div>
-                            </div>
+                        <div class="layui-tab-item">
+                            <iframe src="https://previews.customer.envatousercontent.com/files/251648489/index.html" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
-                    </div>
-
-
-
-                        
-                        <!-- 库列表 end -->
+                        <div class="layui-tab-item">内容3</div>
+                        <div class="layui-tab-item">内容4</div>
                     </div>
                 </div>
-                <!-- 内容主体区域 -->
             </div>
+
+
+
+            <!-- 库列表 end -->
         </div>
-        <script>
-            //JavaScript代码区域
-            layui.use(['element', 'form'],function() {
-                var element = layui.element;
-                var form = layui.form;
-            });
-        </script>
-    </body>
-
-</html>
+    </div>
+    <!-- 内容主体区域 -->
+</div>
+<!-- include tpl=footer -->

@@ -417,6 +417,21 @@ class index_control extends phpok_control
         $this->view('img_list');
     }
 
+    public function book_f() {
+	    $id = $this->get('doc_id');
+	    if (empty($id)) {
+            $this->error(P_Lang('未指定文献id'));
+        }
+        $docs = $this->getAllDocs();
+	    if (empty($docs[$id])) {
+            $this->error(P_Lang('找不到相关数据'));
+        }
+        $bookInfo = $docs[$id];
+        $this->assign('nav_title', $bookInfo['title']);
+        $this->assign('rs', $bookInfo);
+        $this->view('book');
+    }
+
 	public function tips_f()
 	{
 		$info = $this->get('info');
@@ -432,26 +447,6 @@ class index_control extends phpok_control
 		$this->view('tips');
 	}
 
-	/**
-	 * 推薦人
-	 * @引數 uid 推薦人ID
-	**/
-	public function link_f()
-	{
-		$uid = $this->get('uid','int');
-		if(!$uid){
-			$this->_location($this->config['www_file']);
-		}
-		$rs = $this->model('user')->get_one($uid,'id',false,false);
-		if(!$rs){
-			$this->_location($this->config['www_file']);
-		}
-		if($this->session->val('user_id')){
-			$this->_location($this->config['www_file']);
-		}
-		$this->session->assign('introducer',$uid);
-		$this->_location($this->url('register'));
-	}
 
 	public function phpinc_f()
 	{
