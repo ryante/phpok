@@ -66,12 +66,16 @@ class index_control extends phpok_control
         if (!empty($data)) {
             return json_decode($data, true);
         }
-        $rows = $this->db->get_all("select id,parent_id,title,pic from dj_project where id in (2,3,4) order by taxis desc,id desc");
+        $rows = $this->db->get_all("select id,parent_id,module,title,pic from dj_project where id in (2,3,4) order by taxis desc,id desc");
         if (empty($rows)) {
             return false;
         }
-        $this->saveCache($cacheKey, json_encode($rows, true));
-        return $rows;
+        $data = [];
+        foreach ($rows as $val) {
+            $data[$val['id']] = $val;
+        }
+        $this->saveCache($cacheKey, json_encode($data, true));
+        return $data;
     }
 
     //获取文库标签
@@ -212,7 +216,7 @@ class index_control extends phpok_control
                 $picInfo = $this->model('res')->get_one($val['end_cover_pic'],true);
                 if (!empty($picInfo)) {
                     $pic = ['filename' => $picInfo['filename'], 'gd' => $picInfo['gd']];
-                    $data[$key]['start_cover_pic'] = $pic;
+                    $data[$key]['end_cover_pic'] = $pic;
                 }
             }
             if (!empty($val['pdf_file'])) {
@@ -360,7 +364,7 @@ class index_control extends phpok_control
             return json_decode($data, true);
         }
         $where = " b.lid = {$lid} and a.status=1";
-        $row = $this->db->get_one("select a.title,a.dateline,a.sort,a.tag,b.* from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc,a.id desc");
+        $row = $this->db->get_all("select a.title,a.dateline,a.sort,a.tag,b.* from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc,a.id desc");
         if (empty($row)) {
             return false;
         }
@@ -371,7 +375,6 @@ class index_control extends phpok_control
 
 	public function index_f()
 	{
-
         $this->assign('seo_title','首页');
 		$this->view("index");
 	}
@@ -427,9 +430,32 @@ class index_control extends phpok_control
             $this->error(P_Lang('找不到相关数据'));
         }
         $bookInfo = $docs[$id];
+	    $projectInfo = $this->db->get_one("select * from dj_project where id={$bookInfo['project_id']}");
+	    if (!empty($projectInfo['parent_id'])) {
+            $projectInfo = $this->db->get_one("select * from dj_project where id={$projectInfo['parent_id']}");
+        }
+	    $this->assign("prs_info", $projectInfo);
         $this->assign('nav_title', $bookInfo['title']);
+        $this->assign('pid', $projectInfo['id']);
         $this->assign('rs', $bookInfo);
         $this->view('book');
+    }
+
+    public function read_f() {
+	    $id = $this->get('doc_id');
+	    if (empty($id)) {
+            $this->error(P_Lang('未指定文献id'));
+        }
+        $docs = $this->getAllDocs();
+	    if (empty($docs[$id])) {
+            $this->error(P_Lang('找不到相关数据'));
+        }
+        $bookInfo = $docs[$id];
+	    $bookLists = $this->getDocBooks($id);
+	    krsort($bookLists);
+        $this->assign('rslist', $bookLists);
+        $this->assign('rs', $bookInfo);
+        $this->view('wowbook');
     }
 
 	public function tips_f()

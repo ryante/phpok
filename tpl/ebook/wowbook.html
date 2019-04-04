@@ -60,50 +60,40 @@
 		</nav>
 	<div id="main">
   		<div id='features'>
+            <!-- if $rslist -->
+
             <!--开始封面图 start-->
-			<div id='cover'>
+			<div class='last_cover'>
+				<img src="{$rs.start_cover_pic.filename}" width="100%" height="100%" />
 			</div>
-            <div class='responsive feature'>
+			<div class='responsive feature'>
 			</div>
 			<!--开始封面图 end-->
 
+			<!-- loop from=rslist key=$key value=$value -->
 			<div class='responsive feature'>
-				<h1>Lazy loading</h1>
 				<p>
-					Wowbook can defer the loading of a page contents until the page is shown. This is especially useful in books that contains a lot of images.
+                    {$value.content}
 				</p>
+                {if $key % 2 == 0}
+				<!--<div id="leftPageNum">{$key+1}</div>-->
+				{else}
+				<!--<div id="rightPageNum">{$key+1}</div>-->
+				{/if}
 			</div>
-
-			<div class='responsive feature'>
-				<h1>Right-to-left support</h1>
-				<p>
-					Wowbook can order the book pages from right to left if you need to use right-to-left script.
-				</p>
-			</div>
-			<div class='responsive feature'>
-				<h1>Lazy loading</h1>
-				<p>
-					Wowbook can defer the loading of a page contents until the page is shown. This is especially useful in books that contains a lot of images.
-				</p>
-				<div id="rightPageNum">13</div>
-			</div>
-
-			<div class='responsive feature'>
-				<h1>Right-to-left support111</h1>
-				<p>
-					Wowbook can order the book pages from right to left if you need to use right-to-left script.
-				</p>
-				<div id="leftPageNum">12</div>
-			</div>
+			<!-- /if  -->
 
 			<!--结束封面图 start-->
 			<div class='responsive feature'>
 			</div>
 			<div class='last_cover'>
-				<img src="wowbook/picture/cover_last.png" width="100%" height="100%" />
+				<img src="{$rs.end_cover_pic.filename}" width="100%" height="100%" />
 			</div>
 			<!--结束封面图 start-->
 
+			<!-- else  -->
+			<p>暂无内容</p>
+			<!-- /if  -->
 		</div>
 		<!-- features -->
 

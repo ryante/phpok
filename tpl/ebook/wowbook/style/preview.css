@@ -62,8 +62,8 @@ a:visited {
   padding-top: 86px;
   padding-bottom: 20px;
 }
-h1,
-h2 {
+h11,
+h12 {
   font-size: 32px;
   font-weight: normal;
   font-family: 'News Cycle', sans-serif;
@@ -71,7 +71,7 @@ h2 {
   margin-top: 1em;
   margin-bottom: 0.5em;
 }
-h2 {
+h12 {
   font-size: 24px;
   margin-bottom: 0.5em;
 }
@@ -191,7 +191,7 @@ nav a {
 .wowbook-page {
   mmargin: auto;
 }
-.wowbook-page h1 {
+.wowbook-page h11 {
   font-family: 'BebasNeueRegular', sans-serif;
   font-size: 32px;
   color: white;
@@ -228,10 +228,10 @@ nav a {
   width: 400px;
   background: white;
 }
-.feature h1,
-.feature h2 {
+.feature h11,
+.feature h12 {
   font-family: 'BebasNeueRegular', sans-serif;
-  font-size: 38px;
+  font-size: 20px;
   color: black;
 }
 .wowbook-page .feature.pagefx p {
@@ -241,7 +241,7 @@ nav a {
   margin-top: 0;
   font-size: 18px;
 }
-.wowbook-page .feature.pagefx h1 {
+.wowbook-page .feature.pagefx h11 {
   font-size: 48px;
   color: #aa2b2b;
   background: none;
@@ -256,7 +256,7 @@ nav a {
   ffont-size: 1.5em;
   ffont-family: lato;
 }
-.easy h1,
+.easy h11,
 .easy p,
 .easy .subtitle {
   display: none;
@@ -268,7 +268,7 @@ nav a {
   background: #ffffff url("../images/design.png") no-repeat;
   background-size: 200% 100%;
 }
-.design h1 {
+.design h11 {
   background: none;
   text-indent: -10000px;
   color: #88bfbf;
@@ -298,19 +298,19 @@ nav a {
 .responsive pp {
   font-size: 16px;
 }
-.responsive hh2 {
+.responsive hh12 {
   font-size: 20px;
 }
-.responsive h1 {
+.responsive h11 {
   color: white;
 }
 .thumbnails p {
   font-size: 16px;
 }
-.thumbnails h2 {
+.thumbnails h12 {
   font-size: 20px;
 }
-.thumbnails h1 {
+.thumbnails h11 {
   color: white;
 }
 #thumbs_holder {
@@ -364,7 +364,7 @@ nav a {
   background: #ffffff url("../images/zoom.jpg") no-repeat;
   background-size: 200% 100%;
 }
-#zoom-feature h1 {
+#zoom-feature h11 {
   font-size: 100px;
   color: #333;
   background: none;
@@ -384,7 +384,7 @@ nav a {
   background: url("../images/chain.jpg") no-repeat;
   background-size: 200% 100%;
 }
-.deeplinking h1 {
+.deeplinking h11 {
   color: white;
   background: #3d567d !important;
 }
@@ -401,7 +401,7 @@ nav a {
   background: url("../images/numbering.png") #ffffff no-repeat;
   background-size: 100% 100%;
 }
-.wowbook-page .feature.numbering h1 {
+.wowbook-page .feature.numbering h11 {
   color: #AA2B2B;
   background: none;
   font-size: 40px;
@@ -415,7 +415,7 @@ nav a {
   text-indent: 100%;
   overflow: hidden;
 }
-.wowbook-page .feature.slideshow h1 {
+.wowbook-page .feature.slideshow h11 {
   color: #AA2B2B;
   background: none;
   font-size: 40px;
@@ -437,7 +437,7 @@ nav a {
   font-size: 20px;
   padding: 0.7em;
 }
-.wowbook-page .feature.flash h1 {
+.wowbook-page .feature.flash h11 {
   display: none;
 }
 .feature.flash-demo {
@@ -454,7 +454,7 @@ nav a {
   background-size: 200% 100%;
   padding-top: 30px;
 }
-.more h1 {
+.more h11 {
   display: none;
 }
 .more ul {

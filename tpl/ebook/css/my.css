@@ -25,3 +25,5 @@
  #left-slide .layui-nav-tree .layui-nav-child .active{ color: #fff;}
  #lib-list1 .layui-col-md3 img {margin-top:10px;}
  #lib-list1 .layui-col-md3 {text-align: center}
+ /*#lib-list1 a.start_cover img {border:1px solid #e2e2e2}*/
+ #lib-list1 a.start_cover p {margin-top: 10px}
