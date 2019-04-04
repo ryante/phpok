@@ -9,7 +9,8 @@
                 <!-- if !$nav_title -->
                 <a><cite>文献列表</cite></a>
                 <!-- else -->
-                <a href="{url ctrl=index func=docs }">文献列表</a><span lay-separator="">/</span>
+                <a href="/index.php?f=docs">文献列表</a><span lay-separator="">/</span>
+                <a href="/index.php?f=docs&pid={$pid}">{$prs_info.title}</a><span lay-separator="">/</span>
                 <a><cite>{$nav_title}</cite></a>
                 <!-- /if -->
             </span>

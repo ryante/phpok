@@ -1,0 +1,212 @@
+﻿<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<style>
+		#leftPageNum{
+			bottom: 5px;
+			text-align: right;
+			position: absolute;
+			left: 5px;
+		}
+        #rightPageNum{
+			bottom: 5px;
+			text-align: right;
+			position: absolute;
+			right: 5px;
+		}
+	</style>
+	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
+	   Remove this if you use the .htaccess -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+	<title></title>
+	<meta name="description" content="">
+	<meta name="author" content="Marcio Aguiar">
+
+	<!--  Mobile viewport optimized: j.mp/bplateviewport -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<!-- CSS : implied media="all" -->
+	<link rel="stylesheet" href="wowbook/style/style.css">
+	<link rel="stylesheet" href="wowbook/style/wow_book.css" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="wowbook/style/preview.css"><!-- Uncomment if you are specifically targeting less enabled mobile browsers
+	<link rel="stylesheet" media="handheld" href="wowbook/style/handheld.css">  -->
+
+	<link href='wowbook/style/b173eff1326e4578966bbb725a09896a.css' rel='stylesheet' type='text/css'>
+	<!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
+	<script src="wowbook/style/modernizr-1.6.min.js"></script>
+
+</head>
+<body>
+	<div id="container">
+		<nav>
+			<ul>
+				<li><a id='first'     href="#" title='goto first page'   >First page</a></li>
+				<li><a id='back'      href="#" title='go back one page'  >Back</a></li>
+				<li><a id='next'      href="#" title='go foward one page'>Next</a></li>
+				<li><a id='last'      href="#" title='goto last page'    >last page</a></li>
+				<li><a id='zoomin'    href="#" title='zoom in'           >Zoom In</a></li>
+				<li><a id='zoomout'   href="#" title='zoom out'          >Zoom Out</a></li>
+				<li><a id='slideshow' href="#" title='start slideshow'   >Slide Show</a></li>
+				<li><a id='fullscreen' href="#" title='fullscreen on/off' >Fullscreen</a></li>
+				<li><a id='thumbs'    href="#" title='thumbnails on/off' >Thumbs</a></li>
+			</ul>
+		</nav>
+	<div id="main">
+  		<div id='features'>
+            <!--开始封面图 start-->
+			<div id='cover'>
+			</div>
+            <div class='responsive feature'>
+			</div>
+			<!--开始封面图 end-->
+
+			<div class='responsive feature'>
+				<h1>Lazy loading</h1>
+				<p>
+					Wowbook can defer the loading of a page contents until the page is shown. This is especially useful in books that contains a lot of images.
+				</p>
+			</div>
+
+			<div class='responsive feature'>
+				<h1>Right-to-left support</h1>
+				<p>
+					Wowbook can order the book pages from right to left if you need to use right-to-left script.
+				</p>
+			</div>
+			<div class='responsive feature'>
+				<h1>Lazy loading</h1>
+				<p>
+					Wowbook can defer the loading of a page contents until the page is shown. This is especially useful in books that contains a lot of images.
+				</p>
+				<div id="rightPageNum">13</div>
+			</div>
+
+			<div class='responsive feature'>
+				<h1>Right-to-left support111</h1>
+				<p>
+					Wowbook can order the book pages from right to left if you need to use right-to-left script.
+				</p>
+				<div id="leftPageNum">12</div>
+			</div>
+
+			<!--结束封面图 start-->
+			<div class='responsive feature'>
+			</div>
+			<div class='last_cover'>
+				<img src="wowbook/picture/cover_last.png" width="100%" height="100%" />
+			</div>
+			<!--结束封面图 start-->
+
+		</div>
+		<!-- features -->
+
+	</div>
+	<div id='thumbs_holder'>
+	</div>
+	<footer>
+
+	</footer>
+	</div> <!--! end of #container -->
+</div>
+
+	<!-- Javascript at the bottom for fast page loading -->
+
+	<!-- Grab Google CDN's jQuery. fall back to local if necessary -->
+	<script src="wowbook/style/jquery.min.js"></script>
+
+	<script type="text/javascript" src="wowbook/style/wow_book.min.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#features').wowBook({
+				 height : 500
+				,width  : 800
+				,centeredWhenClosed : true
+				,hardcovers : true
+                ,flipSound  : false
+				,controls : {
+						zoomIn    : '#zoomin',
+						zoomOut   : '#zoomout',
+						next      : '#back',
+						back      : '#next',
+						first     : '#first',
+						last      : '#last',
+						slideShow : '#slideshow',
+						// flipSound : '#flipsound',
+						thumbnails : '#thumbs',
+						fullscreen : '#fullscreen'
+					}
+				,scaleToFit: "#container"
+				,thumbnailsPosition : 'bottom'
+                ,startPage:100000
+				,firstPageNumber : 1
+				,pageNumbers : false
+                ,numberedPages:[2,-3]
+                ,turnPageDuration : 1000
+				,onFullscreenError : function(){
+					var msg="Fullscreen failed.";
+					if (self!=top) msg="The frame is blocking full screen mode. Click on 'remove frame' button above and try to go full screen again."
+					alert(msg);
+				}
+			}).css({'display':'none', 'margin':'auto'}).fadeIn(1000);
+
+			$("#cover").click(function(){
+				$.wowBook("#features").advance();
+			});
+
+			var book = $.wowBook("#features");
+
+			function rebuildThumbnails(){
+				book.destroyThumbnails()
+				book.showThumbnails()
+				$("#thumbs_holder").css("marginTop", -$("#thumbs_holder").height()/2)
+			}
+			$("#thumbs_position button").on("click", function(){
+				var position = $(this).text().toLowerCase()
+				if ($(this).data("customized")) {
+					position = "top"
+					book.opts.thumbnailsParent = "#thumbs_holder";
+				} else {
+					book.opts.thumbnailsParent = "body";
+				}
+				book.opts.thumbnailsPosition = position
+				rebuildThumbnails();
+			})
+			$("#thumb_automatic").click(function(){
+				book.opts.thumbnailsSprite = null
+				book.opts.thumbnailWidth = null
+				rebuildThumbnails();
+			})
+			$("#thumb_sprite").click(function(){
+				book.opts.thumbnailsSprite = "images/thumbs.jpg"
+				book.opts.thumbnailWidth = 136
+				rebuildThumbnails();
+			})
+			$("#thumbs_size button").click(function(){
+				var factor = 0.02*( $(this).index() ? -1 : 1 );
+				book.opts.thumbnailScale = book.opts.thumbnailScale + factor;
+				rebuildThumbnails();
+			})
+
+		});
+	</script>
+
+	<!-- scripts concatenated and minified via ant build script-->
+	<script src="wowbook/style/plugins.js"></script>
+	<script src="wowbook/style/script.js"></script>
+	<!-- end concatenated and minified scripts-->
+
+	<!--[if lt IE 7 ]>
+	<script src="wowbook/style/dd_belatedpng.js"></script>
+	<script> DD_belatedPNG.fix('img, .png_bg'); //fix any <img> or .png_bg background-images </script>
+	<![endif]-->
+
+</body>
+</html>
