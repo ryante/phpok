@@ -364,12 +364,21 @@ class index_control extends phpok_control
             return json_decode($data, true);
         }
         $where = " b.lid = {$lid} and a.status=1";
-        $row = $this->db->get_all("select a.title,a.dateline,a.sort,a.tag,b.* from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc,a.id desc");
-        if (empty($row)) {
+        $rows = $this->db->get_all("select a.title,a.dateline,a.sort,a.tag,b.* from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc,a.id desc");
+        if (empty($rows)) {
             return false;
         }
-        $this->saveCache($cacheKey, json_encode($row, true));
-        return $row;
+        foreach ($rows as  &$val) {
+            if (!empty($val['image'])) {
+                $picInfo = $this->model('res')->get_one($val['image'],true);
+                if (!empty($picInfo)) {
+                    $pic = ['filename' => $picInfo['filename'], 'gd' => $picInfo['gd']];
+                    $val['image'] = $pic;
+                }
+            }
+        }
+        $this->saveCache($cacheKey, json_encode($rows, true));
+        return $rows;
     }
 
 
@@ -443,6 +452,7 @@ class index_control extends phpok_control
 
     public function read_f() {
 	    $id = $this->get('doc_id');
+        $type = $this->get('type');
 	    if (empty($id)) {
             $this->error(P_Lang('未指定文献id'));
         }
@@ -455,6 +465,8 @@ class index_control extends phpok_control
 	    krsort($bookLists);
         $this->assign('rslist', $bookLists);
         $this->assign('rs', $bookInfo);
+        $type = empty($type) ? 1 : $type;
+        $this->assign('type', $type);
         $this->view('wowbook');
     }
 
