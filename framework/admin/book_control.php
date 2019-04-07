@@ -1060,6 +1060,7 @@ class book_control extends phpok_control
                 $tmplist[$value["identifier"]] = $this->lib('form')->get($value);
             }
             $tmplist['lid'] = $this->get('lid');
+            $tmplist['nohtml_content'] = strip_tags($tmplist['content']);
             $this->model('list')->save_ext($tmplist,$p_rs["module"]);
         }
         //儲存內容擴充套件欄位

@@ -38,5 +38,20 @@ $(function(){
         $('#lib-list2').css("display","block");
     })
 
+
+
+    $('#book_search').click(function () {
+        var searchRange = $('#search_range').val();
+        var searchTitle = $('#search_title').val();
+        var docId = $('#doc_id').val();
+        var src = $('.layui-show iframe').attr('src') + '&keyword=' + searchTitle;
+        if (searchRange == 1) {
+            $('.layui-show iframe').attr('src', src);
+        } else {
+            window.location.href = "index.php?f=book_search&doc_id=" + docId + "&search_range=" + searchRange + "&keyword=" + searchTitle;
+        }
+    })
+
+
 })
 

@@ -453,6 +453,7 @@ class index_control extends phpok_control
     public function read_f() {
 	    $id = $this->get('doc_id');
         $type = $this->get('type');
+        $keyWord = $this->get('keyword');
 	    if (empty($id)) {
             $this->error(P_Lang('未指定文献id'));
         }
@@ -465,9 +466,58 @@ class index_control extends phpok_control
 	    krsort($bookLists);
         $this->assign('rslist', $bookLists);
         $this->assign('rs', $bookInfo);
+        $this->assign('keyword', $keyWord);
         $type = empty($type) ? 1 : $type;
         $this->assign('type', $type);
         $this->view('wowbook');
+    }
+
+    public function book_search_f() {
+        $keyWord = $this->get('keyword');
+        $searchRange = $this->get('search_range');
+        $docId = $this->get('doc_id');
+        $docs = $this->getAllDocs();
+        $books = [];
+        $bookData = [];
+        if ($searchRange == 2) {
+            if (empty($docs[$docId])) {
+                $this->error(P_Lang('找不到相关数据'));
+            }
+            $docId = $this->get('doc_id');
+            $bookLists = $this->getDocBooks($docId);
+            if (!empty($keyWord)) {
+                foreach ($bookLists as $key => $val) {
+                    $val['content'] = strip_tags($val['content']);
+                    if (stripos($val['content'], $keyWord) !== false) {
+                        $val['content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['content']);
+                        $books[] = $val;
+
+                    }
+                }
+                $bookData[$docId] = ['book_info' => $docs[$docId], 'book_list' => $books];
+            }
+        } else {
+            $where = "1=1";
+            if (!empty($keyWord)) {
+                $where .= " and nohtml_content like '%{$keyWord}%'";
+            }
+            $rows = $this->db->get_all("select id,lid,nohtml_content content from dj_list_6 where {$where} order by id desc");
+            if (!empty($rows)) {
+                foreach ($rows as $key => $val) {
+                    $val['content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['content']);
+                    if (!empty($bookData[$val['lid']])) {
+                        $bookData[$val['lid']]['book_info'] = $docs[$val['lid']];
+                    }
+                    $bookData[$val['lid']]['book_list'][] = $val;
+                }
+            }
+
+        }
+        $this->assign('doc_id', $docId);
+        $this->assign('book_data', $bookData);
+        $this->assign('keyword', $keyWord);
+        $this->assign('search_range', $searchRange);
+        $this->view('book_search');
     }
 
 	public function tips_f()

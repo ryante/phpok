@@ -1,0 +1,92 @@
+<!-- include tpl=header -->
+<!-- include tpl=left_side -->
+<div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px; ">
+        <div class="layui-container">
+             <span class="layui-breadcrumb" style="visibility: visible;">
+                <a href="/">首页</a><span lay-separator="">/</span>
+                <!-- if !$nav_title -->
+                <a><cite>文献列表</cite></a>
+                <!-- else -->
+                <a href="/index.php?f=docs">文献列表</a><span lay-separator="">/</span>
+                <a href="/index.php?f=docs&pid={$pid}">{$prs_info.title}</a><span lay-separator="">/</span>
+                <a><cite>{$nav_title}</cite></a>
+                <!-- /if -->
+            </span>
+
+            <!-- 库列表 start -->
+            <div class="layui-tab-content" style="margin-top: 30px">
+                <div class="layui-form">
+                    <div class="layui-row layui-col-space10">
+                        <input type="hidden" id="doc_id" value="{$doc_id}">
+                        <div class="layui-col-md2">
+                            <select id="search_range" lay-verify="required" lay-search>
+                                <!--<option value="1" {if $searcn_range == 1}selected{/if}>当前内文</option>-->
+                                <option value="2" {if $search_range == 2}selected{/if}>当前文献</option>
+                                <option value="3" {if $search_range == 3}selected{/if}>当前系列</option>
+                            </select>
+                        </div>
+                        <div class="layui-col-md10">
+                            <div style="float: right;">
+                                <button class="layui-btn" id="book_search">
+                                    搜索
+                                </button>
+                            </div>
+
+                            <div style="margin-right: 100px">
+                                <input type="text" id="search_title" lay-verify="title" autocomplete="off"
+                                       placeholder="请输入标题" class="layui-input" value="{$keyword}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
+                <div class="layui-card-header">
+                    检索结果
+                </div>
+                <div class="layui-tab-content" id="lib-list1" >
+                    <!-- if $book_data -->
+                    <!-- loop from=book_data key=$key value=$value -->
+                    <div class="layui-row layui-col-space10">
+                        <div class="layui-col-md3">
+                            <a href="index.php?f=book&doc_id={$value.book_info.id}" class="start_cover">
+                                {if $value.book_info.start_cover_pic}
+                                <img  src="{$value.book_info.start_cover_pic.gd.book-cover}" />
+                                {else}
+                                <img src="img.php?token=YToxMjp7czoyOiJpZCI7czoyOiIxMyI7czoxMDoiaWRlbnRpZmllciI7czoxMDoiYm9vay1jb3ZlciI7czo1OiJ3aWR0aCI7czozOiIxNTAiO3M6NjoiaGVpZ2h0IjtzOjM6IjIwMCI7czoxMjoibWFya19waWN0dXJlIjtzOjA6IiI7czoxMzoibWFya19wb3NpdGlvbiI7czoxMjoiYm90dG9tLXJpZ2h0IjtzOjg6ImN1dF90eXBlIjtzOjE6IjAiO3M6NzoicXVhbGl0eSI7czoyOiI4MCI7czo3OiJiZ2NvbG9yIjtzOjY6IkZGRkZGRiI7czo1OiJ0cmFucyI7czoxOiIwIjtzOjY6ImVkaXRvciI7czoxOiIxIjtzOjM6InVybCI7czozNDoicmVzLzIwMTkwMy8zMS80ZjQ3OGEwYmZlMDM4OGJjLnBuZyI7fQ" />
+                                {/if}
+                                <p>{$value.book_info.title}</p>
+                            </a>
+                        </div>
+                        <div class="layui-col-md9">
+                            <!-- if $value.book_list -->
+                                <!-- loop from=$value.book_list key=$k value=$v -->
+                                <a href="">
+                                    <blockquote class="layui-elem-quote" style="border-left:0px">
+                                        {$v.content}
+                                    </blockquote>
+                                </a>
+                                <!-- /loop -->
+                            <!-- /if  -->
+                        </div>
+                    </div>
+                    <hr />
+                    <!-- /loop -->
+                    <!-- else  -->
+                    <p style="text-align: center"> 暂无内容~ </p>
+                    <!-- /if  -->
+                </div>
+
+            </div>
+
+
+
+            <!-- 库列表 end -->
+        </div>
+    </div>
+    <!-- 内容主体区域 -->
+</div>
+<!-- include tpl=footer -->

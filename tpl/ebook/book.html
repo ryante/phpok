@@ -17,29 +17,30 @@
 
             <!-- 库列表 start -->
             <div class="layui-tab-content" style="margin-top: 30px">
-                <form class="layui-form" action="">
+                <div class="layui-form">
                     <div class="layui-row layui-col-space10">
+                        <input type="hidden" id="doc_id" value="{$rs.id}">
                         <div class="layui-col-md2">
-                            <select name="modules" lay-verify="required" lay-search="">
-                                <option value="1">当前内文</option>
-                                <option value="2">当前文献</option>
-                                <option value="3">当前系列</option>
+                            <select id="search_range" lay-verify="required" >
+                                <!--<option value="1" {if $searcn_range == 1}selected{/if}>当前内文</option>-->
+                                <option value="2" {if $searcn_range == 2}selected{/if}>当前文献</option>
+                                <option value="3 {if $searcn_range == 3}selected{/if}">当前系列</option>
                             </select>
                         </div>
                         <div class="layui-col-md10">
                             <div style="float: right;">
-                                <button class="layui-btn">
+                                <button class="layui-btn" id="book_search">
                                     搜索
                                 </button>
                             </div>
 
                             <div style="margin-right: 100px">
-                                <input type="text" name="title" lay-verify="title" autocomplete="off"
-                                       placeholder="请输入标题" class="layui-input" />
+                                <input type="text" id="search_title" lay-verify="title" autocomplete="off"
+                                       placeholder="请输入标题" class="layui-input" value="{$search_titl}" />
                             </div>
                         </div>
                     </div>
-                </form>
+                </div>
             </div>
 
             <div class="layui-tab-content" style="margin-top: 20px">
