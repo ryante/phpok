@@ -1,7 +1,7 @@
 ;<?php exit("<h1>Access Denied</h1>");?>
 
 ;是否调试，1/true启用，0/false禁用
-debug = true
+debug = false
 
 ;压缩传缩，1/true启用，0/false禁用
 gzip = true

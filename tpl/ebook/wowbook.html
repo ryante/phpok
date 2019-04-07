@@ -96,7 +96,7 @@
             {if $type == 1 || $type == 2}
 			<div class='responsive feature'>
 				<div class="vertical-content">
-					{=str_replace($keyword, "<span class='layui-badge layui-bg-green'> " . $keyword . "</span>", $value['content'])}
+				{=str_replace($keyword, "<span class='layui-badge layui-bg-green'> " . $keyword . "</span>", $value['content'])}
 				</div>
                 {if $key % 2 == 0}
 				<!--<div id="leftPageNum">{$key+1}</div>-->
@@ -109,7 +109,11 @@
 			{if $type == 1 || $type == 3}
             <div class='responsive feature'>
 				<div class="full">
+					{if $value.image}
 					<img src="{$value.image.gd.book-view}" alt="">
+					{else}
+					<img src="img.php?token=YToxMjp7czoyOiJpZCI7czoyOiIxMyI7czoxMDoiaWRlbnRpZmllciI7czoxMDoiYm9vay1jb3ZlciI7czo1OiJ3aWR0aCI7czozOiIxNTAiO3M6NjoiaGVpZ2h0IjtzOjM6IjIwMCI7czoxMjoibWFya19waWN0dXJlIjtzOjA6IiI7czoxMzoibWFya19wb3NpdGlvbiI7czoxMjoiYm90dG9tLXJpZ2h0IjtzOjg6ImN1dF90eXBlIjtzOjE6IjAiO3M6NzoicXVhbGl0eSI7czoyOiI4MCI7czo3OiJiZ2NvbG9yIjtzOjY6IkZGRkZGRiI7czo1OiJ0cmFucyI7czoxOiIwIjtzOjY6ImVkaXRvciI7czoxOiIxIjtzOjM6InVybCI7czozNDoicmVzLzIwMTkwMy8zMS80ZjQ3OGEwYmZlMDM4OGJjLnBuZyI7fQ" />
+					{/if}
 				</div>
 			</div>
 			{/if}

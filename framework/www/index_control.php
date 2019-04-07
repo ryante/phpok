@@ -364,7 +364,7 @@ class index_control extends phpok_control
             return json_decode($data, true);
         }
         $where = " b.lid = {$lid} and a.status=1";
-        $rows = $this->db->get_all("select a.title,a.dateline,a.sort,a.tag,b.* from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc,a.id desc");
+        $rows = $this->db->get_all("select a.title,a.dateline,a.sort,a.tag,b.* from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort asc,a.id asc");
         if (empty($rows)) {
             return false;
         }
@@ -463,7 +463,6 @@ class index_control extends phpok_control
         }
         $bookInfo = $docs[$id];
 	    $bookLists = $this->getDocBooks($id);
-	    krsort($bookLists);
         $this->assign('rslist', $bookLists);
         $this->assign('rs', $bookInfo);
         $this->assign('keyword', $keyWord);
@@ -485,13 +484,17 @@ class index_control extends phpok_control
             }
             $docId = $this->get('doc_id');
             $bookLists = $this->getDocBooks($docId);
-            if (!empty($keyWord)) {
+            if (!empty($bookLists)) {
                 foreach ($bookLists as $key => $val) {
                     $val['content'] = strip_tags($val['content']);
-                    if (stripos($val['content'], $keyWord) !== false) {
-                        $val['content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['content']);
-                        $books[] = $val;
+                    if (!empty($keyWord)) {
+                        if (stripos($val['content'], $keyWord) !== false) {
+                            $val['content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['content']);
+                            $books[] = $val;
 
+                        }
+                    } else {
+                       $books[] = $val;
                     }
                 }
                 $bookData[$docId] = ['book_info' => $docs[$docId], 'book_list' => $books];
@@ -501,11 +504,12 @@ class index_control extends phpok_control
             if (!empty($keyWord)) {
                 $where .= " and nohtml_content like '%{$keyWord}%'";
             }
-            $rows = $this->db->get_all("select id,lid,nohtml_content content from dj_list_6 where {$where} order by id desc");
+            $rows = $this->db->get_all("select a.id,b.lid,b.nohtml_content content from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort asc, a.id asc");
             if (!empty($rows)) {
+                krsort($rows);
                 foreach ($rows as $key => $val) {
                     $val['content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['content']);
-                    if (!empty($bookData[$val['lid']])) {
+                    if (empty($bookData[$val['lid']]['book_info'])) {
                         $bookData[$val['lid']]['book_info'] = $docs[$val['lid']];
                     }
                     $bookData[$val['lid']]['book_list'][] = $val;
