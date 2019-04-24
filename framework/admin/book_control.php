@@ -868,11 +868,11 @@ class book_control extends phpok_control
             $this->json(P_Lang('操作異常，無法取得專案資訊'));
         }
         $array = array();
-        $title = $this->get("title");
+        $title = $this->get("content");
         if(!$title){
-            $this->json(P_Lang('內容的主題不能為空'));
+        //    $this->json(P_Lang('內容不能為空'));
         }
-        $array["title"] = $title;
+        $array["title"] = strip_tags($title);
         if($p_rs['cate']){
             $cate_id = $this->get("cate_id","int");
             if(!$cate_id){

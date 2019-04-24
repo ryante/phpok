@@ -36,8 +36,8 @@ class index_control extends phpok_control
         $editTime = filemtime($file);
         $nowTime = time();
         if (empty($times)) {
-//            $times = 600;
-            $times = 0;
+            $times = 600;
+//            $times = 0;
         }
         if (!file_exists($file) || ($nowTime - $editTime) > $times) {
             return false;
@@ -463,6 +463,7 @@ class index_control extends phpok_control
         }
         $bookInfo = $docs[$id];
 	    $bookLists = $this->getDocBooks($id);
+        $this->assign('total', count($bookLists));
         $this->assign('rslist', $bookLists);
         $this->assign('rs', $bookInfo);
         $this->assign('keyword', $keyWord);
@@ -486,7 +487,7 @@ class index_control extends phpok_control
             $bookLists = $this->getDocBooks($docId);
             if (!empty($bookLists)) {
                 foreach ($bookLists as $key => $val) {
-                    $val['content'] = strip_tags($val['content']);
+                    $val['content'] = str_replace(['&nbsp'], [''], strip_tags($val['content']));
                     if (!empty($keyWord)) {
                         if (stripos($val['content'], $keyWord) !== false) {
                             $val['content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['content']);
