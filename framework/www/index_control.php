@@ -36,8 +36,8 @@ class index_control extends phpok_control
         $editTime = filemtime($file);
         $nowTime = time();
         if (empty($times)) {
-            $times = 600;
-//            $times = 0;
+ //           $times = 600;
+            $times = 0;
         }
         if (!file_exists($file) || ($nowTime - $editTime) > $times) {
             return false;
@@ -368,6 +368,7 @@ class index_control extends phpok_control
         if (empty($rows)) {
             return false;
         }
+        $page = 1;
         foreach ($rows as  &$val) {
             if (!empty($val['image'])) {
                 $picInfo = $this->model('res')->get_one($val['image'],true);
@@ -376,18 +377,21 @@ class index_control extends phpok_control
                     $val['image'] = $pic;
                 }
             }
+            $val['page'] = 2 * $page + 1; 
+            $page++;
         }
         $this->saveCache($cacheKey, json_encode($rows, true));
         return $rows;
     }
 
-
+    // 首页
 	public function index_f()
 	{
         $this->assign('seo_title','首页');
 		$this->view("index");
 	}
 
+    // 文献列表
 	public function docs_f() {
 	    $pid = $this->get('pid');
         $libTags = $this->get('lib_tags');
@@ -487,12 +491,10 @@ class index_control extends phpok_control
             $bookLists = $this->getDocBooks($docId);
             if (!empty($bookLists)) {
                 foreach ($bookLists as $key => $val) {
-                    $val['content'] = str_replace(['&nbsp'], [''], strip_tags($val['content']));
                     if (!empty($keyWord)) {
-                        if (stripos($val['content'], $keyWord) !== false) {
+                        if (stripos($val['nohtml_content'], $keyWord) !== false) {
                             $val['content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['content']);
                             $books[] = $val;
-
                         }
                     } else {
                        $books[] = $val;
@@ -506,6 +508,7 @@ class index_control extends phpok_control
                 $where .= " and nohtml_content like '%{$keyWord}%'";
             }
             $rows = $this->db->get_all("select a.id,b.lid,b.nohtml_content content from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort asc, a.id asc");
+            print_r($rows);die;
             if (!empty($rows)) {
                 krsort($rows);
                 foreach ($rows as $key => $val) {
@@ -518,6 +521,7 @@ class index_control extends phpok_control
             }
 
         }
+                print_r($bookData);die;
         $this->assign('doc_id', $docId);
         $this->assign('book_data', $bookData);
         $this->assign('keyword', $keyWord);
