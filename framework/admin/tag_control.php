@@ -52,7 +52,8 @@ class tag_control extends phpok_control
 			$this->assign("rslist",$rslist);
 			$this->assign('pagelist',$pagelist);
 		}
-		$this->view('tag_index');
+		//$this->view('tag_index');
+		$this->view('tag_index_new');
 	}
 
 	/**
@@ -73,7 +74,8 @@ class tag_control extends phpok_control
 				$this->error(P_Lang('您沒有許可權執行此操作'));
 			}
 		}
-		$this->view("tag_set");
+		//$this->view("tag_set");
+		$this->view("tag_set_new");
 	}
 
 	/**

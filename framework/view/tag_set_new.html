@@ -1,0 +1,40 @@
+<!-- include tpl=head_open -->
+<script type="text/javascript">
+function save()
+{
+	if(typeof(CKEDITOR) != "undefined"){
+		for(var i in CKEDITOR.instances){
+			CKEDITOR.instances[i].updateElement();
+		}
+	}
+	var opener = $.dialog.opener;
+	$("#post_save").ajaxSubmit({
+		'url':get_url('tag','save'),
+		'type':'post',
+		'dataType':'json',
+		'success':function(rs){
+			if(rs.status){
+				$.dialog.alert('標籤提交成功',function(){
+					opener.$.phpok.reload();
+				},'succeed');
+				return true;
+			}
+			opener.$.dialog.alert(rs.info);
+			return false;
+		}
+	});
+	return true;
+}
+</script>
+<form method="post" id="post_save" onsubmit="return false">
+	<!-- if $id --><input type="hidden" name="id" id="id" value="{$id}" /><!-- /if -->
+<div class="table">
+	<div class="title">
+		{lang標籤} <span class="note">請設定好相應的標籤</span>
+	</div>
+	<div class="content">
+		<input type="text" name="title" id="title" value="{$rs.title}" class="long" />
+	</div>
+</div>
+</form>
+<!-- include tpl=foot_open -->

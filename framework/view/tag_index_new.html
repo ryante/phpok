@@ -1,0 +1,39 @@
+<!-- include tpl=head_lay title=標籤管理 -->
+<div class="layui-card">
+	<div class="layui-card-header">
+		{lang列表}
+		<!-- if $session.admin_rs.if_system || $popedom.add -->
+		<div class="layui-btn-group fr">
+			<!-- if $session.admin_rs.if_system --><button class="layui-btn layui-btn-sm" onclick="$.phpok_tag.config();void(0);">{lang配置標籤}</button><!-- /if -->
+			<!-- if $popedom.add --><button class="layui-btn layui-btn-sm" onclick="$.phpok_tag.add();void(0);">{lang新增標籤}</button><!-- /if -->
+		</div>
+		<!-- /if -->
+	</div>
+	<div class="layui-card-body">
+		<table class="layui-table">
+		<thead>
+		<tr>
+			<th width="70">ID</th>
+			<th>{lang名稱}</th>
+			<th width="90" class="center">{lang主題數}</th>
+			<th width="90" >{lang操作}</th>
+		</tr>
+		</thead>
+		<!-- loop from=$rslist key=$key value=$value -->
+		<tr id="edit_{$value.id}">
+			<td>{$value.id}</td>
+			<td>{$value.title}</td>
+			<td class="center">{$value.count ? $value.count : 0}</td>
+			<td>
+				<div class="layui-btn-group">
+					<input type="button" value="{lang編輯}" onclick="$.phpok_tag.edit('{$value.id}')" class="layui-btn  layui-btn-sm" />
+					<input type="button" value="{lang刪除}" onclick="$.phpok_tag.del('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" />
+				</div>
+			</td>
+		</tr>
+		<!-- /loop -->
+		</table>
+		<div align="center"><!-- include tpl=pagelist --></div>
+	</div>
+</div>
+<!-- include tpl=foot_lay -->
