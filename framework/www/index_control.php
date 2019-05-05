@@ -167,11 +167,12 @@ class index_control extends phpok_control
             return json_decode($data, true);
         }
         $data = [];
-        $rows = $this->db->get_all("select ftype,title,identifier,is_front,search from dj_fields where ftype in ({$this->myModuleId}) order by taxis desc");
+        $rows = $this->db->get_all("select ftype,title,identifier,is_front,search from dj_fields where ftype in ({$this->myModuleId}) order by taxis asc");
         if (empty($rows)) {
             return false;
         }
         foreach ($rows as $val) {
+            $data[$val['ftype']]['all'][$val['identifier']] = $val['title'];
             if ($val['is_front'] == 1 ) {
                 $data[$val['ftype']]['is_front'][$val['identifier']] = $val['title'];
             }
