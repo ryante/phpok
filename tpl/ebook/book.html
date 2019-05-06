@@ -46,13 +46,13 @@
             <div class="layui-tab-content" style="margin-top: 20px">
                 <div class="layui-tab layui-tab-brief" style="margin-top: 0px" lay-filter="component-tabs-brief">
                     <ul class="layui-tab-title">
-                        <li class="layui-this">简介</li>
-                        <li>对读</li>
+                        <li {if !$page}class="layui-this"{/if}>简介</li>
+                        <li {if $page > 0}class="layui-this"{/if}>对读</li>
                         <li>文字</li>
                         <li>阅读</li>
                     </ul>
                     <div class="layui-tab-content">
-                        <div class="layui-tab-item layui-show" id="lib-list1">
+                        <div class="layui-tab-item {if !$page}layui-show{/if}" id="lib-list1">
                             <!-- if $module_fields[$rs['module_id']]['search'] -->
                             <table class="layui-table">
                                 <tbody>
@@ -82,14 +82,14 @@
                             </table>
                             <!-- /if  -->
                         </div>
-                        <div class="layui-tab-item">
-                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=1" frameborder="0" width="100%" height="650px"></iframe>
+                        <div class="layui-tab-item  {if $page > 0}layui-show{/if}">
+                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=1&page={$page}" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
                         <div class="layui-tab-item">
-                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=2" frameborder="0" width="100%" height="650px"></iframe>
+                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=2&page={$page}" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
                         <div class="layui-tab-item">
-                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=3" frameborder="0" width="100%" height="650px"></iframe>
+                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=3&page={$page}" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
                     </div>
                 </div>

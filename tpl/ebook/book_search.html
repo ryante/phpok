@@ -64,7 +64,7 @@
                         <div class="layui-col-md9">
                             <!-- if $value.book_list -->
                                 <!-- loop from=$value.book_list key=$k value=$v -->
-                                <a href="">
+                                <a href="index.php?f=book&doc_id={$value.book_info.id}&page={$v.page}&keyword={$keyword}">
                                     <blockquote class="layui-elem-quote" style="border-left:0px">
                                         {$v.content}
                                     </blockquote>

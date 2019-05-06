@@ -365,12 +365,13 @@ class index_control extends phpok_control
             return json_decode($data, true);
         }
         $where = " b.lid = {$lid} and a.status=1";
-        $rows = $this->db->get_all("select a.title,a.dateline,a.sort,a.tag,b.* from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort asc,a.id asc");
+        $rows = $this->db->get_all("select a.title,a.dateline,a.sort,a.tag,b.* from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc,a.id desc");
         if (empty($rows)) {
             return false;
         }
         $page = 1;
-        foreach ($rows as  &$val) {
+        $data = [];
+        foreach ($rows as  $val) {
             if (!empty($val['image'])) {
                 $picInfo = $this->model('res')->get_one($val['image'],true);
                 if (!empty($picInfo)) {
@@ -378,11 +379,12 @@ class index_control extends phpok_control
                     $val['image'] = $pic;
                 }
             }
-            $val['page'] = 2 * $page + 1; 
+            $val['page'] = 2 * $page; 
             $page++;
+            $data[$val['id']] = $val;
         }
-        $this->saveCache($cacheKey, json_encode($rows, true));
-        return $rows;
+        $this->saveCache($cacheKey, json_encode($data, true));
+        return $data;
     }
 
     // 首页
@@ -436,6 +438,7 @@ class index_control extends phpok_control
 
     public function book_f() {
 	    $id = $this->get('doc_id');
+	    $page = $this->get('page', 'int');
 	    if (empty($id)) {
             $this->error(P_Lang('未指定文献id'));
         }
@@ -452,12 +455,14 @@ class index_control extends phpok_control
         $this->assign('nav_title', $bookInfo['title']);
         $this->assign('pid', $projectInfo['id']);
         $this->assign('rs', $bookInfo);
+        $this->assign('page', $page);
         $this->view('book');
     }
 
     public function read_f() {
 	    $id = $this->get('doc_id');
         $type = $this->get('type');
+	    $page = $this->get('page', 'int');
         $keyWord = $this->get('keyword');
 	    if (empty($id)) {
             $this->error(P_Lang('未指定文献id'));
@@ -472,6 +477,7 @@ class index_control extends phpok_control
         $this->assign('rslist', $bookLists);
         $this->assign('rs', $bookInfo);
         $this->assign('keyword', $keyWord);
+        $this->assign('page', $page);
         $type = empty($type) ? 1 : $type;
         $this->assign('type', $type);
         $this->view('wowbook');
@@ -508,12 +514,12 @@ class index_control extends phpok_control
             if (!empty($keyWord)) {
                 $where .= " and nohtml_content like '%{$keyWord}%'";
             }
-            $rows = $this->db->get_all("select a.id,b.lid,b.nohtml_content content from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort asc, a.id asc");
-            print_r($rows);die;
+            $rows = $this->db->get_all("select a.id,b.lid,b.nohtml_content content from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc, a.id desc");
             if (!empty($rows)) {
-                krsort($rows);
                 foreach ($rows as $key => $val) {
                     $val['content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['content']);
+                    $tmpBookLists = $this->getDocBooks($val['lid']);
+                    $val['page'] = $tmpBookLists[$val['id']]['page'];
                     if (empty($bookData[$val['lid']]['book_info'])) {
                         $bookData[$val['lid']]['book_info'] = $docs[$val['lid']];
                     }
@@ -522,7 +528,6 @@ class index_control extends phpok_control
             }
 
         }
-                print_r($bookData);die;
         $this->assign('doc_id', $docId);
         $this->assign('book_data', $bookData);
         $this->assign('keyword', $keyWord);

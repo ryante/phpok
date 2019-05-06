@@ -84,7 +84,7 @@
 
             <!--开始封面图 start-->
 			<div class='last_cover'>
-				<img src="{$rs.start_cover_pic.filename}" width="100%" height="100%" />
+				<img src="{$rs.start_cover_pic.gd.book-view}" width="100%" height="100%" />
 			</div>
 			{if $type!=1 && $total % 2 != 0}
 			<div class='responsive feature'>
@@ -121,7 +121,7 @@
 
 			<!--结束封面图 start-->
 			<div class='last_cover'>
-				<img src="{$rs.end_cover_pic.filename}" width="100%" height="100%" />
+				<img src="{$rs.end_cover_pic.gd.book-view}" width="100%" height="100%" />
 			</div>
 			<!--结束封面图 start-->
 
@@ -184,6 +184,9 @@
 			});
 
 			var book = $.wowBook("#features");
+            {if $type == 1 }
+            book.showPage({$page});
+            {/if}
 
 			function rebuildThumbnails(){
 				book.destroyThumbnails()
