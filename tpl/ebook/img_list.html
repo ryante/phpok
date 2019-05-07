@@ -31,16 +31,16 @@
                         </div>
                         <div class="layui-tab-content" id="lib-list1" >
                             <!-- if $docs -->
-                            <!-- loop from=docs key=$key value=$value -->
+                            <!-- loop from=docs key=$key value=$value id=list_id-->
                             <div class="layui-row layui-col-space10">
                                 <div class="layui-col-md3">
                                     <a href="index.php?f=book&doc_id={$value.id}" class="start_cover">
-                                    {if $value.start_cover_pic}
+                                {if $value.start_cover_pic}
                                     <img  src="{$value.start_cover_pic.gd.book-cover}" />
                                     {else}
                                     <img src="img.php?token=YToxMjp7czoyOiJpZCI7czoyOiIxMyI7czoxMDoiaWRlbnRpZmllciI7czoxMDoiYm9vay1jb3ZlciI7czo1OiJ3aWR0aCI7czozOiIxNTAiO3M6NjoiaGVpZ2h0IjtzOjM6IjIwMCI7czoxMjoibWFya19waWN0dXJlIjtzOjA6IiI7czoxMzoibWFya19wb3NpdGlvbiI7czoxMjoiYm90dG9tLXJpZ2h0IjtzOjg6ImN1dF90eXBlIjtzOjE6IjAiO3M6NzoicXVhbGl0eSI7czoyOiI4MCI7czo3OiJiZ2NvbG9yIjtzOjY6IkZGRkZGRiI7czo1OiJ0cmFucyI7czoxOiIwIjtzOjY6ImVkaXRvciI7czoxOiIxIjtzOjM6InVybCI7czozNDoicmVzLzIwMTkwMy8zMS80ZjQ3OGEwYmZlMDM4OGJjLnBuZyI7fQ" />
                                     {/if}
-                                        <p>{$value.title}</p>
+                                    <p>{$value.title}</p>
                                     </a>
                                 </div>
                                 <div class="layui-col-md9">
@@ -65,7 +65,9 @@
                                     <!-- /if  -->
                                 </div>
                             </div>
+                            {if $list_id.num != $docs_total}
                             <hr />
+                            {/if}
                             <!-- /loop -->
                             <!-- else  -->
                             <p style="text-align: center"> 暂无内容~ </p>

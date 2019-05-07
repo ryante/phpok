@@ -78,82 +78,22 @@ class index_control extends phpok_control
         return $data;
     }
 
-    //获取文库标签
-    public function getLibTags() {
-        $cacheKey = "lib_tags_list";
+    // 获取标签列表
+    public function getAllTags() {
+        $cacheKey = "all_tags_list";
         $data = $this->getCache($cacheKey);
         if (!empty($data)) {
             return json_decode($data, true);
         }
         $data = [];
-        $rows = $this->db->get_all("select id,tag from dj_project where module in ({$this->myModuleId}) and tag!=''");
+        $rows = $this->db->get_all("select id,title from dj_tag order by id desc");
+        
         if (empty($rows)) {
             return false;
-        }
-        foreach ($rows as $val) {
-            if (empty($val['tag'])) {
-                continue;
-            }
-            $tmpTags = explode(",", $val['tag']);
-            if (!empty($tmpTags)) {
-                foreach ($tmpTags as $v) {
-                    $data[$v][] = $val['id'];
-                }
-            }
-        }
-        $this->saveCache($cacheKey, json_encode($data, true));
-        return $data;
-    }
-
-    //获取文献标签
-    public function getDocTags() {
-        $cacheKey = "doc_tags_list";
-        $data = $this->getCache($cacheKey);
-        if (!empty($data)) {
-            return json_decode($data, true);
         }
         $data = [];
-        $rows = $this->db->get_all("select id,tag from dj_list where module_id in ({$this->myModuleId}) and tag != ''");
-        if (empty($rows)) {
-            return false;
-        }
         foreach ($rows as $val) {
-            if (empty($val['tag'])) {
-                continue;
-            }
-            $tmpTags = explode(",", $val['tag']);
-            if (!empty($tmpTags)) {
-                foreach ($tmpTags as $v) {
-                    $data[$v][] = $val['id'];
-                }
-            }
-        }
-        $this->saveCache($cacheKey, json_encode($data, true));
-        return $data;
-    }
-
-    //获取ebook标签
-    public function getBookTags() {
-        $cacheKey = "book_tags_list";
-        $data = $this->getCache($cacheKey);
-        if (!empty($data)) {
-            return json_decode($data, true);
-        }
-        $data = [];
-        $rows = $this->db->get_all("select id,tag from dj_list where module_id=6 and tag != ''");
-        if (empty($rows)) {
-            return false;
-        }
-        foreach ($rows as $val) {
-            if (empty($val['tag'])) {
-                continue;
-            }
-            $tmpTags = explode(",", $val['tag']);
-            if (!empty($tmpTags)) {
-                foreach ($tmpTags as $v) {
-                    $data[$v][] = $val['id'];
-                }
-            }
+           $data[$val['id']] = $val['title']; 
         }
         $this->saveCache($cacheKey, json_encode($data, true));
         return $data;
@@ -279,56 +219,42 @@ class index_control extends phpok_control
         return $result;
     }
 
-    // 通过文库标签、文献标签、书籍标签搜索文献
-    public function searchDocByTag($libTag = "", $docTag = "", $bookTag = "") {
-	    if (empty($libTag) && empty($docTag)) {
+    // 通过标签搜索文献
+    public function searchDocsByTag($tagId) {
+	    if (empty($tagId)) {
 	        return false;
         }
-        $data = [];
-        $idsArr = [];
-        $allDocs = $this->getAllDocs();
-        if (!empty($libTag)) {
-	        $libTags = $this->getLibTags();
-	        if (empty($libTags[$libTag])) {
-	            return false;
-            }
-            foreach ($allDocs as $val) {
-                if (in_array($val['project_id'], $libTags[$libTag])) {
-                    $data[] = $val;
-                }
-            }
-            return $data;
-        }
-        if (!empty($docTag)) {
-	        $docTags =  $this->getDocTags();
-	        $idsArr = $docTags[$docTag];
-        }
-        if (!empty($bookTag)) {
-            $bookTags = $this->getBookTags();
-            if (empty($bookTags[$bookTag])) {
-                return false;
-            }
-            $bookId = implode(",", $bookTags[$bookTag]);
-            $ids = $this->db->get_all("select lid id from dj_list_6 where id in ({$bookId})");
-            if (empty($ids)) {
-                return false;
-            }
-            foreach ($ids as $val) {
-                $idsArr[] = $val;
-            }
-        }
-        if (empty($idsArr)) {
+        $docIds = $this->db->get_all("select title_id from dj_tag_stat where tag_id = {$tagId}");
+        if (empty($docIds)) {
             return false;
         }
-        foreach ($idsArr as $val) {
-            $data[] = $allDocs[$val];
+        $bookIds = [];
+        $data = [];
+        $allDocs = $this->getAllDocs();
+        foreach($docIds as $val) {
+            if (empty($allDocs[$val['title_id']])) {
+                $docIdInfo = $this->db->get_one("select lid from dj_list_6  where id={$val['title_id']}");
+                if (empty($docIdInfo)) {
+                    continue;
+                }
+                if (empty($data[$docIdInfo['lid']])) {
+                    $data[$docIdInfo['lid']] = $allDocs[$docIdInfo['lid']];
+                }
+                $tmpBookLists = getDocBooks($docIdInfo['lid']);
+                $data[$bookInfo['lid']]['book_list'][] = $tmpBookLists[$val['title_id']];
+                continue;
+            }
+            if (!empty($data[$val['title_id']])) {
+                continue;
+            }
+            $data[$val['title_id']] = $allDocs[$val['title_id']];
         }
         return $data;
     }
 
 
     // 通过project_id搜索文献
-    public function searchDocByPid($pid) {
+    public function searchDocsByPid($pid) {
 	   if (empty($pid)) {
 	       return false;
        }
@@ -397,42 +323,33 @@ class index_control extends phpok_control
     // 文献列表
 	public function docs_f() {
 	    $pid = $this->get('pid');
-        $libTags = $this->get('lib_tags');
-        $docTags = $this->get('doc_tags');
+        $tagId = $this->get('tag_id');
         $keywords = $this->get('keywords');
         $searchFields = $this->get('fields');
-        if (empty($pid) && empty($libTags) && empty($docTags) && empty($keywords)) {
+        if (empty($pid) && empty($tagId) && empty($keywords)) {
             $docs = $this->getAllDocs();
         }
+        $tags = $this->getAllTags();
         if (!empty($pid)) {
             $prs = $this->db->get_one("select title from dj_project where id={$pid}");
-            $docs = $this->searchDocByPid($pid);
+            $docs = $this->searchDocsByPid($pid);
             $this->assign('pid', $pid);
             $this->assign('nav_title', $prs['title']);
         }
-        if (!empty($libTags)) {
-            $docs = $this->searchDocByTag($libTags);
-            $this->assign('lib_tags', $docTags);
-            $this->assign('nav_title', "文库标签:  {$libTags}");
-        }
-        if (!empty($docTags)) {
-            $docs = $this->searchDocByTag("", $docTags);
-            $this->assign('doc_tags', $docTags);
-            $this->assign('nav_title', "文献标签:  {$docTags}");
+        if (!empty($tagId)) {
+            $docs = $this->searchDocsByTag($tagId);
+            $this->assign('tag_id', $tagId);
+            $this->assign('nav_title', "文献标签：{$tags[$tagId]}");
         }
         if (!empty($keywords)) {
             $docs = $this->searchDocsByKw($keywords, $searchFields);
             $this->assign('keywords', $keywords);
             $this->assign('search_fields', $searchFields);
-            $this->assign('nav_title', "关键字:  {$keywords}");
+            $this->assign('nav_title', "关键字：{$keywords}");
         }
-        $libTags = $this->getLibTags();
-        $docTags = $this->getDocTags();
-        $bookTags = $this->getBookTags();
-        $this->assign('lib_tags', $libTags);
-        $this->assign('doc_tags', $docTags);
-        $this->assign('book_tags', $bookTags);
+        $this->assign('tags', $tags);
         $this->assign('docs', $docs);
+        $this->assign('docs_total', count($docs));
         $this->view('img_list');
     }
 
@@ -500,7 +417,7 @@ class index_control extends phpok_control
                 foreach ($bookLists as $key => $val) {
                     if (!empty($keyWord)) {
                         if (stripos($val['nohtml_content'], $keyWord) !== false) {
-                            $val['content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['content']);
+                            $val['content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['nohtml_content']);
                             $books[] = $val;
                         }
                     } else {

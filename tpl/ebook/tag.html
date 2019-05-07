@@ -1,37 +1,14 @@
 <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
     <div class="layui-card-header">
-        标签云
+        標簽雲
     </div>
     <div class="layui-tab-content">
-        <!-- if $lib_tags -->
-        <fieldset class="layui-elem-field" >
-            <legend> 文库 </legend>
-            <div class="layui-field-box">
-                <!-- loop from=lib_tags key=$key value=$value -->
-                <a href="{url ctrl=index func=docs lib_tags=$key/}"> <span class="layui-badge layui-bg-cyan">{$key}</span> </a>
+        <!-- if $tags -->
+                <!-- loop from=tags key=$key value=$value -->
+                <a href="{url ctrl=index func=docs tag_id=$key/}"> <span class="layui-badge {if $tag_id==$key}layui-bg-green{else}layui-bg-cyan{/if}">{$value}</span> </a>
                 <!-- /loop -->
-            </div>
-        </fieldset>
-        <!-- /if -->
-        <!-- if $doc_tags -->
-        <fieldset class="layui-elem-field">
-            <legend> 文献 </legend>
-            <div class="layui-field-box">
-                <!-- loop from=doc_tags key=$key value=$value -->
-                <a href="{url ctrl=index func=docs doc_tags=$key/}"> <span class="layui-badge layui-bg-cyan"> {$key} </span> </a>
-                <!-- /loop -->
-            </div>
-        </fieldset>
-        <!-- /if -->
-        <!-- if $book_tags -->
-        <fieldset class="layui-elem-field">
-            <legend> 书籍 </legend>
-            <div class="layui-field-box">
-                <!-- loop from=doc_tags key=$key value=$value -->
-                <a href="{url ctrl=index func=docs book_tags=$key/}"> <span class="layui-badge layui-bg-cyan"> {$key} </span> </a>
-                <!-- /loop -->
-            </div>
-        </fieldset>
+        <!-- else -->
+       <p style="text-align:center; font-size:12px; color:#696969">暫無標簽~~</p> 
         <!-- /if -->
     </div>
 </div>
