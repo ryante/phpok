@@ -36,8 +36,8 @@ class index_control extends phpok_control
         $editTime = filemtime($file);
         $nowTime = time();
         if (empty($times)) {
- //           $times = 600;
-            $times = 0;
+            $times = 6;
+ //           $times = 0;
         }
         if (!file_exists($file) || ($nowTime - $editTime) > $times) {
             return false;
@@ -219,10 +219,15 @@ class index_control extends phpok_control
         return $result;
     }
 
-    // 通过标签搜索文献
+    // 通过标签搜索文献及文献内文
     public function searchDocsByTag($tagId) {
 	    if (empty($tagId)) {
 	        return false;
+        }
+        $cacheKey = "search_tagid_{$tagId}";
+        $data = $this->getCache($cacheKey);
+        if (!empty($data)) {
+            return json_decode($data, true);
         }
         $docIds = $this->db->get_all("select title_id from dj_tag_stat where tag_id = {$tagId}");
         if (empty($docIds)) {
@@ -232,23 +237,23 @@ class index_control extends phpok_control
         $data = [];
         $allDocs = $this->getAllDocs();
         foreach($docIds as $val) {
-            if (empty($allDocs[$val['title_id']])) {
-                $docIdInfo = $this->db->get_one("select lid from dj_list_6  where id={$val['title_id']}");
-                if (empty($docIdInfo)) {
+            $docIdInfo = $this->db->get_one("select lid from dj_list_6  where id={$val['title_id']}");
+            if (!empty($docIdInfo) && !empty($allDocs[$docIdInfo['lid']])) {
+                if (empty($data[$docIdInfo['lid']])) {
+                    $data[$docIdInfo['lid']] = $allDocs[$docIdInfo['lid']]; 
+                }
+                $tmpBookLists = $this->getDocBooks($docIdInfo['lid']);
+                if (empty($tmpBookLists) || empty($tmpBookLists[$val['title_id']]['nohtml_content'])) {
                     continue;
                 }
-                if (empty($data[$docIdInfo['lid']])) {
-                    $data[$docIdInfo['lid']] = $allDocs[$docIdInfo['lid']];
-                }
-                $tmpBookLists = getDocBooks($docIdInfo['lid']);
-                $data[$bookInfo['lid']]['book_list'][] = $tmpBookLists[$val['title_id']];
+                $data[$docIdInfo['lid']]['book_list'][] = $tmpBookLists[$val['title_id']];
                 continue;
             }
-            if (!empty($data[$val['title_id']])) {
-                continue;
+            if (!empty($allDocs[$val['title_id']]) && empty($data[$val['title_id']])) {
+                $data[$val['title_id']] = $allDocs[$val['title_id']];
             }
-            $data[$val['title_id']] = $allDocs[$val['title_id']];
         }
+        $this->saveCache($cacheKey, json_encode($data, true));
         return $data;
     }
 
@@ -354,6 +359,8 @@ class index_control extends phpok_control
     }
 
     public function book_f() {
+        $keyWord = $this->get('keyword');
+        $searchRange = $this->get('search_range');
 	    $id = $this->get('doc_id');
 	    $page = $this->get('page', 'int');
 	    if (empty($id)) {
@@ -373,6 +380,8 @@ class index_control extends phpok_control
         $this->assign('pid', $projectInfo['id']);
         $this->assign('rs', $bookInfo);
         $this->assign('page', $page);
+        $this->assign('keyword', $keyWord);
+        $this->assign('search_range', $searchRange);
         $this->view('book');
     }
 
@@ -417,7 +426,7 @@ class index_control extends phpok_control
                 foreach ($bookLists as $key => $val) {
                     if (!empty($keyWord)) {
                         if (stripos($val['nohtml_content'], $keyWord) !== false) {
-                            $val['content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['nohtml_content']);
+                            $val['nohtml_content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['nohtml_content']);
                             $books[] = $val;
                         }
                     } else {
@@ -431,10 +440,10 @@ class index_control extends phpok_control
             if (!empty($keyWord)) {
                 $where .= " and nohtml_content like '%{$keyWord}%'";
             }
-            $rows = $this->db->get_all("select a.id,b.lid,b.nohtml_content content from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc, a.id desc");
+            $rows = $this->db->get_all("select a.id,b.lid,b.nohtml_content from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc, a.id desc");
             if (!empty($rows)) {
                 foreach ($rows as $key => $val) {
-                    $val['content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['content']);
+                    $val['nohtml_content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['nohtml_content']);
                     $tmpBookLists = $this->getDocBooks($val['lid']);
                     $val['page'] = $tmpBookLists[$val['id']]['page'];
                     if (empty($bookData[$val['lid']]['book_info'])) {
@@ -443,10 +452,9 @@ class index_control extends phpok_control
                     $bookData[$val['lid']]['book_list'][] = $val;
                 }
             }
-
         }
         $this->assign('doc_id', $docId);
-        $this->assign('book_data', $bookData);
+        $this->assign('books', $bookData);
         $this->assign('keyword', $keyWord);
         $this->assign('search_range', $searchRange);
         $this->view('book_search');

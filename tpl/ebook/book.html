@@ -22,9 +22,9 @@
                         <input type="hidden" id="doc_id" value="{$rs.id}">
                         <div class="layui-col-md2">
                             <select id="search_range" lay-verify="required" >
-                                <!--<option value="1" {if $searcn_range == 1}selected{/if}>当前内文</option>-->
-                                <option value="2" {if $searcn_range == 2}selected{/if}>当前文献</option>
-                                <option value="3 {if $searcn_range == 3}selected{/if}">当前系列</option>
+                                <!--<option value="1" {if $search_range == 1}selected{/if}>当前内文</option>-->
+                                <option value="2" {if $search_range == 2}selected{/if}>当前文献</option>
+                                <option value="3 {if $search_range == 3}selected{/if}">当前系列</option>
                             </select>
                         </div>
                         <div class="layui-col-md10">
@@ -36,7 +36,7 @@
 
                             <div style="margin-right: 100px">
                                 <input type="text" id="search_title" lay-verify="title" autocomplete="off"
-                                       placeholder="请输入标题" class="layui-input" value="{$search_titl}" />
+                                       placeholder="请输入标题" class="layui-input" value="{$keyword}" />
                             </div>
                         </div>
                     </div>
@@ -83,10 +83,10 @@
                             <!-- /if  -->
                         </div>
                         <div class="layui-tab-item  {if $page > 0}layui-show{/if}">
-                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=1&page={$page}" frameborder="0" width="100%" height="650px"></iframe>
+                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=1&page={$page}&keyword={$keyword}" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
                         <div class="layui-tab-item">
-                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=2&page={$page}" frameborder="0" width="100%" height="650px"></iframe>
+                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=2&page={$page}&keyword={$keyword}" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
                         <div class="layui-tab-item">
                             <iframe src="index.php?f=read&doc_id={$rs.id}&type=3&page={$page}" frameborder="0" width="100%" height="650px"></iframe>

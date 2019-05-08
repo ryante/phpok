@@ -22,7 +22,7 @@
                         <input type="hidden" id="doc_id" value="{$doc_id}">
                         <div class="layui-col-md2">
                             <select id="search_range" lay-verify="required" lay-search>
-                                <!--<option value="1" {if $searcn_range == 1}selected{/if}>当前内文</option>-->
+                                <!--<option value="1" {if $search_range == 1}selected{/if}>当前内文</option>-->
                                 <option value="2" {if $search_range == 2}selected{/if}>当前文献</option>
                                 <option value="3" {if $search_range == 3}selected{/if}>当前系列</option>
                             </select>
@@ -48,8 +48,8 @@
                     检索结果
                 </div>
                 <div class="layui-tab-content" id="lib-list1" >
-                    <!-- if $book_data -->
-                    <!-- loop from=book_data key=$key value=$value -->
+                    <!-- if $books -->
+                    <!-- loop from=books key=$key value=$value id=list_id -->
                     <div class="layui-row layui-col-space10">
                         <div class="layui-col-md3">
                             <a href="index.php?f=book&doc_id={$value.book_info.id}" class="start_cover">
@@ -63,17 +63,23 @@
                         </div>
                         <div class="layui-col-md9">
                             <!-- if $value.book_list -->
-                                <!-- loop from=$value.book_list key=$k value=$v -->
-                                <a href="index.php?f=book&doc_id={$value.book_info.id}&page={$v.page}&keyword={$keyword}">
-                                    <blockquote class="layui-elem-quote" style="border-left:0px">
-                                        {$v.content}
-                                    </blockquote>
-                                </a>
-                                <!-- /loop -->
+                            <!-- loop from=$value.book_list key=$k value=$v -->
+                            {if $v.nohtml_content}
+                            <a href="index.php?f=book&doc_id={$value.book_info.id}&page={$v.page}&keyword={$keyword}&search_range={$search_range}">
+                                <blockquote class="layui-elem-quote" style="border-left:0px">
+                                    {$v.nohtml_content}
+                                </blockquote>
+                            </a>
+                            {/if}
+                            <!-- /loop -->
+                            <!-- else  -->
+                            <p style="text-align: center"> 暂无匹配内容~ </p>
                             <!-- /if  -->
                         </div>
                     </div>
+                    {if $list_id.num != count($books) }
                     <hr />
+                    {/if}
                     <!-- /loop -->
                     <!-- else  -->
                     <p style="text-align: center"> 暂无内容~ </p>
