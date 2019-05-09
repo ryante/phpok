@@ -64,7 +64,7 @@
                                 {if $k == 'pdf_file'}
                                 <tr>
                                     <td style="width: 160px"> {$v} </td>
-                                    <td>{if $rs[$k]}{$rs[$k]['title']} &nbsp;&nbsp;&nbsp;<a download="{$rs[$k]['filename']}" href="{$rs[$k]['filename']}"  class="layui-btn layui-btn-radius layui-btn-xs">&nbsp;下&nbsp;载&nbsp;</a>&nbsp;<a  href="{$rs[$k]['filename']}" target="_blank" class="layui-btn layui-btn-normal layui-btn-radius layui-btn-xs">&nbsp;预&nbsp;览&nbsp;</a{/if} </td>
+                                    <td>{if $rs[$k]}{$rs[$k]['title']} &nbsp;&nbsp;&nbsp;<a download="{$rs[$k]['filename']}" href="{$rs[$k]['filename']}"  class="layui-btn layui-btn-radius layui-btn-xs">&nbsp;下&nbsp;载&nbsp;</a>&nbsp;<a  href="/pdf_show/web/viewer.html?file=/{$rs[$k]['filename']}" target="_blank" class="layui-btn layui-btn-normal layui-btn-radius layui-btn-xs">&nbsp;预&nbsp;览&nbsp;</a{/if} </td>
                                 </tr>
                                 {elseif $k == 'start_cover_pic' || $k == 'end_cover_pic' }
                                 <tr>
