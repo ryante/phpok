@@ -384,6 +384,16 @@ class book_control extends phpok_control
             }
         }
         $this->assign("ext_list",$m_list);
+        // new add  碑刻和普通文献要分开显示
+        $docInfo = $this->model('project')->get_one($lid);
+        if ($docInfo['module'] == 3) { // 碑刻显示
+            unset($layout_list['content']);
+            unset($layout_list['image']);
+        } else {
+            unset($layout_list['img_pdf']);
+            unset($layout_list['content_pdf']);
+        }
+
         $this->assign("layout",$layout_list);
         unset($layout_list);
         $psize = $this->config["psize"] ? $this->config["psize"] : "30";
@@ -685,6 +695,7 @@ class book_control extends phpok_control
         $ext_list = $this->model('module')->fields_all($p_rs["module"]);
         $extlist = array();
         foreach(($ext_list ? $ext_list : array()) as $key=>$value){
+            
             if($value["ext"] && is_string($value['ext'])){
                 $ext = unserialize($value["ext"]);
                 $value = array_merge($value,($ext ? $ext : array()));
@@ -692,6 +703,15 @@ class book_control extends phpok_control
             $idlist[] = strtolower($value["identifier"]);
             if($rs[$value["identifier"]]){
                 $value["content"] = $rs[$value["identifier"]];
+            }
+            if ($bookInfo['module_id'] == 3) { // 碑刻显示
+                if ($value['identifier'] == 'content' || $value['identifier'] == 'image') {
+                    continue;
+                }
+            } else {
+                if ($value['identifier'] == 'img_pdf' || $value['identifier'] == 'content_pdf') {
+                    continue;
+                }
             }
             $extlist[] = $this->lib('form')->format($value);
         }
@@ -719,6 +739,7 @@ class book_control extends phpok_control
             }
         }
         $this->assign("extlist",$extlist);
+        $this->assign("book_info",$bookInfo);
         $this->assign("p_rs",$p_rs);
         $this->assign("m_rs",$m_rs);
         $this->assign("pid",$pid);
