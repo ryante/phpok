@@ -310,6 +310,20 @@ class index_control extends phpok_control
                     $val['image'] = $pic;
                 }
             }
+            if (!empty($val['content_pdf'])) {
+                $fileInfo = $this->model('res')->get_one($val['content_pdf'],true);
+                if (!empty($fileInfo)) {
+                    $pdf = ['filename' => $fileInfo['filename'], 'title' => $fileInfo['title']];
+                    $val['content_pdf'] = $pdf;
+                }
+            }
+            if (!empty($val['img_pdf'])) {
+                $fileInfo = $this->model('res')->get_one($val['img_pdf'],true);
+                if (!empty($fileInfo)) {
+                    $pdf = ['filename' => $fileInfo['filename'], 'title' => $fileInfo['title']];
+                    $val['img_pdf'] = $pdf;
+                }
+            }
             $val['page'] = 2 * $page; 
             $page++;
             $data[$val['id']] = $val;
@@ -382,7 +396,14 @@ class index_control extends phpok_control
         $this->assign('page', $page);
         $this->assign('keyword', $keyWord);
         $this->assign('search_range', $searchRange);
-        $this->view('book');
+        // 区分碑刻的显示
+        if ($bookInfo['module_id'] == 3) {
+            $bookLists = $this->getDocBooks($id);
+            $this->assign('rslist', current($bookLists));
+            $this->view('book_beike');
+        } else {
+            $this->view('book');
+        }
     }
 
     public function read_f() {

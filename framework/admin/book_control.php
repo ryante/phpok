@@ -385,8 +385,8 @@ class book_control extends phpok_control
         }
         $this->assign("ext_list",$m_list);
         // new add  碑刻和普通文献要分开显示
-        $docInfo = $this->model('project')->get_one($lid);
-        if ($docInfo['module'] == 3) { // 碑刻显示
+        $docInfo = $this->model('list')->get_one($lid);
+        if ($docInfo['module_id'] == 3) { // 碑刻显示
             unset($layout_list['content']);
             unset($layout_list['image']);
         } else {
