@@ -4,11 +4,20 @@
     </div>
     <div class="layui-tab-content">
         <!-- if $tags -->
-                <!-- loop from=tags key=$key value=$value -->
-                <a href="{url ctrl=index func=docs tag_id=$key/}"> <span class="layui-badge {if $tag_id==$key}layui-bg-green{else}layui-bg-cyan{/if}">{$value}</span> </a>
+        <!-- loop from=tags key=$key value=$value -->
+        <fieldset class="layui-elem-field">
+            <legend> {$value.name} </legend>
+            <!-- if $value.tags -->
+            <div class="layui-field-box">
+                <!-- loop from=$value.tags key=$k value=$v -->
+                <a href="{url ctrl=index func=docs tag_id=$v.id/}"> <span class="layui-badge {if $tag_id==$v.id}layui-bg-green{else}layui-bg-cyan{/if}">{$v.title}({$v.items})</span> </a>
                 <!-- /loop -->
+            </div>
+            <!-- /if -->
+        </fieldset>
+        <!-- /loop -->
         <!-- else -->
-       <p style="text-align:center; font-size:12px; color:#696969">暫無標簽~~</p> 
+        <p style="text-align:center; font-size:12px; color:#696969">暫無標簽~~</p> 
         <!-- /if -->
     </div>
 </div>

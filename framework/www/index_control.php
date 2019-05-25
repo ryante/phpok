@@ -85,18 +85,23 @@ class index_control extends phpok_control
         if (!empty($data)) {
             return json_decode($data, true);
         }
-        $data = [];
-        $rows = $this->db->get_all("select id,title from dj_tag order by id desc");
-        
-        if (empty($rows)) {
+        $tagGroups = [];
+        $groups = $this->db->get_all("select id,name,show_nums from dj_tag_group where `show` = 1 order by sort desc, id desc");
+        if (empty($groups)) {
             return false;
         }
-        $data = [];
-        foreach ($rows as $val) {
-           $data[$val['id']] = $val['title']; 
+        foreach($groups as $val) {
+            $tagGroups[$val['id']] = $val;
         }
-        $this->saveCache($cacheKey, json_encode($data, true));
-        return $data;
+        $tags = $this->db->get_all("select id,title,tag_group_id from dj_tag where tag_group_id != 0 order by id desc");
+        foreach ($tags as $key => $val) {
+            $items = $this->db->get_one("select count(`title_id`) total from dj_tag_stat where tag_id={$val['id']}");
+            $val['items'] = $items['total'];
+            $tagGroups[$val['tag_group_id']]['tags'][] = $val;
+        }
+       
+        $this->saveCache($cacheKey, json_encode($tagGroups, true));
+        return $tagGroups;
     }
 
     // 获取模型搜索、显示字段
