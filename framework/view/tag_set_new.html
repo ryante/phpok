@@ -29,6 +29,16 @@ function save()
 <form method="post" id="post_save" onsubmit="return false">
 	<!-- if $id --><input type="hidden" name="id" id="id" value="{$id}" /><!-- /if -->
 <div class="table">
+    <div class="title">
+	選擇標簽組	
+	</div>
+	<div class="content">
+        <select name="tag_group_id" id="tag_group_id" class="long">
+            <!-- loop from=$tag_group key=$key value=$value id=$tmpid -->
+            <option value="{$value.id}"{if $value.id == $rs.tag_group_id} selected{/if}>{$value.name}</option>
+            <!-- /loop -->
+        </select>
+	</div>
 	<div class="title">
 		{lang標籤} <span class="note">請設定好相應的標籤</span>
 	</div>

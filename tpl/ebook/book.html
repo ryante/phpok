@@ -49,10 +49,11 @@
                         <li {if $page > 0}class="layui-this"{/if}>对读</li>
                         <li>文字</li>
                         <li>阅读</li>
+                        <li>全文</li>
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item {if !$page}layui-show{/if}" id="lib-list1">
-                            <!-- if $module_fields[$rs['module_id']]['search'] -->
+                            <!-- if $module_fields[$rs['module_id']]['all'] -->
                             <table class="layui-table">
                                 <tbody>
                                 <tr>
@@ -63,7 +64,7 @@
                                 {if $k == 'pdf_file'}
                                 <tr>
                                     <td style="width: 160px"> {$v} </td>
-                                    <td>{if $rs[$k]}{$rs[$k]['title']} &nbsp;&nbsp;&nbsp;<a download="{$rs[$k]['filename']}" href="{$rs[$k]['filename']}"  class="layui-btn layui-btn-radius layui-btn-xs">&nbsp;下&nbsp;载&nbsp;</a>&nbsp;<a  href="/pdf_show/web/viewer.html?file=/{$rs[$k]['filename']}" target="_blank" class="layui-btn layui-btn-normal layui-btn-radius layui-btn-xs">&nbsp;预&nbsp;览&nbsp;</a{/if} </td>
+                                    <td>{if $rs[$k]}{$rs[$k]['title']} &nbsp;&nbsp;&nbsp;<a download="{$rs[$k]['filename']}" href="{$rs[$k]['filename']}"  class="layui-btn layui-btn-radius layui-btn-xs">&nbsp;下&nbsp;载&nbsp;</a>{/if}</td>
                                 </tr>
                                 {elseif $k == 'start_cover_pic' || $k == 'end_cover_pic' }
                                 <tr>
@@ -89,6 +90,13 @@
                         </div>
                         <div class="layui-tab-item">
                             <iframe src="index.php?f=read&doc_id={$rs.id}&type=3&page={$page}" frameborder="0" width="100%" height="650px"></iframe>
+                        </div>
+                        <div class="layui-tab-item">
+                            <!-- if $rs['pdf_file']['filename'] -->
+                            <iframe src="/pdf_show/web/viewer.html?file=/{$rs['pdf_file']['filename']}" frameborder="0" width="100%" height="650px"></iframe>
+                            <!-- else  -->
+                            <p>暫無內容</p>
+                            <!-- /if  -->
                         </div>
                     </div>
                 </div>

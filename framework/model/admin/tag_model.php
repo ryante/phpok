@@ -178,4 +178,77 @@ class tag_model extends tag_model_base
 		$separator = $config['separator'] ? $config['separator'] : ',';
 		return explode($separator,$string);
 	}
+
+
+
+    public function get_group_list($condition="",$offset=0,$psize=30,$site_id=0)
+	{
+		if($site_id)
+		{
+			$this->site_id($site_id);
+		}
+		$sql = "SELECT * FROM ".$this->db->prefix."tag_group WHERE site_id='".$this->site_id."' ";
+		if($condition)
+		{
+			$sql .= " AND ".$condition;
+		}
+		$sql.= " ORDER BY id DESC LIMIT ".$offset.",".$psize;
+		$rslist = $this->db->get_all($sql,'id');
+		if(!$rslist)
+		{
+			return false;
+		}
+		return $rslist;
+	}
+
+	public function get_group_total($condition="")
+	{
+		$sql = "SELECT count(id) FROM ".$this->db->prefix."tag_group WHERE site_id='".$this->site_id."' ";
+		if($condition)
+		{
+			$sql .= " AND ".$condition;
+		}
+		return $this->db->count($sql);
+	}
+
+    public function chk_group_name($name,$id=0)
+    {
+        $sql = "SELECT id FROM ".$this->db->prefix."tag_group WHERE name='{$name}' AND site_id='".$this->site_id."'";
+		if($id)
+		{
+			$sql .= " AND id!='".$id."'";
+		}
+		return $this->db->get_one($sql);
+	}
+
+    public function save_group($data,$id=0)
+	{
+		if($id)
+		{
+			return $this->db->update_array($data,'tag_group',array('id'=>$id));
+		}
+		else
+		{
+			return $this->db->insert_array($data,"tag_group");
+		}
+	}
+
+	public function delete_group($id)
+	{
+		//刪除記錄
+		$sql = "DELETE FROM ".$this->db->prefix."tag_group WHERE id='".$id."'";
+		return $this->db->query($sql);
+	}
+
+    public function get_group_one($id,$field='id',$site_id=0)
+	{
+		if($site_id){
+			$this->site_id($site_id);
+		}
+		$sql = "SELECT * FROM ".$this->db->prefix."tag_group WHERE ".$field."='".$id."' AND site_id='".$this->site_id."'";
+		return $this->db->get_one($sql);
+	}
+
+
+
 }

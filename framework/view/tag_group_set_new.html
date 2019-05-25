@@ -1,0 +1,60 @@
+<!-- include tpl=head_open -->
+<script type="text/javascript">
+function save()
+{
+	if(typeof(CKEDITOR) != "undefined"){
+		for(var i in CKEDITOR.instances){
+			CKEDITOR.instances[i].updateElement();
+		}
+	}
+	var opener = $.dialog.opener;
+	$("#post_save").ajaxSubmit({
+		'url':get_url('tag','group_save'),
+		'type':'post',
+		'dataType':'json',
+		'success':function(rs){
+			if(rs.status){
+				$.dialog.alert('標籤組提交成功',function(){
+					opener.$.phpok.reload();
+				},'succeed');
+				return true;
+			}
+			opener.$.dialog.alert(rs.info);
+			return false;
+		}
+	});
+	return true;
+}
+</script>
+<form method="post" id="post_save" onsubmit="return false">
+	<!-- if $id --><input type="hidden" name="id" id="id" value="{$id}" /><!-- /if -->
+<div class="table">
+	<div class="title">
+	標簽組名稱
+	</div>
+	<div class="content">
+		<input type="text" name="name" id="name" value="{$rs.name}" class="long" />
+	</div>
+    <div class="title">
+	前端顯示
+	</div>
+	<div class="content">
+		<input type="radio" name="show" id="show_yes" value="1" {if !$id || $rs.show != 0}checked{/if}/><label for='show_yes'>是</label>
+        &nbsp;&nbsp;&nbsp;
+        <input type="radio" name="show" id="show_no" value="0" {if $id && $rs.show == 0}checked{/if} /><label for='show_no'>否</label>
+	</div>
+    <div class="title">
+       顯示數量
+	</div>
+	<div class="content">
+		<input type="text" name="show_nums" id="show_nums" value="{$rs.show_nums}" class="long" />
+	</div>
+    <div class="title">
+        排序
+	</div>
+	<div class="content">
+		<input type="text" name="sort" id="sort" value="{$rs.sort}" class="long" />
+	</div>
+</div>
+</form>
+<!-- include tpl=foot_open -->
