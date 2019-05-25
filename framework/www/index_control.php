@@ -337,6 +337,27 @@ class index_control extends phpok_control
         return $data;
     }
 
+    public function searchBookContent($keyWord) {
+        $where = "1=1";
+        if (!empty($keyWord)) {
+            $where .= " and nohtml_content like '%{$keyWord}%'";
+        }
+        $docs = $this->getAllDocs();
+        $rows = $this->db->get_all("select a.id,b.lid,b.nohtml_content from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc, a.id desc");
+        if (!empty($rows)) {
+            foreach ($rows as $key => $val) {
+                $val['nohtml_content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['nohtml_content']);
+                $tmpBookLists = $this->getDocBooks($val['lid']);
+                $val['page'] = $tmpBookLists[$val['id']]['page'];
+                if (empty($bookData[$val['lid']]['id'])) {
+                    $bookData[$val['lid']] = $docs[$val['lid']];
+                }
+                $bookData[$val['lid']]['book_list'][] = $val;
+            }
+        }
+        return $bookData;
+    }
+
     // 首页
 	public function index_f()
 	{
@@ -367,6 +388,8 @@ class index_control extends phpok_control
         }
         if (!empty($keywords)) {
             $docs = $this->searchDocsByKw($keywords, $searchFields);
+            $bookData = $this->searchBookContent($keywords);
+            $docs = array_merge($docs, $bookData);
             $this->assign('keywords', $keywords);
             $this->assign('search_fields', $searchFields);
             $this->assign('nav_title', "关键字：{$keywords}");
