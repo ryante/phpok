@@ -251,7 +251,7 @@ class index_control extends phpok_control
                 if (empty($tmpBookLists) || empty($tmpBookLists[$val['title_id']]['nohtml_content'])) {
                     continue;
                 }
-                $data[$docIdInfo['lid']]['book_list'][] = $tmpBookLists[$val['title_id']];
+                $data[$docIdInfo['lid']]['book_list'] = $tmpBookLists;
                 continue;
             }
             if (!empty($allDocs[$val['title_id']]) && empty($data[$val['title_id']])) {
