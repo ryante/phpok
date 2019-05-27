@@ -2,22 +2,56 @@
     <div class="layui-card-header">
         標簽雲
     </div>
-    <div class="layui-tab-content">
+    <div class="layui-tab-content tag">
         <!-- if $tags -->
         <!-- loop from=tags key=$key value=$value -->
-        <fieldset class="layui-elem-field">
-            <legend> {$value.name} </legend>
-            <!-- if $value.tags -->
-            <div class="layui-field-box">
-                <!-- loop from=$value.tags key=$k value=$v -->
-                <a href="{url ctrl=index func=docs tag_id=$v.id/}"> <span class="layui-badge {if $tag_id==$v.id}layui-bg-green{else}layui-bg-cyan{/if}">{$v.title}({$v.items})</span> </a>
-                <!-- /loop -->
-            </div>
-            <!-- /if -->
-        </fieldset>
+            <h2> {$value.name} </h2>
+        <!-- if $value.tags -->
+        <div >
+            <!-- loop from=$value.tags key=$k value=$v id=list_id -->
+            <p class="tag-list {if $list_id.num > $value.show_nums}tag-hidden tag-group-{$key}{/if}"> <a href="{url ctrl=index func=docs tag_id=$v.id/}" > {$v.title}. </a>({$v.items})</p>
+            <!-- /loop -->
+            {if count($value.tags) > $value.show_nums}
+            <p class="tag-list no-border"><a href="javascript:handleTag('tag-group-{$key}')" id="tag-group-{$key}">顯示更多</a></p>
+           {/if}
+        </div>
+        <!-- /if -->
+
         <!-- /loop -->
         <!-- else -->
         <p style="text-align:center; font-size:12px; color:#696969">暫無標簽~~</p> 
         <!-- /if -->
     </div>
 </div>
+<style>
+    .no-border{border:0px !important;}
+    .tag-hidden{display:none !important;}
+    .tag-show{display:block !important;}
+    .tag { color:gray; margin-top:-20px }
+    .tag h2{line-height:30px;margin-top:15px; margin-bottom:5px;}
+    .tag-list{
+        display: block;
+        line-height: 30px;
+        font-size: 15px;
+        border-bottom: 1px solid #ececec;
+    }
+    .tag-list a{
+        color: #009688;
+    }
+    .tag-list a:hover{
+        color:gray
+    }
+</style>
+<script>
+    function handleTag(element) {
+        if ($('.' + element).hasClass('tag-hidden')) {
+            $('.' + element).removeClass('tag-hidden');
+            $('.' + element).addClass('tag-show');
+            $('#' + element).text('收起');
+        } else {
+            $('.' + element).removeClass('tag-show');
+            $('.' + element).addClass('tag-hidden');
+            $('#' + element).text('顯示更多');
+        }
+    }
+</script>

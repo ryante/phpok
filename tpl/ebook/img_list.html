@@ -45,10 +45,13 @@
                                 </div>
 
                                 <div class="layui-col-md9">
-                                    <!-- if $module_fields[$value['module_id']]['search'] -->
+                                    <!-- if $module_fields[$value['module_id']]['is_front'] -->
                                     <table class="layui-table">
                                         <tbody>
-                                        <!-- loop from=$module_fields[$value['module_id']]['search'] key=$k value=$v -->
+                                        <!-- loop from=$module_fields[$value['module_id']]['is_front'] key=$k value=$v -->
+                                        <!-- if $k == 'start_cover_pic' || $k == 'end_cover_pic'  -->
+                                        <?php continue; ?>
+                                        <!-- /if  -->
                                         {if $k == 'pdf_file'}
                                         <tr>
                                             <td style="width: 160px"> {$v} </td>

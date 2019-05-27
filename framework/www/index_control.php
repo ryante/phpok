@@ -383,8 +383,9 @@ class index_control extends phpok_control
         }
         if (!empty($tagId)) {
             $docs = $this->searchDocsByTag($tagId);
+            $tagInfo = $this->db->get_one("select title from dj_tag where id={$tagId}");
             $this->assign('tag_id', $tagId);
-            $this->assign('nav_title', "文献标签：{$tags[$tagId]}");
+            $this->assign('nav_title', "文献标签：{$tagInfo['title']}");
         }
         if (!empty($keywords)) {
             $docs = $this->searchDocsByKw($keywords, $searchFields);
