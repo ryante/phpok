@@ -709,7 +709,7 @@ class book_control extends phpok_control
                     continue;
                 }
             } else {
-                if ($value['identifier'] == 'img_pdf' || $value['identifier'] == 'content_pdf') {
+                if ($value['identifier'] == 'img_pdf' || $value['identifier'] == 'content_pdf' || $value['identifier'] == 'nohtml_content') {
                     continue;
                 }
             }
@@ -1081,7 +1081,7 @@ class book_control extends phpok_control
                 $tmplist[$value["identifier"]] = $this->lib('form')->get($value);
             }
             $tmplist['lid'] = $this->get('lid');
-            $tmplist['nohtml_content'] = strip_tags($tmplist['content']);
+            $tmplist['nohtml_content'] = empty($tmplist['nohtml_content']) ? strip_tags($tmplist['content']) : $tmplist['nohtml_content'];
             $this->model('list')->save_ext($tmplist,$p_rs["module"]);
         }
         //儲存內容擴充套件欄位

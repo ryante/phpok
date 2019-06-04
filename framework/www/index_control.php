@@ -36,8 +36,8 @@ class index_control extends phpok_control
         $editTime = filemtime($file);
         $nowTime = time();
         if (empty($times)) {
-            $times = 6;
- //           $times = 0;
+//            $times = 600;
+            $times = 0;
         }
         if (!file_exists($file) || ($nowTime - $editTime) > $times) {
             return false;
@@ -95,7 +95,7 @@ class index_control extends phpok_control
         }
         $tags = $this->db->get_all("select id,title,tag_group_id from dj_tag where tag_group_id != 0 order by id desc");
         foreach ($tags as $key => $val) {
-            $items = $this->db->get_one("select count(`title_id`) total from dj_tag_stat where tag_id={$val['id']}");
+            $items = $this->db->get_one("select count(`title_id`) total from dj_tag_stat where tag_id='{$val['id']}'");
             $val['items'] = $items['total'];
             $tagGroups[$val['tag_group_id']]['tags'][] = $val;
         }
@@ -234,7 +234,7 @@ class index_control extends phpok_control
         if (!empty($data)) {
             return json_decode($data, true);
         }
-        $docIds = $this->db->get_all("select title_id from dj_tag_stat where tag_id = {$tagId}");
+        $docIds = $this->db->get_all("select title_id from dj_tag_stat where tag_id = '{$tagId}'");
         if (empty($docIds)) {
             return false;
         }
@@ -242,7 +242,7 @@ class index_control extends phpok_control
         $data = [];
         $allDocs = $this->getAllDocs();
         foreach($docIds as $val) {
-            $docIdInfo = $this->db->get_one("select lid from dj_list_6  where id={$val['title_id']}");
+            $docIdInfo = $this->db->get_one("select lid from dj_list_6  where id='{$val['title_id']}'");
             if (!empty($docIdInfo) && !empty($allDocs[$docIdInfo['lid']])) {
                 if (empty($data[$docIdInfo['lid']])) {
                     $data[$docIdInfo['lid']] = $allDocs[$docIdInfo['lid']]; 
@@ -269,7 +269,7 @@ class index_control extends phpok_control
 	       return false;
        }
        $data = [];
-       $sonPid = $this->db->get_all("select id from dj_project where parent_id = {$pid}");
+       $sonPid = $this->db->get_all("select id from dj_project where parent_id = '{$pid}'");
 	   if (!empty($sonPid)) {
 	      foreach ($sonPid as $val) {
 	          $pidArr[] = $val['id'];
@@ -300,8 +300,8 @@ class index_control extends phpok_control
         if (!empty($data)) {
             return json_decode($data, true);
         }
-        $where = " b.lid = {$lid} and a.status=1";
-        $rows = $this->db->get_all("select a.title,a.dateline,a.sort,a.tag,b.* from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc,a.id desc");
+        $where = " b.lid = '{$lid}' and a.status=1";
+        $rows = $this->db->get_all("select a.title,a.project_id,a.dateline,a.sort,a.tag,b.* from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc,a.id desc");
         if (empty($rows)) {
             return false;
         }
@@ -337,22 +337,31 @@ class index_control extends phpok_control
         return $data;
     }
 
-    public function searchBookContent($keyWord) {
+    public function searchBookContent($keyWord, $docId = '') {
         $where = "1=1";
+        $docs = $this->getAllDocs();
+        if (!empty($docId)) {
+            $thisDocsInfo = $docs[$docId];
+            if (empty($thisDocsInfo)) {
+                return false;
+            }
+            $where .= " and a.project_id = '{$thisDocsInfo['project_id']}' ";
+        }
         if (!empty($keyWord)) {
             $where .= " and nohtml_content like '%{$keyWord}%'";
         }
-        $docs = $this->getAllDocs();
-        $rows = $this->db->get_all("select a.id,b.lid,b.nohtml_content from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc, a.id desc");
+        $rows = $this->db->get_all("select b.id,b.lid,b.nohtml_content from dj_list a inner join dj_list_6 b on a.id=b.lid where {$where} order by a.sort desc, a.id desc");
         if (!empty($rows)) {
             foreach ($rows as $key => $val) {
                 $val['nohtml_content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['nohtml_content']);
                 $tmpBookLists = $this->getDocBooks($val['lid']);
                 $val['page'] = $tmpBookLists[$val['id']]['page'];
-                if (empty($bookData[$val['lid']]['id'])) {
-                    $bookData[$val['lid']] = $docs[$val['lid']];
+                if (!empty($docs[$val['lid']])) {
+                    if (empty($bookData[$val['lid']]['id'])) {
+                        $bookData[$val['lid']] = $docs[$val['lid']];
+                    }
+                    $bookData[$val['lid']]['book_list'][] = $val;
                 }
-                $bookData[$val['lid']]['book_list'][] = $val;
             }
         }
         return $bookData;
@@ -376,14 +385,14 @@ class index_control extends phpok_control
         }
         $tags = $this->getAllTags();
         if (!empty($pid)) {
-            $prs = $this->db->get_one("select title from dj_project where id={$pid}");
+            $prs = $this->db->get_one("select title from dj_project where id='{$pid}'");
             $docs = $this->searchDocsByPid($pid);
             $this->assign('pid', $pid);
             $this->assign('nav_title', $prs['title']);
         }
         if (!empty($tagId)) {
             $docs = $this->searchDocsByTag($tagId);
-            $tagInfo = $this->db->get_one("select title from dj_tag where id={$tagId}");
+            $tagInfo = $this->db->get_one("select title from dj_tag where id='{$tagId}'");
             $this->assign('tag_id', $tagId);
             $this->assign('nav_title', "文献标签：{$tagInfo['title']}");
         }
@@ -414,9 +423,9 @@ class index_control extends phpok_control
             $this->error(P_Lang('找不到相关数据'));
         }
         $bookInfo = $docs[$id];
-	    $projectInfo = $this->db->get_one("select * from dj_project where id={$bookInfo['project_id']}");
+	    $projectInfo = $this->db->get_one("select * from dj_project where id='{$bookInfo['project_id']}'");
 	    if (!empty($projectInfo['parent_id'])) {
-            $projectInfo = $this->db->get_one("select * from dj_project where id={$projectInfo['parent_id']}");
+            $projectInfo = $this->db->get_one("select * from dj_project where id='{$projectInfo['parent_id']}'");
         }
 	    $this->assign("prs_info", $projectInfo);
         $this->assign('nav_title', $bookInfo['title']);
@@ -483,25 +492,11 @@ class index_control extends phpok_control
                        $books[] = $val;
                     }
                 }
-                $bookData[$docId] = ['book_info' => $docs[$docId], 'book_list' => $books];
+                $bookData[$docId] = $docs[$docId];
+                $bookData[$docId]['book_list'] = $books;
             }
         } else {
-            $where = "1=1";
-            if (!empty($keyWord)) {
-                $where .= " and nohtml_content like '%{$keyWord}%'";
-            }
-            $rows = $this->db->get_all("select a.id,b.lid,b.nohtml_content from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc, a.id desc");
-            if (!empty($rows)) {
-                foreach ($rows as $key => $val) {
-                    $val['nohtml_content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['nohtml_content']);
-                    $tmpBookLists = $this->getDocBooks($val['lid']);
-                    $val['page'] = $tmpBookLists[$val['id']]['page'];
-                    if (empty($bookData[$val['lid']]['book_info'])) {
-                        $bookData[$val['lid']]['book_info'] = $docs[$val['lid']];
-                    }
-                    $bookData[$val['lid']]['book_list'][] = $val;
-                }
-            }
+            $bookData = $this->searchBookContent($keyWord, $docId);
         }
         $this->assign('doc_id', $docId);
         $this->assign('books', $bookData);

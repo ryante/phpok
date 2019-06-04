@@ -15,7 +15,7 @@
                 <!-- /if -->
             </span>
             <!-- 库列表 start -->
-            <div class="layui-tab-content" style="margin-top: 30px; display:none">
+            <div class="layui-tab-content" style="margin-top: 30px;">
                 <div class="layui-form">
                     <div class="layui-row layui-col-space10">
                         <input type="hidden" id="doc_id" value="{$rs.id}">
@@ -81,8 +81,12 @@
                         </div>
 
                         <div class="layui-tab-item">
+                            {if $rslist['content_pdf']}
                             <iframe src="/pdf_show/web/viewer.html?file=/{$rslist['content_pdf']['filename']}" style="float:left" frameborder="0" width="50%" height="650px"></iframe>
                             <iframe src="/pdf_show/web/viewer.html?file=/{$rslist['img_pdf']['filename']}" frameborder="0" width="50%" height="650px"></iframe>
+                            {else}
+                            <p>暫無內容</p>
+                            {/if}
                         </div>
                     </div>
                 </div>
