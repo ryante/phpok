@@ -152,7 +152,7 @@ function search_set(val){
 	</div>
 	<div class="content">
 		<ul class="layout">
-			<li><label><input type="radio" name="search" value="1"{if $rs.search == 2} checked{/if} onclick="search_set(2)" />{lang支援搜尋}</label></li>
+			<li><label><input type="radio" name="search" value="2"{if $rs.search == 2} checked{/if} onclick="search_set(2)" />{lang支援搜尋}</label></li>
 			<li><label><input type="radio" name="search" value="0"{if !$rs.search} checked{/if} onclick="search_set(0)" />{lang不支援搜尋}</label></li>
 			<li id="search_separator_html" {if !$rs.search || $rs.search != 3}style="display:none"{/if}><input type="text" name="search_separator" id="search_separator" class="short" value="{$rs.search_separator}" placeholder="{lang分隔符}" /></li>
 		</ul>

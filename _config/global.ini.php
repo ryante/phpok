@@ -21,7 +21,7 @@ func_id = f
 admin_file = admin.php
 
 ;网站首页，这里一般不修改，除非首页要另外制作，才改名
-www_file = index.php
+www_file = home.php
 
 ;API接口
 api_file = api.php

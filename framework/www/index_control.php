@@ -242,6 +242,8 @@ class index_control extends phpok_control
         $data = [];
         $allDocs = $this->getAllDocs();
         foreach($docIds as $val) {
+            /*
+             * 又改变主意不显示内文了
             $docIdInfo = $this->db->get_one("select lid from dj_list_6  where id='{$val['title_id']}'");
             if (!empty($docIdInfo) && !empty($allDocs[$docIdInfo['lid']])) {
                 if (empty($data[$docIdInfo['lid']])) {
@@ -254,6 +256,7 @@ class index_control extends phpok_control
                 $data[$docIdInfo['lid']]['book_list'] = $tmpBookLists;
                 continue;
             }
+             */
             if (!empty($allDocs[$val['title_id']]) && empty($data[$val['title_id']])) {
                 $data[$val['title_id']] = $allDocs[$val['title_id']];
             }
@@ -337,6 +340,7 @@ class index_control extends phpok_control
         return $data;
     }
 
+    // 内文搜索
     public function searchBookContent($keyWord, $docId = '') {
         $where = "1=1";
         $docs = $this->getAllDocs();
@@ -353,7 +357,7 @@ class index_control extends phpok_control
         $rows = $this->db->get_all("select b.id,b.lid,b.nohtml_content from dj_list a inner join dj_list_6 b on a.id=b.lid where {$where} order by a.sort desc, a.id desc");
         if (!empty($rows)) {
             foreach ($rows as $key => $val) {
-                $val['nohtml_content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['nohtml_content']);
+                $val['nohtml_content'] = $this->formatBookContent($val['nohtml_content'], $keyWord, 38);
                 $tmpBookLists = $this->getDocBooks($val['lid']);
                 $val['page'] = $tmpBookLists[$val['id']]['page'];
                 if (!empty($docs[$val['lid']])) {
@@ -485,7 +489,7 @@ class index_control extends phpok_control
                 foreach ($bookLists as $key => $val) {
                     if (!empty($keyWord)) {
                         if (stripos($val['nohtml_content'], $keyWord) !== false) {
-                            $val['nohtml_content'] = str_replace($keyWord,"<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $val['nohtml_content']);
+                            $val['nohtml_content'] = $this->formatBookContent($val['nohtml_content'], $keyWord, 38);
                             $books[] = $val;
                         }
                     } else {
@@ -505,11 +509,41 @@ class index_control extends phpok_control
         $this->view('book_search');
     }
 
-	public function tips_f()
-	{
-		$info = $this->get('info');
-		$backurl = $this->get('back');
-		if(!$info){
+
+    // 格式化内文
+    public function formatBookContent($str, $kw, $subLen) {
+        if (empty($str) || empty($kw)) {
+            return;
+        }   
+        $str = str_replace([" ","　","\t","\n","\r"], '', $str);
+        $strLen = mb_strlen($str);
+        $kwLen = mb_strlen($kw);
+        $pos = mb_strpos($str, $kw, 0, 'utf-8');
+        if ($strLen <= $subLen) {
+            return $str;
+        }   
+        $halfOffset = intval(($subLen - $kwLen) / 2); 
+        if ($pos < $halfOffset) {
+            // 左边偏移不够
+            $str = mb_substr($str, 0, $subLen) . "...";
+        } elseif (($pos + $halfOffset) > $strLen ) { 
+            // 右边偏移不够
+            $str = "..." . mb_substr($str, $subLen - 2 * $subLen);
+        } else {
+            $leftSubStr = mb_substr($str, $pos - $halfOffset, $halfOffset);
+            $rightSubStr = mb_substr($str, $pos + $kwLen - 1, $halfOffset);
+            $str = "..." . $leftSubStr . $rightSubStr . "...";
+        }   
+        $str = str_replace($kw,"<span class='layui-badge layui-bg-green'>{$kw}</span>", $str);
+        return $str;
+    }
+
+
+    public function tips_f()
+    {
+        $info = $this->get('info');
+        $backurl = $this->get('back');
+        if(!$info){
 			$info = P_Lang('友情提示');
 		}
 		if(!$backurl){

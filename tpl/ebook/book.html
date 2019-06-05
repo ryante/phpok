@@ -9,8 +9,8 @@
                 <!-- if !$nav_title -->
                 <a><cite>文献列表</cite></a>
                 <!-- else -->
-                <a href="/index.php?f=docs">文献列表</a><span lay-separator="">/</span>
-                <a href="/index.php?f=docs&pid={$pid}">{$prs_info.title}</a><span lay-separator="">/</span>
+                <a href="/{$sys.www_file}?f=docs">文献列表</a><span lay-separator="">/</span>
+                <a href="/{$sys.www_file}?f=docs&pid={$pid}">{$prs_info.title}</a><span lay-separator="">/</span>
                 <a><cite>{$nav_title}</cite></a>
                 <!-- /if -->
             </span>
@@ -83,13 +83,13 @@
                             <!-- /if  -->
                         </div>
                         <div class="layui-tab-item  {if $page > 0}layui-show{/if}">
-                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=1&page={$page}&keyword={$keyword}" frameborder="0" width="100%" height="650px"></iframe>
+                            <iframe src="{$sys.www_file}?f=read&doc_id={$rs.id}&type=1&page={$page}&keyword={$keyword}" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
                         <div class="layui-tab-item">
-                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=2&page={$page}&keyword={$keyword}" frameborder="0" width="100%" height="650px"></iframe>
+                            <iframe src="{$sys.www_file}?f=read&doc_id={$rs.id}&type=2&page={$page}&keyword={$keyword}" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
                         <div class="layui-tab-item">
-                            <iframe src="index.php?f=read&doc_id={$rs.id}&type=3&page={$page}" frameborder="0" width="100%" height="650px"></iframe>
+                            <iframe src="{$sys.www_file}?f=read&doc_id={$rs.id}&type=3&page={$page}" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
                         <div class="layui-tab-item">
                             <!-- if $rs['pdf_file']['filename'] -->
