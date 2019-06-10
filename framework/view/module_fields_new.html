@@ -65,10 +65,12 @@ $(document).ready(function(){
 			<td>{$value.format_type_name}</td>
 			<td><div class="gray i hand center" title="{lang點選調整排序}" name="taxis" data="{$value.id}">{$value.taxis}</div></td>
 			<td>
+                {if !in_array($value.identifier, ['start_cover_pic', 'end_cover_pic', 'pdf_file'])}
 				<div class="layui-btn-group">
 					<input type="button" value="{lang編輯}" onclick="$.admin_module.field_edit('{$value.id}')" class="layui-btn  layui-btn-sm" />
 					<input type="button" value="{lang刪除}" onclick="$.admin_module.field_del('{$value.id}','{$value.title}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 				</div>
+                {/if}
 			</td>
 		</tr>
 		<!-- /loop -->

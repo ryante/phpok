@@ -403,6 +403,12 @@ class index_control extends phpok_control
         if (!empty($keywords)) {
             $docs = $this->searchDocsByKw($keywords, $searchFields);
             $bookData = $this->searchBookContent($keywords);
+            foreach ($docs as $key => $val) {
+                if (!empty($bookData[$key])) {
+                    $docs[$key] = $bookData[$key];
+                    unset($bookData[$key]);
+                }
+            }
             $docs = array_merge($docs, $bookData);
             $this->assign('keywords', $keywords);
             $this->assign('search_fields', $searchFields);
@@ -531,7 +537,7 @@ class index_control extends phpok_control
             $str = "..." . mb_substr($str, $subLen - 2 * $subLen);
         } else {
             $leftSubStr = mb_substr($str, $pos - $halfOffset, $halfOffset);
-            $rightSubStr = mb_substr($str, $pos + $kwLen - 1, $halfOffset);
+            $rightSubStr = mb_substr($str, $pos, $halfOffset + $kwLen);
             $str = "..." . $leftSubStr . $rightSubStr . "...";
         }   
         $str = str_replace($kw,"<span class='layui-badge layui-bg-green'>{$kw}</span>", $str);
