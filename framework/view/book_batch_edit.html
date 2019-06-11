@@ -1,0 +1,120 @@
+<!-- include tpl=head_lay -->
+<script type="text/javascript" src="{func include_js list.js}"></script>
+<form method="post" id="_listedit" class="layui-form" onsubmit="return $.admin_list_edit.save()">
+<input type="hidden" name="id" id="id" value="{$id}" />
+<input type="hidden" name="pid" id="pid" value="{$pid}" />
+<input type="hidden" name="lid" id="lid" value="{$book_info.id}" />
+<input type="hidden" name="parent_id" id="parent_id" value="{$parent_id}" />
+<div class="layui-card">
+	<div class="layui-card-header">{if $id}編輯{else}新增{/if}書籍</div>
+	<div class="layui-card-body">
+		<!-- loop from=$extlist key=$key value=$value id=$tmpid -->
+		{if $value.identifier == 'images'}
+		<div class="layui-form-item">
+			<label class="layui-form-label">
+				<!-- if $value.note -->
+				<i class="layui-icon layui-tips" lay-tips="{$value.note}">&#xe702;</i>
+				<!-- /if -->
+				{$value.title}
+			</label>
+			<div class="layui-input-block">
+				{$value.html}
+				<!-- if $popedom.ext && $value.is_edit && $session.adm_develop -->
+				<div class="layui-btn-group">
+					<!-- if $ext_module != 'add-list' -->
+					<input type="button" value="{lang編輯}" class="layui-btn layui-btn-xs" onclick="ext_edit('{$value.identifier}','{$ext_module}')" />
+					<!-- /if -->
+					<input type="button" value="{lang刪除}" class="layui-btn layui-btn-xs layui-btn-danger" onclick="ext_delete('{$value.identifier}','{$ext_module}','{$value.title}')" />
+				</div>
+				<!-- /if -->
+			</div>
+		{/if}
+		<!-- /loop -->
+
+
+		</div>
+
+	</div>
+</div>
+
+<div class="submit-info">
+	<div class="layui-container center">
+		<input type="submit" value="{lang提交}" class="layui-btn layui-btn-lg layui-btn-danger" />
+		<input type="button" value="{lang取消關閉}" class="layui-btn layui-btn-lg layui-btn-primary" onclick="$.admin.close()" />
+	</div>
+</div>
+<div class="submit-info-clear"></div>
+</form>
+<!-- include tpl=foot_lay -->
+<script>
+    $(function(){
+            $.admin_list_edit = {
+save:function()
+		{
+			var loading_action;
+			var id = $("#id").val();
+			var pcate = $("#_root_cate").val();
+			var pcate_multiple = $("#_root_cate_multiple").val();
+			if(typeof(CKEDITOR) != "undefined"){
+				for(var i in CKEDITOR.instances){
+					CKEDITOR.instances[i].updateElement();
+				}
+			}
+			$("#_listedit").ajaxSubmit({
+				'url':get_url('book','batchok'),
+				'type':'post',
+				'dataType':'json',
+				'beforeSubmit':function(){
+					loading_action = $.dialog.tips('<img src="images/loading.gif" border="0" align="absmiddle" /> '+p_lang('正在儲存資料，請稍候…')).time(30).lock();
+				},
+				'success':function(rs){
+					if(loading_action){
+						loading_action.close();
+					}
+
+                    if(rs.status == 'ok'){
+						var url = get_url('book','action','id='+$("#pid").val());
+                        var jumpUrl = get_url('book','action','lid='+$('#lid').val() + '&id='+$("#pid").val());
+						var addurl = get_url('book','edit','pid='+$("#pid").val()+'&lid='+$('#lid').val()+"&batch=1");
+						if(pcate>0){
+							var cateid = $("#cate_id").val();
+							url += "&keywords[cateid]="+cateid;
+						}
+						if(id){
+							$.dialog.alert(p_lang('內容資訊修改成功'),function(){
+								$.phpok.message('pendding');
+                                $.admin.reload(jumpUrl);
+								$.admin.close(url);
+							},'succeed');
+							return true;
+						}
+						$.dialog.through({
+							'icon':'succeed',
+							'content':p_lang('內容新增操作成功，請選擇繼續新增或返回列表'),
+							'ok':function(){
+								$.phpok.message('pendding');
+								// $.admin.reload(jumpUrl);
+                                $.phpok.reload();
+							},
+							'okVal':p_lang('繼續新增'),
+							'cancel':function(){
+								$.phpok.message('pendding');
+								$.admin.reload(jumpUrl);
+								$.admin.close(addurl);
+							},
+							'cancelVal':p_lang('關閉視窗'),
+							'lock':true
+						});
+						return true;
+
+					}
+					$.dialog.alert(rs.content);
+					return true;
+				}
+			});
+			return false;
+		},
+
+            }
+    })
+</script>

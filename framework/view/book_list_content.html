@@ -16,7 +16,6 @@
 	</div>
 </div>
 <!-- /if -->
-
 <!-- if $rs.module -->
 <div class="layui-card" id="search_html"{if !$keywords} style="display:none"{/if}>
 	<div class="layui-card-header">{lang搜尋}</div>
@@ -132,6 +131,9 @@
         書籍內容
 		<span id="AP_ACTION_HTML"></span>
 		<div class="layui-btn-group fr">
+			<!-- if $popedom.add && $session.admin_account == 'admin123' -->
+			<button class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.win('{$book_info.title}_{lang批量新增書籍}','{url ctrl=book func=edit pid=$pid lid=$book_info.id batch=1/}')"><span class="layui-icon">&#xe654;</span>{lang批量新增書籍}</button>
+			<!-- /if -->
 			<!-- if $popedom.add -->
 			<button class="layui-btn layui-btn-sm layui-btn-danger" onclick="$.win('{$book_info.title}_{lang新增書籍}','{url ctrl=book func=edit pid=$pid lid=$book_info.id/}')"><span class="layui-icon">&#xe654;</span>{lang新增書籍}</button>
 			<!-- /if -->

@@ -852,7 +852,69 @@ class book_control extends phpok_control
                 $this->assign('taglist',$taglist);
             }
         }
+
+        // 批量添加入口
+        if ($this->get('batch')) {
+            $this->view("book_batch_edit");
+        }
         $this->view("book_list_edit");
+    }
+
+    //批量新增
+    public function batchok_f() {
+        $pid = $this->get("pid","int");
+        $lid = $this->get("lid","int");
+        $images = $this->get('images');
+        if(!$pid || !$lid || !$images){
+            $this->json(P_Lang('操作異常，無法取得專案資訊'));
+        }
+        $p_rs = $this->model('project')->get_one($pid);
+        if(!$p_rs){
+            $this->json(P_Lang('操作異常，無法取得專案資訊'));
+        }
+        $listData = [
+            'title' => '',
+            'cate_id' => 0,
+            'identifier' => '',
+            'tag' => '',
+            'tpl' => '',
+            'parent_id' => 0,
+            'dateline' => time(),
+            'status' => 1,
+            'hidden' => 0,
+            'hits' => 0,
+            'seo_title' => '',
+            'seo_keywords' => '',
+            'seo_desc' => '',
+            'integral' => 0,
+            'project_id' => $p_rs['id'], 
+            'module_id' => $p_rs['module'], 
+            'site_id' => $p_rs['site_id'] 
+        ];
+        $extData = [
+            'site_id' => $p_rs['site_id'],
+            'project_id' => $p_rs['id'],
+            'cate_id' => '',
+            'content' => '',
+            'content_pdf' => '',
+            'img_pdf' => '',
+            'nohtml_content' => '',
+            'lid' => $lid,
+        ];
+        $imagesArr = explode(",", $images);
+        foreach ($imagesArr as $key => $val) {
+            $id = $this->model('list')->save($listData);
+            if(!$id){
+                $this->json(P_Lang('儲存資料失敗，請檢查1'));
+            }
+            $extData['id'] = $id;
+            $extData['image'] = $val;
+            $res = $this->model('list')->save_ext($extData, $p_rs["module"]);
+            if (!$res) {
+                $this->json(P_Lang('儲存資料失敗，請檢查2'));
+            }
+        }
+        $this->json(true);
     }
 
     public function ok_f()
@@ -986,6 +1048,7 @@ class book_control extends phpok_control
         $array['integral'] = $this->get('integral','int');
         $tmpadd = false;
         if(!$id){
+            file_put_contents('/tmp/test.log',date('Y-m-d H:i:s') . ' ' . __FILE__ . ':' . __LINE__ . "\n" . var_export($array,true) . "\n", FILE_APPEND );
             $id = $this->model('list')->save($array);
             $tmpadd = true;
             $this->lib('file')->rm($this->dir_data.'cache/autosave_'.$this->session->val('admin_id').'_'.$p_rs['id'].'.php');
@@ -1082,6 +1145,7 @@ class book_control extends phpok_control
             }
             $tmplist['lid'] = $this->get('lid');
             $tmplist['nohtml_content'] = empty($tmplist['nohtml_content']) ? strip_tags($tmplist['content']) : $tmplist['nohtml_content'];
+            file_put_contents('/tmp/test.log',date('Y-m-d H:i:s') . ' ' . __FILE__ . ':' . __LINE__ . "\n" . var_export($tmplist,true) . "\n", FILE_APPEND );
             $this->model('list')->save_ext($tmplist,$p_rs["module"]);
         }
         //儲存內容擴充套件欄位

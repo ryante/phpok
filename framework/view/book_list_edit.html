@@ -16,6 +16,9 @@
 		</div>		
 
 		<!-- loop from=$extlist key=$key value=$value id=$tmpid -->
+		{if $value.identifier == 'images'}
+        <?php continue; ?>
+		{/if}
 		{if $value.identifier == 'content'}
         <?php $content = $value['content'];continue; ?>
 		{/if}
@@ -58,7 +61,6 @@
 
 				.note-editor,.note-editable{ width: 400px;}
 			</style>
-		{if $value.identifier == 'content'}
 		<div class="layui-form-item" >
 			<label class="layui-form-label">內容</label>
 			<div class="layui-input-block">
@@ -86,7 +88,6 @@
 			</div>
 		</div>
 			<!-- 編輯器 end -->
-		{/if}
 
 
 		</div>
