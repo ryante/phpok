@@ -872,6 +872,9 @@ class book_control extends phpok_control
         if(!$p_rs){
             $this->json(P_Lang('操作異常，無法取得專案資訊'));
         }
+
+        $latestRow = $this->db->get_one("select a.sort from dj_list a inner join dj_list_6 b on a.id=b.id where b.lid={$lid}  order by a.sort desc,a.id desc");
+        $startSort = empty($latestRow['sort']) ? 0: $latestRow['sort'];
         $listData = [
             'title' => '',
             'cate_id' => 0,
@@ -903,6 +906,8 @@ class book_control extends phpok_control
         ];
         $imagesArr = explode(",", $images);
         foreach ($imagesArr as $key => $val) {
+            $startSort++;
+            $listData['sort'] = $startSort;
             $id = $this->model('list')->save($listData);
             if(!$id){
                 $this->json(P_Lang('儲存資料失敗，請檢查1'));
@@ -1048,7 +1053,6 @@ class book_control extends phpok_control
         $array['integral'] = $this->get('integral','int');
         $tmpadd = false;
         if(!$id){
-            file_put_contents('/tmp/test.log',date('Y-m-d H:i:s') . ' ' . __FILE__ . ':' . __LINE__ . "\n" . var_export($array,true) . "\n", FILE_APPEND );
             $id = $this->model('list')->save($array);
             $tmpadd = true;
             $this->lib('file')->rm($this->dir_data.'cache/autosave_'.$this->session->val('admin_id').'_'.$p_rs['id'].'.php');
@@ -1145,7 +1149,6 @@ class book_control extends phpok_control
             }
             $tmplist['lid'] = $this->get('lid');
             $tmplist['nohtml_content'] = empty($tmplist['nohtml_content']) ? strip_tags($tmplist['content']) : $tmplist['nohtml_content'];
-            file_put_contents('/tmp/test.log',date('Y-m-d H:i:s') . ' ' . __FILE__ . ':' . __LINE__ . "\n" . var_export($tmplist,true) . "\n", FILE_APPEND );
             $this->model('list')->save_ext($tmplist,$p_rs["module"]);
         }
         //儲存內容擴充套件欄位
