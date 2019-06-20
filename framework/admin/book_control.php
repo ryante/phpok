@@ -873,8 +873,7 @@ class book_control extends phpok_control
             $this->json(P_Lang('操作異常，無法取得專案資訊'));
         }
 
-        $latestRow = $this->db->get_one("select a.sort from dj_list a inner join dj_list_6 b on a.id=b.id where b.lid={$lid}  order by a.sort desc,a.id desc");
-        $startSort = empty($latestRow['sort']) ? 0: $latestRow['sort'];
+        $imgsInfo = $this->db->get_all("select id,title from dj_res where id in ($images)");
         $listData = [
             'title' => '',
             'cate_id' => 0,
@@ -904,16 +903,21 @@ class book_control extends phpok_control
             'nohtml_content' => '',
             'lid' => $lid,
         ];
-        $imagesArr = explode(",", $images);
-        foreach ($imagesArr as $key => $val) {
-            $startSort++;
-            $listData['sort'] = $startSort;
+        foreach ($imgsInfo as $key => $val) {
+            $sort = $key + 1;
+            if (stripos($val['title'], 'Page_') !== false) {
+               $tmpSort = str_replace('Page_', '', $val['title']); 
+               if (is_numeric($tmpSort) && $tmpSort > 0) {
+                   $sort = $tmpSort;
+               }
+            }
+            $listData['sort'] = $sort;
             $id = $this->model('list')->save($listData);
             if(!$id){
                 $this->json(P_Lang('儲存資料失敗，請檢查1'));
             }
             $extData['id'] = $id;
-            $extData['image'] = $val;
+            $extData['image'] = $val['id'];
             $res = $this->model('list')->save_ext($extData, $p_rs["module"]);
             if (!$res) {
                 $this->json(P_Lang('儲存資料失敗，請檢查2'));
