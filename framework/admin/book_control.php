@@ -906,7 +906,7 @@ class book_control extends phpok_control
         foreach ($imgsInfo as $key => $val) {
             $sort = $key + 1;
             if (stripos($val['title'], 'Page_') !== false) {
-               $tmpSort = str_replace('Page_', '', $val['title']); 
+               $tmpSort = preg_replace('/^(.*)Page_/', '', $val['title']);
                if (is_numeric($tmpSort) && $tmpSort > 0) {
                    $sort = $tmpSort;
                }
