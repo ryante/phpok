@@ -138,9 +138,9 @@ class index_control extends phpok_control
             return json_decode($data, true);
         }
 	    $result = [];
-	    $rows[2] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_2 b on a.id=b.id where a.status=1 ");
-        $rows[3] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_3 b on a.id=b.id where a.status=1 ");
-        $rows[5] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_5 b on a.id=b.id where a.status=1 ");
+	    $rows[2] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_2 b on a.id=b.id where a.status=1 order by a.sort asc ");
+        $rows[3] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_3 b on a.id=b.id where a.status=1 order by a.sort asc");
+        $rows[5] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_5 b on a.id=b.id where a.status=1 order by a.sort asc");
         $rows[2] = empty($rows[2]) ? [] : $rows[2];
         $rows[3] = empty($rows[3]) ? [] : $rows[3];
         $rows[5] = empty($rows[5]) ? [] : $rows[5];
@@ -148,8 +148,8 @@ class index_control extends phpok_control
         if (empty($data)) {
             return false;
         }
-        $sortKey = array_column($data, "id", "id");
-        array_multisort($sortKey, SORT_DESC, $data);
+        //$sortKey = array_column($data, "id", "id");
+        //array_multisort($sortKey, SORT_DESC, $data);
         foreach ($data as $key => $val) {
             if (!empty($val['start_cover_pic'])) {
                 $picInfo = $this->model('res')->get_one($val['start_cover_pic'],true);
@@ -277,6 +277,7 @@ class index_control extends phpok_control
 	      foreach ($sonPid as $val) {
 	          $pidArr[] = $val['id'];
           }
+          $pidArr[] = $pid;
        } else {
 	       $pidArr[] = $pid;
        }

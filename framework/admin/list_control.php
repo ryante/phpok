@@ -22,7 +22,8 @@ class list_control extends phpok_control
 
     private function popedom_auto($pid)
     {
-        $this->popedom = appfile_popedom("list",$pid);
+        //$this->popedom = appfile_popedom("list",$pid);
+        $this->popedom = appfile_popedom("list",3);
         $this->assign("popedom",$this->popedom);
         return $this->popedom;
     }
@@ -87,7 +88,7 @@ class list_control extends phpok_control
             foreach($son_list as $key=>$value){
                 $popedom = appfile_popedom("list",$value["id"]);
                 if(!$popedom["list"]){
-                    unset($son_list[$key]);
+                   // unset($son_list[$key]);
                 }
             }
         }
