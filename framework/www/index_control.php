@@ -138,9 +138,14 @@ class index_control extends phpok_control
             return json_decode($data, true);
         }
 	    $result = [];
-	    $rows[2] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_2 b on a.id=b.id where a.status=1 order by a.sort asc ");
-        $rows[3] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_3 b on a.id=b.id where a.status=1 order by a.sort asc");
-        $rows[5] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_5 b on a.id=b.id where a.status=1 order by a.sort asc");
+        $allProject = $this->db->get_all("select id from dj_project");
+        foreach ($allProject as $project) {
+            $projectId[] = $project['id'];
+        }
+        $projectStr = implode(",", $projectId);
+	    $rows[2] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_2 b on a.id=b.id where a.status=1 and a.project_id in ({$projectStr}) order by a.sort asc ");
+        $rows[3] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_3 b on a.id=b.id where a.status=1 and a.project_id in ({$projectStr}) order by a.sort asc");
+        $rows[5] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_5 b on a.id=b.id where a.status=1 and a.project_id in ({$projectStr}) order by a.sort asc");
         $rows[2] = empty($rows[2]) ? [] : $rows[2];
         $rows[3] = empty($rows[3]) ? [] : $rows[3];
         $rows[5] = empty($rows[5]) ? [] : $rows[5];
