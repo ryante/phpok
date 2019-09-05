@@ -875,7 +875,7 @@ class book_control extends phpok_control
 
         $imgsInfo = $this->db->get_all("select id,title from dj_res where id in ($images)");
         $listData = [
-            'title' => '',
+            'title' => '--',
             'cate_id' => 0,
             'identifier' => '',
             'tag' => '',
@@ -960,9 +960,9 @@ class book_control extends phpok_control
             $this->json(P_Lang('操作異常，無法取得專案資訊'));
         }
         $array = array();
-        $title = $this->get("content");
+        $title = $this->get("title");
         if(!$title){
-        //    $this->json(P_Lang('內容不能為空'));
+            $this->json(P_Lang('頁標題不能為空'));
         }
         $array["title"] = strip_tags($title);
         if($p_rs['cate']){

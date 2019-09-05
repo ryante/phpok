@@ -288,6 +288,43 @@ function set_admin_id(id)
 	});
 }
 
+// new add 2019-07-30
+
+function set_parent_new()
+{
+	var ids = $.input.checkbox_join();
+	if(!ids){
+		$.dialog.alert(p_lang('未指定要操作的主題'));
+		return false;
+	}
+	$.dialog.prompt(p_lang('請輸入新文庫ID，所遷移的新文庫和舊文庫繫結模組要壹致'),function(val){
+		if(!val){
+			$.dialog.alert('內容不能為空');
+			return false;
+		}
+		var lst = ids.split(',');
+		var isin = false;
+		for(var i in lst){
+			if(lst[i] == val){
+				isin = true;
+			}
+		}
+		if(isin){
+			$.dialog.alert(p_lang('輸入的主題重複了'));
+			return false;
+		}
+		var url = get_url('list','set_parent_new','id='+val+"&ids="+$.str.encode(ids));
+		var rs = $.phpok.json(url);
+		if(rs.status){
+			$.phpok.reload();
+		}else{
+			$.dialog.alert(rs.info);
+			return false;
+		}
+	},'');
+}
+
+// new add end
 function set_parent()
 {
 	var ids = $.input.checkbox_join();
@@ -372,6 +409,14 @@ function list_action_exec()
 	}
 	if(val == 'unset_parent'){
 		unset_parent();
+		return false;
+	}
+	if(val == 'set_parent_new'){
+		set_parent_new();
+		return false;
+	}
+	if(val == 'unset_parent_new'){
+		unset_parent_new();
 		return false;
 	}
 	//執行批量稽核通過

@@ -8,7 +8,7 @@
 <div class="layui-card">
 	<div class="layui-card-header">{if $id}編輯{else}新增{/if}書籍</div>
 	<div class="layui-card-body">
-		<div class="layui-form-item" style="display:none">
+		<div class="layui-form-item" >
 			<label class="layui-form-label"><!-- if $p_rs.alias_title -->{$p_rs.alias_title}<!-- else -->{lang主題}<!-- /if --></label>
 			<div class="layui-input-block">
 				<input type="text" name="title" id="title" value="{$rs.title}" class="layui-input" placeholder="{lang不能超過80個漢字}<!-- if $p_rs.alias_note -->，{$p_rs.alias_note}<!-- /if -->" />
@@ -145,7 +145,7 @@
 			<div class="layui-input-inline auto gray lh38">{lang繫結會員功能，允許會員對主題進行修改或刪除，需要開放釋出許可權}</div>
 		</div>
 		<!-- /if -->
-		<!-- if $p_rs.is_tag == 1 -->
+		<!-- if $p_rs.is_tag == 1 && false -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">{lang標籤}</label>
 			<div class="layui-input-block">

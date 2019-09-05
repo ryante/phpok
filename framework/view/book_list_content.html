@@ -148,7 +148,7 @@
 			<th width="20px">&nbsp;</th>
 			<th width="20px">&nbsp;</th>
 			<th>&nbsp;</th>
-			<th style="display:none">{$rs.alias_title ? $rs.alias_title : P_Lang('主題')}</th>
+			<th>{$rs.alias_title ? $rs.alias_title : P_Lang('主題')}</th>
 			<!-- if $rs.cate -->
 			<th class="center">{lang主分類}</th>
 			<!-- /if -->
@@ -174,7 +174,7 @@
 			<td class="center"><input type="checkbox" name="ids[]" id="id_{$value.id}" value="{$value.id}" /></td>
 			<td><span class="status{$value.status}" id="status_{$value.id}" {if $popedom.status}onclick="$.admin_list.status({$value.id})"{else} style="cursor: default;"{/if} value="{$value.status}"></span></td>
 			<td class="center">{$value.id}</td>
-			<td style="display:none"><label for="id_{$value.id}">
+			<td><label for="id_{$value.id}">
 				<a href="{$sys.url}?id={$value.id}" target="_blank" title="{lang前臺訪問}">{$value.title}</a>
 				<!-- if $value.attr -->
 					<!-- php:$attr = explode(",",$value['attr']) -->

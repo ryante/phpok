@@ -329,23 +329,50 @@
 			<div class="layui-input-inline auto gray lh38">{lang繫結會員功能，允許會員對主題進行修改或刪除，需要開放釋出許可權}</div>
 		</div>
 		<!-- /if -->
-		<!-- if $p_rs.is_tag == 1 -->
+		<!-- if $p_rs.is_tag == 1 || true -->
 		<div class="layui-form-item">
 			<label class="layui-form-label">{lang標籤}</label>
 			<div class="layui-input-block">
-				<input type="text" name="tag" id="tag" value="{$rs.tag}" class="layui-input" />
+				<input type="text" name="tag" id="tag" value="{$rs.tag}" readonly class="layui-input" style="width:85%; float:left; marin-right:10px;" />
+				<input type="button" value="{lang清空}" onclick="$('input[name=tag]').val('')" class="layui-btn layui-btn layui-btn-danger" />
 			</div>
+
+			<!-- if $tag_groups -->
+			<div class="layui-input-block mtop" style="width:280px;">
+			<select id="tag-group" lay-filter="tag-group">
+			<option value="">{lang請選擇標籤組}</option>
+			<!-- loop from=$tag_groups key=$key value=$value id=$tmpid -->
+			<option value="{$value.id}">{$value.name}</option>
+			<!-- /loop -->
+			</select>
+			</div>
+			<script>
+			$(function(){
+					var form = layui.form;
+					//监听提交
+					form.on('select(tag-group)', function(data){
+							$('.tag_group_cate').css('display', 'none');
+							$('#tag_group_'+data.value).css('display', 'block');
+							});
+
+			})
+			</script>
+			<!-- /if -->
+
+			<!-- if $tags  -->
 			<div class="layui-input-block mtop">
 				<div class="layui-btn-group">
-					<!-- if $tag_config.count && $taglist -->
-					<!-- loop from=$taglist key=$key value=$value id=$tmpid -->
-					<input type="button" value="{$value.title}" onclick="$.phpok_list.tag_append(this.value,'{$tag_config.separator}')" class="layui-btn layui-btn-sm" />
+					<!-- loop from=$tags key=$key value=$value id=$tmpid -->
+       				       <div id="tag_group_{$key}" class="tag_group_cate" style="display:none">
+					<!-- loop from=$value key=$k value=$v id=$tmpid -->
+					<input type="button" value="{$v.title}" onclick="$.phpok_list.tag_append(this.value,'{$tag_config.separator}')" class="layui-btn layui-btn-sm" />
 					<!-- /loop -->
-					<!-- /if -->
-					<input type="button" value="{lang更多選擇}" onclick="$.phpok_list.tag()" class="layui-btn layui-btn-sm layui-btn-warm" />
-					<input type="button" value="{lang清空}" onclick="$('input[name=tag]').val('')" class="layui-btn layui-btn-sm layui-btn-danger" />
+					<input type="button" style="display:none" value="{lang更多選擇}" onclick="$.phpok_list.tag()" class="layui-btn layui-btn-sm layui-btn-warm" />
+					</div>
+					<!-- /loop -->
 				</div>
 			</div>
+			<!-- /if -->
 			<div class="layui-input-block mtop">{lang多個標籤用 [title] 分開，最多不能超過10個|title:$tag_config.separator}</div>
 		</div>
 		<!-- /if -->

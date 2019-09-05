@@ -36,8 +36,7 @@ class index_control extends phpok_control
         $editTime = filemtime($file);
         $nowTime = time();
         if (empty($times)) {
-//            $times = 600;
-            $times = 0;
+            $times = 600;
         }
         if (!file_exists($file) || ($nowTime - $editTime) > $times) {
             return false;
@@ -177,6 +176,13 @@ class index_control extends phpok_control
                     $data[$key]['pdf_file'] = $pdf;
                 }
             }
+	    if (!empty($val['summary'])) {
+                $fileInfo = $this->model('res')->get_one($val['summary'],true);
+                if (!empty($fileInfo)) {
+                    $pdf = ['filename' => $fileInfo['filename'], 'title' => $fileInfo['title']];
+                    $data[$key]['summary'] = $pdf;
+                }
+	    }
             $result[$val['id']] = $data[$key];
         }
         $this->saveCache($cacheKey, json_encode($result, true));
@@ -439,17 +445,19 @@ class index_control extends phpok_control
             $this->error(P_Lang('找不到相关数据'));
         }
         $bookInfo = $docs[$id];
-	    $projectInfo = $this->db->get_one("select * from dj_project where id='{$bookInfo['project_id']}'");
-	    if (!empty($projectInfo['parent_id'])) {
+	$projectInfo = $this->db->get_one("select * from dj_project where id='{$bookInfo['project_id']}'");
+	if (!empty($projectInfo['parent_id'])) {
             $projectInfo = $this->db->get_one("select * from dj_project where id='{$projectInfo['parent_id']}'");
         }
-	    $this->assign("prs_info", $projectInfo);
+	$sonBook = $this->db->get_all("select id,title from dj_list where parent_id={$id}");
+	$this->assign("prs_info", $projectInfo);
         $this->assign('nav_title', $bookInfo['title']);
         $this->assign('pid', $projectInfo['id']);
         $this->assign('rs', $bookInfo);
         $this->assign('page', $page);
         $this->assign('keyword', $keyWord);
         $this->assign('search_range', $searchRange);
+        $this->assign('son_book', $sonBook);
         // 区分碑刻的显示
         if ($bookInfo['module_id'] == 3) {
             $bookLists = $this->getDocBooks($id);

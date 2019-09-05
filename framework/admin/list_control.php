@@ -822,6 +822,7 @@ class list_control extends phpok_control
         }
 
         //獲取標簽選項
+        /*
         if($p_rs['is_tag']){
             $tag_config = $this->model('tag')->config();
             $this->assign('tag_config',$tag_config);
@@ -830,8 +831,26 @@ class list_control extends phpok_control
                 $this->assign('taglist',$taglist);
             }
         }
+         */
 
         // new add start
+        if($p_rs['is_tag'] || true){
+            $tagGroups = $this->db->get_all("select id,name from dj_tag_group where `show`=1 order by sort asc");
+            $tagLists = $this->db->get_all("select id,title,tag_group_id from dj_tag");
+            $tags = [];
+            foreach($tagGroups as $val) {
+                foreach($tagLists as $k => $v) {
+                    if ($v['tag_group_id'] == $val['id']) {
+                        $tags[$val['id']][] = $v;
+                        unset($tagLists[$k]);
+                    }
+
+                }
+            }
+            $this->assign('tag_groups', $tagGroups);
+            $this->assign('tags', $tags);
+        }
+
         $myModuleId = empty($this->config['my_config']['my_module_id']) ? '' : $this->config['my_config']['my_module_id'];
         if (!empty($myModuleId)) {
             $myModuleArr = explode(",", $myModuleId);
@@ -910,7 +929,7 @@ class list_control extends phpok_control
             }
             $array["attr"] = $attr;
         }
-        if($p_rs['is_tag']){
+        if($p_rs['is_tag'] || true){
             $array["tag"] = $this->get("tag");
             if($array["tag"]){
                 $array["tag"] = preg_replace("/(\x20{2,})/"," ",$array["tag"]);
@@ -1575,4 +1594,52 @@ class list_control extends phpok_control
         }
         $this->success();
     }
+
+
+    // new add 2019-07-30
+    public function set_parent_new_f()
+    {
+        $id = $this->get('id','int');
+        if(!$id){
+            $this->error(P_Lang('未指定ID'));
+        }
+        $ids = $this->get('ids');
+        if(!$ids){
+            $this->error(P_Lang('沒有要變更的ID'));
+        }
+        $list = explode(",",$ids);
+        $isin = false;
+        foreach($list as $key=>$value){
+            $value = intval($value);
+            if(!$value || $value == $id){
+                $isin = true;
+                break;
+            }
+        }
+        if($isin){
+            $this->error(P_Lang('ID有沖突，要變更的主題ID和內建ID重復了'));
+        }
+        $projectInfo = $this->model('project')->get_one($id,false);
+        if (empty($projectInfo['module'])) {
+            $this->error(P_Lang('未找到新文庫，或者新文庫暫未關聯任何模組'));
+        }
+
+        foreach($list as $key=>$value){
+            $value = intval($value);
+            if (empty($value)) {
+                continue;
+            }
+            $rs = $this->model('list')->get_one($value,false);
+            if ($rs['project_id'] == $id) {
+                $this->error(P_Lang('新文庫ID是自己所在文庫ID，勿須重復工作'));
+            }
+            if ($rs['module_id'] != $projectInfo['module']) {
+                $this->error(P_Lang('新舊文庫繫結的模組不壹致，無法遷移'));
+            }
+            $tmp = array('parent_id' => 0, 'project_id' => $id);
+            $this->model('list')->save($tmp,$value);
+        }
+        $this->success();
+    }
+    // new add end
 }

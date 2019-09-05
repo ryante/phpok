@@ -48,8 +48,10 @@
                         <li {if !$page}class="layui-this"{/if}>简介</li>
                         <li {if $page > 0}class="layui-this"{/if}>对读</li>
                         <li>文字</li>
-                        <li>阅读</li>
-                        <li>全文</li>
+                        <li>閱讀</li>
+			{if $rs.pdf_file.filename}<li>全文</li>{/if}
+			{if $rs.summary.filename}<li>提要</li>{/if}
+                        {if $son_book}<li>分冊</li>{/if}
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item {if !$page}layui-show{/if}" id="lib-list1">
@@ -61,12 +63,8 @@
                                     <td> {$rs.title} </td>
                                 </tr>
                                 <!-- loop from=$module_fields[$rs['module_id']]['all'] key=$k value=$v -->
-                                {if $k == 'pdf_file'}
-                                <tr>
-                                    <td style="width: 160px"> {$v} </td>
-                                    <td>{if $rs[$k]}{$rs[$k]['title']} &nbsp;&nbsp;&nbsp;<a download="{$rs[$k]['filename']}" style="display:none" href="{$rs[$k]['filename']}"  class="layui-btn layui-btn-radius layui-btn-xs">&nbsp;下&nbsp;载&nbsp;</a>{/if}</td>
-                                </tr>
-                                {elseif $k == 'start_cover_pic' || $k == 'end_cover_pic' }
+                                {if in_array($k, ['end_cover_pic', 'summary', 'pdf_file']) }
+                                {elseif $k == 'start_cover_pic' }
                                 <tr>
                                     <td style="width: 160px"> {$v} </td>
                                     <td>{if $rs[$k]}&nbsp;&nbsp;&nbsp;<a href="{$rs[$k]['filename']}" target='_blank'><img src="{$rs[$k]['gd']['book-cover']}"/></a>{/if} </td>
@@ -91,13 +89,31 @@
                         <div class="layui-tab-item">
                             <iframe src="{$sys.www_file}?f=read&doc_id={$rs.id}&type=3&page={$page}" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
+
+			{if $rs.pdf_file.filename}
                         <div class="layui-tab-item">
-                            <!-- if $rs['pdf_file']['filename'] -->
                             <iframe src="/pdf_show/web/viewer.html?file=/{$rs['pdf_file']['filename']}" frameborder="0" width="100%" height="650px"></iframe>
-                            <!-- else  -->
-                            <p>暫無內容</p>
-                            <!-- /if  -->
                         </div>
+			{/if}
+
+			{if $rs.summary.filename}
+                        <div class="layui-tab-item">
+                            <iframe src="/pdf_show/web/viewer.html?file=/{$rs['summary']['filename']}" frameborder="0" width="100%" height="650px"></iframe>
+			</div>
+			{/if}
+
+			{if $son_book}
+                        <div class="layui-tab-item">
+				<div class="layui-text">
+					<ul>
+			<!-- loop from=son_book key=$key value=$value -->
+						<li><a href="index.php?f=book&doc_id={$value.id}">{$value.title}</a></li>
+			<!-- /loop -->
+					</ul>
+				</div>
+			</div>
+			{/if}
+
                     </div>
                 </div>
             </div>

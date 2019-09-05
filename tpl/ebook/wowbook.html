@@ -23,7 +23,7 @@
 		}
 		.vertical-content{
 			writing-mode: tb-rl;
-			height: 93%;
+			height: 520px;
 			float: right;
 			letter-spacing: 2px;
 		}
@@ -41,6 +41,11 @@
 			background-color: #FF5722!important;
 			color: #fff;
 		}
+.page-title{
+background: #842f2f;
+color: #fff;
+padding: 4px;
+}
 	</style>
 	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
 	   Remove this if you use the .htaccess -->
@@ -95,6 +100,7 @@
 			<!-- loop from=rslist key=$key value=$value -->
             {if $type == 1 || $type == 2}
 			<div class='responsive feature'>
+			<h1 class="page-title">{$value.title}</h1>
 				<div class="vertical-content">
 				{=str_replace($keyword, "<span class='layui-badge layui-bg-green'> " . $keyword . "</span>", $value['content'])}
 				</div>
@@ -108,6 +114,7 @@
 
 			{if $type == 1 || $type == 3}
             <div class='responsive feature'>
+			<h1 class="page-title">{$value.title}</h1>
 				<div class="full">
 					{if $value.image}
 					<img src="{$value.image.gd.book-view}" alt="">
@@ -145,7 +152,7 @@
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$('#features').wowBook({
-				 height : 600
+				 height : 565
 				,width  : 700
 				,centeredWhenClosed : true
 				,hardcovers : true
