@@ -339,7 +339,7 @@
 
 			<!-- if $tag_groups -->
 			<div class="layui-input-block mtop" style="width:280px;">
-			<select id="tag-group" lay-filter="tag-group">
+			<select id="tag-group" lay-filter="tag-group" lay-ignore>
 			<option value="">{lang請選擇標籤組}</option>
 			<!-- loop from=$tag_groups key=$key value=$value id=$tmpid -->
 			<option value="{$value.id}">{$value.name}</option>
@@ -348,19 +348,22 @@
 			</div>
 			<script>
 			$(function(){
-					var form = layui.form;
-					//监听提交
-					form.on('select(tag-group)', function(data){
+					$('#tag-group').change(function(){
+							var val = $('#tag-group').val();
+							if (val == "") {
+								$('#tag-list').css('display', 'none');
+							} else {
+								$('#tag-list').css('display', 'block');
+							}
 							$('.tag_group_cate').css('display', 'none');
-							$('#tag_group_'+data.value).css('display', 'block');
-							});
-
+							$('#tag_group_'+val).css('display', 'block');
+					})
 			})
 			</script>
 			<!-- /if -->
 
 			<!-- if $tags  -->
-			<div class="layui-input-block mtop">
+			<div class="layui-input-block mtop" id="tag-list" style="display:none">
 				<div class="layui-btn-group">
 					<!-- loop from=$tags key=$key value=$value id=$tmpid -->
        				       <div id="tag_group_{$key}" class="tag_group_cate" style="display:none">

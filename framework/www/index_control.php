@@ -36,7 +36,7 @@ class index_control extends phpok_control
         $editTime = filemtime($file);
         $nowTime = time();
         if (empty($times)) {
-            $times = 600;
+            $times = 3600;
         }
         if (!file_exists($file) || ($nowTime - $editTime) > $times) {
             return false;
@@ -219,7 +219,7 @@ class index_control extends phpok_control
             if (empty($searchField[$val['module_id']])) {
                 continue;
             }
-            foreach ($val as $k => &$v) {
+            foreach ($val as $k => $v) {
                 if (empty($v)) {
                     continue;
                 }
@@ -227,8 +227,8 @@ class index_control extends phpok_control
                    continue;
                 }
                 if (stripos($v, $keyWord) !== false) {
-                   $v = str_replace($keyWord, "<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $v);
-                   $result[$val['id']] = $val;
+                   $val[$k] = str_replace($keyWord, "<span class='layui-badge layui-bg-green'>{$keyWord}</span>", $v);
+		   $result[$val['id']] = $val;
                 }
             }
         }
@@ -415,13 +415,15 @@ class index_control extends phpok_control
         if (!empty($keywords)) {
             $docs = $this->searchDocsByKw($keywords, $searchFields);
             $bookData = $this->searchBookContent($keywords);
-            foreach ($docs as $key => $val) {
-                if (!empty($bookData[$key])) {
-                    $docs[$key] = $bookData[$key];
-                    unset($bookData[$key]);
-                }
-            }
-            $docs = array_merge($docs, $bookData);
+	    if (!empty($bookData)) {
+		    foreach ($docs as $key => $val) {
+			    if (!empty($bookData[$key]['book_list'])) {
+				    $docs[$key]['book_list'] = $bookData[$key]['book_list'];
+				    unset($bookData[$key]);
+			    }
+		    }
+		    $docs = array_merge($docs, $bookData);
+	    }
             $this->assign('keywords', $keywords);
             $this->assign('search_fields', $searchFields);
             $this->assign('nav_title', "关键字：{$keywords}");
