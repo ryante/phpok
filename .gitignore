@@ -4,3 +4,4 @@ _cache/
 _config/
 res/
 .*
+*.tar.gz

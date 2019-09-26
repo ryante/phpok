@@ -142,9 +142,9 @@ class index_control extends phpok_control
             $projectId[] = $project['id'];
         }
         $projectStr = implode(",", $projectId);
-	    $rows[2] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_2 b on a.id=b.id where a.status=1 and a.project_id in ({$projectStr}) order by a.sort asc ");
-        $rows[3] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_3 b on a.id=b.id where a.status=1 and a.project_id in ({$projectStr}) order by a.sort asc");
-        $rows[5] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,b.* from dj_list a inner join dj_list_5 b on a.id=b.id where a.status=1 and a.project_id in ({$projectStr}) order by a.sort asc");
+	    $rows[2] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_2 b on a.id=b.id where a.status=1 and a.project_id in ({$projectStr}) order by a.sort asc ");
+        $rows[3] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_3 b on a.id=b.id where a.status=1 and a.project_id in ({$projectStr}) order by a.sort asc");
+        $rows[5] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_5 b on a.id=b.id where a.status=1 and a.project_id in ({$projectStr}) order by a.sort asc");
         $rows[2] = empty($rows[2]) ? [] : $rows[2];
         $rows[3] = empty($rows[3]) ? [] : $rows[3];
         $rows[5] = empty($rows[5]) ? [] : $rows[5];
@@ -451,7 +451,11 @@ class index_control extends phpok_control
 	if (!empty($projectInfo['parent_id'])) {
             $projectInfo = $this->db->get_one("select * from dj_project where id='{$projectInfo['parent_id']}'");
         }
-	$sonBook = $this->db->get_all("select id,title from dj_list where parent_id={$id}");
+    if ($bookInfo['parent_id'] > 0 ) {
+        $sonBook = $this->db->get_all("select id,title from dj_list where (parent_id={$bookInfo['parent_id']} or id = {$bookInfo['parent_id']}) and id != {$bookInfo['id']}");
+    } else {
+        $sonBook = $this->db->get_all("select id,title from dj_list where parent_id={$id}");
+    }
 	$this->assign("prs_info", $projectInfo);
         $this->assign('nav_title', $bookInfo['title']);
         $this->assign('pid', $projectInfo['id']);
