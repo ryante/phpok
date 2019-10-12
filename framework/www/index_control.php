@@ -298,6 +298,10 @@ class index_control extends phpok_control
        }
        foreach ($docs as $val) {
 	       if (in_array($val['project_id'], $pidArr)) {
+               if ($val['parent_id'] > 0 && empty($docs[$val['parent_id']])) {
+                   //主题迁移到另外一个主题时,另外一个主题作为父主题，父主题被删，后台子主题也不显示，这里同样不能再显示
+                  continue; 
+               }
 	           $data[] = $val;
            }
        }

@@ -38,13 +38,13 @@ prefix = "dj_"
 socket = ""
 
 ; 是否调试，配合系统的debug为true时，会打印出整个页面执行的SQL语句
-debug = true
+debug = false
 
 ; 即时缓存，适应用大量的小查询（重复查询，一般不用开启）
 cache = false
 
 ;慢查询记录
-slow = false
+slow = true
 
 ;慢查询时间，单位是秒，支持小数点，如0.05
 slow_time = 0.05

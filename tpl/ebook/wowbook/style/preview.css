@@ -211,8 +211,12 @@ nav a {
 .wowbook-page p,
 .wowbook-page ul {
   font-family: 'News Cycle', sans-serif;
-  font-size: 24px;
+  //font-size: 24px;
   margin-top: 0.5em;
+}
+
+.wowbook-page ul {
+  font-size: 24px;
 }
 .wowbook-page li {
   list-style: none;
