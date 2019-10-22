@@ -43,10 +43,12 @@
 			color: #fff;
 		}
 .page-title{
+    font-weight:bold !important;
 background: #842f2f;
 color: #fff;
 padding: 4px;
 }
+.wowbook-page p.page-title {margin-top:0px !important;}
 #features{user-select:none !important;}
 	</style>
 	<!-- Always force latest IE rendering engine (even in intranet) & Chrome Frame
@@ -102,7 +104,7 @@ padding: 4px;
 			<!-- loop from=rslist key=$key value=$value -->
             {if $type == 1 || $type == 2}
 			<div class='responsive feature'>
-			<h1 class="page-title">{$value.title}</h1>
+			<p class="page-title">{$value.title}</p>
 				<div class="vertical-content">
 				{=str_replace($keyword, "<span class='layui-badge layui-bg-green'> " . $keyword . "</span>", $value['content'])}
 				</div>
@@ -116,7 +118,7 @@ padding: 4px;
 
 			{if $type == 1 || $type == 3}
             <div class='responsive feature'>
-			<h1 class="page-title">{$value.title}</h1>
+			<p class="page-title">{$value.title}</p>
 				<div class="full">
 					{if $value.image}
 					<img src="{$value.image.gd.book-view}" alt="">
