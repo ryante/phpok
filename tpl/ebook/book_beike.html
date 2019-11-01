@@ -4,16 +4,27 @@
     <!-- 内容主体区域 -->
     <div style="padding: 15px; ">
         <div class="layui-container">
-             <span class="layui-breadcrumb" style="visibility: visible;">
-                <a href="/">首页</a><span lay-separator="">/</span>
-                <!-- if !$nav_title -->
-                <a><cite>文献列表</cite></a>
-                <!-- else -->
-                <a href="/{$sys.www_file}?f=docs">文献列表</a><span lay-separator="">/</span>
-                <a href="/{$sys.www_file}?f=docs&pid={$pid}">{$prs_info.title}</a><span lay-separator="">/</span>
-                <a><cite>{$nav_title}</cite></a>
+
+			<ul class="layui-nav layui-bg-cyan">
+				<li class="layui-nav-item">
+				<a href="/">首页</a>
+				<!-- if $libs -->
+				<dl class="layui-nav-child">
+					<!-- loop from=libs key=$key value=$value id=list_id-->
+					<dd><a href="{url ctrl=index func=docs pid=$value.id/}">{$value.title}</a></dd>
+					<!-- /loop -->
+				</dl>
                 <!-- /if -->
-            </span>
+				</li>
+                <!-- if !$nav_title -->
+				<li class="layui-nav-item layui-this"><a href="">文献列表</a></li>
+                <!-- else -->
+				<li class="layui-nav-item"><a href="/{$sys.www_file}?f=docs">文献列表</a></li>
+				<li class="layui-nav-item"><a href="/{$sys.www_file}?f=docs&pid={$pid}">{$prs_info.title}</a></li>
+				<li class="layui-nav-item layui-this"><a href="">{$nav_title}</a></li>
+                <!-- /if -->
+			</ul>
+
             <!-- 库列表 start -->
             <div class="layui-tab-content" style="margin-top: 30px;">
                 <div class="layui-form">

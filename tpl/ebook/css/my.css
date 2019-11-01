@@ -1,4 +1,4 @@
- .layui-nav{padding: 0px 0px !important} .head-img{height: 52px;} .layui-header{
+ .layui-nav{padding: 0px 0px !important} .layui-header{
  	background-color: #fff !important; box-shadow: 0 2px 2px rgba(0, 0, 0,
  		0.05), 0 1px 0 rgba(0, 0, 0, 0.05); } .layui-nav .layui-nav-item1 { position:
  		relative; display: inline-block; *display: inline; *zoom: 1; vertical-align:
@@ -27,3 +27,25 @@
  #lib-list1 .layui-col-md3 {text-align: center}
  /*#lib-list1 a.start_cover img {border:1px solid #e2e2e2}*/
  #lib-list1 a.start_cover p {margin-top: 10px}
+
+#footer {
+    height: 80px;
+    width: 100%;
+    position: relative;
+	margin-top:20px;
+    left: 0px;
+    bottom: 0px;
+    text-align: center;
+    border: none;
+    color: #FFF;
+    background-color: #7E7254;
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12px;
+    padding: 10px 0;
+}
+#footer a {color:#FFF;}
+
+.layui-nav .layui-nav-item { line-height:46px;}
+.layui-nav-child{top:46px;}
+
+#nav a{margin-left:20px; }

@@ -16,7 +16,9 @@
 			<th width="70">ID</th>
 			<th>標簽組</th>
 			<th>{lang名稱}</th>
+			<th>{lang近义词}</th>
 			<th width="90" class="center">{lang主題數}</th>
+			<th>{lang排序}</th>
 			<th width="90" >{lang操作}</th>
 		</tr>
 		</thead>
@@ -25,7 +27,9 @@
 			<td>{$value.id}</td>
 			<td>{$tag_group[$value.tag_group_id]['name']}</td>
 			<td>{$value.title}</td>
+			<td>{$value.alias_title}</td>
 			<td class="center">{$value.count ? $value.count : 0}</td>
+			<td>{$value.sort}</td>
 			<td>
 				<div class="layui-btn-group">
 					<input type="button" value="{lang編輯}" onclick="$.phpok_tag.edit('{$value.id}')" class="layui-btn  layui-btn-sm" />

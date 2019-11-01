@@ -45,6 +45,19 @@ function save()
 	<div class="content">
 		<input type="text" name="title" id="title" value="{$rs.title}" class="long" />
 	</div>
+	<div class="title">
+		{lang近义词} <span class="note">多個詞語用英文(,)隔開</span>
+	</div>
+	<div class="content">
+		<input type="text" name="alias_title" id="alias_title" value="{$rs.alias_title}" class="long" />
+	</div>
+	<div class="title">
+		{lang排序}
+	</div>
+	<div class="content">
+		<input type="text" name="sort" id="sort" value="{$rs.sort}" class="short" />
+	</div>
+
 </div>
 </form>
 <!-- include tpl=foot_open -->

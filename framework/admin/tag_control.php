@@ -103,6 +103,8 @@ class tag_control extends phpok_control
 		$data = array('title'=>$title,'url'=>$this->get('url'),'target'=>$this->get('target','int'),'tag_group_id'=>$this->get('tag_group_id','int'));;
 		$data['site_id'] = $this->session->val('admin_site_id');
 		$data['alt'] = $this->get('alt');
+		$data['alias_title'] = $this->get('alias_title','int');
+		$data['sort'] = $this->get('sort','int');
 		$data['is_global'] = $this->get('is_global','int');
 		$data['replace_count'] = $this->get('replace_count','int');
 		if($id){
