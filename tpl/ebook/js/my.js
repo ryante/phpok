@@ -51,7 +51,23 @@ $(function(){
             window.location.href = "home.php?f=book_search&doc_id=" + docId + "&search_range=" + searchRange + "&keyword=" + searchTitle;
         }
     })
+	
+	$('.tag-list a').hover(function(event){
+		if ($(this).parent().hasClass('no-border')) {
+			return;
+		} 
+		if ($(this).data('tip') == '' || $(this).data('tip') == 0) {
+			return;
+		}
+		e = event.target;
+		subtips = layer.tips($(this).data('tip'), e, {tips:[1,'#393D49']});
+	}, function(){
+		layer.close(subtips);	
+	});
 
 
 })
 
+function tagLink(id) {
+	window.location.href="home.php?f=docs&tag_id=" + id;
+}

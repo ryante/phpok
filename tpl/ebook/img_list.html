@@ -7,7 +7,7 @@
 
 			<ul class="layui-nav layui-bg-cyan">
 				<li class="layui-nav-item">
-				<a href="/">首页</a>
+				<a href="/">首頁</a>
 				<!-- if $libs -->
 				<dl class="layui-nav-child">
 					<!-- loop from=libs key=$key value=$value id=list_id-->
@@ -17,9 +17,9 @@
                 <!-- /if -->
 				</li>
                 <!-- if !$nav_title -->
-				<li class="layui-nav-item layui-this"><a href="">文献列表</a></li>
+				<li class="layui-nav-item layui-this"><a href="">文獻列表</a></li>
                 <!-- else -->
-				<li class="layui-nav-item"><a href="/{$sys.www_file}?f=docs">文献列表</a></li>
+				<li class="layui-nav-item"><a href="/{$sys.www_file}?f=docs">文獻列表</a></li>
 				<li class="layui-nav-item layui-this"><a href="">{$nav_title}</a></li>
                 <!-- /if -->
 			</ul>
@@ -33,10 +33,10 @@
                 <div class="layui-col-md9">
                     <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
                         <div class="layui-card-header">
-                            检索结果
+							搜索結果
                             <div style="float: right;">
-                                <span id="list_view_1" title="图表显示"> <i class="layui-icon layui-icon-list" style="font-size: 26px; color: #009688"> </i> </span>
-                                <span  id="list_view_2"title="列表显示"> <i class="layui-icon layui-icon-table" style="font-size: 26px;color: #009688"> </i> </span>
+                                <span id="list_view_1" title="圖表顯示"> <i class="layui-icon layui-icon-list" style="font-size: 26px; color: #009688"> </i> </span>
+                                <span  id="list_view_2" title="列表顯示"> <i class="layui-icon layui-icon-table" style="font-size: 26px;color: #009688"> </i> </span>
                             </div>
                         </div>
                         <div class="layui-tab-content" id="lib-list1" >
@@ -50,7 +50,7 @@
                                     {else}
                                     <img src="img.php?token=YToxMjp7czoyOiJpZCI7czoyOiIxMyI7czoxMDoiaWRlbnRpZmllciI7czoxMDoiYm9vay1jb3ZlciI7czo1OiJ3aWR0aCI7czozOiIxNTAiO3M6NjoiaGVpZ2h0IjtzOjM6IjIwMCI7czoxMjoibWFya19waWN0dXJlIjtzOjA6IiI7czoxMzoibWFya19wb3NpdGlvbiI7czoxMjoiYm90dG9tLXJpZ2h0IjtzOjg6ImN1dF90eXBlIjtzOjE6IjAiO3M6NzoicXVhbGl0eSI7czoyOiI4MCI7czo3OiJiZ2NvbG9yIjtzOjY6IkZGRkZGRiI7czo1OiJ0cmFucyI7czoxOiIwIjtzOjY6ImVkaXRvciI7czoxOiIxIjtzOjM6InVybCI7czozNDoicmVzLzIwMTkwMy8zMS80ZjQ3OGEwYmZlMDM4OGJjLnBuZyI7fQ" />
                                     {/if}
-                                    <p>{$value.title}</p>
+                                    <p>{if $value.real_title}{$value.real_title}{else}{$value.title}{/if}</p>
                                     </a>
                                 </div>
 
@@ -81,23 +81,19 @@
                                     <p>相關內文</p>
                                     <hr/>
                                     <div class="layui-col-md12">
-                                        <!-- loop from=$value.book_list key=$k value=$v -->
-                                        <!-- if $v.nohtml_content -->
-                                        {if $value.project_id == 3}
-                                        <a href="{$sys.www_file}?f=book&doc_id={$value.id}">
-                                            <blockquote class="layui-elem-quote" style="border-left:0px">
-                                                {$v.nohtml_content}
-                                            </blockquote>
-                                        </a>
-                                        {else}
-                                        <a href="{$sys.www_file}?f=book&doc_id={$value.id}&page={$v.page}">
-                                            <blockquote class="layui-elem-quote" style="border-left:0px">
-                                                {$v.nohtml_content}
-                                            </blockquote>
-                                        </a>
-                                        {/if}
-                                        <!-- /if  -->
+                                        <!-- loop from=$value.book_list key=$k value=$v id=book_list_id-->
+
+											<a href="{$sys.www_file}?f=book&doc_id={$value.id}{if $value.project_id != 3}&page={$v.page}&keyword={$keywords}{/if}" class="{if $book_list_id.num >= 6}book_content_hide{else}book_content_show{/if}">
+												<blockquote class="layui-elem-quote" style="border-left:0px">
+													{$v.nohtml_content}
+												</blockquote>
+											</a>
+
                                         <!-- /loop -->
+										{if count($value.book_list) > 6}
+										<a href="javascript:showMore('book_search_{$list_id.num}')"  id="book_search_{$list_id.num}" class="book_content_more book_content_expand" ><i class="layui-icon layui-icon-down"></i></a>
+										{/if}	
+										
                                     </div>
                                     <!-- /if  -->
                                 </div>
@@ -126,7 +122,8 @@
                                     {else}
                                     <img src="img.php?token=YToxMjp7czoyOiJpZCI7czoyOiIxMyI7czoxMDoiaWRlbnRpZmllciI7czoxMDoiYm9vay1jb3ZlciI7czo1OiJ3aWR0aCI7czozOiIxNTAiO3M6NjoiaGVpZ2h0IjtzOjM6IjIwMCI7czoxMjoibWFya19waWN0dXJlIjtzOjA6IiI7czoxMzoibWFya19wb3NpdGlvbiI7czoxMjoiYm90dG9tLXJpZ2h0IjtzOjg6ImN1dF90eXBlIjtzOjE6IjAiO3M6NzoicXVhbGl0eSI7czoyOiI4MCI7czo3OiJiZ2NvbG9yIjtzOjY6IkZGRkZGRiI7czo1OiJ0cmFucyI7czoxOiIwIjtzOjY6ImVkaXRvciI7czoxOiIxIjtzOjM6InVybCI7czozNDoicmVzLzIwMTkwMy8zMS80ZjQ3OGEwYmZlMDM4OGJjLnBuZyI7fQ" />
                                     {/if}
-                                        <p>{$value.title}</p>
+
+                                    <p>{if $value.real_title}{$value.real_title}{else}{$value.title}{/if}</p>
                                     </a>
                                 </div>
                              {if ($num.num ) % 4 == 0}
@@ -134,7 +131,7 @@
                             {/if}
                             <!-- /loop -->
                             <!-- else  -->
-                            <p style="text-align: center"> 暂无内容~ </p>
+                            <p style="text-align: center"> 暫無內容~ </p>
                             <!-- /if  -->
 
                             </div>
@@ -148,4 +145,18 @@
     </div>
     <!-- 内容主体区域 -->
 </div>
+<script>
+
+function showMore(element) {
+	if ($('#' + element).hasClass('book_content_expand')) {
+		$('#' + element).removeClass('book_content_expand');
+		$('#' + element).prevAll().removeClass('book_content_hide');
+		$('#' + element).html('<i class="layui-icon layui-icon-up"></i>');
+	} else {
+		$('#' + element).addClass('book_content_expand');
+		$('#' + element).prevAll().addClass('book_content_hide');
+		$('#' + element).html('<i class="layui-icon layui-icon-down"></i>');
+	}
+}
+</script>
 <!-- include tpl=footer -->

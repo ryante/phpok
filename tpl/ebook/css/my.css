@@ -49,3 +49,8 @@
 .layui-nav-child{top:46px;}
 
 #nav a{margin-left:20px; }
+.book_content_more{background-color:#f2f2f2; color:#777; text-align:center; font-size:14px; line-height:30px; display:block}
+.book_content_more:hover{background-color:#ccc}
+.book_content_hide{ display:none}
+.book_content_show{ display:block}
+span.tag-link{color:#064eb9 !important; cursor:pointer }

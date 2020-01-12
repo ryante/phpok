@@ -570,6 +570,13 @@ class book_control extends phpok_control
             $string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
             $pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
             $this->assign("pagelist",$pagelist);
+
+			$i = 0;
+			foreach ($rslist as $key => $val) {
+				$rslist[$key]['front_page'] = ($total - ($pageid - 1) * $psize - $i) * 2;
+				$i++;
+			}
+
             $this->assign("rslist",$rslist);
         }
         $attrlist = $this->model('list')->attr_list();

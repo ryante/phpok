@@ -189,7 +189,7 @@
 				<span class="red i"> {func price_format $value.price $value.currency_id}</span>
 				<!-- /if -->
 				<!-- if $value.hidden -->
-				<span class="red i">({lang隱藏})</span>
+				<span class="red i">({lang草稿})</span>
 				<!-- /if -->
 				<!-- if $clist && $clist[$value.id] -->
 				<div class="extcate">
@@ -246,6 +246,7 @@
 					<!-- if $popedom.delete -->
 					<input type="button" value="{lang刪除}" onclick="content_del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 					<!-- /if -->
+					<a target="_blank" href="home.php?f=book&doc_id={$book_info.id}&page={$value.front_page}&view=1" class="layui-btn-normal layui-btn layui-btn-sm" />預覽</a>
 					<!-- if $popedom.comment && ($rs.comment_status || $comments[$value.id]) -->
 					<button type="button"class="layui-btn layui-btn-sm" onclick="$.admin_list.reply_it('{$value.id}')">
 						{lang評論}
@@ -277,7 +278,7 @@
 					<span class="red i"> {func price_format $vv.price $vv.currency_id}</span>
 					<!-- /if -->
 					<!-- if $vv.hidden -->
-					<span class="red i">(隱藏)</span>
+					<span class="red i">(草稿)</span>
 					<!-- /if -->
 					<!-- if $clist && $clist[$vv.id] -->
 					<div class="extcate">
@@ -333,6 +334,8 @@
 							<!-- if $comments[$vv.id][uncheck] --><span class="layui-badge layui-bg-orange">{$comments[$vv.id][uncheck]}</span><!-- /if -->
 						</button>
 						<!-- /if -->
+
+
 					</div>
 				</td>
 			</tr>
@@ -368,8 +371,8 @@
 					<option value="status">{lang稽核}</option>
 					<option value="unstatus">{lang取消稽核}</option>
 					<!-- /if -->
-					<option value="hidden">{lang隱藏}</option>
-					<option value="show">{lang顯示}</option>
+					<option value="hidden">{lang草稿}</option>
+					<option value="show">{lang發布}</option>
 					<!-- if $popedom.delete -->
 					<option value="delete">{lang刪除}</option>
 					<!-- /if -->

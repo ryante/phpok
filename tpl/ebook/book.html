@@ -7,7 +7,7 @@
 
 			<ul class="layui-nav layui-bg-cyan">
 				<li class="layui-nav-item">
-				<a href="/">首页</a>
+				<a href="/">首頁</a>
 				<!-- if $libs -->
 				<dl class="layui-nav-child">
 					<!-- loop from=libs key=$key value=$value id=list_id-->
@@ -17,9 +17,9 @@
                 <!-- /if -->
 				</li>
                 <!-- if !$nav_title -->
-				<li class="layui-nav-item layui-this"><a href="">文献列表</a></li>
+				<li class="layui-nav-item layui-this"><a href="">文獻列表</a></li>
                 <!-- else -->
-				<li class="layui-nav-item"><a href="/{$sys.www_file}?f=docs">文献列表</a></li>
+				<li class="layui-nav-item"><a href="/{$sys.www_file}?f=docs">文獻列表</a></li>
 				<li class="layui-nav-item"><a href="/{$sys.www_file}?f=docs&pid={$pid}">{$prs_info.title}</a></li>
 				<li class="layui-nav-item layui-this"><a href="">{$nav_title}</a></li>
                 <!-- /if -->
@@ -33,8 +33,8 @@
                         <div class="layui-col-md2">
                             <select id="search_range" lay-verify="required" >
                                 <!--<option value="1" {if $search_range == 1}selected{/if}>当前内文</option>-->
-                                <option value="2" {if $search_range == 2}selected{/if}>当前文献</option>
-                                <option value="3 {if $search_range == 3}selected{/if}">当前系列</option>
+                                <option value="2" {if $search_range == 2}selected{/if}>當前文獻</option>
+                                <option value="3 {if $search_range == 3}selected{/if}">當前系列</option>
                             </select>
                         </div>
                         <div class="layui-col-md10">
@@ -46,7 +46,7 @@
 
                             <div style="margin-right: 100px">
                                 <input type="text" id="search_title" lay-verify="title" autocomplete="off"
-                                       placeholder="请输入标题" class="layui-input" value="{$keyword}" />
+                                       placeholder="輸入搜索詞" class="layui-input" value="{$keyword}" />
                             </div>
                         </div>
                     </div>
@@ -56,13 +56,13 @@
             <div class="layui-tab-content" style="margin-top: 20px">
                 <div class="layui-tab layui-tab-brief" style="margin-top: 0px" lay-filter="component-tabs-brief">
                     <ul class="layui-tab-title">
-                        <li {if !$page}class="layui-this"{/if}>简介</li>
-                        <li {if $page > 0}class="layui-this"{/if}>对读</li>
-                        <li>文字</li>
-                        <li>閱讀</li>
-			{if $rs.pdf_file.filename}<li>全文</li>{/if}
-			{if $rs.summary.filename}<li>提要</li>{/if}
-                        {if $son_book}<li>分冊</li>{/if}
+                        <li {if !$page}class="layui-this"{/if}>文獻簡介</li>
+                        <li {if $page > 0}class="layui-this"{/if}>圖文對照</li>
+                        <li>經本原文</li>
+                        <li>經本掃描</li>
+			{if $rs.pdf_file.filename}<li>全文閱讀</li>{/if}
+			{if $rs.summary.filename}<li>文獻提要</li>{/if}
+                        {if $son_book}<li>分冊 / 分卷</li>{/if}
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item {if !$page}layui-show{/if}" id="lib-list1">
@@ -92,13 +92,13 @@
                             <!-- /if  -->
                         </div>
                         <div class="layui-tab-item  {if $page > 0}layui-show{/if}">
-                            <iframe src="{$sys.www_file}?f=read&doc_id={$rs.id}&type=1&page={$page}&keyword={$keyword}" frameborder="0" width="100%" height="650px"></iframe>
+                            <iframe src="{$sys.www_file}?f=read&doc_id={$rs.id}&type=1&page={$page}&keyword={$keyword}&view={$get.view}" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
                         <div class="layui-tab-item">
-                            <iframe src="{$sys.www_file}?f=read&doc_id={$rs.id}&type=2&page={$page}&keyword={$keyword}" frameborder="0" width="100%" height="650px"></iframe>
+                            <iframe src="{$sys.www_file}?f=read&doc_id={$rs.id}&type=2&page={$page}&keyword={$keyword}&view={$get.view}" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
                         <div class="layui-tab-item">
-                            <iframe src="{$sys.www_file}?f=read&doc_id={$rs.id}&type=3&page={$page}" frameborder="0" width="100%" height="650px"></iframe>
+                            <iframe src="{$sys.www_file}?f=read&doc_id={$rs.id}&type=3&page={$page}&view={$get.view}" frameborder="0" width="100%" height="650px"></iframe>
                         </div>
 
 			{if $rs.pdf_file.filename}

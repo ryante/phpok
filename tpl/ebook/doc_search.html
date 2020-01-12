@@ -3,15 +3,15 @@
         <div class="layui-row">
             <div style="float: right;">
                 <button class="layui-btn"> 搜索 </button>
-                <a class="layui-btn" id="more_search_btn"> 进阶搜索 <i class="layui-icon {if $search_fields}layui-icon-down{else}layui-icon-right{/if}"></i> </a>
+                <a class="layui-btn" id="more_search_btn"> 進階搜索 <i class="layui-icon {if $search_fields}layui-icon-down{else}layui-icon-right{/if}"></i> </a>
             </div>
             <div style="margin-right: 210px">
-                <input type="text" name="keywords" lay-verify="title" value="{$keywords}" autocomplete="off" placeholder="请输入标题" class="layui-input" />
+                <input type="text" name="keywords" lay-verify="title" value="{$keywords}" autocomplete="off" placeholder="輸入搜索詞" class="layui-input" />
             </div>
         </div>
         <div class="layui-tab layui-tab-card" id="more_search_text" style="display:{if $search_fields}block{else}none{/if};margin-top: 20px;">
             <div class="layui-card-header">
-                搜索项
+				搜索項
             </div>
             <div class="layui-tab-content">
                 <!-- loop from=$module_fields key=$key value=$value -->

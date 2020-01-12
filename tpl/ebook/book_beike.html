@@ -7,7 +7,7 @@
 
 			<ul class="layui-nav layui-bg-cyan">
 				<li class="layui-nav-item">
-				<a href="/">首页</a>
+				<a href="/">首頁</a>
 				<!-- if $libs -->
 				<dl class="layui-nav-child">
 					<!-- loop from=libs key=$key value=$value id=list_id-->
@@ -17,9 +17,9 @@
                 <!-- /if -->
 				</li>
                 <!-- if !$nav_title -->
-				<li class="layui-nav-item layui-this"><a href="">文献列表</a></li>
+				<li class="layui-nav-item layui-this"><a href="">文獻列表</a></li>
                 <!-- else -->
-				<li class="layui-nav-item"><a href="/{$sys.www_file}?f=docs">文献列表</a></li>
+				<li class="layui-nav-item"><a href="/{$sys.www_file}?f=docs">文獻列表</a></li>
 				<li class="layui-nav-item"><a href="/{$sys.www_file}?f=docs&pid={$pid}">{$prs_info.title}</a></li>
 				<li class="layui-nav-item layui-this"><a href="">{$nav_title}</a></li>
                 <!-- /if -->
@@ -33,8 +33,8 @@
                         <div class="layui-col-md2">
                             <select id="search_range" lay-verify="required" >
                                 <!--<option value="1" {if $search_range == 1}selected{/if}>当前内文</option>-->
-                                <option value="2" {if $search_range == 2}selected{/if}>当前文献</option>
-                                <option value="3 {if $search_range == 3}selected{/if}">当前系列</option>
+                                <option value="2" {if $search_range == 2}selected{/if}>當前文獻</option>
+                                <option value="3 {if $search_range == 3}selected{/if}">當前系列</option>
                             </select>
                         </div>
                         <div class="layui-col-md10">
@@ -46,7 +46,7 @@
 
                             <div style="margin-right: 100px">
                                 <input type="text" id="search_title" lay-verify="title" autocomplete="off"
-                                       placeholder="请输入标题" class="layui-input" value="{$keyword}" />
+                                       placeholder="輸入搜索詞" class="layui-input" value="{$keyword}" />
                             </div>
                         </div>
                     </div>
@@ -56,7 +56,7 @@
             <div class="layui-tab-content" style="margin-top: 20px">
                 <div class="layui-tab layui-tab-brief" style="margin-top: 0px" lay-filter="component-tabs-brief">
                     <ul class="layui-tab-title">
-                        <li class="layui-this">简介</li>
+                        <li class="layui-this">簡介</li>
                         <li>閱讀</li>
 			{if $rs.summary.filename}<li>提要</li>{/if}
                         {if $son_book}<li>分冊</li>{/if}

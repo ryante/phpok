@@ -1,6 +1,6 @@
 <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
-    <div class="layui-card-header">
-        標簽雲
+    <div class="layui-card-header tag-header" >
+		 標簽列 
     </div>
     <div class="layui-tab-content tag">
         <!-- if $tags -->
@@ -9,7 +9,7 @@
         <!-- if $value.tags -->
         <div >
             <!-- loop from=$value.tags key=$k value=$v id=list_id -->
-            <p class="tag-list {if $list_id.num > $value.show_nums}tag-hidden tag-group-{$key}{/if}"> <a href="{url ctrl=index func=docs tag_id=$v.id/}" > {$v.title}. </a>({$v.items})</p>
+            <p class="tag-list{if $list_id.num > $value.show_nums} tag-hidden tag-group-{$key}{/if}"> <a href="{url ctrl=index func=docs tag_id=$v.id/}" data-tip="{$v.alias_title}" > {$v.title}. </a>({$v.items})</p>
             <!-- /loop -->
             {if count($value.tags) > $value.show_nums}
             <p class="tag-list no-border"><a href="javascript:handleTag('tag-group-{$key}')" id="tag-group-{$key}">顯示更多</a></p>
@@ -24,6 +24,7 @@
     </div>
 </div>
 <style>
+	.tag-header{background-color:#009688; color:#fff; text-align:center; font-size:16px}
     .no-border{border:0px !important;}
     .tag-hidden{display:none !important;}
     .tag-show{display:block !important;}

@@ -177,7 +177,7 @@
 			<td><span class="status{$value.status}" id="status_{$value.id}" {if $popedom.status}onclick="$.admin_list.status({$value.id})"{else} style="cursor: default;"{/if} value="{$value.status}"></span></td>
 			<td class="center">{$value.id}</td>
 			<td><label for="id_{$value.id}">
-				<a href="{$sys.url}?id={$value.id}" target="_blank" title="{lang前臺訪問}">{$value.title}</a>
+				<a href="{$sys.url}home.php?f=book&doc_id={$value.id}" target="_blank" title="{lang前臺訪問}">{$value.title}</a>
 				<!-- if $value.attr -->
 					<!-- php:$attr = explode(",",$value['attr']) -->
 					<!-- loop from=$attr key=$attr_k value=$attr_v -->
@@ -191,7 +191,7 @@
 				<span class="red i"> {func price_format $value.price $value.currency_id}</span>
 				<!-- /if -->
 				<!-- if $value.hidden -->
-				<span class="red i">({lang隱藏})</span>
+				<span class="red i">({lang草稿})</span>
 				<!-- /if -->
 				<!-- if $clist && $clist[$value.id] -->
 				<div class="extcate">
@@ -255,7 +255,10 @@
 					</button>
 					<!-- /if -->
 					<!-- if $rs.subtopics && !$value.parent_id && $popedom.add --><input type="button" value="{lang加版本}" onclick="$.win('{lang加子主題}_{$rs.title}','{url ctrl=list func=edit parent_id=$value.id pid=$value.project_id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
-					<!-- if $my_module --><input type="button" value="書籍管理" onclick="$.win('{$rs.title}_{$value.title}','{url ctrl=book func=action id=8 lid=$value.id /}')" class="layui-btn layui-btn-sm" /><!-- /if -->
+					<!-- if $my_module -->
+					<input type="button" value="書籍管理" onclick="$.win('{$rs.title}_{$value.title}','{url ctrl=book func=action id=8 lid=$value.id /}')" class="layui-btn layui-btn-sm" />
+					<a target="_blank" href="home.php?f=book&doc_id={$value.id}" class="layui-btn-normal layui-btn layui-btn-sm" />預覽</a>
+					<!-- /if -->
 				</div>
 			</td>
 		</tr>
@@ -266,7 +269,7 @@
 				<td><span class="status{$vv.status}" id="status_{$vv.id}" {if $popedom.status}onclick="$.admin_list.status({$vv.id})"{else} style="cursor: default;"{/if} value="{$vv.status}"></span></td>
 				<td class="center">{$vv.id}</td>
 				<td><label for="id_{$vv.id}">
-					&nbsp; &nbsp; ├─ <a href="{$sys.url}?id={$vv.id}" target="_blank" title="{lang前臺訪問}">{$vv.title}</a>
+					&nbsp; &nbsp; ├─ <a href="{$sys.url}home.php?f=book&doc_id={$vv.id}" target="_blank" title="{lang前臺訪問}">{$vv.title}</a>
 					<!-- if $vv.attr -->
 						<!-- php:$attr = explode(",",$vv['attr']) -->
 						<!-- loop from=$attr key=$attr_k value=$attr_v -->
@@ -280,7 +283,7 @@
 					<span class="red i"> {func price_format $vv.price $vv.currency_id}</span>
 					<!-- /if -->
 					<!-- if $vv.hidden -->
-					<span class="red i">(隱藏)</span>
+					<span class="red i">(草稿)</span>
 					<!-- /if -->
 					<!-- if $clist && $clist[$vv.id] -->
 					<div class="extcate">
@@ -337,7 +340,10 @@
 						</button>
 						<!-- /if -->
 
-						<!-- if $my_module --><input type="button" value="書籍管理" onclick="$.win('{$rs.title}_{$vv.title}','{url ctrl=book func=action id=8 lid=$vv.id /}')" class="layui-btn layui-btn-sm" /><!-- /if -->
+						<!-- if $my_module -->
+						<input type="button" value="書籍管理" onclick="$.win('{$rs.title}_{$vv.title}','{url ctrl=book func=action id=8 lid=$vv.id /}')" class="layui-btn layui-btn-sm" />
+					<a target="_blank" href="home.php?f=book&doc_id={$value.id}&view=1" class="layui-btn-normal layui-btn layui-btn-sm" />預覽</a>
+						<!-- /if -->
 					</div>
 				</td>
 			</tr>
@@ -373,8 +379,8 @@
 					<option value="status">{lang稽核}</option>
 					<option value="unstatus">{lang取消稽核}</option>
 					<!-- /if -->
-					<option value="hidden">{lang隱藏}</option>
-					<option value="show">{lang顯示}</option>
+					<option value="hidden">{lang草稿}</option>
+					<option value="show">{lang發布}</option>
 					<!-- if $popedom.delete -->
 					<option value="delete">{lang刪除}</option>
 					<!-- /if -->

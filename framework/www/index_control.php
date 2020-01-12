@@ -139,6 +139,10 @@ class index_control extends phpok_control
 	// 拉取所有文献
 	public function getAllDocs() {
 		$cacheKey = "all_doc_lists";
+		if (!empty($this->get('view'))) {
+			// 给后台预览草稿
+			$cacheKey = "all_doc_lists_view";
+		}
 		$data = $this->getCache($cacheKey);
 		if (!empty($data)) {
 			return json_decode($data, true);
@@ -149,9 +153,14 @@ class index_control extends phpok_control
 			$projectId[] = $project['id'];
 		}
 		$projectStr = implode(",", $projectId);
-		$rows[2] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_2 b on a.id=b.id where a.status=1 and a.project_id in ({$projectStr}) order by a.sort asc ");
-		$rows[3] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_3 b on a.id=b.id where a.status=1 and a.project_id in ({$projectStr}) order by a.sort asc");
-		$rows[5] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_5 b on a.id=b.id where a.status=1 and a.project_id in ({$projectStr}) order by a.sort asc");
+		$where = " a.status=1 and a.project_id in ({$projectStr}) ";
+		if (empty($this->get('view'))) {
+			$where .= " and a.hidden=0 ";
+
+		}
+		$rows[2] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_2 b on a.id=b.id where {$where} order by a.sort asc ");
+		$rows[3] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_3 b on a.id=b.id where {$where} order by a.sort asc");
+		$rows[5] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_5 b on a.id=b.id where {$where} order by a.sort asc");
 		$rows[2] = empty($rows[2]) ? [] : $rows[2];
 		$rows[3] = empty($rows[3]) ? [] : $rows[3];
 		$rows[5] = empty($rows[5]) ? [] : $rows[5];
@@ -216,7 +225,6 @@ class index_control extends phpok_control
 				$searchField[$key] = $tmpKeys;
 			}
 		} 
-
 		foreach ($docs as $val) {
 			if (empty($searchField[$val['module_id']])) {
 				continue;
@@ -233,6 +241,12 @@ class index_control extends phpok_control
 					$result[$val['id']] = $val;
 				}
 			}
+		}
+		foreach ($result as $key => $val) {
+			$realTitle = $val['title'];
+			$val = $this->hightLightTag($val);
+			$val['real_title'] = $realTitle;
+			$result[$key] = $val;
 		}
 		return $result;
 	}
@@ -271,7 +285,9 @@ class index_control extends phpok_control
 		}
 			 */
 			if (!empty($allDocs[$val['title_id']]) && empty($data[$val['title_id']])) {
-				$data[$val['title_id']] = $allDocs[$val['title_id']];
+				$tmp = $allDocs[$val['title_id']];
+				$tmp = $this->hightLightTag($tmp);
+				$data[$val['title_id']] = $tmp;
 			}
 		}
 		$this->saveCache($cacheKey, json_encode($data, true));
@@ -304,6 +320,7 @@ class index_control extends phpok_control
 					//主题迁移到另外一个主题时,另外一个主题作为父主题，父主题被删，后台子主题也不显示，这里同样不能再显示
 					continue; 
 				}
+				$val = $this->hightLightTag($val);
 				$data[] = $val;
 			}
 		}
@@ -317,11 +334,17 @@ class index_control extends phpok_control
 			return false;
 		}
 		$cacheKey = "doc_{$lid}_book_lists";
+		if (!empty($this->get('view'))) {
+			$cacheKey .= "_view";
+		}
 		$data = $this->getCache($cacheKey);
 		if (!empty($data)) {
 			return json_decode($data, true);
 		}
-		$where = " b.lid = '{$lid}' and a.status=1";
+		$where = " b.lid = '{$lid}' and a.status=1 ";
+		if (empty($this->get('view'))) {
+			$where .= " and a.hidden=0 ";
+		}
 		$rows = $this->db->get_all("select a.title,a.project_id,a.dateline,a.sort,a.tag,b.* from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc,a.id desc");
 		if (empty($rows)) {
 			return false;
@@ -420,7 +443,10 @@ class index_control extends phpok_control
 		}
 		if (!empty($keywords)) {
 			$docs = $this->searchDocsByKw($keywords, $searchFields);
-			$bookData = $this->searchBookContent($keywords);
+			$bookData = [];
+			if (empty($searchFields)) {
+				$bookData = $this->searchBookContent($keywords);
+			}
 			if (!empty($bookData)) {
 				foreach ($docs as $key => $val) {
 					if (!empty($bookData[$key]['book_list'])) {
@@ -548,27 +574,68 @@ class index_control extends phpok_control
 		if (empty($str) || empty($kw)) {
 			return;
 		}   
-		$str = str_replace([" ","　","\t","\n","\r"], '', $str);
+		$str = str_replace([" ","　","\t","\n","\r","&nbsp"], '', $str);
 		$strLen = mb_strlen($str);
 		$kwLen = mb_strlen($kw);
 		$pos = mb_strpos($str, $kw, 0, 'utf-8');
-		if ($strLen <= $subLen) {
-			return $str;
-		}   
-		$halfOffset = intval(($subLen - $kwLen) / 2); 
-		if ($pos < $halfOffset) {
-			// 左边偏移不够
-			$str = mb_substr($str, 0, $subLen) . "...";
-		} elseif (($pos + $halfOffset) > $strLen ) { 
-			// 右边偏移不够
-			$str = "..." . mb_substr($str, $subLen - 2 * $subLen);
-		} else {
-			$leftSubStr = mb_substr($str, $pos - $halfOffset, $halfOffset);
-			$rightSubStr = mb_substr($str, $pos, $halfOffset + $kwLen);
-			$str = "..." . $leftSubStr . $rightSubStr . "...";
-		}   
-		$str = str_replace($kw,"<span class='layui-badge layui-bg-green'>{$kw}</span>", $str);
+		if ($strLen > $subLen) {
+			$halfOffset = intval(($subLen - $kwLen) / 2); 
+			if ($pos < $halfOffset) {
+				// 左边偏移不够
+				$str = mb_substr($str, 0, $subLen) . "...";
+			} elseif (($pos + $halfOffset) > $strLen ) { 
+				// 右边偏移不够
+				$str = "..." . mb_substr($str, $subLen - 2 * $subLen);
+			} else {
+				$leftSubStr = mb_substr($str, $pos - $halfOffset, $halfOffset);
+				$rightSubStr = mb_substr($str, $pos, $halfOffset + $kwLen);
+				$str = "..." . $leftSubStr . $rightSubStr . "...";
+			}   
+		}
+		$str = str_replace($kw,"{##{$kw}##}", $str);
+		$str = str_replace(["{##", "##}"], ["<span class='layui-badge layui-bg-green'>", "</span>"], $str);
 		return $str;
+	}
+
+	// 格式化搜索文献
+	public function hightLightTag($bookInfo) {
+		if (empty($bookInfo)) {
+			return $bookInfo;
+		}
+		$tagsIdArr = [];
+		$tagsArr = [];
+		$tags = $this->getAllTags();
+		if (empty($tags)) {
+			return $bookInfo;	
+		}
+		$findTagArr = [];
+		$replaceTagArr = [];
+		foreach ($tags as $val) {
+			if (count($val['tags']) <= 0) {
+				continue;
+			}
+			foreach ($val['tags'] as $v) {
+				$titleLen = strlen($v['title']);
+				if (empty($v['title'])){
+					continue;
+				}
+				$tagsArr[$titleLen][$v['id']] = $v['title'];
+			}
+		}
+		krsort($tagsArr);
+		foreach ($tagsArr as $val) {
+			foreach ($val as $k => $v) {
+				$findTagArr[] = $v;
+				$replaceTagArr[] = "<span class='tag-link' onclick='tagLink({$k})' >{$v}</span>";
+			}
+		}
+		$realTitle = $bookInfo['title'];
+		foreach ($bookInfo as $k => $v) {
+			$v = str_replace($findTagArr, $replaceTagArr, $v);
+			$bookInfo[$k] = $v;
+		}
+		$bookInfo['real_title'] = $realTitle;
+		return $bookInfo;
 	}
 
 
