@@ -15,8 +15,8 @@ class index_control extends phpok_control
 		parent::control();
 		$this->myModuleId = "2,3,5";
 		$this->myModule = [
-			2 => '經書',
-			3 => '碑刻集',
+			2 => '呂祖道書',
+			3 => '道教碑刻',
 			5 => '科儀文獻',
 		];
 		$this->assign('my_module', $this->myModule);
@@ -153,7 +153,7 @@ class index_control extends phpok_control
 			$projectId[] = $project['id'];
 		}
 		$projectStr = implode(",", $projectId);
-		$where = " a.status=1 and a.project_id in ({$projectStr}) ";
+		$where = " a.parent_id!=1 and a.status=1 and a.project_id in ({$projectStr}) ";//a.parent_id!=1 id=1的父主题被删掉，孤儿子题不展示
 		if (empty($this->get('view'))) {
 			$where .= " and a.hidden=0 ";
 
@@ -243,9 +243,8 @@ class index_control extends phpok_control
 			}
 		}
 		foreach ($result as $key => $val) {
-			$realTitle = $val['title'];
 			$val = $this->hightLightTag($val);
-			$val['real_title'] = $realTitle;
+			$val['real_title'] = strip_tags($val['title']);
 			$result[$key] = $val;
 		}
 		return $result;
@@ -390,12 +389,22 @@ class index_control extends phpok_control
 			if (empty($thisDocsInfo)) {
 				return false;
 			}
-			$where .= " and a.project_id = '{$thisDocsInfo['project_id']}' ";
+			$projectDocs = $this->db->get_all("select id from dj_list where project_id='{$thisDocsInfo['project_id']}'");
+			if (empty($projectDocs)) {
+				return false;
+			}
+			$projectDocIdArr = [];
+			$projectDocIdStr = "";
+			foreach ($projectDocs as $val) {
+				$projectDocIdArr[] = $val['id'];
+			}
+			$projectDocIdStr = implode(",", $projectDocIdArr);
+			$where .= " and b.lid in ({$projectDocIdStr}) ";
 		}
 		if (!empty($keyWord)) {
 			$where .= " and nohtml_content like '%{$keyWord}%'";
 		}
-		$rows = $this->db->get_all("select b.id,b.lid,b.nohtml_content from dj_list a inner join dj_list_6 b on a.id=b.lid where {$where} order by a.sort desc, a.id desc");
+		$rows = $this->db->get_all("select a.sort,b.id,b.lid,b.nohtml_content from dj_list a inner join dj_list_6 b on a.id=b.id where {$where} order by a.sort desc, a.id desc");
 		if (!empty($rows)) {
 			foreach ($rows as $key => $val) {
 				$val['nohtml_content'] = $this->formatBookContent($val['nohtml_content'], $keyWord, 38);
@@ -405,7 +414,9 @@ class index_control extends phpok_control
 					if (empty($bookData[$val['lid']]['id'])) {
 						$bookData[$val['lid']] = $docs[$val['lid']];
 					}
-					$bookData[$val['lid']]['book_list'][] = $val;
+					$tmpeBookLists[$val['lid']][$val['sort']] = $val;
+					sort($tmpeBookLists[$val['lid']]);
+					$bookData[$val['lid']]['book_list'] = $tmpeBookLists[$val['lid']];
 				}
 			}
 		}
@@ -415,7 +426,7 @@ class index_control extends phpok_control
 	// 首页
 	public function index_f()
 	{
-		$this->assign('seo_title','首页');
+		$this->assign('seo_title','首頁');
 		$this->view("index");
 	}
 
@@ -427,6 +438,11 @@ class index_control extends phpok_control
 		$searchFields = $this->get('fields');
 		if (empty($pid) && empty($tagId) && empty($keywords)) {
 			$docs = $this->getAllDocs();
+			foreach ($docs as $key => $val) {
+				$val = $this->hightLightTag($val);
+				$val['real_title'] = strip_tags($val['title']);
+				$docs[$key] = $val;
+			}
 		}
 		$tags = $this->getAllTags();
 		if (!empty($pid)) {
@@ -439,7 +455,7 @@ class index_control extends phpok_control
 			$docs = $this->searchDocsByTag($tagId);
 			$tagInfo = $this->db->get_one("select title from dj_tag where id='{$tagId}'");
 			$this->assign('tag_id', $tagId);
-			$this->assign('nav_title', "标签：{$tagInfo['title']}");
+			$this->assign('nav_title', "標籤：{$tagInfo['title']}");
 		}
 		if (!empty($keywords)) {
 			$docs = $this->searchDocsByKw($keywords, $searchFields);
@@ -448,6 +464,11 @@ class index_control extends phpok_control
 				$bookData = $this->searchBookContent($keywords);
 			}
 			if (!empty($bookData)) {
+				// 改变排序
+				//foreach ($bookData as $key => $val) {
+				//	krsort($bookData[$key]['book_list']);
+				//	$bookData[$key]['book_list'] = $bookData[$key]['book_list']; 
+				//}
 				foreach ($docs as $key => $val) {
 					if (!empty($bookData[$key]['book_list'])) {
 						$docs[$key]['book_list'] = $bookData[$key]['book_list'];
@@ -458,7 +479,7 @@ class index_control extends phpok_control
 			}
 			$this->assign('keywords', $keywords);
 			$this->assign('search_fields', $searchFields);
-			$this->assign('nav_title', "关键字：{$keywords}");
+			$this->assign('nav_title', "關鍵字：{$keywords}");
 		}
 		$this->assign('tags', $tags);
 		$this->assign('docs', $docs);
@@ -472,11 +493,11 @@ class index_control extends phpok_control
 		$id = $this->get('doc_id');
 		$page = $this->get('page', 'int');
 		if (empty($id)) {
-			$this->error(P_Lang('未指定文献id'));
+			$this->error(P_Lang('未指定文獻id'));
 		}
 		$docs = $this->getAllDocs();
 		if (empty($docs[$id])) {
-			$this->error(P_Lang('找不到相关数据'));
+			$this->error(P_Lang('找不到相關數據'));
 		}
 		$bookInfo = $docs[$id];
 		$projectInfo = $this->db->get_one("select * from dj_project where id='{$bookInfo['project_id']}'");
@@ -512,11 +533,11 @@ class index_control extends phpok_control
 		$page = $this->get('page', 'int');
 		$keyWord = $this->get('keyword');
 		if (empty($id)) {
-			$this->error(P_Lang('未指定文献id'));
+			$this->error(P_Lang('未指定文獻id'));
 		}
 		$docs = $this->getAllDocs();
 		if (empty($docs[$id])) {
-			$this->error(P_Lang('找不到相关数据'));
+			$this->error(P_Lang('找不到相關數據'));
 		}
 		$bookInfo = $docs[$id];
 		$bookLists = $this->getDocBooks($id);
@@ -540,7 +561,7 @@ class index_control extends phpok_control
 		$bookData = [];
 		if ($searchRange == 2) {
 			if (empty($docs[$docId])) {
-				$this->error(P_Lang('找不到相关数据'));
+				$this->error(P_Lang('找不到相關數據'));
 			}
 			$docId = $this->get('doc_id');
 			$bookLists = $this->getDocBooks($docId);
@@ -555,11 +576,15 @@ class index_control extends phpok_control
 						$books[] = $val;
 					}
 				}
+				krsort($books);
 				$bookData[$docId] = $docs[$docId];
 				$bookData[$docId]['book_list'] = $books;
 			}
 		} else {
 			$bookData = $this->searchBookContent($keyWord, $docId);
+file_put_contents('/tmp/test.log',date('Y-m-d H:i:s') . ' ' . __FILE__ . ':' . __LINE__ . "\n" . var_export($keyWord,true) . "\n", FILE_APPEND );
+file_put_contents('/tmp/test.log',date('Y-m-d H:i:s') . ' ' . __FILE__ . ':' . __LINE__ . "\n" . var_export($docId,true) . "\n", FILE_APPEND );
+file_put_contents('/tmp/test.log',date('Y-m-d H:i:s') . ' ' . __FILE__ . ':' . __LINE__ . "\n" . var_export($bookData,true) . "\n", FILE_APPEND );
 		}
 		$this->assign('doc_id', $docId);
 		$this->assign('books', $bookData);
@@ -659,7 +684,7 @@ class index_control extends phpok_control
 	{
 		$phpfile = $this->get('phpfile','system');
 		if(!$phpfile){
-			$this->error(P_Lang('未指定合法的 PHP 檔案'));
+			$this->error(P_Lang('未指定合法的PHP 檔案'));
 		}
 		$phpfile .= ".php";
 		if(!file_exists($this->dir_root.'phpinc/'.$phpfile)){

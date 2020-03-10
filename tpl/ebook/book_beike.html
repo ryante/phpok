@@ -56,10 +56,10 @@
             <div class="layui-tab-content" style="margin-top: 20px">
                 <div class="layui-tab layui-tab-brief" style="margin-top: 0px" lay-filter="component-tabs-brief">
                     <ul class="layui-tab-title">
-                        <li class="layui-this">簡介</li>
-                        <li>閱讀</li>
-			{if $rs.summary.filename}<li>提要</li>{/if}
-                        {if $son_book}<li>分冊</li>{/if}
+                        <li class="layui-this">文獻簡介</li>
+                        <li>圖文對照</li>
+			{if $rs.summary.filename}<li>文獻考釋</li>{/if}
+                        {if $son_book}<li>分冊 / 分卷</li>{/if}
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item {if !$page}layui-show{/if}" id="lib-list1">

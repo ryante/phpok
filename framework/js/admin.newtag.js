@@ -99,7 +99,7 @@
 			}
 			var lst = old.split(cut_identifier);
 			var total = lst.length;
-			if(total>=10){
+			if(total>=20){
 				$.dialog.alert(p_lang('超出系統限制，請刪除一些不常用的標籤'));
 				return false;
 			}
