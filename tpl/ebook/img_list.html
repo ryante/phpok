@@ -35,11 +35,11 @@
                         <div class="layui-card-header">
 							文獻列表
                             <div style="float: right;">
-                                <span id="list_view_1" title="列表顯示"> <i class="layui-icon layui-icon-list" style="font-size: 26px; color: #009688"> </i> </span>
-                                <span  id="list_view_2" title="圖表顯示"> <i class="layui-icon layui-icon-table" style="font-size: 26px;color: #009688"> </i> </span>
+                                <span  id="list_view_2" title="方格顯示"> <i class="layui-icon layui-icon-table" style="font-size: 26px;color: #009688"> </i> </span>
+                                <span id="list_view_1" title="圖表顯示"> <i class="layui-icon layui-icon-list" style="font-size: 26px; color: #009688"> </i> </span>
                             </div>
                         </div>
-                        <div class="layui-tab-content" id="lib-list1" >
+                        <div class="layui-tab-content" id="lib-list1" {if !$keywords}style="display: none"{/if} >
                             <!-- if $docs -->
                             <!-- loop from=docs key=$key value=$value id=list_id-->
                             <div class="layui-row layui-col-space10">
@@ -109,7 +109,7 @@
                         </div>
 
 
-                        <div class="layui-tab-content" id="lib-list2" style="display: none">
+                        <div class="layui-tab-content" id="lib-list2"  {if $keywords}style="display: none"{/if}  >
                             <!-- if $docs -->
                             <!-- loop from=docs key=$key value=$value id=num -->
                             {if ($num.num - 1) % 4 == 0}
