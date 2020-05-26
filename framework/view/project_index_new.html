@@ -48,12 +48,11 @@
 						<input type="button" value="{lang編輯}" onclick="$.win('{lang編輯}_#{$value.id}','{url ctrl=newproject func=set id=$value.id/}')" class="layui-btn layui-btn-sm" />
 						<input type="button" value="{lang刪除}" onclick="$.admin_project.del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
 						<!-- if !$value.parent_id -->
-						<input type="button" value="{lang新增子項}" class="layui-btn layui-btn-sm" onclick="$.win('{lang新增子項}_#{$value.id}','{url ctrl=newproject func=set pid=$value.id/}')" />
-						<!-- /if -->
-						<!-- if $value.module -->
 						<input type="button" value="{lang欄位管理}" onclick="$.win('{lang欄位管理}_{$value.title}_#{$value.module}','{url ctrl=newmodule func=fields id=$value.module/}');" class="layui-btn layui-btn-sm"/>
 						<!-- /if -->
-
+						<!-- if !$value.module || !$value.parent_id -->
+						<input type="button" value="{lang新增子項}" class="layui-btn layui-btn-sm" onclick="$.win('{lang新增子項}_#{$value.id}','{url ctrl=newproject func=set pid=$value.id/}')" />
+						<!-- /if -->
 					</div>
 				</td>
 				<!-- /if -->

@@ -140,20 +140,10 @@ class list_control extends phpok_control
 
         $m_rs = $this->model('module')->get_one($rs['module']);
         $contentTpl = "list_content";
-        $setTpl = "list_set2";
+        $setTpl = "list_set2_new";
 
         // new add start
-        $myModuleId = empty($this->config['my_config']['my_module_id']) ? '' : $this->config['my_config']['my_module_id'];
-        if (!empty($myModuleId)) {
-            $myModuleArr = explode(",", $myModuleId);
-            if (in_array($m_rs['id'], $myModuleArr)) {
-                $this->assign('my_module', true);
-                $contentTpl = "list_content_new";
-            }
-        }
-        if ($rs['id'] == 4){
-            $setTpl = "list_set2_new";
-        }
+        $contentTpl = "list_content_new";
         // new add end
 
         //設定內容列表
@@ -692,6 +682,7 @@ class list_control extends phpok_control
             if($rs[$value["identifier"]]){
                 $value["content"] = $rs[$value["identifier"]];
             }
+            $value['project_parent_id'] = $p_rs['parent_id'];
             $extlist[] = $this->lib('form')->format($value);
         }
         if($id){
@@ -851,16 +842,10 @@ class list_control extends phpok_control
             $this->assign('tags', $tags);
         }
 
-        $myModuleId = empty($this->config['my_config']['my_module_id']) ? '' : $this->config['my_config']['my_module_id'];
-        if (!empty($myModuleId)) {
-            $myModuleArr = explode(",", $myModuleId);
-            if (in_array($m_rs['id'], $myModuleArr)) {
-                $this->view("list_edit_new");
-            }
-        }
+        $this->view("list_edit_new");
         // new add end
 
-        $this->view("list_edit");
+        //$this->view("list_edit");
     }
 
     public function ok_f()

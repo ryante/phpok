@@ -70,7 +70,11 @@ class newproject_control extends phpok_control
 			$rs['ico'] = 'images/ico/default.png';
 			$this->assign("rs",$rs);
 		}
-		$parent_list = $this->model('project')->get_all($this->session->val('admiin_site_id'),0);
+
+        $tuku_module = $this->db->get_one("select * from dj_module where title='圖庫'");
+		$this->assign("tuku_module",$tuku_module);
+		//$parent_list = $this->model('project')->get_all($this->session->val('admin_site_id'),0);
+		$parent_list = $this->model('project')->get_all_project($this->session->val('admin_site_id'));
 		$this->assign("parent_list",$parent_list);
 		$this->assign("ext_module",$ext_module);
 		$forbid = array("id","identifier");
@@ -297,8 +301,12 @@ class newproject_control extends phpok_control
 				$array["alias_note"] = $this->get("alias_note");
 			}
 		}
-		$array["parent_id"] = $this->get("parent_id","int");
-		$array["module"] = $module;
+        if (isset($_POST["parent_id"])) {
+            $array["parent_id"] = $this->get("parent_id","int");
+        }
+        if (isset($_POST["module"])) {
+            $array["module"] = $module;
+        }
 		$array["cate"] = $cate;
 		$array['cate_multiple'] = $cate_multiple;
 		$array["title"] = $title;

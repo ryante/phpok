@@ -20,21 +20,7 @@
 			<div class="layui-input-inline auto gray">{lang自定義排序，值越小越往前靠}</div>
 		</div>
 
-		<div class="layui-form-item">
-			<label class="layui-form-label">{lang父級欄目}</label>
-			<div class="layui-input-inline default-auto">
-				<select id="parent_id" name="parent_id">
-				<option value="0">{lang設為父欄目}</option>
-				<!-- loop from=$parent_list key=$key value=$value -->
-				<!-- if $rs.id != $value.id -->
-				<option value="{$value.id}"{if $rs.parent_id == $value.id} selected{/if}>{$value.title}</option>
-				<!-- /if -->
-				<!-- /loop -->
-				</select>
-			</div>
-			<div class="layui-input-inline auto gray">{lang實現父子欄目可以實現資料交叉使用}</div>
-		</div>
-		<div class="layui-form-item">
+        <div class="layui-form-item">
 			<div class="layui-input-inline default-auto">
 				<input type="hidden" id="identifier" name="identifier" class="layui-input" value="{$rs.identifier}" />
                 {if !$rs.identifier}
@@ -46,18 +32,53 @@
 				</script>
 			</div>
 		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label title">{lang繫結模組}</label>
-			<div class="layui-input-inline auto">
-				<select id="module" name="module" onchange="$.admin_project.module_change(this)"lay-ignore>
-				<option value="0">{lang不關聯模組}</option>
-				<!-- loop from=$module_list key=$key value=$value id=module_list_id -->
-				<option value="{$value.id}"{if $value.id == $rs.module} selected{/if} data-mtype="{$value.mtype}">{$value.title}</option>
+
+        <!-- if !$rs.id  -->
+        <!-- 新增时可配置，更新不允许修改 -->
+        <div class="layui-form-item" >
+			<label class="layui-form-label">{lang父級欄目}</label>
+			<div class="layui-input-inline default-auto">
+				<select id="parent_id" name="parent_id">
+				<option value="0">{lang設為父欄目}</option>
+				<!-- loop from=$parent_list key=$key value=$value -->
+				<!-- if $rs.id != $value.id -->
+                <option value="{$value.id}"{if $rs.parent_id == $value.id} selected{/if}>{$value.space}{$value.title}</option>
+				<!-- /if -->
 				<!-- /loop -->
 				</select>
 			</div>
-			<div class="layui-input-inline auto gray">{lang實現類似新聞，產品等多條專案資訊，繫結成功後建議不要修改，以防止資料混亂！}</div>
+			<div class="layui-input-inline auto gray">{lang實現父子欄目可以實現資料交叉使用}</div>
 		</div>
+
+        <!-- if $rs.parent_id -->
+        <!-- 一级子节点可以创建目录，子库，图库，二级后面的不可以创建图库 -->
+		<div class="layui-form-item">
+			<label class="layui-form-label title">{lang子類型}</label>
+			<div class="layui-input-inline auto">
+				<select id="module" name="module" onchange="$.admin_project.module_change(this)"lay-ignore>
+                    <option value="0" {if !$rs.module} selected {/if}>{lang子目錄}</option>
+                    <option value="{$parent_list[$rs.parent_id]['origin_module']}" {if $rs.module && $rs.module != $tuku_module.id} selected {/if} data-mtype=0>{lang子文庫}</option>
+                    {if !$parent_list[$rs.parent_id]['parent_id'] && false}<option value="{$tuku_module.id}" {if $rs.module && $rs.module == $tuku_module.id} selected {/if} data-mtype=0>{lang圖庫}</option>{/if}
+				</select>
+			</div>
+		</div>
+        <!-- else -->
+        <!-- 根节点必须选择关联的模块，子节点继承 -->
+        <div class="layui-form-item">
+            <label class="layui-form-label title">{lang繫結模組}</label>
+            <div class="layui-input-inline auto">
+                <select id="module" name="module" onchange="$.admin_project.module_change(this)"lay-ignore>
+                <!-- loop from=$module_list key=$key value=$value id=module_list_id -->
+                <option value="{$value.id}"{if $value.id == $rs.module} selected{/if} data-mtype="{$value.mtype}">{$value.title}</option>
+                <!-- /loop -->
+                </select>
+            </div>
+            <div class="layui-input-inline auto gray">{lang實現類似新聞，產品等多條專案資訊，繫結成功後建議不要修改，以防止資料混亂！}</div>
+        </div>
+        <!-- /if -->
+
+        <!-- /if -->
+
 		<div id="module_set2" class="hidden">
 			<div class="layui-form-item">
 				<label class="layui-form-label">{lang預設主題數}</label>
@@ -85,7 +106,7 @@
 			</div>
 		</div>
 
-		<div id="module_set" class="hidden">
+		<div id="module_set_myadd" class="hidden" >
 			<div class="layui-form-item">
 				<label class="layui-form-label">{lang主題別名}</label>
 				<div class="layui-input-inline default-auto">
@@ -313,7 +334,7 @@
 			</div>
 		</div>
 		<div class="layui-form-mid">
-			{lang請選擇一個直觀的圖示，大小為：48x48，建議使用PNG格式}
+			{lang請選擇一個直觀的圖示，建議使用PNG格式}
 		</div>
 	</div>
 

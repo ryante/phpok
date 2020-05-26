@@ -28,7 +28,7 @@ pass = "root"
 ; 使用 sqlite 或 pdo_sqlite 时，请填写数据库相对地址，要确保文件存在
 ; 使用 mysqli 或 pdo_mysql 时，请填写数据库名称
 ;data = "daojiao"
-data = "their_daojiao4"
+data = "ddm2"
 
 ; 数据表前缀，实现同一个数据库安装不同版本程序，默认使用 qinggan_
 ; 使用 http 模式时，注意生成的 SQL 文件会补上前缀

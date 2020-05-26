@@ -239,7 +239,6 @@
 					<!-- /if -->
 				<!-- /if -->
 			<!-- /loop -->
-			
 			<td>
 				<div class="layui-btn-group">
 					<!-- if $popedom.modify -->
@@ -255,10 +254,10 @@
 					</button>
 					<!-- /if -->
 					<!-- if $rs.subtopics && !$value.parent_id && $popedom.add --><input type="button" value="{lang加版本}" onclick="$.win('{lang加子主題}_{$rs.title}','{url ctrl=list func=edit parent_id=$value.id pid=$value.project_id/}')" class="layui-btn layui-btn-sm" /><!-- /if -->
-					<!-- if $my_module -->
+					<!-- if $m_rs.title == '科儀文獻' || $m_rs.title == '呂祖全書' -->
 					<input type="button" value="書籍管理" onclick="$.win('{$rs.title}_{$value.title}','{url ctrl=book func=action id=8 lid=$value.id /}')" class="layui-btn layui-btn-sm" />
-					<a target="_blank" href="home.php?f=book&doc_id={$value.id}" class="layui-btn-normal layui-btn layui-btn-sm" />預覽</a>
 					<!-- /if -->
+					<a target="_blank" href="home.php?f=book&doc_id={$value.id}" class="layui-btn-normal layui-btn layui-btn-sm" />預覽</a>
 				</div>
 			</td>
 		</tr>
@@ -340,10 +339,10 @@
 						</button>
 						<!-- /if -->
 
-						<!-- if $my_module -->
+                        <!-- if $m_rs.title == '科儀文獻' || $m_rs.title == '呂祖全書' -->
 						<input type="button" value="書籍管理" onclick="$.win('{$rs.title}_{$vv.title}','{url ctrl=book func=action id=8 lid=$vv.id /}')" class="layui-btn layui-btn-sm" />
-					<a target="_blank" href="home.php?f=book&doc_id={$value.id}&view=1" class="layui-btn-normal layui-btn layui-btn-sm" />預覽</a>
 						<!-- /if -->
+                        <a target="_blank" href="home.php?f=book&doc_id={$value.id}&view=1" class="layui-btn-normal layui-btn layui-btn-sm" />預覽</a>
 					</div>
 				</td>
 			</tr>

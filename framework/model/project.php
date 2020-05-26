@@ -199,8 +199,10 @@ class project_model_base extends phpok_model
 		$rslist = $this->get_all($site_id,$pid,$condition);
 		if($rslist){
 			foreach($rslist as $key=>$value){
+                $value['origin_module'] = !empty($value['module']) ? $value['module'] : $list[$pid]['origin_module'];
 				$value["space"] = $space ? $space."├─ " : '';
-				$list[] = $value;
+				//$list[] = $value;
+				$list[$value['id']] = $value;
 				$newspace = $space."　　";
 				$this->get_sublist($list,$value["id"],$site_id,$newspace,$condition);
 			}
