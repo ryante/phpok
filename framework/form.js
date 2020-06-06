@@ -843,7 +843,7 @@ function go_to_page_action()
 			});
 		},
 
-		extitle_list:function(fid,input_id,maxcount,ext)
+		extitle_list:function(fid,input_id,maxcount,ext, parent_project_id = 0)
 		{
 			if(!maxcount || maxcount == 'undefined'){
 				maxcount = 1;
@@ -876,6 +876,9 @@ function go_to_page_action()
 				if(!is_ok){
 					return false;
 				}
+			}
+			if (parent_project_id > 0) {
+				url = url + '&parent_project_id=' + parent_project_id;
 			}
 			$.dialog.open(url,{
 				'title':p_lang('選擇'),

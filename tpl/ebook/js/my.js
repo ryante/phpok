@@ -29,6 +29,7 @@ $(function(){
     })
 
     $('#list_view_1').click(function () {
+        $('#lib-list3').css("display","none");
         $('#lib-list2').css("display","none");
         $('#lib-list1').css("display","block");
     })
@@ -36,6 +37,13 @@ $(function(){
     $('#list_view_2').click(function () {
         $('#lib-list1').css("display","none");
         $('#lib-list2').css("display","block");
+        $('#lib-list3').css("display","none");
+    })
+
+    $('#list_view_3').click(function () {
+        $('#lib-list1').css("display","none");
+        $('#lib-list2').css("display","none");
+        $('#lib-list3').css("display","block");
     })
 
 
@@ -66,8 +74,53 @@ $(function(){
 	});
 
 
+
 })
+
+
+
+// 文献列表
+var listTabPages = new Array();
+listTabPages[1] = 1;
+listTabPages[2] = 1;
+listTabPages[3] = 1;
+var maxPage = $('#total_docs').val();
+$(function(){
+    $('.list1-page-1').show();
+    $('.list2-page-1').show();
+    $('.list3-page-1').show();
+    $('.view-more').click(function () {
+        tab = $(this).data('tab');
+        listTabPages[tab]++;
+        $('.list'+tab+'-page-'+listTabPages[tab]).show();
+        if (listTabPages[tab] >=  maxPage) {
+            $(this).parent().remove();
+        }
+    })
+})
+
+//搜索项
+var addClickTimes = 0;
+layui.use('form', function(){
+    var form = layui.form;//只有执行了这一步，部分表单元素才会自动修饰成功
+    $('#add-search-item').click(function () {
+        if (addClickTimes >= 10) {
+            layer.msg('已超過系統限制');
+            return;
+        }
+        appendHtml = $('#search-item-tpl').html().trim();
+        $('#append-search-item').append(appendHtml);
+        addClickTimes++;
+        form.render('select', 'condition-search');
+    });
+    $('#remove-search-item').click(function(){
+       $('#append-search-item').html('');
+       addClickTimes = 0;
+        form.render('select', 'condition-search');
+    })
+});
 
 function tagLink(id) {
 	window.location.href="home.php?f=docs&tag_id=" + id;
 }
+

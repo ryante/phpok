@@ -1,39 +1,168 @@
-<div class="layui-tab-content" style="padding: 20px; margin-top: 20px">
-    <form class="layui-form" action="{url ctrl=index func=docs /}" method="get">
-		<input type="hidden" name="f" value="docs"/>
-        <div class="layui-row">
-            <div style="float: right;">
-                <button class="layui-btn"> 搜索 </button>
-                <a class="layui-btn" id="more_search_btn"> 進階搜索 <i class="layui-icon {if $search_fields}layui-icon-down{else}layui-icon-right{/if}"></i> </a>
-            </div>
-            <div style="margin-right: 210px">
-                <input type="text" name="keywords" lay-verify="title" value="{$keywords}" autocomplete="off" placeholder="輸入搜索詞" class="layui-input" />
-            </div>
-        </div>
-        <div class="layui-tab layui-tab-card" id="more_search_text" style="display:{if $search_fields}block{else}none{/if};margin-top: 20px;">
-            <div class="layui-card-header">
-				搜索項
-            </div>
-            <div class="layui-tab-content">
-                <!-- loop from=$module_fields key=$key value=$value -->
-                <!-- if $value.search -->
-                <div class="layui-form-item">
-                    <div class="layui-block choose-item">
-                        <input type="checkbox" name="fields[{$key}][]" value="0" title="{$my_module[$key]}" />
+<div class="layui-tab layui-tab-card" style=" margin-top: 20px">
+    <ul class="layui-tab-title">
+        <li class="layui-this">关键词查询</li>
+        <li>条件查询</li>
+    </ul>
+    <div class="layui-tab-content" style="padding: 20px">
+        <div class="layui-tab-item  layui-show">
+                <form class="layui-form" action="{url ctrl=index func=docs /}" method="get">
+                    <input type="hidden" name="f" value="docs"/>
+                    <div class="layui-row">
+                        <div style="float: right;">
+                            <button class="layui-btn"> 搜索 </button>
+                            <a class="layui-btn" id="more_search_btn"> 進階搜索 <i class="layui-icon {if $search_fields}layui-icon-down{else}layui-icon-right{/if}"></i> </a>
+                        </div>
+                        <div style="margin-right: 210px">
+                            <input type="text" name="keywords" lay-verify="title" value="{$keywords}" autocomplete="off" placeholder="輸入搜索詞" class="layui-input" />
+                        </div>
                     </div>
-                    <div class="layui-block">
-                        <!-- loop from=$value.search key=$k value=$v -->
-                        {if in_array($k, $search_fields[$key])}
-                        <input type="checkbox" checked="true" name="fields[{$key}][]" lay-skin="primary" value="{$k}" title="{$v}" />
-                        {else}
-                        <input type="checkbox" name="fields[{$key}][]" lay-skin="primary" value="{$k}" title="{$v}" />
-                        {/if}
-                        <!-- /loop -->
+                    <div class="layui-tab layui-tab-card" id="more_search_text" style="display:{if $search_fields}block{else}none{/if};margin-top: 20px;">
+                        <div class="layui-card-header">
+                            搜索項
+                        </div>
+                        <div class="layui-tab-content">
+                            <!-- loop from=$module_fields key=$key value=$value -->
+                            <!-- if $value.search -->
+                            <div class="layui-form-item">
+                                <div class="layui-block choose-item">
+                                    <input type="checkbox" name="fields[{$key}][]" value="0" title="{$my_module[$key]}" />
+                                </div>
+                                <div class="layui-block">
+                                    <!-- loop from=$value.search key=$k value=$v -->
+                                    {if in_array($k, $search_fields[$key])}
+                                    <input type="checkbox" checked="true" name="fields[{$key}][]" lay-skin="primary" value="{$k}" title="{$v}" />
+                                    {else}
+                                    <input type="checkbox" name="fields[{$key}][]" lay-skin="primary" value="{$k}" title="{$v}" />
+                                    {/if}
+                                    <!-- /loop -->
+                                </div>
+                            </div>
+                            <!-- /if -->
+                            <!-- /loop -->
+                        </div>
+                    </div>
+                </form>
+        </div>
+        <div class="layui-tab-item">
+            <form class="layui-form" lay-filter="condition-search" action="{url ctrl=index func=docs /}" method="get">
+                <input type="hidden" name="f" value="docs"/>
+                <div class="layui-row">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline">
+                            <select name="module" lay-filter="aihao">
+                                <!-- loop from=my_module key=$key value=$value -->
+                                <option value="{$key}" {if $module == $key}selected{/if}>{$value}</option>
+                                <!-- /loop -->
+                            </select>
+                        </div>
+                        <label class="layui-form-label">请选择文库</label>
                     </div>
                 </div>
-                <!-- /if -->
-                <!-- /loop -->
+
+                <div class="layui-row">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline">
+                            <select name="fields[]" class="search-field-list" >
+                                <!-- loop from=$module_fields key=$key value=$value -->
+                                <!-- if $value.search -->
+                                    <!-- loop from=$value.search key=$k value=$v -->
+                                        <option value="{$k}" data-module="{$key}" {if $fields[0] == $k}selected{/if}>{$v}</option>
+                                    <!-- /loop -->
+                                <!-- /if -->
+                                <!-- /loop -->
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="match[]">
+                                <option value="like" {if $match[0] != 'eq'}selected{/if}>包括</option>
+                                <option value="eq" {if $match[0] == 'eq'}selected{/if}>精确</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline" >
+                            <input type="text" name="kw[]" class="layui-input" value="{$kw[0]}" placeholder="请输入关键字">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="layui-row ">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline">
+                            <select name="logic[]">
+                                <option value="&">和</option>
+                                <option value="|">或</option>
+                                <option value="!">否</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="interest" >
+                                <option value="">题名</option>
+                                <option value="0">写作</option>
+                                <option value="1" >阅读</option>
+                                <option value="2">游戏</option>
+                                <option value="3">音乐</option>
+                                <option value="4">旅行</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="match[]">
+                                <option value="like">包括</option>
+                                <option value="eq">精确</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline" >
+                            <input type="text" name="kw[]" class="layui-input" placeholder="请输入关键字">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="append-search-item">
+
+                </div>
+
+                <div class="layui-row">
+                    <div class="layui-input-inline">
+                        <button type="button" class="layui-btn" id="add-search-item">增加一行</button>
+                    </div>
+                    <div class="layui-input-inline">
+                        <button type="button" class="layui-btn layui-btn-danger" id="remove-search-item">清除</button>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script type="text/html" id="search-item-tpl">
+<div class="layui-row">
+        <div class="layui-form-item">
+            <div class="layui-input-inline">
+                <select name="logic[]">
+                    <option value="&">和</option>
+                    <option value="|">或</option>
+                    <option value="!">否</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="interest" >
+                    <option value="">题名</option>
+                    <option value="0">写作</option>
+                    <option value="1" >阅读</option>
+                    <option value="2">游戏</option>
+                    <option value="3">音乐</option>
+                    <option value="4">旅行</option>
+                </select>
+            </div>
+            <div class="layui-input-inline">
+                <select name="match[]">
+                    <option value="like">包括</option>
+                    <option value="eq">精确</option>
+                </select>
+            </div>
+            <div class="layui-input-inline" >
+                <input type="text" name="kw[]" class="layui-input" placeholder="请输入关键字">
             </div>
         </div>
-    </form>
 </div>
+</script>
+

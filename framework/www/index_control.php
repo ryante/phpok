@@ -13,11 +13,12 @@ class index_control extends phpok_control
 	public function __construct()
 	{
 		parent::control();
-		$this->myModuleId = "2,3,5";
+		$this->myModuleId = "2,3,5,9";
 		$this->myModule = [
 			2 => '呂祖道書',
 			3 => '道教碑刻',
 			5 => '科儀文獻',
+            9 => '廟宇',
 		];
 		$this->assign('my_module', $this->myModule);
 		$libs = $this->getLibs();
@@ -65,7 +66,7 @@ class index_control extends phpok_control
 		if (!empty($data)) {
 			return json_decode($data, true);
 		}
-		$rows = $this->db->get_all("select id,parent_id,module,title,pic from dj_project where id in (2,3,4) order by taxis desc,id desc");
+		$rows = $this->db->get_all("select id,parent_id,module,title,pic from dj_project where module in ({$this->myModuleId}) and parent_id=0 order by taxis asc,id asc");
 		if (empty($rows)) {
 			return false;
 		}
@@ -582,9 +583,6 @@ class index_control extends phpok_control
 			}
 		} else {
 			$bookData = $this->searchBookContent($keyWord, $docId);
-file_put_contents('/tmp/test.log',date('Y-m-d H:i:s') . ' ' . __FILE__ . ':' . __LINE__ . "\n" . var_export($keyWord,true) . "\n", FILE_APPEND );
-file_put_contents('/tmp/test.log',date('Y-m-d H:i:s') . ' ' . __FILE__ . ':' . __LINE__ . "\n" . var_export($docId,true) . "\n", FILE_APPEND );
-file_put_contents('/tmp/test.log',date('Y-m-d H:i:s') . ' ' . __FILE__ . ':' . __LINE__ . "\n" . var_export($bookData,true) . "\n", FILE_APPEND );
 		}
 		$this->assign('doc_id', $docId);
 		$this->assign('books', $bookData);

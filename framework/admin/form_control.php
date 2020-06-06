@@ -334,6 +334,7 @@ class form_control extends phpok_control
 	**/
 	public function quicklist_f()
 	{
+	    $tpl = "form_quicklist";
 		$id = $this->get('id','int');
 		if(!$id){
 			$this->error(P_Lang('未指定欄位ID'));
@@ -354,6 +355,15 @@ class form_control extends phpok_control
 		}
 		$this->assign('id',$id);
 		$this->assign('identifier',$identifier);
+
+
+        // new add 关联文库文献 2020年6月2日
+        if ($id == 109) { // dj_field.id
+            $this->relateDoc($id);
+            return;
+        }
+        // new add end
+
 		$project = $this->model('project')->get_one($pid,false);
 		if(!$project){
 			$this->error(P_Lang('專案不存在'));
@@ -374,6 +384,7 @@ class form_control extends phpok_control
 			foreach($ext as $key=>$value){
 				$pageurl .= "&ext[".$key."]=".rawurlencode($value);
 			}
+		    $pageurl .=
 			$this->assign('ext',$ext);
 		}
 		$psize = $this->config["psize"] ? $this->config["psize"] : "30";
@@ -426,12 +437,32 @@ class form_control extends phpok_control
 			$this->model('list')->is_user(false);
 			$keywords = $this->get('keywords');
 			$condition = "l.project_id='".$project['id']."' AND l.site_id='".$project['site_id']."' ";
+
+			$tmptitle = $project['alias_title'] ? $project['alias_title'] : P_Lang('主題');
+
+			$layout = array();
+			if(in_array('title',$layoutids)){
+				$layout['title'] = $tmptitle;
+			}
+			foreach($mlist as $key=>$value){
+				if($value['identifier'] && in_array($value['identifier'],$layoutids)){
+					$layout[$value['identifier']] = $value['title'];
+				}
+			}
+			$this->assign('layout',$layout);
+
+			// 图库关联ebook  只显示某个库下的文献的EBOOK new do 2020年5月26日
+            $this->relateEbook($tpl, $condition, $mlist, $pageurl);
+            // new do
+
 			if($keywords){
 				$clist = array();
 				$clist[] = "l.title LIKE '%".$keywords."%'";
-				foreach($mlist as $key=>$value){
-					$clist[] = "ext.".$value['identifier']." LIKE '%".$keywords."%'";
-				}
+				if (!empty($mlist)) {
+                    foreach($mlist as $key=>$value){
+                        $clist[] = "ext.".$value['identifier']." LIKE '%".$keywords."%'";
+                    }
+                }
 				$condition .= " AND (".implode(" OR ",$clist).") ";
 				$pageurl .= "&keywords=".rawurlencode($keywords);
 				$this->assign('keywords',$keywords);
@@ -453,17 +484,7 @@ class form_control extends phpok_control
 					}
 				}
 			}
-			$tmptitle = $project['alias_title'] ? $project['alias_title'] : P_Lang('主題');
-			$layout = array();
-			if(in_array('title',$layoutids)){
-				$layout['title'] = $tmptitle;
-			}
-			foreach($mlist as $key=>$value){
-				if($value['identifier'] && in_array($value['identifier'],$layoutids)){
-					$layout[$value['identifier']] = $value['title'];
-				}
-			}
-			$this->assign('layout',$layout);
+
 		}
 		if($total>0){
 			$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=1';
@@ -477,7 +498,7 @@ class form_control extends phpok_control
 			$maxcount = 9999;
 		}
 		$this->assign('maxcount',$maxcount);
-		$this->view("form_quicklist");
+		$this->view($tpl);
 	}
 
 	/**
@@ -572,4 +593,83 @@ class form_control extends phpok_control
 		$this->assign('mlist',$mlist);
 		$this->view('form_quickview');
 	}
+
+	/*
+	 * note: 图库关联EBOOK图片
+	 */
+	public function relateEbook(&$tpl , &$condition, &$mlist, &$pageurl) {
+	    //parent_project_id 模块在添加扩展模型的字段，里面有个预设值填写上父项目的ID
+        $parentPid = $this->get('parent_project_id');
+        $docId = $this->get('doc_id');
+        if (empty($docId) && empty($parentPid)) {
+            return false;
+        }
+        $tpl = "form_quicklist_ebook";
+        $mlist = [];
+        if (!empty($parentPid)) {
+            $docLists = $this->db->get_all("select id,title from dj_list where project_id={$parentPid} order by id desc");
+        }
+        $this->assign("doc_lists", $docLists);
+        $this->assign("doc_id", $docId);
+        $this->assign("parent_project_id", $parentPid);
+        $pageurl .= "&parent_project_id=" . $parentPid;
+	    if (!empty($docId)) {
+            $condition .= " and ext.lid = {$docId}";
+            $pageurl .= "&doc_id=" . $docId;
+        } else {
+	        $docIds = [];
+	        foreach ($docLists as $val) {
+	           $docIds[] = $val['id'];
+            }
+            $docIdStr = implode(",", $docIds);
+            $condition .= " and ext.lid in ({$docIdStr})";
+        }
+        return true;
+    }
+
+
+    /*
+     * note: 图库关联文献/碑刻
+     */
+    public function relateDoc($id) {
+        $tpl = "form_quicklist_doc";
+        $projectId = $this->get('project_id');
+        $keyword = $this->get('keyword');
+        $projectLists = $this->model('project')->get_all_project($this->session->val('admin_site_id'));
+        $this->assign("project_lists", $projectLists);
+        $this->assign("project_id", $projectId);
+        $this->assign("keyword", $keyword);
+        $pageurl = $this->url('form','quicklist','id='.$id);
+        $condition = " l.site_id=1 and l.module_id in (2,3,5)  ";
+        if (!empty($projectId)) {
+            $pageurl .= "&project_id=" . $projectId;
+            $condition .= " and l.project_id = {$projectId}";
+        }
+        if (!empty($keyword)) {
+            $pageurl .= "&keyword=" . $keyword;
+            $condition .= " and l.title like  '%{$keyword}%'";
+        }
+        $total = $this->model('list')->get_all_total($condition);
+        $psize = $this->config["psize"] ? $this->config["psize"] : "30";
+        $pageid = $this->get($this->config["pageid"],"int");
+		if(!$pageid){
+			$pageid = 1;
+		}
+		$offset = ($pageid-1) * $psize;
+		if($total>0){
+            $rslist = $this->model('list')->get_all($condition,$offset,$psize);
+			$string = 'home='.P_Lang('首頁').'&prev='.P_Lang('上一頁').'&next='.P_Lang('下一頁').'&last='.P_Lang('尾頁').'&half=1';
+			$string.= '&add='.P_Lang('數量：').'(total)/(psize)'.P_Lang('，').P_Lang('頁碼：').'(num)/(total_page)&always=1';
+			$pagelist = phpok_page($pageurl,$total,$pageid,$psize,$string);
+			$this->assign("pagelist",$pagelist);
+			$this->assign("rslist",$rslist);
+		}
+		$maxcount = $this->get('maxcount','int');
+		if(!$maxcount){
+			$maxcount = 9999;
+		}
+		$this->assign('maxcount',$maxcount);
+		$this->view($tpl);
+    }
+
 }
