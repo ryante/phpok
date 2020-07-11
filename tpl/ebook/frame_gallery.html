@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv=X-UA-Compatible content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="http://www.jq22.com/jquery/font-awesome.4.6.0.css">
+    <script src="http://www.jq22.com/jquery/jquery-1.10.2.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcss.com/jquery.scrollbar/0.2.11/jquery.scrollbar.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery.scrollbar/0.2.11/jquery.scrollbar.min.js"></script>
+    <link href="css/nth.tabs.min.css" rel="stylesheet">
+    <script src="js/nth.tabs.min.js"></script>
+    <style>
+.container{margin-top:20px;}
+.nth-tabs{border:none !important;}
+.nth-tabs .roll-nav-right{right:0px;}
+.right-nav-list{display:none;}
+.table-striped tbody>tr>td {border-top:none; border-bottom:1px solid #ddd;}
+.tab-content{padding:20px 30px !important}
+</style>
+<script>
+    var nthTabs;
+    $(function () {
+            nthTabs = $("#editor-tabs").nthTabs();
+            <!-- loop from=cate_data key=$key value=$value id=list_id id=num -->
+            <!-- php: $contents = json_encode($value['contents'], true); -->
+            active = false;
+            <!-- if $num.num == 1 -->
+            active = true;
+            <!-- /if  -->
+            nthTabs.addTab({
+                id:{$key},
+                title:'{$value.title}',
+                content:getTplContent({$contents}),
+                active:active,
+                allowClose:false,
+            });
+            <!-- /loop -->
+        });
+
+    function getTplContent(contents) {
+        view = {$view};
+        html = '<div class="row">';
+        if (view == 2) {
+            html += $('#gallery-tpl-2-pre').html();
+        }
+        $.each(contents, function(key,val){
+                tmpHtml = $('#gallery-tpl-' + view).html();
+                tmpHtml = tmpHtml.replace('##img##', val.ebook_info.image);
+                tmpHtml = tmpHtml.replace('##doc_id##', val.ebook_info.lid);
+                tmpHtml = tmpHtml.replace('##page##', val.ebook_info.page);
+                tmpHtml = tmpHtml.replace('##id##', val.id);
+                tmpHtml = tmpHtml.replace('##title##', val.title);
+                tmpHtml = tmpHtml.replace('##source##', val.doc_info.title);
+                <!-- loop from=fields key=$key value=$value id=list_id -->
+                tmpHtml = tmpHtml.replace('##{$value.identifier}##', val.{$value.identifier});
+                <!-- /loop -->
+                html += tmpHtml;
+        });
+        if (view == 2) {
+            html += '</tbody></table>';
+        }
+        html += '</div>';
+        return html;
+    }
+</script>
+
+<script type="text/html" id="gallery-tpl-1">
+<div class="col-sm-3"  style="text-align:center">
+    <a href="javascript:showModal(##id##)">
+        <img src="##img##"  class="img-thumbnail" style="height:300px">
+        <h5>##title##</h5>
+    </a>
+</div>
+</script>
+
+<script type="text/html" id="gallery-tpl-2-pre">
+  <table class="table table-bordered">
+  <thead style="background-color:#eee">
+    <tr>
+        <th>標題</th>
+        <th>經圖</th>
+        <th>出處</th>
+        <!-- loop from=fields key=$key value=$value id=list_id -->
+        <th>{$value.title}</th>
+        <!-- /loop -->
+    </tr>
+    </thead>
+    <tbody>
+</script>
+
+<script type="text/html" id="gallery-tpl-2">
+    <tr>
+        <td>##title##</td>
+        <td><a href="javascript:showModal(##id##)"><img src="##img##" width="120px"></a></td>
+        <td><a href='{$sys.www_file}?f=book&doc_id=##doc_id##&page=##page##' target="_blank">##source##</a></td>
+        <!-- loop from=fields key=$key value=$value id=list_id -->
+        <th>##{$value.identifier}##</th>
+        <!-- /loop -->
+    </tr>
+</script>
+
+<script type="text/html" id="gallery-tpl-3">
+<table class="table table-bordered">
+ <tr>
+    <td style="width:160px; text-align:center">
+        <a href="javascript:showModal(##id##)"><img src="##img##" width="120px"></a>
+    </td>
+    <td style="padding:0px">
+        <table class="table table-striped">
+            <tr>
+                <td><strong>##title##</strong></td>
+            </tr>
+            <tr>
+                <td><strong>出處： </strong><a href='{$sys.www_file}?f=book&doc_id=##doc_id##&page=##page##' target="_blank">##source##</a></td>
+            </tr>
+            <!-- loop from=fields key=$key value=$value id=list_id -->
+            <tr>
+                <td><strong>{$value.title}： </strong>##{$value.identifier}##</td>
+            </tr>
+            <!-- /loop -->
+        </table>
+    </td>
+ </tr> 
+</table>
+</script>
+
+<script>
+function showModal(dataId) {
+    htmlContent = $('#modal-' + dataId).html();
+    window.parent.showModal(htmlContent);
+}
+</script>
+
+</head>
+<body>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="nth-tabs" id="editor-tabs"></div>
+            </div>
+        </div>
+
+        <!-- loop from=cate_data key=$key value=$val id=list_id id=num -->
+        <!-- if count($val['contents']) > 0 -->
+        <!-- loop from=$val['contents'] value=$value -->
+        <div id="modal-{$value.id}" style="display:none" >
+                <div class="modal-content" style="padding:20px; text-align:center" >
+                            <img src="{$value.ebook_info.image}" height="400px">
+                            <table class="layui-table" style="margin:20px 0px">
+                                <tr>
+                                    <th>標題</th>
+                                    <td>{$value.title}</td>
+                                </tr> 
+                                <tr>
+                                    <th>出處</th>
+                                    <td><a href="{$sys.www_file}?f=book&doc_id={$value.ebook_info.lid}&page={$value.ebook_info.page}">{$value.doc_info.title}</a></td>
+                                </tr> 
+                                <!-- loop from=fields value=$v -->
+                                <tr>
+                                    <th>{$v.title}</th>
+                                    <td>{$value[$v['identifier']]}</td>
+                                </tr> 
+                                <!-- /loop -->
+                            </table>
+            </div>
+        </div>
+        <!-- /loop -->
+        <!-- /if -->
+        <!-- /loop -->
+</body>
+</html>

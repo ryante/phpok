@@ -880,6 +880,7 @@ function go_to_page_action()
 			if (parent_project_id > 0) {
 				url = url + '&parent_project_id=' + parent_project_id;
 			}
+            console.log(url);
 			$.dialog.open(url,{
 				'title':p_lang('選擇'),
 				'width':'90%',

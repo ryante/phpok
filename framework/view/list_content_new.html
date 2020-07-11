@@ -16,7 +16,6 @@
 	</div>
 </div>
 <!-- /if -->
-
 <!-- if $rs.module -->
 <div class="layui-card" id="search_html"{if !$keywords} style="display:none"{/if}>
 	<div class="layui-card-header">{lang搜尋}</div>
@@ -127,7 +126,7 @@
 <!-- /if -->
 
 
-
+<!-- if !$project_list -->
 <div class="layui-card">
 	<div class="layui-card-header">
 		{lang列表}
@@ -257,7 +256,9 @@
 					<!-- if $m_rs.title == '科儀文獻' || $m_rs.title == '呂祖全書' -->
 					<input type="button" value="書籍管理" onclick="$.win('{$rs.title}_{$value.title}','{url ctrl=book func=action id=8 lid=$value.id /}')" class="layui-btn layui-btn-sm" />
 					<!-- /if -->
+					<!-- if $m_rs.id != $KEYI_GALLERY_LIB_MODULEID && $m_rs.id != $LVZHU_GALLERY_LIB_MODULEID -->
 					<a target="_blank" href="home.php?f=book&doc_id={$value.id}" class="layui-btn-normal layui-btn layui-btn-sm" />預覽</a>
+					<!-- /if -->
 				</div>
 			</td>
 		</tr>
@@ -342,7 +343,9 @@
                         <!-- if $m_rs.title == '科儀文獻' || $m_rs.title == '呂祖全書' -->
 						<input type="button" value="書籍管理" onclick="$.win('{$rs.title}_{$vv.title}','{url ctrl=book func=action id=8 lid=$vv.id /}')" class="layui-btn layui-btn-sm" />
 						<!-- /if -->
+                        <!-- if $m_rs.title == '科儀文獻' || $m_rs.title == '呂祖全書' -->
                         <a target="_blank" href="home.php?f=book&doc_id={$value.id}&view=1" class="layui-btn-normal layui-btn layui-btn-sm" />預覽</a>
+						<!-- /if -->
 					</div>
 				</td>
 			</tr>
@@ -383,8 +386,8 @@
 					<!-- if $popedom.delete -->
 					<option value="delete">{lang刪除}</option>
 					<!-- /if -->
-					<!-- if $popedom.modify && $rs.subtopics -->
-					<option value="set_parent_new">{lang文庫遷移}</option>
+					<!-- if $popedom.modify  -->
+					<option value="set_parent_new">{lang子文庫遷移}</option>
 					<option value="unset_parent_new" style="display:none">{lang取消父層}</option>
 					<!-- /if -->
 				</optgroup>
@@ -412,4 +415,5 @@
 	</div>
 	<!-- /if -->
 </div>
+<!-- /if -->
 <!-- include tpl=foot_lay -->

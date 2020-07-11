@@ -36,7 +36,8 @@
 			</div>
 			<div class="layui-input-inline auto">{lang值越小越往前靠，最小值為0，最大值為255}</div>
 		</div>
-		<div class="layui-form-item">
+        <input type="hidden" name="status" value="1" />
+		<div class="layui-form-item" style="display:none">
 			<label class="layui-form-label">{lang狀態}</label>
 			<div class="layui-input-block">
 				<input type="radio" name="status" value="0" title="{lang禁用}"{if $id && !$rs.status} checked{/if} />
@@ -85,7 +86,7 @@
 		<!-- /if -->
 	</div>
 </div>
-<div class="layui-card">
+<div class="layui-card" style="display:none">
 	<div class="layui-card-header">{lang分類屬性}</div>
 	<div class="layui-card-body">
 		<div class="layui-form-item">
@@ -133,7 +134,7 @@
 		<!-- /if -->
 	</div>
 </div>
-<div class="layui-card">
+<div class="layui-card" style="display:none">
 	<div class="layui-card-header">{langSEO優化}</div>
 	<div class="layui-card-body">
 		<div class="layui-form-item">

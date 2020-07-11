@@ -103,21 +103,40 @@ $(function(){
 var addClickTimes = 0;
 layui.use('form', function(){
     var form = layui.form;//只有执行了这一步，部分表单元素才会自动修饰成功
+    // 初始化 
+    module = $('#search-module-list').val();
+    fieldHtml = $('#search-field-tpl-'+module).html();
+    $('.search-field-list').html(fieldHtml);
+    form.render('select', 'condition-search');
+    // end
+    // 新增搜索项
     $('#add-search-item').click(function () {
         if (addClickTimes >= 10) {
             layer.msg('已超過系統限制');
             return;
         }
         appendHtml = $('#search-item-tpl').html().trim();
+        module = $('#search-module-list').val();
+        fieldHtml = $('#search-field-tpl-'+module).html();
+        appendHtml = appendHtml.replace('search-field-tpl', fieldHtml);
         $('#append-search-item').append(appendHtml);
         addClickTimes++;
         form.render('select', 'condition-search');
     });
+    // 移除搜索项
     $('#remove-search-item').click(function(){
        $('#append-search-item').html('');
        addClickTimes = 0;
         form.render('select', 'condition-search');
     })
+    //文库选项选择
+    form.on('select(search-module-list)', function (data) {
+        $('.search-field-list').each(function(){
+            html = $('#search-field-tpl-'+data.value).html();
+            $('.search-field-list').html(html);
+            form.render('select', 'condition-search');
+        })
+    });
 });
 
 function tagLink(id) {

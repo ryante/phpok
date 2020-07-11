@@ -1,0 +1,98 @@
+<!-- include tpl=header -->
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script type="text/javascript" src="//api.map.baidu.com/api?v=2.0&ak=iCNEIaAt8S0gYV4F1yea4OKVhd6NKH0O"></script>
+<div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <div class="layui-container">
+
+            <ul class="layui-nav layui-bg-cyan">
+                <li class="layui-nav-item">
+                <a href="/">首頁</a>
+                <!-- if $libs -->
+                <dl class="layui-nav-child"> <!-- loop from=libs key=$key value=$value id=list_id-->
+                    <dd><a href="{url ctrl=index func=sonlib pid=$value.id/}">{$value.title}</a></dd>
+                    <!-- /loop -->
+                </dl>
+                <!-- /if -->
+                </li>
+                {if $parent_info}
+                <li class="layui-nav-item"><a href="{url ctrl=index func=sonlib pid=$parent_info.id/}">{$parent_info['title']}</a></li>
+                {/if}
+                <li class="layui-nav-item layui-this"><a href="#">{$lib_info['title']}</a></li>
+            </ul>
+            <div class="layui-row">
+                <div class="layui-col-sm12">
+                     <div class="layui-tab-content" style="margin-top:20px" >
+                         <div id="allmap" style="width:100%; height:600px"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<!-- 内容主体区域 -->
+</div>
+<script type="text/html" id="map-market-content">
+<h4 style='margin:0 0 5px 0;padding:0.2em 0;font-weight:700;color:#efbb25'>##title##</h4>
+<div class="layui-row">
+        <table class="layui-table">
+        <!-- loop from=fields key=$key value=$value id=list_id -->
+            <tr>
+                <th>{$value.title}</th>
+                <!-- if $value.identifier == 'thumb' -->
+                <td><img class='imgDemo' src='##{$value.identifier}##' width='100px' title='##title##'/></td>
+                <!-- else if $value.identifier == 'doc'  -->
+                <td><a href='{$sys.www_file}?f=book&doc_id=##doc_id##' target="_blank">##{$value.identifier}##</a></td>
+                <!-- else -->
+                <td>##{$value.identifier}##</th>
+                <!-- /if  -->
+            </tr>
+        <!-- /loop -->
+        </table>
+</div>
+</script>
+
+<script type="text/javascript">
+    // 百度地图API功能
+    var map = new BMap.Map("allmap");
+    var point = new BMap.Point(113.271429, 23.135336);
+    map.centerAndZoom(point, 9);
+    map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+
+    // 编写自定义函数,创建标注
+    function addMarker(point, content){
+      var marker = new BMap.Marker(point);
+      map.addOverlay(marker);
+      var infoWindow = new BMap.InfoWindow(content, {width:0,height:0});
+      marker.addEventListener("click", function(){          
+              this.openInfoWindow(infoWindow);
+              //图片加载完毕重绘infowindow
+              $('img').on('load', function() {
+                infoWindow.redraw();   //防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
+              });
+      });
+    }
+    
+    // 格式化标记内容
+    function formatMarkContent(content) {
+        tplHtml = $('#map-market-content').html();
+        tplHtml = tplHtml.replace('##image##', content.image);
+        tplHtml = tplHtml.replace('##title##', content.title);
+        tplHtml = tplHtml.replace('##doc_id##', content.doc_id);
+        <!-- loop from=fields key=$key value=$value id=list_id -->
+        tplHtml = tplHtml.replace('##{$value.identifier}##', content.{$value.identifier});
+        <!-- /loop -->
+        return tplHtml;
+    }
+
+    <!-- loop from=temple_datas key=$key value=$value id=list_id -->
+    <!-- php: $markContent = json_encode($value, true); -->
+    var point = new BMap.Point({$value.longitude}, {$value.latitude});
+    markContent = formatMarkContent({$markContent});
+    addMarker(point, markContent);
+    <!-- /loop -->
+</script>
+<!-- include tpl=footer -->

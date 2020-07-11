@@ -55,3 +55,9 @@
 .book_content_show{ display:block}
 span.tag-link{color:#064eb9 !important; cursor:pointer }
 .layui-table th { background-color: #e2e2e2; white-space: nowrap; border:1px solid #fff; color: #000; font-weight: 700 }
+#son-libs .layui-col-md4{text-align:center;height:300px; margin-bottom:25px;}
+#son-libs .layui-col-md4 a img{height:270px;}
+#son-libs .layui-col-md4 a {font-size:16px;}
+.show-types{float:right}
+.show-types span{cursor:pointer}
+.show-types span i{font-size:26px; color:#009688}

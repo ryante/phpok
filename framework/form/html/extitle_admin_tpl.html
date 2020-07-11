@@ -5,7 +5,7 @@
 	<!-- else -->
 		<!-- if !$_rs.form_true_delete -->
 		<div class="button-group" style="padding:2px 0 0 0;">
-			<input type="button" value="{lang選擇}" onclick="$.phpokform.extitle_list('{$_rs.id}','{$_rs.identifier}',{$_rs.form_maxcount}, '', '{$_rs.content}')" class="layui-btn layui-btn-sm" />
+			<input type="button" value="{lang選擇}" onclick="$.phpokform.extitle_list('{$_rs.id}','{$_rs.identifier}',{$_rs.form_maxcount}, '', '{if $_rs.project_parent_id}{$_rs.project_parent_id}{else}{$_rs.content}{/if}')" class="layui-btn layui-btn-sm" />
 			<input type="button" value="{lang新增}" onclick="$.phpokform.extitle_quickadd('{$_rs.id}','{$_rs.identifier}',{$_rs.form_maxcount})" class="layui-btn layui-btn-sm" style="display:none" />
 		</div>
 		<!-- else -->

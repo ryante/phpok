@@ -13,6 +13,8 @@
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class form_control extends phpok_control
 {
+    const KEYI_GALLERY_LIB_MODULEID = 8; //科仪图库MODULE ID
+    const LVZHU_GALLERY_LIB_MODULEID = 10; // 吕祖图库MODULE ID
 	function __construct()
 	{
 		parent::control();
@@ -357,7 +359,7 @@ class form_control extends phpok_control
 		$this->assign('identifier',$identifier);
 
 
-        // new add 关联文库文献 2020年6月2日
+        // new add 庙宇关联文库文献 2020年6月2日
         if ($id == 109) { // dj_field.id
             $this->relateDoc($id);
             return;
@@ -606,9 +608,21 @@ class form_control extends phpok_control
         }
         $tpl = "form_quicklist_ebook";
         $mlist = [];
+        $sonProjectList = [];
         if (!empty($parentPid)) {
-            $docLists = $this->db->get_all("select id,title from dj_list where project_id={$parentPid} order by id desc");
+            $sonProjects = $this->db->get_all("select id,title from dj_project where parent_id={$parentPid} and module!=" . self::KEYI_GALLERY_LIB_MODULEID . " and module !=" . self::LVZHU_GALLERY_LIB_MODULEID);
+            if (empty($sonProjects)) {
+                return false;
+            }
+            $projectIds = [];
+            foreach ($sonProjects as $val) {
+                $sonProjectList[$val['id']] = $val;
+                $projectIds[] = $val['id'];
+            }
+            $projectIdStr = implode(",", $projectIds);
+            $docLists = $this->db->get_all("select id,title,project_id from dj_list where project_id in ({$projectIdStr}) order by id desc");
         }
+        $this->assign("son_project_lists", $sonProjectList);
         $this->assign("doc_lists", $docLists);
         $this->assign("doc_id", $docId);
         $this->assign("parent_project_id", $parentPid);

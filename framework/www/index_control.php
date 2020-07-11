@@ -10,6 +10,10 @@
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class index_control extends phpok_control
 {
+    const KEYI_GALLERY_LIB_MODULEID = 8; //科仪图库MODULE ID
+    const LVZHU_GALLERY_LIB_MODULEID = 10; // 吕祖图库MODULE ID
+    const TEMPLE_LIB_MODULEID = 9; // 吕祖图库MODULE ID
+    const GALLERY_LIB_MODULEID = 8; 
 	public function __construct()
 	{
 		parent::control();
@@ -58,7 +62,6 @@ class index_control extends phpok_control
 		@file_put_contents($file, $data);
 	}
 
-
 	// 获取文库
 	public function getLibs(){
 		$cacheKey = "libs_list";
@@ -71,6 +74,25 @@ class index_control extends phpok_control
 			return false;
 		}
 		$data = [];
+		foreach ($rows as $val) {
+			$data[$val['id']] = $val;
+		}
+		$this->saveCache($cacheKey, json_encode($data, true));
+		return $data;
+	}
+    
+	// 获取文库
+	public function getAllLibs(){
+		$cacheKey = "all_libs_list";
+		$data = $this->getCache($cacheKey);
+		if (!empty($data) && false) {
+			return json_decode($data, true);
+		}
+		$rows = $this->db->get_all("select id,parent_id,module,title,pic,cate from dj_project where status = 1 order by taxis asc,id asc");
+		if (empty($rows)) {
+			return false;
+		}
+        $data = [];
 		foreach ($rows as $val) {
 			$data[$val['id']] = $val;
 		}
@@ -159,19 +181,28 @@ class index_control extends phpok_control
 			$where .= " and a.hidden=0 ";
 
 		}
-		$rows[2] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_2 b on a.id=b.id where {$where} order by a.sort asc ");
-		$rows[3] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_3 b on a.id=b.id where {$where} order by a.sort asc");
-		$rows[5] = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_5 b on a.id=b.id where {$where} order by a.sort asc");
-		$rows[2] = empty($rows[2]) ? [] : $rows[2];
-		$rows[3] = empty($rows[3]) ? [] : $rows[3];
-		$rows[5] = empty($rows[5]) ? [] : $rows[5];
-		$data = array_merge($rows[2], $rows[3], $rows[5]);
+
+        $data = [];
+        foreach ($this->myModule as $key => $val) {
+            $rows[$key] = [];
+            $tmpData = $this->db->get_all("select a.project_id,a.module_id,a.title,a.dateline,a.tag,a.sort,a.parent_id,b.* from dj_list a inner join dj_list_{$key} b on a.id=b.id where {$where} order by a.sort asc ");
+            if (!empty($tmpData)) {
+                $data = array_merge($data, $tmpData);
+            }
+        }
 		if (empty($data)) {
 			return false;
 		}
 		//$sortKey = array_column($data, "id", "id");
 		//array_multisort($sortKey, SORT_DESC, $data);
 		foreach ($data as $key => $val) {
+            if (!empty($val['thumb'])) {
+				$picInfo = $this->model('res')->get_one($val['thumb'],true);
+				if (!empty($picInfo)) {
+					$pic = ['filename' => $picInfo['filename'], 'gd' => $picInfo['gd']];
+					$data[$key]['thumb'] = $pic;
+				}
+			}
 			if (!empty($val['start_cover_pic'])) {
 				$picInfo = $this->model('res')->get_one($val['start_cover_pic'],true);
 				if (!empty($picInfo)) {
@@ -217,7 +248,6 @@ class index_control extends phpok_control
 		if (empty($keyWord)) {
 			return $docs;
 		}
-
 		// 默认搜索要带上标题
 		if (empty($searchField)) {
 			foreach ($this->moduleFields as $key => $val) {
@@ -431,12 +461,110 @@ class index_control extends phpok_control
 		$this->view("index");
 	}
 
+    //子图库页面
+    public function sonlib_f() {
+		$pid = $this->get('pid');
+        $allLibs = $this->getAllLibs();
+        $libInfo = $allLibs[$pid];
+		$tags = $this->getAllTags();
+        $data = []; 
+        $this->_tree($data, $allLibs, $pid);
+		$this->assign('parent_info', $allLibs[$allLibs[$pid]['parent_id']]);
+		$this->assign('lib_info', $libInfo);
+		$this->assign('son_libs', $data);
+		$this->assign('tags', $tags);
+		$this->assign('LVZHU_GALLERY_LIB_MODULEID', self::LVZHU_GALLERY_LIB_MODULEID);
+		$this->assign('KEYI_GALLERY_LIB_MODULEID', self::KEYI_GALLERY_LIB_MODULEID);
+        if ($libInfo['module'] == self::TEMPLE_LIB_MODULEID) {
+            $this->templelib($libInfo);
+        }
+        if ($libInfo['module'] == self::LVZHU_GALLERY_LIB_MODULEID || $libInfo['module'] == self::KEYI_GALLERY_LIB_MODULEID ) {
+            $this->gallerylib($libInfo);
+        }
+		$this->view("son_lib");
+    }
+
+    // 图库列表
+    public function gallerylib($libInfo) {
+        if (empty($libInfo)) {
+            return false;
+        }
+        $cates = $this->db->get_all("select id,title from dj_cate where parent_id={$libInfo['cate']} and status = 1"); 
+        if (empty($cates)) {
+            return false;
+        }
+        $cateData = [];
+        foreach ($cates as $val) {
+            $cateData[$val['id']] = $val;
+        }
+		$pid = $libInfo['id'];
+        $frame = $this->get('frame');
+        $rows = $this->db->get_all("select a.id,a.title,a.cate_id,b.* from dj_list a inner join dj_list_{$libInfo['module']} b on a.id=b.id where b.project_id={$pid} order by a.sort asc,a.id desc");
+        if (empty($rows)) {
+            return false;
+        }
+        foreach ($rows as $val) {
+            if (!empty($val['pictures'])) {
+                $ebookInfo = $this->db->get_one("select id,lid from dj_list_6 where id={$val['pictures']} limit 1");
+                $ebookData = $this->getDocBooks($ebookInfo['lid']);
+                if (!empty($ebookData[$val['pictures']])) {
+                    $ebookInfo['image'] = $ebookData[$val['pictures']]['image']['filename'];
+                    $ebookInfo['page'] = $ebookData[$val['pictures']]['page'];
+                }
+                $val['ebook_info'] = $ebookInfo;
+                $docInfo = $this->db->get_one("select id,title from dj_list where id={$ebookInfo['lid']}");
+                $val['doc_info'] = $docInfo;
+            }
+            if (!empty($cateData[$val['cate_id']])) {
+                $cateData[$val['cate_id']]['contents'][] = $val;
+            }
+        }
+        $view = $this->get('view') ? $this->get('view') : 1;
+        $this->assign('view', $view);
+        if (empty($frame)) {
+            $this->view('gallery_lib');
+        }
+        $fields = $this->db->get_all("select title,identifier from dj_fields where ftype={$libInfo['module']} and is_front=1 and identifier != 'pictures'");
+        $this->assign('fields', $fields);
+        $this->assign('cate_data', $cateData);
+        $this->view('frame_gallery');
+    }
+
+    //庙宇
+    public function templelib($libInfo) {
+        if (empty($libInfo)) {
+            return false;
+        }
+        $rows = $this->db->get_all("select a.title,b.* from dj_list a inner join dj_list_9 b on a.id=b.id order by a.sort asc,a.id desc");
+        if (!empty($rows)) {
+            foreach ($rows as $key => $val) {
+                if (!empty($val['thumb'])) {
+                    $picInfo = $this->model('res')->get_one($val['thumb'],true);
+                    if (!empty($picInfo)) {
+                        $rows[$key]['thumb'] = $picInfo['gd']['thumb'];
+                    }
+                }
+                if (!empty($val['doc'])) {
+                    $docInfo = $this->db->get_one("select id,title from dj_list where id={$val['doc']}");
+                    $rows[$key]['doc'] = $docInfo['title'];
+                    $rows[$key]['doc_id'] = $docInfo['id'];
+                }
+            }
+        }
+        $fields = $this->db->get_all("select title,identifier from dj_fields where ftype={$libInfo['module']} and is_front=1 ");
+        $this->assign('fields', $fields);
+        $this->assign('temple_datas', $rows);
+        $this->view('temple_list');
+    }
+
+
 	// 文献列表
 	public function docs_f() {
 		$pid = $this->get('pid');
 		$tagId = $this->get('tag_id');
 		$keywords = $this->get('keywords');
 		$searchFields = $this->get('fields');
+		$diySearch = $this->get('diy_search');
 		if (empty($pid) && empty($tagId) && empty($keywords)) {
 			$docs = $this->getAllDocs();
 			foreach ($docs as $key => $val) {
@@ -446,9 +574,12 @@ class index_control extends phpok_control
 			}
 		}
 		$tags = $this->getAllTags();
+		$this->assign('tags', $tags);
 		if (!empty($pid)) {
 			$prs = $this->db->get_one("select title from dj_project where id='{$pid}'");
 			$docs = $this->searchDocsByPid($pid);
+            $allLibs = $this->getAllLibs();
+            $this->assign('parent_info', $allLibs[$allLibs[$pid]['parent_id']]);
 			$this->assign('pid', $pid);
 			$this->assign('nav_title', $prs['title']);
 		}
@@ -482,11 +613,102 @@ class index_control extends phpok_control
 			$this->assign('search_fields', $searchFields);
 			$this->assign('nav_title', "關鍵字：{$keywords}");
 		}
-		$this->assign('tags', $tags);
+        if (!empty($diySearch)) {
+            $this->diySearchDoc();
+        }
 		$this->assign('docs', $docs);
 		$this->assign('docs_total', count($docs));
 		$this->view('img_list');
 	}
+
+    // 自定义搜索
+    public function diySearchDoc() {
+        $allowSearchFields = $this->moduleFields[$_POST['module']]['search'];
+        foreach ($_POST['fields'] as $val) {
+            if (!in_array($val, array_keys($allowSearchFields))) {
+                $this->error(P_Lang('非法提交'));
+            }
+        }
+        $where = "1=1";
+        $firstCondition = true;
+        $hightLightWord = [];
+        $result = [];
+        foreach ($_POST['kws'] as $key => $kw) {
+            $kw = trim($kw);
+            if (empty($kw)) {
+                continue;
+            }
+            $kw = addslashes($kw);
+            $logic = "and";
+            if (!$firstCondition) {
+                $logic = $_POST['logics'][$key - 1];
+            }
+            if ($_POST['matches'][$key] == 'like') {
+                if ($logic == 'not') {
+                    $logic = "and";
+                    $where .= " {$logic} ({$_POST['fields'][$key]} not like '%{$kw}%') ";
+                } else {
+                    $where .= " {$logic} ({$_POST['fields'][$key]} like '%{$kw}%') ";
+                }
+            } else {
+                if ($logic == 'not') {
+                    $logic = "and";
+                    $where .= " {$logic} ({$_POST['fields'][$key]} != '{$kw}') ";
+                } else {
+                    $where .= " {$logic} ({$_POST['fields'][$key]} = '{$kw}') ";
+                }
+            }
+            if ($logic != 'not') {
+                $hightLightWord[$_POST['fields'][$key]][] = $kw; // 条件为否定的不hightlight
+            }
+            $firstCondition = false;
+        }
+        if ($firstCondition) {
+                $this->error(P_Lang('請輸入搜索關鍵字'));
+        }
+        $rows = $this->db->get_all("select id from dj_list_{$_POST['module']} where {$where} order by id desc");
+		$allDocs = $this->getAllDocs();
+		foreach($rows as $val) {
+            $docInfo = $allDocs[$val['id']];
+            foreach ($docInfo as $k => $v) {
+				if (empty($v)) {
+					continue;
+				}
+				if (!in_array($k, array_keys($hightLightWord))) {
+					continue;
+				}
+                $tmpWordsArr = $hightLightWord[$k];
+                if (empty($tmpWordsArr)) {
+                    continue;
+                }
+                foreach ($tmpWordsArr as $word) {
+                    if (stripos($v, $word) !== false) {
+                        $docInfo[$k] = str_replace($word, "<span class='layui-badge layui-bg-green'>{$word}</span>", $v);
+                    }
+                }
+                $docInfo['start_cover_pic'] = $docInfo['thumb'];//向已经编写好的搜索模板看齐
+			}
+            if (!empty($docInfo['doc']) && !empty($allDocs[$docInfo['doc']])) {
+                $docInfo['doc_id'] = $docInfo['doc'];
+                $docInfo['doc'] = $allDocs[$docInfo['doc']]['title'];
+            }
+            $result[$val['id']] = $docInfo;
+        }
+		foreach ($result as $key => $val) {
+			$val = $this->hightLightTag($val);
+			$val['real_title'] = strip_tags($val['title']);
+			$result[$key] = $val;
+		}
+        foreach ($_POST as $key => $val) {
+            $this->assign($key, $val);
+        }
+        $this->assign('diy_search', true);
+        $this->assign('nav_title', "自定義查詢");
+		$this->assign('keywords', '');//判断这个是否显示碑刻
+		$this->assign('docs', $result);
+		$this->assign('docs_total', count($result));
+		$this->view('img_list');
+    }
 
 	public function book_f() {
 		$keyWord = $this->get('keyword');
@@ -690,5 +912,17 @@ class index_control extends phpok_control
 		}
 		global $app;
 		include($this->dir_root.'phpinc/'.$phpfile);
+	}
+
+    public function _tree(&$list,$catelist,$parent_id=0)
+	{
+		foreach($catelist as $key=>$value)
+		{
+			if($value['parent_id'] == $parent_id)
+			{
+				$list[$value['id']] = $value;
+				$this->_tree($list[$value['id']]['sublist'],$catelist,$value['id']);
+			}
+		}
 	}
 }

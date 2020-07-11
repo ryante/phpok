@@ -47,7 +47,7 @@
 					<div class="layui-btn-group">
 						<input type="button" value="{lang編輯}" onclick="$.win('{lang編輯}_#{$value.id}','{url ctrl=newproject func=set id=$value.id/}')" class="layui-btn layui-btn-sm" />
 						<input type="button" value="{lang刪除}" onclick="$.admin_project.del('{$value.id}')" class="layui-btn layui-btn-sm layui-btn-danger" />
-						<!-- if !$value.parent_id -->
+						<!-- if !$value.parent_id || $value.module == 8 || $value.module == 10 -->
 						<input type="button" value="{lang欄位管理}" onclick="$.win('{lang欄位管理}_{$value.title}_#{$value.module}','{url ctrl=newmodule func=fields id=$value.module/}');" class="layui-btn layui-btn-sm"/>
 						<!-- /if -->
 						<!-- if !$value.module || !$value.parent_id -->

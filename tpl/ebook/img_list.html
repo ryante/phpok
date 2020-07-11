@@ -7,42 +7,40 @@
 
             <ul class="layui-nav layui-bg-cyan">
                 <li class="layui-nav-item">
-                    <a href="/">首頁</a>
-                    <!-- if $libs -->
-                    <dl class="layui-nav-child">
-                        <!-- loop from=libs key=$key value=$value id=list_id-->
-                        <dd><a href="{url ctrl=index func=docs pid=$value.id/}">{$value.title}</a></dd>
-                        <!-- /loop -->
-                    </dl>
-                    <!-- /if -->
-                </li>
-                <!-- if !$nav_title -->
-                <li class="layui-nav-item layui-this"><a href="">文獻列表</a></li>
-                <!-- else -->
-                <li class="layui-nav-item"><a href="/{$sys.www_file}?f=docs">文獻列表</a></li>
-                <li class="layui-nav-item layui-this"><a href="">{$nav_title}</a></li>
+                <a href="/">首頁</a>
+                <!-- if $libs -->
+                <dl class="layui-nav-child">
+                    <!-- loop from=libs key=$key value=$value id=list_id-->
+                    <dd><a href="{url ctrl=index func=sonlib pid=$value.id/}">{$value.title}</a></dd>
+                    <!-- /loop -->
+                </dl>
                 <!-- /if -->
+                </li>
+                {if $parent_info}
+                <li class="layui-nav-item"><a href="{url ctrl=index func=sonlib pid=$parent_info.id/}">{$parent_info['title']}</a></li>
+                {/if}
+                <li class="layui-nav-item layui-this"><a href="">{$nav_title}</a></li>
             </ul>
 
             <!-- include tpl=doc_search -->
             <!-- search list start -->
             <div class="layui-row layui-col-space20">
-                <div class="layui-col-md3">
+                <div class="layui-col-sm3">
                     <!-- include tpl=tag -->
                 </div>
-                <div class="layui-col-md9">
+                <div class="layui-col-sm9">
                     <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
                         <div class="layui-card-header">
                             文獻列表
                             <div style="float: right;">
                                 <span id="list_view_2" title="方格顯示"> <i class="layui-icon layui-icon-picture-fine"
-                                                                        style="font-size: 26px;color: #009688"> </i> </span>
+                                        style="font-size: 26px;color: #009688"> </i> </span>
                                 <span id="list_view_1" title="圖表顯示"> <i class="layui-icon layui-icon-list"
-                                                                        style="font-size: 26px; color: #009688"> </i> </span>
+                                        style="font-size: 26px; color: #009688"> </i> </span>
 
-                                <!-- if !$keywords -->
+                                <!-- if !isset($keywords) -->
                                 <span id="list_view_3" title="清單顯示"> <i class="layui-icon layui-icon-table"
-                                                                        style="font-size: 26px; color: #009688"> </i> </span>
+                                        style="font-size: 26px; color: #009688"> </i> </span>
                                 <!-- /if -->
                             </div>
                         </div>
@@ -51,192 +49,208 @@
 
                         <input type="hidden" id="total_docs"  value="{$totalPages}">
                         <div class="layui-tab-content" id="lib-list1" {if !$keywords}style="display: none" {/if} >
-                        <!-- if $totalDocs > 0 -->
-                        <!-- loop from=docs key=$key value=$value id=list_id id=num -->
-                        <!-- php: $page = ceil($num.num / 12); -->
-                        <div class="layui-row layui-col-space10 list1-page-{$page}" style="display: none" >
-                            <div class="layui-col-md3">
-                                <a href="{$sys.www_file}?f=book&doc_id={$value.id}" class="start_cover">
-                                    {if $value.start_cover_pic}
-                                    <img src="{$value.start_cover_pic.gd.book-cover}"/>
-                                    {else}
-                                    <img src="images/nopic.png"/>
-                                    {/if}
-                                    <p>{if $value.real_title}{$value.real_title}{else}{$value.title}{/if}</p>
-                                </a>
-                            </div>
-
-                            <div class="layui-col-md9">
-                                <!-- if $module_fields[$value['module_id']]['is_front'] -->
-                                <table class="layui-table">
-                                    <tbody>
-                                    <!-- loop from=$module_fields[$value['module_id']]['is_front'] key=$k value=$v -->
-                                    <!-- if $k == 'start_cover_pic' || $k == 'end_cover_pic'  -->
-                                    <?php continue; ?>
-                                    <!-- /if  -->
-                                    {if $k == 'pdf_file'}
-                                    <tr>
-                                        <td style="width: 160px"> {$v}</td>
-                                        <td>{if $value[$k]}{$value[$k]['title']} &nbsp;&nbsp;&nbsp;<a
-                                                href="{$value[$k]['filename']}" title="点击下载"><i
-                                                class="layui-icon layui-icon-download-circle"></i></a>{/if}
-                                        </td>
-                                    </tr>
-                                    {else}
-                                    <tr>
-                                        <td style="width: 160px"> {$v}</td>
-                                        <td> {$value[$k]}</td>
-                                    </tr>
-                                    {/if}
-                                    <!-- /loop -->
-                                    </tbody>
-                                </table>
-                                <!-- /if  -->
-                                <!-- if $value.book_list -->
-                                <p>相關內文</p>
-                                <hr/>
-                                <div class="layui-col-md12">
-                                    <!-- loop from=$value.book_list key=$k value=$v id=book_list_id-->
-
-                                    <a href="{$sys.www_file}?f=book&doc_id={$value.id}{if $value.project_id != 3}&page={$v.page}&keyword={$keywords}{/if}"
-                                       class="{if $book_list_id.num >= 6}book_content_hide{else}book_content_show{/if}">
-                                        <blockquote class="layui-elem-quote" style="border-left:0px">
-                                            {$v.nohtml_content}
-                                        </blockquote>
-                                    </a>
-
-                                    <!-- /loop -->
-                                    {if count($value.book_list) > 6}
-                                    <a href="javascript:showMore('book_search_{$list_id.num}')"
-                                       id="book_search_{$list_id.num}" class="book_content_more book_content_expand"><i
-                                            class="layui-icon layui-icon-down"></i></a>
-                                    {/if}
-
-                                </div>
-                                <!-- /if  -->
-                            </div>
-
-                        </div>
-                        {if $list_id.num != $docs_total}
-                        <hr class="list1-page-{$page}" style="display: none"/>
-                        {/if}
-                        <!-- /loop -->
-                        <div style="width: 100%; margin: 10px 0px;">
-                            <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid view-more" data-tab="1">查看更多</button>
-                        </div>
-                        <!-- else  -->
-                        <p style="text-align: center"> 暫無內容~ </p>
-                        <!-- /if  -->
-                    </div>
-
-
-                    <div class="layui-tab-content" id="lib-list2" {if $keywords}style="display: none" {/if} >
-                    <!-- if $totalDocs > 0 -->
-                    <!-- loop from=docs key=$key value=$value id=num -->
-                    <!-- php: $page = ceil($num.num / 12); -->
-                    {if ($num.num - 1) % 4 == 0}
-                    <div class="layui-row">
-                        {/if}
-                        <div class="layui-col-md3  list2-page-{$page}" style="display: none;">
-                            <a href="{$sys.www_file}?f=book&doc_id={$value.id}">
-                                {if $value.start_cover_pic}
-                                <img src="{$value.start_cover_pic.gd.book-cover}" />
-                                {else}
-                                <img src="images/nopic.png"/>
-                                {/if}
-
-                                <p>{if $value.real_title}{$value.real_title}{else}{$value.title}{/if}</p>
-                            </a>
-                        </div>
-                    {if ($num.num ) % 4 == 0 || $num.num == $totalDocs}
-                    </div>
-                    {/if}
-                    <!-- /loop -->
-                    <div style="width: 100%; margin: 10px 0px;">
-                        <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid view-more" data-tab="2">查看更多</button>
-                    </div>
-                    <!-- else  -->
-                    <p style="text-align: center"> 暫無內容~ </p>
-                    <!-- /if  -->
-                </div>
-
-                <!-- if !$keywords -->
-                <div class="layui-tab-content" id="lib-list3" style="display: none"  >
-                    <!-- if $totalDocs > 0 -->
-                <div class="layui-row layui-col-space10" style="width: 100%; overflow-x: scroll">
-                <div class="layui-col-md12">
-                    <!-- if $module_fields[$value['module_id']]['is_front'] -->
-                    <table class="layui-table">
-                        <tbody>
-                            <tr>
-                                <!-- loop from=$module_fields[$value['module_id']]['is_front'] key=$k value=$v -->
-                                <!-- if $k == 'start_cover_pic' || $k == 'end_cover_pic' -->
-                                <?php continue; ?>
-                                <!-- /if  -->
-                                <th> {$v}</th>
-                                <!-- /loop -->
-                            </tr>
-
-                            <!-- loop from=docs key=$key value=$value id=num -->
+                            <!-- if $totalDocs > 0 -->
+                            <!-- loop from=docs key=$key value=$value id=list_id id=num -->
                             <!-- php: $page = ceil($num.num / 12); -->
-                            <tr class="list3-page-{$page}" style="display: none">
-                                <!-- loop from=$module_fields[$value['module_id']]['is_front'] key=$k value=$v -->
-                                <!-- if $k == 'start_cover_pic' || $k == 'end_cover_pic'  -->
-                                <?php continue; ?>
-                                <!-- /if  -->
-                                {if $k == 'pdf_file'}
-                                <td>
-                                {if $value[$k]}{$value[$k]['title']} &nbsp;&nbsp;&nbsp;<a
-                                    href="{$value[$k]['filename']}" title="点击下载"><i
-                                    class="layui-icon layui-icon-download-circle"></i></a>{/if}
-                                </td>
-                                {else}
-                                <td> {$value[$k]}</td>
-                                {/if}
-                                <!-- /loop -->
-                            </tr>
+                            <div class="layui-row layui-col-space10 list1-page-{$page}" style="display: none" >
+                                <div class="layui-col-md3">
+                                    <a href="{$sys.www_file}?f=book&doc_id={$value.id}" class="start_cover">
+                                        {if $value.start_cover_pic}
+                                        <img src="{$value.start_cover_pic.gd.book-cover}"/>
+                                        {elseif $value.thumb}
+                                        <img src="{$value.thumb.gd.book-cover}"/>
+                                        {else}
+                                        <img src="images/nopic.png"/>
+                                        {/if}
+                                        <p>{if $value.real_title}{$value.real_title}{else}{$value.title}{/if}</p>
+                                    </a>
+                                </div>
+
+                                <div class="layui-col-md9">
+                                    <!-- if $module_fields[$value['module_id']]['is_front'] -->
+                                    <table class="layui-table">
+                                        <tbody>
+                                        <!-- loop from=$module_fields[$value['module_id']]['is_front'] key=$k value=$v -->
+                                        <!-- if $k == 'start_cover_pic' || $k == 'end_cover_pic' || $k == 'thumb'  -->
+                                        <?php continue; ?>
+                                        <!-- /if  -->
+                                        {if $k == 'pdf_file'}
+                                        <tr>
+                                            <td style="width: 160px"> {$v}</td>
+                                            <td>{if $value[$k]}{$value[$k]['title']} &nbsp;&nbsp;&nbsp;<a
+                                                    href="{$value[$k]['filename']}" title="点击下载"><i
+                                                        class="layui-icon layui-icon-download-circle"></i></a>{/if}
+                                            </td>
+                                        </tr>
+                                        {else}
+                                        <tr>
+                                            <td style="width: 160px"> {$v}</td>
+                                            <td> {$value[$k]}</td>
+                                        </tr>
+                                        {/if}
+                                        <!-- /loop -->
+                                        </tbody>
+                                    </table>
+                                    <!-- /if  -->
+                                    <!-- if $value.book_list -->
+                                    <p>相關內文</p>
+                                    <hr/>
+                                    <div class="layui-col-md12">
+                                        <!-- loop from=$value.book_list key=$k value=$v id=book_list_id-->
+
+                                        <a href="{$sys.www_file}?f=book&doc_id={$value.id}{if $value.project_id != 3}&page={$v.page}&keyword={$keywords}{/if}"
+                                            class="{if $book_list_id.num >= 6}book_content_hide{else}book_content_show{/if}">
+                                            <blockquote class="layui-elem-quote" style="border-left:0px">
+                                                {$v.nohtml_content}
+                                            </blockquote>
+                                        </a>
+
+                                        <!-- /loop -->
+                                        {if count($value.book_list) > 6}
+                                        <a href="javascript:showMore('book_search_{$list_id.num}')"
+                                            id="book_search_{$list_id.num}" class="book_content_more book_content_expand"><i
+                                                class="layui-icon layui-icon-down"></i></a>
+                                        {/if}
+
+                                    </div>
+                                    <!-- /if  -->
+                                </div>
+
+                            </div>
+                            {if $list_id.num != $docs_total}
+                            <hr class="list1-page-{$page}" style="display: none"/>
+                            {/if}
                             <!-- /loop -->
 
-                        </tbody>
-                    </table>
+                            <!-- if $totalPages > 1 -->
+                            <div style="width: 100%; margin: 10px 0px;">
+                                <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid view-more" data-tab="1">查看更多</button>
+                            </div>
+                            <!-- /if  -->
 
-                    <div style="width: 100%; margin: 10px 0px;">
-                        <button type="button"  class="layui-btn layui-btn-primary layui-btn-fluid view-more" data-tab="3">查看更多</button>
+                            <!-- else  -->
+                            <p style="text-align: center"> 暫無內容~ </p>
+                            <!-- /if  -->
+                        </div>
+
+
+                        <div class="layui-tab-content" id="lib-list2" {if $keywords}style="display: none" {/if} >
+                            <!-- if $totalDocs > 0 -->
+                            <!-- loop from=docs key=$key value=$value id=num -->
+                            <!-- php: $page = ceil($num.num / 12); -->
+                            {if ($num.num - 1) % 4 == 0}
+                            <div class="layui-row">
+                                {/if}
+                                <div class="layui-col-md3  list2-page-{$page}" style="display: none;">
+                                    <a href="{$sys.www_file}?f=book&doc_id={$value.id}">
+                                        {if $value.start_cover_pic}
+                                        <img src="{$value.start_cover_pic.gd.book-cover}" />
+                                        {else}
+                                        <img src="images/nopic.png"/>
+                                        {/if}
+
+                                        <p>{if $value.real_title}{$value.real_title}{else}{$value.title}{/if}</p>
+                                    </a>
+                                </div>
+                                {if ($num.num ) % 4 == 0 || $num.num == $totalDocs}
+                            </div>
+                            {/if}
+                            <!-- /loop -->
+
+                            <!-- if $totalPages > 1 -->
+                            <div style="width: 100%; margin: 10px 0px;">
+                                <button type="button" class="layui-btn layui-btn-primary layui-btn-fluid view-more" data-tab="2">查看更多</button>
+                            </div>
+                            <!-- /if  -->
+
+
+                            <!-- else  -->
+                            <p style="text-align: center"> 暫無內容~ </p>
+                            <!-- /if  -->
+                        </div>
+
+                        <!-- if !$keywords -->
+                        <div class="layui-tab-content" id="lib-list3" style="display: none"  >
+                            <!-- if $totalDocs > 0 -->
+                            <div class="layui-row layui-col-space10" style="width: 100%; overflow-x: scroll">
+                                <div class="layui-col-md12">
+                                    <!-- if $module_fields[$value['module_id']]['is_front'] -->
+                                    <table class="layui-table">
+                                        <tbody>
+                                        <tr>
+                                            <!-- loop from=$module_fields[$value['module_id']]['is_front'] key=$k value=$v -->
+                                            <!-- if $k == 'start_cover_pic' || $k == 'end_cover_pic' || $k == 'thumb' -->
+                                            <?php continue; ?>
+                                            <!-- /if  -->
+                                            <th> {$v}</th>
+                                            <!-- /loop -->
+                                        </tr>
+
+                                        <!-- loop from=docs key=$key value=$value id=num -->
+                                        <!-- php: $page = ceil($num.num / 12); -->
+                                        <tr class="list3-page-{$page}" style="display: none">
+                                            <!-- loop from=$module_fields[$value['module_id']]['is_front'] key=$k value=$v -->
+                                            <!-- if $k == 'start_cover_pic' || $k == 'end_cover_pic' || $k == 'thumb' -->
+                                            <?php continue; ?>
+                                            <!-- /if  -->
+                                            {if $k == 'pdf_file'}
+                                            <td>
+                                                {if $value[$k]}{$value[$k]['title']} &nbsp;&nbsp;&nbsp;<a
+                                                    href="{$value[$k]['filename']}" title="点击下载"><i
+                                                        class="layui-icon layui-icon-download-circle"></i></a>{/if}
+                                            </td>
+                                            {else}
+                                            <td> {$value[$k]}</td>
+                                            {/if}
+                                            <!-- /loop -->
+                                        </tr>
+                                        <!-- /loop -->
+
+                                        </tbody>
+                                    </table>
+
+                                    <!-- if $totalPages > 1 -->
+                                    <div style="width: 100%; margin: 10px 0px;">
+                                        <button type="button"  class="layui-btn layui-btn-primary layui-btn-fluid view-more" data-tab="3">查看更多</button>
+                                    </div>
+                                    <!-- /if  -->
+
+                                    <!-- /if  -->
+                                </div>
+                                <!-- layui-col-md12  -->
+                            </div>
+                                <!-- layui-row  -->
+
+                            <!-- else  -->
+                            <p style="text-align: center"> 暫無內容~ </p>
+                            <!-- /if  -->
+                        </div>
+                     <!-- /if  -->
+
+
                     </div>
-                    <!-- /if  -->
-                </div>
-                </div>
-                    <!-- /if  -->
 
-                <!-- else  -->
-                <p style="text-align: center"> 暫無內容~ </p>
-                <!-- /if  -->
+                </div>
             </div>
-
-
         </div>
-
+        <!-- search list end -->
     </div>
-</div>
-</div>
-<!-- search list end -->
-</div>
 </div>
 <!-- 内容主体区域 -->
 </div>
 <script>
 
-    function showMore(element) {
-        if ($('#' + element).hasClass('book_content_expand')) {
-            $('#' + element).removeClass('book_content_expand');
-            $('#' + element).prevAll().removeClass('book_content_hide');
-            $('#' + element).html('<i class="layui-icon layui-icon-up"></i>');
-        } else {
-            $('#' + element).addClass('book_content_expand');
-            $('#' + element).prevAll().addClass('book_content_hide');
-            $('#' + element).html('<i class="layui-icon layui-icon-down"></i>');
-        }
+function showMore(element) {
+    if ($('#' + element).hasClass('book_content_expand')) {
+        $('#' + element).removeClass('book_content_expand');
+        $('#' + element).prevAll().removeClass('book_content_hide');
+        $('#' + element).html('<i class="layui-icon layui-icon-up"></i>');
+    } else {
+        $('#' + element).addClass('book_content_expand');
+        $('#' + element).prevAll().addClass('book_content_hide');
+        $('#' + element).html('<i class="layui-icon layui-icon-down"></i>');
     }
+}
 
 </script>
 <!-- include tpl=footer -->

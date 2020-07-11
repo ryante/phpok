@@ -1,10 +1,10 @@
 <div class="layui-tab layui-tab-card" style=" margin-top: 20px">
     <ul class="layui-tab-title">
-        <li {if !$diy_search}class="layui-this"{/if}>关键词查询</li>
-        <li {if $diy_search}class="layui-this"{/if}>自定義查詢</li>
+        <li class="layui-this">关键词查询</li>
+        <li>条件查询</li>
     </ul>
     <div class="layui-tab-content" style="padding: 20px">
-        <div class="layui-tab-item  {if !$diy_search}layui-show{/if}">
+        <div class="layui-tab-item  layui-show">
                 <form class="layui-form" action="{url ctrl=index func=docs /}" method="get">
                     <input type="hidden" name="f" value="docs"/>
                     <div class="layui-row">
@@ -43,15 +43,15 @@
                     </div>
                 </form>
         </div>
-        <div class="layui-tab-item  {if $diy_search}layui-show{/if}">
-            <form class="layui-form" lay-filter="condition-search" action="{url ctrl=index func=docs /}" method="post">
-                <input type="hidden" name="diy_search" value="1"/>
+        <div class="layui-tab-item">
+            <form class="layui-form" lay-filter="condition-search" action="{url ctrl=index func=docs /}" method="get">
+                <input type="hidden" name="f" value="docs"/>
                 <div class="layui-row">
                     <div class="layui-form-item">
                         <div class="layui-input-inline">
                             <select name="module" id="search-module-list" lay-filter="search-module-list">
                                 <!-- loop from=my_module key=$key value=$value -->
-                                <option value="{$key}" {if $module == $key}selected{/if}>{$value}</option>
+                                <option value="{$key}" {if $module == $key}selected{/if}>{$value}{$key}</option>
                                 <!-- /loop -->
                             </select>
                         </div>
@@ -66,30 +66,29 @@
                             </select>
                         </div>
                         <div class="layui-input-inline">
-                            <select name="matches[]">
-                                <option value="like" {if $matches[0] != 'eq'}selected{/if}>包括</option>
-                                <option value="eq" {if $matches[0] == 'eq'}selected{/if}>精确</option>
+                            <select name="match[]">
+                                <option value="like" {if $match[0] != 'eq'}selected{/if}>包括</option>
+                                <option value="eq" {if $match[0] == 'eq'}selected{/if}>精确</option>
                             </select>
                         </div>
                         <div class="layui-input-inline" >
-                            <input type="text" name="kws[]" class="layui-input" value="{$kws[0]}" placeholder="请输入关键字">
+                            <input type="text" name="kw[]" class="layui-input" value="{$kw[0]}" placeholder="请输入关键字">
                         </div>
                     </div>
                 </div>
-                
-                <div id="append-search-item">
+
+
                 <!-- if count($fields) > 1 -->
                 <!-- loop from=$fields key=$fields_key value=$fields_val -->
                     <!-- if $fields_key == 0 -->
                     <!-- php: continue; -->
                     <!-- /if -->
-                <div class="layui-row">
                     <div class="layui-form-item">
                         <div class="layui-input-inline">
-                            <select name="logics[]">
-                                <option value="and" {if $logics[$fields_key-1] == 'and'}selected{/if}>和</option>
-                                <option value="or" {if $logics[$fields_key-1] == 'or'}selected{/if}>或</option>
-                                <option value="not" {if $logics[$fields_key-1] == 'not'}selected{/if}>否</option>
+                            <select name="logic[]">
+                                <option value="and" {if $logic[$logic-1] == 'and'}selected{/if}>和</option>
+                                <option value="or" {if $logic[$logic-1] == 'or'}selected{/if}>或</option>
+                                <option value="not" {if $logic[$logic-1] == 'not'}selected{/if}>否</option>
                             </select>
                         </div>
 
@@ -98,24 +97,49 @@
                             </select>
                         </div>
                         <div class="layui-input-inline">
-                            <select name="matches[]">
-                                <option value="like" {if $matches[$fields_key] != 'eq'}selected{/if}>包括</option>
-                                <option value="eq" {if $matches[$fields_key] == 'eq'}selected{/if}>精确</option>
+                            <select name="match[]">
+                                <option value="like" {if $match[$fields_key] != 'eq'}selected{/if}>包括</option>
+                                <option value="eq" {if $match[$fields_key] == 'eq'}selected{/if}>精确</option>
                             </select>
                         </div>
                         <div class="layui-input-inline" >
-                            <input type="text" name="kws[]" class="layui-input" value="{$kws[$fields_key]}" placeholder="请输入关键字">
+                            <input type="text" name="kw[]" class="layui-input" value="{$kw[$fields_key]}" placeholder="请输入关键字">
                         </div>
                     </div>
                 </div>
                 <!-- /loop -->
                 <!-- /if -->
+
+                <div class="layui-row ">
+                    <div class="layui-form-item">
+                        <div class="layui-input-inline">
+                            <select name="logic[]">
+                                <option value="and">和</option>
+                                <option value="or">或</option>
+                                <option value="not">否</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="fields[]" class="search-field-list" >
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="match[]">
+                                <option value="like">包括</option>
+                                <option value="eq">精确</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline" >
+                            <input type="text" name="kw[]" class="layui-input" placeholder="请输入关键字">
+                        </div>
+                    </div>
+                </div>
+
+                <div id="append-search-item">
+
                 </div>
 
                 <div class="layui-row">
-                    <div class="layui-input-inline">
-                            <button type="submit" class="layui-btn"> 搜索 </button>
-                    </div>
                     <div class="layui-input-inline">
                         <button type="button" class="layui-btn" id="add-search-item">增加一行</button>
                     </div>
@@ -133,7 +157,7 @@
 <script type="text/html" id="search-field-tpl-{$key}">
                                 <!-- if $value.search -->
                                     <!-- loop from=$value.search key=$k value=$v -->
-                                    <option value="{$k}" >{$v}</option>
+                                    <option value="{$k}" >{$v}{$key}</option>
                                     <!-- /loop -->
                                 <!-- /if -->
 </script>
@@ -143,7 +167,7 @@
 <div class="layui-row">
         <div class="layui-form-item">
             <div class="layui-input-inline">
-                <select name="logics[]">
+                <select name="logic[]">
                     <option value="and">和</option>
                     <option value="or">或</option>
                     <option value="not">否</option>
@@ -155,14 +179,15 @@
                    </select>
             </div>
             <div class="layui-input-inline">
-                <select name="matches[]">
+                <select name="match[]">
                     <option value="like">包括</option>
                     <option value="eq">精确</option>
                 </select>
             </div>
             <div class="layui-input-inline" >
-                <input type="text" name="kws[]" class="layui-input" placeholder="请输入关键字">
+                <input type="text" name="kw[]" class="layui-input" placeholder="请输入关键字">
             </div>
         </div>
 </div>
 </script>
+

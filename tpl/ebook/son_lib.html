@@ -1,0 +1,72 @@
+<!-- include tpl=header -->
+<!-- include tpl=left_side -->
+<div class="layui-body">
+    <!-- 内容主体区域 -->
+    <div style="padding: 15px;">
+        <div class="layui-container">
+
+            <ul class="layui-nav layui-bg-cyan">
+                <li class="layui-nav-item">
+                    <a href="/">首頁</a>
+                    <!-- if $libs -->
+                    <dl class="layui-nav-child"> <!-- loop from=libs key=$key value=$value id=list_id-->
+                        <dd><a href="{url ctrl=index func=sonlib pid=$value.id/}">{$value.title}</a></dd>
+                        <!-- /loop -->
+                    </dl>
+                    <!-- /if -->
+                </li>
+                {if $parent_info}
+                <li class="layui-nav-item"><a href="{url ctrl=index func=sonlib pid=$parent_info.id/}">{$parent_info['title']}</a></li>
+                {/if}
+                <li class="layui-nav-item layui-this"><a href="#">{$lib_info['title']}</a></li>
+            </ul>
+            <!-- include tpl=doc_search -->
+            <!-- search list start -->
+            <div class="layui-row layui-col-space20">
+                <div class="layui-col-md3 layui-col-sm3">
+                    <!-- include tpl=tag -->
+                </div>
+                <div class="layui-col-md9 layui-col-sm9">
+                    <div class="layui-tab layui-tab-card" style="margin-top: 20px;">
+                        <div class="layui-card-header">
+                            子庫列表
+                        </div>
+                        <div class="layui-tab-content" id="son-libs">
+                        <!-- if count($son_libs) > 0 -->
+                        <div class="layui-row layui-col-space20">
+                        <!-- loop from=son_libs key=$key value=$value id=list_id id=num -->
+                        <div class="layui-col-md4">
+                            <a href="{if $value.sublist || $value.module == $KEYI_GALLERY_LIB_MODULEID || $value.module == $LVZHU_GALLERY_LIB_MODULEID}{url ctrl=index func=sonlib pid=$value.id/}{else}{url ctrl=index func=docs pid=$value.id/}{/if}" title="{$value.title}" class="img-href"><img src="{if $value.pic}{$value.pic}{else}images/nopic.png{/if}" />{$value.title}</a>
+                        </div>
+                        <!-- /loop -->
+                        </div>
+                        <!-- else  -->
+                        <p style="text-align: center"> 暫無內容~ </p>
+                        <!-- /if  -->
+                    </div>
+            </div>
+
+    </div>
+</div>
+</div>
+<!-- search list end -->
+</div>
+</div>
+<!-- 内容主体区域 -->
+</div>
+<script>
+
+    function showMore(element) {
+        if ($('#' + element).hasClass('book_content_expand')) {
+            $('#' + element).removeClass('book_content_expand');
+            $('#' + element).prevAll().removeClass('book_content_hide');
+            $('#' + element).html('<i class="layui-icon layui-icon-up"></i>');
+        } else {
+            $('#' + element).addClass('book_content_expand');
+            $('#' + element).prevAll().addClass('book_content_hide');
+            $('#' + element).html('<i class="layui-icon layui-icon-down"></i>');
+        }
+    }
+
+</script>
+<!-- include tpl=footer -->

@@ -19,7 +19,7 @@ function form_check_search()
 					<select name="doc_id" >
 						<option value="">請選擇文獻</option>
 						<!-- loop from=$doc_lists key=$key value=$value id=$tmpid -->
-						<option value="{$value.id}" {if $doc_id == $value.id}selected{/if}>{$value.title}</option>
+                        <option value="{$value.id}" {if $doc_id == $value.id}selected{/if}>[{$son_project_lists[$value['project_id']]['title']}] {$value.title}</option>
 						<!-- /loop -->
 					</select>
 				</li>

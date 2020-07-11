@@ -316,6 +316,7 @@ function set_parent_new()
 		var url = get_url('list','set_parent_new','id='+val+"&ids="+$.str.encode(ids));
 		var rs = $.phpok.json(url);
 		if(rs.status){
+            $.dialog.alert(rs.info);
 			$.phpok.reload();
 		}else{
 			$.dialog.alert(rs.info);

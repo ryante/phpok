@@ -13,6 +13,8 @@
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class list_control extends phpok_control
 {
+    const KEYI_GALLERY_LIB_MODULEID = 8; //科仪图库MODULE ID
+    const LVZHU_GALLERY_LIB_MODULEID = 10; // 吕祖图库MODULE ID
     public $popedom;
     public function __construct()
     {
@@ -25,6 +27,8 @@ class list_control extends phpok_control
         //$this->popedom = appfile_popedom("list",$pid);
         $this->popedom = appfile_popedom("list",3);
         $this->assign("popedom",$this->popedom);
+        $this->assign("KEYI_GALLERY_LIB_MODULEID", self::KEYI_GALLERY_LIB_MODULEID);
+        $this->assign("LVZHU_GALLERY_LIB_MODULEID", self::LVZHU_GALLERY_LIB_MODULEID);
         return $this->popedom;
     }
 
@@ -1586,7 +1590,7 @@ class list_control extends phpok_control
     {
         $id = $this->get('id','int');
         if(!$id){
-            $this->error(P_Lang('未指定ID'));
+            $this->error(P_Lang('未指定文庫ID'));
         }
         $ids = $this->get('ids');
         if(!$ids){
@@ -1605,8 +1609,14 @@ class list_control extends phpok_control
             $this->error(P_Lang('ID有沖突，要變更的主題ID和內建ID重復了'));
         }
         $projectInfo = $this->model('project')->get_one($id,false);
-        if (empty($projectInfo['module'])) {
-            $this->error(P_Lang('未找到新文庫，或者新文庫暫未關聯任何模組'));
+        if (empty($projectInfo)) {
+            $this->error(P_Lang('未找到所填寫的文庫ID'));
+        }
+        if ($projectInfo['parent_id'] == 0) {
+            $this->error(P_Lang('不能遷移取根目錄下'));
+        }
+        if ($projectInfo['module'] == 0) {
+            $this->error(P_Lang('只能向子庫遷移，不能向目錄遷移'));
         }
 
         foreach($list as $key=>$value){
@@ -1623,8 +1633,10 @@ class list_control extends phpok_control
             }
             $tmp = array('parent_id' => 0, 'project_id' => $id);
             $this->model('list')->save($tmp,$value);
+            $exData = ['id' => $value, 'project_id' => $id];
+            $this->model('list')->save_ext($exData,$rs['module_id']);
         }
-        $this->success();
+        $this->success("遷移成功");
     }
     // new add end
 }
