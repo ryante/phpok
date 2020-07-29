@@ -4,7 +4,7 @@
 		{lang文庫}
 		<!-- if $popedom.set -->
 		<div class="layui-btn-group fr">
-			<input type="button" value="{lang新增文庫}" onclick="$.win('{lang新增文庫}','{url ctrl=newproject func=set/}')" class="layui-btn layui-btn-sm" />
+			<input style="display:none" type="button" value="{lang新增文庫}" onclick="$.win('{lang新增文庫}','{url ctrl=newproject func=set/}')" class="layui-btn layui-btn-sm" />
 			<!-- if $session.adm_develop -->
 			<input type="button" onclick="$.admin_project.import_xml()" value="{lang文庫匯入}" class="layui-btn layui-btn-sm" />
 			<!-- /if -->

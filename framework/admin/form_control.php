@@ -13,6 +13,8 @@
 if(!defined("PHPOK_SET")){exit("<h1>Access Denied</h1>");}
 class form_control extends phpok_control
 {
+    const KEYI_PROJECT_ID = 2; //科仪项目 ID
+    const LVZHU_PROJECT_ID = 4; //吕祖项目 ID
     const KEYI_GALLERY_LIB_MODULEID = 8; //科仪图库MODULE ID
     const LVZHU_GALLERY_LIB_MODULEID = 10; // 吕祖图库MODULE ID
 	function __construct()
@@ -454,7 +456,7 @@ class form_control extends phpok_control
 			$this->assign('layout',$layout);
 
 			// 图库关联ebook  只显示某个库下的文献的EBOOK new do 2020年5月26日
-            $this->relateEbook($tpl, $condition, $mlist, $pageurl);
+            $this->relateEbook($id, $tpl, $condition, $mlist, $pageurl);
             // new do
 
 			if($keywords){
@@ -599,9 +601,13 @@ class form_control extends phpok_control
 	/*
 	 * note: 图库关联EBOOK图片
 	 */
-	public function relateEbook(&$tpl , &$condition, &$mlist, &$pageurl) {
+	public function relateEbook($fileId, &$tpl , &$condition, &$mlist, &$pageurl) {
 	    //parent_project_id 模块在添加扩展模型的字段，里面有个预设值填写上父项目的ID
-        $parentPid = $this->get('parent_project_id');
+        $fileArr = [
+            104 => self::KEYI_PROJECT_ID,
+            111 => self::LVZHU_PROJECT_ID,
+        ]; 
+        $parentPid = $fileArr[$fileId];
         $docId = $this->get('doc_id');
         if (empty($docId) && empty($parentPid)) {
             return false;

@@ -67,7 +67,8 @@
                         </div>
                         <div class="layui-input-inline">
                             <select name="matches[]">
-                                <option value="like" {if $matches[0] != 'eq'}selected{/if}>包括</option>
+                                <option value="like" {if $matches[0] != 'eq' && $matches[0] != 'notlike'}selected{/if}>包含</option>
+                                <option value="notlike" {if $matches[0] == 'notlike'}selected{/if}>不包含</option>
                                 <option value="eq" {if $matches[0] == 'eq'}selected{/if}>精确</option>
                             </select>
                         </div>
@@ -99,7 +100,8 @@
                         </div>
                         <div class="layui-input-inline">
                             <select name="matches[]">
-                                <option value="like" {if $matches[$fields_key] != 'eq'}selected{/if}>包括</option>
+                                <option value="like" {if $matches[$fields_key] != 'eq' && $matches[$fields_key] != 'notlike'}selected{/if}>包含</option>
+                                <option value="notlike" {if $matches[$fields_key] == 'notlike'}selected{/if}>不包含</option>
                                 <option value="eq" {if $matches[$fields_key] == 'eq'}selected{/if}>精确</option>
                             </select>
                         </div>
@@ -156,7 +158,8 @@
             </div>
             <div class="layui-input-inline">
                 <select name="matches[]">
-                    <option value="like">包括</option>
+                    <option value="like">包含</option>
+                    <option value="notlike">不包含</option>
                     <option value="eq">精确</option>
                 </select>
             </div>

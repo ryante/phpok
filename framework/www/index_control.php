@@ -17,7 +17,8 @@ class index_control extends phpok_control
 	public function __construct()
 	{
 		parent::control();
-		$this->myModuleId = "2,3,5,9";
+		$this->myModuleId = "2,3,5";
+		//$this->myModuleId = "2,3,5,9";
 		$this->myModule = [
 			2 => '呂祖道書',
 			3 => '道教碑刻',
@@ -609,12 +610,14 @@ class index_control extends phpok_control
 				}
 				$docs = array_merge($docs, $bookData);
 			}
-			$this->assign('keywords', $keywords);
 			$this->assign('search_fields', $searchFields);
 			$this->assign('nav_title', "關鍵字：{$keywords}");
 		}
         if (!empty($diySearch)) {
             $this->diySearchDoc();
+        }
+        if (isset($_GET['keywords'])) {
+            $this->assign('keywords', $keywords);
         }
 		$this->assign('docs', $docs);
 		$this->assign('docs_total', count($docs));
@@ -643,19 +646,19 @@ class index_control extends phpok_control
             if (!$firstCondition) {
                 $logic = $_POST['logics'][$key - 1];
             }
-            if ($_POST['matches'][$key] == 'like') {
-                if ($logic == 'not') {
-                    $logic = "and";
-                    $where .= " {$logic} ({$_POST['fields'][$key]} not like '%{$kw}%') ";
-                } else {
-                    $where .= " {$logic} ({$_POST['fields'][$key]} like '%{$kw}%') ";
-                }
-            } else {
+            if ($_POST['matches'][$key] == 'eq') {
                 if ($logic == 'not') {
                     $logic = "and";
                     $where .= " {$logic} ({$_POST['fields'][$key]} != '{$kw}') ";
                 } else {
                     $where .= " {$logic} ({$_POST['fields'][$key]} = '{$kw}') ";
+                }
+            } else {
+                if ($logic == 'not' || $_POST['matches'][$key] == 'notlike') {
+                    $logic = "and";
+                    $where .= " {$logic} ({$_POST['fields'][$key]} not like '%{$kw}%') ";
+                } else {
+                    $where .= " {$logic} ({$_POST['fields'][$key]} like '%{$kw}%') ";
                 }
             }
             if ($logic != 'not') {

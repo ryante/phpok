@@ -19,7 +19,7 @@
                 {if $parent_info}
                 <li class="layui-nav-item"><a href="{url ctrl=index func=sonlib pid=$parent_info.id/}">{$parent_info['title']}</a></li>
                 {/if}
-                <li class="layui-nav-item layui-this"><a href="">{$nav_title}</a></li>
+                {if $nav_title}<li class="layui-nav-item layui-this"><a href="">{$nav_title}</a></li>{/if}
             </ul>
 
             <!-- include tpl=doc_search -->
@@ -33,13 +33,13 @@
                         <div class="layui-card-header">
                             文獻列表
                             <div style="float: right;">
-                                <span id="list_view_2" title="方格顯示"> <i class="layui-icon layui-icon-picture-fine"
+                                <span id="list_view_2" title="方格顯示"> <i class="layui-icon layui-icon-table"
                                         style="font-size: 26px;color: #009688"> </i> </span>
-                                <span id="list_view_1" title="圖表顯示"> <i class="layui-icon layui-icon-list"
+                                <span id="list_view_1" title="圖表顯示"> <i class="layui-icon layui-icon-picture-fine"
                                         style="font-size: 26px; color: #009688"> </i> </span>
 
                                 <!-- if !isset($keywords) -->
-                                <span id="list_view_3" title="清單顯示"> <i class="layui-icon layui-icon-table"
+                                <span id="list_view_3" title="清單顯示"> <i class="layui-icon layui-icon-list"
                                         style="font-size: 26px; color: #009688"> </i> </span>
                                 <!-- /if -->
                             </div>

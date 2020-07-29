@@ -853,7 +853,8 @@ function go_to_page_action()
 				var list = str.split(",");
 				var total = list.length;
 				if(total >= maxcount){
-					$.dialog.alert(p_lang('超出系統限制新增的數量'));
+					//$.dialog.alert(p_lang('超出系統限制新增的數量'));
+					$.dialog.close();
 					return false;
 				}
 			}
@@ -958,6 +959,9 @@ function go_to_page_action()
 				opener.$("#"+identifier).val(id);
 			}
 			$("#title_"+id).remove();
+            if (maxcount == 1) {
+                $.dialog.close();
+            }
 			opener.$.phpokform.extitle_reload(pid,identifier);
 			return true;
 		},
