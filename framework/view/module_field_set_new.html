@@ -119,6 +119,20 @@ function save()
 	</div>
 </div>
 
+<div class="table">
+	<div class="title">
+		{lang清單顯示}：
+		<span class="note">{lang設定前端清單是否可用，如果需要前端清單載入相應屬性請在這裡操作}</span>
+	</div>
+	<div class="content">
+		<table>
+		<tr>
+			<td><label><input type="radio" name="is_front_list" value="0"{if !$rs.is_front_list} checked{/if} />{lang禁用}</label></td>
+			<td><label><input type="radio" name="is_front_list" value="1"{if $rs.is_front_list} checked{/if} />{lang使用}</label></td>
+		</tr>
+		</table>
+	</div>
+</div>
 
 	<div class="table">
 		<div class="title">

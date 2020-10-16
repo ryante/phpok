@@ -43,7 +43,7 @@
 				<td><input type="text" id="taxis_{$value.id}" class="layui-input" value="{$value.taxis}" tabindex="{$tab_i}" onblur="update_taxis('{$value.id}')" /></td>
 				<td>
 					<div class="layui-btn-group">
-						<!-- if $popedom.add -->
+						<!-- if $popedom.add && $value.parent_id == 0 -->
 						<input type="button" value="{lang新增子分類}" onclick="$.win('{lang新增分類}','{url ctrl=cate func=set parent_id=$value.id/}')" class="layui-btn layui-btn-sm" />
 						<!-- /if -->
 						<!-- if $popedom.modify -->

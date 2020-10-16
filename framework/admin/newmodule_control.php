@@ -489,6 +489,7 @@ class newmodule_control extends phpok_control
 		$array["content"] = $this->get("content");
 		$array["taxis"] = $this->get("taxis","int");
 		$array['is_front'] = $this->get('is_front','int');
+		$array['is_front_list'] = $this->get('is_front_list','int');
         $array['is_back'] = $this->get('is_back','int');
 		$array["ext"] = ($ext && count($ext)>0) ? serialize($ext) : "";
 		$array['search'] = $this->get('search','int');
@@ -563,6 +564,7 @@ class newmodule_control extends phpok_control
 		$array['content'] = $this->get("content");
 		$array['taxis'] = $this->get("taxis","int");
 		$array['is_front'] = $this->get('is_front','int');
+		$array['is_front_list'] = $this->get('is_front_list','int');
 		$array['search'] = $this->get('search','int');
 		$array['search_separator'] = $this->get('search_separator');
 		$ext_form_id = $this->get("ext_form_id");

@@ -46,6 +46,9 @@ $(function(){
         $('#lib-list3').css("display","block");
     })
 
+    $("#lib-list3 .layui-table tr").click(function(){
+        window.location.href = "home.php?f=book&doc_id=" + $(this).data('id');
+    })
 
 
     $('#book_search').click(function () {

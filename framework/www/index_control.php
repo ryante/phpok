@@ -95,6 +95,9 @@ class index_control extends phpok_control
 		}
         $data = [];
 		foreach ($rows as $val) {
+            if (!empty($val['pic'])) {
+                $val['cut_pic'] =  $this->model('res')->get_ico($val['pic'], 252, 270, 0);
+            }
 			$data[$val['id']] = $val;
 		}
 		$this->saveCache($cacheKey, json_encode($data, true));
@@ -131,11 +134,11 @@ class index_control extends phpok_control
 	public function getModuleFields() {
 		$cacheKey = "module_field_list";
 		$data = $this->getCache($cacheKey);
-		if (!empty($data)) {
+		if (!empty($data) && false) {
 			return json_decode($data, true);
 		}
 		$data = [];
-		$rows = $this->db->get_all("select ftype,title,identifier,is_front,search from dj_fields where ftype in ({$this->myModuleId}) order by taxis asc");
+		$rows = $this->db->get_all("select ftype,title,identifier,is_front,is_front_list,search from dj_fields where ftype in ({$this->myModuleId}) order by taxis asc");
 		if (empty($rows)) {
 			return false;
 		}
@@ -143,6 +146,9 @@ class index_control extends phpok_control
 			$data[$val['ftype']]['all'][$val['identifier']] = $val['title'];
 			if ($val['is_front'] == 1 ) {
 				$data[$val['ftype']]['is_front'][$val['identifier']] = $val['title'];
+			}
+			if ($val['is_front_list'] == 1 ) {
+				$data[$val['ftype']]['is_front_list'][$val['identifier']] = $val['title'];
 			}
 			if ($val['search'] == 2 ) {
 				$data[$val['ftype']]['search'][$val['identifier']] = $val['title'];
@@ -497,6 +503,7 @@ class index_control extends phpok_control
         $cateData = [];
         foreach ($cates as $val) {
             $cateData[$val['id']] = $val;
+            $cateData[$val['id']]['contents'] = [];
         }
 		$pid = $libInfo['id'];
         $frame = $this->get('frame');
@@ -516,6 +523,13 @@ class index_control extends phpok_control
                 $docInfo = $this->db->get_one("select id,title from dj_list where id={$ebookInfo['lid']}");
                 $val['doc_info'] = $docInfo;
             }
+            if (!empty($val['revision'])) {
+                $fileInfo = $this->model('res')->get_one($val['revision'],true);
+				if (!empty($fileInfo)) {
+					$pdf = ['filename' => $fileInfo['filename'], 'title' => $fileInfo['title']];
+					$val['revision_info'] = $pdf;
+				}
+            }
             if (!empty($cateData[$val['cate_id']])) {
                 $cateData[$val['cate_id']]['contents'][] = $val;
             }
@@ -526,6 +540,7 @@ class index_control extends phpok_control
             $this->view('gallery_lib');
         }
         $fields = $this->db->get_all("select title,identifier from dj_fields where ftype={$libInfo['module']} and is_front=1 and identifier != 'pictures'");
+
         $this->assign('fields', $fields);
         $this->assign('cate_data', $cateData);
         $this->view('frame_gallery');

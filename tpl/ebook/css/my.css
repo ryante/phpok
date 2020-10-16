@@ -61,3 +61,5 @@ span.tag-link{color:#064eb9 !important; cursor:pointer }
 .show-types{float:right}
 .show-types span{cursor:pointer}
 .show-types span i{font-size:26px; color:#009688}
+
+#lib-list3 .layui-table tr:hover{ cursor:pointer !important}

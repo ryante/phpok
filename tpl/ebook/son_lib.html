@@ -36,7 +36,7 @@
                         <div class="layui-row layui-col-space20">
                         <!-- loop from=son_libs key=$key value=$value id=list_id id=num -->
                         <div class="layui-col-md4">
-                            <a href="{if $value.sublist || $value.module == $KEYI_GALLERY_LIB_MODULEID || $value.module == $LVZHU_GALLERY_LIB_MODULEID}{url ctrl=index func=sonlib pid=$value.id/}{else}{url ctrl=index func=docs pid=$value.id/}{/if}" title="{$value.title}" class="img-href"><img src="{if $value.pic}{$value.pic}{else}images/nopic.png{/if}" />{$value.title}</a>
+                            <a href="{if $value.sublist || $value.module == $KEYI_GALLERY_LIB_MODULEID || $value.module == $LVZHU_GALLERY_LIB_MODULEID}{url ctrl=index func=sonlib pid=$value.id/}{else}{url ctrl=index func=docs pid=$value.id/}{/if}" title="{$value.title}" class="img-href"><img src="{if $value.cut_pic}{$value.cut_pic}{else}images/nopic.png{/if}" />{$value.title}</a>
                         </div>
                         <!-- /loop -->
                         </div>

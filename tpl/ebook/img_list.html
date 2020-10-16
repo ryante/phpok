@@ -38,7 +38,7 @@
                                 <span id="list_view_1" title="圖表顯示"> <i class="layui-icon layui-icon-picture-fine"
                                         style="font-size: 26px; color: #009688"> </i> </span>
 
-                                <!-- if !isset($keywords) -->
+                                <!-- if !isset($keywords) && empty($tag_id) -->
                                 <span id="list_view_3" title="清單顯示"> <i class="layui-icon layui-icon-list"
                                         style="font-size: 26px; color: #009688"> </i> </span>
                                 <!-- /if -->
@@ -48,7 +48,7 @@
                         <!-- php: $totalPages = ceil( $totalDocs / 12); -->
 
                         <input type="hidden" id="total_docs"  value="{$totalPages}">
-                        <div class="layui-tab-content" id="lib-list1" {if !$keywords}style="display: none" {/if} >
+                        <div class="layui-tab-content" id="lib-list1" {if !isset($keywords)}style="display: none" {/if} >
                             <!-- if $totalDocs > 0 -->
                             <!-- loop from=docs key=$key value=$value id=list_id id=num -->
                             <!-- php: $page = ceil($num.num / 12); -->
@@ -134,7 +134,7 @@
                         </div>
 
 
-                        <div class="layui-tab-content" id="lib-list2" {if $keywords}style="display: none" {/if} >
+                        <div class="layui-tab-content" id="lib-list2" {if isset($keywords)}style="display: none" {/if} >
                             <!-- if $totalDocs > 0 -->
                             <!-- loop from=docs key=$key value=$value id=num -->
                             <!-- php: $page = ceil($num.num / 12); -->
@@ -174,22 +174,22 @@
                             <!-- if $totalDocs > 0 -->
                             <div class="layui-row layui-col-space10" style="width: 100%; overflow-x: scroll">
                                 <div class="layui-col-md12">
-                                    <!-- if $module_fields[$value['module_id']]['is_front'] -->
+                                    <!-- if $module_fields[$value['module_id']]['is_front_list'] -->
                                     <table class="layui-table">
                                         <tbody>
                                         <tr>
-                                            <!-- loop from=$module_fields[$value['module_id']]['is_front'] key=$k value=$v -->
+                                            <!-- loop from=$module_fields[$value['module_id']]['is_front_list'] key=$k value=$v -->
                                             <!-- if $k == 'start_cover_pic' || $k == 'end_cover_pic' || $k == 'thumb' -->
                                             <?php continue; ?>
                                             <!-- /if  -->
-                                            <th> {$v}</th>
+                                            <th>{$v}</th>
                                             <!-- /loop -->
                                         </tr>
 
                                         <!-- loop from=docs key=$key value=$value id=num -->
                                         <!-- php: $page = ceil($num.num / 12); -->
-                                        <tr class="list3-page-{$page}" style="display: none">
-                                            <!-- loop from=$module_fields[$value['module_id']]['is_front'] key=$k value=$v -->
+                                        <tr class="list3-page-{$page}" style="display: none" data-id={$value.id}>
+                                            <!-- loop from=$module_fields[$value['module_id']]['is_front_list'] key=$k value=$v -->
                                             <!-- if $k == 'start_cover_pic' || $k == 'end_cover_pic' || $k == 'thumb' -->
                                             <?php continue; ?>
                                             <!-- /if  -->
