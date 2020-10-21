@@ -49,7 +49,7 @@
         }
         $.each(contents, function(key,val){
                 tmpHtml = $('#gallery-tpl-' + view).html();
-                tmpHtml = tmpHtml.replace('##img##', val.ebook_info.image);
+                tmpHtml = tmpHtml.replace('##img##', val.figure_info.list_thumb);
                 tmpHtml = tmpHtml.replace('##doc_id##', val.ebook_info.lid);
                 tmpHtml = tmpHtml.replace('##page##', val.ebook_info.page);
                 tmpHtml = tmpHtml.replace('##id##', val.id);
@@ -147,7 +147,7 @@ function showModal(dataId) {
         <!-- loop from=$val['contents'] value=$value -->
         <div id="modal-{$value.id}" style="display:none" >
                 <div class="modal-content" style="padding:20px; text-align:center" >
-                            <img src="{$value.ebook_info.image}" height="400px">
+                    {if $value.figure_info.filename}<img src="{$value.figure_info.filename}" height="400px">{/if}
                             <table class="layui-table" style="margin:20px 0px">
                                 <tr>
                                     <th>標題</th>
@@ -157,17 +157,8 @@ function showModal(dataId) {
                                     <th>出處</th>
                                     <td><a href="{$sys.www_file}?f=book&doc_id={$value.ebook_info.lid}&page={$value.ebook_info.page}">{$value.doc_info.title}</a></td>
                                 </tr> 
-                                <tr>
-                                    <th>頁碼</th>
-                                    <td>{$value.ebook_info.page}</td>
-                                </tr> 
                                 <!-- loop from=fields value=$v -->
-                                {if $v.identifier == 'revision'}
-                                <tr>
-                                    <th>{$v.title}</th>
-                                    <td>{if $value['revision_info']['filename']}<a href="/pdf_show/web/viewer.html?file=/{$value['revision_info']['filename']}" target="_blank">{$value['revision_info']['title']}</a>{/if}</td>
-                                </tr> 
-                                {else}
+                                {if $v.identifier != 'revision'}
                                 <tr>
                                     <th>{$v.title}</th>
                                     <td>{$value[$v['identifier']]}</td>
@@ -177,6 +168,7 @@ function showModal(dataId) {
                                 <tr>
                                     <td colspan="2">
                                         <a href="{$sys.www_file}?f=book&doc_id={$value.ebook_info.lid}&page={$value.ebook_info.page}" class="layui-btn layui-btn-normal layui-btn-sm" target="_blank">文獻跳轉</a>
+                                        {if $value['revision_info']['filename']}<a href="/pdf_show/web/viewer.html?file=/{$value['revision_info']['filename']}" target="_blank"  class="layui-btn layui-btn-normal layui-btn-sm full_screen">全屏顯示</a>{/if}
                                     </td>
                                 </tr> 
                             </table>
@@ -187,3 +179,5 @@ function showModal(dataId) {
         <!-- /loop -->
 </body>
 </html>
+<script>
+</script>

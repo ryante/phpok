@@ -523,6 +523,12 @@ class index_control extends phpok_control
                 $docInfo = $this->db->get_one("select id,title from dj_list where id={$ebookInfo['lid']}");
                 $val['doc_info'] = $docInfo;
             }
+            $val['figure_info']['list_thumb'] = "images/nopic.png";
+            if (!empty($val['figure'])) {
+				$picInfo = $this->model('res')->get_one($val['figure'],true);
+                $val['figure_info'] = $picInfo;
+                $val['figure_info']['list_thumb'] = $picInfo['gd']['book-view'];
+            }
             if (!empty($val['revision'])) {
                 $fileInfo = $this->model('res')->get_one($val['revision'],true);
 				if (!empty($fileInfo)) {

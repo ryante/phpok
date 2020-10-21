@@ -110,6 +110,17 @@ layui.use('form', function(){
     module = $('#search-module-list').val();
     fieldHtml = $('#search-field-tpl-'+module).html();
     $('.search-field-list').html(fieldHtml);
+
+    if (searchField != "") {
+        $('.search-field-list').each(function(key, val){
+            field = searchField[key];
+            if (field.length == 0) {
+                return;
+            }
+            $('.search-field-list:eq(' + key + ') option[value="' + field + '"]').attr("selected", "selected");
+        });
+    }
+
     form.render('select', 'condition-search');
     // end
     // 新增搜索项
@@ -144,5 +155,33 @@ layui.use('form', function(){
 
 function tagLink(id) {
 	window.location.href="home.php?f=docs&tag_id=" + id;
+}
+
+function fullScreen() {
+    var elem = document.body;
+    if (elem.webkitRequestFullScreen) {
+        elem.webkitRequestFullScreen();
+    } else if (elem.mozRequestFullScreen) {
+        elem.mozRequestFullScreen();
+    } else if (elem.requestFullScreen) {
+        elem.requestFullscreen();
+    } else {
+        notice.notice_show("浏览器不支持全屏API或已被禁用", null, null, null, true, true);
+    }
+}
+
+function exitFullScreen() {
+    var elem = document;
+    if (elem.webkitCancelFullScreen) {
+        elem.webkitCancelFullScreen();
+    } else if (elem.mozCancelFullScreen) {
+        elem.mozCancelFullScreen();
+    } else if (elem.cancelFullScreen) {
+        elem.cancelFullScreen();
+    } else if (elem.exitFullscreen) {
+        elem.exitFullscreen();
+    } else {
+        notice.notice_show("浏览器不支持全屏API或已被禁用", null, null, null, true, true);
+    }
 }
 

@@ -1,6 +1,6 @@
 <div class="layui-tab layui-tab-card" style=" margin-top: 20px">
     <ul class="layui-tab-title">
-        <li {if !$diy_search}class="layui-this"{/if}>关键词查询</li>
+        <li {if !$diy_search}class="layui-this"{/if}>關鍵詞查詢</li>
         <li {if $diy_search}class="layui-this"{/if}>自定義查詢</li>
     </ul>
     <div class="layui-tab-content" style="padding: 20px">
@@ -55,10 +55,11 @@
                                 <!-- /loop -->
                             </select>
                         </div>
-                        <label class="layui-form-label">请选择文库</label>
+                        <label class="layui-form-label">請選擇文庫</label>
                     </div>
                 </div>
-
+                <pre>
+                </pre>
                 <div class="layui-row">
                     <div class="layui-form-item">
                         <div class="layui-input-inline">
@@ -69,11 +70,11 @@
                             <select name="matches[]">
                                 <option value="like" {if $matches[0] != 'eq' && $matches[0] != 'notlike'}selected{/if}>包含</option>
                                 <option value="notlike" {if $matches[0] == 'notlike'}selected{/if}>不包含</option>
-                                <option value="eq" {if $matches[0] == 'eq'}selected{/if}>精确</option>
+                                <option value="eq" {if $matches[0] == 'eq'}selected{/if}>精確</option>
                             </select>
                         </div>
                         <div class="layui-input-inline" >
-                            <input type="text" name="kws[]" class="layui-input" value="{$kws[0]}" placeholder="请输入关键字">
+                            <input type="text" name="kws[]" class="layui-input" value="{$kws[0]}" placeholder="請輸入關鍵字">
                         </div>
                     </div>
                 </div>
@@ -102,11 +103,11 @@
                             <select name="matches[]">
                                 <option value="like" {if $matches[$fields_key] != 'eq' && $matches[$fields_key] != 'notlike'}selected{/if}>包含</option>
                                 <option value="notlike" {if $matches[$fields_key] == 'notlike'}selected{/if}>不包含</option>
-                                <option value="eq" {if $matches[$fields_key] == 'eq'}selected{/if}>精确</option>
+                                <option value="eq" {if $matches[$fields_key] == 'eq'}selected{/if}>精確</option>
                             </select>
                         </div>
                         <div class="layui-input-inline" >
-                            <input type="text" name="kws[]" class="layui-input" value="{$kws[$fields_key]}" placeholder="请输入关键字">
+                            <input type="text" name="kws[]" class="layui-input" value="{$kws[$fields_key]}" placeholder="請輸入關鍵字">
                         </div>
                     </div>
                 </div>
@@ -160,12 +161,19 @@
                 <select name="matches[]">
                     <option value="like">包含</option>
                     <option value="notlike">不包含</option>
-                    <option value="eq">精确</option>
+                    <option value="eq">精確</option>
                 </select>
             </div>
             <div class="layui-input-inline" >
-                <input type="text" name="kws[]" class="layui-input" placeholder="请输入关键字">
+                <input type="text" name="kws[]" class="layui-input" placeholder="請輸入關鍵字">
             </div>
         </div>
 </div>
+</script>
+<script>
+var searchField = "";
+<!-- if !empty($fields) -->
+<!-- php: $fieldStr = json_encode($fields, true); -->
+var searchField = {$fieldStr};
+<!-- /if -->
 </script>
